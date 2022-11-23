@@ -1,0 +1,11 @@
+
+
+    1. In GUI_Frames, add the button to the desired Frame grid
+    2. Deconstruct the button from packaged value (ie; all_btns)
+    3. In GUI_Buttons, add the button to get_all_btns() in corresponding package value
+    4. Add the corresponding image to the button
+    5. Deconstruct the image from the appropriate package value
+    6. In GUI_Images, create the Image and return it in the appropriate package value
+
+
+

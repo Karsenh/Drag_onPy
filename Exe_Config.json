@@ -1,0 +1,113 @@
+{
+ "version": "auto-py-to-exe-configuration_v1",
+ "pyinstallerOptions": [
+  {
+   "optionDest": "noconfirm",
+   "value": true
+  },
+  {
+   "optionDest": "filenames",
+   "value": "C:/Users/Karsen/Desktop/Drag_onPy/Main.py"
+  },
+  {
+   "optionDest": "onefile",
+   "value": false
+  },
+  {
+   "optionDest": "console",
+   "value": true
+  },
+  {
+   "optionDest": "icon_file",
+   "value": "C:/Users/Karsen/Desktop/Drag_onPy/Assets/Images/Icon.ico"
+  },
+  {
+   "optionDest": "ascii",
+   "value": false
+  },
+  {
+   "optionDest": "clean_build",
+   "value": false
+  },
+  {
+   "optionDest": "strip",
+   "value": false
+  },
+  {
+   "optionDest": "noupx",
+   "value": false
+  },
+  {
+   "optionDest": "disable_windowed_traceback",
+   "value": false
+  },
+  {
+   "optionDest": "embed_manifest",
+   "value": true
+  },
+  {
+   "optionDest": "uac_admin",
+   "value": false
+  },
+  {
+   "optionDest": "uac_uiaccess",
+   "value": false
+  },
+  {
+   "optionDest": "win_private_assemblies",
+   "value": false
+  },
+  {
+   "optionDest": "win_no_prefer_redirects",
+   "value": false
+  },
+  {
+   "optionDest": "bootloader_ignore_signals",
+   "value": false
+  },
+  {
+   "optionDest": "argv_emulation",
+   "value": false
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/Karsen/Desktop/Drag_onPy/API;API/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/Karsen/Desktop/Drag_onPy/Assets;Assets/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/Karsen/Desktop/Drag_onPy/build;build/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/Karsen/Desktop/Drag_onPy/dist;dist/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/Karsen/Desktop/Drag_onPy/GUI;GUI/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/Karsen/Desktop/Drag_onPy/Misc;Misc/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/Karsen/Desktop/Drag_onPy/Scripts;Scripts/"
+  },
+  {
+   "optionDest": "hiddenimports",
+   "value": "pyautogui"
+  },
+  {
+   "optionDest": "hiddenimports",
+   "value": "pywintypes"
+  }
+ ],
+ "nonPyinstallerOptions": {
+  "increaseRecursionLimit": true,
+  "manualArguments": ""
+ }
+}
