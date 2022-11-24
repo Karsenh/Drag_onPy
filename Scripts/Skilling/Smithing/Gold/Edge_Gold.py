@@ -27,7 +27,7 @@ def smith_gold_edge():
     # 3. Checks if we're on mining tab - clicks mining tab if not
     check_if_bank_tab_open(4, True)
 
-    # 4. Checks for goldsmithing gauntlets - withdraws & equips if finds
+    # 4. Checks for goldsmithing gauntlets - withdraws & equips if found
     if check_for_gauntlets:
         equip_gauntlets_if_banked()
 
