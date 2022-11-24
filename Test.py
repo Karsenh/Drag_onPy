@@ -6,6 +6,7 @@ from API.Imaging.Image import *
 from API.AntiBan import *
 from API.Interface import *
 from API.Import_Libs.Coords import *
+from enum import Enum
 from Scripts.Skilling.Smithing.Gold.Edge_Gold import *
 
 get_bluestacks_xy()
@@ -18,6 +19,12 @@ capture_bluestacks()
 # check_skill_tab(max_sec=5.0)
 
 # open_tab_color = 106, 35, 26
+
+class script_enum(Enum):
+    PISC_IRON = 0
+    EDGE_GOLD = 1
+
+
 open_tab_color = 106, 35, 26
 # inventory_tab_xy      1426, 392
 # equipment_tab_xy      1426, 460

@@ -8,17 +8,19 @@ exit_prog = False
 def mine_iron_pisc(DEBUG=True):
     global exit_prog
 
+    first_loop = True
     exit_prog = False
     keyboard.add_hotkey('esc', lambda: quit_script())
 
-    check_one_tap_drop_enabled(should_enable=True)
-    turn_compass("south")
-    zoom_camera(5)
-    pitch_camera("up")
+    if first_loop:
+        check_one_tap_drop_enabled(should_enable=True)
+        turn_compass("south")
+        zoom_camera(5)
+        pitch_camera("up")
 
-    time.sleep(1.5)
+        time.sleep(1.5)
 
-    ores_clicked = 0
+        ores_clicked = 0
 
     ore_1_xy = 1218, 181
     ore_2_xy = 1363, 291
@@ -30,7 +32,7 @@ def mine_iron_pisc(DEBUG=True):
     # ore_3_color = 90, 67, 37
     ore_colors = ore_1_color, ore_2_color
 
-    while not exit_prog and does_img_exist("spot_check", script_name="Pisc_Iron"):
+    if does_img_exist("spot_check", script_name="Pisc_Iron"):
         print(f'Ores clicked: {ores_clicked}')
         # On the first loop, randomly select an ore (of the three)
         if ores_clicked == 0:

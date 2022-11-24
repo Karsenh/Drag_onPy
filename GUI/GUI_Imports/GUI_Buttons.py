@@ -3,6 +3,8 @@ from GUI.GUI_Imports.GUI_Frames import *
 from Scripts.Skilling.Mining.Iron.Pisc_Iron import *
 from Scripts.Skilling.Smithing.Gold.Edge_Gold import *
 
+from GUI.GUI_Imports.Script_Launch import *
+
 btn_active_bg_color = '#972b29'
 btn_bg_color = '#645747'
 
@@ -88,26 +90,5 @@ def get_all_btns(all_frames, all_images):
     return main_gui_btns, gold_gui_btns, skill_gui_btns, pvm_pvp_gui_btns
 
 
-def launch_script(script_name="pisc_iron"):
-    print("Pre-launch checks:")
-    # Check that we're not on dc screen (click continue if so)
-    print(f'Disconnected screen? : {is_on_dc_screen(should_cont=True)}')
-    # is_on_dc_screen(should_cont=True)
-    # Check that we're not on login screen (click login if so)
-    print(f'Login screen? : {is_on_login_screen(should_cont=True)}')
-    # is_on_login_screen(should_cont=True)
-    # Check that we're not on the welcome screen (click 'Tap Here To Play' if so)
-    print(f'Welcome screen? : {is_on_welcome_screen(should_cont=True)}')
-    # is_on_welcome_screen(should_cont=True)
 
-    match script_name:
-        case "pisc_iron":
-            print("launch_script: Scripts > Skilling > Mining Launched...")
-            mine_iron_pisc()
-        case "edge_gold":
-            print("launch_script: Scripts > Skilling > Smithing > Edge Gold Launched...")
-            smith_gold_edge()
-        case _:
-            print("Default Switch printing")
-            exit(-1)
-    return
+

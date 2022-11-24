@@ -8,62 +8,61 @@ exit_prog = False
 def smith_gold_edge():
     global exit_prog
 
+    first_loop = True
+
     exit_prog = False
     check_for_gauntlets = True
     keyboard.add_hotkey('esc', lambda: quit_script())
 
-    setup()
-
     # normalize interface
     # Start in front of NW bank booth in Edge bank
+    if first_loop:
+        setup()
 
-    # 1. Opens bank booth
-    if not is_furnace_start():
-        start_open_bank()
+        # 1. Opens bank booth
+        if not is_furnace_start():
+            start_open_bank()
 
-    # 2. Deposits All inventory & equipment
-    deposit_all(include_equipment=True)
+        # 2. Deposits All inventory & equipment
+        deposit_all(include_equipment=True)
 
-    # 3. Checks if we're on mining tab - clicks mining tab if not
-    check_if_bank_tab_open(4, True)
+        # 3. Checks if we're on mining tab - clicks mining tab if not
+        check_if_bank_tab_open(4, True)
 
-    # 4. Checks for goldsmithing gauntlets - withdraws & equips if found
-    if check_for_gauntlets:
-        equip_gauntlets_if_banked()
+        # 4. Checks for goldsmithing gauntlets - withdraws & equips if found
+        if check_for_gauntlets:
+            equip_gauntlets_if_banked()
 
-    # 5. Checks if we're on 'All' withdraw qty
-    check_withdraw_qty_all()
-
-    # 6. Checks if we have ore - exits if not
-    # while
-    first_loop = True
-
-    while not exit_prog:
-
-        if not first_loop:
-            deposit_all()
+        # 5. Checks if we're on 'All' withdraw qty
+        check_withdraw_qty_all()
 
         first_loop = False
 
-        # 7. Withdraws ore
-        withdraw_gold_if_banked()
+    # 6. Checks if we have ore - exits if not
+    # while
 
-        # 8. Click furnace
-        move_to_furnace()
+    if not first_loop:
+        deposit_all()
 
-        # 9. Click / 6 / Space (after first selection) to select gold bar
-        select_gold_bar()
+    # 7. Withdraws ore
+    withdraw_gold_if_banked()
 
-        get_break_times()
+    # 8. Click furnace
+    move_to_furnace()
 
-        # 10. Sleep for ~84 seconds
-        check_for_level()
+    # 9. Click / 6 / Space (after first selection) to select gold bar
+    select_gold_bar()
 
-        bank_from_furnace()
+    get_break_times()
 
-        # 11. Repeat from step 6
+    # 10. Sleep for ~84 seconds
+    check_for_level()
 
-        # sleep_between(1.1, 1.2)
+    bank_from_furnace()
+
+    # 11. Repeat from step 6
+
+    # sleep_between(1.1, 1.2)
     return
 
 
