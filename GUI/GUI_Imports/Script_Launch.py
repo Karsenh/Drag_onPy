@@ -3,6 +3,10 @@ from Scripts.Skilling.Smithing.Gold.Edge_Gold import *
 from Scripts.Skilling.Mining.Iron.Pisc_Iron import *
 from enum import Enum
 
+
+script_start_time = None
+
+
 # script_name passed into individual buttons in GUI corresponding to individual scripts
 def launch_script(script_name="pisc_iron"):
     print("Pre-launch checks:")
@@ -37,21 +41,20 @@ def launch_script(script_name="pisc_iron"):
 
             sleep_between()
 
-    # match script_name:
-    #     case "pisc_iron":
-    #         print("launch_script: Scripts > Skilling > Mining Launched...")
-    #         # mine_iron_pisc()
-    #         script_method[0]()
-    #     case "edge_gold":
-    #         print("launch_script: Scripts > Skilling > Smithing > Edge Gold Launched...")
-    #         # smith_gold_edge()
-    #         script_method[1]()
-    #
-    #     case _:
-    #         print("Default Switch printing")
-    #         exit(-1)
     return
 
 
 def is_on_break():
+    global script_start_time
+    # If this is the first loop (if the global last checked time is none - set that along with start time
+    break_vals = get_break_times()
+    break_t, break_dev_t, interval_t, interval_dev_t = break_vals
+
+    if not script_start_time:
+        script_start_time = datetime.now()
+
+    # If this is the first loop - set the start time of the script to now
+    # Calculate how long has elapsed since start
+    # Check if the elapsed time is greater than or equal to the
+
     return False
