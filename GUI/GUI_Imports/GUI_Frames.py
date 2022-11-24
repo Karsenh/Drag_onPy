@@ -86,6 +86,69 @@ def get_all_frames(root):
 # ----
 # SHOW FRAME METHODS
 # ----
+def show_settings_frame():
+    int_minutes = Variable
+    break_font = tkinter.font.Font(family='Helvetica', size=10, weight='normal')
+    break_btn_font = tkinter.font.Font(family='Helvetica', size=10, weight='bold')
+
+    pwd = os.getcwd()
+    settings_gui = Toplevel(height=600, width=300)
+    settings_gui.title('Settings')
+    settings_gui.iconbitmap(f'{pwd}\Assets\Images\Icon.ico')
+    settings_gui.configure(bg='#969488', height=600, width=300)
+
+    # Every 'a' minutes             (int_minutes)
+    # Give or take 'b' minutes      (int_dev_minutes)
+    # Break for 'c' minutes         (break_minutes)
+    # Give or take 'd' minutes      (break_dev_minutes)
+
+    test_img_1 = ImageTk.PhotoImage(Image.open(f'{pwd}\Assets\Images\GUI_Images\Gold\Cballs.png'))
+    test_img_2 = ImageTk.PhotoImage(Image.open(f'{pwd}\Assets\Images\GUI_Images\Gold\Cballs.png'))
+
+    bt_frame_1 = LabelFrame(settings_gui, text="Break Schedule", bg=frame_bg_color, height=250, width=450, pady=20, padx=20)
+
+    e_min_label_prefix = Label(bt_frame_1, text="Every", background=frame_bg_color, font=break_font)
+    e_min = Entry(bt_frame_1, textvariable=int_minutes, background=label_frame_bg_color)
+    e_min_label_suffix = Label(bt_frame_1, text="minutes,", background=frame_bg_color, font=break_font)
+
+    e_min_label_prefix2 = Label(bt_frame_1, text="give or take", background=frame_bg_color, font=break_font)
+    e_min2 = Entry(bt_frame_1, textvariable=int_minutes, background=label_frame_bg_color)
+    e_min_label_suffix2 = Label(bt_frame_1, text="minutes,", background=frame_bg_color, font=break_font)
+
+    e_min_label_prefix3 = Label(bt_frame_1, text="Break for", background=frame_bg_color, font=break_font)
+    e_min3 = Entry(bt_frame_1, textvariable=int_minutes, background=label_frame_bg_color)
+    e_min_label_suffix3 = Label(bt_frame_1, text="minutes,", background=frame_bg_color, font=break_font)
+
+    e_min_label_prefix4 = Label(bt_frame_1, text="give or take", background=frame_bg_color, font=break_font)
+    e_min4 = Entry(bt_frame_1, textvariable=int_minutes, background=label_frame_bg_color)
+    e_min_label_suffix4 = Label(bt_frame_1, text="minutes,", background=frame_bg_color, font=break_font)
+
+    e_min_label_prefix.grid(row=1, column=1)
+    e_min.grid(row=1, column=2, columnspan=1, padx=20, pady=10)
+    e_min_label_suffix.grid(row=1, column=3, padx=10, pady=15)
+
+    e_min_label_prefix2.grid(row=2, column=1)
+    e_min2.grid(row=2, column=2, columnspan=1, padx=20, pady=10)
+    e_min_label_suffix2.grid(row=2, column=3, padx=10, pady=15)
+
+    e_min_label_prefix3.grid(row=3, column=1)
+    e_min3.grid(row=3, column=2, columnspan=1, padx=20, pady=10)
+    e_min_label_suffix3.grid(row=3, column=3, padx=10, pady=15)
+
+    e_min_label_prefix4.grid(row=4, column=1)
+    e_min4.grid(row=4, column=2, columnspan=1, padx=20, pady=10)
+    e_min_label_suffix4.grid(row=4, column=3, padx=10, pady=15)
+
+    test_btn = Button(bt_frame_1, text="Set Schedule", font=break_btn_font, bg=btn_bg_color, activebackground=btn_active_bg_color, command=lambda: print(f'Setting break schedule variables'))
+    test_btn.grid(row=5, column=1, columnspan=3)
+
+    bt_frame_1.grid(row=1, column=1)
+    # hwd_frame_2 = LabelFrame(settings_gui, text="HWID", bg=frame_bg_color, height=250, width=450)
+    # hwd_frame_2.grid(row=2, column=1)
+
+    return
+
+
 def show_gold_frame(all_frames, gold_gui_btns, toggle_active_frame, gui_btns):
 
     gold_btn, skill_btn, pvm_pvp_btn = gui_btns

@@ -17,8 +17,9 @@ def show_main_gui():
     root = Tk()
     root.title('Drag_onPy')
     root.iconbitmap(f'{pwd}\Assets\Images\Icon.ico')
-    root.configure(bg='#969488', height=847, width=675)
-    #
+    root_gui_height = 847
+    root_gui_width = 550  #675
+    root.configure(bg='#969488', height=root_gui_height, width=root_gui_width)
 
     dragon_py_hwnd = win32gui.FindWindow(None, 'Drag_onPy')
     if not dragon_py_hwnd:
@@ -29,7 +30,7 @@ def show_main_gui():
     print(f'bs x1 y1: {x1}, {y1}')
     # x1y1 = x1, y1
     # x, y = translate_coords(x1y1, update_coords=True)
-    app_x = x1 - 675
+    app_x = x1 - root_gui_width
     app_y = y1
 
     print(f'📈 app_x: {app_x} app_y: {app_y}')

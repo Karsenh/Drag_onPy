@@ -7,8 +7,6 @@ btn_active_bg_color = '#972b29'
 btn_bg_color = '#645747'
 
 
-
-
 def get_all_btns(all_frames, all_images):
     global is_active_gold
     global is_active_skill
@@ -45,7 +43,7 @@ def get_all_btns(all_frames, all_images):
     skill_btn = Button(main_frame, text="Leveling", bg=btn_bg_color, activebackground=btn_active_bg_color, image=skills_img, command=lambda: show_skill_frame(all_frames, skill_gui_btns, toggle_active_frame, gui_btns))
     pvm_pvp_btn = Button(main_frame, text="PvP-PvM", bg=btn_bg_color, activebackground=btn_active_bg_color, image=skull_img, command=lambda: show_pvm_pvp_frame(all_frames, pvm_pvp_gui_btns, toggle_active_frame, gui_btns))
 
-    settings_btn = Button(main_frame, text="Settings", bg=btn_bg_color, activebackground='#f7881c', image=settings_img, command=lambda: print('Settings test'), height=50, width=50)
+    settings_btn = Button(main_frame, text="Settings", bg=btn_bg_color, activebackground='#f7881c', image=settings_img, command=lambda: show_settings_frame(), height=50, width=50)
     info_btn = Button(main_frame, text="Info", bg=btn_bg_color, activebackground='#febf56', image=question_mark_img, command=lambda: print('Info test'), height=50, width=50)
     bug_report_btn = Button(main_frame, text="Bug Report", bg=btn_bg_color, activebackground='#81d5fa', image=bug_report_img, command=lambda: print('Bug test'), height=50, width=50)
 
