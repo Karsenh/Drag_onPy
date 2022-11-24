@@ -1,5 +1,5 @@
 import random
-
+from GUI.Break_Timer.Timer import *
 from API.Interface import *
 
 exit_prog = False
@@ -53,6 +53,8 @@ def smith_gold_edge():
 
         # 9. Click / 6 / Space (after first selection) to select gold bar
         select_gold_bar()
+
+        get_break_times()
 
         # 10. Sleep for ~84 seconds
         check_for_level()

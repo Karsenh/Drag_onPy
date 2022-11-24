@@ -9,7 +9,7 @@ def mine_iron_pisc(DEBUG=True):
     global exit_prog
 
     exit_prog = False
-    keyboard.add_hotkey('end', lambda: quit_script())
+    keyboard.add_hotkey('esc', lambda: quit_script())
 
     check_one_tap_drop_enabled(should_enable=True)
     turn_compass("south")
