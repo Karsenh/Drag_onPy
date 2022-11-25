@@ -1,3 +1,4 @@
+import random
 import tkinter
 
 break_time = None

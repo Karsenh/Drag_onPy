@@ -10,9 +10,9 @@ btn_bg_color = '#645747'
 
 
 def get_all_btns(all_frames, all_images):
-    global is_active_gold
-    global is_active_skill
-    global is_active_pvm_pvp
+    # global is_active_gold
+    # global is_active_skills
+    # global is_active_pvm_pvp
 
     # ALL FRAMES
     main_frame, gold_frame, skill_frame, pvm_pvp_frame, skill_sub_frames = all_frames

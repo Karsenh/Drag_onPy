@@ -3,12 +3,11 @@ from GUI.Break_Timer.Timer import *
 from API.Interface import *
 
 exit_prog = False
-
+first_loop = True
 
 def smith_gold_edge():
     global exit_prog
-
-    first_loop = True
+    global first_loop
 
     exit_prog = False
     check_for_gauntlets = True

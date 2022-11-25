@@ -34,16 +34,21 @@ def launch_script(script_name="pisc_iron"):
 
     go = True
 
-    while go:
-        if not is_on_break():
+    if is_break_timer_set():
+        while go:
+            # TODO Simplify this doewn to two lines
+            if not should_break():
+                all_scripts[selected_script]()
+            else:
+                sleep_between()
+    else:
+        while go:
             all_scripts[selected_script]()
-        else:
-            sleep_between()
 
     return
 
 
-def is_on_break():
+def should_break():
     global script_start_time
     # If this is the first loop (if the global last checked time is none - set that along with start time
     break_vals = get_break_times()
@@ -54,12 +59,29 @@ def is_on_break():
         print(f'First loop - script start set: {start_time}')
         script_start_time = start_time
 
+    print(f'Script start time: {script_start_time}')
     curr_time = datetime.now()
+    print(f'Curr time: {curr_time}')
     elapsed_time = curr_time - script_start_time
-    print(f'Elapsed Time: {elapsed_time}')
+    print(f'Elapsed Time (min): {elapsed_time.total_seconds() / 60}')
+
+    if elapsed_time > break_t:
+        print(f'We should be on break')
+
 
     # If this is the first loop - set the start time of the script to now
     # Calculate how long has elapsed since start
     # Check if the elapsed time is greater than or equal to the
 
     return False
+
+def is_break_timer_set():
+    break_vals = get_break_times()
+    bt, bdt, it, idt = break_vals
+    if bt is None:
+        return False
+    else:
+        return True
+    return
+
+def go_on_break():
