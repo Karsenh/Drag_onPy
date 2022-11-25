@@ -32,13 +32,12 @@ def launch_script(script_name="pisc_iron"):
         case "edge_gold":
             selected_script = ScriptEnum.EDGE_GOLD.value
 
-    Go = True
+    go = True
 
-    while Go:
+    while go:
         if not is_on_break():
             all_scripts[selected_script]()
         else:
-
             sleep_between()
 
     return
@@ -51,7 +50,13 @@ def is_on_break():
     break_t, break_dev_t, interval_t, interval_dev_t = break_vals
 
     if not script_start_time:
-        script_start_time = datetime.now()
+        start_time = datetime.now()
+        print(f'First loop - script start set: {start_time}')
+        script_start_time = start_time
+
+    curr_time = datetime.now()
+    elapsed_time = curr_time - script_start_time
+    print(f'Elapsed Time: {elapsed_time}')
 
     # If this is the first loop - set the start time of the script to now
     # Calculate how long has elapsed since start
