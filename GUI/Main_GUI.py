@@ -18,7 +18,7 @@ def show_main_gui():
     root.title('Drag_onPy')
     root.iconbitmap(f'{pwd}\Assets\Images\Icon.ico')
     root_gui_height = 847
-    root_gui_width = 550  #675
+    root_gui_width = 675  #675
     root.configure(bg='#969488', height=root_gui_height, width=root_gui_width)
 
     dragon_py_hwnd = win32gui.FindWindow(None, 'Drag_onPy')

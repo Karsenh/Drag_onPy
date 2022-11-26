@@ -98,12 +98,12 @@ def show_settings_frame():
     settings_gui.iconbitmap(f'{pwd}\Assets\Images\Icon.ico')
     settings_gui.configure(bg='#969488')
 
-    break_t = tkinter.StringVar(settings_gui)
-    break_dev_t = tkinter.StringVar(settings_gui)
-    interval_t = tkinter.StringVar(settings_gui)
-    interval_dev_t = tkinter.StringVar(settings_gui)
+    break_m = tkinter.StringVar(settings_gui)
+    break_dev_m = tkinter.StringVar(settings_gui)
+    interval_m = tkinter.StringVar(settings_gui)
+    interval_dev_m = tkinter.StringVar(settings_gui)
 
-    time_vars = break_t, break_dev_t, interval_t, interval_dev_t
+    time_vars = break_m, break_dev_m, interval_m, interval_dev_m
 
     # Every 'a' minutes             (int_minutes)
     # Give or take 'b' minutes      (int_dev_minutes)
@@ -113,22 +113,22 @@ def show_settings_frame():
     test_img_1 = ImageTk.PhotoImage(Image.open(f'{pwd}\Assets\Images\GUI_Images\Gold\Cballs.png'))
     test_img_2 = ImageTk.PhotoImage(Image.open(f'{pwd}\Assets\Images\GUI_Images\Gold\Cballs.png'))
 
-    bt_frame_1 = LabelFrame(settings_gui, text="Break Schedule", bg=frame_bg_color, pady=40, padx=40)
+    bt_frame_1 = LabelFrame(settings_gui, text="⏱ Break Schedule", bg=frame_bg_color, pady=40, padx=40)
 
     e_min_label_prefix = Label(bt_frame_1, text="Every", background=frame_bg_color, font=break_font)
-    e_min = Entry(bt_frame_1, textvariable=break_t, background=label_frame_bg_color, font=break_btn_font)
+    e_min = Entry(bt_frame_1, textvariable=break_m, background=label_frame_bg_color, font=break_btn_font)
     e_min_label_suffix = Label(bt_frame_1, text="minutes,", background=frame_bg_color, font=break_font)
 
     e_min_label_prefix2 = Label(bt_frame_1, text="give or take", background=frame_bg_color, font=break_font)
-    e_min2 = Entry(bt_frame_1, textvariable=break_dev_t, background=label_frame_bg_color, font=break_btn_font)
+    e_min2 = Entry(bt_frame_1, textvariable=break_dev_m, background=label_frame_bg_color, font=break_btn_font)
     e_min_label_suffix2 = Label(bt_frame_1, text="minutes,", background=frame_bg_color, font=break_font)
 
     e_min_label_prefix3 = Label(bt_frame_1, text="Break for", background=frame_bg_color, font=break_font)
-    e_min3 = Entry(bt_frame_1, textvariable=interval_t, background=label_frame_bg_color, font=break_btn_font)
+    e_min3 = Entry(bt_frame_1, textvariable=interval_m, background=label_frame_bg_color, font=break_btn_font)
     e_min_label_suffix3 = Label(bt_frame_1, text="minutes,", background=frame_bg_color, font=break_font)
 
     e_min_label_prefix4 = Label(bt_frame_1, text="give or take", background=frame_bg_color, font=break_font)
-    e_min4 = Entry(bt_frame_1, textvariable=interval_dev_t, background=label_frame_bg_color, font=break_btn_font)
+    e_min4 = Entry(bt_frame_1, textvariable=interval_dev_m, background=label_frame_bg_color, font=break_btn_font)
     e_min_label_suffix4 = Label(bt_frame_1, text="minutes,", background=frame_bg_color, font=break_font)
 
     e_min_label_prefix.grid(row=1, column=1)
@@ -147,7 +147,7 @@ def show_settings_frame():
     e_min4.grid(row=4, column=2, columnspan=1, padx=20, pady=10)
     e_min_label_suffix4.grid(row=4, column=3, padx=10, pady=15)
 
-    test_btn = Button(bt_frame_1, fg=frame_bg_color, padx=10, pady=5, text="Set Schedule", font=break_btn_font, bg=btn_bg_color, activebackground=btn_active_bg_color, command=lambda: set_break_timer(time_vars, settings_gui))
+    test_btn = Button(bt_frame_1, fg='white', padx=10, pady=5, text="Set Schedule", font=break_btn_font, bg=btn_bg_color, activebackground=btn_active_bg_color, command=lambda: set_break_timer(time_vars, settings_gui))
     test_btn.grid(row=5, column=1, pady=20, padx=20, columnspan=3)
 
     bt_frame_1.grid(row=1, column=1)

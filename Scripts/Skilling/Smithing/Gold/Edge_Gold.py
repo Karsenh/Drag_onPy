@@ -1,9 +1,15 @@
 import random
+from datetime import datetime, timedelta
+from GUI.Break_Timer.Break_Handler import *
+
+
 from GUI.Break_Timer.Timer import *
 from API.Interface import *
 
+
 exit_prog = False
 first_loop = True
+
 
 def smith_gold_edge():
     global exit_prog
@@ -20,7 +26,7 @@ def smith_gold_edge():
 
         # 1. Opens bank booth
         if not is_furnace_start():
-            start_open_bank()
+            bank_from_bank()
 
         # 2. Deposits All inventory & equipment
         deposit_all(include_equipment=True)
@@ -41,6 +47,7 @@ def smith_gold_edge():
     # while
 
     if not first_loop:
+        check_break_timer(cbf_1)
         deposit_all()
 
     # 7. Withdraws ore
@@ -52,10 +59,10 @@ def smith_gold_edge():
     # 9. Click / 6 / Space (after first selection) to select gold bar
     select_gold_bar()
 
-    get_break_times()
-
     # 10. Sleep for ~84 seconds
     check_for_level()
+
+    check_break_timer()
 
     bank_from_furnace()
 
@@ -83,14 +90,9 @@ def is_furnace_start():
     return False
 
 
-def start_open_bank():
-    start_bank_xy = 743, 483
-    mouse_click(start_bank_xy, 11, 12)
-    time.sleep(1.4)
-    return
-
-
 def deposit_all(include_equipment=False):
+    # TODO: Check if bank is open - if not, check if we're in front of the bank (click if so) - if not - exit
+    # If the bank is not open
     mouse_click(BANK_dep_inventory)
     sleep_between(0.5, 0.7)
     if include_equipment:
@@ -120,7 +122,7 @@ def check_withdraw_qty_all():
 
 def withdraw_gold_if_banked():
     print(f'Withdrawing gold ore if comparator image is found')
-    if not does_img_exist("gold_ore", script_name="Edge_Gold", threshold=0.95):
+    if not does_img_exist("gold_ore", script_name="Edge_Gold", threshold=0.99):
         print_to_log("No gold ore found in bank.")
         exit(-1)
     else:
@@ -151,48 +153,77 @@ def select_gold_bar():
 def check_for_level():
     # Loop 17 times (total of ~85 seconds)
     start = time.time()
+    start_time = datetime.now()
 
-    for x in range(35):
-        print(f'START LOOP TIME = {start}')
-        # Sleep ~5 sec
-        sleep_or_move = random.randint(1, 20)
-        if sleep_or_move <= 19:
-            print(f'Sleeping between 1.9 - 2.3')
-            sleep_between(1.9, 2.3)
-        else:
-            skill_or_quest_tab = random.randint(1, 10)
-            if skill_or_quest_tab <= 7:
-                print(f'check between 1.9 - 2.3')
-                check_skill_tab(max_sec=2.0, skill_to_check="smithing")
-            else:
-                print(f'🧙‍Opening quest tab')
-                check_if_tab_open("quest", should_open=True)
-                sleep_between(0.5, 0.9)
-                quest_list_hover_xy = 1212, 574
-                mouse_move(quest_list_hover_xy, 21, 19)
-                sleep_between(0.3, 1.2)
-                random_scroll = random.randint(-389, 400)
-                print(f'{random_scroll}')
-                pag.hscroll(random_scroll)
-                sleep_between(0.5, 1.6)
-                check_if_tab_open("inventory", should_open=True)
-        # Check if we leveled up
+    avg_wait_seconds = random.randint(83, 89)
+    longer_wait_seconds = random.randint(90, 97)
+    sel_wait = random.randint(1, 10)
+    if sel_wait < 9:
+        wait_time_seconds = avg_wait_seconds
+    else:
+        wait_time_seconds = longer_wait_seconds
+
+    end_time = start_time + timedelta(seconds=wait_time_seconds)
+
+    while datetime.now() < end_time:
+        print(f'🔨Smithing...')
+        sleep_between(1.9, 5.3)
+
         if does_img_exist("level_up", category="General"):
             # If so, click the furnace again to start making bars
             furnace_xy = 782, 449
             mouse_click(furnace_xy, 3, 3, max_num_clicks=2)
             sleep_between(1.1, 1.4)
             select_gold_bar()
-        end = time.time()
-        print(f'END LOOP TIME = {end}')
+
+        should_check_tab = random.randint(1, 10)
+        if should_check_tab > 7:  # 30% chance to check a tab
+            skill_or_quest_tab = random.randint(1, 10)
+            if skill_or_quest_tab <= 7:
+                print(f'Checking Skill tab > Smithing for max of 5 seconds')
+                check_skill_tab(max_sec=4.0, skill_to_check="smithing")
+            else:
+                print(f'🧙Checking Quest tab')
+                check_if_tab_open("quest", should_open=True)
+                sleep_between(0.5, 1.3)
+                quest_list_hover_xy = 1212, 574
+                mouse_move(quest_list_hover_xy, 17, 23)
+                sleep_between(0.5, 1.2)
+                random_scroll = random.randint(-637, 601)
+                print(f'Scrolling: {random_scroll}')
+                pag.hscroll(random_scroll)
+                sleep_between(0.6, 2.6)
+                check_if_tab_open("inventory", should_open=True)
 
     return
 
 
+def bank_from_bank():
+    start_bank_xy = 743, 483
+    mouse_click(start_bank_xy, 11, 12)
+    time.sleep(1.4)
+    return
+
+
 def bank_from_furnace():
-    bank_booth_xy = 334, 622
-    mouse_click(bank_booth_xy, 3, 4)
-    sleep_between(5.9, 6.2)
+    furnace_loc_check = 1459, 194
+    furnace_loc_color = 55, 86, 73
+    if does_color_exist(furnace_loc_color, furnace_loc_check):
+        bank_booth_xy = 334, 622
+        mouse_click(bank_booth_xy, 3, 4)
+        sleep_between(5.9, 6.2)
+        check_if_bank_tab_open(tab_num=4, should_open=True)
+    return
+
+
+def cbf_1():
+    print('cbf 1 fired')
+    is_bank_open = check_if_bank_tab_open(tab_num=0, should_open=False), check_if_bank_tab_open(tab_num=4, should_open=False)
+    if not is_bank_open:
+        print(f'🏧 Not open. Opening...')
+        bank_from_bank()
+        check_if_bank_tab_open(4, True)
+
     return
 
 

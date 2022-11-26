@@ -117,19 +117,15 @@ def check_if_tab_open(tab="inventory", should_open=True):
 
 
 def check_if_bank_tab_open(tab_num=0, should_open=True, double_check=True):
+    # If the bank tab IS open...
     if does_img_exist(f"tab_{tab_num}", category="Banking", threshold=0.9):
-        if not should_open:
-            mouse_click(BANK_all_tab_xys[tab_num])
-            # Check for tab again after clicking (if double check is true)
-            if double_check:
-                if not does_img_exist(f"tab_{tab_num}", category="Banking", threshold=0.9):
-                    print(f"Couldn't find expected tab no. {tab_num} despite having tried to click... Exiting")
-                    # Print this issue to log file
-                    log_text = f"Couldn't find Bank Tab {tab_num} after trying to click it."
-                    print_to_log(log_text)
-                    exit(-1)
+        # return true
+        return True
+    # Else, the bank tab is NOT open...
     else:
+        # If it's not open, but we SHOULD open it...
         if should_open:
+            # Click that tab xy to open
             mouse_click(BANK_all_tab_xys[tab_num])
             # Check for tab again after clicking (if double check is true)
             if double_check:
@@ -139,8 +135,10 @@ def check_if_bank_tab_open(tab_num=0, should_open=True, double_check=True):
                     log_text = f"Couldn't find Bank Tab {tab_num} after trying to click it."
                     print_to_log(log_text)
                     exit(-1)
-
-    return
+            #         It's now open
+            return True
+        # Still closed because should_open is false
+        return False
 
 
 def check_one_tap_drop_enabled(should_enable=True):
@@ -291,4 +289,16 @@ def check_skill_tab(max_sec=2.0, skill_to_check='random'):
     remaining_time = max_sec - elapsed_time
     print(f'remaining time: {remaining_time}')
     time.sleep(remaining_time)
+    return
+
+
+def handle_auth_screens(DEBUG=True):
+    print(f'Disconnected screen? : {is_on_dc_screen(should_cont=True)}')
+    # is_on_dc_screen(should_cont=True)
+    # Check that we're not on login screen (click login if so)
+    print(f'Login screen? : {is_on_login_screen(should_cont=True)}')
+    # is_on_login_screen(should_cont=True)
+    # Check that we're not on the welcome screen (click 'Tap Here To Play' if so)
+    print(f'Welcome screen? : {is_on_welcome_screen(should_cont=True)}')
+    # is_on_welcome_screen(should_cont=True)
     return

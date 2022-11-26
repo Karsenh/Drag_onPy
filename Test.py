@@ -20,12 +20,15 @@ capture_bluestacks()
 
 # open_tab_color = 106, 35, 26
 
-class script_enum(Enum):
-    PISC_IRON = 0
-    EDGE_GOLD = 1
+# class script_enum(Enum):
+#     PISC_IRON = 0
+#     EDGE_GOLD = 1
+#
+#
+# open_tab_color = 106, 35, 26
 
-
-open_tab_color = 106, 35, 26
+does_exist = does_img_exist("gold_ore", script_name="Edge_Gold", threshold=0.99)
+print(f'does exist: {does_exist}')
 # inventory_tab_xy      1426, 392
 # equipment_tab_xy      1426, 460
 # stat_tab_xy           1431, 522
@@ -59,8 +62,8 @@ open_tab_color = 106, 35, 26
 
 # coords = 1363, 291
 # print(f'Color: {get_color_at_coords(INVENT_tab_xy)}')
-invent_color_xy = 1363, 291
-mouse_move(invent_color_xy)
+# invent_color_xy = 1363, 291
+# mouse_move(invent_color_xy)
 
 # r, g, b = get_color_at_coords(BANK_qty_all)
 
