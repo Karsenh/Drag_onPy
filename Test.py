@@ -8,11 +8,13 @@ from API.Interface import *
 from API.Import_Libs.Coords import *
 from enum import Enum
 from Scripts.Skilling.Smithing.Gold.Edge_Gold import *
+from API.Imaging.OCR.Run_Energy import *
 
 get_bluestacks_xy()
 set_bluestacks_window_size()
 capture_bluestacks()
 
+read_run()
 # smith_gold_edge()
 # get_color_at_coords(furnace_loc_check)
 
@@ -27,8 +29,7 @@ capture_bluestacks()
 #
 # open_tab_color = 106, 35, 26
 
-does_exist = does_img_exist("gold_ore", script_name="Edge_Gold", threshold=0.99)
-print(f'does exist: {does_exist}')
+
 # inventory_tab_xy      1426, 392
 # equipment_tab_xy      1426, 460
 # stat_tab_xy           1431, 522

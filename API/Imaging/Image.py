@@ -10,7 +10,7 @@ from API.Import_Libs.Paths import *
 img_check_xy = 0, 0
 
 
-def capture_bluestacks(DEBUG=False):
+def capture_bluestacks(DEBUG=True):
     x1, y1, x2, y2 = get_bluestacks_region()
     if DEBUG:
         print(f'🐛 x1: {x1}, y1: {y1}')
