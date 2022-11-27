@@ -25,8 +25,6 @@ def toggle_active_frame(frame_name, all_frames):
 
     main_frame, gold_frame, skill_frame, pvm_pvp_frame, skill_sub_frames = all_frames
 
-    mining_frame, smithing_frame = skill_sub_frames
-
     match frame_name:
         case "gold":
             is_active_gold = not is_active_gold
@@ -76,8 +74,9 @@ def get_all_frames(root):
 
     mining_frame = LabelFrame(main_frame, text="Mining", bg=label_frame_bg_color, font=sub_gui_label_font)
     smithing_frame = LabelFrame(main_frame, text="Smithing", bg=label_frame_bg_color, font=sub_gui_label_font)
+    agility_frame = LabelFrame(main_frame, text="Agility", bg=label_frame_bg_color, font=sub_gui_label_font)
 
-    skill_sub_frames = mining_frame, smithing_frame
+    skill_sub_frames = mining_frame, smithing_frame, agility_frame
 
     # Import All Frames & All Images from GUI Imports
     all_frames = main_frame, gold_frame, skill_frame, pvm_pvp_frame, skill_sub_frames
@@ -253,7 +252,8 @@ def show_pvm_pvp_frame(all_frames, pvm_pvp_btns, toggle_active_frame, gui_btns):
 def show_mining_frame(all_frames, toggle_active_frame, iron_pisc_btn):
     # Close skill_frame
     _, _, _, _, skill_sub_frames = all_frames
-    mining_frame, _ = skill_sub_frames
+    mining_frame, _, _ = skill_sub_frames
+
     is_active = toggle_active_frame("skill", all_frames)
     print(f'show_mining_frame - skill_frame - is_active: {is_active}')
 
@@ -274,7 +274,7 @@ def show_mining_frame(all_frames, toggle_active_frame, iron_pisc_btn):
 
 def show_smithing_frame(all_frames, toggle_active_frame, edge_gold_btn):
     _, _, _, _, skill_sub_frames = all_frames
-    _, smithing_frame = skill_sub_frames
+    _, smithing_frame, _ = skill_sub_frames
 
     is_active = toggle_active_frame("skill", all_frames)
     print(f'show_smithing_frame - skill_frame - is_active: {is_active}')
@@ -291,4 +291,25 @@ def show_smithing_frame(all_frames, toggle_active_frame, edge_gold_btn):
     gold_img_label.grid(row=1, column=1)
     edge_gold_btn.grid(row=1, column=2, columnspan=2, pady=20, padx=30)
 
+    return
+
+
+def show_agility_frame(all_frames, toggle_active_frame, gnome_course_btn):
+    _, _, _, _, skill_sub_frames = all_frames
+    _, _, agility_frame = skill_sub_frames
+
+    is_active = toggle_active_frame("skill", all_frames)
+    print(f'show_agility_frame - skill_frame - is_active: {is_active}')
+
+    agility_frame.grid(row=sub_gui_row, column=1, columnspan=5, pady=50)
+
+    agility_path = 'Assets\Images\GUI_Images\Stats\Agility'
+    gnome_course_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{agility_path}\Gnome_Course.png'))
+
+    gold_img_label = Label(agility_frame, image=gnome_course_img, height=100, width=100, bg=label_frame_bg_color)
+    gnome_course_img.image = gnome_course_img
+
+    # Load button with ore
+    gold_img_label.grid(row=1, column=1)
+    gnome_course_btn.grid(row=1, column=2, columnspan=2, pady=20, padx=30)
     return

@@ -17,7 +17,7 @@ def get_all_btns(all_frames, all_images):
     # ALL FRAMES
     main_frame, gold_frame, skill_frame, pvm_pvp_frame, skill_sub_frames = all_frames
 
-    mining_frame, smithing_frame = skill_sub_frames
+    mining_frame, smithing_frame, agility_frame = skill_sub_frames
 
     # IMAGES
     main_gui_images, gold_gui_images, skill_gui_images, pvm_pvp_gui_images, skilling_sub_gui_images = all_images
@@ -30,7 +30,7 @@ def get_all_btns(all_frames, all_images):
 
     # Sub_sub_gui_images
     # (Mining/Smithing)
-    pisc_iron_img, edge_gold_img = skilling_sub_gui_images
+    pisc_iron_img, edge_gold_img, gnome_course_img = skilling_sub_gui_images
 
 
     # MAIN_GUI_BTNS
@@ -64,7 +64,7 @@ def get_all_btns(all_frames, all_images):
     minining_btn = Button(skill_frame, text="Mining", image=mining_img, height=skill_btn_height, width=skill_btn_width, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_mining_frame(all_frames, toggle_active_frame, iron_pisc_btn))
 
     strength_btn = Button(skill_frame, text="Strength", image=strength_img, height=skill_btn_height, width=skill_btn_width, bg='#545550', activebackground=btn_active_bg_color)
-    agility_btn = Button(skill_frame, text="Agility", image=agility_img, height=skill_btn_height, width=skill_btn_width, bg='#545550', activebackground=btn_active_bg_color)
+    agility_btn = Button(skill_frame, text="Agility", image=agility_img, height=skill_btn_height, width=skill_btn_width, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_agility_frame(all_frames, toggle_active_frame, gnome_course_btn))
     smithing_btn = Button(skill_frame, text="Smithing", image=smithing_img, height=skill_btn_height, width=skill_btn_width, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_smithing_frame(all_frames, toggle_active_frame, edge_gold_btn))
 
     # (Sub-Skill) Sub_skill_gui_btns - passed into method directly
@@ -73,6 +73,7 @@ def get_all_btns(all_frames, all_images):
     #     Smithing
     edge_gold_btn = Button(smithing_frame, text="Edge Gold", image=edge_gold_img,  height=100, width=100, bg='#545550', activebackground=btn_active_bg_color, command=lambda: launch_script("edge_gold"))
     #     Agility
+    gnome_course_btn = Button(agility_frame, text="Gnome Agility", image=gnome_course_img,  height=100, width=100, bg='#545550', activebackground=btn_active_bg_color, command=lambda: launch_script("gnome_course"))
     #     RuneCrafting
     #     Herblore
     #     Firemaking

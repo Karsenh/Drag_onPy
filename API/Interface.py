@@ -162,6 +162,38 @@ def check_one_tap_drop_enabled(should_enable=True):
         return False
 
 
+def is_run_on():
+    run_check_xy = 1210, 255
+    run_rgb = get_color_at_coords(run_check_xy)
+    run_on_color = 236, 218, 103
+    run_off_color = 145, 100, 59
+    if run_rgb == run_on_color:
+        print(f'🥾 ✔ Run is ON with RGB: {run_rgb}')
+        return True
+    if run_rgb == run_off_color:
+        print(f'🥾 ❌ Run is OFF with RGB: {run_rgb}')
+        return False
+    else:
+        print(f'❌ Color: {run_rgb} not detected for 🥾 run energy.')
+        return False
+
+
+def is_run_gt(percent=10):
+    off_color = 14, 14, 14
+
+    if percent <= 10:
+        xy = 1215, 265
+        message = '12 percent.'
+
+    color_at_coords = get_color_at_coords(xy)
+    if color_at_coords < off_color:
+        print(f'Run energy < {message}')
+        return False
+    else:
+        print(f'Run energy >= {message}')
+        return True
+
+
 # --- IMAGE MATCHING ---
 def is_on_dc_screen(should_cont=True):
     img_found = does_img_exist("disconnected", category="Auth")

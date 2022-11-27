@@ -57,8 +57,10 @@ def get_all_gui_images():
     iron_pisc_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{skill_sub_path}\Mining\Iron_Pisc.png'))
     #     Edge_Gold
     edge_gold_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{skill_sub_path}\Smithing\Edge_Gold.png'))
+    #     Gnome Course
+    gnome_course_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{skill_sub_path}\Agility\gnome_map.png'))
 
-    skilling_sub_gui_images = iron_pisc_img, edge_gold_img
+    skilling_sub_gui_images = iron_pisc_img, edge_gold_img, gnome_course_img
 
     return main_gui_images, gold_gui_images, skill_gui_images, pvmpvp_gui_images, skilling_sub_gui_images
 

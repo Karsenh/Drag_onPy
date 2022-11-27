@@ -1,6 +1,7 @@
 # from GUI.Break_Timer.Break_Handler import *
 from Scripts.Skilling.Smithing.Gold.Edge_Gold import *
 from Scripts.Skilling.Mining.Iron.Pisc_Iron import *
+from Scripts.Skilling.Agility.Gnome_Course import *
 from enum import Enum
 
 
@@ -13,14 +14,17 @@ def launch_script(script_name="pisc_iron"):
     class ScriptEnum(Enum):
         PISC_IRON = 0
         EDGE_GOLD = 1
+        GNOME_COURSE = 2
 
-    all_scripts = [mine_iron_pisc, smith_gold_edge]
+    all_scripts = [mine_iron_pisc, smith_gold_edge, run_gnome_course]
 
     match script_name:
         case "pisc_iron":
             selected_script = ScriptEnum.PISC_IRON.value
         case "edge_gold":
             selected_script = ScriptEnum.EDGE_GOLD.value
+        case "gnome_course":
+            selected_script = ScriptEnum.GNOME_COURSE.value
 
     go = True
 

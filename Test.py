@@ -9,6 +9,7 @@ from API.Imports.Coords import *
 from enum import Enum
 from Scripts.Skilling.Smithing.Gold.Edge_Gold import *
 from API.Imaging.OCR.Run_Energy import *
+from Scripts.Skilling.Agility.Gnome_Course import *
 
 get_bluestacks_xy()
 set_bluestacks_window_size()
@@ -16,21 +17,23 @@ capture_bluestacks()
 
 # read_run()
 
+# get_color_at_coords(xy)
 
+
+run_gnome_course()
+# run_on = 1210, 255
+# xy = 724, 735
+# print(f'color: {get_color_at_coords(xy)}')
+
+# color = get_color_at_coords(run_on)
+
+# run off = 1211, 255 = (139, 94, 54)
+# run on = 1211, 255 = (236, 218, 103)
 # capture_bluestacks()
 # image = Image.open()
 # picture = image.load()
 
-run_on_xy = 1210, 255
-run_rgb = get_color_at_coords(run_on_xy)
-run_on_color = 236, 218, 103
-run_off_color = 145, 100, 59
-if run_rgb == run_on_color:
-    print(f'🥾✔ Run is ON')
-if run_rgb == run_off_color:
-    print(f'🥾❌ Run is OFF')
-else:
-    print(f'❌ Color: {run_rgb} not detected for 🥾 run energy.')
+
 
 # Run ON    1210, 255 = (236, 218, 103)
 # Run OFF   1210, 255 = (145, 100, 59)
@@ -42,12 +45,17 @@ else:
 # Run OUT   70+     - 1219, 241 = (6, 5, 4)
 # Run OUT   12+     - 1215, 265 = (11, 11, 11)
 
-xy = 1215, 265
-off_color = 11, 11, 11
-if get_color_at_coords(xy) > off_color:
-    print(f'We have more than 10% run energy!')
-else:
-    print(f'LESS THAN 10% REMAINING!')
+# xy = 1215, 265
+# off_color = 11, 11, 11
+# if get_color_at_coords(xy) > off_color:
+#     print(f'We have more than 10% run energy!')
+# else:
+#     print(f'LESS THAN 10% REMAINING!')
+#
+# is_run_gt(percent=10)
+
+
+
 # capture_bluestacks()
 # pyautogui.screenshot(imageFilename=fr'{ROOT_SCREENSHOTS_PATH}\Test.png')
 #
