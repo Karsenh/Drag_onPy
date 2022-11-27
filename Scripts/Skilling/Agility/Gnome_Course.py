@@ -23,11 +23,11 @@ def run_gnome_course():
     # Zoom - 2
     # Turn - North
     # Camera - Up
-    # zoom_camera(notches=2)
-    # turn_compass(direction="north")
-    # pitch_camera(direction="up")
-
     if first_loop:
+        zoom_camera(notches=2)
+        turn_compass(direction="north")
+        pitch_camera(direction="up")
+
         first_loop = False
         if is_pipe_start():
             i = 1
@@ -40,6 +40,10 @@ def run_gnome_course():
             print(f'Starting in front of log i = {i}')
 
     print(f'♾ ITERATION: {i} - Clicking xy: {obstacle_xys[i]}')
+    if i == 1:
+        if not does_img_exist("pipe_start", script_name="Gnome_Course"):
+            print(f"⛔ We should be in front of the pipe but it appears we're not...")
+            exit(-1)
 
     if is_run_gt(percent=10):
         if is_run_on():
@@ -69,6 +73,7 @@ def run_gnome_course():
 
 
 def is_pipe_start():
-    check_spot_xy = 1440, 220
-    water_color = 98, 115, 152
-    return does_color_exist(water_color, check_spot_xy)
+    if does_img_exist("pipe_start", script_name="Gnome_Course"):
+        return True
+    else:
+        return False

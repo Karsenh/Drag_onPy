@@ -11,6 +11,9 @@ compass_xy = 1210, 70
 inventory_x, inventory_y = 1447, 403
 
 
+# ----
+# INTERFACE NORMALIZATION
+# ----
 def turn_compass(direction="south", DEBUG=False):
     global compass_xy
 
@@ -75,6 +78,9 @@ def zoom_camera(notches=1):
     return
 
 
+# ----
+# INTERFACE UTILITY
+# ----
 def drop_inventory(from_spot_num=1, to_spot_num=27):
     # Open inventory if not open
     check_if_tab_open("inventory", should_open=True)

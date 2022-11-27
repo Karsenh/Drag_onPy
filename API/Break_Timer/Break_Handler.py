@@ -1,4 +1,4 @@
-from GUI.Break_Timer.Timer import *
+from API.Break_Timer.Timer import *
 from datetime import datetime, timedelta
 import time
 from API.Interface import handle_auth_screens
