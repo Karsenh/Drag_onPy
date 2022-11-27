@@ -1,29 +1,47 @@
-from API.Setup import get_bluestacks_region
-from pytesseract import pytesseract
-import pyautogui as pag
-from API.Import_Libs.Paths import *
-from PIL import Image
-
-pytesseract.run_tesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+from API.Imaging.OCR.Helpers import *
 
 
 def read_run():
     # Take screenshot of run energy
-    x1, y1, x2, y2 = get_bluestacks_region()
 
-    run_x1 = x1 + 1142
-    run_y1 = y1 + 240
-    run_x2 = 45
-    run_y2 = 30
+    # Capture screenshot of run energy
+    capture_run_energy()
 
-    pag.screenshot(imageFilename=fr'{ROOT_SCREENSHOTS_PATH}\Comparators\General\run_energy.png', region=(run_x1, run_y1, run_x2, run_y2))
+    # img_path = fr'{ROOT_SCREENSHOTS_PATH}\Comparators\General\run_energy.png'
+    #
+    # # Read the run energy image
+    # run_img = cv2.imread(img_path)
+    #
+    # # Invert the image
+    # inverted_img = invert_image(run_img)
+    #
+    # # Grayscale image
+    # gray_img = gray_scale_image(inverted_img)
+    #
+    # # Sharpen image
+    # sharp_img = sharpen_image(gray_img)
+    #
+    # # Sharpen image a different way
+    # sharp_alt_img, thresh = alt_sharpen_image(gray_img)
+    #
+    # # Remove noise
+    # no_noise_img = noise_removal(sharp_img)
+    #
+    # dpi_img = Image.fromarray(no_noise_img)
+    # dpi_img.save(fr'{ROOT_SCREENSHOTS_PATH}\Comparators\General\run_energy_dpi.png')
+    #
+    # ocr_string1 = ocr_image(dpi_img)
+    # print(f'OCR string 🅰: {ocr_string1}')
+    #
+    # no_noise_img_alt = noise_removal_alt(sharp_alt_img)
+    #
+    # dpi_img2 = Image.fromarray(no_noise_img_alt)
+    # dpi_img2.save(fr'{ROOT_SCREENSHOTS_PATH}\Comparators\General\run_energy_dpi_alt.png')
+    #
+    # ocr_string2 = ocr_image(dpi_img2)
+    # print(f'OCR string (alt) 🅱: {ocr_string2}')
 
-    # Perform OCR
-    run_img =  Image.open(fr'{ROOT_SCREENSHOTS_PATH}\Comparators\General\run_energy.png')
+    # process_and_ocr()
+    # process_and_ocr2()
 
-    test_string = pytesseract.image_to_string(run_img, config='--psm 6')
-
-    print(f'test string: {test_string}')
-
-    # Return integer value
     return

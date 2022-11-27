@@ -4,7 +4,7 @@ import numpy as np
 import cv2
 from API.Setup import *
 import pyautogui
-from API.Import_Libs.Paths import *
+from API.Imports.Paths import *
 
 
 img_check_xy = 0, 0

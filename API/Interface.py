@@ -3,7 +3,7 @@ from API.Imaging.Image import *
 from API.Mouse import *
 import pyautogui as pag
 import keyboard
-from API.Import_Libs.Coords import *
+from API.Imports.Coords import *
 import math
 
 

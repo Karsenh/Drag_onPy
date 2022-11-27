@@ -1,9 +1,9 @@
 from tkinter import *
-from GUI.GUI_Imports.GUI_Frames import *
+from GUI.Imports.GUI_Frames import *
 from Scripts.Skilling.Mining.Iron.Pisc_Iron import *
 from Scripts.Skilling.Smithing.Gold.Edge_Gold import *
 
-from GUI.GUI_Imports.Script_Launch import *
+from GUI.Imports.Script_Launch import *
 
 btn_active_bg_color = '#972b29'
 btn_bg_color = '#645747'

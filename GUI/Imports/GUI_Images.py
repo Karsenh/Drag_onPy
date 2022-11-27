@@ -1,6 +1,6 @@
 import os
 from PIL import ImageTk, Image
-import API.Import_Libs.Paths
+import API.Imports.Paths
 
 
 def get_all_gui_images():

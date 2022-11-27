@@ -1,5 +1,5 @@
 from datetime import datetime
-from API.Import_Libs.Paths import *
+from API.Imports.Paths import *
 import time
 import random
 

@@ -2,8 +2,8 @@ import math
 
 from Scripts.Skilling.Mining.Iron.Pisc_Iron import *
 from API.Interface import *
-from GUI.GUI_Imports.GUI_Images import *
-from GUI.GUI_Imports.GUI_Buttons import *
+from GUI.Imports.GUI_Images import *
+from GUI.Imports.GUI_Buttons import *
 from PIL import ImageTk, Image
 from tkinter import *
 import os
