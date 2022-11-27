@@ -48,12 +48,13 @@ def does_color_exist(check_color, xy, DEBUG=True):
         return False
 
 
-def get_color_at_coords(xy):
+def get_color_at_coords(xy, DEBUG=False):
     x, y = xy
     capture_bluestacks()
     image = Image.open(f'{BS_SCREEN_PATH}')
     picture = image.load()
-    print(f'RGB Color @ {x}, {y} = {picture[x, y]}')
+    if DEBUG:
+        print(f'RGB Color @ {x}, {y} = {picture[x, y]}')
     return picture[x, y]
 
 
