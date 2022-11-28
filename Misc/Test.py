@@ -10,6 +10,7 @@ from enum import Enum
 from Scripts.Skilling.Smithing.Gold.Edge_Gold import *
 from API.Imaging.OCR.Run_Energy import *
 from Scripts.Skilling.Agility.Gnome_Course import *
+from GUI.Auth import show_auth_gui
 
 get_bluestacks_xy()
 set_bluestacks_window_size()
@@ -19,8 +20,8 @@ capture_bluestacks()
 
 # get_color_at_coords(xy)
 
-
-run_gnome_course()
+show_auth_gui()
+# run_gnome_course()
 # run_on = 1210, 255
 # xy = 724, 735
 # print(f'color: {get_color_at_coords(xy)}')

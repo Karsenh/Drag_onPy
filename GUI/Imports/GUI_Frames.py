@@ -1,6 +1,6 @@
 import tkinter.font
 from GUI.Main_GUI import *
-from GUI.Break_Timer.Timer import *
+from API.Break_Timer.Timer import *
 import os
 from tkinter import *
 from PIL import ImageTk, Image
