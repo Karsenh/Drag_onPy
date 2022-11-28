@@ -1,11 +1,12 @@
-import random
-import time
-
 from API.Interface import *
 
+# TODO:
+# 1. Add short random sleep variance between obstacles
+# 2. Add message based on current obstacle (iteration)
+
 first_loop = True
-run_sleep_times = [5, 10, 4, 2, 8, 3, 5, 9]
-walk_sleep_times = [5, 14, 4, 2, 8, 4, 7, 9]
+run_sleep_times = [5.0, 10.0, 4.0, 3.0, 8.0, 3.0, 5.6, 9.0]
+walk_sleep_times = [5.0, 14.0, 4.0, 3.0, 8.0, 4.0, 7.0, 9.0]
 
 obstacle_xys = [[743, 496], [160, 540], [723, 620], [745, 485], [972, 466], [893, 492], [767, 202], [754, 291]]
 
@@ -23,23 +24,25 @@ def run_gnome_course():
     # Zoom - 2
     # Turn - North
     # Camera - Up
-    # zoom_camera(notches=2)
-    # turn_compass(direction="north")
-    # pitch_camera(direction="up")
 
     if first_loop:
+        zoom_camera(notches=2)
+        turn_compass(direction="north")
+        pitch_camera(direction="up")
         first_loop = False
         if is_pipe_start():
             i = 1
-            print(f'Starting at pipe with i = {i}')
-        elif does_color_exist(second_loop_start_spot_color, second_loop_start_spot_xy):
+            print(f'🚽 PIPE START i = {i}')
+        elif is_net_start():
             i = 2
-            print(f"We're entering the course from the second obstacle... i = {i}")
+            print(f"🥅 NET START... i = {i}")
         else:
             i = 0
-            print(f'Starting in front of log i = {i}')
+            print(f'🪓 LOG START i = {i}')
 
-    print(f'♾ ITERATION: {i} - Clicking xy: {obstacle_xys[i]}')
+    curr_msg = get_iteration_msg(i)
+
+    print(f'♾ ITERATION: {i} - Clicking {curr_msg} @ xy: {obstacle_xys[i]}')
 
     if is_run_gt(percent=10):
         if is_run_on():
@@ -53,10 +56,13 @@ def run_gnome_course():
 
     mouse_click(obstacle_xys[i], max_num_clicks=2)
 
-    print(f'Sleeping for {sleep_times[i]} seconds...')
-    # r_sleep_dev = random.uniform(1.0, 3.4)
-    # sleep_between(sleep_times[i], sleep_times[i]+r_sleep_dev)
-    time.sleep(sleep_times[i])
+    r_sleep_length = random.randint(1, 20)
+    if r_sleep_length < 19:
+        r_sleep_dev = random.uniform(0.1, 1.3)
+    else:
+        r_sleep_dev = random.uniform(0.1, 1.3)
+
+    sleep_between(sleep_times[i], sleep_times[i]+r_sleep_dev)
 
     if i == 0:
         i = 1
@@ -69,6 +75,28 @@ def run_gnome_course():
 
 
 def is_pipe_start():
-    check_spot_xy = 1440, 220
-    water_color = 98, 115, 152
-    return does_color_exist(water_color, check_spot_xy)
+    return does_img_exist(img_name="pipe_start", script_name="Gnome_Course")
+
+
+def is_net_start():
+    return does_img_exist(img_name="net_start", script_name="Gnome_Course")
+
+
+def get_iteration_msg(curr_iteration):
+    match curr_iteration:
+        case 0:
+            return "Log Balance obstacle from near..."
+        case 1:
+            return "Log Balance obstacle from Pipe obstacle..."
+        case 2:
+            return "Net obstacle (up)..."
+        case 3:
+            return "Branch obstacle (up)..."
+        case 4:
+            return "Rope Balance obstacle..."
+        case 5:
+            return "Branch obstacle (down)..."
+        case 6:
+            return "Net obstacle (over)..."
+        case 7:
+            return "Pipe obstacle - END."

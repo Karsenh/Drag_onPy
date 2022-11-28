@@ -1,9 +1,9 @@
 import random
 from datetime import datetime, timedelta
-from GUI.Break_Timer.Break_Handler import *
+from API.Break_Timer.Break_Handler import *
 
 
-from GUI.Break_Timer.Timer import *
+from API.Break_Timer.Timer import *
 from API.Interface import *
 
 

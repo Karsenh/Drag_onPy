@@ -7,7 +7,7 @@ import random
 def sleep_between(min_seconds, max_seconds, DEBUG=True):
     r_sleep = random.uniform(min_seconds, max_seconds)
     if DEBUG:
-        print(f'Sleeping for {r_sleep} ms')
+        print(f'💤 Sleeping for {r_sleep} ms')
     time.sleep(r_sleep)
     return
 
