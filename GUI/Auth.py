@@ -1,7 +1,8 @@
 from tkinter import StringVar, LabelFrame, Tk, Label, Entry, Button, Frame
 import os
+import re
 from GUI.Imports.GUI_Frames import btn_bg_color, btn_active_bg_color, frame_bg_color, label_frame_bg_color
-
+from Database.Connection import get_user
 
 def show_auth_gui():
     auth_top_height = 500
@@ -23,12 +24,14 @@ def show_auth_gui():
     email_val = StringVar(form_frame)
     pass_val = StringVar(form_frame)
 
+    form_vals = email_val, pass_val
+
     # Labels and Entries
     email_label = Label(form_frame, text="Email", pady=10, background=label_frame_bg_color)
     email_entry = Entry(form_frame, textvariable=email_val)
 
     pass_label = Label(form_frame, text="Password", pady=10, background=label_frame_bg_color)
-    pass_entry = Entry(form_frame, textvariable=pass_val)
+    pass_entry = Entry(form_frame, textvariable=pass_val, show="✖")
 
     # Positioning
     form_frame.grid(row=1, column=1)
@@ -45,7 +48,7 @@ def show_auth_gui():
     pass_entry.grid(row=5, column=1, columnspan=1, pady=5, padx=30)
     pass_entry.place(anchor='w', relx=0.1, rely=0.60, width=195, height=30)
 
-    login_btn = Button(form_frame, text="Login", fg='white', width=15, bg=btn_bg_color, activebackground=btn_active_bg_color, command=lambda: authenticate_user())
+    login_btn = Button(form_frame, text="Login", fg='white', width=15, bg=btn_bg_color, activebackground=btn_active_bg_color, command=lambda: authenticate_user(form_vals))
     login_btn.grid(row=6, column=1, columnspan=3, pady=20)
     login_btn.place(anchor="center", relx=0.5, rely=0.85, height=30)
 
@@ -54,11 +57,31 @@ def show_auth_gui():
     return
 
 
-def authenticate_user():
-    print(f'🗝 Authenticating user...')
+def authenticate_user(form_vals):
     # Get the entries (email / pass)
+    email, password = form_vals
+
+    email = email.get()
+    password = password.get()
+    print(f'🗝 Authenticating user with:\nEmail: {email}\nPassword: {password}')
+
+    # **Validate the email REGEX
+    regex = '^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$'
+
+    if re.search(regex, email):
+        print(f'✅ Valid email')
+    else:
+        print(f'⛔ Not a valid email')
+        return -1
+
+    if not password:
+        print(f'⛔ Password field must be provided')
+        return -1
+    else:
+        print(f'✅ Password provided')
 
     # Connect to mongoDb
+    get_user(email, password)
 
     # Search User collection for that email
 
