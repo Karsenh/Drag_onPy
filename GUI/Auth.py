@@ -56,4 +56,24 @@ def show_auth_gui():
 
 def authenticate_user():
     print(f'🗝 Authenticating user...')
+    # Get the entries (email / pass)
+
+    # Connect to mongoDb
+
+    # Search User collection for that email
+
+    #   If no user - throw error.         - User doesn't exist
+
+    # Compare pass entry hash to db hash
+
+    #   If not matching - throw error.    - User info (password) incorrect
+
+    # Check if correct user has HWID
+
+    #   If so - check if it's current HWID being used
+    #       - If not - throw error.       - Too many systems attempting to access.
+
+    #   If not - add current HWID to user doc
+
+    #   Display Main_GUI
     return
