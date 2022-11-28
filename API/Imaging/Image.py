@@ -17,9 +17,9 @@ def capture_bluestacks(DEBUG=False):
         print(f'🐛 x2: {x2}, y2: {y2}')
 
     # w, h = get_bluestacks_window_size()
-    pyautogui.screenshot(imageFilename=fr'{ROOT_SCREENSHOTS_PATH}\BlueStacks_ScreenShot.png', region=(x1, y1, x2-x1, y2-y1))
+    pyautogui.screenshot(imageFilename=fr'{BS_SCREEN_PATH}', region=(x1, y1, x2-x1, y2-y1))
     if DEBUG:
-        print(f'📸 Captured & Saved Live (BlueStacks) Img: {BS_SCREEN_PATH}\BlueStacks_ScreenShot.png')
+        print(f'📸 Captured & Saved Live (BlueStacks) Img: {BS_SCREEN_PATH}')
     return
 
 
