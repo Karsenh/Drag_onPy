@@ -1,46 +1,59 @@
-from tkinter import StringVar, LabelFrame, Tk, Label, Entry, Button
+from tkinter import StringVar, LabelFrame, Tk, Label, Entry, Button, Frame
 import os
-from GUI.Imports.GUI_Frames import btn_bg_color, btn_active_bg_color
+from GUI.Imports.GUI_Frames import btn_bg_color, btn_active_bg_color, frame_bg_color, label_frame_bg_color
 
 
 def show_auth_gui():
-    auth_top_height = 400
-    auth_top_width = 400
+    auth_top_height = 500
+    auth_top_width = 450
 
     pwd = os.getcwd()
     auth_top = Tk()
     auth_top.title('Drag_onPy - Login')
     auth_top.iconbitmap(f'{pwd}\Assets\Images\Icon.ico')
-    auth_top.configure(bg='#969488')
+    auth_top.configure(bg='#676157')
     auth_top.geometry(f"{auth_top_width}x{auth_top_height}")
 
 
     # Auth Frame
-    auth_frame = LabelFrame(auth_top, text="Login")
-    auth_frame.grid(row=1, column=1, padx=100, pady=75)
-    auth_frame.place(anchor='center', relx=0.5, rely=0.5)
+
+    form_frame = Frame(auth_top, bg=label_frame_bg_color)
 
     # Entry value variables
-    email_val = StringVar(auth_frame)
-    pass_val = StringVar(auth_frame)
+    email_val = StringVar(form_frame)
+    pass_val = StringVar(form_frame)
 
     # Labels and Entries
-    email_label = Label(auth_frame, text="Email", anchor='w')
-    email_entry = Entry(auth_frame, textvariable=email_val)
+    email_label = Label(form_frame, text="Email", pady=10, background=label_frame_bg_color)
+    email_entry = Entry(form_frame, textvariable=email_val)
 
-    pass_label = Label(auth_frame, text="Password")
-    pass_entry = Entry(auth_frame, textvariable=pass_val)
+    pass_label = Label(form_frame, text="Password", pady=10, background=label_frame_bg_color)
+    pass_entry = Entry(form_frame, textvariable=pass_val)
 
     # Positioning
-    email_label.grid(row=1, column=1, pady=5, padx=10)
-    email_entry.grid(row=2, column=1, pady=5, padx=30)
+    form_frame.grid(row=1, column=1)
+    form_frame.place(anchor="center", relx=0.5, rely=0.5, height=300, width=250)
+    # form_frame.place(anchor='center', relx=0.5, rely=0.5)
 
-    pass_label.grid(row=3, column=1, pady=5, padx=10)
-    pass_entry.grid(row=4, column=1, pady=5, padx=30)
+    email_label.grid(row=2, column=1)
+    email_label.place(anchor='w', relx=0.1, rely=0.2)
+    email_entry.grid(row=3, column=1, columnspan=1, pady=5, padx=30)
+    email_entry.place(anchor='w', relx=0.1, rely=0.30, width=195, height=30)
 
-    login_btn = Button(auth_frame, text="Login", fg='white', width=15, bg=btn_bg_color, activebackground=btn_active_bg_color, command=lambda: print(f'Login fired'))
-    login_btn.grid(row=5, column=1, columnspan=3, pady=20)
+    pass_label.grid(row=4, column=1)
+    pass_label.place(anchor='w', relx=0.1, rely=0.5)
+    pass_entry.grid(row=5, column=1, columnspan=1, pady=5, padx=30)
+    pass_entry.place(anchor='w', relx=0.1, rely=0.60, width=195, height=30)
+
+    login_btn = Button(form_frame, text="Login", fg='white', width=15, bg=btn_bg_color, activebackground=btn_active_bg_color, command=lambda: authenticate_user())
+    login_btn.grid(row=6, column=1, columnspan=3, pady=20)
+    login_btn.place(anchor="center", relx=0.5, rely=0.85, height=30)
 
     auth_top.mainloop()
 
+    return
+
+
+def authenticate_user():
+    print(f'🗝 Authenticating user...')
     return
