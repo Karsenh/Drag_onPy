@@ -1,8 +1,7 @@
+import keyboard
+
 from API.Interface import *
 
-# TODO:
-# 1. Add short random sleep variance between obstacles
-# 2. Add message based on current obstacle (iteration)
 
 first_loop = True
 run_sleep_times = [5.0, 10.0, 4.0, 3.0, 8.0, 3.0, 5.6, 9.0]
@@ -54,6 +53,17 @@ def run_gnome_course():
     else:
         sleep_times = walk_sleep_times
 
+    check_for_level_dialogue()
+
+    if i == 1:
+        print(f'Checking if we are on the expected tile...')
+        on_right_tile = is_pipe_start()
+        if not on_right_tile:
+            print(f'⛔ Not on pipe tile as we expect to be. Exiting...')
+            return False
+        else:
+            print(f'✔ Still on course.')
+
     mouse_click(obstacle_xys[i], max_num_clicks=2)
 
     r_sleep_length = random.randint(1, 20)
@@ -71,7 +81,7 @@ def run_gnome_course():
     if i == 8:
         i = 1
 
-    return
+    return True
 
 
 def is_pipe_start():
@@ -100,3 +110,13 @@ def get_iteration_msg(curr_iteration):
             return "Net obstacle (over)..."
         case 7:
             return "Pipe obstacle - END."
+
+
+def check_for_level_dialogue():
+    if does_img_exist(img_name="level_up", category="General"):
+        print(f'Level-up detected. Spacing through...')
+        keyboard.press('space')
+        sleep_between(1.1, 2.6)
+        keyboard.press('space')
+        print(f'Should be through all chat-box dialogue now. Continuing...')
+    return

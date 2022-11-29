@@ -65,10 +65,12 @@ def authenticate_user(form_vals, auth_top):
 
     email = email.get()
     password = password.get()
+
+    email = email.lower()
     print(f'🗝 Authenticating user with:\nEmail: {email}\nPassword: {password}')
 
     # **Validate the email REGEX
-    regex = '^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$'
+    regex = '^[a-zA-Z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$'
 
     if re.search(regex, email):
         print(f'✅ Valid email')

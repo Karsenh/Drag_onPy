@@ -65,7 +65,7 @@ def should_break(DEBUG=True):
     # Check if the elapsed time is greater than or equal to the break interval time (how often we should take a break)
     if now > break_at:
         # If we should take a break, return true
-        print(f'⌛ We should go on break now.')
+        print(f'🚩 We should go on break now.')
         return True
 
     # Else, return false
@@ -94,4 +94,16 @@ def go_on_break(DEBUG=True):
     # Reset script start time after finished breaking to get out of break loop and start fresh
     script_start_time = datetime.now()
 
+    return
+
+
+def break_handler():
+    print(f'⏳ Entering break handler...')
+    should_we_break = should_break()
+    print(f'Should_we_break = {should_we_break}')
+    if should_we_break:
+        print(f"We're going on break...")
+        go_on_break()
+        print(f'Done with break.\nHandling auth screens...')
+        handle_auth_screens()
     return
