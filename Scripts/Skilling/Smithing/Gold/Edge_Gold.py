@@ -1,17 +1,14 @@
-import random
-from datetime import datetime, timedelta
+from API.Imaging.Image import get_existing_img_xy
 from API.Break_Timer.Break_Handler import *
 
-
-from API.Break_Timer.Timer import *
-from API.Interface import *
+from API.Interface.General import *
 
 
 exit_prog = False
 first_loop = True
 
 
-def smith_gold_edge():
+def smith_gold_edge(curr_loop):
     global exit_prog
     global first_loop
 
@@ -90,14 +87,7 @@ def is_furnace_start():
     return False
 
 
-def deposit_all(include_equipment=False):
-    # TODO: Check if bank is open - if not, check if we're in front of the bank (click if so) - if not - exit
-    # If the bank is not open
-    mouse_click(BANK_dep_inventory)
-    sleep_between(0.5, 0.7)
-    if include_equipment:
-        mouse_click(BANK_dep_equipment)
-    return
+
 
 
 def equip_gauntlets_if_banked():
@@ -184,7 +174,7 @@ def check_for_level():
                 check_skill_tab(max_sec=4.0, skill_to_check="smithing")
             else:
                 print(f'🧙Checking Quest tab')
-                check_if_tab_open("quest", should_open=True)
+                is_tab_open("quest", should_open=True)
                 sleep_between(0.5, 1.3)
                 quest_list_hover_xy = 1212, 574
                 mouse_move(quest_list_hover_xy, 17, 23)
@@ -193,7 +183,7 @@ def check_for_level():
                 print(f'Scrolling: {random_scroll}')
                 pag.hscroll(random_scroll)
                 sleep_between(0.6, 2.6)
-                check_if_tab_open("inventory", should_open=True)
+                is_tab_open("inventory", should_open=True)
 
     return
 

@@ -2,9 +2,10 @@ import os
 from PIL import Image, ImageGrab
 import numpy as np
 import cv2
-from API.Setup import *
+from API.Setup import get_bluestacks_region
 import pyautogui
 from API.Imports.Paths import *
+from API.Mouse import mouse_click
 
 
 img_check_xy = 0, 0
@@ -58,11 +59,8 @@ def get_color_at_coords(xy, DEBUG=False):
     return picture[x, y]
 
 
-def does_img_exist(img_name, script_name=None, category='Scripts', threshold=0.8, DEBUG=False):
+def does_img_exist(img_name, script_name=None, category='Scripts', threshold=0.8, should_click=False, click_xy_offet=8, DEBUG=True):
     global img_check_xy
-    # Get this projects root directory path
-    pwd = os.getcwd()
-    # Capture a current view of the game
     capture_bluestacks()
     img_rgb = cv2.imread(BS_SCREEN_PATH)
 
@@ -80,14 +78,10 @@ def does_img_exist(img_name, script_name=None, category='Scripts', threshold=0.8
 
     template = cv2.imread(template_img_path, 0)
 
-    # Store width and height of template in w and h
-    # w, h = template.shape[::-1]
-
-    # Perform match operations.
     res = cv2.matchTemplate(img_gray, template, cv2.TM_CCOEFF_NORMED)
 
-    if DEBUG:
-        print(f'Res: {res}')
+    # if DEBUG:
+    #     print(f'Res: {res}')
 
     # Store the coordinates of matched area in a numpy array
     loc = np.where(res >= threshold)
@@ -99,19 +93,16 @@ def does_img_exist(img_name, script_name=None, category='Scripts', threshold=0.8
     else:
         if DEBUG:
             print(f'✔ {img_name}.png found:\n loc[0] = {loc[0]}\nloc[1] = {loc[1]}')
-            print(f'{img_check_xy} saved to img_check_xy global')
         #     Save the 'deepest' find of img's xy coords
         img_check_xy = loc[1][len(loc[1])-1], loc[0][len(loc[0])-1]
+        if should_click:
+            img_x, img_y = img_check_xy
+            adj_x = img_x + click_xy_offet
+            adj_y = img_y + click_xy_offet
+            adj_xy = adj_x, adj_y
+            mouse_click(adj_xy)
+        print(f'{img_check_xy} saved to img_check_xy global')
         return True
-
-    # Draw a rectangle around the matched region.
-    # for pt in zip(*loc[::-1]):
-    #     cv2.rectangle(img_rgb, pt, (pt[0] + w, pt[1] + h), (0, 255, 255), 2)
-
-    # Show the final image with the matched area.
-    # cv2.imshow('Detected', img_rgb)
-    # cv2.waitKey(0)
-    # return
 
 
 def get_existing_img_xy():

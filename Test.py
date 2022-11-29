@@ -16,12 +16,40 @@ get_bluestacks_xy()
 set_bluestacks_window_size()
 capture_bluestacks()
 
+# print(f'Does shrimp spot exist: {does_img_exist(img_name="shrimp_spot", script_name="Draynor_Shrimp")}')
+# print(f'Does shrimp spot exist: {does_img_exist(img_name="bank_spot", script_name="Draynor_Shrimp")}')
+#
+# xy = get_existing_img_xy()
+#
+# mouse_click(xy)
+
+# does_img_exist(img_name="bank_booth", script_name="Draynor_Shrimp", threshold=.95, should_click=True)
+# curr_loop = 1
+# fish_draynor_shrimp(curr_loop)
+# wait_for_img(img_to_search="is_fishing", script_name="Draynor_Shrimp", category_name="Scripts", max_wait_sec=4, img_threshold=0.65)
+
+launch_script("draynor_shrimp")
+# is_tab_open("inventory", should_open=False)
+
+# # color_xy = 875, 708
+# check_color = (63, 214, 221)
+# # print(f'Color @ coords {color_xy}: {check_color}')
+#
+# x, y = find_color_xy(BS_SCREEN_PATH, check_color)
+# print(f'x: {x} | y: {y}')
+#
+# move_to_xy = x[len(x)-1], y[len(y)-1]
+# mouse_move(move_to_xy)
+
+# does_exist = does_color_exist(check_color)
+# print(f'Does exist? {does_exist}')
+
 # read_run()
 
 # get_color_at_coords(xy)
 
 # show_main_gui()
-show_auth_gui()
+# show_auth_gui()
 # run_gnome_course()
 # run_on = 1210, 255
 # xy = 724, 735

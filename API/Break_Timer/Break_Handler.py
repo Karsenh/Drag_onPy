@@ -1,7 +1,7 @@
 from API.Break_Timer.Timer import *
 from datetime import datetime, timedelta
 import time
-from API.Interface import handle_auth_screens
+from API.Interface.General import handle_auth_screens
 
 
 script_start_time = None

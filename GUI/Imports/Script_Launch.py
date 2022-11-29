@@ -2,10 +2,11 @@
 from Scripts.Skilling.Smithing.Gold.Edge_Gold import *
 from Scripts.Skilling.Mining.Iron.Pisc_Iron import *
 from Scripts.Skilling.Agility.Gnome_Course import *
+from Scripts.Skilling.Fishing.Shrimp.Draynor_Shrimp import fish_draynor_shrimp
 from enum import Enum
 
 
-curr_script_iteration = 0
+curr_script_iteration = 1
 should_continue = True
 
 
@@ -24,8 +25,9 @@ def launch_script(script_name="pisc_iron"):
         PISC_IRON = 0
         EDGE_GOLD = 1
         GNOME_COURSE = 2
+        DRAYNOR_SHRIMP = 3
 
-    all_scripts = [mine_iron_pisc, smith_gold_edge, run_gnome_course]
+    all_scripts = [mine_iron_pisc, smith_gold_edge, run_gnome_course, fish_draynor_shrimp]
 
     match script_name:
         case "pisc_iron":
@@ -34,18 +36,22 @@ def launch_script(script_name="pisc_iron"):
             selected_script = ScriptEnum.EDGE_GOLD.value
         case "gnome_course":
             selected_script = ScriptEnum.GNOME_COURSE.value
+        case "draynor_shrimp":
+            selected_script = ScriptEnum.DRAYNOR_SHRIMP.value
 
     is_timer_set = is_break_timer_set()
 
     if is_timer_set:
         print(f'🚩 Break Timer Set - Entering loop with break_handler()')
         while should_continue:
-            should_continue = all_scripts[selected_script]()
+            should_continue = all_scripts[selected_script](curr_script_iteration)
             break_handler()
+            curr_script_iteration += 1
     else:
         print(f'🚩 NO Break Timer Set - Entering loop WITHOUT break_handler()')
         while should_continue:
-            should_continue = all_scripts[selected_script]()
+            should_continue = all_scripts[selected_script](curr_script_iteration)
+            curr_script_iteration += 1
 
     return
 

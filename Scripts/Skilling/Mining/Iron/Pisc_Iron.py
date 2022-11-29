@@ -1,11 +1,12 @@
-from API.Interface import *
+from API.Interface.General import *
 from datetime import datetime
+import os
 
 exit_prog = False
 
 
 # Start character on the tile between three iron ore in Piscatoris
-def mine_iron_pisc(DEBUG=True):
+def mine_iron_pisc(curr_loop, DEBUG=True):
     global exit_prog
 
     first_loop = True

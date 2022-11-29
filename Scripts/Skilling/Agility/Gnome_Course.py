@@ -1,6 +1,4 @@
-import keyboard
-
-from API.Interface import *
+from API.Interface.General import *
 
 
 first_loop = True
@@ -15,7 +13,7 @@ second_loop_start_spot_xy = 724, 735
 i = 0
 
 
-def run_gnome_course():
+def run_gnome_course(_):
     global first_loop
     global i
 

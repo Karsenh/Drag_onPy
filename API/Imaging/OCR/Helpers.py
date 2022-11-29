@@ -1,4 +1,4 @@
-from API.Interface import *
+from API.Interface.General import *
 from pytesseract import pytesseract
 
 
