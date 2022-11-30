@@ -9,6 +9,7 @@ from API.Imports.Coords import *
 from enum import Enum
 from Scripts.Skilling.Smithing.Gold.Edge_Gold import *
 from API.Imaging.OCR.Run_Energy import *
+from API.Imaging.OCR.Total_Exp import is_exp_changing
 # from Scripts.Skilling.Agility.Gnome_Course import *
 from GUI.Auth_GUI import *
 from Scripts.Skilling.Fishing.Trout.Barb_Trout import fish_barb_trout
@@ -33,9 +34,16 @@ capture_bluestacks()
 # is_fishing = does_img_exist(img_name="is_fishing_trout", script_name="Barb_Trout", category="Scripts", threshold=0.65, should_click=True)
 # print(f'is_fishing_trout: {is_fishing}')
 
-# does_img_exist(img_name="is_fishing_trout", script_name="Barb_Trout", category="Scripts", should_click=True, threshold=0.65)
+# does_img_exist(img_name="is_fishing_trout", script_name="Barb_Trout", category="Scripts", should_click=True, threshold=0.80)
 
-launch_script("barb_trout")
+
+# capture_total_exp()
+# process_and_ocr()
+# is_exp_changing(max_wait_sec=10)
+
+show_main_gui()
+
+# launch_script("barb_trout")
 # is_tab_open("inventory", should_open=False)
 
 # # color_xy = 875, 708

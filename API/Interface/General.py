@@ -192,8 +192,8 @@ def is_inventory_full(should_cont=True, should_drop=False, start_slot=1, end_slo
             time.sleep(r_sleep)
         if should_drop:
             drop_inventory(start_slot, end_slot)
-
         return True
+
     else:
         return False
 

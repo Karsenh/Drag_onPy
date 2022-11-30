@@ -16,8 +16,7 @@ def get_all_btns(all_frames, all_images):
 
     # ALL FRAMES
     main_frame, gold_frame, skill_frame, pvm_pvp_frame, skill_sub_frames = all_frames
-
-    mining_frame, smithing_frame, agility_frame = skill_sub_frames
+    mining_frame, smithing_frame, agility_frame, defence_frame, herblore_frame, fishing_frame  = skill_sub_frames
 
     # IMAGES
     main_gui_images, gold_gui_images, skill_gui_images, pvm_pvp_gui_images, skilling_sub_gui_images = all_images
@@ -25,12 +24,12 @@ def get_all_btns(all_frames, all_images):
     gold_img, skills_img, skull_img, settings_img, question_mark_img, bug_report_img = main_gui_images
     # Sub_gui_images
     cball_img = gold_gui_images
-    attack_img, hp_img, mining_img, strength_img, agility_img, smithing_img = skill_gui_images
+    attack_img, hp_img, mining_img, strength_img, agility_img, smithing_img, defence_img, herblore_img, fishing_img = skill_gui_images
     ags_gmaul_img = pvm_pvp_gui_images
 
     # Sub_sub_gui_images
     # (Mining/Smithing)
-    pisc_iron_img, edge_gold_img, gnome_course_img = skilling_sub_gui_images
+    pisc_iron_img, edge_gold_img, gnome_course_img, draynor_shrimp_map, barb_trout_map = skilling_sub_gui_images
 
 
     # MAIN_GUI_BTNS
@@ -67,6 +66,10 @@ def get_all_btns(all_frames, all_images):
     agility_btn = Button(skill_frame, text="Agility", image=agility_img, height=skill_btn_height, width=skill_btn_width, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_agility_frame(all_frames, toggle_active_frame, gnome_course_btn))
     smithing_btn = Button(skill_frame, text="Smithing", image=smithing_img, height=skill_btn_height, width=skill_btn_width, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_smithing_frame(all_frames, toggle_active_frame, edge_gold_btn))
 
+    defence_btn = Button(skill_frame, text="Defence", image=defence_img, height=skill_btn_height, width=skill_btn_width, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_defence_frame(all_frames, toggle_active_frame))
+    herblore_btn = Button(skill_frame, text="Herblore", image=herblore_img, height=skill_btn_height, width=skill_btn_width, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_herblore_frame(all_frames, toggle_active_frame))
+    fishing_btn = Button(skill_frame, text="Fishing", image=fishing_img, height=skill_btn_height, width=skill_btn_width, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_fishing_frame(all_frames, toggle_active_frame, fishing_sub_btns))
+
     # (Sub-Skill) Sub_skill_gui_btns - passed into method directly
     #     Mining
     iron_pisc_btn = Button(mining_frame, text="Pisc Iron", image=pisc_iron_img, height=100, width=100, bg='#545550', activebackground=btn_active_bg_color, command=lambda: launch_script("pisc_iron"))
@@ -74,18 +77,21 @@ def get_all_btns(all_frames, all_images):
     edge_gold_btn = Button(smithing_frame, text="Edge Gold", image=edge_gold_img,  height=100, width=100, bg='#545550', activebackground=btn_active_bg_color, command=lambda: launch_script("edge_gold"))
     #     Agility
     gnome_course_btn = Button(agility_frame, text="Gnome Agility", image=gnome_course_img,  height=100, width=100, bg='#545550', activebackground=btn_active_bg_color, command=lambda: launch_script("gnome_course"))
+    #     Fishing
+    draynor_shrimp_btn = Button(fishing_frame, text="Draynor Shrimp", image=draynor_shrimp_map,  height=100, width=100, bg='#545550', activebackground=btn_active_bg_color, command=lambda: launch_script("draynor_shrimp"))
+    barb_trout_btn = Button(fishing_frame, text="Barbarian Trout", image=barb_trout_map,  height=100, width=100, bg='#545550', activebackground=btn_active_bg_color, command=lambda: launch_script("barb_trout"))
+    fishing_sub_btns = draynor_shrimp_btn, barb_trout_btn
     #     RuneCrafting
     #     Herblore
     #     Firemaking
     #     Woodcutting
-
 
     # Pvm_Pvp_Gui_Btns
     ags_gmaul_btn = Button(pvm_pvp_frame, text="Ags_Gmaul", image=ags_gmaul_img, bg='#545550', activebackground=btn_active_bg_color,)
 
     main_gui_btns = gold_btn, skill_btn, pvm_pvp_btn, settings_btn, info_btn, bug_report_btn
     gold_gui_btns = cball_btn
-    skill_gui_btns = attack_btn, hp_btn, minining_btn, strength_btn, agility_btn, smithing_btn
+    skill_gui_btns = attack_btn, hp_btn, minining_btn, strength_btn, agility_btn, smithing_btn, defence_btn, herblore_btn, fishing_btn
     pvm_pvp_gui_btns = ags_gmaul_btn
 
     return main_gui_btns, gold_gui_btns, skill_gui_btns, pvm_pvp_gui_btns
