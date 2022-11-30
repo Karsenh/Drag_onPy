@@ -78,7 +78,7 @@ def bank():
 
 
 def move_to_bank():
-    return does_img_exist(img_name="bank_spot", script_name="Draynor_Shrimp", click_xy_offet=5, should_click=True)
+    return does_img_exist(img_name="bank_spot", script_name="Draynor_Shrimp", x_offset=5, y_offset=5, should_click=True)
 
 
 def open_bank():
@@ -94,7 +94,7 @@ def withdraw_banked_net():
 
 
 def move_to_fishing_spot():
-    return does_img_exist(img_name="fishing_spot", script_name="Draynor_Shrimp", threshold=0.95, should_click=True, click_xy_offet=0)
+    return does_img_exist(img_name="fishing_spot", script_name="Draynor_Shrimp", threshold=0.95, should_click=True, x_offset=0, y_offset=0)
 
 
 def is_fishing():

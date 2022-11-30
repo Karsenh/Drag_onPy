@@ -9,8 +9,9 @@ from API.Imports.Coords import *
 from enum import Enum
 from Scripts.Skilling.Smithing.Gold.Edge_Gold import *
 from API.Imaging.OCR.Run_Energy import *
-from Scripts.Skilling.Agility.Gnome_Course import *
+# from Scripts.Skilling.Agility.Gnome_Course import *
 from GUI.Auth_GUI import *
+from Scripts.Skilling.Fishing.Trout.Barb_Trout import fish_barb_trout
 
 get_bluestacks_xy()
 set_bluestacks_window_size()
@@ -28,7 +29,13 @@ capture_bluestacks()
 # fish_draynor_shrimp(curr_loop)
 # wait_for_img(img_to_search="is_fishing", script_name="Draynor_Shrimp", category_name="Scripts", max_wait_sec=4, img_threshold=0.65)
 
-launch_script("draynor_shrimp")
+# does_img_exist(img_name="trout_spot", script_name="Barb_Trout", category="Scripts", threshold=0.8, should_click=True, x_offset=20, y_offset=45)
+# is_fishing = does_img_exist(img_name="is_fishing_trout", script_name="Barb_Trout", category="Scripts", threshold=0.65, should_click=True)
+# print(f'is_fishing_trout: {is_fishing}')
+
+# does_img_exist(img_name="is_fishing_trout", script_name="Barb_Trout", category="Scripts", should_click=True, threshold=0.65)
+
+launch_script("barb_trout")
 # is_tab_open("inventory", should_open=False)
 
 # # color_xy = 875, 708

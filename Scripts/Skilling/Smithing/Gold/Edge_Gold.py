@@ -70,7 +70,7 @@ def smith_gold_edge(curr_loop):
 
 
 def setup():
-    check_one_tap_drop_enabled(should_enable=False)
+    is_otd_enabled(should_enable=False)
     turn_compass("north")
     zoom_camera(1)
     pitch_camera("up")

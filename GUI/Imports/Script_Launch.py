@@ -3,6 +3,7 @@ from Scripts.Skilling.Smithing.Gold.Edge_Gold import *
 from Scripts.Skilling.Mining.Iron.Pisc_Iron import *
 from Scripts.Skilling.Agility.Gnome_Course import *
 from Scripts.Skilling.Fishing.Shrimp.Draynor_Shrimp import fish_draynor_shrimp
+from Scripts.Skilling.Fishing.Trout.Barb_Trout import fish_barb_trout
 from enum import Enum
 
 
@@ -26,8 +27,9 @@ def launch_script(script_name="pisc_iron"):
         EDGE_GOLD = 1
         GNOME_COURSE = 2
         DRAYNOR_SHRIMP = 3
+        BARB_TROUT = 4
 
-    all_scripts = [mine_iron_pisc, smith_gold_edge, run_gnome_course, fish_draynor_shrimp]
+    all_scripts = [mine_iron_pisc, smith_gold_edge, run_gnome_course, fish_draynor_shrimp, fish_barb_trout]
 
     match script_name:
         case "pisc_iron":
@@ -38,6 +40,8 @@ def launch_script(script_name="pisc_iron"):
             selected_script = ScriptEnum.GNOME_COURSE.value
         case "draynor_shrimp":
             selected_script = ScriptEnum.DRAYNOR_SHRIMP.value
+        case "barb_trout":
+            selected_script = ScriptEnum.BARB_TROUT.value
 
     is_timer_set = is_break_timer_set()
 

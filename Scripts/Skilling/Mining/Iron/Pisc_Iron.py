@@ -14,7 +14,7 @@ def mine_iron_pisc(curr_loop, DEBUG=True):
     keyboard.add_hotkey('esc', lambda: quit_script())
 
     if first_loop:
-        check_one_tap_drop_enabled(should_enable=True)
+        is_otd_enabled(should_enable=True)
         turn_compass("south")
         zoom_camera(5)
         pitch_camera("up")

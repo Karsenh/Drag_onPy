@@ -59,7 +59,7 @@ def get_color_at_coords(xy, DEBUG=False):
     return picture[x, y]
 
 
-def does_img_exist(img_name, script_name=None, category='Scripts', threshold=0.8, should_click=False, click_xy_offet=8, DEBUG=True):
+def does_img_exist(img_name, script_name=None, category='Scripts', threshold=0.8, should_click=False, x_offset=8, y_offset=8, DEBUG=True):
     global img_check_xy
     capture_bluestacks()
     img_rgb = cv2.imread(BS_SCREEN_PATH)
@@ -97,8 +97,8 @@ def does_img_exist(img_name, script_name=None, category='Scripts', threshold=0.8
         img_check_xy = loc[1][len(loc[1])-1], loc[0][len(loc[0])-1]
         if should_click:
             img_x, img_y = img_check_xy
-            adj_x = img_x + click_xy_offet
-            adj_y = img_y + click_xy_offet
+            adj_x = img_x + x_offset
+            adj_y = img_y + y_offset
             adj_xy = adj_x, adj_y
             mouse_click(adj_xy)
         print(f'{img_check_xy} saved to img_check_xy global')

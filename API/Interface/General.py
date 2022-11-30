@@ -86,7 +86,7 @@ def zoom_camera(notches=1):
 def drop_inventory(from_spot_num=1, to_spot_num=27):
     # Open inventory if not open
     is_tab_open("inventory", should_open=True)
-    check_one_tap_drop_enabled(should_enable=True)
+    is_otd_enabled(should_enable=True)
 
     for i in range(from_spot_num, to_spot_num+1):
         mouse_click(get_xy_for_invent_slot(i))
@@ -124,7 +124,8 @@ def is_tab_open(tab="inventory", should_open=True):
     return is_open
 
 
-def check_one_tap_drop_enabled(should_enable=True):
+# One-tap-drop mode on mobile
+def is_otd_enabled(should_enable=True):
     enabled_color = 202, 42, 42
     otd_loc = 39, 348
     if does_color_exist(enabled_color, otd_loc):
@@ -191,9 +192,8 @@ def is_inventory_full(should_cont=True, should_drop=False, start_slot=1, end_slo
             time.sleep(r_sleep)
         if should_drop:
             drop_inventory(start_slot, end_slot)
-            return False
-        else:
-            return True
+
+        return True
     else:
         return False
 
