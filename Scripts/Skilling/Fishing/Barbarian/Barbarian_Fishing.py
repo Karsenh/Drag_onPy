@@ -19,7 +19,7 @@ def barbarian_fishing(curr_loop):
 
     # If level up dialogue - clear and re-click fish
     if not is_barbarian_fishing():
-        if not click_barbarian_fish():
+        if not any(click_barbarian_fish()):
             click_fish_attempts += 1
             if click_fish_attempts > 10:
                 return False
@@ -33,7 +33,10 @@ def barbarian_fishing(curr_loop):
 
 
 def click_barbarian_fish():
-    return does_img_exist("leaping_trout", script_name="Barbarian_Fishing", category="Scripts", threshold=0.8, should_click=True, x_offset=15, y_offset=50)
+    is_leaping_trout = does_img_exist("leaping_trout", script_name="Barbarian_Fishing", category="Scripts", threshold=0.8, should_click=True, x_offset=15, y_offset=50)
+    is_leaping_salmon = does_img_exist("leaping_salmon", script_name="Barbarian_Fishing", category="Scripts", threshold=0.8, should_click=True, x_offset=15, y_offset=50)
+    all_fish = is_leaping_salmon, is_leaping_trout
+    return all_fish
 
 
 def is_barbarian_fishing():
