@@ -8,7 +8,7 @@ saved_total_exp = None
 
 
 # Wait 'x' seconds for total exp to change and returns True if it does within that time - otherwise returns False
-def is_exp_changing(max_wait_sec=8, DEBUG=True):
+def wait_for_exp_change(max_wait_sec=8, DEBUG=True):
     global saved_total_exp
     start_time = datetime.now()
     if DEBUG:

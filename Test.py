@@ -9,15 +9,22 @@ from API.Imports.Coords import *
 from enum import Enum
 from Scripts.Skilling.Smithing.Gold.Edge_Gold import *
 from API.Imaging.OCR.Run_Energy import *
-from API.Imaging.OCR.Total_Exp import is_exp_changing
+from API.Imaging.OCR.Total_Exp import wait_for_exp_change
 # from Scripts.Skilling.Agility.Gnome_Course import *
 from GUI.Auth_GUI import *
 from Scripts.Skilling.Fishing.Trout.Barb_Trout import fish_barb_trout
+from Scripts.Skilling.Fishing.Barbarian.Barbarian_Fishing import barbarian_fishing
 
 get_bluestacks_xy()
 set_bluestacks_window_size()
 capture_bluestacks()
 
+launch_script("barbarian_fishing")
+
+# does_img_exist("leaping_trout", script_name="Barbarian_Fishing", category="Scripts", threshold=0.8, should_click=True, x_offset=15, y_offset=50)
+
+# cur_loop = 1
+# barbarian_fishing(cur_loop)
 # print(f'Does shrimp spot exist: {does_img_exist(img_name="shrimp_spot", script_name="Draynor_Shrimp")}')
 # print(f'Does shrimp spot exist: {does_img_exist(img_name="bank_spot", script_name="Draynor_Shrimp")}')
 #
@@ -41,7 +48,7 @@ capture_bluestacks()
 # process_and_ocr()
 # is_exp_changing(max_wait_sec=10)
 
-show_main_gui()
+# show_main_gui()
 
 # launch_script("barb_trout")
 # is_tab_open("inventory", should_open=False)

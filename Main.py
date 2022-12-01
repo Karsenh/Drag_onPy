@@ -1,5 +1,5 @@
 from GUI.Main_GUI import *
-from API.Interface import *
+from API.Imaging.Image import *
 # not_exit = True
 
 

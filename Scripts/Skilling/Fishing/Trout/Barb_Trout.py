@@ -1,7 +1,7 @@
 import random
 
 from API.Interface.General import setup_interface, does_img_exist, is_otd_enabled, is_tab_open, is_inventory_full
-from API.Imaging.OCR.Total_Exp import is_exp_changing
+from API.Imaging.OCR.Total_Exp import wait_for_exp_change
 from API.AntiBan import sleep_between, wait_for_img
 import pyautogui as pag
 
@@ -43,7 +43,7 @@ def fish_barb_trout(curr_loop):
 
 def is_fishing_trout():
     r_max_wait_sec = random.randint(10, 14)
-    return is_exp_changing(max_wait_sec=r_max_wait_sec)
+    return wait_for_exp_change(max_wait_sec=r_max_wait_sec)
 
 
 def click_trout_spot():
