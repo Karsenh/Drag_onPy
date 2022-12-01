@@ -25,7 +25,7 @@ def barbarian_fishing(curr_loop):
                 return False
         sleep_between(1.1, 2.3)
 
-    is_inventory_full(should_cont=True, should_drop=True, start_slot=1, end_slot=25)
+    is_inventory_full(should_cont=True, should_drop=True, start_slot=1, end_slot=26)
 
     sleep_between(3.3, 6.4)
 
