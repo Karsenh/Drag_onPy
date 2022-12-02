@@ -30,7 +30,7 @@ def show_main_gui():
     app_y = y1
 
     print(f'📈 app_x: {app_x} app_y: {app_y}')
-    root.geometry(f"675x847+{app_x}+{app_y}")
+    root.geometry(f"{root_gui_width}x{root_gui_height}+{app_x}+{app_y}")
 
     # win32gui.MoveWindow(dragon_py_hwnd, app_x, app_y, app_y2, app_x2, True)
 
