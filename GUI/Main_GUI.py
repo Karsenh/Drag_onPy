@@ -1,5 +1,6 @@
 from GUI.Imports.GUI_Buttons import *
 from GUI.Imports.GUI_Images import get_all_gui_images
+from GUI.Imports.GUI_Frames import get_all_frames
 from tkinter import *
 import os
 
