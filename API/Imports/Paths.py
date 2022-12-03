@@ -15,4 +15,5 @@ BS_SCREEN_PATH = f'{proj_root_path}\{ROOT_SCREENSHOTS_PATH}\BlueStacks_ScreenSho
 
 
 # LOGGING
-STOP_LOG_PATH = f'{proj_root_path}\Misc\Stop_Log.txt'
+STOP_LOG_PATH = f'{proj_root_path}\Logs\Stop_Log.txt'
+DEBUG_PATH = f'{proj_root_path}\Logs\Debug_Log.txt'

@@ -2,6 +2,7 @@ from API.Break_Timer.Timer import *
 from datetime import datetime, timedelta
 import time
 from API.Interface.General import handle_auth_screens
+from API.Debug import DEBUG_MODE
 
 
 script_start_time = None
@@ -31,7 +32,7 @@ def is_break_timer_set():
 
 
 # Checks the interval times to see if we need to use the break times
-def should_break(DEBUG=True):
+def should_break():
     global script_start_time
     break_vals = get_break_times()
     _, _, interval_t, interval_dev_t = break_vals
@@ -60,7 +61,7 @@ def should_break(DEBUG=True):
 
     now = datetime.now()
 
-    if DEBUG:
+    if DEBUG_MODE:
         print(f'🕒 Script start time: {script_start_time}\n⏱ actual_interval_minutes: {actual_interval_minutes} minutes\n🕓 break_at: {break_at}\n🕖 now: {now}')
     # Check if the elapsed time is greater than or equal to the break interval time (how often we should take a break)
     if now > break_at:
@@ -73,7 +74,7 @@ def should_break(DEBUG=True):
 
 
 # Uses the break times based on the interval times warranting it
-def go_on_break(DEBUG=True):
+def go_on_break():
     global script_start_time
     #     Sleep for however long the break_time is
     break_vals = get_break_times()
@@ -87,7 +88,7 @@ def go_on_break(DEBUG=True):
     actual_break_minutes = break_t + rand_break_dev
     actual_break_seconds = actual_break_minutes * 60
 
-    if DEBUG:
+    if DEBUG_MODE:
         print(f'💤 🛌🏼 Going on break - Sleeping for {actual_break_minutes} minutes ({actual_break_seconds} seconds) with values:\nRand_break_dev: {rand_break_dev}\nbreak_t: {break_t}')
     time.sleep(actual_break_seconds)
 

@@ -2,6 +2,7 @@ import sys
 import time
 from API.Mouse import *
 from GUI.Main_GUI import *
+from API.Debug import clear_debug_log
 from API.Imaging.Image import *
 from API.AntiBan import *
 from API.Interface import *
@@ -18,8 +19,11 @@ from Scripts.Skilling.Fishing.Barbarian.Barbarian_Fishing import barbarian_fishi
 get_bluestacks_xy()
 set_bluestacks_window_size()
 capture_bluestacks()
-
+# show_main_gui()
+clear_debug_log()
 launch_script("barbarian_fishing")
+
+
 
 # does_img_exist("leaping_trout", script_name="Barbarian_Fishing", category="Scripts", threshold=0.8, should_click=True, x_offset=15, y_offset=50)
 
@@ -48,7 +52,6 @@ launch_script("barbarian_fishing")
 # process_and_ocr()
 # is_exp_changing(max_wait_sec=10)
 
-# show_main_gui()
 
 # launch_script("barb_trout")
 # is_tab_open("inventory", should_open=False)

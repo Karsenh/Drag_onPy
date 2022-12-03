@@ -1,12 +1,20 @@
-from API.Interface.General import *
+# from API.Interface.General import *
 from datetime import datetime
+from API.Interface.General import is_otd_enabled, turn_compass, zoom_camera, pitch_camera, is_inventory_full
+from API.Mouse import mouse_click
+from API.Imaging.Image import does_img_exist
+from API.AntiBan import sleep_between
+import time
+import keyboard
 import os
+import random
+from API.Debug import DEBUG_MODE
 
 exit_prog = False
 
 
 # Start character on the tile between three iron ore in Piscatoris
-def mine_iron_pisc(curr_loop, DEBUG=True):
+def mine_iron_pisc(curr_loop):
     global exit_prog
 
     first_loop = True
@@ -51,13 +59,13 @@ def mine_iron_pisc(curr_loop, DEBUG=True):
         ore_sel += 1
         ores_clicked += 1
 
-        if DEBUG:
+        if DEBUG_MODE:
             print(f'Ores Clicked post-increment: {ores_clicked}')
             print(f'Ore # selected post-increment: {ore_sel}')
         # If ore_sel is now 4 though, we need to start back at 1 since there are only 3 ores
         if ore_sel == 3:
             ore_sel = 0
-            if DEBUG:
+            if DEBUG_MODE:
                 print(f'Since ore_sel == 4, resetting to 1 ({ore_sel})')
 
     # If we're no longer standing on the right tile to mine, we'll drop out of the previous While loop and into this

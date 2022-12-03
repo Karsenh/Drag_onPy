@@ -1,5 +1,6 @@
 import random
 import tkinter
+from API.Debug import DEBUG_MODE
 
 break_min = None
 break_dev_min = None
@@ -9,7 +10,7 @@ interval_dev_min = None
 # Break-Timer Values in Settings Frame
 
 
-def set_break_timer(time_vars, settings_gui, DEBUG=True):
+def set_break_timer(time_vars, settings_gui):
     global break_min
     global break_dev_min
     global interval_min
@@ -23,12 +24,12 @@ def set_break_timer(time_vars, settings_gui, DEBUG=True):
 
     # If the deviation times are not greater than at least 1, default them to 1
     if not break_dev_min >= 1:
-        if DEBUG:
+        if DEBUG_MODE:
             print(f'Break Deviation Time not >= 1 ... Defaulting to deviation of 1.')
         break_dev_min = 1
 
     if not interval_dev_min >= 1:
-        if DEBUG:
+        if DEBUG_MODE:
             print(f'Interval Deviation Time not >= 1 ... Defaulting to deviation of 1.')
         interval_dev_min = 1
 
@@ -40,12 +41,12 @@ def set_break_timer(time_vars, settings_gui, DEBUG=True):
     # Close the Settings GUI window
     settings_gui.destroy()
 
-    if DEBUG:
+    if DEBUG_MODE:
         print(f'Break schedule fired with values:\nBreak Time: {break_min}\nBreak Time Dev: {break_dev_min}\nInterval Time: {interval_min}\nInterval Time Dev: {interval_dev_min}')
     return
 
 
-def get_break_times(DEBUG=True):
+def get_break_times():
     global break_min
     global break_dev_min
     global interval_min
@@ -53,7 +54,7 @@ def get_break_times(DEBUG=True):
 
     time_vals = break_min, break_dev_min, interval_min, interval_dev_min
 
-    if DEBUG:
+    if DEBUG_MODE:
         print(f'BREAK TIME VALS: {break_min} {break_dev_min} {interval_min} {interval_dev_min}')
 
     return time_vals

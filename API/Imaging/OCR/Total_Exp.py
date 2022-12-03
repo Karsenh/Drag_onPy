@@ -3,15 +3,16 @@ import pyautogui as pag
 from API.Setup import get_bluestacks_region
 from API.Imaging.OCR.Helpers import process_and_ocr, capture_ocr_region
 from API.Imports.Paths import *
+from API.Debug import DEBUG_MODE
 
 saved_total_exp = None
 
 
 # Wait 'x' seconds for total exp to change and returns True if it does within that time - otherwise returns False
-def wait_for_exp_change(max_wait_sec=8, DEBUG=True):
+def wait_for_exp_change(max_wait_sec=8):
     global saved_total_exp
     start_time = datetime.now()
-    if DEBUG:
+    if DEBUG_MODE:
         print(f'⏲ Wait_For_Img Start Time: {start_time}')
 
     while not is_time_up(start_time, max_wait_sec):
@@ -35,10 +36,10 @@ def wait_for_exp_change(max_wait_sec=8, DEBUG=True):
     return False
 
 
-def is_time_up(start_time, max_wait_sec, DEBUG=True):
+def is_time_up(start_time, max_wait_sec):
     curr_time = datetime.now()
     time_diff = curr_time - start_time
-    if DEBUG:
+    if DEBUG_MODE:
         print(f'⏲ Time diff seconds: {time_diff.total_seconds()} | is {time_diff} > {max_wait_sec} ?')
     if time_diff.total_seconds() > max_wait_sec:
         print(f'✖ Time is up!')

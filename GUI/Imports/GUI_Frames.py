@@ -3,7 +3,9 @@ from GUI.Main_GUI import *
 from API.Break_Timer.Timer import *
 import os
 from tkinter import *
+from tkinter import ttk
 from PIL import ImageTk, Image
+from API.Debug import *
 
 
 frame_bg_color = '#969488'
@@ -113,9 +115,6 @@ def show_settings_frame():
     # Break for 'c' minutes         (break_minutes)
     # Give or take 'd' minutes      (break_dev_minutes)
 
-    test_img_1 = ImageTk.PhotoImage(Image.open(f'{pwd}\Assets\Images\GUI_Images\Gold\Cballs.png'))
-    test_img_2 = ImageTk.PhotoImage(Image.open(f'{pwd}\Assets\Images\GUI_Images\Gold\Cballs.png'))
-
     bt_frame_1 = LabelFrame(settings_gui, text="⏱ Break Schedule", bg=frame_bg_color, pady=40, padx=40)
 
     e_min_label_prefix = Label(bt_frame_1, text="Every", background=frame_bg_color, font=break_font)
@@ -153,9 +152,24 @@ def show_settings_frame():
     test_btn = Button(bt_frame_1, fg='white', padx=10, pady=5, text="Set Schedule", font=break_btn_font, bg=btn_bg_color, activebackground=btn_active_bg_color, command=lambda: set_break_timer(time_vars, settings_gui))
     test_btn.grid(row=5, column=1, pady=20, padx=20, columnspan=3)
 
+    # Break Timer Frame
     bt_frame_1.grid(row=1, column=1)
-    # hwd_frame_2 = LabelFrame(settings_gui, text="HWID", bg=frame_bg_color, height=250, width=450)
-    # hwd_frame_2.grid(row=2, column=1)
+
+    # DEBUG MODE
+    # sep = tkinter.ttk.Separator(settings_gui, orient="horizontal")
+    # sep.grid(row=6, column=1, columnspan=4)
+
+    db_frame_2 = LabelFrame(settings_gui, text="🐛 Debugging", bg=frame_bg_color, pady=40, padx=40)
+
+    # Debug checkbox variable
+    is_debug = tkinter.IntVar()
+
+    is_debug_cb = tkinter.Checkbutton(db_frame_2, text='Enable DEBUG', bg=frame_bg_color, variable=is_debug, offvalue=False, onvalue=True, command=lambda: set_is_debug(is_debug))
+    is_debug_cb.grid(row=1, column=1)
+
+    # Debug Frame
+    db_frame_2.grid(row=2, column=1)
+
 
     return
 

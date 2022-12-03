@@ -3,6 +3,7 @@ from API.Imaging.Image import does_img_exist
 from API.Imaging.OCR.Total_Exp import wait_for_exp_change
 from API.AntiBan import sleep_between
 import pyautogui as pag
+from API.Debug import DEBUG_MODE, log_to_debug
 
 
 click_fish_attempts = 0
@@ -10,6 +11,12 @@ click_fish_attempts = 0
 
 def barbarian_fishing(curr_loop):
     global click_fish_attempts
+
+    if DEBUG_MODE:
+        print(f'DEBUG MODE DETECTED')
+        log_to_debug("testing1")
+        log_to_debug("testing2")
+
 
     if curr_loop == 1:
         setup_interface("east", 2, "up")

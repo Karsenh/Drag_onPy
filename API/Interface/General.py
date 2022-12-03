@@ -3,6 +3,7 @@ from API.Imaging.Image import does_img_exist, does_color_exist, get_color_at_coo
 import pyautogui as pag
 from API.Mouse import *
 from API.Imports.Coords import *
+from API.Debug import DEBUG_MODE
 import pyautogui as pag
 import keyboard
 import math
@@ -19,12 +20,12 @@ def setup_interface(cam_dir="north", cam_distance=3, cam_angle="up"):
     return
 
 
-def turn_compass(direction="south", DEBUG=False):
+def turn_compass(direction="south"):
     global compass_xy
 
     match direction:
         case "north":
-            if DEBUG:
+            if DEBUG_MODE:
                 print(f'Turning compass: {direction} - Moving to {compass_xy}')
             xy = 1211, 72
             mouse_click(xy)
@@ -37,7 +38,7 @@ def turn_compass(direction="south", DEBUG=False):
             dir_xy = 1208, 254
         case _:
             print(f'ERROR: Direction {direction} not valid case.')
-    if DEBUG:
+    if DEBUG_MODE:
         print(f'Turning compass: {direction} - Moving to {dir_xy}')
     # Move mouse to compass & click down
     mouse_move(compass_xy)
@@ -179,10 +180,10 @@ def is_run_gt(percent=10):
 
 
 # --- IMAGE MATCHING ---
-def is_inventory_full(should_cont=True, should_drop=False, start_slot=1, end_slot=27, DEBUG=True):
+def is_inventory_full(should_cont=True, should_drop=False, start_slot=1, end_slot=27):
     does_exist = does_img_exist("inventory_full", category="General"), does_img_exist("inventory_full_fish", category="General")
 
-    if DEBUG:
+    if DEBUG_MODE:
         print(f'is_inventory_full does_exist: {does_exist}')
 
     if any(does_exist):
@@ -283,8 +284,7 @@ def is_on_welcome_screen(should_cont=True):
     return img_found
 
 
-
-def handle_auth_screens(DEBUG=True):
+def handle_auth_screens():
     print(f'Disconnected screen? : {is_on_dc_screen(should_cont=True)}')
     # is_on_dc_screen(should_cont=True)
     # Check that we're not on login screen (click login if so)
