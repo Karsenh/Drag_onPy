@@ -284,7 +284,7 @@ def is_on_dc_screen(should_cont=True):
     if img_found and should_cont:
         xy = 755, 555
         mouse_click(xy)
-        API.AntiBan.sleep_between(3.0, 3.1)
+        API.AntiBan.sleep_between(3.0, 3.5)
 
     return img_found
 
@@ -295,7 +295,7 @@ def is_on_login_screen(should_cont=True):
     if img_found and should_cont:
         xy = 753, 471
         mouse_click(xy, 67, 23)
-        API.AntiBan.sleep_between(7.0, 7.1)
+        API.AntiBan.sleep_between(7.1, 8.2)
 
     return img_found
 
@@ -306,7 +306,7 @@ def is_on_welcome_screen(should_cont=True):
     if img_found and should_cont:
         xy = 755, 593
         mouse_click(xy, 54, 34)
-        API.AntiBan.sleep_between(1.0, 1.3)
+        API.AntiBan.sleep_between(1.3, 1.7)
 
     return img_found
 

@@ -107,4 +107,5 @@ def break_handler():
         go_on_break()
         print(f'Done with break.\nHandling auth screens...')
         handle_auth_screens()
+        # GUI.Imports.Script_Launch.set_curr_iteration(1)
     return

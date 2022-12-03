@@ -29,7 +29,7 @@ def get_all_btns(all_frames, all_images):
 
     # Sub_sub_gui_images
     # (Mining/Smithing)
-    pisc_iron_img, edge_gold_img, gnome_course_img, draynor_shrimp_map, barb_trout_map = skilling_sub_gui_images
+    pisc_iron_img, edge_gold_img, gnome_course_img, draynor_shrimp_map, barb_trout_map, barb_fishing_map = skilling_sub_gui_images
 
 
     # MAIN_GUI_BTNS
@@ -80,7 +80,8 @@ def get_all_btns(all_frames, all_images):
     #     Fishing
     draynor_shrimp_btn = Button(fishing_frame, text="Draynor Shrimp", image=draynor_shrimp_map,  height=100, width=100, bg='#545550', activebackground=btn_active_bg_color, command=lambda: launch_script("draynor_shrimp"))
     barb_trout_btn = Button(fishing_frame, text="Barbarian Trout", image=barb_trout_map,  height=100, width=100, bg='#545550', activebackground=btn_active_bg_color, command=lambda: launch_script("barb_trout"))
-    fishing_sub_btns = draynor_shrimp_btn, barb_trout_btn
+    barb_fishing_btn = Button(fishing_frame, text="Barbarian Fishing", image=barb_fishing_map,  height=100, width=100, bg='#545550', activebackground=btn_active_bg_color, command=lambda: launch_script("barbarian_fishing"))
+    fishing_sub_btns = draynor_shrimp_btn, barb_trout_btn, barb_fishing_btn
     #     RuneCrafting
     #     Herblore
     #     Firemaking

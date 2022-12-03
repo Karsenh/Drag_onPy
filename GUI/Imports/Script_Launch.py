@@ -1,12 +1,16 @@
-# from GUI.Break_Timer.Break_Handler import *
-from Scripts.Skilling.Smithing.Gold.Edge_Gold import *
-from Scripts.Skilling.Mining.Iron.Pisc_Iron import *
-from Scripts.Skilling.Agility.Gnome_Course import *
+from Scripts.Skilling.Smithing.Gold.Edge_Gold import smith_gold_edge
+from Scripts.Skilling.Mining.Iron.Pisc_Iron import mine_iron_pisc
+from Scripts.Skilling.Agility.Gnome_Course import run_gnome_course
 from Scripts.Skilling.Fishing.Shrimp.Draynor_Shrimp import fish_draynor_shrimp
 from Scripts.Skilling.Fishing.Trout.Barb_Trout import fish_barb_trout
 from Scripts.Skilling.Fishing.Barbarian.Barbarian_Fishing import barbarian_fishing
 from enum import Enum
-
+import API
+import keyboard
+from API.Debug import write_debug
+from API.Interface.General import handle_auth_screens
+from API.Break_Timer.Break_Handler import is_break_timer_set
+from API.Break_Timer.Break_Handler import break_handler
 
 curr_script_iteration = 1
 should_continue = True
@@ -73,4 +77,10 @@ def quit_prog():
     should_continue = False
     write_debug(f'User terminated script with ESC hotkey - Exiting...')
     exit(-2)
+    return
+
+
+def set_curr_iteration(new_val):
+    global curr_script_iteration
+    curr_script_iteration = new_val
     return

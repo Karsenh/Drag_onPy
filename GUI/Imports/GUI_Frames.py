@@ -82,6 +82,7 @@ def get_all_frames(root):
     herblore_frame = LabelFrame(main_frame, text="Herblore", bg=label_frame_bg_color, font=sub_gui_label_font)
     fishing_frame = LabelFrame(main_frame, text="Fishing", bg=label_frame_bg_color, font=sub_gui_label_font)
 
+
     skill_sub_frames = mining_frame, smithing_frame, agility_frame, defence_frame, herblore_frame, fishing_frame
 
     # Import All Frames & All Images from GUI Imports
@@ -387,7 +388,7 @@ def show_fishing_frame(all_frames, toggle_active_frame, fishing_btns):
     _, _, _, _, skill_sub_frames = all_frames
     _, _, _, _, _, fishing_frame = skill_sub_frames
 
-    draynor_shrimp_btn, barb_trout_btn = fishing_btns
+    draynor_shrimp_btn, barb_trout_btn, barb_fishing_btn = fishing_btns
 
     is_active = toggle_active_frame("skill", all_frames)
     print(f'show_fishing_frame - skill_frame - is_active: {is_active}')
@@ -395,6 +396,7 @@ def show_fishing_frame(all_frames, toggle_active_frame, fishing_btns):
     fishing_frame.grid(row=sub_gui_row, column=1, columnspan=5, pady=50)
 
     fishing_img_path = 'Assets\Images\GUI_Images\Stats\Fishing'
+
     draynor_shrimp_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{fishing_img_path}\Shrimp.png'))
 
     draynor_shrimp_label = Label(fishing_frame, image=draynor_shrimp_img, height=100, width=100, bg=label_frame_bg_color)
@@ -405,10 +407,18 @@ def show_fishing_frame(all_frames, toggle_active_frame, fishing_btns):
     barb_trout_label = Label(fishing_frame, image=barb_trout_img, height=100, width=100, bg=label_frame_bg_color)
     barb_trout_img.image = barb_trout_img
 
-    draynor_shrimp_label.grid(row=1, column=1)
-    draynor_shrimp_btn.grid(row=1, column=2, columnspan=2, pady=20, padx=30)
+    barb_fishing_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{fishing_img_path}\leaping_sturgeon.png'))
 
-    barb_trout_label.grid(row=2, column=1)
-    barb_trout_btn.grid(row=2, column=2, columnspan=2, pady=20, padx=30)
+    barb_fishing_label = Label(fishing_frame, image=barb_fishing_img, height=100, width=100, bg=label_frame_bg_color)
+    barb_fishing_img.image = barb_fishing_img
+
+    draynor_shrimp_label.grid(row=1, column=1, padx=35)
+    draynor_shrimp_btn.grid(row=1, column=2, columnspan=2, pady=20, padx=25)
+
+    barb_trout_label.grid(row=2, column=1, padx=35)
+    barb_trout_btn.grid(row=2, column=2, columnspan=2, pady=20, padx=25)
+
+    barb_fishing_label.grid(row=3, column=1, padx=35)
+    barb_fishing_btn.grid(row=3, column=2, columnspan=2, pady=20, padx=25)
 
     return
