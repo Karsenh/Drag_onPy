@@ -15,6 +15,8 @@ def barbarian_fishing(curr_loop):
     if curr_loop == 1:
         setup_interface("east", 2, "up")
         is_otd_enabled(True)
+        is_tab_open("inventory", should_open=False)
+        click_barbarian_fish()
 
     is_tab_open("inventory", should_open=False)
 
