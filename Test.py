@@ -19,9 +19,11 @@ from Scripts.Skilling.Fishing.Barbarian.Barbarian_Fishing import barbarian_fishi
 get_bluestacks_xy()
 set_bluestacks_window_size()
 capture_bluestacks()
-# show_main_gui()
 clear_debug_log()
-launch_script("barbarian_fishing")
+
+random_human_actions(max_downtime_seconds=10)
+# show_main_gui()
+# launch_script("barbarian_fishing")
 
 
 

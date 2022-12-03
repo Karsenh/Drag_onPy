@@ -1,8 +1,9 @@
 from datetime import datetime
 from API.Imports.Paths import DEBUG_PATH
+import inspect
 
 
-DEBUG_MODE = False
+DEBUG_MODE = True
 
 
 def get_is_debug():
@@ -34,4 +35,13 @@ def log_to_debug(text):
 def clear_debug_log():
     with open(f'{DEBUG_PATH}', 'r+') as file:
         file.truncate(0)
+    return
+
+
+def write_debug(text, to_file=False):
+    if DEBUG_MODE:
+        print(f'\n🐛 DEBUG - {inspect.currentframe().f_back.f_code.co_name} executed:\n{text}\n')
+        if to_file:
+            print(f'📝 to Debug_Log')
+            log_to_debug(text)
     return

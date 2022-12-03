@@ -1,7 +1,12 @@
-from API.Imaging.Image import get_existing_img_xy
+from API.Imaging.Image import get_existing_img_xy, does_img_exist, does_color_exist
 from API.Break_Timer.Break_Handler import *
-
-from API.Interface.General import *
+from API.Interface.General import is_otd_enabled, setup_interface, check_skill_tab, is_tab_open
+from API.Interface.Bank import deposit_all, check_if_bank_tab_open
+import keyboard
+from API.AntiBan import sleep_between, print_to_log
+from API.Imports.Coords import BANK_qty_all,INVENT_slot_1
+from API.Mouse import mouse_click, mouse_drag, mouse_move
+import pyautogui as pag
 
 
 exit_prog = False
@@ -19,7 +24,7 @@ def smith_gold_edge(curr_loop):
     # normalize interface
     # Start in front of NW bank booth in Edge bank
     if first_loop:
-        setup()
+        setup_interface("nort", 1, "up")
 
         # 1. Opens bank booth
         if not is_furnace_start():
@@ -68,14 +73,6 @@ def smith_gold_edge(curr_loop):
     # sleep_between(1.1, 1.2)
     return
 
-
-def setup():
-    is_otd_enabled(should_enable=False)
-    turn_compass("north")
-    zoom_camera(1)
-    pitch_camera("up")
-    sleep_between(1.1, 1.6)
-    return
 
 
 def is_furnace_start():
