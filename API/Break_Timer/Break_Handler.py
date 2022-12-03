@@ -1,6 +1,7 @@
 from API.Break_Timer.Timer import *
 from datetime import datetime, timedelta
 import time
+import GUI
 from API.Interface.General import handle_auth_screens
 from API.Debug import DEBUG_MODE
 
@@ -107,5 +108,5 @@ def break_handler():
         go_on_break()
         print(f'Done with break.\nHandling auth screens...')
         handle_auth_screens()
-        # GUI.Imports.Script_Launch.set_curr_iteration(1)
+        GUI.Imports.Script_Launch.set_curr_iteration(0)
     return
