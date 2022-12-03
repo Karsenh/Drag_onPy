@@ -19,7 +19,7 @@ def launch_script(script_name="pisc_iron"):
 
     keyboard.add_hotkey('esc', lambda: quit_prog())
 
-    print("Pre-launch checks:")
+    write_debug("Pre-launch checks:")
     # Check that we're not on dc screen (click continue if so)
     handle_auth_screens()
 
@@ -50,15 +50,19 @@ def launch_script(script_name="pisc_iron"):
     is_timer_set = is_break_timer_set()
 
     if is_timer_set:
-        print(f'🚩 Break Timer Set - Entering loop with break_handler()')
+        write_debug(f'🚩 Break Timer Set - Entering loop with break_handler()')
         while should_continue:
             should_continue = all_scripts[selected_script](curr_script_iteration)
+            API.AntiBan.random_human_actions(6)
             break_handler()
+
             curr_script_iteration += 1
     else:
-        print(f'🚩 NO Break Timer Set - Entering loop WITHOUT break_handler()')
+        write_debug(f'🏳 NO Break Timer Set - Entering loop WITHOUT break_handler()')
         while should_continue:
             should_continue = all_scripts[selected_script](curr_script_iteration)
+            API.AntiBan.random_human_actions(6)
+
             curr_script_iteration += 1
 
     return
@@ -67,6 +71,6 @@ def launch_script(script_name="pisc_iron"):
 def quit_prog():
     global should_continue
     should_continue = False
-    print(f'User terminated script with ESC hotkey - Exiting...')
+    write_debug(f'User terminated script with ESC hotkey - Exiting...')
     exit(-2)
     return

@@ -48,7 +48,13 @@ INVENT_slot_y_step = 58
 SKILL_tab_xy = 1431, 522
 
 # Skills:
+SKILL_attack = 1142, 407
+SKILL_strength = 1139, 463
+SKILL_defence = 1142, 407
+SKILL_hp = 1155, 512
+SKILL_agility = 1254, 466
 SKILL_smithing = 1353, 463
+SKILL_fishing = 1352, 512
 
 GEAR_tab_xy = 1426, 460
 

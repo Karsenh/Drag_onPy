@@ -100,7 +100,7 @@ def process_and_ocr(image_name):
     ocr_string = ocr_image(no_noise)
     if ocr_string:
         ocr_string = int(ocr_string)
-        print(f'OCR STRING: {ocr_string}')
+        API.Debug.write_debug(f'OCR STRING: {ocr_string}')
 
     return ocr_string
 

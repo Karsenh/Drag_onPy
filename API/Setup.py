@@ -1,6 +1,6 @@
 import time
 import win32gui
-from API.Debug import DEBUG_MODE
+from API.Debug import write_debug
 
 
 # BlueStacks HWND
@@ -28,11 +28,7 @@ def get_bluestacks_xy():
 
     x0, y0, x1, y1 = win32gui.GetWindowRect(bsHWND)
 
-    if DEBUG_MODE:
-        print(f'1 - get_bluestacks_xy called.')
-        print(f'BlueStacks Hwnd: {bsHWND}')
-        print(f'Top-Left X: {x0} & Y1: {y0}')
-        print(f'Bottom-Right X: {x1} & Y1: {y1}')
+    # write_debug(f'BlueStacks Hwnd: {bsHWND}\nTop-Left X: {x0} & Y1: {y0}\nBottom-Right X: {x1} & Y1: {y1}')
 
     bsX = x0
     bsY = y0
@@ -44,8 +40,7 @@ def get_bluestacks_xy():
 def focus_bluestacks():
     global bsHWND
     win32gui.SetForegroundWindow(bsHWND)
-    if DEBUG_MODE:
-        print(f'1b. - Focusing BlueStacks window...')
+    # write_debug(f'Focusing BlueStacks window...')
     time.sleep(1)
     return
 
@@ -54,8 +49,7 @@ def get_bluestacks_window_size() -> tuple:
     global bsX, bsY, bsY2, bsX2
     w = bsX2 - bsX  # width
     h = bsY2 - bsY  # height
-    if DEBUG_MODE:
-        print(f'Height: {h} & Width: {w}')
+    # write_debug(f'Height {h} & Width: {w}')
     return w, h
 
 
@@ -71,44 +65,34 @@ def set_bluestacks_window_size(w=BS_WINDOW_WIDTH, h=BS_WINDOW_HEIGHT):
     curr_w, curr_h = get_bluestacks_window_size()
 
     if curr_h == BS_WINDOW_HEIGHT:
-        if DEBUG_MODE:
-            print(f'✅ BlueStacks Dimensions are correct.\n({bsX}, {bsY}, {bsX2}, {bsY2})')
+        write_debug(f'✅ BlueStacks Dimensions are correct.\n({bsX}, {bsY}, {bsX2}, {bsY2})')
 
     if curr_h > BS_WINDOW_HEIGHT:
         diff_h = curr_h - BS_WINDOW_HEIGHT
         diff_w = curr_w - BS_WINDOW_WIDTH
-        if DEBUG_MODE:
-            print(f'⛔ BlueStacks Dimensions are larger than required.\n({bsX}, {bsY}, {bsX2}, {bsY2})')
-            print(f'Difference in (curr_h - desired_h) Height = {curr_h - BS_WINDOW_HEIGHT}')
-            print(f'Difference in (curr_w - desired_w) Width = {curr_w - BS_WINDOW_WIDTH}')
+        write_debug(f'⛔ BlueStacks Dimensions are larger than required.\n({bsX}, {bsY}, {bsX2}, {bsY2})\nDifference in (curr_h - desired_h) Height = {curr_h - BS_WINDOW_HEIGHT}\nDifference in (curr_w - desired_w) Width = {curr_w - BS_WINDOW_WIDTH}')
 
         win32gui.MoveWindow(bsHWND, bsX, bsY, bsX2-diff_w-bsX, bsY2-diff_h-bsY, True)
         new_w, new_h = get_bluestacks_window_size()
         get_bluestacks_xy()
-        if DEBUG_MODE:
-            print(f'BlueStacks Dimensions after MoveWindow: ({bsX}, {bsY}, {bsX2}, {bsY2})\n new_width: {new_w}, new_height: {new_h}')
+        write_debug(f'BlueStacks Dimensions after MoveWindow: ({bsX}, {bsY}, {bsX2}, {bsY2})\nnew_width: {new_w}, new_height: {new_h}')
 
     if curr_h < BS_WINDOW_HEIGHT:
         diff_h = BS_WINDOW_HEIGHT - curr_h
         diff_w = BS_WINDOW_WIDTH - curr_w
-        if DEBUG_MODE:
-            print(f'⛔ BlueStacks Dimensions are smaller than required.\n({bsX}, {bsY}, {bsX2}, {bsY2})')
-            print(f'Difference in (curr_h - desired_h) Height = {diff_h}')
-            print(f'Difference in (curr_w - desired_w) Width = {diff_w}')
+        write_debug(f'⛔ BlueStacks Dimensions are smaller than required.\n({bsX}, {bsY}, {bsX2}, {bsY2})\nDifference in (curr_h - desired_h) Height = {diff_h}\nDifference in (curr_w - desired_w) Width = {diff_w}')
 
         # Multiply by -1 to get absolute value
         win32gui.MoveWindow(bsHWND, bsX, bsY, bsX2+diff_w-bsX, bsY2+diff_h-bsY, True)
         new_w, new_h = get_bluestacks_window_size()
         get_bluestacks_xy()
-        if DEBUG_MODE:
-            print(f'BlueStacks Dimensions after MoveWindow: ({bsX}, {bsY}, {bsX2}, {bsY2})\n new_width: {new_w}, new_height: {new_h}')
+        write_debug(f'BlueStacks Dimensions after MoveWindow: ({bsX}, {bsY}, {bsX2}, {bsY2})\n new_width: {new_w}, new_height: {new_h}')
 
     return
 
 
 def get_bluestacks_region() -> tuple:
-    if DEBUG_MODE:
-        print(f'Returning BlueStacks region: {bsX}, {bsY}, {bsX2}, {bsY2}')
+    write_debug(f'Returning BlueStacks region: {bsX}, {bsY}, {bsX2}, {bsY2}')
     return bsX, bsY, bsX2, bsY2
 
 

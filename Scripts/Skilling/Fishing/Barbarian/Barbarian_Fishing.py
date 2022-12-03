@@ -12,17 +12,17 @@ click_fish_attempts = 0
 def barbarian_fishing(curr_loop):
     global click_fish_attempts
 
-    if DEBUG_MODE:
-        print(f'DEBUG MODE DETECTED')
-        log_to_debug("testing1")
-        log_to_debug("testing2")
-
-
     if curr_loop == 1:
         setup_interface("east", 2, "up")
         is_otd_enabled(True)
 
     is_tab_open("inventory", should_open=False)
+
+    if is_inventory_full(should_cont=True, should_drop=True, start_slot=1, end_slot=26, should_close_after=True):
+        if not any(click_barbarian_fish()):
+            click_fish_attempts += 1
+            if click_fish_attempts > 10:
+                return False
 
     # If level up dialogue - clear and re-click fish
     if not is_barbarian_fishing():
@@ -32,9 +32,11 @@ def barbarian_fishing(curr_loop):
                 return False
         API.AntiBan.sleep_between(1.1, 2.3)
 
-    is_inventory_full(should_cont=True, should_drop=True, start_slot=1, end_slot=26)
-
-    API.AntiBan.sleep_between(3.3, 6.4)
+    if is_inventory_full(should_cont=True, should_drop=True, start_slot=1, end_slot=26, should_close_after=True):
+        if not any(click_barbarian_fish()):
+            click_fish_attempts += 1
+            if click_fish_attempts > 10:
+                return False
 
     return True
 

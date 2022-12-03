@@ -1,7 +1,7 @@
 from API.Imaging.Image import does_img_exist, does_color_exist, get_color_at_coords
 from API.Mouse import *
 from API.Imports.Coords import *
-from API.Debug import DEBUG_MODE
+from API.Debug import DEBUG_MODE, write_debug
 import API.AntiBan
 import pyautogui as pag
 import keyboard
@@ -83,13 +83,19 @@ def zoom_camera(notches=1):
     return
 
 
-def drop_inventory(from_spot_num=1, to_spot_num=27):
+def drop_inventory(from_spot_num=1, to_spot_num=27, should_close_after=False):
     # Open inventory if not open
     is_tab_open("inventory", should_open=True)
     is_otd_enabled(should_enable=True)
 
     for i in range(from_spot_num, to_spot_num+1):
         mouse_click(get_xy_for_invent_slot(i))
+        if i % 4 == 0:
+            API.AntiBan.sleep_between(0.3, 0.7)
+
+    if should_close_after:
+        API.AntiBan.sleep_between(0.3, 0.5)
+        is_tab_open("inventory", should_open=False)
 
     return
 
@@ -179,11 +185,10 @@ def is_run_gt(percent=10):
 
 
 # --- IMAGE MATCHING ---
-def is_inventory_full(should_cont=True, should_drop=False, start_slot=1, end_slot=27):
+def is_inventory_full(should_cont=True, should_drop=False, start_slot=1, end_slot=27, should_close_after=False):
     does_exist = does_img_exist("inventory_full", category="General"), does_img_exist("inventory_full_fish", category="General")
 
-    if DEBUG_MODE:
-        print(f'is_inventory_full does_exist: {does_exist}')
+    write_debug(f'is_inventory_full does_exist: {does_exist}')
 
     if any(does_exist):
         if should_cont:
@@ -191,7 +196,7 @@ def is_inventory_full(should_cont=True, should_drop=False, start_slot=1, end_slo
             r_sleep = random.uniform(1.0, 1.2)
             time.sleep(r_sleep)
         if should_drop:
-            drop_inventory(start_slot, end_slot)
+            drop_inventory(start_slot, end_slot, should_close_after)
         return True
 
     else:
@@ -224,20 +229,43 @@ def get_xy_for_invent_slot(slot_num):
 def check_skill_tab(max_sec=2.0, skill_to_check='random'):
     # check skill passed in as arg
     start = time.time()
-    print(f'start: {start}')
+    write_debug(f'Start time: {start}\nOpening Skill tab')
     is_tab_open("skill", should_open=True)
-    print(f'skill tab: {SKILL_tab_xy}')
-    # check_if_tab_open("skill", should_open=True)
+    write_debug(f'skill tab: {SKILL_tab_xy}')
+    is_tab_open("skill", should_open=True)
     API.AntiBan.sleep_between(0.4, 1.3)
     if max_sec >= 2.0:
         diff = max_sec - 1.3
         print(f'smithing skill {SKILL_smithing}')
-        match skill_to_check:
-            case "smithing":
-                skill_to_check_xy = SKILL_smithing
+        if skill_to_check == "random":
+            skill_to_check = random.randint(1, 5)
+            match skill_to_check:
+                case 1:
+                    skill_to_check_xy = SKILL_smithing
+                    write_debug(f'{skill_to_check_xy}')
+                case 2:
+                    skill_to_check_xy = SKILL_fishing
+                    write_debug(f'{skill_to_check_xy}')
+                case 3:
+                    skill_to_check_xy = SKILL_agility
+                    write_debug(f'{skill_to_check_xy}')
+                case 4:
+                    skill_to_check_xy = SKILL_attack
+                    write_debug(f'{skill_to_check_xy}')
+                case 5:
+                    skill_to_check_xy = SKILL_defence
+                    write_debug(f'{skill_to_check_xy}')
+                case 6:
+                    skill_to_check_xy = SKILL_strength
+                    write_debug(f'{skill_to_check_xy}')
+        else:
+            match skill_to_check:
+                case "smithing":
+                    skill_to_check_xy = SKILL_smithing
+                case "fishing":
+                    skill_to_check_xy = SKILL_fishing
         mouse_click(skill_to_check_xy)
         API.AntiBan.sleep_between(1, diff)
-    # check_skills(max_sec)
 
     is_tab_open("inventory", should_open=True)
     end = time.time()

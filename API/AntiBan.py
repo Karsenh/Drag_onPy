@@ -11,7 +11,7 @@ import API
 
 def sleep_between(min_seconds, max_seconds):
     r_sleep = random.uniform(min_seconds, max_seconds)
-    write_debug(f'🎲Selecting random time between {min_seconds} & {max_seconds}\n💤 Sleeping for {r_sleep} ms')
+    write_debug(f'🎲 Selecting random time between {min_seconds} & {max_seconds}\n💤 Sleeping for {r_sleep} ms')
     time.sleep(r_sleep)
     return
 
@@ -24,9 +24,7 @@ def random_thumbs_up():
 def print_to_log(text):
     now = datetime.now()
     current_time = now.strftime("%H:%M:%S")
-    print(
-        f'⛔ Script Stopping @ [{current_time}]: - {text}\n'
-        f'Logging to Script_Stop_Log.txt')
+    write_debug(f'⛔ Script Stopping @ [{current_time}]: - {text}\n'f'Logging to Script_Stop_Log.txt')
 
     with open(f'{STOP_LOG_PATH}', 'w') as f:
         f.write(f'{current_time}: {text}')
@@ -38,15 +36,14 @@ def print_to_log(text):
 #       Returns False if the image is not found after trying for specified amount of time
 def wait_for_img(img_to_search, script_name=None, category_name="Scripts", max_wait_sec=5, img_threshold=0.8):
     start_time = datetime.now()
-    if DEBUG_MODE:
-        print(f'⏲ Wait_For_Img Start Time: {start_time}')
+    write_debug(f'⏲ Wait_For_Img Start Time: {start_time}')
 
     while not is_time_up(start_time, max_wait_sec):
         img_found = does_img_exist(img_to_search, script_name=script_name, category=category_name, threshold=img_threshold)
         if img_found:
             return True
         else:
-            print(f'Still checking for image...')
+            write_debug(f'Still checking for image...')
 
     return
 
@@ -55,22 +52,21 @@ def is_time_up(start_time, max_wait_sec):
     curr_time = datetime.now()
     time_diff = curr_time - start_time
 
-    if DEBUG_MODE:
-        print(f'⏲ Time diff: {time_diff} | Time diff seconds: {time_diff.total_seconds()} | is > {max_wait_sec} ?')
+    write_debug(f'⏲ Time diff: {time_diff} | Time diff seconds: {time_diff.total_seconds()} | is > {max_wait_sec} ?')
     if time_diff.total_seconds() > max_wait_sec:
-        print(f'Time is up!')
+        write_debug(f'Time is up!')
         return True
     else:
-        print(f'Time is not up yet.')
+        write_debug(f'Time is not up yet...')
         return False
 
 
-def random_human_actions(max_downtime_seconds=3.0):
+def random_human_actions(max_downtime_seconds=3.0, reopen_inventory=True):
     start_time = datetime.now()
 
     # Generate a random number between 1-10
     should_perform_actions = False
-    if random.randint(1, 10) < 10:
+    if random.randint(1, 10) == 10:
         should_perform_actions = True
         write_debug(f"{should_perform_actions} (True?)")
     else:
@@ -91,27 +87,38 @@ def random_human_actions(max_downtime_seconds=3.0):
             write_debug(f'time_remaining = {time_remaining}')
 
             write_debug(f'Random human activity time not up - Doing something and sleeping between 0.1 - {time_remaining} seconds...')
-            # should_check_tab = random.randint(1, 10)
-            #
-            # if should_check_tab > 7:  # 30% chance to check a tab
+
             skill_or_quest_tab = random.randint(1, 10)
-            if max_downtime_seconds <= 4:
-                print(f'Checking Skill tab > Smithing for max of 5 seconds')
-                API.Interface.General.check_skill_tab(max_sec=4.0, skill_to_check="smithing")
+            write_debug(f'skill_or_quest_tab = {skill_or_quest_tab} | if <= 4 (Skill)')
+            if skill_or_quest_tab <= 4:
+                write_debug(f'Checking Skill Tab...')
+                API.Interface.General.check_skill_tab(max_sec=4.0, skill_to_check="random")
             else:
-                print(f'🧙Checking Quest tab')
+                write_debug(f'🧙Checking Quest tab...')
                 API.Interface.General.is_tab_open("quest", should_open=True)
                 sleep_between(0.5, 1.2)
                 quest_list_hover_xy = 1212, 574
                 mouse_move(quest_list_hover_xy, 17, 23)
-                sleep_between(0.5, 1.2)
+                sleep_between(0.6, 1.2)
                 random_scroll = random.randint(-637, 601)
-                print(f'Scrolling: {random_scroll}')
+                write_debug(f'Scrolling: {random_scroll}')
                 pag.hscroll(random_scroll)
                 sleep_between(0.6, 2.6)
-                API.Interface.General.is_tab_open("inventory", should_open=True)
+                API.Interface.General.is_tab_open("inventory", should_open=reopen_inventory)
 
-            sleep_between(0.1, time_remaining)
+            elapsed_time = datetime.now() - start_time
+            time_remaining = max_downtime_seconds - elapsed_time.total_seconds()
+
+            if time_remaining < 0:
+                write_debug(f'⌛ Time is up!')
+                return
+            else:
+                write_debug(f'⏳ Time not up - sleeping between 0.1 - {time_remaining}')
+                sleep_between(0.1, time_remaining)
+    else:
+        write_debug(f'Not performing human interactions - {should_perform_actions} - Sleeping instead.')
+        sleep_between(0.1, max_seconds=max_downtime_seconds)
+
 
     return
 

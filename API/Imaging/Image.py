@@ -7,6 +7,7 @@ import pyautogui
 from API.Imports.Paths import *
 from API.Mouse import mouse_click
 from API.Debug import DEBUG_MODE
+from API.Debug import write_debug
 
 
 img_check_xy = 0, 0
@@ -14,14 +15,12 @@ img_check_xy = 0, 0
 
 def capture_bluestacks():
     x1, y1, x2, y2 = get_bluestacks_region()
-    if DEBUG_MODE:
-        print(f'🐛 x1: {x1}, y1: {y1}')
-        print(f'🐛 x2: {x2}, y2: {y2}')
+
+    # write_debug(f'🐛 x1: {x1}, y1: {y1}\n🐛 x2: {x2}, y2: {y2}')
 
     # w, h = get_bluestacks_window_size()
     pyautogui.screenshot(imageFilename=fr'{BS_SCREEN_PATH}', region=(x1, y1, x2-x1, y2-y1))
-    if DEBUG_MODE:
-        print(f'📸 Captured & Saved Live (BlueStacks) Img: {BS_SCREEN_PATH}')
+    write_debug(f'📸 Captured & Saved Live (BlueStacks) Img: {BS_SCREEN_PATH}')
     return
 
 
@@ -41,12 +40,11 @@ def does_color_exist(check_color, xy):
 
     # Compare passed RGB values with comparative RGB values
     if r == cr and g == cg and b == cb:
-        if DEBUG_MODE:
-            print(f'✔ Check Color rgb: {r,g,b} FOUND @ {xy}')
+
+        write_debug(f'✔ Check Color rgb: {r,g,b} FOUND @ {xy}')
         return True
     else:
-        if DEBUG_MODE:
-            print(f'✖ Check Color rgb: {r,g,b} NOT Found @ {xy}')
+        write_debug(f'✖ Check Color rgb: {r,g,b} NOT Found @ {xy}')
         return False
 
 
@@ -55,8 +53,7 @@ def get_color_at_coords(xy):
     capture_bluestacks()
     image = Image.open(f'{BS_SCREEN_PATH}')
     picture = image.load()
-    if DEBUG_MODE:
-        print(f'RGB Color @ {x}, {y} = {picture[x, y]}')
+    write_debug(f'RGB Color @ {x}, {y} = {picture[x, y]}')
     return picture[x, y]
 
 
@@ -70,11 +67,11 @@ def does_img_exist(img_name, script_name=None, category='Scripts', threshold=0.8
 
     # Read the template (disconnected)
     if script_name is not None:  # If it's a script name
-        print(f'Checking if {img_name}.png exists in {SCRIPTS_SCREEN_PATH}\{script_name}\{img_name}.png ... ')
+        write_debug(f'Checking if {img_name}.png exists in {SCRIPTS_SCREEN_PATH}\{script_name}\{img_name}.png ... ')
         template_img_path = f'{SCRIPTS_SCREEN_PATH}\{script_name}\{img_name}.png'
 
     else:  # If no script name - get Category
-        print(f'Checking if {img_name}.png exists in Comparators\{category}...')
+        write_debug(f'Checking if {img_name}.png exists in Comparators\{category}...')
         template_img_path = f'{ROOT_COMPARATORS_PATH}\{category}\{img_name}.png'
 
     template = cv2.imread(template_img_path, 0)
@@ -88,12 +85,10 @@ def does_img_exist(img_name, script_name=None, category='Scripts', threshold=0.8
     loc = np.where(res >= threshold)
 
     if len(loc[0]) == 0 and len(loc[1]) == 0:
-        if DEBUG_MODE:
-            print(f'✖ {img_name}.png NOT found within game window.\n {loc[0]} {loc[1]}')
+        write_debug(f'✖ {img_name}.png NOT found within game window.\n {loc[0]} {loc[1]}')
         return False
     else:
-        if DEBUG_MODE:
-            print(f'✔ {img_name}.png found:\n loc[0] = {loc[0]}\nloc[1] = {loc[1]}')
+        write_debug(f'✔ {img_name}.png found:\n loc[0] = {loc[0]}\nloc[1] = {loc[1]}')
         #     Save the 'deepest' find of img's xy coords
         img_check_xy = loc[1][len(loc[1])-1], loc[0][len(loc[0])-1]
         if should_click:
@@ -102,7 +97,7 @@ def does_img_exist(img_name, script_name=None, category='Scripts', threshold=0.8
             adj_y = img_y + y_offset
             adj_xy = adj_x, adj_y
             mouse_click(adj_xy)
-        print(f'{img_check_xy} saved to img_check_xy global')
+        write_debug(f'{img_check_xy} saved to img_check_xy global')
         return True
 
 
