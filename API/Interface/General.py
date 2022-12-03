@@ -1,9 +1,8 @@
-from API.AntiBan import sleep_between, print_to_log
 from API.Imaging.Image import does_img_exist, does_color_exist, get_color_at_coords
-import pyautogui as pag
 from API.Mouse import *
 from API.Imports.Coords import *
 from API.Debug import DEBUG_MODE
+import API.AntiBan
 import pyautogui as pag
 import keyboard
 import math
@@ -54,7 +53,7 @@ def pitch_camera(direction="up"):
     print(f'Angling camera {direction}')
     center_viewport_xy = 730, 436
     mouse_move(center_viewport_xy, 33, 47)
-    sleep_between(0.5, 1.1)
+    API.AntiBan.sleep_between(0.5, 1.1)
     pag.hscroll(200)
     return
 
@@ -77,7 +76,7 @@ def zoom_camera(notches=1):
 
     mouse_click(notch_list[index], 0, 0)
 
-    sleep_between(0.3, 0.7)
+    API.AntiBan.sleep_between(0.3, 0.7)
 
     mouse_click(INVENT_tab_xy)
 
@@ -229,7 +228,7 @@ def check_skill_tab(max_sec=2.0, skill_to_check='random'):
     is_tab_open("skill", should_open=True)
     print(f'skill tab: {SKILL_tab_xy}')
     # check_if_tab_open("skill", should_open=True)
-    sleep_between(0.4, 1.3)
+    API.AntiBan.sleep_between(0.4, 1.3)
     if max_sec >= 2.0:
         diff = max_sec - 1.3
         print(f'smithing skill {SKILL_smithing}')
@@ -237,7 +236,7 @@ def check_skill_tab(max_sec=2.0, skill_to_check='random'):
             case "smithing":
                 skill_to_check_xy = SKILL_smithing
         mouse_click(skill_to_check_xy)
-        sleep_between(1, diff)
+        API.AntiBan.sleep_between(1, diff)
     # check_skills(max_sec)
 
     is_tab_open("inventory", should_open=True)
@@ -257,7 +256,7 @@ def is_on_dc_screen(should_cont=True):
     if img_found and should_cont:
         xy = 755, 555
         mouse_click(xy)
-        sleep_between(3.0, 3.1)
+        API.AntiBan.sleep_between(3.0, 3.1)
 
     return img_found
 
@@ -268,7 +267,7 @@ def is_on_login_screen(should_cont=True):
     if img_found and should_cont:
         xy = 753, 471
         mouse_click(xy, 67, 23)
-        sleep_between(7.0, 7.1)
+        API.AntiBan.sleep_between(7.0, 7.1)
 
     return img_found
 
@@ -279,7 +278,7 @@ def is_on_welcome_screen(should_cont=True):
     if img_found and should_cont:
         xy = 755, 593
         mouse_click(xy, 54, 34)
-        sleep_between(1.0, 1.3)
+        API.AntiBan.sleep_between(1.0, 1.3)
 
     return img_found
 

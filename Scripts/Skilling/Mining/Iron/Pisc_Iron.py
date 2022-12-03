@@ -1,13 +1,12 @@
-# from API.Interface.General import *
+import os
+import time
+import random
+import keyboard
+import API.Interface.General
 from datetime import datetime
-from API.Interface.General import is_otd_enabled, turn_compass, zoom_camera, pitch_camera, is_inventory_full
 from API.Mouse import mouse_click
 from API.Imaging.Image import does_img_exist
-from API.AntiBan import sleep_between
-import time
-import keyboard
-import os
-import random
+
 from API.Debug import DEBUG_MODE
 
 exit_prog = False
@@ -22,10 +21,9 @@ def mine_iron_pisc(curr_loop):
     keyboard.add_hotkey('esc', lambda: quit_script())
 
     if first_loop:
-        is_otd_enabled(should_enable=True)
-        turn_compass("south")
-        zoom_camera(5)
-        pitch_camera("up")
+        API.Interface.General.is_otd_enabled(should_enable=True)
+
+        API.Interface.General.setup_interface("south", 5, "up")
 
         time.sleep(1.5)
 
@@ -100,11 +98,12 @@ def quit_script():
 
 
 def mine_iron_at(xy):
-    is_inventory_full(should_cont=True, should_drop=True)
+    API.Interface.General.is_inventory_full(should_cont=True, should_drop=True)
     mouse_click(xy, 16, 23, click_direction="left", max_num_clicks=3)
     # mouse_move(x, y, 17, 23)
     # sleep_between(0.4, 0.88)
     # ag.leftClick()
+    # sleep_between(1.5, 1.7)
     sleep_between(1.5, 1.7)
     return
 

@@ -3,7 +3,8 @@ from API.Mouse import mouse_click
 from API.Interface.General import setup_interface, is_inventory_full, is_tab_open, get_xy_for_invent_slot
 from API.Interface.Bank import check_if_bank_tab_open, deposit_all
 from API.Imaging.Image import does_img_exist
-from API.AntiBan import sleep_between, print_to_log, wait_for_img
+from API.AntiBan import print_to_log, wait_for_img
+import API.AntiBan
 
 
 def fish_draynor_shrimp(curr_loop):
@@ -18,28 +19,28 @@ def fish_draynor_shrimp(curr_loop):
 
         check_if_bank_tab_open(tab_num=5, should_open=True)
 
-        sleep_between(0.4, 1.2)
+        API.AntiBan.sleep_between(0.4, 1.2)
 
         deposit_all(include_equipment=True)
 
-        sleep_between(0.6, 1.4)
+        API.AntiBan.sleep_between(0.6, 1.4)
 
         if not withdraw_banked_net():
             print(f'Need small fishing net!')
             print_to_log('Need small fishing net!')
             return False
 
-        sleep_between(0.6, 1.6)
+        API.AntiBan.sleep_between(0.6, 1.6)
 
         if not move_to_fishing_spot():
             print_to_log("Can't see fishing spot image")
             return False
 
-        sleep_between(10.3, 14.5)
+        API.AntiBan.sleep_between(10.3, 14.5)
 
     if not is_fishing():
         click_fishing_spot()
-        sleep_between(2.1, 4.7)
+        API.AntiBan.sleep_between(2.1, 4.7)
         if is_inventory_full(should_drop=False):
             print(f'Entering is_inventory_full true block')
             if not bank():
@@ -48,18 +49,18 @@ def fish_draynor_shrimp(curr_loop):
             # deposit_shrimp = get_xy_for_invent_slot(r_invent_slot)
             # mouse_click(deposit_shrimp)
             deposit_all()
-            sleep_between(0.8, 1.4)
+            API.AntiBan.sleep_between(0.8, 1.4)
             if not withdraw_banked_net():
                 return False
-            sleep_between(0.7, 1.2)
+            API.AntiBan.sleep_between(0.7, 1.2)
             if not move_to_fishing_spot():
                 return False
-            sleep_between(10.3, 12.4)
+            API.AntiBan.sleep_between(10.3, 12.4)
             if not is_fishing():
                 click_fishing_spot()
-                sleep_between(1.6, 4.7)
+                API.AntiBan.sleep_between(1.6, 4.7)
     else:
-        sleep_between(1.3, 3.7)
+        API.AntiBan.sleep_between(1.3, 3.7)
 
     return True
 
@@ -68,12 +69,12 @@ def bank():
     if not move_to_bank():
         return False
 
-    sleep_between(10.0, 13.1)
+    API.AntiBan.sleep_between(10.0, 13.1)
 
     if not open_bank():
         return False
 
-    sleep_between(1.3, 2.3)
+    API.AntiBan.sleep_between(1.3, 2.3)
     return True
 
 

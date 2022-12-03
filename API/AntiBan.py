@@ -1,9 +1,12 @@
-from datetime import datetime
 from API.Imports.Paths import *
 from API.Imaging.Image import does_img_exist
-import time
-import random
 from API.Debug import DEBUG_MODE, write_debug
+from datetime import datetime
+from API.Mouse import mouse_move
+import random
+import pyautogui as pag
+import time
+import API
 
 
 def sleep_between(min_seconds, max_seconds):
@@ -88,11 +91,27 @@ def random_human_actions(max_downtime_seconds=3.0):
             write_debug(f'time_remaining = {time_remaining}')
 
             write_debug(f'Random human activity time not up - Doing something and sleeping between 0.1 - {time_remaining} seconds...')
-
-
+            # should_check_tab = random.randint(1, 10)
+            #
+            # if should_check_tab > 7:  # 30% chance to check a tab
+            skill_or_quest_tab = random.randint(1, 10)
+            if max_downtime_seconds <= 4:
+                print(f'Checking Skill tab > Smithing for max of 5 seconds')
+                API.Interface.General.check_skill_tab(max_sec=4.0, skill_to_check="smithing")
+            else:
+                print(f'🧙Checking Quest tab')
+                API.Interface.General.is_tab_open("quest", should_open=True)
+                sleep_between(0.5, 1.2)
+                quest_list_hover_xy = 1212, 574
+                mouse_move(quest_list_hover_xy, 17, 23)
+                sleep_between(0.5, 1.2)
+                random_scroll = random.randint(-637, 601)
+                print(f'Scrolling: {random_scroll}')
+                pag.hscroll(random_scroll)
+                sleep_between(0.6, 2.6)
+                API.Interface.General.is_tab_open("inventory", should_open=True)
 
             sleep_between(0.1, time_remaining)
 
     return
-
 

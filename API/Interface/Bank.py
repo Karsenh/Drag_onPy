@@ -1,7 +1,7 @@
 from API.Imports.Coords import *
 from API.Mouse import mouse_click
 from API.Imaging.Image import does_img_exist
-from API.AntiBan import sleep_between, print_to_log
+from API.AntiBan import print_to_log, sleep_between
 
 
 def deposit_all(include_equipment=False):
@@ -12,7 +12,6 @@ def deposit_all(include_equipment=False):
     if include_equipment:
         mouse_click(BANK_dep_equipment)
     return
-
 
 
 def check_if_bank_tab_open(tab_num=0, should_open=True, double_check=True):

@@ -1,8 +1,7 @@
 import random
-
+import API.AntiBan
 from API.Interface.General import setup_interface, does_img_exist, is_otd_enabled, is_tab_open, is_inventory_full
 from API.Imaging.OCR.Total_Exp import wait_for_exp_change
-from API.AntiBan import sleep_between, wait_for_img
 import pyautogui as pag
 
 
@@ -15,9 +14,9 @@ def fish_barb_trout(curr_loop):
     if curr_loop == 1:
         setup_interface("west", 2, "up")
         is_otd_enabled(should_enable=True)
-        sleep_between(0.8, 2.3)
+        API.AntiBan.sleep_between(0.8, 2.3)
         is_tab_open(tab="inventory", should_open=False)
-        sleep_between(1.1, 2.1)
+        API.AntiBan.sleep_between(1.1, 2.1)
 
     handle_level_dialogue()
 
@@ -26,7 +25,7 @@ def fish_barb_trout(curr_loop):
         if not click_trout_spot():
             fishing_attempts += 1
             print(f"Couldn't find trout spot to click (b) - attempts: {fishing_attempts}")
-        sleep_between(4.1, 5.3)
+        API.AntiBan.sleep_between(4.1, 5.3)
 
     if not is_fishing_trout():
         if not click_trout_spot():
@@ -34,9 +33,9 @@ def fish_barb_trout(curr_loop):
             print(f"Couldn't find trout spot to click (a) - attempts: {fishing_attempts}")
             if fishing_attempts > 5:
                 return False
-        sleep_between(4.3, 6.7)
+        API.AntiBan.sleep_between(4.3, 6.7)
 
-    sleep_between(4.3, 6.7)
+    API.AntiBan.sleep_between(4.3, 6.7)
 
     return True
 
@@ -53,6 +52,6 @@ def click_trout_spot():
 def handle_level_dialogue():
     if does_img_exist(img_name="level_up", category="General"):
         pag.press('space')
-        sleep_between(1.1, 2.3)
+        API.AntiBan.sleep_between(1.1, 2.3)
         pag.press('space')
     return

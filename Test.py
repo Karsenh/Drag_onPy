@@ -21,7 +21,7 @@ set_bluestacks_window_size()
 capture_bluestacks()
 clear_debug_log()
 
-random_human_actions(max_downtime_seconds=10)
+random_human_actions(max_downtime_seconds=12)
 # show_main_gui()
 # launch_script("barbarian_fishing")
 

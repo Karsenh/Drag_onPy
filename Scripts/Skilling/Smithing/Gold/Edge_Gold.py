@@ -3,7 +3,8 @@ from API.Break_Timer.Break_Handler import *
 from API.Interface.General import is_otd_enabled, setup_interface, check_skill_tab, is_tab_open
 from API.Interface.Bank import deposit_all, check_if_bank_tab_open
 import keyboard
-from API.AntiBan import sleep_between, print_to_log
+from API.AntiBan import print_to_log
+import API.AntiBan
 from API.Imports.Coords import BANK_qty_all,INVENT_slot_1
 from API.Mouse import mouse_click, mouse_drag, mouse_move
 import pyautogui as pag
@@ -24,7 +25,7 @@ def smith_gold_edge(curr_loop):
     # normalize interface
     # Start in front of NW bank booth in Edge bank
     if first_loop:
-        setup_interface("nort", 1, "up")
+        setup_interface("north", 1, "up")
 
         # 1. Opens bank booth
         if not is_furnace_start():
@@ -49,7 +50,6 @@ def smith_gold_edge(curr_loop):
     # while
 
     if not first_loop:
-        check_break_timer(cbf_1)
         deposit_all()
 
     # 7. Withdraws ore
@@ -64,15 +64,12 @@ def smith_gold_edge(curr_loop):
     # 10. Sleep for ~84 seconds
     check_for_level()
 
-    check_break_timer()
-
     bank_from_furnace()
 
     # 11. Repeat from step 6
 
-    # sleep_between(1.1, 1.2)
+    # API.AntiBan.sleep_between()(1.1, 1.2)
     return
-
 
 
 def is_furnace_start():
@@ -84,17 +81,14 @@ def is_furnace_start():
     return False
 
 
-
-
-
 def equip_gauntlets_if_banked():
-    sleep_between(0.8, 1.2)
+    API.AntiBan.sleep_between(0.8, 1.2)
     if does_img_exist("goldsmith_gauntlets", script_name="Edge_Gold", threshold=0.99):
         xy = get_existing_img_xy()
         x, y = xy
         new_xy = x+30, y+20
         mouse_click(new_xy)
-        sleep_between(0.9, 1.3)
+        API.AntiBan.sleep_between(0.9, 1.3)
         to_xy = 1173, 763
         mouse_drag(INVENT_slot_1, to_xy)
     return
@@ -115,10 +109,10 @@ def withdraw_gold_if_banked():
     else:
         print(f'🥇 Clicking gold ore at: {get_existing_img_xy()}')
         mouse_click(get_existing_img_xy())
-        sleep_between(0.7, 1)
+        API.AntiBan.sleep_between(0.7, 1)
         rand_long_wait = random.randint(1,10)
         if rand_long_wait >= 9:
-            sleep_between(3.0, 9.0)
+            API.AntiBan.sleep_between(3.0, 9.0)
 
     return
 
@@ -126,7 +120,7 @@ def withdraw_gold_if_banked():
 def move_to_furnace():
     furnace_xy = 1090, 340
     mouse_click(furnace_xy, 3, 3, max_num_clicks=2)
-    sleep_between(6.0, 6.4)
+    API.AntiBan.sleep_between(6.0, 6.4)
     # TODO Check if we're actually at the furnace when we get here
     return
 
@@ -154,13 +148,13 @@ def check_for_level():
 
     while datetime.now() < end_time:
         print(f'🔨Smithing...')
-        sleep_between(1.9, 5.3)
+        API.AntiBan.sleep_between(1.9, 5.3)
 
         if does_img_exist("level_up", category="General"):
             # If so, click the furnace again to start making bars
             furnace_xy = 782, 449
             mouse_click(furnace_xy, 3, 3, max_num_clicks=2)
-            sleep_between(1.1, 1.4)
+            API.AntiBan.sleep_between(1.1, 1.4)
             select_gold_bar()
 
         should_check_tab = random.randint(1, 10)
@@ -172,14 +166,14 @@ def check_for_level():
             else:
                 print(f'🧙Checking Quest tab')
                 is_tab_open("quest", should_open=True)
-                sleep_between(0.5, 1.3)
+                API.AntiBan.sleep_between(0.5, 1.3)
                 quest_list_hover_xy = 1212, 574
                 mouse_move(quest_list_hover_xy, 17, 23)
-                sleep_between(0.5, 1.2)
+                API.AntiBan.sleep_between(0.5, 1.2)
                 random_scroll = random.randint(-637, 601)
                 print(f'Scrolling: {random_scroll}')
                 pag.hscroll(random_scroll)
-                sleep_between(0.6, 2.6)
+                API.AntiBan.sleep_between(0.6, 2.6)
                 is_tab_open("inventory", should_open=True)
 
     return
@@ -198,7 +192,7 @@ def bank_from_furnace():
     if does_color_exist(furnace_loc_color, furnace_loc_check):
         bank_booth_xy = 334, 622
         mouse_click(bank_booth_xy, 3, 4)
-        sleep_between(5.9, 6.2)
+        API.AntiBan.sleep_between(5.9, 6.2)
         check_if_bank_tab_open(tab_num=4, should_open=True)
     return
 

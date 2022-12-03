@@ -1,7 +1,7 @@
 from API.Interface.General import setup_interface, is_otd_enabled, is_inventory_full, is_tab_open
 from API.Imaging.Image import does_img_exist
 from API.Imaging.OCR.Total_Exp import wait_for_exp_change
-from API.AntiBan import sleep_between
+import API.AntiBan
 import pyautogui as pag
 from API.Debug import DEBUG_MODE, log_to_debug
 
@@ -30,11 +30,11 @@ def barbarian_fishing(curr_loop):
             click_fish_attempts += 1
             if click_fish_attempts > 10:
                 return False
-        sleep_between(1.1, 2.3)
+        API.AntiBan.sleep_between(1.1, 2.3)
 
     is_inventory_full(should_cont=True, should_drop=True, start_slot=1, end_slot=26)
 
-    sleep_between(3.3, 6.4)
+    API.AntiBan.sleep_between(3.3, 6.4)
 
     return True
 
@@ -53,7 +53,7 @@ def is_barbarian_fishing():
 def handle_level_dialogue():
     if does_img_exist("level_up", category="General"):
         pag.press('space')
-        sleep_between(1.1, 2.3)
+        API.AntiBan.sleep_between(1.1, 2.3)
         pag.press('space')
-        sleep_between(0.8, 1.7)
+        API.AntiBan.sleep_between(0.8, 1.7)
     return
