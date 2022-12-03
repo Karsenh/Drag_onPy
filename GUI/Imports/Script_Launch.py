@@ -40,16 +40,28 @@ def launch_script(script_name="pisc_iron"):
     match script_name:
         case "pisc_iron":
             selected_script = ScriptEnum.PISC_IRON.value
+            antiban_likelihood = 50
+            antiban_downtime_sec = 0.5
         case "edge_gold":
             selected_script = ScriptEnum.EDGE_GOLD.value
+            antiban_likelihood = 10
+            antiban_downtime_sec = 6
         case "gnome_course":
             selected_script = ScriptEnum.GNOME_COURSE.value
+            antiban_likelihood = 10
+            antiban_downtime_sec = 6
         case "draynor_shrimp":
             selected_script = ScriptEnum.DRAYNOR_SHRIMP.value
+            antiban_likelihood = 10
+            antiban_downtime_sec = 6
         case "barb_trout":
             selected_script = ScriptEnum.BARB_TROUT.value
+            antiban_likelihood = 10
+            antiban_downtime_sec = 6
         case "barbarian_fishing":
             selected_script = ScriptEnum.BARBARIAN_FISHING.value
+            antiban_likelihood = 10
+            antiban_downtime_sec = 6
 
     is_timer_set = is_break_timer_set()
 
@@ -57,7 +69,7 @@ def launch_script(script_name="pisc_iron"):
         write_debug(f'🚩 Break Timer Set - Entering loop with break_handler()')
         while should_continue:
             should_continue = all_scripts[selected_script](curr_script_iteration)
-            API.AntiBan.random_human_actions(6)
+            API.AntiBan.random_human_actions(max_downtime_seconds=6, likelihood=antiban_likelihood)
             break_handler()
 
             curr_script_iteration += 1
@@ -65,7 +77,7 @@ def launch_script(script_name="pisc_iron"):
         write_debug(f'🏳 NO Break Timer Set - Entering loop WITHOUT break_handler()')
         while should_continue:
             should_continue = all_scripts[selected_script](curr_script_iteration)
-            API.AntiBan.random_human_actions(6)
+            API.AntiBan.random_human_actions(max_downtime_seconds=antiban_downtime_sec, likelihood=antiban_likelihood)
 
             curr_script_iteration += 1
 

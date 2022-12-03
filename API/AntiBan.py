@@ -61,12 +61,12 @@ def is_time_up(start_time, max_wait_sec):
         return False
 
 
-def random_human_actions(max_downtime_seconds=3.0, reopen_inventory=True):
+def random_human_actions(max_downtime_seconds=3.0, likelihood=10, reopen_inventory=True):
     start_time = datetime.now()
 
-    # Generate a random number between 1-10
+    # Generate a random number between 1-10 (or likelihood)
     should_perform_actions = False
-    if random.randint(1, 10) == 10:
+    if random.randint(1, likelihood) == likelihood:
         should_perform_actions = True
         write_debug(f"{should_perform_actions} (True?)")
     else:
