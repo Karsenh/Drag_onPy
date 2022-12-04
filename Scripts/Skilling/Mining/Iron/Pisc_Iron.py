@@ -2,7 +2,7 @@ import os
 import time
 import random
 import keyboard
-import API.Interface.General
+import API
 from datetime import datetime
 from API.AntiBan import sleep_between
 from API.Mouse import mouse_click
@@ -81,7 +81,7 @@ def mine_iron_pisc(curr_loop):
 def mine_iron_at(xy):
     API.Interface.General.is_inventory_full(should_cont=True, should_drop=True)
     mouse_click(xy, 16, 23, click_direction="left", max_num_clicks=3)
-    sleep_between(1.5, 1.7)
+    API.AntiBan.sleep_between(1.5, 1.7)
     return
 
 

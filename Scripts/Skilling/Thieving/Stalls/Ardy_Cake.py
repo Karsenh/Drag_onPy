@@ -1,6 +1,6 @@
 from API.Interface.General import setup_interface, is_otd_enabled, is_inventory_full
 from API.Imaging.Image import does_img_exist
-from API.AntiBan import wait_for_img, sleep_between
+from API.AntiBan import sleep_between
 from API.Mouse import mouse_click
 
 

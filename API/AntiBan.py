@@ -1,3 +1,4 @@
+import API
 from API.Imports.Paths import *
 from API.Imaging.Image import does_img_exist
 from API.Debug import DEBUG_MODE, write_debug
@@ -31,36 +32,6 @@ def print_to_log(text):
     return
 
 
-# Search for a particular img on screen for a set amount of time
-#       Returns True if the image is found within the amount of time
-#       Returns False if the image is not found after trying for specified amount of time
-def wait_for_img(img_to_search, script_name=None, category_name="Scripts", max_wait_sec=5, img_threshold=0.8):
-    start_time = datetime.now()
-    write_debug(f'⏲ Wait_For_Img Start Time: {start_time}')
-
-    while not is_time_up(start_time, max_wait_sec):
-        img_found = does_img_exist(img_to_search, script_name=script_name, category=category_name, threshold=img_threshold)
-        if img_found:
-            return True
-        else:
-            write_debug(f'Still checking for image...')
-
-    return False
-
-
-def is_time_up(start_time, max_wait_sec):
-    curr_time = datetime.now()
-    time_diff = curr_time - start_time
-
-    write_debug(f'⏲ Time diff: {time_diff} | Time diff seconds: {time_diff.total_seconds()} | is > {max_wait_sec} ?')
-    if time_diff.total_seconds() > max_wait_sec:
-        write_debug(f'Time is up!')
-        return True
-    else:
-        write_debug(f'Time is not up yet...')
-        return False
-
-
 def random_human_actions(max_downtime_seconds=3.0, likelihood=10, reopen_inventory=True):
     start_time = datetime.now()
 
@@ -75,7 +46,7 @@ def random_human_actions(max_downtime_seconds=3.0, likelihood=10, reopen_invento
     if should_perform_actions:
         write_debug(f'Performing human actions for max_downtime_seconds: {max_downtime_seconds}')
 
-        while not is_time_up(start_time, max_downtime_seconds):
+        while not API.Time.is_time_up(start_time, max_downtime_seconds):
             # Loop around in here while we still have time in max_downtime
             # Sleep for a random interval at the end of each loop to randomly decide how many concurrent actions we do
             #   - If the sleep is longer we'll only do 1-2 actions

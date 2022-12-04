@@ -1,6 +1,6 @@
-from API.Imaging.Image import does_img_exist, get_existing_img_xy
+from API.Imaging.Image import does_img_exist, get_existing_img_xy, wait_for_img
 from API.Mouse import mouse_drag
-from API.AntiBan import wait_for_img, sleep_between
+from API.AntiBan import sleep_between
 from API.Debug import write_debug
 from API.Interface.General import setup_interface
 

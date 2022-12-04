@@ -1,4 +1,5 @@
 import os
+from API.Time import is_time_up
 from PIL import Image, ImageGrab
 import numpy as np
 import cv2
@@ -6,8 +7,8 @@ from API.Setup import get_bluestacks_region
 import pyautogui
 from API.Imports.Paths import *
 from API.Mouse import mouse_click
-from API.Debug import DEBUG_MODE
 from API.Debug import write_debug
+from datetime import datetime
 
 
 img_check_xy = 0, 0
@@ -99,6 +100,23 @@ def does_img_exist(img_name, script_name=None, category='Scripts', threshold=0.8
             mouse_click(adj_xy)
         write_debug(f'{img_check_xy} saved to img_check_xy global')
         return True
+
+
+# Search for a particular img on screen for a set amount of time
+#       Returns True if the image is found within the amount of time
+#       Returns False if the image is not found after trying for specified amount of time
+def wait_for_img(img_to_search, script_name=None, category_name="Scripts", max_wait_sec=5, img_threshold=0.8):
+    start_time = datetime.now()
+    write_debug(f'⏲ Wait_For_Img Start Time: {start_time}')
+
+    while not is_time_up(start_time, max_wait_sec):
+        img_found = does_img_exist(img_to_search, script_name=script_name, category=category_name, threshold=img_threshold)
+        if img_found:
+            return True
+        else:
+            write_debug(f'Still checking for image...')
+
+    return False
 
 
 def get_existing_img_xy():

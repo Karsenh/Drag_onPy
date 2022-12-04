@@ -16,6 +16,7 @@ from API.Imaging.OCR.Total_Exp import wait_for_exp_change
 from GUI.Auth_GUI import *
 from Scripts.Skilling.Fishing.Trout.Barb_Trout import fish_barb_trout
 from Scripts.Skilling.Fishing.Barbarian.Barbarian_Fishing import barbarian_fishing
+from Scripts.Skilling.Firemaking.GE_Log_Burner import burn_logs_at_ge, burn_logs
 
 get_bluestacks_xy()
 set_bluestacks_window_size()
@@ -24,9 +25,9 @@ clear_debug_log()
 
 # random_human_actions(max_downtime_seconds=12)
 # show_main_gui()
-# launch_script("ardy_cake")
+launch_script("ge_log_burner")
 
-wait_for_img(img_to_search="log_burned", script_name="GE_Log_Burner", category_name="Scripts", max_wait_sec=10, img_threshold=0.8)
+
 
 # curr_loop = 1
 # steal_ardy_cake(curr_loop)

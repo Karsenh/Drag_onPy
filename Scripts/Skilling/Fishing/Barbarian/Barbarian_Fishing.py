@@ -3,7 +3,7 @@ from API.Imaging.Image import does_img_exist
 from API.Imaging.OCR.Total_Exp import wait_for_exp_change
 import API.AntiBan
 import pyautogui as pag
-from API.Debug import DEBUG_MODE, log_to_debug
+from API.Debug import write_debug
 
 
 click_fish_attempts = 0

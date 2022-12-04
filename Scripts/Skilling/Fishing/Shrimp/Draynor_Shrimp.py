@@ -2,8 +2,8 @@ import random
 from API.Mouse import mouse_click
 from API.Interface.General import setup_interface, is_inventory_full, is_tab_open, get_xy_for_invent_slot
 from API.Interface.Bank import check_if_bank_tab_open, deposit_all
-from API.Imaging.Image import does_img_exist
-from API.AntiBan import print_to_log, wait_for_img
+from API.Imaging.Image import does_img_exist, wait_for_img
+from API.AntiBan import print_to_log
 import API.AntiBan
 
 

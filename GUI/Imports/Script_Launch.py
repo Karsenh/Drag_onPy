@@ -6,6 +6,7 @@ from Scripts.Skilling.Fishing.Trout.Barb_Trout import fish_barb_trout
 from Scripts.Skilling.Fishing.Barbarian.Barbarian_Fishing import barbarian_fishing
 from Scripts.Skilling.Thieving.Pickpocketing.Draynor_Man import pickpocket_draynor_man
 from Scripts.Skilling.Thieving.Stalls.Ardy_Cake import steal_ardy_cake
+from Scripts.Skilling.Firemaking.GE_Log_Burner import burn_logs_at_ge
 
 from enum import Enum
 import API
@@ -39,8 +40,9 @@ def launch_script(script_name="pisc_iron"):
         BARBARIAN_FISHING = 5
         DRAYNOR_MAN = 6
         ARDY_CAKE = 7
+        GE_LOGS = 8
 
-    all_scripts = [mine_iron_pisc, smith_gold_edge, run_gnome_course, fish_draynor_shrimp, fish_barb_trout, barbarian_fishing, pickpocket_draynor_man, steal_ardy_cake]
+    all_scripts = [mine_iron_pisc, smith_gold_edge, run_gnome_course, fish_draynor_shrimp, fish_barb_trout, barbarian_fishing, pickpocket_draynor_man, steal_ardy_cake, burn_logs_at_ge]
 
     match script_name:
         case "pisc_iron":
@@ -75,6 +77,10 @@ def launch_script(script_name="pisc_iron"):
             selected_script = ScriptEnum.ARDY_CAKE.value
             antiban_likelihood = 10
             antiban_downtime_sec = 0.4
+        case "ge_log_burner":
+            selected_script = ScriptEnum.GE_LOGS.value
+            antiban_likelihood = 20
+            antiban_downtime_sec = 0.5
 
     is_timer_set = is_break_timer_set()
 
@@ -82,7 +88,7 @@ def launch_script(script_name="pisc_iron"):
         write_debug(f'🚩 Break Timer Set - Entering loop with break_handler()')
         while should_continue:
             should_continue = all_scripts[selected_script](curr_script_iteration)
-            API.AntiBan.random_human_actions(max_downtime_seconds=6, likelihood=antiban_likelihood)
+            API.AntiBan.random_human_actions(max_downtime_seconds=antiban_downtime_sec, likelihood=antiban_likelihood)
             break_handler()
 
             curr_script_iteration += 1
