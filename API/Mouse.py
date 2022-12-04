@@ -44,7 +44,7 @@ def mouse_drag(from_xy, to_xy, drag_delay=True):
     if drag_delay:
         trans_x, trans_y = translate_coords(to_xy, update_coords=True)
     # Translate the relative coordinates of the direction x, y for dragTo()
-    r_dur = random.uniform(0.5, 0.74)
+    r_dur = random.uniform(0.3, 0.53)
     pag.dragTo(trans_x, trans_y, duration=r_dur)
     return
 

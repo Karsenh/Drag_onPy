@@ -4,6 +4,7 @@ from Scripts.Skilling.Agility.Gnome_Course import run_gnome_course
 from Scripts.Skilling.Fishing.Shrimp.Draynor_Shrimp import fish_draynor_shrimp
 from Scripts.Skilling.Fishing.Trout.Barb_Trout import fish_barb_trout
 from Scripts.Skilling.Fishing.Barbarian.Barbarian_Fishing import barbarian_fishing
+from Scripts.Skilling.Thieving.Pickpocketing.Draynor_Man import pickpocket_draynor_man
 from enum import Enum
 import API
 import keyboard
@@ -34,8 +35,9 @@ def launch_script(script_name="pisc_iron"):
         DRAYNOR_SHRIMP = 3
         BARB_TROUT = 4
         BARBARIAN_FISHING = 5
+        DRAYNOR_MAN = 6
 
-    all_scripts = [mine_iron_pisc, smith_gold_edge, run_gnome_course, fish_draynor_shrimp, fish_barb_trout, barbarian_fishing]
+    all_scripts = [mine_iron_pisc, smith_gold_edge, run_gnome_course, fish_draynor_shrimp, fish_barb_trout, barbarian_fishing, pickpocket_draynor_man]
 
     match script_name:
         case "pisc_iron":
@@ -62,6 +64,10 @@ def launch_script(script_name="pisc_iron"):
             selected_script = ScriptEnum.BARBARIAN_FISHING.value
             antiban_likelihood = 10
             antiban_downtime_sec = 6
+        case "draynor_man":
+            selected_script = ScriptEnum.DRAYNOR_MAN.value
+            antiban_likelihood = 50
+            antiban_downtime_sec = 0.2
 
     is_timer_set = is_break_timer_set()
 

@@ -10,6 +10,7 @@ from API.Imports.Coords import *
 from enum import Enum
 from Scripts.Skilling.Smithing.Gold.Edge_Gold import *
 from API.Imaging.OCR.Run_Energy import *
+from Scripts.Skilling.Thieving.Pickpocketing.Draynor_Man import pickpocket_draynor_man
 from API.Imaging.OCR.Total_Exp import wait_for_exp_change
 # from Scripts.Skilling.Agility.Gnome_Course import *
 from GUI.Auth_GUI import *
@@ -22,8 +23,10 @@ capture_bluestacks()
 clear_debug_log()
 
 # random_human_actions(max_downtime_seconds=12)
-show_main_gui()
-# launch_script("barbarian_fishing")
+# show_main_gui()
+launch_script("draynor_man")
+
+# pickpocket_draynor_man()
 
 
 

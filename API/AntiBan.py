@@ -45,7 +45,7 @@ def wait_for_img(img_to_search, script_name=None, category_name="Scripts", max_w
         else:
             write_debug(f'Still checking for image...')
 
-    return
+    return False
 
 
 def is_time_up(start_time, max_wait_sec):
