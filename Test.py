@@ -24,7 +24,9 @@ clear_debug_log()
 
 # random_human_actions(max_downtime_seconds=12)
 # show_main_gui()
-launch_script("ardy_cake")
+# launch_script("ardy_cake")
+
+wait_for_img(img_to_search="log_burned", script_name="GE_Log_Burner", category_name="Scripts", max_wait_sec=10, img_threshold=0.8)
 
 # curr_loop = 1
 # steal_ardy_cake(curr_loop)
