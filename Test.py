@@ -10,7 +10,7 @@ from API.Imports.Coords import *
 from enum import Enum
 from Scripts.Skilling.Smithing.Gold.Edge_Gold import *
 from API.Imaging.OCR.Run_Energy import *
-from Scripts.Skilling.Thieving.Pickpocketing.Draynor_Man import pickpocket_draynor_man
+from Scripts.Skilling.Thieving.Stalls.Ardy_Cake import steal_ardy_cake
 from API.Imaging.OCR.Total_Exp import wait_for_exp_change
 # from Scripts.Skilling.Agility.Gnome_Course import *
 from GUI.Auth_GUI import *
@@ -24,8 +24,10 @@ clear_debug_log()
 
 # random_human_actions(max_downtime_seconds=12)
 # show_main_gui()
-launch_script("draynor_man")
+launch_script("ardy_cake")
 
+# curr_loop = 1
+# steal_ardy_cake(curr_loop)
 # pickpocket_draynor_man()
 
 

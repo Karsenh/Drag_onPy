@@ -20,7 +20,7 @@ def capture_bluestacks():
 
     # w, h = get_bluestacks_window_size()
     pyautogui.screenshot(imageFilename=fr'{BS_SCREEN_PATH}', region=(x1, y1, x2-x1, y2-y1))
-    write_debug(f'📸 Captured & Saved Live (BlueStacks) Img: {BS_SCREEN_PATH}')
+    # write_debug(f'📸 Captured & Saved Live (BlueStacks) Img: {BS_SCREEN_PATH}')
     return
 
 
@@ -110,5 +110,5 @@ def find_color_xy(img_path, search_color):
     im = np.array(pim)
 
     y, x = np.where(np.all(im == search_color, axis=2))
-    print(f'Found X: {x} & Y: {y}')
+    write_debug(f'Found X: {x} & Y: {y}')
     return x, y

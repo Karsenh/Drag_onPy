@@ -92,7 +92,7 @@ def set_bluestacks_window_size(w=BS_WINDOW_WIDTH, h=BS_WINDOW_HEIGHT):
 
 
 def get_bluestacks_region() -> tuple:
-    write_debug(f'Returning BlueStacks region: {bsX}, {bsY}, {bsX2}, {bsY2}')
+    # write_debug(f'Returning BlueStacks region: {bsX}, {bsY}, {bsX2}, {bsY2}')
     return bsX, bsY, bsX2, bsY2
 
 
