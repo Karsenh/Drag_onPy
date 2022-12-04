@@ -17,6 +17,7 @@ from GUI.Auth_GUI import *
 from Scripts.Skilling.Fishing.Trout.Barb_Trout import fish_barb_trout
 from Scripts.Skilling.Fishing.Barbarian.Barbarian_Fishing import barbarian_fishing
 from Scripts.Skilling.Firemaking.GE_Log_Burner import burn_logs_at_ge, burn_logs
+import pyautogui as pag
 
 get_bluestacks_xy()
 set_bluestacks_window_size()
@@ -25,9 +26,14 @@ clear_debug_log()
 
 # random_human_actions(max_downtime_seconds=12)
 # show_main_gui()
-launch_script("ge_log_burner")
+# launch_script("ge_log_burner")
 
-
+random_scroll = random.randint(-350, 350)
+write_debug(f'Scrolling: {random_scroll}')
+pag.hscroll(random_scroll)
+random_scroll = random.randint(-350, 350)
+write_debug(f'Scrolling: {random_scroll}')
+pag.hscroll(random_scroll)
 
 # curr_loop = 1
 # steal_ardy_cake(curr_loop)

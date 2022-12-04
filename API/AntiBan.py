@@ -71,9 +71,11 @@ def random_human_actions(max_downtime_seconds=3.0, likelihood=10, reopen_invento
                 quest_list_hover_xy = 1212, 574
                 mouse_move(quest_list_hover_xy, 17, 23)
                 sleep_between(0.6, 1.2)
-                random_scroll = random.randint(-637, 601)
-                write_debug(f'Scrolling: {random_scroll}')
-                pag.hscroll(random_scroll)
+                r_num_scrolls = random.randint(1, 3)
+                for i in range(1, r_num_scrolls):
+                    random_scroll = random.randint(-350, 350)
+                    write_debug(f'Scrolling: {random_scroll}')
+                    pag.hscroll(random_scroll)
                 sleep_between(0.6, 2.6)
                 API.Interface.General.is_tab_open("inventory", should_open=reopen_inventory)
 
