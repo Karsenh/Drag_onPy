@@ -15,7 +15,7 @@ def show_main_gui():
     root = Tk()
     root.title('Drag_onPy')
     root.iconbitmap(f'{pwd}\Assets\Images\Icon.ico')
-    root_gui_height = 847
+    root_gui_height = 1225
     root_gui_width = 675  #675
     root.configure(bg='#969488', height=root_gui_height, width=root_gui_width)
 
