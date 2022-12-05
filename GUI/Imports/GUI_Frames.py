@@ -82,8 +82,32 @@ def get_all_frames(root):
     herblore_frame = LabelFrame(main_frame, text="Herblore", bg=label_frame_bg_color, font=sub_gui_label_font)
     fishing_frame = LabelFrame(main_frame, text="Fishing", bg=label_frame_bg_color, font=sub_gui_label_font)
 
+    ranged_frame = LabelFrame(main_frame, text="Ranged", bg=label_frame_bg_color, font=sub_gui_label_font)
+    thieving_frame = LabelFrame(main_frame, text="Thieving", bg=label_frame_bg_color, font=sub_gui_label_font)
+    cooking_frame = LabelFrame(main_frame, text="Cooking", bg=label_frame_bg_color, font=sub_gui_label_font)
 
-    skill_sub_frames = mining_frame, smithing_frame, agility_frame, defence_frame, herblore_frame, fishing_frame
+    prayer_frame = LabelFrame(main_frame, text="Prayer", bg=label_frame_bg_color, font=sub_gui_label_font)
+    crafting_frame = LabelFrame(main_frame, text="Crafting", bg=label_frame_bg_color, font=sub_gui_label_font)
+    firemaking_frame = LabelFrame(main_frame, text="Firemaking", bg=label_frame_bg_color, font=sub_gui_label_font)
+
+    magic_frame = LabelFrame(main_frame, text="Magic", bg=label_frame_bg_color, font=sub_gui_label_font)
+    fletching_frame = LabelFrame(main_frame, text="Fletching", bg=label_frame_bg_color, font=sub_gui_label_font)
+    woodcutting_frame = LabelFrame(main_frame, text="Woodcutting", bg=label_frame_bg_color, font=sub_gui_label_font)
+
+    runecrafting_frame = LabelFrame(main_frame, text="Runecrafting", bg=label_frame_bg_color, font=sub_gui_label_font)
+    slayer_frame = LabelFrame(main_frame, text="Slayer", bg=label_frame_bg_color, font=sub_gui_label_font)
+    farming_frame = LabelFrame(main_frame, text="Farming", bg=label_frame_bg_color, font=sub_gui_label_font)
+
+    construction_frame = LabelFrame(main_frame, text="Construction", bg=label_frame_bg_color, font=sub_gui_label_font)
+    hunter_frame = LabelFrame(main_frame, text="Hunter", bg=label_frame_bg_color, font=sub_gui_label_font)
+
+    skill_sub_frames = mining_frame, smithing_frame, agility_frame, \
+                       defence_frame, herblore_frame, fishing_frame, \
+                       ranged_frame, thieving_frame, cooking_frame, \
+                       prayer_frame, crafting_frame, firemaking_frame, \
+                       magic_frame, fletching_frame, woodcutting_frame, \
+                       runecrafting_frame, slayer_frame, farming_frame, \
+                       construction_frame, hunter_frame
 
     # Import All Frames & All Images from GUI Imports
     all_frames = main_frame, gold_frame, skill_frame, pvm_pvp_frame, skill_sub_frames
@@ -175,10 +199,10 @@ def show_settings_frame():
     return
 
 
-def show_gold_frame(all_frames, gold_gui_btns, toggle_active_frame, gui_btns):
+def show_gold_frame(all_frames, gold_gui_btns, t_active_frame, gui_btns):
 
     gold_btn, skill_btn, pvm_pvp_btn = gui_btns
-    is_active = toggle_active_frame("gold", all_frames)
+    is_active = t_active_frame("gold", all_frames)
     # print(f'Entering 💰 Gold Frame with is_active: {not is_active} which is now: {is_active}')
     gold_btn.configure(bg=btn_active_bg_color)
     skill_btn.configure(bg=btn_bg_color)
@@ -202,18 +226,26 @@ def show_gold_frame(all_frames, gold_gui_btns, toggle_active_frame, gui_btns):
     return
 
 
-def show_skill_frame(all_frames, skill_gui_btns, toggle_active_frame, gui_btns):
+def show_skill_frame(all_frames, skill_gui_btns, t_active_frame, gui_btns):
     gold_btn, skill_btn, pvm_pvp_btn = gui_btns
     skill_btn_y_pad = 3
     skill_btn_x_pad = 5
 
-    is_active = toggle_active_frame("skill", all_frames)
+    is_active = t_active_frame("skill", all_frames)
     # print(f'📊 Skill Frame with is_active: {not is_active} which is now: {is_active}')
     gold_btn.configure(bg=btn_bg_color)
     skill_btn.configure(bg=btn_active_bg_color)
     pvm_pvp_btn.configure(bg=btn_bg_color)
 
-    attack_btn, hp_btn, mining_btn, strength_btn, agility_btn, smithing_btn, defence_btn, herblore_btn, fishing_btn = skill_gui_btns
+    attack_btn, hp_btn, mining_btn, \
+    strength_btn, agility_btn, smithing_btn, \
+    defence_btn, herblore_btn, fishing_btn, \
+    ranged_btn, thieving_btn, cooking_btn, \
+    prayer_btn, crafting_btn, firemaking_btn, \
+    magic_btn, fletching_btn, woodcutting_btn, \
+    runecrafting_btn, slayer_btn, farming_btn, \
+    construction_btn, hunter_btn = skill_gui_btns
+
     main_frame, gold_frame, skill_frame, pvm_pvp_frame, skill_sub_frame = all_frames
 
     gold_frame.grid_remove()
@@ -234,9 +266,24 @@ def show_skill_frame(all_frames, skill_gui_btns, toggle_active_frame, gui_btns):
     herblore_btn.grid(row=3, column=2, pady=skill_btn_y_pad, padx=skill_btn_x_pad)
     fishing_btn.grid(row=3, column=3, pady=skill_btn_y_pad, padx=skill_btn_x_pad)
     # Fourth row
-    # range_btn.grid(row=2, column=1, pady=skill_btn_y_pad, padx=skill_btn_x_pad)
-    # thieving_btn.grid(row=2, column=2, pady=skill_btn_y_pad, padx=skill_btn_x_pad)
-    # cooking_btn.grid(row=2, column=3, pady=skill_btn_y_pad, padx=skill_btn_x_pad)
+    ranged_btn.grid(row=4, column=1, pady=skill_btn_y_pad, padx=skill_btn_x_pad)
+    thieving_btn.grid(row=4, column=2, pady=skill_btn_y_pad, padx=skill_btn_x_pad)
+    cooking_btn.grid(row=4, column=3, pady=skill_btn_y_pad, padx=skill_btn_x_pad)
+    # Fifth row
+    prayer_btn.grid(row=5, column=1, pady=skill_btn_y_pad, padx=skill_btn_x_pad)
+    crafting_btn.grid(row=5, column=2, pady=skill_btn_y_pad, padx=skill_btn_x_pad)
+    firemaking_btn.grid(row=5, column=3, pady=skill_btn_y_pad, padx=skill_btn_x_pad)
+    # Sixth row
+    magic_btn.grid(row=6, column=1, pady=skill_btn_y_pad, padx=skill_btn_x_pad)
+    fletching_btn.grid(row=6, column=2, pady=skill_btn_y_pad, padx=skill_btn_x_pad)
+    woodcutting_btn.grid(row=6, column=3, pady=skill_btn_y_pad, padx=skill_btn_x_pad)
+    # Seventh row
+    runecrafting_btn.grid(row=7, column=1, pady=skill_btn_y_pad, padx=skill_btn_x_pad)
+    slayer_btn.grid(row=7, column=2, pady=skill_btn_y_pad, padx=skill_btn_x_pad)
+    farming_btn.grid(row=7, column=3, pady=skill_btn_y_pad, padx=skill_btn_x_pad)
+    # Eighth row
+    construction_btn.grid(row=8, column=1, pady=skill_btn_y_pad, padx=skill_btn_x_pad)
+    hunter_btn.grid(row=8, column=2, pady=skill_btn_y_pad, padx=skill_btn_x_pad)
 
     # If is_active is false here, it was true when we clicked, therefore exit
     if not is_active:
@@ -246,10 +293,10 @@ def show_skill_frame(all_frames, skill_gui_btns, toggle_active_frame, gui_btns):
     return
 
 
-def show_pvm_pvp_frame(all_frames, pvm_pvp_btns, toggle_active_frame, gui_btns):
+def show_pvm_pvp_frame(all_frames, pvm_pvp_btns, t_active_frame, gui_btns):
     gold_btn, skill_btn, pvm_pvp_btn = gui_btns
 
-    is_active = toggle_active_frame("pvm pvp", all_frames)
+    is_active = t_active_frame("pvm pvp", all_frames)
     # print(f'Entering ☠ PvM/PvP Frame with is_active: {not is_active} which is now: {is_active}')
     gold_btn.configure(bg=btn_bg_color)
     skill_btn.configure(bg=btn_bg_color)
@@ -276,12 +323,12 @@ def show_pvm_pvp_frame(all_frames, pvm_pvp_btns, toggle_active_frame, gui_btns):
 # ---
 # SKILL FRAME - SUB-FRAMES
 # ---
-def show_mining_frame(all_frames, toggle_active_frame, iron_pisc_btn):
+def show_mining_frame(all_frames, t_active_frame, iron_pisc_btn):
     # Close skill_frame
     _, _, _, _, skill_sub_frames = all_frames
-    mining_frame, _, _, _, _, _ = skill_sub_frames
+    mining_frame, _, _, _, _, _, _, _, _ = skill_sub_frames
 
-    is_active = toggle_active_frame("skill", all_frames)
+    is_active = t_active_frame("skill", all_frames)
     print(f'show_mining_frame - skill_frame - is_active: {is_active}')
 
     mining_frame.grid(row=sub_gui_row, column=1, columnspan=5, pady=50)
@@ -299,11 +346,11 @@ def show_mining_frame(all_frames, toggle_active_frame, iron_pisc_btn):
     return
 
 
-def show_smithing_frame(all_frames, toggle_active_frame, edge_gold_btn):
+def show_smithing_frame(all_frames, t_active_frame, edge_gold_btn):
     _, _, _, _, skill_sub_frames = all_frames
-    _, smithing_frame, _, _, _, _ = skill_sub_frames
+    _, smithing_frame, _, _, _, _, _, _, _ = skill_sub_frames
 
-    is_active = toggle_active_frame("skill", all_frames)
+    is_active = t_active_frame("skill", all_frames)
     print(f'show_smithing_frame - skill_frame - is_active: {is_active}')
 
     smithing_frame.grid(row=sub_gui_row, column=1, columnspan=5, pady=50)
@@ -321,11 +368,11 @@ def show_smithing_frame(all_frames, toggle_active_frame, edge_gold_btn):
     return
 
 
-def show_agility_frame(all_frames, toggle_active_frame, gnome_course_btn):
+def show_agility_frame(all_frames, t_active_frame, gnome_course_btn):
     _, _, _, _, skill_sub_frames = all_frames
-    _, _, agility_frame, _, _, _ = skill_sub_frames
+    _, _, agility_frame, _, _, _, _, _, _ = skill_sub_frames
 
-    is_active = toggle_active_frame("skill", all_frames)
+    is_active = t_active_frame("skill", all_frames)
     print(f'show_agility_frame - skill_frame - is_active: {is_active}')
 
     agility_frame.grid(row=sub_gui_row, column=1, columnspan=5, pady=50)
@@ -342,11 +389,11 @@ def show_agility_frame(all_frames, toggle_active_frame, gnome_course_btn):
     return
 
 
-def show_defence_frame(all_frames, toggle_active_frame, _):
+def show_defence_frame(all_frames, t_active_frame, _):
     _, _, _, _, skill_sub_frames = all_frames
-    _, _, _, defence_frame, _, _ = skill_sub_frames
+    _, _, _, defence_frame, _, _, _, _, _ = skill_sub_frames
 
-    is_active = toggle_active_frame("skill", all_frames)
+    is_active = t_active_frame("skill", all_frames)
     print(f'show_defence_frame - skill_frame - is_active: {is_active}')
 
     defence_frame.grid(row=sub_gui_row, column=1, columnspan=5, pady=50)
@@ -363,11 +410,11 @@ def show_defence_frame(all_frames, toggle_active_frame, _):
     return
 
 
-def show_herblore_frame(all_frames, toggle_active_frame, _):
+def show_herblore_frame(all_frames, t_active_frame, _):
     _, _, _, _, skill_sub_frames = all_frames
-    _, _, _, _, herblore_frame, _ = skill_sub_frames
+    _, _, _, _, herblore_frame, _, _, _, _ = skill_sub_frames
 
-    is_active = toggle_active_frame("skill", all_frames)
+    is_active = t_active_frame("skill", all_frames)
     print(f'show_herblore_frame - skill_frame - is_active: {is_active}')
 
     herblore_frame.grid(row=sub_gui_row, column=1, columnspan=5, pady=50)
@@ -384,35 +431,35 @@ def show_herblore_frame(all_frames, toggle_active_frame, _):
     return
 
 
-def show_fishing_frame(all_frames, toggle_active_frame, fishing_btns):
+def show_fishing_frame(all_frames, t_active_frame, fishing_btns):
     _, _, _, _, skill_sub_frames = all_frames
-    _, _, _, _, _, fishing_frame = skill_sub_frames
+    _, _, _, _, _, fishing_frame, _, _, _ = skill_sub_frames
 
     draynor_shrimp_btn, barb_trout_btn, barb_fishing_btn = fishing_btns
 
-    is_active = toggle_active_frame("skill", all_frames)
+    is_active = t_active_frame("skill", all_frames)
     print(f'show_fishing_frame - skill_frame - is_active: {is_active}')
 
     fishing_frame.grid(row=sub_gui_row, column=1, columnspan=5, pady=50)
 
     fishing_img_path = 'Assets\Images\GUI_Images\Stats\Fishing'
 
-    draynor_shrimp_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{fishing_img_path}\Shrimp.png'))
+    draynor_man_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{fishing_img_path}\Shrimp.png'))
 
-    draynor_shrimp_label = Label(fishing_frame, image=draynor_shrimp_img, height=100, width=100, bg=label_frame_bg_color)
-    draynor_shrimp_img.image = draynor_shrimp_img
+    draynor_man_label = Label(fishing_frame, image=draynor_man_img, height=100, width=100, bg=label_frame_bg_color)
+    draynor_man_img.image = draynor_man_img
 
-    barb_trout_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{fishing_img_path}\Trout.png'))
+    ardy_cake_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{fishing_img_path}\Trout.png'))
 
-    barb_trout_label = Label(fishing_frame, image=barb_trout_img, height=100, width=100, bg=label_frame_bg_color)
-    barb_trout_img.image = barb_trout_img
+    barb_trout_label = Label(fishing_frame, image=ardy_cake_img, height=100, width=100, bg=label_frame_bg_color)
+    ardy_cake_img.image = ardy_cake_img
 
     barb_fishing_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{fishing_img_path}\leaping_sturgeon.png'))
 
     barb_fishing_label = Label(fishing_frame, image=barb_fishing_img, height=100, width=100, bg=label_frame_bg_color)
     barb_fishing_img.image = barb_fishing_img
 
-    draynor_shrimp_label.grid(row=1, column=1, padx=35)
+    draynor_man_label.grid(row=1, column=1, padx=35)
     draynor_shrimp_btn.grid(row=1, column=2, columnspan=2, pady=20, padx=25)
 
     barb_trout_label.grid(row=2, column=1, padx=35)
@@ -420,5 +467,49 @@ def show_fishing_frame(all_frames, toggle_active_frame, fishing_btns):
 
     barb_fishing_label.grid(row=3, column=1, padx=35)
     barb_fishing_btn.grid(row=3, column=2, columnspan=2, pady=20, padx=25)
+
+    return
+
+
+def show_ranged_frame():
+
+    return
+
+
+def show_thieving_frame(all_frames, t_active_frame, thieving_frame, thieving_sub_btns):
+    _, _, _, _, skill_sub_frames = all_frames
+
+    draynor_man_btn, ardy_cake_btn = thieving_sub_btns
+
+    is_active = t_active_frame("skill", all_frames)
+    print(f'show_fishing_frame - skill_frame - is_active: {is_active}')
+
+    thieving_frame.grid(row=sub_gui_row, column=1, columnspan=5, pady=50)
+
+    thieving_img_path = 'Assets\Images\GUI_Images\Stats\Thieving'
+
+    # Draynor Man
+    draynor_man_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{thieving_img_path}\draynor_man.png'))
+
+    draynor_man_label = Label(thieving_frame, image=draynor_man_img, height=100, width=100, bg=label_frame_bg_color)
+    draynor_man_img.image = draynor_man_img
+
+    # Ardy Cake
+    ardy_cake_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{thieving_img_path}\Cake.png'))
+
+    barb_trout_label = Label(thieving_frame, image=ardy_cake_img, height=100, width=100, bg=label_frame_bg_color)
+    ardy_cake_img.image = ardy_cake_img
+
+
+    draynor_man_label.grid(row=1, column=1, padx=35)
+    draynor_man_btn.grid(row=1, column=2, columnspan=2, pady=20, padx=25)
+
+    barb_trout_label.grid(row=2, column=1, padx=35)
+    ardy_cake_btn.grid(row=2, column=2, columnspan=2, pady=20, padx=25)
+
+    return
+
+
+def show_firemaking_frame():
 
     return

@@ -25,15 +25,9 @@ capture_bluestacks()
 clear_debug_log()
 
 # random_human_actions(max_downtime_seconds=12)
-# show_main_gui()
+show_main_gui()
 # launch_script("ge_log_burner")
 
-random_scroll = random.randint(-350, 350)
-write_debug(f'Scrolling: {random_scroll}')
-pag.hscroll(random_scroll)
-random_scroll = random.randint(-350, 350)
-write_debug(f'Scrolling: {random_scroll}')
-pag.hscroll(random_scroll)
 
 # curr_loop = 1
 # steal_ardy_cake(curr_loop)
