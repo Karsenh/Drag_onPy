@@ -1,17 +1,31 @@
 import os
+import API.AntiBan
 from API.Time import is_time_up
 from PIL import Image, ImageGrab
 import numpy as np
 import cv2
 from API.Setup import get_bluestacks_region
-import pyautogui
 from API.Imports.Paths import *
 from API.Mouse import mouse_click
 from API.Debug import write_debug
 from datetime import datetime
+import pyautogui as pag
 
 
 img_check_xy = 0, 0
+
+
+def capture_img_region(window_x, window_y, window_x2, window_y2, image_name):
+    x1, y1, _, _ = get_bluestacks_region()
+
+    run_x1 = x1 + window_x
+    run_y1 = y1 + window_y
+    run_x2 = window_x2 - window_x
+    run_y2 = window_y2 - window_y
+    img_path = fr'{CUSTOM_IMG_PATH}\{image_name}.png'
+
+    pag.screenshot(imageFilename=img_path, region=(run_x1, run_y1, run_x2, run_y2))
+    return
 
 
 def capture_bluestacks():
@@ -20,7 +34,7 @@ def capture_bluestacks():
     # write_debug(f'🐛 x1: {x1}, y1: {y1}\n🐛 x2: {x2}, y2: {y2}')
 
     # w, h = get_bluestacks_window_size()
-    pyautogui.screenshot(imageFilename=fr'{BS_SCREEN_PATH}', region=(x1, y1, x2-x1, y2-y1))
+    pag.screenshot(imageFilename=fr'{BS_SCREEN_PATH}', region=(x1, y1, x2-x1, y2-y1))
     # write_debug(f'📸 Captured & Saved Live (BlueStacks) Img: {BS_SCREEN_PATH}')
     return
 
@@ -115,6 +129,8 @@ def wait_for_img(img_to_search, script_name=None, category_name="Scripts", max_w
             return True
         else:
             write_debug(f'Still checking for image...')
+            # if max_wait_sec > 60:
+            #     API.AntiBan.random_human_actions(max_downtime_seconds=6, likelihood=5, reopen_inventory=False)
 
     return False
 

@@ -17,6 +17,7 @@ from GUI.Auth_GUI import *
 from Scripts.Skilling.Fishing.Trout.Barb_Trout import fish_barb_trout
 from Scripts.Skilling.Fishing.Barbarian.Barbarian_Fishing import barbarian_fishing
 from Scripts.Skilling.Firemaking.GE_Log_Burner import burn_logs_at_ge, burn_logs
+from Scripts.MiniGames.Fishing_Trawler import repair_hole_until_finished, start_trawling
 import pyautogui as pag
 
 get_bluestacks_xy()
@@ -25,14 +26,23 @@ capture_bluestacks()
 clear_debug_log()
 
 # random_human_actions(max_downtime_seconds=12)
-show_main_gui()
-# launch_script("ge_log_burner")
+# show_main_gui()
+launch_script("fishing_trawler")
+
+# capture_img_region(window_x=1420, window_y=374, x2=1472, y2=425, image_name="test")
 
 
 # curr_loop = 1
 # steal_ardy_cake(curr_loop)
 # pickpocket_draynor_man()
 
+# repair_hole_until_finished()
+
+# curr_loop = 1
+# start_trawling(curr_loop)
+
+# does_img_exist("finished", script_name="Fishing_Trawler", category="Scripts", threshold=0.95)
+# does_img_exist(img_name="rewards_box", script_name="Fishing_Trawler", should_click=True, threshold=0.95)
 
 
 # does_img_exist("leaping_trout", script_name="Barbarian_Fishing", category="Scripts", threshold=0.8, should_click=True, x_offset=15, y_offset=50)
@@ -57,6 +67,10 @@ show_main_gui()
 
 # does_img_exist(img_name="is_fishing_trout", script_name="Barb_Trout", category="Scripts", should_click=True, threshold=0.80)
 
+# does_img_exist(img_name="finished", script_name="Fishing_Trawler", category="Scripts", threshold=0.95)
+# does_img_exist(img_name="finished_1", script_name="Fishing_Trawler", category="Scripts", threshold=0.95)
+# does_img_exist(img_name="finished_2", script_name="Fishing_Trawler", category="Scripts", threshold=0.95)
+# does_img_exist(img_name="finished_3", script_name="Fishing_Trawler", category="Scripts", threshold=0.95)
 
 # capture_total_exp()
 # process_and_ocr()

@@ -12,6 +12,7 @@ GENERAL_SCREEN_PATH = f'{ROOT_COMPARATORS_PATH}\General'
 SCRIPTS_SCREEN_PATH = f'{ROOT_COMPARATORS_PATH}\Scripts'
 
 BS_SCREEN_PATH = f'{proj_root_path}\{ROOT_SCREENSHOTS_PATH}\BlueStacks_ScreenShot.png'
+CUSTOM_IMG_PATH = f'{proj_root_path}\{ROOT_SCREENSHOTS_PATH}\Comparators\Custom'
 
 
 # LOGGING

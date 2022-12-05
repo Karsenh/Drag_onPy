@@ -7,6 +7,7 @@ from Scripts.Skilling.Fishing.Barbarian.Barbarian_Fishing import barbarian_fishi
 from Scripts.Skilling.Thieving.Pickpocketing.Draynor_Man import pickpocket_draynor_man
 from Scripts.Skilling.Thieving.Stalls.Ardy_Cake import steal_ardy_cake
 from Scripts.Skilling.Firemaking.GE_Log_Burner import burn_logs_at_ge
+from Scripts.MiniGames.Fishing_Trawler import start_trawling
 
 from enum import Enum
 import API
@@ -41,8 +42,9 @@ def launch_script(script_name="pisc_iron"):
         DRAYNOR_MAN = 6
         ARDY_CAKE = 7
         GE_LOGS = 8
+        TRAWLER = 9
 
-    all_scripts = [mine_iron_pisc, smith_gold_edge, run_gnome_course, fish_draynor_shrimp, fish_barb_trout, barbarian_fishing, pickpocket_draynor_man, steal_ardy_cake, burn_logs_at_ge]
+    all_scripts = [mine_iron_pisc, smith_gold_edge, run_gnome_course, fish_draynor_shrimp, fish_barb_trout, barbarian_fishing, pickpocket_draynor_man, steal_ardy_cake, burn_logs_at_ge, start_trawling]
 
     match script_name:
         case "pisc_iron":
@@ -79,6 +81,10 @@ def launch_script(script_name="pisc_iron"):
             antiban_downtime_sec = 0.4
         case "ge_log_burner":
             selected_script = ScriptEnum.GE_LOGS.value
+            antiban_likelihood = 20
+            antiban_downtime_sec = 0.5
+        case "fishing_trawler":
+            selected_script = ScriptEnum.TRAWLER.value
             antiban_likelihood = 20
             antiban_downtime_sec = 0.5
 
