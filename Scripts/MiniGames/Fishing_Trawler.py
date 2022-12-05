@@ -14,6 +14,8 @@ def start_trawling(curr_loop):
         setup_interface("north", 3, "up")
 
     if not game_over:
+        setup_interface("north", 3, "up")
+
         # move to rewards box
         if not move_to_reward_box():
             return False
