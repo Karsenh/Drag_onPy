@@ -323,10 +323,11 @@ def show_pvm_pvp_frame(all_frames, pvm_pvp_btns, t_active_frame, gui_btns):
 # ---
 # SKILL FRAME - SUB-FRAMES
 # ---
-def show_mining_frame(all_frames, t_active_frame, iron_pisc_btn):
+def show_mining_frame(all_frames, t_active_frame, mining_frame, mining_sub_btns):
     # Close skill_frame
     _, _, _, _, skill_sub_frames = all_frames
-    mining_frame, _, _, _, _, _, _, _, _ = skill_sub_frames
+    # mining_frame, _, _, _, _, _, _, _, _ = skill_sub_frames
+    iron_pisc_btn = mining_sub_btns
 
     is_active = t_active_frame("skill", all_frames)
     print(f'show_mining_frame - skill_frame - is_active: {is_active}')
@@ -346,9 +347,10 @@ def show_mining_frame(all_frames, t_active_frame, iron_pisc_btn):
     return
 
 
-def show_smithing_frame(all_frames, t_active_frame, edge_gold_btn):
+def show_smithing_frame(all_frames, t_active_frame, smithing_frame, smithing_sub_btns):
     _, _, _, _, skill_sub_frames = all_frames
-    _, smithing_frame, _, _, _, _, _, _, _ = skill_sub_frames
+    # _, smithing_frame, _, _, _, _, _, _, _ = skill_sub_frames
+    edge_gold_btn = smithing_sub_btns
 
     is_active = t_active_frame("skill", all_frames)
     print(f'show_smithing_frame - skill_frame - is_active: {is_active}')
@@ -368,9 +370,10 @@ def show_smithing_frame(all_frames, t_active_frame, edge_gold_btn):
     return
 
 
-def show_agility_frame(all_frames, t_active_frame, gnome_course_btn):
+def show_agility_frame(all_frames, t_active_frame, agility_frame, agility_sub_btns):
     _, _, _, _, skill_sub_frames = all_frames
-    _, _, agility_frame, _, _, _, _, _, _ = skill_sub_frames
+    # _, _, agility_frame, _, _, _, _, _, _ = skill_sub_frames
+    gnome_course_btn = agility_sub_btns
 
     is_active = t_active_frame("skill", all_frames)
     print(f'show_agility_frame - skill_frame - is_active: {is_active}')
@@ -389,9 +392,9 @@ def show_agility_frame(all_frames, t_active_frame, gnome_course_btn):
     return
 
 
-def show_defence_frame(all_frames, t_active_frame, _):
+def show_defence_frame(all_frames, t_active_frame, defence_frame, defence_sub_btns):
     _, _, _, _, skill_sub_frames = all_frames
-    _, _, _, defence_frame, _, _, _, _, _ = skill_sub_frames
+    # _, _, _, defence_frame, _, _, _, _, _ = skill_sub_frames
 
     is_active = t_active_frame("skill", all_frames)
     print(f'show_defence_frame - skill_frame - is_active: {is_active}')
@@ -410,9 +413,9 @@ def show_defence_frame(all_frames, t_active_frame, _):
     return
 
 
-def show_herblore_frame(all_frames, t_active_frame, _):
+def show_herblore_frame(all_frames, t_active_frame, herblore_frame, herblore_sub_btns):
     _, _, _, _, skill_sub_frames = all_frames
-    _, _, _, _, herblore_frame, _, _, _, _ = skill_sub_frames
+    # _, _, _, _, herblore_frame, _, _, _, _ = skill_sub_frames
 
     is_active = t_active_frame("skill", all_frames)
     print(f'show_herblore_frame - skill_frame - is_active: {is_active}')
@@ -431,11 +434,11 @@ def show_herblore_frame(all_frames, t_active_frame, _):
     return
 
 
-def show_fishing_frame(all_frames, t_active_frame, fishing_btns):
+def show_fishing_frame(all_frames, t_active_frame, fishing_frame, fishing_sub_btns):
     _, _, _, _, skill_sub_frames = all_frames
-    _, _, _, _, _, fishing_frame, _, _, _ = skill_sub_frames
+    # _, _, _, _, _, fishing_frame, _, _, _ = skill_sub_frames
 
-    draynor_shrimp_btn, barb_trout_btn, barb_fishing_btn = fishing_btns
+    draynor_shrimp_btn, barb_trout_btn, barb_fishing_btn = fishing_sub_btns
 
     is_active = t_active_frame("skill", all_frames)
     print(f'show_fishing_frame - skill_frame - is_active: {is_active}')
@@ -510,6 +513,22 @@ def show_thieving_frame(all_frames, t_active_frame, thieving_frame, thieving_sub
     return
 
 
-def show_firemaking_frame():
+def show_firemaking_frame(all_frames, t_active_frame, firemaking_frame, firemaking_sub_btns):
+    _, _, _, _, skill_sub_frames = all_frames
+    ge_log_burner = firemaking_sub_btns
 
+    is_active = t_active_frame("skill", all_frames)
+    print(f'show_firemaking_frame - skill_frame - is_active: {is_active}')
+
+    firemaking_frame.grid(row=sub_gui_row, column=1, columnspan=5, pady=50)
+
+    firemaking_img_path = 'Assets\Images\GUI_Images\Stats\Firemaking'
+    tinderbox_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{firemaking_img_path}\Tinderbox.png'))
+
+    tinderbox_img_label = Label(firemaking_frame, image=tinderbox_img, height=100, width=100, bg=label_frame_bg_color)
+    tinderbox_img_label.image = tinderbox_img
+
+    # Load button with ore
+    tinderbox_img_label.grid(row=1, column=1)
+    ge_log_burner.grid(row=1, column=2, columnspan=2, pady=20, padx=30)
     return
