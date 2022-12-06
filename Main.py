@@ -1,6 +1,7 @@
 from GUI.Main_GUI import *
 from GUI.Auth_GUI import *
 from API.Imaging.Image import *
+from API.Setup import get_bluestacks_xy, set_bluestacks_window_size
 # not_exit = True
 
 

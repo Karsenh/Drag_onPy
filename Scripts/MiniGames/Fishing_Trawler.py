@@ -1,6 +1,6 @@
 import random
 import API.AntiBan
-from API.Interface.General import setup_interface
+from API.Interface.General import setup_interface, pitch_camera
 from API.Imaging.Image import does_img_exist, wait_for_img
 from API.Mouse import mouse_click
 
@@ -14,7 +14,7 @@ def start_trawling(curr_loop):
         setup_interface("north", 3, "up")
 
     if not game_over:
-        setup_interface("north", 3, "up")
+        pitch_camera(direction="up")
 
         # move to rewards box
         if not move_to_reward_box():
@@ -107,7 +107,8 @@ def repair_hole_until_finished():
     while not does_img_exist(img_name="finished", script_name="Fishing_Trawler", category="Scripts", threshold=0.90) \
             or does_img_exist(img_name="finished_1", script_name="Fishing_Trawler", category="Scripts", threshold=0.90) \
             or does_img_exist(img_name="finished_2", script_name="Fishing_Trawler", category="Scripts", threshold=0.90) \
-            or does_img_exist(img_name="finished_3", script_name="Fishing_Trawler", category="Scripts", threshold=0.90):
+            or does_img_exist(img_name="finished_3", script_name="Fishing_Trawler", category="Scripts", threshold=0.90) \
+            or does_img_exist(img_name="rewards_box", script_name="Fishing_Trawler", should_click=False, threshold=0.95):
         mouse_click(hole_xy, max_num_clicks=12)
 
         if random.randint(1, 50) > 49:
