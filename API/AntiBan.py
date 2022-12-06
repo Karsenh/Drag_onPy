@@ -3,7 +3,7 @@ from API.Imports.Paths import *
 from API.Imaging.Image import does_img_exist
 from API.Debug import DEBUG_MODE, write_debug
 from datetime import datetime
-from API.Mouse import mouse_move
+from API.Mouse import mouse_move, mouse_click
 import random
 import pyautogui as pag
 import time
@@ -67,15 +67,28 @@ def random_human_actions(max_downtime_seconds=3.0, likelihood=10, reopen_invento
             else:
                 write_debug(f'🧙Checking Quest tab...')
                 API.Interface.General.is_tab_open("quest", should_open=True)
-                sleep_between(0.5, 1.2)
+                sleep_between(0.6, 1.1)
+
+                # Select a random Quest sub-tab (achievement, quests, combat, favour)
+                r_sub_tab = random.randint(0, 3)
+                cmb_tab = 1127, 400
+                quest_tab = 1204, 401
+                achievement_tab = 1282, 401
+                favour_tab = 1359, 400
+                sub_tab_xys = [ cmb_tab, quest_tab, achievement_tab, favour_tab]
+                tab_to_sel = sub_tab_xys[r_sub_tab]
+                mouse_click(tab_to_sel, max_x_dev=6, max_y_dev=5)
+                sleep_between(0.2, 0.4)
+
                 quest_list_hover_xy = 1212, 574
                 mouse_move(quest_list_hover_xy, 17, 23)
-                sleep_between(0.6, 1.2)
+                sleep_between(0.7, 1.2)
                 r_num_scrolls = random.randint(1, 3)
                 for i in range(1, r_num_scrolls):
                     random_scroll = random.randint(-350, 350)
                     write_debug(f'Scrolling: {random_scroll}')
                     pag.hscroll(random_scroll)
+                    sleep_between(0.2, 0.5)
                 sleep_between(0.6, 2.6)
                 API.Interface.General.is_tab_open("inventory", should_open=reopen_inventory)
 

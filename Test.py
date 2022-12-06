@@ -27,7 +27,18 @@ clear_debug_log()
 
 # random_human_actions(max_downtime_seconds=12)
 # show_main_gui()
-launch_script("cow_killer")
+launch_script("rogue_cooker")
+
+
+
+# does_img_exist(img_name="raw_shrimp", script_name="Rogue_Cooker", threshold=0.85, should_click=True, y_offset=10, x_offset=10)
+# rogue_bank_xy = 979, 396
+# bank_sel_xy = 985, 514
+# mouse_drag(rogue_bank_xy, bank_sel_xy)
+#
+# sleep_between(1.1, 1.4)
+
+# does_img_exist(img_name="raw_shrimp", script_name="Rogue_Cooker", threshold=0.95, should_click=True, y_offset=10, x_offset=10)
 
 # capture_img_region(window_x=1420, window_y=374, x2=1472, y2=425, image_name="test")]
 

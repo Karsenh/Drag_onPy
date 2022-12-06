@@ -70,7 +70,7 @@ def run_gnome_course(_):
     else:
         r_sleep_dev = random.uniform(0.1, 1.3)
 
-    sleep_between(sleep_times[i], sleep_times[i]+r_sleep_dev)
+    API.AntiBan.sleep_between(sleep_times[i], sleep_times[i]+r_sleep_dev)
 
     if i == 0:
         i = 1
@@ -114,7 +114,7 @@ def check_for_level_dialogue():
     if does_img_exist(img_name="level_up", category="General"):
         print(f'Level-up detected. Spacing through...')
         keyboard.press('space')
-        sleep_between(1.1, 2.6)
+        API.AntiBan.sleep_between(1.1, 2.6)
         keyboard.press('space')
         print(f'Should be through all chat-box dialogue now. Continuing...')
     return
