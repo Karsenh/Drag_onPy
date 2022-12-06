@@ -127,8 +127,8 @@ def wait_for_img(img_to_search, script_name=None, category_name="Scripts", max_w
         img_found = does_img_exist(img_to_search, script_name=script_name, category=category_name, threshold=img_threshold)
         if img_found:
             return True
-        else:
-            write_debug(f'Still checking for image...')
+        # else:
+            # write_debug(f'Still checking for image...')
             # if max_wait_sec > 60:
             #     API.AntiBan.random_human_actions(max_downtime_seconds=6, likelihood=5, reopen_inventory=False)
 

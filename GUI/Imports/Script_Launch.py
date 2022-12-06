@@ -8,6 +8,7 @@ from Scripts.Skilling.Thieving.Pickpocketing.Draynor_Man import pickpocket_drayn
 from Scripts.Skilling.Thieving.Stalls.Ardy_Cake import steal_ardy_cake
 from Scripts.Skilling.Firemaking.GE_Log_Burner import burn_logs_at_ge
 from Scripts.MiniGames.Fishing_Trawler import start_trawling
+from Scripts.Skilling.Combat.Cow_Killer import start_killing_cows
 
 from enum import Enum
 import API
@@ -43,13 +44,16 @@ def launch_script(script_name="pisc_iron"):
         ARDY_CAKE = 7
         GE_LOGS = 8
         TRAWLER = 9
+        COW_KILLER = 10
 
-    all_scripts = [mine_iron_pisc, smith_gold_edge, run_gnome_course, fish_draynor_shrimp, fish_barb_trout, barbarian_fishing, pickpocket_draynor_man, steal_ardy_cake, burn_logs_at_ge, start_trawling]
+    all_scripts = [mine_iron_pisc, smith_gold_edge, run_gnome_course, fish_draynor_shrimp, fish_barb_trout, barbarian_fishing, pickpocket_draynor_man, steal_ardy_cake, burn_logs_at_ge, start_trawling, start_killing_cows]
 
     match script_name:
         case "pisc_iron":
             selected_script = ScriptEnum.PISC_IRON.value
+            # 1 / x
             antiban_likelihood = 50
+            # Interval between scrip loops
             antiban_downtime_sec = 0.5
         case "edge_gold":
             selected_script = ScriptEnum.EDGE_GOLD.value
@@ -87,6 +91,10 @@ def launch_script(script_name="pisc_iron"):
             selected_script = ScriptEnum.TRAWLER.value
             antiban_likelihood = 20
             antiban_downtime_sec = 0.5
+        case "cow_killer":
+            selected_script = ScriptEnum.COW_KILLER.value
+            antiban_likelihood = 10
+            antiban_downtime_sec = 2.3
 
     is_timer_set = is_break_timer_set()
 

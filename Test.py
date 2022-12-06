@@ -27,10 +27,23 @@ clear_debug_log()
 
 # random_human_actions(max_downtime_seconds=12)
 # show_main_gui()
-launch_script("fishing_trawler")
+launch_script("cow_killer")
 
-# capture_img_region(window_x=1420, window_y=374, x2=1472, y2=425, image_name="test")
+# capture_img_region(window_x=1420, window_y=374, x2=1472, y2=425, image_name="test")]
 
+# for i in range(1, 20):
+#     does_img_exist(img_name="hp_exp", script_name="Cow_Killer", threshold=0.85)
+
+
+# for t in range(1, 10):
+#     for i in range(1, 47):
+#         if does_img_exist(img_name=f"c{i}", script_name="Cow_Killer", threshold=0.75, should_click=True):
+#             break
+#     while wait_for_img("hp_exp", script_name="Cow_Killer", max_wait_sec=6, img_threshold=.8):
+#         print(f'Fighting cow...')
+#     print(f'Done fighting cow.')
+
+    # sleep_between(2.0, 2.5)
 
 # curr_loop = 1
 # steal_ardy_cake(curr_loop)
