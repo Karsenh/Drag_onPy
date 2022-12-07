@@ -1,3 +1,4 @@
+import os
 import sys
 import time
 from API.Mouse import *
@@ -26,10 +27,39 @@ capture_bluestacks()
 clear_debug_log()
 
 # random_human_actions(max_downtime_seconds=12)
-show_main_gui()
+# show_main_gui()
 # launch_script("rogue_cooker")
 
 
+start_x = 1140
+start_y = 388
+
+levels = []
+
+curr_x_diff = 0
+curr_y_diff = 0
+
+for i in range(1, 24):
+    # add 105 every x (horizontal) step
+    # add 53 every thrid (mod 3 == 0) (vertical) step
+
+    curr_x = start_x + curr_x_diff
+    curr_y = start_y + curr_y_diff
+
+    print(f'X {curr_x} | Y: {curr_y}')
+
+    capture_ocr_region(curr_x, curr_y, 26, 19, image_name=f"Skill_Lvl_{i}")
+    curr_level_string = process_and_ocr(image_name=f"Skill_Lvl_{i}")
+    levels.append(curr_level_string)
+
+    curr_x_diff += 106.5
+
+    if i % 3 == 0:
+        print(f'End of the line - increasing Y(53) and resetting x(from: {curr_x_diff} to 0)')
+        curr_x_diff = 0
+        curr_y_diff += 53.5
+
+print(f'Levels: {levels}')
 
 # does_img_exist(img_name="raw_shrimp", script_name="Rogue_Cooker", threshold=0.85, should_click=True, y_offset=10, x_offset=10)
 # rogue_bank_xy = 979, 396

@@ -99,8 +99,12 @@ def process_and_ocr(image_name):
     # OCR
     ocr_string = ocr_image(no_noise)
     if ocr_string:
-        ocr_string = int(ocr_string)
-        API.Debug.write_debug(f'OCR STRING: {ocr_string}')
+        try:
+            ocr_string = int(ocr_string)
+            API.Debug.write_debug(f'OCR STRING: {ocr_string}')
+        except:
+            print(f'Something went wrong in OCR process_and_ocr: {ocr_string}')
+            return ocr_string
 
     return ocr_string
 
