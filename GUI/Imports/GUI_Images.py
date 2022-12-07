@@ -113,6 +113,10 @@ def get_all_gui_images():
     #     Barbarian_Fishing
     barbarian_fishing_map_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{skill_sub_path}\Fishing\Barbarian_fishing_map.png'))
 
+    # COOKING
+    #     Rogue_Cooker
+    rogue_den_map_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{skill_sub_path}\Cooking\Rogues_den_map.png'))
+
     skilling_sub_gui_images = iron_pisc_img, edge_gold_img, gnome_course_img, draynor_shrimp_map_img, barb_trout_map_img, barbarian_fishing_map_img
 
     return main_gui_images, gold_gui_images, skill_gui_images, pvmpvp_gui_images, skilling_sub_gui_images

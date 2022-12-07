@@ -4,15 +4,14 @@
 ## Undetected Mobile Botting Software
 
 ### Currently working on:
-a. `Gnome Agility Course`
+⬜ - [Script-Cow_Killer] Add random combat style switcher after 'x' loops to 'evenly' train combat up
+⬜ - [Script-Edge_Gold] Refine script
+⬜ - 
 
-b. Building out 
 
-b. Cleaning up repo
 
-c. Break-Timer
 
-c. Building out API
+
 ### [ 2 ] Total Scripts
 1. Piscatoris Iron **Miner**
 2. Edgeville Gold **Smither**
@@ -37,3 +36,12 @@ c. Building out API
 6. ** NOTE (not shown in image) Must include in "Hidden imports" - "pyautogui" & "pywintypes"
 
 <img src='C:\Users\Karsen\Desktop\Drag_onPy\Assets\Images\Instructions\Generating Exe\Auto-Py-To-Exe Configuration.png' />
+
+
+---
+## Process Order:
+
+The following documentation pertains to the smoothest possible route for creating main accounts:
+
+1. Start by running Cow_Killer at the pen that border Al Kharid to get base combat stats up 
+2. 
