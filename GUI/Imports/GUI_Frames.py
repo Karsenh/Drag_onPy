@@ -479,6 +479,30 @@ def show_ranged_frame():
     return
 
 
+def show_cooking_frame(all_frames, t_active_frame, cooking_frame, cooking_sub_btns):
+    _, _, _, _, skill_sub_frames = all_frames
+    rogue_cooker_btn = cooking_sub_btns
+
+    is_active = t_active_frame("skill", all_frames)
+    print(f'show_cooking_frame - skill_frame - is_active: {is_active}')
+
+    cooking_frame.grid(row=sub_gui_row, column=1, columnspan=5, pady=50)
+
+    cooking_img_path = 'Assets\Images\GUI_Images\Stats\Cooking'
+
+    # Draynor Man
+    fire_gif = Image.open(f'{os.getcwd()}\{cooking_img_path}\Fire.png')
+    rogue_cooker_map_image = ImageTk.PhotoImage(fire_gif)
+
+    rogue_cooker_label = Label(cooking_frame, image=rogue_cooker_map_image, height=100, width=100, bg=label_frame_bg_color)
+    rogue_cooker_map_image.image = rogue_cooker_map_image
+
+    rogue_cooker_label.grid(row=1, column=1, padx=35)
+    rogue_cooker_btn.grid(row=1, column=2, columnspan=2, pady=20, padx=25)
+
+    return
+
+
 def show_thieving_frame(all_frames, t_active_frame, thieving_frame, thieving_sub_btns):
     _, _, _, _, skill_sub_frames = all_frames
 

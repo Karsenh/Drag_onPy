@@ -43,7 +43,7 @@ def get_all_btns(all_frames, all_images):
 
     # Skilling SUB Images
     # (Mining/Smithing/Fishing)
-    pisc_iron_img, edge_gold_img, gnome_course_img, draynor_shrimp_map, barb_trout_map, barb_fishing_map = skilling_sub_gui_images
+    pisc_iron_img, edge_gold_img, gnome_course_img, draynor_shrimp_map, barb_trout_map, barb_fishing_map, rogue_cooking_map = skilling_sub_gui_images
 
 
     # MAIN_GUI_BTNS
@@ -86,7 +86,7 @@ def get_all_btns(all_frames, all_images):
 
     ranged_btn = Button(skill_frame, state="disabled", text="Ranged", image=ranged_img, height=skill_btn_height, width=skill_btn_width, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_ranged_frame(all_frames, toggle_active_frame, ranged_frame, ranged_sub_btns))
     thieving_btn = Button(skill_frame, text="Thieving", image=thieving_img, height=skill_btn_height, width=skill_btn_width, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_thieving_frame(all_frames, toggle_active_frame, thieving_frame, thieving_sub_btns))
-    cooking_btn = Button(skill_frame, state="disabled", text="Cooking", image=cooking_img, height=skill_btn_height, width=skill_btn_width, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_firemaking_frame(all_frames, toggle_active_frame, cooking_frame, cooking_sub_btns))
+    cooking_btn = Button(skill_frame, text="Cooking", image=cooking_img, height=skill_btn_height, width=skill_btn_width, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_cooking_frame(all_frames, toggle_active_frame, cooking_frame, cooking_sub_btns))
 
     prayer_btn = Button(skill_frame, state="disabled", text="Prayer", image=prayer_img, height=skill_btn_height, width=skill_btn_width, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_ranged_frame(all_frames, toggle_active_frame, prayer_frame, prayer_sub_btns))
     crafting_btn = Button(skill_frame, state="disabled", text="Crafting", image=crafting_img, height=skill_btn_height, width=skill_btn_width, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_thieving_frame(all_frames, toggle_active_frame, crafting_frame, crafting_sub_btns))
@@ -121,10 +121,13 @@ def get_all_btns(all_frames, all_images):
     #     Smithing
     edge_gold_btn = Button(smithing_frame, text="Edge Gold", image=edge_gold_img,  height=100, width=100, bg='#545550', activebackground=btn_active_bg_color, command=lambda: launch_script("edge_gold"))
     smithing_sub_btns = edge_gold_btn
+
     #     Defence
     defence_sub_btns = None
+
     #     Herblore
     herblore_sub_btns = None
+
     #     Fishing
     draynor_shrimp_btn = Button(fishing_frame, text="Draynor Shrimp", image=draynor_shrimp_map,  height=100, width=100, bg='#545550', activebackground=btn_active_bg_color, command=lambda: launch_script("draynor_shrimp"))
     barb_trout_btn = Button(fishing_frame, text="Barbarian Trout", image=barb_trout_map,  height=100, width=100, bg='#545550', activebackground=btn_active_bg_color, command=lambda: launch_script("barb_trout"))
@@ -133,20 +136,26 @@ def get_all_btns(all_frames, all_images):
 
     #     Ranged
     ranged_sub_btns = None
+
     #     Thieving
     draynor_man_btn = Button(thieving_frame, text="Draynor Man", image=draynor_shrimp_map,  height=100, width=100, bg='#545550', activebackground=btn_active_bg_color, command=lambda: launch_script("draynor_man"))
-    ardy_cake_btn = Button(thieving_frame, text="Ardougn Cake", image=draynor_shrimp_map,  height=100, width=100, bg='#545550', activebackground=btn_active_bg_color, command=lambda: launch_script("ardy_cake"))
+    ardy_cake_btn = Button(thieving_frame, text="Ardougne Cake", image=draynor_shrimp_map,  height=100, width=100, bg='#545550', activebackground=btn_active_bg_color, command=lambda: launch_script("ardy_cake"))
     thieving_sub_btns = draynor_man_btn, ardy_cake_btn
 
     #     Cooking
-    cooking_sub_btns = None
+    rogue_cooker_btn = Button(cooking_frame, text="Rogue", image=rogue_cooking_map,  height=100, width=100, bg='#545550', activebackground=btn_active_bg_color, command=lambda: launch_script("rogue_cooker"))
+    cooking_sub_btns = rogue_cooker_btn
+
     #     Prayer
     prayer_sub_btns = None
+
     #     Crafting
     crafting_sub_btns = None
+
     #     Firemaking
     ge_log_burner_btn = Button(firemaking_frame, text="GE Log Burner", image=draynor_shrimp_map,  height=100, width=100, bg='#545550', activebackground=btn_active_bg_color, command=lambda: launch_script("ge_log_burner"))
     firemaking_sub_btns = ge_log_burner_btn
+
     #     Woodcutting
 
     #     Runecrafting
