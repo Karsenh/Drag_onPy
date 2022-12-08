@@ -36,7 +36,7 @@ def chop_and_wait_for_exp():
     if wait_for_img(img_to_search=f"t{curr_tree_num}", script_name="Lummy_Chop_Fletch", img_threshold=0.9, max_wait_sec=4):
         does_img_exist(img_name=f"t{curr_tree_num}", script_name="Lummy_Chop_Fletch", should_click=True, x_offset=23, y_offset=20, threshold=0.9)
 
-    if not wait_for_img(img_to_search="wc_exp", script_name="Lummy_Chop_Fletch", max_wait_sec=4, img_threshold=0.88):
+    if not wait_for_img(img_to_search="wc_exp", script_name="Lummy_Chop_Fletch", max_wait_sec=6, img_threshold=0.88):
         print(f"Havent't chopped the logs yet?")
         API.AntiBan.sleep_between(0.6, 1.2)
 
@@ -63,9 +63,15 @@ def fletch_logs(should_drop_recursive=True):
 
     API.AntiBan.sleep_between(1.2, 1.6)
 
-    curr_fletch_lvl = get_skill_level("fletching")
+    lvl_val = get_skill_level("fletching")
+    if lvl_val == "n/a":
+        lvl_val = 1
+    else:
+        lvl_val = int(lvl_val)
 
-    if 1 < curr_fletch_lvl <= 4:
+    curr_fletch_lvl = lvl_val
+
+    if curr_fletch_lvl <= 4:
         pag.press("1")
         should_drop_fletched_items = False
     if 4 < curr_fletch_lvl <= 9:

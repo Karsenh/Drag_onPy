@@ -3,6 +3,10 @@
 ---
 ## Undetected Mobile Botting Software
 
+1. Must have Permanent XP drops enabled in settings
+2. Must have BlueStacks 5 Android emulator
+3. Must be on mobile sub-tab within Settings Tab
+
 ### Currently working on:
 ⬜ - [Script-Cow_Killer] Add random combat style switcher after 'x' loops to 'evenly' train combat up
 ⬜ - [Script-Edge_Gold] Refine script

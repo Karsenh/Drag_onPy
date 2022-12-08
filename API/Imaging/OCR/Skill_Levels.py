@@ -37,7 +37,10 @@ def ocr_skill_levels():
 
         capture_ocr_region(curr_x, curr_y, 26, 19, image_name=f"Skill_Lvl_{i}")
         curr_level_string = process_and_ocr(image_name=f"Skill_Lvl_{i}")
-        levels.append(curr_level_string)
+        if curr_level_string:
+            levels.append(int(curr_level_string))
+        else:
+            levels.append("n/a")
 
         curr_x_diff += 106.5
 

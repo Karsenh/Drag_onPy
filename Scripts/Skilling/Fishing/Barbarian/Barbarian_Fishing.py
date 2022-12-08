@@ -46,12 +46,14 @@ def barbarian_fishing(curr_loop):
 def click_barbarian_fish():
     is_leaping_trout = does_img_exist("leaping_trout", script_name="Barbarian_Fishing", category="Scripts", threshold=0.8, should_click=True, x_offset=15, y_offset=50)
     is_leaping_salmon = does_img_exist("leaping_salmon", script_name="Barbarian_Fishing", category="Scripts", threshold=0.8, should_click=True, x_offset=15, y_offset=50)
-    all_fish = is_leaping_salmon, is_leaping_trout
+    is_leaping_sturgeon = does_img_exist("leaping_sturgeon", script_name="Barbarian_Fishing", category="Scripts", threshold=0.8, should_click=True, x_offset=15, y_offset=50)
+    all_fish = is_leaping_salmon, is_leaping_trout, is_leaping_sturgeon
     return all_fish
 
 
 def is_barbarian_fishing():
-    return wait_for_exp_change(max_wait_sec=8)
+    return API.Imaging.Image.wait_for_img(img_to_search="exp_change", script_name="Barbarian_Fishing", img_threshold=0.8, max_wait_sec=8)
+    # return wait_for_exp_change(max_wait_sec=8)
 
 
 def handle_level_dialogue():

@@ -15,7 +15,7 @@ def start_killing_cows(curr_loop):
 
     is_tab_open("inventory", should_open=False)
 
-    if not wait_for_img(img_to_search="hp_exp", script_name="Cow_Killer", max_wait_sec=6, img_threshold=0.8):
+    if not wait_for_img(img_to_search="hp_exp", script_name="Cow_Killer", max_wait_sec=8, img_threshold=0.8):
         for i in range(1, 56):
             if does_img_exist(img_name='c30', script_name='Cow_Killer', x_offset=15, y_offset=30, should_click=True) or does_img_exist(img_name=f"c{i}", script_name="Cow_Killer", threshold=0.76, should_click=True):
                 break

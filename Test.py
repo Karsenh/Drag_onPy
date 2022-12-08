@@ -31,8 +31,12 @@ clear_debug_log()
 
 # random_human_actions(max_downtime_seconds=12)
 # show_main_gui()
-launch_script("ge_glass_blower")
+launch_script("cow_killer")
 
+
+# does_img_exist("leaping_sturgeon", script_name="Barbarian_Fishing", category="Scripts", threshold=0.8, should_click=True, x_offset=15, y_offset=50)
+
+# does_img_exist("leaping_sturgeon", script_name="Barbarian_Fishing", category="Scripts", threshold=0.8, should_click=True, x_offset=15, y_offset=50)
 
 
 # print(f'withdraw_all not selected? {is_withdraw_qty(qty_img_name="withdraw_all", should_click=True)}')
