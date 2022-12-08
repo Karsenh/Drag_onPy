@@ -21,6 +21,7 @@ from Scripts.Skilling.Firemaking.GE_Log_Burner import burn_logs_at_ge, burn_logs
 from Scripts.MiniGames.Fishing_Trawler import repair_hole_until_finished, start_trawling
 import pyautogui as pag
 from API.Imaging.OCR.Skill_Levels import get_skill_level
+from API.Interface.Bank import is_withdraw_qty
 
 
 get_bluestacks_xy()
@@ -30,8 +31,26 @@ clear_debug_log()
 
 # random_human_actions(max_downtime_seconds=12)
 # show_main_gui()
-launch_script("lummy_chop_fletcher")
+launch_script("ge_glass_blower")
 
+
+
+# print(f'withdraw_all not selected? {is_withdraw_qty(qty_img_name="withdraw_all", should_click=True)}')
+
+# red_all_xy = 825, 793
+# get_color_at_coords(red_all_xy)
+#
+# red_all_xy = 655, 815
+# get_color_at_coords(red_all_xy)
+#
+# red_all_xy = 655, 815
+# get_color_at_coords(red_all_xy)
+
+# is_withdraw_qty("10", should_click=True)
+
+#
+# red_all_xy = 768, 813
+# get_color_at_coords(red_all_xy)
 
 # does_img_exist(img_name="raw_shrimp", script_name="Rogue_Cooker", threshold=0.85, should_click=True, y_offset=10, x_offset=10)
 # rogue_bank_xy = 979, 396

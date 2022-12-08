@@ -53,5 +53,37 @@ def close_bank():
     return
 
 
-def is_withdraw_qty(qty_img_name="withdraw_all", should_click=True):
-    return does_img_exist(img_name=qty_img_name, category="Banking", threshold=0.95, should_click=should_click)
+def is_withdraw_qty(qty="all", should_click=True):
+    all_sel_color = 122, 29, 27
+    all_sel_xy = 768, 813
+
+    ten_sel_color = 123, 29, 27
+    ten_sel_xy = 655, 815
+
+    five_sel_color = 141, 33, 30
+    five_sel_xy = 636, 817
+
+    one_sel_color = 138, 33, 30
+    one_sel_xy = 594, 816
+
+    match qty:
+        case "all":
+            color_to_check = all_sel_color
+            coords_to_check = all_sel_xy
+        case "10":
+            color_to_check = ten_sel_color
+            coords_to_check = ten_sel_xy
+        case "5":
+            color_to_check = five_sel_color
+            coords_to_check = five_sel_xy
+        case "1":
+            color_to_check = one_sel_color
+            coords_to_check = one_sel_xy
+
+    is_selected = does_color_exist(check_color=color_to_check, xy=coords_to_check)
+
+    if not is_selected and should_click:
+        mouse_click(coords_to_check)
+        sleep_between(0.7, 0.9)
+
+    return is_selected

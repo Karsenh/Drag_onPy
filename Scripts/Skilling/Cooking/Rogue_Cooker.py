@@ -34,7 +34,7 @@ def start_rogue_cooking(curr_loop):
 
 def open_rogue_bank():
     API.AntiBan.sleep_between(2.0, 2.1)
-    print(f'WITHDRAW QTY ALL: {is_withdraw_qty(qty_img_name="withdraw_all", should_click=True)}')
+    print(f'WITHDRAW QTY ALL: {is_withdraw_qty(qty="all", should_click=True)}')
     API.AntiBan.sleep_between(0.8, 1.2)
     rogue_bank_xy = 978, 441
     bank_sel_xy = 979, 549

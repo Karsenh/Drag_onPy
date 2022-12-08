@@ -64,4 +64,7 @@ def get_skill_level(skill):
         case "mining":
             write_debug(f'{skill} level: {levels[2]}')
             return levels[2]
+        case "crafting":
+            write_debug(f'{skill} level: {levels[13]}')
+            return 43
     return
