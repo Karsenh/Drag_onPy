@@ -10,6 +10,8 @@ from Scripts.Skilling.Firemaking.GE_Log_Burner import burn_logs_at_ge
 from Scripts.MiniGames.Fishing_Trawler import start_trawling
 from Scripts.Skilling.Combat.Cow_Killer import start_killing_cows
 from Scripts.Skilling.Cooking.Rogue_Cooker import start_rogue_cooking
+from Scripts.Skilling.Combination.Lummy_Chop_Fletcher import start_chop_fletching
+from API.Imaging.OCR.Skill_Levels import get_skill_level, ocr_skill_levels
 
 from enum import Enum
 import API
@@ -45,11 +47,12 @@ def launch_script(script_name="pisc_iron"):
         TRAWLER = 9
         COW_KILLER = 10
         ROGUE_COOKER = 11
+        CHOP_FLETCH = 12
 
     all_scripts = [mine_iron_pisc, smith_gold_edge, run_gnome_course,
                    fish_draynor_shrimp, fish_barb_trout, barbarian_fishing,
                    pickpocket_draynor_man, steal_ardy_cake, burn_logs_at_ge,
-                   start_trawling, start_killing_cows, start_rogue_cooking]
+                   start_trawling, start_killing_cows, start_rogue_cooking, start_chop_fletching]
 
     match script_name:
         case "pisc_iron":
@@ -102,6 +105,10 @@ def launch_script(script_name="pisc_iron"):
             selected_script = ScriptEnum.ROGUE_COOKER.value
             antiban_likelihood = 10
             antiban_downtime_sec = 6
+        case "lummy_chop_fletcher":
+            selected_script = ScriptEnum.CHOP_FLETCH.value
+            antiban_likelihood = 20
+            antiban_downtime_sec = 3
 
     is_timer_set = is_break_timer_set()
 

@@ -83,18 +83,23 @@ def zoom_camera(notches=1):
     return
 
 
-def drop_inventory(from_spot_num=1, to_spot_num=27, should_close_after=False):
+def drop_inventory(from_spot_num=1, to_spot_num=27, should_close_after=False, should_disable_otd_after=False):
     # Open inventory if not open
     is_tab_open("inventory", should_open=True)
     is_otd_enabled(should_enable=True)
+
+    API.AntiBan.sleep_between(0.9, 1.4)
 
     for i in range(from_spot_num, to_spot_num+1):
         mouse_click(get_xy_for_invent_slot(i))
         if i % 4 == 0:
             API.AntiBan.sleep_between(0.3, 0.7)
 
+    if should_disable_otd_after:
+        is_otd_enabled(should_enable=False)
+
     if should_close_after:
-        API.AntiBan.sleep_between(0.3, 0.5)
+        API.AntiBan.sleep_between(0.8, 1.1)
         is_tab_open("inventory", should_open=False)
 
     return
