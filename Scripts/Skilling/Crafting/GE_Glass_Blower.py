@@ -57,7 +57,7 @@ def open_ge_bank(curr_loop):
 
     pag.press('esc')
 
-    API.AntiBan.sleep_between(1.1, 1.8)
+    API.AntiBan.sleep_between(0.9, 1.8)
 
     return
 
