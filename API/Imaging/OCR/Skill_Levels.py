@@ -69,5 +69,5 @@ def get_skill_level(skill):
             return levels[2]
         case "crafting":
             write_debug(f'{skill} level: {levels[13]}')
-            return 43
+            return 49
     return

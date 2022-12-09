@@ -1,0 +1,1 @@
+Empty placeholder to vc Capture directory despite ignoring .pngs within

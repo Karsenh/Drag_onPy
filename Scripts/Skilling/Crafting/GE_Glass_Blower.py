@@ -25,9 +25,10 @@ def start_blowing_glass(curr_loop):
 
 def open_ge_bank(curr_loop):
 
-    ge_bank_xy = 680, 476
-
+    ge_bank_xy = 679, 440
     mouse_click(ge_bank_xy)
+
+    # does_img_exist(img_name="bank", script_name="GE_Glass_Blower", threshold=0.80, should_click=True, x_offset=25, y_offset=35)
 
     API.AntiBan.sleep_between(3.0, 3.1)
 
@@ -95,7 +96,7 @@ def blow_glass():
         pag.press('5')
     if 45 < crafting_lvl <= 48:
         pag.press('6')
-    if crafting_lvl > 49:
+    if crafting_lvl >= 49:
         pag.press('7')
 
     API.AntiBan.sleep_between(1.0, 1.1)
