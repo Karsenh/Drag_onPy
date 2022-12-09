@@ -71,9 +71,9 @@ def get_all_gui_images():
     hunter_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{stats_path}\Hunter.png'))
 
 
-    # PvM-PvP_Gui images
-    pvm_pvp_path = "Assets\Images\GUI_Images\PvMPvP"
-    ags_gmaul_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{pvm_pvp_path}\PvP\Ags_gmaul.png'))
+    # Minigames images
+    minigames_path = "Assets\Images\GUI_Images\Minigames"
+    trawler_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{minigames_path}\Fishing_Trawler\Fishing_Trawler.png'))
 
     main_gui_images = gold_img, skills_img, skull_img, settings_img, question_mark_img, bug_report_img
 
@@ -88,10 +88,9 @@ def get_all_gui_images():
                        runecrafting_img, slayer_img, farming_img, \
                        construction_img, hunter_img
 
-    pvmpvp_gui_images = ags_gmaul_img
+    minigames_images = trawler_img
 
     # -----------------------------------------------------------------------------------------
-
     # ---
     # SUB-SUB-GUIs
     # ---
@@ -99,12 +98,19 @@ def get_all_gui_images():
     # Skill Sub-GUI
     skill_sub_path = "Assets\Images\GUI_Images\Stats"
     # (Map Button Images)
+
+    # MINING
     #     Pisc_Iron
     iron_pisc_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{skill_sub_path}\Mining\Iron_Pisc.png'))
+
+    # SMITHING
     #     Edge_Gold
     edge_gold_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{skill_sub_path}\Smithing\Edge_Gold.png'))
+
+    # AGILITY
     #     Gnome Course
     gnome_course_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{skill_sub_path}\Agility\gnome_map.png'))
+
     # FISHING
     #     Draynor Shrimp
     barb_trout_map_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{skill_sub_path}\Fishing\Barb_Trout_map.png'))
@@ -117,9 +123,16 @@ def get_all_gui_images():
     #     Rogue_Cooker
     rogue_den_map_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{skill_sub_path}\Cooking\Rogues_den_map.png'))
 
-    skilling_sub_gui_images = iron_pisc_img, edge_gold_img, gnome_course_img, draynor_shrimp_map_img, barb_trout_map_img, barbarian_fishing_map_img, rogue_den_map_img
+    # COMBAT
+    #     Cow_Killer
+    cow_killer_map_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{skill_sub_path}\Combat\Cow_killer_map.png'))
 
-    return main_gui_images, gold_gui_images, skill_gui_images, pvmpvp_gui_images, skilling_sub_gui_images
+    # FLETCHING / CRAFTING
+    ge_map_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{skill_sub_path}\Fletching\GE_map.png'))
+
+    skilling_sub_gui_images = iron_pisc_img, edge_gold_img, gnome_course_img, draynor_shrimp_map_img, barb_trout_map_img, barbarian_fishing_map_img, rogue_den_map_img, cow_killer_map_img, ge_map_img
+
+    return main_gui_images, gold_gui_images, skill_gui_images, minigames_images, skilling_sub_gui_images
 
     # -----------------------------------------------------------------------------------------
 

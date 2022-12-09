@@ -17,13 +17,13 @@ sub_gui_row = 3
 
 is_active_gold = False
 is_active_skill = False
-is_active_pvm_pvp = False
+is_active_minigames = False
 
 
 def toggle_active_frame(frame_name, all_frames):
     global is_active_gold
     global is_active_skill
-    global is_active_pvm_pvp
+    global is_active_minigames
 
     main_frame, gold_frame, skill_frame, pvm_pvp_frame, skill_sub_frames = all_frames
 
@@ -34,7 +34,7 @@ def toggle_active_frame(frame_name, all_frames):
                 for frame in skill_sub_frames:
                     frame.grid_remove()
                 is_active_skill = False
-                is_active_pvm_pvp = False
+                is_active_minigames = False
             return_val = is_active_gold
 
         case "skill":
@@ -45,19 +45,19 @@ def toggle_active_frame(frame_name, all_frames):
                 for frame in skill_sub_frames:
                     frame.grid_remove()
                 is_active_gold = False
-                is_active_pvm_pvp = False
+                is_active_minigames = False
             else:
                 skill_frame.grid_remove()
             return_val = is_active_skill
 
-        case "pvm pvp":
-            is_active_pvm_pvp = not is_active_pvm_pvp
-            if is_active_pvm_pvp:
+        case "minigames":
+            is_active_minigames = not is_active_minigames
+            if is_active_minigames:
                 for frame in skill_sub_frames:
                     frame.grid_remove()
                 is_active_gold = False
                 is_active_skill = False
-            return_val = is_active_pvm_pvp
+            return_val = is_active_minigames
 
     return return_val
 
@@ -72,11 +72,15 @@ def get_all_frames(root):
 
     gold_frame = LabelFrame(main_frame, text="Money making", bg=label_frame_bg_color, font=sub_gui_label_font)
     skill_frame = LabelFrame(main_frame, text="Skill training", bg=label_frame_bg_color, font=sub_gui_label_font)
-    pvm_pvp_frame = LabelFrame(main_frame, text="Combat helpers", bg=label_frame_bg_color, font=sub_gui_label_font)
+    minigames_frame = LabelFrame(main_frame, text="Minigames", bg=label_frame_bg_color, font=sub_gui_label_font)
 
+    attack_frame = LabelFrame(main_frame, text="Attack", bg=label_frame_bg_color, font=sub_gui_label_font)
+    hp_frame = LabelFrame(main_frame, text="Hitpoints", bg=label_frame_bg_color, font=sub_gui_label_font)
     mining_frame = LabelFrame(main_frame, text="Mining", bg=label_frame_bg_color, font=sub_gui_label_font)
-    smithing_frame = LabelFrame(main_frame, text="Smithing", bg=label_frame_bg_color, font=sub_gui_label_font)
+
+    strength_frame = LabelFrame(main_frame, text="Strength", bg=label_frame_bg_color, font=sub_gui_label_font)
     agility_frame = LabelFrame(main_frame, text="Agility", bg=label_frame_bg_color, font=sub_gui_label_font)
+    smithing_frame = LabelFrame(main_frame, text="Smithing", bg=label_frame_bg_color, font=sub_gui_label_font)
 
     defence_frame = LabelFrame(main_frame, text="Defence", bg=label_frame_bg_color, font=sub_gui_label_font)
     herblore_frame = LabelFrame(main_frame, text="Herblore", bg=label_frame_bg_color, font=sub_gui_label_font)
@@ -107,10 +111,10 @@ def get_all_frames(root):
                        prayer_frame, crafting_frame, firemaking_frame, \
                        magic_frame, fletching_frame, woodcutting_frame, \
                        runecrafting_frame, slayer_frame, farming_frame, \
-                       construction_frame, hunter_frame
+                       construction_frame, hunter_frame, attack_frame
 
     # Import All Frames & All Images from GUI Imports
-    all_frames = main_frame, gold_frame, skill_frame, pvm_pvp_frame, skill_sub_frames
+    all_frames = main_frame, gold_frame, skill_frame, minigames_frame, skill_sub_frames
     return all_frames
 
 
@@ -194,7 +198,6 @@ def show_settings_frame():
 
     # Debug Frame
     db_frame_2.grid(row=2, column=1)
-
 
     return
 
@@ -293,36 +296,53 @@ def show_skill_frame(all_frames, skill_gui_btns, t_active_frame, gui_btns):
     return
 
 
-def show_pvm_pvp_frame(all_frames, pvm_pvp_btns, t_active_frame, gui_btns):
-    gold_btn, skill_btn, pvm_pvp_btn = gui_btns
+def show_minigames_frame(all_frames, t_active_frame, minigames_frame, minigames_sub_btns):
+    _, _, _, _, skill_sub_frames = all_frames
 
-    is_active = t_active_frame("pvm pvp", all_frames)
+    is_active = t_active_frame("minigames", all_frames)
     # print(f'Entering ☠ PvM/PvP Frame with is_active: {not is_active} which is now: {is_active}')
-    gold_btn.configure(bg=btn_bg_color)
-    skill_btn.configure(bg=btn_bg_color)
-    pvm_pvp_btn.configure(bg=btn_active_bg_color)
 
-    ags_gmaul_btn = pvm_pvp_btns
-    main_frame, gold_frame, skill_frame, pvm_pvp_frame, skill_sub_frame = all_frames
+    ags_gmaul_btn = minigames_sub_btns
+    main_frame, gold_frame, skill_frame, minigames_frame, skill_sub_frame = all_frames
 
     gold_frame.grid_remove()
     skill_frame.grid_remove()
 
-    pvm_pvp_frame.grid(row=sub_gui_row, column=1, columnspan=5, pady=50)
+    minigames_frame.grid(row=sub_gui_row, column=1, columnspan=5, pady=50)
 
     ags_gmaul_btn.grid(row=1, column=1, pady=35, padx=50)
 
     # If is_active is false here, it was true when we clicked, therefore exit
     if not is_active:
-        pvm_pvp_frame.grid_remove()
-        pvm_pvp_btn.configure(bg=btn_bg_color)
-
+        minigames_frame.grid_remove()
+        ags_gmaul_btn.configure(bg=btn_bg_color)
     return
 
 
 # ---
 # SKILL FRAME - SUB-FRAMES
 # ---
+def show_attack_frame(all_frames, t_active_frame, attack_frame, attack_sub_btns):
+    _, _, _, _, skill_sub_frames = all_frames
+    cow_killer_btn = attack_sub_btns
+
+    is_active = t_active_frame("skill", all_frames)
+    print(f'show_attack_frame - skill_frame - is_active: {is_active}')
+
+    attack_frame.grid(row=sub_gui_row, column=1, columnspan=5, pady=50)
+
+    cow_img_path = 'Assets\Images\GUI_Images\Stats\Combat'
+    cow_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{cow_img_path}\Cow.png'))
+
+    cow_img_label = Label(attack_frame, image=cow_img, height=100, width=100, bg=label_frame_bg_color)
+    cow_img_label.image = cow_img
+
+    # Load button with ore
+    cow_img_label.grid(row=1, column=1)
+    cow_killer_btn.grid(row=1, column=2, columnspan=2, pady=20, padx=30)
+    return
+
+
 def show_mining_frame(all_frames, t_active_frame, mining_frame, mining_sub_btns):
     # Close skill_frame
     _, _, _, _, skill_sub_frames = all_frames
@@ -343,7 +363,6 @@ def show_mining_frame(all_frames, t_active_frame, mining_frame, mining_sub_btns)
     # Load button with ore
     iron_img_label.grid(row=1, column=1)
     iron_pisc_btn.grid(row=1, column=2, columnspan=2, pady=20, padx=30)
-
     return
 
 
@@ -366,7 +385,6 @@ def show_smithing_frame(all_frames, t_active_frame, smithing_frame, smithing_sub
     # Load button with ore
     gold_img_label.grid(row=1, column=1)
     edge_gold_btn.grid(row=1, column=2, columnspan=2, pady=20, padx=30)
-
     return
 
 
@@ -470,7 +488,6 @@ def show_fishing_frame(all_frames, t_active_frame, fishing_frame, fishing_sub_bt
 
     barb_fishing_label.grid(row=3, column=1, padx=35)
     barb_fishing_btn.grid(row=3, column=2, columnspan=2, pady=20, padx=25)
-
     return
 
 
@@ -533,13 +550,12 @@ def show_thieving_frame(all_frames, t_active_frame, thieving_frame, thieving_sub
 
     barb_trout_label.grid(row=2, column=1, padx=35)
     ardy_cake_btn.grid(row=2, column=2, columnspan=2, pady=20, padx=25)
-
     return
 
 
 def show_firemaking_frame(all_frames, t_active_frame, firemaking_frame, firemaking_sub_btns):
     _, _, _, _, skill_sub_frames = all_frames
-    ge_log_burner = firemaking_sub_btns
+    ge_log_burner_btn = firemaking_sub_btns
 
     is_active = t_active_frame("skill", all_frames)
     print(f'show_firemaking_frame - skill_frame - is_active: {is_active}')
@@ -554,5 +570,45 @@ def show_firemaking_frame(all_frames, t_active_frame, firemaking_frame, firemaki
 
     # Load button with ore
     tinderbox_img_label.grid(row=1, column=1)
-    ge_log_burner.grid(row=1, column=2, columnspan=2, pady=20, padx=30)
+    ge_log_burner_btn.grid(row=1, column=2, columnspan=2, pady=20, padx=30)
+    return
+
+
+def show_fletching_frame(all_frames, t_active_frame, fletching_frame, fletching_sub_btns):
+    _, _, _, _, skill_sub_frames = all_frames
+    ge_dart_fletcher_btn = fletching_sub_btns
+
+    is_active = t_active_frame("skill", all_frames)
+    print(f'show_firemaking_frame - skill_frame - is_active: {is_active}')
+
+    fletching_frame.grid(row=sub_gui_row, column=1, columnspan=5, pady=50)
+
+    fletching_img_path = 'Assets\Images\GUI_Images\Stats\Fletching'
+    dart_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{fletching_img_path}\Dart.png'))
+
+    dart_img_label = Label(fletching_frame, image=dart_img, height=100, width=100, bg=label_frame_bg_color)
+    dart_img_label.image = dart_img
+
+    dart_img_label.grid(row=1, column=1)
+    ge_dart_fletcher_btn.grid(row=1, column=2, columnspan=2, pady=20, padx=30)
+    return
+
+
+def show_crafting_frame(all_frames, t_active_frame, crafting_frame, crafting_sub_btns):
+    _, _, _, _, skill_sub_frames = all_frames
+    ge_glass_blower_btn = crafting_sub_btns
+
+    is_active = t_active_frame("skill", all_frames)
+    print(f'show_firemaking_frame - skill_frame - is_active: {is_active}')
+
+    crafting_frame.grid(row=sub_gui_row, column=1, columnspan=5, pady=50)
+
+    fletching_img_path = 'Assets\Images\GUI_Images\Stats\Crafting'
+    dart_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{fletching_img_path}\Molten_glass.png'))
+
+    dart_img_label = Label(crafting_frame, image=dart_img, height=100, width=100, bg=label_frame_bg_color)
+    dart_img_label.image = dart_img
+
+    dart_img_label.grid(row=1, column=1)
+    ge_glass_blower_btn.grid(row=1, column=2, columnspan=2, pady=20, padx=30)
     return

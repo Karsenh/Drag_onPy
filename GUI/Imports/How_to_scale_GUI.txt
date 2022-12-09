@@ -9,3 +9,6 @@
 
 
 
+1. Add images
+2. Create Sub-btn and send through main btn
+3. Create show frame method
