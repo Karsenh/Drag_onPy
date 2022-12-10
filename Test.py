@@ -30,8 +30,9 @@ capture_bluestacks()
 clear_debug_log()
 
 # random_human_actions(max_downtime_seconds=12)
-show_main_gui()
-# launch_script("cow_killer")
+# show_main_gui()
+launch_script("hosidius_plough")
+
 
 
 # does_img_exist("leaping_sturgeon", script_name="Barbarian_Fishing", category="Scripts", threshold=0.8, should_click=True, x_offset=15, y_offset=50)

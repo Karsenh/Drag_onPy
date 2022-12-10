@@ -13,6 +13,7 @@ from Scripts.Skilling.Cooking.Rogue_Cooker import start_rogue_cooking
 from Scripts.Skilling.Combination.Lummy_Chop_Fletcher import start_chop_fletching
 from Scripts.Skilling.Crafting.GE_Glass_Blower import start_blowing_glass
 from Scripts.Skilling.Fletching.GE_Dart_Fletcher import start_fletching_darts
+from Scripts.MiniGames.Hosidius_Plough import start_ploughing_for_favour
 from API.Imaging.OCR.Skill_Levels import get_skill_level, ocr_skill_levels
 
 from enum import Enum
@@ -52,12 +53,13 @@ def launch_script(script_name="pisc_iron"):
         CHOP_FLETCH = 12
         BLOW_GLASS = 13
         DART_FLETCHER = 14
+        HOSIDIUS_PLOUGH = 15
 
     all_scripts = [mine_iron_pisc, smith_gold_edge, run_gnome_course,
                    fish_draynor_shrimp, fish_barb_trout, barbarian_fishing,
                    pickpocket_draynor_man, steal_ardy_cake, burn_logs_at_ge,
                    start_trawling, start_killing_cows, start_rogue_cooking,
-                   start_chop_fletching, start_blowing_glass, start_fletching_darts]
+                   start_chop_fletching, start_blowing_glass, start_fletching_darts, start_ploughing_for_favour]
 
     match script_name:
         case "pisc_iron":
@@ -121,6 +123,10 @@ def launch_script(script_name="pisc_iron"):
         case "ge_dart_fletcher":
             selected_script = ScriptEnum.DART_FLETCHER.value
             antiban_likelihood = 20
+            antiban_downtime_sec = 4
+        case "hosidius_plough":
+            selected_script = ScriptEnum.HOSIDIUS_PLOUGH.value
+            antiban_likelihood = 15
             antiban_downtime_sec = 4
 
     is_timer_set = is_break_timer_set()
