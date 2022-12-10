@@ -7,13 +7,6 @@
 2. Must have BlueStacks 5 Android emulator
 3. Must be on mobile sub-tab within Settings Tab
 
-### Currently working on:
-⬜ - [Script-Cow_Killer] Add random combat style switcher after 'x' loops to 'evenly' train combat up
-⬜ - [Script-Edge_Gold] Refine script
-⬜ - 
-
-
-
 
 
 ### [ 2 ] Total Scripts
@@ -43,9 +36,11 @@
 
 
 ---
-## Process Order:
 
-The following documentation pertains to the smoothest possible route for creating main accounts:
+## Hosidius Plough:
 
-1. Start by running Cow_Killer at the pen that border Al Kharid to get base combat stats up 
-2. 
+Start:
+
+Inventory:
+
+Notes:
