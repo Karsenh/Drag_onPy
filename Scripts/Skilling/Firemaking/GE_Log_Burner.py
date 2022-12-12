@@ -9,15 +9,19 @@ from API.Imports.Coords import *
 import pyautogui as pag
 
 
+logs_to_use = "yew"
+
+
 def burn_logs_at_ge(curr_loop):
     if curr_loop == 1:
+
         setup_interface("east", 3, "up")
 
         API.AntiBan.sleep_between(0.3, 1.3)
 
         is_tab_open("inventory", should_open=True)
 
-        API.AntiBan.sleep_between(0.9, 1.3)
+        API.AntiBan.sleep_between(1.0, 1.5)
 
         click_to_open_bank()
 
@@ -101,14 +105,14 @@ def move_to_start(move_xy):
 
 def burn_logs():
     i = 0
-    while does_img_exist(img_name="inventory_maple", script_name="GE_Log_Burner", category="Scripts", threshold=0.85, should_click=False):
+    while does_img_exist(img_name=f"inventory_{logs_to_use}_log", script_name="GE_Log_Burner", category="Scripts", threshold=0.85, should_click=False):
         i += 1
         write_debug(f'BURN LOGS - {i}/28')
         does_img_exist(img_name="inventory_tinderbox", script_name="GE_Log_Burner", category="Scripts", threshold=.95, should_click=True, y_offset=6, x_offset=6)
         API.AntiBan.sleep_between(0.3, 0.7)
 
         if i > 1:
-            does_img_exist(img_name="inventory_maple", script_name="GE_Log_Burner", category="Scripts", threshold=0.85, should_click=False)
+            does_img_exist(img_name=f"inventory_{logs_to_use}_log", script_name="GE_Log_Burner", category="Scripts", threshold=0.85, should_click=False)
             next_log_xy = get_existing_img_xy()
             mouse_move(next_log_xy, max_x_dev=15, max_y_dev=15)
 
@@ -116,21 +120,22 @@ def burn_logs():
                 pag.click(button="left")
             else:
                 write_debug(f'Exp drop not seen!')
+                pag.leftClick()
         else:
-            does_img_exist(img_name="inventory_maple", script_name="GE_Log_Burner", category="Scripts", threshold=0.85, should_click=True, x_offset=15, y_offset=15)
+            does_img_exist(img_name=f"inventory_{logs_to_use}_log", script_name="GE_Log_Burner", category="Scripts", threshold=0.85, should_click=True, x_offset=15, y_offset=15)
 
     wait_for_img(img_name="log_burned", script_name="GE_Log_Burner", category_name="Scripts", max_wait_sec=6)
     return
 
 
 def click_to_open_bank():
-    bank_open_xy = 745, 479
-    mouse_click(bank_open_xy)
+    bank_open_xy = 774, 481
+    mouse_click(bank_open_xy, max_x_dev=0, max_y_dev=0)
     API.AntiBan.sleep_between(1.1, 1.5)
     return
 
 
 def click_to_withdraw_logs():
-    banked_logs_xy = 342, 445
-    mouse_click(banked_logs_xy, max_x_dev=11, max_y_dev=11)
+    does_img_exist(img_name=f"banked_{logs_to_use}_log", script_name="GE_Log_Burner", threshold=0.96, should_click=True,
+                   x_offset=22, y_offset=15)
     return
