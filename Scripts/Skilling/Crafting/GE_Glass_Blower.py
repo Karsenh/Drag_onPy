@@ -105,7 +105,7 @@ def blow_glass():
 
 
 def is_still_crafting():
-    return wait_for_img(img_to_search="crafting_exp", script_name="GE_Glass_Blower", img_threshold=0.90, max_wait_sec=3)
+    return wait_for_img(img_name="crafting_exp", script_name="GE_Glass_Blower", threshold=0.90, max_wait_sec=3)
 
 
 def did_level_crafting():

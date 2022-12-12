@@ -22,7 +22,7 @@ def start_fletching_darts(curr_loop):
     mouse_click(first_slot_xy)
     mouse_click(second_slot_xy)
 
-    if not wait_for_img(img_to_search="Fletching_exp", script_name="GE_Dart_Fletcher", max_wait_sec=5, img_threshold=0.8):
+    if not wait_for_img(img_name="Fletching_exp", script_name="GE_Dart_Fletcher", max_wait_sec=5, threshold=0.8):
         return False
 
     for i in range(1, random.randint(13, 27)):

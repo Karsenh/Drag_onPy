@@ -57,5 +57,5 @@ def check_coin_pouch():
 
 
 def check_if_caught():
-    return wait_for_img(img_to_search="caught", script_name="Draynor_Man", category_name="Scripts", max_wait_sec=2)
+    return wait_for_img(img_name="caught", script_name="Draynor_Man", category_name="Scripts", max_wait_sec=2)
 

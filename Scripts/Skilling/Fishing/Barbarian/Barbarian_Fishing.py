@@ -52,7 +52,7 @@ def click_barbarian_fish():
 
 
 def is_barbarian_fishing():
-    return API.Imaging.Image.wait_for_img(img_to_search="exp_change", script_name="Barbarian_Fishing", img_threshold=0.8, max_wait_sec=8)
+    return API.Imaging.Image.wait_for_img(img_name="exp_change", script_name="Barbarian_Fishing", threshold=0.8, max_wait_sec=8)
     # return wait_for_exp_change(max_wait_sec=8)
 
 

@@ -1,6 +1,8 @@
 import os
 import sys
 import time
+
+import API.AntiBan
 from API.Mouse import *
 from GUI.Main_GUI import *
 from API.Debug import clear_debug_log
@@ -22,6 +24,7 @@ from Scripts.MiniGames.Fishing_Trawler import repair_hole_until_finished, start_
 import pyautogui as pag
 from API.Imaging.OCR.Skill_Levels import get_skill_level
 from API.Interface.Bank import is_withdraw_qty
+from Scripts.Skilling.Thieving.Stalls.Hosidius_Fruit import start_stealing_fruit
 
 
 get_bluestacks_xy()
@@ -31,7 +34,7 @@ clear_debug_log()
 
 # random_human_actions(max_downtime_seconds=12)
 # show_main_gui()
-launch_script("hosidius_plough")
+launch_script("hosidius_fruit")
 
 
 

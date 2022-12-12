@@ -157,7 +157,7 @@ def is_otd_enabled(should_enable=True):
         return False
 
 
-def is_run_on():
+def is_run_on(should_click=False):
     run_check_xy = 1210, 255
     run_rgb = get_color_at_coords(run_check_xy)
     run_on_color = 236, 218, 103
@@ -167,6 +167,9 @@ def is_run_on():
         return True
     if run_rgb == run_off_color:
         print(f'🥾 ❌ Run is OFF with RGB: {run_rgb}')
+        if should_click:
+            run_xy = 1206, 248
+            mouse_click(run_xy)
         return False
     else:
         print(f'❌ Color: {run_rgb} not detected for 🥾 run energy.')

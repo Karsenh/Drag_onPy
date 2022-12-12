@@ -4,7 +4,7 @@ import pyautogui as pag
 
 
 #  Moves mouse to specified X, Y and clicks
-def mouse_click(xy, max_x_dev=2, max_y_dev=2, click_direction="left", max_num_clicks=1):
+def mouse_click(xy, max_x_dev=2, max_y_dev=2, click_direction="left", max_num_clicks=1, min_num_clicks=1, max_int_delay=0.5):
     trans_x, trans_y = translate_coords(xy)
 
     if max_x_dev < 13:
@@ -20,12 +20,12 @@ def mouse_click(xy, max_x_dev=2, max_y_dev=2, click_direction="left", max_num_cl
         move_y = trans_y + organic_y
 
     if max_num_clicks > 1:
-        num_clicks = random.randint(1, max_num_clicks)
+        num_clicks = random.randint(min_num_clicks, max_num_clicks)
     else:
         num_clicks = max_num_clicks
 
     for x in range(num_clicks):
-        r_sleep = random.uniform(0.1, 0.4)
+        r_sleep = random.uniform(0.1, max_int_delay)
         pag.click(button=click_direction, x=move_x, y=move_y)
         time.sleep(r_sleep)
 

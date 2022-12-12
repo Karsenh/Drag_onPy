@@ -112,14 +112,14 @@ def burn_logs():
             next_log_xy = get_existing_img_xy()
             mouse_move(next_log_xy, max_x_dev=15, max_y_dev=15)
 
-            if wait_for_img(img_to_search="log_burned", script_name="GE_Log_Burner", category_name="Scripts", max_wait_sec=6):
+            if wait_for_img(img_name="log_burned", script_name="GE_Log_Burner", category_name="Scripts", max_wait_sec=6):
                 pag.click(button="left")
             else:
                 write_debug(f'Exp drop not seen!')
         else:
             does_img_exist(img_name="inventory_maple", script_name="GE_Log_Burner", category="Scripts", threshold=0.85, should_click=True, x_offset=15, y_offset=15)
 
-    wait_for_img(img_to_search="log_burned", script_name="GE_Log_Burner", category_name="Scripts", max_wait_sec=6)
+    wait_for_img(img_name="log_burned", script_name="GE_Log_Burner", category_name="Scripts", max_wait_sec=6)
     return
 
 

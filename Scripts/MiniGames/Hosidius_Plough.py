@@ -21,8 +21,8 @@ def start_ploughing_for_favour(curr_loop):
 
 
 def plough_east():
-    while not wait_for_img(img_to_search="East_end", script_name="Hosidius_Plough", max_wait_sec=30,
-                           img_threshold=0.99):
+    while not wait_for_img(img_name="East_end", script_name="Hosidius_Plough", max_wait_sec=30,
+                           threshold=0.99):
         repair_east_xy = 1040, 472
         mouse_click(repair_east_xy, max_num_clicks=2)
         API.AntiBan.sleep_between(3.0, 3.1)
@@ -38,8 +38,8 @@ def plough_east():
 
 
 def plough_west():
-    while not wait_for_img(img_to_search="West_end", script_name="Hosidius_Plough", max_wait_sec=30,
-                           img_threshold=0.99):
+    while not wait_for_img(img_name="West_end", script_name="Hosidius_Plough", max_wait_sec=30,
+                           threshold=0.99):
         repair_east_xy = 470, 470
         mouse_click(repair_east_xy, max_num_clicks=2)
         API.AntiBan.sleep_between(3.0, 3.1)

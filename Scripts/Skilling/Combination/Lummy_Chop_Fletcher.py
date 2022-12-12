@@ -33,10 +33,10 @@ def start_chop_fletching(curr_loop):
 
 
 def chop_and_wait_for_exp():
-    if wait_for_img(img_to_search=f"t{curr_tree_num}", script_name="Lummy_Chop_Fletch", img_threshold=0.9, max_wait_sec=4):
+    if wait_for_img(img_name=f"t{curr_tree_num}", script_name="Lummy_Chop_Fletch", threshold=0.9, max_wait_sec=4):
         does_img_exist(img_name=f"t{curr_tree_num}", script_name="Lummy_Chop_Fletch", should_click=True, x_offset=23, y_offset=20, threshold=0.9)
 
-    if not wait_for_img(img_to_search="wc_exp", script_name="Lummy_Chop_Fletch", max_wait_sec=6, img_threshold=0.88):
+    if not wait_for_img(img_name="wc_exp", script_name="Lummy_Chop_Fletch", max_wait_sec=6, threshold=0.88):
         print(f"Havent't chopped the logs yet?")
         API.AntiBan.sleep_between(0.6, 1.2)
 
@@ -79,7 +79,7 @@ def fletch_logs(should_drop_recursive=True):
     elif curr_fletch_lvl > 9:
         pag.press("4")
 
-    while wait_for_img(img_to_search="fletching_exp", script_name="Lummy_Chop_Fletch", max_wait_sec=3, img_threshold=0.8):
+    while wait_for_img(img_name="fletching_exp", script_name="Lummy_Chop_Fletch", max_wait_sec=3, threshold=0.8):
         print(f'Still fletching...')
         API.AntiBan.sleep_between(1.1, 1.6)
 
