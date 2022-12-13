@@ -15,11 +15,11 @@ def start_rogue_cooking(curr_loop):
 
     write_debug(f'Checking if cooking...')
     if not is_cooking():
+
         write_debug(f'Not cooking. Checking for level dialogue...')
 
         if check_for_level_dialogue():
             write_debug(f'Level dialogue found. Continuing to cook...')
-
             cook_food()
 
         else:
@@ -27,7 +27,7 @@ def start_rogue_cooking(curr_loop):
 
             open_rogue_bank()
 
-            API.AntiBan.sleep_between(0.6, 0.9)
+            API.AntiBan.sleep_between(1.2, 1.7)
 
             deposit_all()
 
@@ -53,10 +53,9 @@ def open_rogue_bank():
 def withdraw_food_to_cook():
     food_withdraw_slot = 905, 443
     mouse_click(food_withdraw_slot)
-    API.AntiBan.sleep_between(0.7, 1.3)
+    API.AntiBan.sleep_between(0.7, 1.5)
     close_bank()
     API.AntiBan.sleep_between(0.9, 1.4)
-
     return
 
 
@@ -65,7 +64,7 @@ def cook_food():
 
     mouse_click(fire_xy, max_x_dev=15, max_y_dev=13)
 
-    API.AntiBan.sleep_between(2.0, 2.1)
+    API.AntiBan.sleep_between(1.75, 2.2)
 
     if not does_img_exist(img_name="all_qty_selected", category="General", threshold=0.95):
         does_img_exist(img_name="all_qty", category="General", threshold=0.9, should_click=True, x_offset=8, y_offset=7)
