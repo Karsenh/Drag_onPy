@@ -14,7 +14,9 @@ inventory_x, inventory_y = 1447, 403
 
 def setup_interface(cam_dir="north", cam_distance=3, cam_angle="up"):
     turn_compass(direction=cam_dir)
+    API.AntiBan.sleep_between(0.6, 0.9)
     zoom_camera(notches=cam_distance)
+    API.AntiBan.sleep_between(0.6, 0.9)
     pitch_camera(direction=cam_angle)
     return
 

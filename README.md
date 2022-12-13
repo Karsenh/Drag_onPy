@@ -6,6 +6,7 @@
 1. Must have Permanent XP drops enabled in settings
 2. Must have BlueStacks 5 Android emulator
 3. Must be on mobile sub-tab within Settings Tab
+4. DO NOT adjust Mini-map zoom (turn minimap zoom off)
 
 
 

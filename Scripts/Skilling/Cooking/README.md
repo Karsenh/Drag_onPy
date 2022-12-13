@@ -7,4 +7,3 @@ in front of rogues den fire.
 Simply put desired food to cook in top right bank slot.
 
 ### Known issues:
-1. selects fire and cooks twice in a row

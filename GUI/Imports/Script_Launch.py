@@ -109,8 +109,8 @@ def launch_script(script_name="pisc_iron"):
             antiban_downtime_sec = 0.5
         case "cow_killer":
             selected_script = ScriptEnum.COW_KILLER.value
-            antiban_likelihood = 10
-            antiban_downtime_sec = 2.3
+            antiban_likelihood = 20
+            antiban_downtime_sec = 2.75
         case "rogue_cooker":
             selected_script = ScriptEnum.ROGUE_COOKER.value
             antiban_likelihood = 10

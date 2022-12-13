@@ -34,7 +34,12 @@ clear_debug_log()
 
 # random_human_actions(max_downtime_seconds=12)
 # show_main_gui()
-launch_script("rogue_cooker")
+launch_script("cow_killer")
+
+# wait_for_img(img_name="dead_cow", script_name="Cow_Killer", threshold=.84, max_wait_sec=15)
+
+
+
 
 
 
