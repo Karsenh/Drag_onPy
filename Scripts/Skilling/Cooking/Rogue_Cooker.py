@@ -1,5 +1,4 @@
 import random
-
 import keyboard
 import pyautogui as pag
 import API.AntiBan
@@ -7,18 +6,25 @@ from API.Mouse import mouse_click, mouse_drag
 from API.Interface.General import setup_interface, get_xy_for_invent_slot
 from API.Interface.Bank import check_if_bank_tab_open, deposit_all, close_bank, is_withdraw_qty
 from API.Imaging.Image import does_img_exist, wait_for_img
+from API.Debug import write_debug
 
 
 def start_rogue_cooking(curr_loop):
     if curr_loop == 1:
         setup_interface("south", 5, "up")
 
+    write_debug(f'Checking if cooking...')
     if not is_cooking():
+        write_debug(f'Not cooking. Checking for level dialogue...')
 
         if check_for_level_dialogue():
+            write_debug(f'Level dialogue found. Continuing to cook...')
+
             cook_food()
 
         else:
+            write_debug(f'No level dialogue found. Opening bank to get food...')
+
             open_rogue_bank()
 
             API.AntiBan.sleep_between(0.6, 0.9)
@@ -34,14 +40,13 @@ def start_rogue_cooking(curr_loop):
 
 def open_rogue_bank():
     API.AntiBan.sleep_between(2.0, 2.1)
-    print(f'WITHDRAW QTY ALL: {is_withdraw_qty(qty="all", should_click=True)}')
-    API.AntiBan.sleep_between(0.8, 1.2)
     rogue_bank_xy = 978, 441
     bank_sel_xy = 979, 549
     mouse_drag(rogue_bank_xy, bank_sel_xy)
     API.AntiBan.sleep_between(1.2, 1.3)
     if not check_if_bank_tab_open(tab_num=5, should_open=True, double_check=True):
         return False
+    print(f'WITHDRAW QTY ALL: {is_withdraw_qty(qty="all", should_click=True)}')
     return
 
 

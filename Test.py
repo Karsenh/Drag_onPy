@@ -34,7 +34,7 @@ clear_debug_log()
 
 # random_human_actions(max_downtime_seconds=12)
 # show_main_gui()
-# launch_script("hosidius_fruit")
+launch_script("rogue_cooker")
 
 
 
