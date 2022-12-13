@@ -79,7 +79,7 @@ def cook_food():
 
 
 def is_cooking():
-    return wait_for_img(img_name="cooking_exp", script_name="Rogue_Cooker", threshold=0.95, max_wait_sec=6)
+    return wait_for_img(img_name="cooking_exp", script_name="Rogue_Cooker", threshold=0.90, max_wait_sec=6)
 
 
 def check_for_level_dialogue():
