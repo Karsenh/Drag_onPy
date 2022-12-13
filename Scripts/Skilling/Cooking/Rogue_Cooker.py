@@ -83,8 +83,6 @@ def is_cooking():
 
 def check_for_level_dialogue():
     if does_img_exist(img_name="level_up", category="General"):
-        print(f'Level-up detected. Spacing through...')
-        cook_food()
         API.AntiBan.sleep_between(2.0, 2.1)
         return True
     return False
