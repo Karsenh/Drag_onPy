@@ -21,8 +21,8 @@ def mine_iron_pisc(curr_loop):
     global total_ores_mined
 
     if curr_loop == 1:
-        API.Interface.Generalis_otd_enabled(should_enable=True)
-        API.Interface.Generalsetup_interface("south", 5, "up")
+        API.Interface.General.is_otd_enabled(should_enable=True)
+        API.Interface.General.setup_interface("south", 5, "up")
         API.AntiBan.sleep_between(0.8, 1.4)
 
     handle_full_inventory()
