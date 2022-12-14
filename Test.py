@@ -34,7 +34,15 @@ clear_debug_log()
 
 # random_human_actions(max_downtime_seconds=12)
 # show_main_gui()
-launch_script("cow_killer")
+# launch_script("cow_killer")
+
+
+does_img_exist(img_name="spot_check_2", script_name="Pisc_Iron", threshold=0.95)
+
+# for i in range(1, 4):
+#     does_img_exist(img_name=f"iron_{i}", script_name="Pisc_Iron", threshold=0.90, should_click=True)
+#     sleep_between(1.5, 1.9)
+
 
 # wait_for_img(img_name="dead_cow", script_name="Cow_Killer", threshold=.84, max_wait_sec=15)
 

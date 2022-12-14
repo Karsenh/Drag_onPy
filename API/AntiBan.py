@@ -104,7 +104,16 @@ def random_human_actions(max_downtime_seconds=3.0, likelihood=10, reopen_invento
     else:
         write_debug(f'Not performing human interactions - {should_perform_actions} - Sleeping instead.')
         sleep_between(0.1, max_seconds=max_downtime_seconds)
-
-
     return
 
+
+def shutdown(script_name, reason):
+    pwd = os.getcwd()
+    now = datetime.now()
+    current_time = now.strftime("%H:%M:%S")
+    print(
+        f'⛔ Script [{script_name}] Stopped @ [{current_time}]: {reason}'
+        f'Logging to Script_Stop_Log.txt')
+    with open(f'{pwd}\Misc\Stop_Log.txt', 'w') as f:
+        f.write(f'{current_time}: {reason}')
+    return False

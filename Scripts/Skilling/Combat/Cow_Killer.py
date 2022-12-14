@@ -23,7 +23,8 @@ def start_killing_cows(curr_loop):
     alive_green_col = 0, 200, 0
 
     if get_color_at_coords(coords) != dead_red_col and get_color_at_coords(coords) != alive_green_col:
-        for i in range(1, 19):
+        # Range has to be one more than we want to iterate over
+        for i in range(1, 20):
             if does_img_exist(img_name='moo', script_name='Cow_Killer', x_offset=15, y_offset=30, should_click=True) or does_img_exist(img_name=f"c{i}", script_name="Cow_Killer", threshold=0.85, should_click=True):
                 API.AntiBan.sleep_between(3.1, 3.5)
                 break
