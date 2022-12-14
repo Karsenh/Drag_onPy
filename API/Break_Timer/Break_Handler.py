@@ -36,7 +36,7 @@ def is_break_timer_set():
 def should_break():
     global script_start_time
     break_vals = get_break_times()
-    _, _, interval_t, interval_dev_t = break_vals
+    interval_t, interval_dev_t, _, _ = break_vals
 
     # If this is the first loop - set the start time of the script to now
     if not script_start_time:
@@ -79,7 +79,7 @@ def go_on_break():
     global script_start_time
     #     Sleep for however long the break_time is
     break_vals = get_break_times()
-    break_t, break_dev_t, _, _ = break_vals
+    _, _, break_t, break_dev_t = break_vals
 
     rand_break_dev = random.randint(1, break_dev_t)
     should_be_negative = random.randint(1, 10)
