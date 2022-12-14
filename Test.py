@@ -34,10 +34,10 @@ clear_debug_log()
 
 # random_human_actions(max_downtime_seconds=12)
 # show_main_gui()
-# launch_script("cow_killer")
+launch_script("pisc_iron")
 
 
-does_img_exist(img_name="spot_check_2", script_name="Pisc_Iron", threshold=0.95)
+# does_img_exist(img_name="spot_check_2", script_name="Pisc_Iron", threshold=0.95)
 
 # for i in range(1, 4):
 #     does_img_exist(img_name=f"iron_{i}", script_name="Pisc_Iron", threshold=0.90, should_click=True)

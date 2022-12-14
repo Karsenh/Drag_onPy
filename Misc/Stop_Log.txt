@@ -1,1 +1,1 @@
-18:07:53: is_on_right_tile(obj, colors) failed after 792 ores clicked.
+18:46:53: Couldn't find ore more than 10 times.

@@ -70,7 +70,7 @@ def launch_script(script_name="pisc_iron"):
             # 1 / x
             antiban_likelihood = 50
             # Interval between scrip loops
-            antiban_downtime_sec = 0.5
+            antiban_downtime_sec = 1
         case "edge_gold":
             selected_script = ScriptEnum.EDGE_GOLD.value
             antiban_likelihood = 10
