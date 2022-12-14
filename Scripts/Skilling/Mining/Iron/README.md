@@ -10,4 +10,3 @@
 * None
 
 ### Known issues:
-1. Uses color pixel detection to determine if we're still in the right spot - change to image search

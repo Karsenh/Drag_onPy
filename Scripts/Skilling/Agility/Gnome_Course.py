@@ -113,8 +113,8 @@ def get_iteration_msg(curr_iteration):
 def check_for_level_dialogue():
     if does_img_exist(img_name="level_up", category="General"):
         print(f'Level-up detected. Spacing through...')
-        keyboard.press('space')
+        pag.press('space')
         API.AntiBan.sleep_between(1.1, 2.6)
-        keyboard.press('space')
+        pag.press('space')
         print(f'Should be through all chat-box dialogue now. Continuing...')
     return

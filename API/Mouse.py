@@ -29,8 +29,6 @@ def mouse_click(xy, max_x_dev=2, max_y_dev=2, click_direction="left", max_num_cl
         pag.click(button=click_direction, x=move_x, y=move_y)
         time.sleep(r_sleep)
 
-    # sleep_between(.1, .2)
-
     return
 
 

@@ -12,14 +12,14 @@ from API.Debug import write_debug
 
 ores_clicked = 0
 ore_sel = 0
-no_ore_found = 0
+total_ores_mined = 0
 
 
 # Start character on the tile between three iron ore in Piscatoris
 def mine_iron_pisc(curr_loop):
     global ores_clicked
     global ore_sel
-    global no_ore_found
+    global total_ores_mined
 
     if curr_loop == 1:
         is_otd_enabled(should_enable=True)
@@ -28,6 +28,8 @@ def mine_iron_pisc(curr_loop):
 
     handle_full_inventory()
 
+    write_debug(f'💎 Total ores mined so far: {total_ores_mined}')
+
     if does_img_exist("Spot_check", script_name="Pisc_Iron", threshold=0.90):
         print(f'Ores clicked: {ores_clicked}')
 
@@ -35,8 +37,7 @@ def mine_iron_pisc(curr_loop):
         if ores_clicked == 0:
             ore_sel = random.randint(1, 3)
 
-        if not does_img_exist(img_name=f"Iron_{ore_sel}", script_name="Pisc_Iron", threshold=0.90, should_click=True, x_offset=15, y_offset=15):
-            no_ore_found += 1
+        does_img_exist(img_name=f"Iron_{ore_sel}", script_name="Pisc_Iron", threshold=0.90, should_click=True, x_offset=15, y_offset=15)
 
         ore_sel += 1
         ores_clicked += 1
@@ -55,6 +56,9 @@ def mine_iron_pisc(curr_loop):
 
 
 def handle_full_inventory():
+    global total_ores_mined
     if does_img_exist(img_name="inventory_full", category="General", threshold=0.85):
         drop_inventory(from_spot_num=1, to_spot_num=27)
+        total_ores_mined += 27
+
     return

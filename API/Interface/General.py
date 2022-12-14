@@ -4,7 +4,6 @@ from API.Imports.Coords import *
 from API.Debug import DEBUG_MODE, write_debug
 import API.AntiBan
 import pyautogui as pag
-import keyboard
 import math
 
 
@@ -85,7 +84,7 @@ def zoom_camera(notches=1):
     return
 
 
-def drop_inventory(from_spot_num=1, to_spot_num=27, should_close_after=False, should_disable_otd_after=False):
+def drop_inventory(from_spot_num=1, to_spot_num=27, should_random_skip=False, should_close_after=False, should_disable_otd_after=False):
     # Open inventory if not open
     is_tab_open("inventory", should_open=True)
     is_otd_enabled(should_enable=True)
@@ -145,7 +144,7 @@ def is_otd_enabled(should_enable=True):
         print(f'✔ OTD Enabled')
         if not should_enable:
             print(f'Disabling...')
-            keyboard.press('space')
+            pag.press('space')
             xy = 48, 340
             mouse_click(xy)
         return True
@@ -153,7 +152,7 @@ def is_otd_enabled(should_enable=True):
         print(f'✖ OTD NOT Enabled')
         if should_enable:
             print(f'Enabling...')
-            keyboard.press('space')
+            pag.press('space')
             xy = 48, 340
             mouse_click(xy)
         return False
