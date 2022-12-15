@@ -54,9 +54,6 @@ clear_debug_log()
 # #     mouse_move(ad_xy)
 # #     visit_last_xy = 679, 723
 # #     mouse_drag(from_xy=ad_xy, to_xy=visit_last_xy)
-house_ad_tile_xy = 1326, 221
-altar_xy = 1340, 214
-curr_loop = 1
 
 # Click workless' arrow on house ad
 # mouse_click(house_ad_tile_xy)
@@ -82,8 +79,27 @@ curr_loop = 1
 #     API.AntiBan.sleep_between(6.0, 6.1)
 #     mouse_click(altar_xy)
 
-cl = 1
-Scripts.Skilling.Prayer.Gilded_Altar.start_gilded_altar(cl)
+# cl = 1
+# Scripts.Skilling.Prayer.Gilded_Altar.start_gilded_altar(cl)
+
+scroll_xy = 640, 564
+mouse_move(scroll_xy)
+API.AntiBan.sleep_between(0.8, 1.1)
+pag.hscroll(-22)
+
+# global phials_xy
+#
+# portal_xy = 1339, 133
+# click_portal_xy = 704, 337
+#
+# mouse_click(portal_xy)
+# API.AntiBan.sleep_between(5.0, 5.1)
+#
+# mouse_click(click_portal_xy)
+# API.AntiBan.sleep_between(6.0, 6.1)
+#
+# mouse_click(phials_xy)
+# API.AntiBan.sleep_between(5.0, 5.1)
 
 
 

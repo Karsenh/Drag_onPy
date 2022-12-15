@@ -25,7 +25,8 @@ def start_gilded_altar(curr_loop):
     if not unnote_bones():
         return False
 
-    move_to_altar(curr_loop)
+    if not move_to_altar(curr_loop):
+        return False
 
     worship_bones()
 
@@ -41,10 +42,12 @@ def unnote_bones():
     # wait till we see phials
     if wait_for_img(img_name="phials", script_name="Gilded_Altar", threshold=0.75, max_wait_sec=10):
         mouse_click(INVENT_slot_1)
-        API.AntiBan.sleep_between(0.5, 0.93)
-        does_img_exist(img_name="phials", script_name="Gilded_Altar", threshold=0.75, should_click=True)
-
-        if not wait_for_img(img_name="exchange_bones", script_name="Gilded_Altar", should_click=True) and not does_img_exist(img_name="full_invent", script_name="Gilded_Altar", threshold=0.8):
+        API.AntiBan.sleep_between(0.3, 0.5)
+        # does_img_exist(img_name="phials", script_name="Gilded_Altar", threshold=0.75, should_click=True)
+        wait_for_img(img_name="phials", script_name="Gilded_Altar", threshold=0.75, max_wait_sec=10, should_click=True)
+        if not wait_for_img(img_name="exchange_bones_gen", script_name="Gilded_Altar", should_click=True) \
+                and not does_img_exist(img_name="full_invent", script_name="Gilded_Altar", threshold=0.8) \
+                and not does_img_exist(img_name="exchange_bones2", script_name="Gilded_Altar", should_click=True):
             tries += 1
             if tries > 10:
                 return False
@@ -60,18 +63,37 @@ def move_to_altar(curr_loop):
     # Move to the house ad tile near the poh portal
     mouse_click(house_ad_tile_xy)
 
+    API.AntiBan.sleep_between(3.0, 3.1)
+
     # Wait for house_ad image (we're next to house ad)
     if wait_for_img(img_name="house_ad", script_name="Gilded_Altar", threshold=0.75, max_wait_sec=8):
         if curr_loop == 1:
             # mouse click to search for workless ad
             does_img_exist(img_name="house_ad", script_name="Gilded_Altar", threshold=0.75, should_click=True)
             API.AntiBan.sleep_between(2.5, 2.7)
-            does_img_exist(img_name="workless_ad", script_name="Gilded_Altar", threshold=0.90, should_click=True,
-                           x_offset=700, y_offset=20)
-            does_img_exist(img_name="og_ad", script_name="Gilded_Altar", threshold=0.90, should_click=True,
-                           x_offset=700, y_offset=20)
-            does_img_exist(img_name="og_ad2", script_name="Gilded_Altar", threshold=0.90, should_click=True,
-                           x_offset=700, y_offset=20)
+
+            if not does_img_exist(img_name="workless_ad", script_name="Gilded_Altar", threshold=0.90, should_click=True,
+                           x_offset=700, y_offset=20) \
+            and not does_img_exist(img_name="workless_ad2", script_name="Gilded_Altar", threshold=0.90, should_click=True,
+                           x_offset=700, y_offset=20) \
+            and not does_img_exist(img_name="og_ad", script_name="Gilded_Altar", threshold=0.90, should_click=True,
+                           x_offset=700, y_offset=20) \
+            and not does_img_exist(img_name="og_ad2", script_name="Gilded_Altar", threshold=0.90, should_click=True,
+                           x_offset=700, y_offset=20):
+                scroll_xy = 640, 564
+                mouse_move(scroll_xy)
+                API.AntiBan.sleep_between(0.8, 1.1)
+                pag.hscroll(-22)
+
+            if not does_img_exist(img_name="workless_ad", script_name="Gilded_Altar", threshold=0.90, should_click=True,
+                           x_offset=700, y_offset=20) \
+            and not does_img_exist(img_name="workless_ad2", script_name="Gilded_Altar", threshold=0.90, should_click=True,
+                           x_offset=700, y_offset=20) \
+            and not does_img_exist(img_name="og_ad", script_name="Gilded_Altar", threshold=0.90, should_click=True,
+                           x_offset=700, y_offset=20) \
+            and not does_img_exist(img_name="og_ad2", script_name="Gilded_Altar", threshold=0.90, should_click=True,
+                           x_offset=700, y_offset=20):
+                return False
         else:
             # visit last
             does_img_exist(img_name="house_ad", script_name="Gilded_Altar", threshold=0.9)
@@ -84,7 +106,7 @@ def move_to_altar(curr_loop):
         mouse_click(altar_xy)
         API.AntiBan.sleep_between(1.0, 1.1)
 
-    return
+    return True
 
 
 def worship_bones():
@@ -96,12 +118,13 @@ def worship_bones():
     API.AntiBan.sleep_between(0.3, 0.77)
 
     # does_img_exist(img_name="gilded_altar", script_name="Gilded_Altar", threshold=0.80, should_click=True)
-    altar_xy = 817, 482
+    altar_xy = 846, 487
     mouse_click(altar_xy)
 
-    if wait_for_img(img_name="level_up", category_name="General", max_wait_sec=27):
+    API.AntiBan.sleep_between(1.0, 1.1)
+
+    if wait_for_img(img_name="level_up", category_name="General", max_wait_sec=60):
         worship_bones()
-        API.AntiBan.sleep_between(1.0, 1.1)
 
     return
 
@@ -110,7 +133,7 @@ def return_to_phials():
     global phials_xy
 
     portal_xy = 1339, 133
-    click_portal_xy = 700, 293
+    click_portal_xy = 721, 322
 
     mouse_click(portal_xy)
     API.AntiBan.sleep_between(5.0, 5.1)

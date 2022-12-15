@@ -15,6 +15,7 @@ from Scripts.Skilling.Crafting.GE_Glass_Blower import start_blowing_glass
 from Scripts.Skilling.Fletching.GE_Dart_Fletcher import start_fletching_darts
 from Scripts.MiniGames.Hosidius_Plough import start_ploughing_for_favour
 from Scripts.Skilling.Thieving.Stalls.Hosidius_Fruit import start_stealing_fruit
+from Scripts.Skilling.Prayer.Gilded_Altar import start_gilded_altar
 from API.Imaging.OCR.Skill_Levels import get_skill_level, ocr_skill_levels
 
 from enum import Enum
@@ -56,13 +57,14 @@ def launch_script(script_name="pisc_iron"):
         DART_FLETCHER = 14
         HOSIDIUS_PLOUGH = 15
         HOSIDIUS_FRUIT = 16
+        HOSIDIUS_FRUIT = 17
 
     all_scripts = [mine_iron_pisc, smith_gold_edge, run_gnome_course,
                    fish_draynor_shrimp, fish_barb_trout, barbarian_fishing,
                    pickpocket_draynor_man, steal_ardy_cake, burn_logs_at_ge,
                    start_trawling, start_killing_cows, start_rogue_cooking,
                    start_chop_fletching, start_blowing_glass, start_fletching_darts,
-                   start_ploughing_for_favour, start_stealing_fruit]
+                   start_ploughing_for_favour, start_stealing_fruit, start_gilded_altar]
 
     match script_name:
         case "pisc_iron":
@@ -135,6 +137,10 @@ def launch_script(script_name="pisc_iron"):
             selected_script = ScriptEnum.HOSIDIUS_FRUIT.value
             antiban_likelihood = 10
             antiban_downtime_sec = 10
+        case "gilded_altar":
+            selected_script = ScriptEnum.HOSIDIUS_FRUIT.value
+            antiban_likelihood = 20
+            antiban_downtime_sec = 5
 
     is_timer_set = is_break_timer_set()
 
