@@ -1,3 +1,5 @@
 **/.rar
 
 API/Imaging/OCR/Captures/*.png
+
+**/__pycache__/

@@ -34,7 +34,7 @@ clear_debug_log()
 
 # random_human_actions(max_downtime_seconds=12)
 # show_main_gui()
-launch_script("pisc_iron")
+launch_script("hosidius_fruit")
 
 
 # does_img_exist(img_name="spot_check_2", script_name="Pisc_Iron", threshold=0.95)

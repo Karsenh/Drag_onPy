@@ -32,7 +32,7 @@ def steal_from_fruit_stall():
 
 def bank_fruit():
     if is_run_gt(percent=10):
-        is_run_on()
+        is_run_on(should_click=True)
         sleep1 = 1.4, 1.5
     else:
         sleep1 = 4.0, 4.1
@@ -78,13 +78,14 @@ def bank_fruit():
     mouse_click(bank_last_xy, max_x_dev=0, max_y_dev=0)
     API.AntiBan.sleep_between(a, b)
 
-    if not wait_for_img(img_name="deposit_inventory", script_name="Hosidius_Fruit", threshold=0.85):
+    if not wait_for_img(img_name="deposit_inventory", script_name="Hosidius_Fruit", threshold=0.85, max_wait_sec=6):
         print(f'Cant find deposit inventory button - Checking if we clicked the cier...')
         if does_img_exist(img_name="clicked_crier", script_name="Hosidius_Fruit", threshold=0.80):
             # If we accidentally clicked the crier - click the new deposit box xy
             deposit_box_xy = 745, 347
             mouse_click(deposit_box_xy, max_num_clicks=2)
-        return False
+            does_img_exist(img_name="deposit_inventory", script_name="Hosidius_Fruit", threshold=0.85,
+                           should_click=True, x_offset=25, y_offset=25)
     else:
         does_img_exist(img_name="deposit_inventory", script_name="Hosidius_Fruit", threshold=0.85, should_click=True, x_offset=25, y_offset=25)
 
