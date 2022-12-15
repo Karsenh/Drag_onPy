@@ -35,7 +35,9 @@ clear_debug_log()
 
 # random_human_actions(max_downtime_seconds=12)
 # show_main_gui()
-# launch_script("hosidius_fruit")
+launch_script("gilded_altar")
+
+
 
 # GILDED ALTAR
 # does_img_exist(img_name="phials", script_name="Gilded_Altar", threshold=0.75, should_click=True)
@@ -82,10 +84,10 @@ clear_debug_log()
 # cl = 1
 # Scripts.Skilling.Prayer.Gilded_Altar.start_gilded_altar(cl)
 
-scroll_xy = 640, 564
-mouse_move(scroll_xy)
-API.AntiBan.sleep_between(0.8, 1.1)
-pag.hscroll(-22)
+# scroll_xy = 640, 564
+# mouse_move(scroll_xy)
+# API.AntiBan.sleep_between(0.8, 1.1)
+# pag.hscroll(-22)
 
 # global phials_xy
 #

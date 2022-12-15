@@ -57,7 +57,7 @@ def launch_script(script_name="pisc_iron"):
         DART_FLETCHER = 14
         HOSIDIUS_PLOUGH = 15
         HOSIDIUS_FRUIT = 16
-        HOSIDIUS_FRUIT = 17
+        GILDED_ALTAR = 17
 
     all_scripts = [mine_iron_pisc, smith_gold_edge, run_gnome_course,
                    fish_draynor_shrimp, fish_barb_trout, barbarian_fishing,
@@ -138,7 +138,7 @@ def launch_script(script_name="pisc_iron"):
             antiban_likelihood = 10
             antiban_downtime_sec = 10
         case "gilded_altar":
-            selected_script = ScriptEnum.HOSIDIUS_FRUIT.value
+            selected_script = ScriptEnum.GILDED_ALTAR.value
             antiban_likelihood = 20
             antiban_downtime_sec = 5
 
