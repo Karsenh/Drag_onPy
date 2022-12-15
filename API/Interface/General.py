@@ -330,3 +330,14 @@ def handle_auth_screens():
     print(f'Welcome screen? : {is_on_welcome_screen(should_cont=True)}')
     # is_on_welcome_screen(should_cont=True)
     return
+
+
+def toggle_public_chat(state="on"):
+    public_chat_xy = 291, 59
+    match state:
+        case "off":
+            sel_state_xy = 283, 285
+        case "on":
+            sel_state_xy = 293, 201
+    mouse_drag(from_xy=public_chat_xy, to_xy=sel_state_xy)
+    return

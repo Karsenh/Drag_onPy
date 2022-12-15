@@ -1,4 +1,6 @@
 import random
+
+import API.AntiBan
 from API.Setup import *
 import pyautogui as pag
 
@@ -42,7 +44,7 @@ def mouse_drag(from_xy, to_xy, drag_delay=True):
     if drag_delay:
         trans_x, trans_y = translate_coords(to_xy, update_coords=True)
     # Translate the relative coordinates of the direction x, y for dragTo()
-    r_dur = random.uniform(0.3, 0.53)
+    r_dur = random.uniform(0.6, 0.63)
     pag.dragTo(trans_x, trans_y, duration=r_dur)
     return
 
@@ -63,6 +65,12 @@ def mouse_move(xy, max_x_dev=0, max_y_dev=0):
     return
 
 
+def mouse_long_click(xy):
+    move_x, move_y = translate_coords(xy, update_coords=False)
 
+    pag.mouseDown(move_x, move_y)
+    API.AntiBan.sleep_between(0.7, 0.8)
+    pag.mouseUp()
+    return
 
 
