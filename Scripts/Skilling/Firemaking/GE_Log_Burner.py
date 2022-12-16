@@ -1,5 +1,5 @@
 import API.AntiBan
-from API.Interface.General import setup_interface, is_tab_open
+from API.Interface.General import setup_interface, is_tab_open, is_otd_enabled
 from API.AntiBan import write_debug
 from API.Mouse import mouse_click, mouse_move
 from API.Interface.Bank import check_if_bank_tab_open
@@ -16,6 +16,10 @@ def burn_logs_at_ge(curr_loop):
     if curr_loop == 1:
 
         setup_interface("east", 3, "up")
+
+        API.AntiBan.sleep_between(0.3, 1.3)
+
+        is_otd_enabled(False)
 
         API.AntiBan.sleep_between(0.3, 1.3)
 
