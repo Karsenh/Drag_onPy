@@ -109,7 +109,7 @@ def burn_logs():
         i += 1
         write_debug(f'BURN LOGS - {i}/28')
         does_img_exist(img_name="inventory_tinderbox", script_name="GE_Log_Burner", category="Scripts", threshold=.95, should_click=True, y_offset=6, x_offset=6)
-        API.AntiBan.sleep_between(0.3, 0.7)
+        API.AntiBan.sleep_between(0.2, 0.5)
 
         if i > 1:
             does_img_exist(img_name=f"inventory_{logs_to_use}_log", script_name="GE_Log_Burner", category="Scripts", threshold=0.85, should_click=False)
