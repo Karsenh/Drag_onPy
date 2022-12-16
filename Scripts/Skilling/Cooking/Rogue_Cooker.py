@@ -4,7 +4,7 @@ import pyautogui as pag
 import API.AntiBan
 from API.Mouse import mouse_click, mouse_drag
 from API.Interface.General import setup_interface, get_xy_for_invent_slot
-from API.Interface.Bank import check_if_bank_tab_open, deposit_all, close_bank, is_withdraw_qty
+from API.Interface.Bank import check_if_bank_tab_open, deposit_all, close_bank, check_withdraw_qty
 from API.Imaging.Image import does_img_exist, wait_for_img
 from API.Debug import write_debug
 
@@ -46,7 +46,7 @@ def open_rogue_bank():
     API.AntiBan.sleep_between(1.2, 1.3)
     if not check_if_bank_tab_open(tab_num=5, should_open=True, double_check=True):
         return False
-    print(f'WITHDRAW QTY ALL: {is_withdraw_qty(qty="all", should_click=True)}')
+    print(f'WITHDRAW QTY ALL: {check_withdraw_qty(qty="all", should_click=True)}')
     return
 
 

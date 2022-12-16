@@ -99,7 +99,7 @@ def move_to_fishing_spot():
 
 
 def is_fishing():
-    return wait_for_img(img_name="is_fishing", script_name="Draynor_Shrimp", category_name="Scripts", max_wait_sec=5, threshold=0.60)
+    return wait_for_img(img_name="is_fishing", script_name="Draynor_Shrimp", category="Scripts", max_wait_sec=5, threshold=0.60)
 
 
 def click_fishing_spot():

@@ -160,7 +160,7 @@ def worship_bones(wait_sec=60):
 
     API.AntiBan.sleep_between(1.0, 1.1)
 
-    if wait_for_img(img_name="level_up", category_name="General", max_wait_sec=wait_sec):
+    if wait_for_img(img_name="level_up", category="General", max_wait_sec=wait_sec):
         time_elapsed = datetime.datetime.now() - start_time
         time_remaining = 60 - time_elapsed.total_seconds()
         print(f'ELAPSED: {time_elapsed}\nREMAINING: {time_remaining}')

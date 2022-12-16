@@ -50,7 +50,7 @@ def start_trawling(curr_loop):
 
 
 def move_to_reward_box():
-    if wait_for_img(img_name="rewards_box", script_name="Fishing_Trawler", category_name="Scripts", max_wait_sec=5):
+    if wait_for_img(img_name="rewards_box", script_name="Fishing_Trawler", category="Scripts", max_wait_sec=5):
         does_img_exist(img_name="rewards_box", script_name="Fishing_Trawler", should_click=True, threshold=0.95)
         API.AntiBan.sleep_between(3.5, 3.6)
         return True
@@ -90,7 +90,7 @@ def climb_down_ladder():
 
 
 def wait_for_game_to_start():
-    return wait_for_img(img_name="arrival", script_name="Fishing_Trawler", category_name="Scripts", max_wait_sec=360, threshold=0.95)
+    return wait_for_img(img_name="arrival", script_name="Fishing_Trawler", category="Scripts", max_wait_sec=360, threshold=0.95)
 
 
 def move_to_wall():

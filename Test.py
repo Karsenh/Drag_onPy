@@ -24,7 +24,7 @@ from Scripts.Skilling.Firemaking.GE_Log_Burner import burn_logs_at_ge, burn_logs
 from Scripts.MiniGames.Fishing_Trawler import repair_hole_until_finished, start_trawling
 import pyautogui as pag
 from API.Imaging.OCR.Skill_Levels import get_skill_level
-from API.Interface.Bank import is_withdraw_qty
+from API.Interface.Bank import check_withdraw_qty
 from Scripts.Skilling.Thieving.Stalls.Hosidius_Fruit import start_stealing_fruit
 
 
@@ -35,7 +35,12 @@ clear_debug_log()
 
 # random_human_actions(max_downtime_seconds=12)
 # show_main_gui()
-launch_script("gilded_altar")
+launch_script("barbarian_fishing")
+
+
+
+
+# UNF POTS
 
 
 

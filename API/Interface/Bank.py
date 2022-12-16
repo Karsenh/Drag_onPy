@@ -53,9 +53,12 @@ def close_bank():
     return
 
 
-def is_withdraw_qty(qty="all", should_click=True):
+def check_withdraw_qty(qty="all", should_click=True):
     all_sel_color = 122, 29, 27
     all_sel_xy = 768, 813
+
+    x_sel_color = 138, 33, 30
+    x_sel_xy = 720, 816
 
     ten_sel_color = 123, 29, 27
     ten_sel_xy = 655, 815
@@ -70,6 +73,9 @@ def is_withdraw_qty(qty="all", should_click=True):
         case "all":
             color_to_check = all_sel_color
             coords_to_check = all_sel_xy
+        case "x":
+            color_to_check = x_sel_color
+            coords_to_check = x_sel_xy
         case "10":
             color_to_check = ten_sel_color
             coords_to_check = ten_sel_xy

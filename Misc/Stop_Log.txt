@@ -1,1 +1,1 @@
-18:46:53: Couldn't find ore more than 10 times.
+18:54:12: Couldn't find anymore vials of water to withdraw from bank.

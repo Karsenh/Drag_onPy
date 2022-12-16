@@ -55,7 +55,10 @@ def pitch_camera(direction="up"):
     center_viewport_xy = 730, 436
     mouse_move(center_viewport_xy, 33, 47)
     API.AntiBan.sleep_between(0.5, 1.1)
-    pag.hscroll(200)
+    if direction == "up":
+        pag.hscroll(200)
+    else:
+        pag.hscroll(-200)
     return
 
 
