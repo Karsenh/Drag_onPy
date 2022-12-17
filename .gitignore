@@ -8,4 +8,6 @@ build/
 dist/
 main.spec
 output/
-screenshots/
+Assets/Screenshots/
+
+*.rar
