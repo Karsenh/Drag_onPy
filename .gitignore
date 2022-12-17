@@ -8,6 +8,8 @@ build/
 dist/
 main.spec
 output/
-Assets/Screenshots/
+
+API/Imaging/Screenshots/
+Assets/Screenshots/BlueStacks_ScreenShot.png
 
 *.rar
