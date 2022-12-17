@@ -26,12 +26,15 @@
 
 
 ## Generating .exe:
-1. Start instance of Anaconda (terminal) with Python 3.10+
-2. `pip install auto-py-to-exe` if not already installed
-3. `auto-py-to-exe` to start Auto-Py-To-Exe application
-4. Import JSON config settings and convert to exe
-5. (or) Manually configure based on following:
-6. ** NOTE (not shown in image) Must include in "Hidden imports" - "pyautogui" & "pywintypes"
+1. Delete build, dist, main.spec and output directories
+2. Start instance of Anaconda (terminal) with Python 3.10+
+3. `pip install -r requirements.txt` if any new packages have been added
+4. `pip install auto-py-to-exe` if not already installed
+5. `pyinstaller --onefile main.py` to create Build directory within project folder
+6. `auto-py-to-exe` to start Auto-Py-To-Exe application
+7. Import JSON config settings and convert to exe
+8. (or) Manually configure based on following:
+9. ** NOTE (not shown in image) Must include in "Hidden imports" - "pyautogui" & "pywintypes"
 
 <img src='C:\Users\Karsen\Desktop\Drag_onPy\Assets\Images\Instructions\Generating Exe\Auto-Py-To-Exe Configuration.png' />
 

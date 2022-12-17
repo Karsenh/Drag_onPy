@@ -11,7 +11,7 @@
   },
   {
    "optionDest": "onefile",
-   "value": false
+   "value": true
   },
   {
    "optionDest": "console",
@@ -19,7 +19,7 @@
   },
   {
    "optionDest": "icon_file",
-   "value": "C:/Users/Karsen/Desktop/Drag_onPy/Assets/Images/Icon.ico"
+   "value": "C:/Users/Karsen/Desktop/Drag_onPy/Icon.ico"
   },
   {
    "optionDest": "ascii",
@@ -104,6 +104,14 @@
   {
    "optionDest": "hiddenimports",
    "value": "pywintypes"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/Karsen/Desktop/Drag_onPy/BlueStacks_ScreenShot.png;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/Karsen/Desktop/Drag_onPy/Icon.ico;."
   }
  ],
  "nonPyinstallerOptions": {

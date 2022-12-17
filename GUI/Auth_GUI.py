@@ -13,7 +13,7 @@ def show_auth_gui():
     pwd = os.getcwd()
     auth_top = Tk()
     auth_top.title('Drag_onPy - Login')
-    auth_top.iconbitmap(f'{pwd}\Assets\Images\Icon.ico')
+    auth_top.iconbitmap(f'{pwd}\Icon.ico')
     auth_top.configure(bg='#676157')
     auth_top.geometry(f"{auth_top_width}x{auth_top_height}")
 
