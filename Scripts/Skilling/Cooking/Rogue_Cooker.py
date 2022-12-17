@@ -57,6 +57,8 @@ def open_rogue_bank():
     bank_sel_xy = 979, 549
     mouse_drag(rogue_bank_xy, bank_sel_xy)
     API.AntiBan.sleep_between(1.2, 1.3)
+    check_withdraw_qty('all', should_click=True)
+    API.AntiBan.sleep_between(0.5, 0.6)
     if not check_if_bank_tab_open(tab_num=5, should_open=True, double_check=True):
         return False
     return True
