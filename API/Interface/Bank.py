@@ -50,7 +50,7 @@ def close_bank():
     else:
         keyboard.send('esc')
 
-    sleep_between(0.6, 0.7)
+    sleep_between(0.9, 1.1)
     return
 
 
