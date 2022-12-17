@@ -77,7 +77,8 @@ def cook_food():
 
     mouse_click(fire_xy, max_x_dev=15, max_y_dev=13)
 
-    API.AntiBan.sleep_between(1.75, 1.8)
+    # API.AntiBan.sleep_between(1.75, 1.8)
+    wait_for_img(img_name="cook_dialogue", script_name="Rogue_Cooker")
 
     if not does_img_exist(img_name="all_qty_selected", category="General", threshold=0.95):
         does_img_exist(img_name="all_qty", category="General", threshold=0.9, should_click=True, x_offset=8, y_offset=7)
@@ -91,7 +92,7 @@ def cook_food():
 
 
 def is_cooking():
-    return wait_for_img(img_name="cooking_exp", script_name="Rogue_Cooker", threshold=0.90, max_wait_sec=6)
+    return wait_for_img(img_name="cooking_exp", script_name="Rogue_Cooker", threshold=0.90, max_wait_sec=4)
 
 
 def check_for_level_dialogue():
