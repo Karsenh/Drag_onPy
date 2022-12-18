@@ -129,7 +129,7 @@ def show_settings_frame():
     pwd = os.getcwd()
     settings_gui = Toplevel(pady=50, padx=50)
     settings_gui.title('Settings')
-    settings_gui.iconbitmap(f'{pwd}\Assets\Images\Icon.ico')
+    settings_gui.iconbitmap(f'{pwd}\Icon.ico')
     settings_gui.configure(bg='#969488')
 
     break_m = tkinter.StringVar(settings_gui)
@@ -649,3 +649,24 @@ def show_prayer_frame(all_frames, t_active_frame, prayer_frame, prayer_sub_btns)
     prayer_img_label.grid(row=1, column=1)
     gilded_altar_btn.grid(row=1, column=2, columnspan=2, pady=20, padx=30)
     return
+
+
+def show_woodcutting_frame(all_frames, t_active_frame, woodcutting_frame, woodcutting_sub_btns):
+    _, _, _, _, skill_sub_frames = all_frames
+    chop_fletcher = woodcutting_sub_btns
+
+    is_active = t_active_frame("skill", all_frames)
+    print(f'show_wooductting_frame - skill_frame - is_active: {is_active}')
+
+    woodcutting_frame.grid(row=sub_gui_row, column=1, columnspan=5, pady=50)
+
+    prayer_img_path = 'Assets\Images\GUI_Images\Stats\Woodcutting'
+    Shaft_log_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{prayer_img_path}\Chop_fletcher.png'))
+
+    chop_fletcher_label = Label(woodcutting_frame, image=Shaft_log_img, height=100, width=100, bg=label_frame_bg_color)
+    chop_fletcher_label.image = Shaft_log_img
+
+    chop_fletcher_label.grid(row=1, column=1)
+    chop_fletcher.grid(row=1, column=2, columnspan=2, pady=20, padx=30)
+    return
+

@@ -49,7 +49,7 @@ def get_all_btns(all_frames, all_images):
     pisc_iron_img, edge_gold_img, gnome_course_img, \
     draynor_shrimp_map, barb_trout_map, barb_fishing_map, \
     rogue_cooking_map, cow_killer_map, ge_map, canifis_map_img, \
-    remmy_map_img, ardy_map_img, hosidius_map_img \
+    remmy_map_img, ardy_map_img, hosidius_map_img, lummy_map_img \
         = skilling_sub_gui_images
 
     # MAIN_GUI_BTNS
@@ -100,7 +100,7 @@ def get_all_btns(all_frames, all_images):
 
     magic_btn = Button(skill_frame, state="disabled", text="Magic", image=magic_img, height=skill_btn_height, width=skill_btn_width, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_ranged_frame(all_frames, toggle_active_frame))
     fletching_btn = Button(skill_frame, text="Fletching", image=fletching_img, height=skill_btn_height, width=skill_btn_width, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_fletching_frame(all_frames, toggle_active_frame, fletching_frame, fletching_sub_btns))
-    woodcutting_btn = Button(skill_frame, state="disabled", text="Woodcutting", image=woodcutting_img, height=skill_btn_height, width=skill_btn_width, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_firemaking_frame(all_frames, toggle_active_frame, firemaking_frame, firemaking_sub_btns))
+    woodcutting_btn = Button(skill_frame, text="Woodcutting", image=woodcutting_img, height=skill_btn_height, width=skill_btn_width, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_woodcutting_frame(all_frames, toggle_active_frame, woodcutting_frame, woodcutting_sub_btns))
 
     runecrafting_btn = Button(skill_frame, state="disabled", text="RuneCrafting", image=runecrafting_img, height=skill_btn_height, width=skill_btn_width, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_ranged_frame(all_frames, toggle_active_frame, runecrafting_frame, runecrafting_sub_btns))
     slayer_btn = Button(skill_frame, state="disabled", text="Slayer", image=slayer_img, height=skill_btn_height, width=skill_btn_width, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_thieving_frame(all_frames, toggle_active_frame, thieving_frame, thieving_sub_btns))
@@ -174,7 +174,8 @@ def get_all_btns(all_frames, all_images):
     firemaking_sub_btns = ge_log_burner_btn
 
     #     Woodcutting
-
+    chop_fletcher_btn = Button(woodcutting_frame, text="GE Log Burner", image=lummy_map_img,  height=100, width=100, bg='#545550', activebackground=btn_active_bg_color, command=lambda: launch_script("lummy_chop_fletcher"))
+    woodcutting_sub_btns = chop_fletcher_btn
     #     Runecrafting
     runecrafting_sub_btns = None
 
