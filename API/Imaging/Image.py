@@ -72,7 +72,7 @@ def get_color_at_coords(xy):
     return picture[x, y]
 
 
-def does_img_exist(img_name, script_name=None, category='Scripts', threshold=0.8, should_click=False, x_offset=8, y_offset=8):
+def does_img_exist(img_name, script_name=None, category='Scripts', threshold=0.8, should_click=False, x_offset=8, y_offset=8, max_clicks=1):
     global img_check_xy
     capture_bluestacks()
     img_rgb = cv2.imread(BS_SCREEN_PATH)
@@ -111,7 +111,7 @@ def does_img_exist(img_name, script_name=None, category='Scripts', threshold=0.8
             adj_x = img_x + x_offset
             adj_y = img_y + y_offset
             adj_xy = adj_x, adj_y
-            mouse_click(adj_xy)
+            mouse_click(adj_xy, max_num_clicks=max_clicks)
         write_debug(f'{img_check_xy} saved to img_check_xy global')
         return True
 
@@ -119,14 +119,14 @@ def does_img_exist(img_name, script_name=None, category='Scripts', threshold=0.8
 # Search for a particular img on screen for a set amount of time
 #       Returns True if the image is found within the amount of time
 #       Returns False if the image is not found after trying for specified amount of time
-def wait_for_img(img_name, script_name=None, category="Scripts", max_wait_sec=5, threshold=0.8, should_click=False, x_offset=0, y_offset=0):
+def wait_for_img(img_name, script_name=None, category="Scripts", max_wait_sec=5, threshold=0.8, should_click=False, x_offset=0, y_offset=0, max_clicks=1):
     start_time = datetime.now()
     write_debug(f'⏲ Wait_For_Img Start Time: {start_time}')
 
     while not is_time_up(start_time, max_wait_sec):
-        img_found = does_img_exist(img_name, script_name=script_name, category=category, threshold=threshold)
+        img_found = does_img_exist(img_name, script_name=script_name, category=category, threshold=threshold, should_click=should_click, x_offset=x_offset, y_offset=y_offset, max_clicks=max_clicks)
         if img_found:
-            does_img_exist(img_name, script_name=script_name, category=category, threshold=threshold, should_click=should_click, x_offset=x_offset, y_offset=y_offset)
+            # does_img_exist(img_name, script_name=script_name, category=category, threshold=threshold, should_click=should_click, x_offset=x_offset, y_offset=y_offset)
             return True
         # else:
             # write_debug(f'Still checking for image...')

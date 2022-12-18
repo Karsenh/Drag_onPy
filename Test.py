@@ -26,6 +26,7 @@ import pyautogui as pag
 from API.Imaging.OCR.Skill_Levels import get_skill_level
 from API.Interface.Bank import check_withdraw_qty
 from Scripts.Skilling.Thieving.Stalls.Hosidius_Fruit import start_stealing_fruit
+from Scripts.Skilling.Agility.Canifis_Rooftops import start_canifis_rooftops, click_second_jump, click_third_jump
 
 
 get_bluestacks_xy()
@@ -35,8 +36,20 @@ clear_debug_log()
 
 # random_human_actions(max_downtime_seconds=12)
 # show_main_gui()
-launch_script("rogue_cooker")
+launch_script("canifis_rooftops")
+# start_canifis_rooftops(2)
+# wait_for_img(img_name="mog_on_2", script_name="Canifis_Rooftops", threshold=0.92, should_click=True, max_wait_sec=6, x_offset=4, y_offset=8)
+#
 
+# wait_for_img(img_name="o1_alt", script_name="Canifis_Rooftops", threshold=0.85, should_click=True, max_wait_sec=15,
+#              y_offset=13, x_offset=4)
+
+# does_img_exist(img_name="o1_alt", script_name="Canifis_Rooftops", threshold=0.9, should_click=True)
+
+# wait_for_img(img_name='o7_from_broken', script_name="Canifis_Rooftops", threshold=0.9, should_click=True, max_wait_sec=10)
+
+
+# does_img_exist(img_name="mog_3", script_name="Canifis_Rooftops", threshold=0.9, should_click=True)
 
 
 # UNF POTS
