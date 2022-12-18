@@ -11,8 +11,8 @@ def __main__() -> int:
     set_bluestacks_window_size()
     capture_bluestacks()
 
-    # show_main_gui()
-    show_auth_gui()
+    show_main_gui()
+    # show_auth_gui()
 
     return 0
 

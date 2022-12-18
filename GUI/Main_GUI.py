@@ -44,15 +44,15 @@ def show_main_gui():
     all_images = get_all_gui_images()
     all_btns = get_all_btns(all_frames, all_images)
 
-    # Get the Main_Gui from All_Btns  (Gold, Skill, and Pvm_Pvp buttons not used)
+    # Get the Main_Gui from All_Btns  (Gold, Skill, and Minigames buttons not used)
     main_gui_btns, _, _, _ = all_btns
 
     # Get the Main_Gui btns out to use in root
-    gold_btn, skill_btn, pvm_pvp_btn, settings_btn, info_btn, bug_report_btn = main_gui_btns
+    gold_btn, skill_btn, minigames_btn, settings_btn, info_btn, bug_report_btn = main_gui_btns
 
     gold_btn.grid(row=main_gui_row, column=1, pady=20, padx=15)
     skill_btn.grid(row=main_gui_row, column=2, pady=20, padx=15)
-    pvm_pvp_btn.grid(row=main_gui_row, column=3, pady=20, padx=15)
+    minigames_btn.grid(row=main_gui_row, column=3, pady=20, padx=15)
 
     settings_btn.grid(row=footer_row, column=1, columnspan=1, pady=20, padx=20)
     info_btn.grid(row=footer_row, column=2, columnspan=1, pady=20)
