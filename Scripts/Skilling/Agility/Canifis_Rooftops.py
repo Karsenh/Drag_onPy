@@ -77,7 +77,8 @@ def click_fifth_jump():
             # Return to the start of the course (recover from o3 fall)
             back_to_start_xy = 1445, 230
             mouse_click(back_to_start_xy)
-            wait_for_img(img_name="o4_restart", script_name="Canifis_Rooftops", threshold=0.9, should_click=True, y_offset=4, max_wait_sec=8)
+            API.AntiBan.sleep_between(2.8, 3.1)
+            wait_for_img(img_name="o4_restart", script_name="Canifis_Rooftops", threshold=0.75, should_click=True, y_offset=4, max_wait_sec=8)
             click_second_jump()
             click_third_jump()
             click_fourth_jump()
