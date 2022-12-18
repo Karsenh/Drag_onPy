@@ -36,8 +36,9 @@ clear_debug_log()
 
 # random_human_actions(max_downtime_seconds=12)
 # show_main_gui()
-# launch_script("canifis_rooftops")
+launch_script("canifis_rooftops")
 # start_canifis_rooftops(2)
+# wait_for_img(img_name='o3_alt', script_name="Canifis_Rooftops", threshold=0.9, should_click=True, x_offset=35, y_offset=45, max_wait_sec=10)
 
 
 # wait_for_img(img_name="o4_restart", script_name="Canifis_Rooftops", threshold=0.75, should_click=True, y_offset=4, max_wait_sec=8)
