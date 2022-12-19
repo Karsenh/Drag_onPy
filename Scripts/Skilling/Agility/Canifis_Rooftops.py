@@ -30,7 +30,7 @@ def click_first_tree():
 
 def click_second_jump():
     if wait_for_img(img_name="mog_4", script_name="Canifis_Rooftops", threshold=0.9, should_click=True, max_wait_sec=8,
-                    x_offset=5, y_offset=8):
+                    x_offset=5, y_offset=15):
         API.AntiBan.sleep_between(0.8, 1.1)
         return wait_for_img(img_name='o2_from_mog', script_name="Canifis_Rooftops", threshold=0.9, should_click=True,
                             x_offset=20, y_offset=22, max_wait_sec=10)
@@ -44,9 +44,9 @@ def click_second_jump():
 
 def click_third_jump():
     if wait_for_img(img_name="mog_on_2", script_name="Canifis_Rooftops", threshold=0.92, should_click=True, max_wait_sec=6, x_offset=4, y_offset=8):
-        return wait_for_img(img_name='o3_from_mog', script_name="Canifis_Rooftops", threshold=0.9, should_click=True, x_offset=30, y_offset=25, max_wait_sec=10)
+        return wait_for_img(img_name='o3_from_mog', script_name="Canifis_Rooftops", threshold=0.9, should_click=True, x_offset=38, y_offset=25, max_wait_sec=10)
     else:
-        if not wait_for_img(img_name='o3', script_name="Canifis_Rooftops", threshold=0.9, should_click=True, x_offset=25, y_offset=30, max_wait_sec=10):
+        if not wait_for_img(img_name='o3_alt', script_name="Canifis_Rooftops", threshold=0.9, should_click=True, x_offset=35, y_offset=45, max_wait_sec=10):
             handle_level_dialogue()
     return
 
@@ -77,7 +77,8 @@ def click_fifth_jump():
             # Return to the start of the course (recover from o3 fall)
             back_to_start_xy = 1445, 230
             mouse_click(back_to_start_xy)
-            wait_for_img(img_name="o4_restart", script_name="Canifis_Rooftops", threshold=0.9, should_click=True, y_offset=4, max_wait_sec=8)
+            API.AntiBan.sleep_between(2.8, 3.1)
+            wait_for_img(img_name="o4_restart", script_name="Canifis_Rooftops", threshold=0.75, should_click=True, y_offset=4, max_wait_sec=8)
             click_second_jump()
             click_third_jump()
             click_fourth_jump()
