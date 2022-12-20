@@ -65,3 +65,5 @@ SETTINGS_tab_xy = 1426, 722
 MUSIC_tab_xy = 1426, 655
 
 EXIT_tab_xy = 1426, 787
+
+MAGIC_tab_xy = 35, 523

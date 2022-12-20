@@ -27,6 +27,7 @@ from API.Imaging.OCR.Skill_Levels import get_skill_level
 from API.Interface.Bank import check_withdraw_qty
 from Scripts.Skilling.Thieving.Stalls.Hosidius_Fruit import start_stealing_fruit
 from Scripts.Skilling.Agility.Canifis_Rooftops import start_canifis_rooftops, click_second_jump, click_third_jump
+from Scripts.Skilling.Agility.Seers_Rooftops import start_seers_rooftops, handle_next_jump, alch_on_agility_drop
 
 
 get_bluestacks_xy()
@@ -36,10 +37,55 @@ clear_debug_log()
 
 # random_human_actions(max_downtime_seconds=12)
 # show_main_gui()
-launch_script("canifis_rooftops")
+launch_script("seers_rooftops")
 # start_canifis_rooftops(2)
-# wait_for_img(img_name='o3_alt', script_name="Canifis_Rooftops", threshold=0.9, should_click=True, x_offset=35, y_offset=45, max_wait_sec=10)
 
+
+# start_seers_rooftops(1)
+
+
+
+# wait_for_img(img_name="restart_course", script_name="Seers_Rooftops", threshold=0.9, should_click=True)
+# 1. Search for high-alch and click
+# if not wait_for_img(img_name='high_alch', script_name='Seers_Rooftops', threshold=0.8, should_click=True):
+#     # 2. If not found - check if Magic tab is open and search for high-alch again, clicking if found.
+#     if is_tab_open("magic", should_open=True):
+#         if not wait_for_img(img_name='high_alch', script_name='Seers_Rooftops', threshold=0.9, should_click=True):
+#             print(f"Couldn't find alchemy spell despite magic tab being open")
+#             # return False
+#     else:
+#         print(f"Couldn't open magic tab")
+#         # return False
+# else:
+#     # 3. Hover mouse over magic_long_note with High-alch selected, waiting for agility exp before left clicking
+#     if wait_for_img(img_name="magic_long_note", script_name="Seers_Rooftops", x_offset=4, y_offset=4):
+#         mouse_move(get_existing_img_xy())
+#
+#
+# if wait_for_img(img_name="agility_exp", script_name="Seers_Rooftops", max_wait_sec=15):
+#     pag.leftClick();
+
+
+# is_tab_open("magic", should_open=True)
+
+# wait_for_img(img_name="Agility_exp", script_name="Seers_Rooftops", threshold=0.9, max_wait_sec=20)
+
+# check_color = 106, 35, 26
+# x_arr, y_arr = find_color_xy(BS_SCREEN_PATH, check_color)
+#
+# if len(x_arr) > 0:
+#     x_check = x_arr[len(x_arr) - 8]
+#     y_check = y_arr[len(y_arr) - 8]
+#     print(f'x: {x_check} y: {y_check}')
+#     xy = x_check, y_check
+#     mouse_move(xy)
+# else:
+#     print('Couldnt find the color')
+
+
+
+
+# does_color_exist(check_color)
 
 # wait_for_img(img_name="o4_restart", script_name="Canifis_Rooftops", threshold=0.75, should_click=True, y_offset=4, max_wait_sec=8)
 # wait_for_img(img_name="mog_on_2", script_name="Canifis_Rooftops", threshold=0.92, should_click=True, max_wait_sec=6, x_offset=4, y_offset=8)

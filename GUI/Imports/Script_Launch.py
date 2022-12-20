@@ -18,6 +18,7 @@ from Scripts.Skilling.Thieving.Stalls.Hosidius_Fruit import start_stealing_fruit
 from Scripts.Skilling.Prayer.Gilded_Altar import start_gilded_altar
 from Scripts.Skilling.Herblore.Unf_Pots import start_unf_pots
 from Scripts.Skilling.Agility.Canifis_Rooftops import start_canifis_rooftops
+from Scripts.Skilling.Agility.Seers_Rooftops import start_seers_rooftops
 from API.Imaging.OCR.Skill_Levels import get_skill_level, ocr_skill_levels
 
 from enum import Enum
@@ -62,6 +63,7 @@ def launch_script(script_name="pisc_iron"):
         GILDED_ALTAR = 17
         UNF_POTS = 18
         CANIFIS_ROOFTOPS = 19
+        SEERS_ROOFTOPS = 20
 
     all_scripts = [mine_iron_pisc, smith_gold_edge, run_gnome_course,
                    fish_draynor_shrimp, fish_barb_trout, barbarian_fishing,
@@ -69,7 +71,7 @@ def launch_script(script_name="pisc_iron"):
                    start_trawling, start_killing_cows, start_rogue_cooking,
                    start_chop_fletching, start_blowing_glass, start_fletching_darts,
                    start_ploughing_for_favour, start_stealing_fruit, start_gilded_altar,
-                   start_unf_pots, start_canifis_rooftops]
+                   start_unf_pots, start_canifis_rooftops, start_seers_rooftops]
 
     match script_name:
         case "pisc_iron":
@@ -154,6 +156,10 @@ def launch_script(script_name="pisc_iron"):
             selected_script = ScriptEnum.CANIFIS_ROOFTOPS.value
             antiban_likelihood = 25
             antiban_downtime_sec = 8
+        case "seers_rooftops":
+            selected_script = ScriptEnum.SEERS_ROOFTOPS.value
+            antiban_likelihood = 50
+            antiban_downtime_sec = 0.5
 
     is_timer_set = is_break_timer_set()
 
