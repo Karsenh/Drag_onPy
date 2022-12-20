@@ -78,7 +78,7 @@ def check_for_dead_snare():
     global should_reset
 
     if wait_for_img(img_name=f"dead_trap_{bird_type}", script_name="Bird_Snarer", should_click=True, x_offset=8,
-                        y_offset=10, max_wait_sec=2, threshold=0.95):
+                        y_offset=10, max_wait_sec=2, threshold=0.93):
         should_reset = True
         check_snare_for_bird()
     return
