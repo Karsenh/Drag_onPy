@@ -93,14 +93,11 @@ def does_img_exist(img_name, script_name=None, category='Scripts', threshold=0.8
 
     res = cv2.matchTemplate(img_gray, template, cv2.TM_CCOEFF_NORMED)
 
-    # if DEBUG_MODE:
-    #     print(f'Res: {res}')
-
     # Store the coordinates of matched area in a numpy array
     loc = np.where(res >= threshold)
 
     if len(loc[0]) == 0 and len(loc[1]) == 0:
-        write_debug(f'✖ {img_name}.png NOT found within game window.\n {loc[0]} {loc[1]}')
+        # write_debug(f'✖ {img_name}.png NOT found within game window.\n {loc[0]} {loc[1]}')
         return False
     else:
         write_debug(f'✔ {img_name}.png found:\n loc[0] = {loc[0]}\nloc[1] = {loc[1]}')

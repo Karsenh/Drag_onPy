@@ -28,7 +28,7 @@ def start_snaring_birds(curr_loop):
                 else:
                     should_reset = True
 
-        reset_tile_xy = 852, 535
+        reset_tile_xy = 886, 485
         mouse_click(reset_tile_xy)
         API.AntiBan.sleep_between(1.4, 1.5)
 
