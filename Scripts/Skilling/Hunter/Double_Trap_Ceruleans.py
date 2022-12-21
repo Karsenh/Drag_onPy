@@ -18,9 +18,11 @@ trap_tile_2 = 779, 665
 needs_reset_1 = False
 needs_reset_2 = False
 
+# 92 on dt
 caught_threshold = 0.92
-down_threshold = 0.91
-reset_threshold = 0.97
+# 91 on dt
+down_threshold = 0.94
+reset_threshold = 0.90
 
 last_reset_trap_num = 0
 
@@ -29,8 +31,8 @@ def start_trapping_birds(curr_loop):
     global should_reset_traps
 
     if curr_loop == 1:
-        # setup_interface("north", 5, "up")
-        # API.AntiBan.sleep_between(1.0, 1.1)
+        setup_interface("north", 5, "up")
+        API.AntiBan.sleep_between(1.0, 1.1)
         is_tab_open("inventory", should_open=True)
         set_initial_traps()
 
@@ -186,7 +188,7 @@ def reset_trap_num(trap_num=1):
             API.AntiBan.sleep_between(5.0, 5.1)
             return True
     # Check for down / pickup separate from caught - no need to empty inventory here
-    elif wait_for_img(img_name=f"trap_{trap_num}_down", script_name=script_name, threshold=down_threshold, should_click=True, x_offset=5, y_offset=4):
+    elif wait_for_img(img_name=f"trap_{trap_num}_down", script_name=script_name, threshold=down_threshold, should_click=True, x_offset=9, y_offset=8):
         API.AntiBan.sleep_between(3.0, 3.1)
         # Clicking the tile we want to set trap ONE on
         mouse_click(trap_tile_xy)
