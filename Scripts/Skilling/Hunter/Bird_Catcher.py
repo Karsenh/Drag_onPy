@@ -23,7 +23,7 @@ def start_snaring_birds(curr_loop):
                 alch()
             check_count += 1
             if check_count > 14:
-                if not does_img_exist(img_name="downed_trap", script_name="Bird_Catcher", should_click=True, threshold=0.9):
+                if not does_img_exist(img_name="downed_trap", script_name="Bird_Catcher", should_click=True, threshold=0.85):
                     return False
                 else:
                     should_reset = True
@@ -53,11 +53,11 @@ def check_snare_for_bird():
 
     # if we find a caught bird...
     if wait_for_img(img_name=f"caught_{bird_type}_bird", script_name="Bird_Catcher", max_wait_sec=2, x_offset=5,
-                    y_offset=10, threshold=0.9):
+                    y_offset=10, threshold=0.86):
         should_reset = True
         API.AntiBan.sleep_between(1.0, 1.1)
         wait_for_img(img_name=f"caught_{bird_type}_bird", script_name="Bird_Catcher", max_wait_sec=2, x_offset=5,
-                     y_offset=10, should_click=True, threshold=0.9)
+                     y_offset=10, should_click=True, threshold=0.86)
 
         if not wait_for_img(img_name="hunter_exp", script_name="Bird_Catcher"):
             # Empty inventory of birds and bones
@@ -79,8 +79,8 @@ def check_snare_for_bird():
 def check_for_dead_snare():
     global should_reset
 
-    if wait_for_img(img_name=f"dead_trap_{bird_type}", script_name="Bird_Catcher", should_click=True, x_offset=8,
-                        y_offset=10, max_wait_sec=2, threshold=0.98):
+    if wait_for_img(img_name=f"dead_trap_{bird_type}_alt", script_name="Bird_Catcher", should_click=True, x_offset=8,
+                        y_offset=10, max_wait_sec=2, threshold=0.85):
         should_reset = True
         check_snare_for_bird()
         return True
