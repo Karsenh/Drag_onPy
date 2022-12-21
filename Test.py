@@ -37,8 +37,10 @@ clear_debug_log()
 
 # random_human_actions(max_downtime_seconds=12)
 # show_main_gui()
-launch_script("bird_snarer")
+launch_script("bird_catcher")
 # start_canifis_rooftops(2)
+
+
 
 
 # start_seers_rooftops(1)

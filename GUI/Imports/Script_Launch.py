@@ -19,7 +19,7 @@ from Scripts.Skilling.Prayer.Gilded_Altar import start_gilded_altar
 from Scripts.Skilling.Herblore.Unf_Pots import start_unf_pots
 from Scripts.Skilling.Agility.Canifis_Rooftops import start_canifis_rooftops
 from Scripts.Skilling.Agility.Seers_Rooftops import start_seers_rooftops
-from Scripts.Skilling.Hunter.Bird_Snarer import start_snaring_birds
+from Scripts.Skilling.Hunter.Bird_Catcher import start_snaring_birds
 from API.Imaging.OCR.Skill_Levels import get_skill_level, ocr_skill_levels
 
 from enum import Enum
@@ -162,7 +162,7 @@ def launch_script(script_name="pisc_iron"):
             selected_script = ScriptEnum.SEERS_ROOFTOPS.value
             antiban_likelihood = 50
             antiban_downtime_sec = 0.5
-        case "bird_snarer":
+        case "bird_catcher":
             selected_script = ScriptEnum.BIRD_SNARER.value
             antiban_likelihood = 30
             antiban_downtime_sec = 1
