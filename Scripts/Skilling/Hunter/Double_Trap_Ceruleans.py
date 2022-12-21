@@ -9,8 +9,8 @@ script_name = "Double_Trap_Ceruleans"
 should_reset_traps = False
 bird_type = "cerulean"
 
-monitor_tile_from_trap_1 = 703, 608
-monitor_tile_from_trap_2 = 685, 419
+monitor_tile_from_trap_1 = 748, 740
+monitor_tile_from_trap_2 = 743, 428
 
 trap_tile_1 = 775, 367
 trap_tile_2 = 779, 665
@@ -19,7 +19,8 @@ needs_reset_1 = False
 needs_reset_2 = False
 
 # 92 on dt
-caught_threshold = 0.92
+caught_threshold = 0.91
+caught_threshold_from_drop = 0.94
 # 91 on dt
 down_threshold = 0.94
 reset_threshold = 0.90
@@ -177,7 +178,7 @@ def reset_trap_num(trap_num=1):
             API.AntiBan.sleep_between(0.4, 0.5)
             is_otd_enabled(False)
             API.AntiBan.sleep_between(0.4, 0.5)
-            wait_for_img(img_name=f"trap_{trap_num}_from_drop_invent", script_name="Double_Trap_Ceruleans", threshold=caught_threshold, should_click=True)
+            wait_for_img(img_name=f"trap_{trap_num}_from_drop_invent", script_name="Double_Trap_Ceruleans", threshold=caught_threshold_from_drop, should_click=True, y_offset=5)
             # Click track reset tile to try picking up trap again after making inventory space
             API.AntiBan.sleep_between(2.0, 2.1)
             # Move to trap reset tile
@@ -198,15 +199,16 @@ def reset_trap_num(trap_num=1):
         API.AntiBan.sleep_between(5.0, 5.1)
         return True
     elif wait_for_img(img_name=f"trap_{trap_num}_pickup", script_name=script_name, threshold=reset_threshold, should_click=True):
+        API.AntiBan.sleep_between(3.0, 3.1)
         wait_for_img(img_name="inventory_trap", script_name=script_name, should_click=True)
         API.AntiBan.sleep_between(5.0, 5.1)
 
-    print(f"Didn't find trap_{trap_num}_caught / down / reset. Returning False")
+    print(f"⛔ Didn't find trap_{trap_num}_caught / down / reset. Returning False")
     return False
 
 
 def reset_trap_two_from_one():
-    if does_img_exist(img_name=f"trap_2_caught_from_1", script_name=script_name, threshold=0.9, should_click=True) or \
+    if does_img_exist(img_name=f"trap_2_caught_from_1", script_name=script_name, threshold=0.92, should_click=True) or \
             does_img_exist(img_name=f"trap_2_down_from_1", script_name=script_name, threshold=0.9, should_click=True, x_offset=5, y_offset=4) or \
             does_img_exist(img_name=f"trap_2_pickup_from_1", script_name=script_name, threshold=0.9, should_click=True):
         print(f'Trap two seen needing reset from trap 1 reset. Clicking...')
