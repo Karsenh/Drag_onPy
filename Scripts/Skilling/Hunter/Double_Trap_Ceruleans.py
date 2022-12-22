@@ -322,6 +322,7 @@ def move_back_to_monitor(from_tile):
 
     else:
         write_debug(f"⛔ move_back_to_monitor couldn't find trap_{from_tile}_set image. Why?")
+        mouse_click(monitor_tile_xy)
     return
 
 

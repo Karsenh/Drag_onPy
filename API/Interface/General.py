@@ -1,4 +1,4 @@
-from API.Imaging.Image import does_img_exist, does_color_exist, get_color_at_coords
+from API.Imaging.Image import does_img_exist, does_color_exist, get_color_at_coords, wait_for_img
 from API.Mouse import *
 from API.Imports.Coords import *
 from API.Debug import DEBUG_MODE, write_debug
@@ -293,36 +293,31 @@ def check_skill_tab(max_sec=2.0, skill_to_check='random'):
 
 
 def is_on_dc_screen(should_cont=True):
-    img_found = does_img_exist("disconnected", category="Auth")
-
-    if img_found and should_cont:
+    if wait_for_img(img_name="disconnected_screen", category="Auth", threshold=0.85) and should_cont and should_cont:
         xy = 755, 555
         mouse_click(xy)
         API.AntiBan.sleep_between(3.0, 3.5)
+        return True
 
-    return img_found
+    return False
 
 
 def is_on_login_screen(should_cont=True):
-    img_found = does_img_exist("login_screen", category="Auth")
-
-    if img_found and should_cont:
+    if wait_for_img(img_name="login_screen", category="Auth", threshold=0.85) and should_cont and should_cont:
         xy = 753, 471
         mouse_click(xy, 67, 23)
-        API.AntiBan.sleep_between(7.1, 8.2)
+        return True
 
-    return img_found
+    return False
 
 
 def is_on_welcome_screen(should_cont=True):
-    img_found = does_img_exist("welcome_screen", category="Auth")
-
-    if img_found and should_cont:
+    if wait_for_img(img_name="welcome_screen", category="Auth", threshold=0.85) and should_cont:
         xy = 755, 593
         mouse_click(xy, 54, 34)
-        API.AntiBan.sleep_between(1.3, 1.7)
+        return True
 
-    return img_found
+    return False
 
 
 def handle_auth_screens():
