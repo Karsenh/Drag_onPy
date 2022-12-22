@@ -223,7 +223,7 @@ def reset_trap_num(trap_num=1):
     elif wait_for_img(img_name=f"trap_{trap_num}_pickup", script_name=script_name, threshold=reset_threshold, should_click=True):
         API.AntiBan.sleep_between(3.0, 3.1)
         wait_for_img(img_name="inventory_trap", script_name=script_name, should_click=True)
-        # API.AntiBan.sleep_between(5.0, 5.1)
+        API.AntiBan.sleep_between(5.0, 5.1)
         return True
 
     print(f"⛔ Didn't find trap_{trap_num}_caught / down / reset. Returning False")
