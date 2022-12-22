@@ -133,7 +133,7 @@ def burn_logs():
 
 
 def click_to_open_bank():
-    bank_open_xy = 774, 481
+    bank_open_xy = 788, 483
     mouse_click(bank_open_xy, max_x_dev=0, max_y_dev=0)
     API.AntiBan.sleep_between(1.1, 1.5)
     return

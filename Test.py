@@ -37,7 +37,7 @@ clear_debug_log()
 
 # random_human_actions(max_downtime_seconds=12)
 # show_main_gui()
-launch_script("troll_double_trap_ceruleans")
+launch_script("ge_dart_fletcher")
 # start_canifis_rooftops(2)
 
 
