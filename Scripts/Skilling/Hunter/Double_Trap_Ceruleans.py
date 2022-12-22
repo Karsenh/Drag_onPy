@@ -126,7 +126,7 @@ def handle_trap_state():
         if reset_trap_num(1):
             # Since both traps need replacing, click trap 2 from here
             if reset_trap_two_from_one():
-            # Move back to monitor tile and begin checking trap status'
+                # Move back to monitor tile and begin checking trap status'
                 move_back_to_monitor(from_tile=2)
                 needs_reset_1 = False
                 needs_reset_2 = False
