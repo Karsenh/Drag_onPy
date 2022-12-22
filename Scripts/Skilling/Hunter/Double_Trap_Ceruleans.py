@@ -179,9 +179,10 @@ def reset_trap_num(trap_num=1):
     is_tab_open("inventory", True)
 
     # Check for CAUGHT trap separately - might need to empty invent
-    if wait_for_img(img_name=f"trap_{trap_num}_caught", script_name=script_name, threshold=caught_threshold, should_click=True):
+    if wait_for_img(img_name=f"trap_{trap_num}_caught", script_name=script_name, threshold=caught_threshold):
+        API.AntiBan.sleep_between(0.4, 0.5)
         # Click caught bird trap to dismantle...
-        # wait_for_img(img_name=f"trap_{trap_num}_caught", script_name=script_name, threshold=caught_threshold, y_offset=6, x_offset=4, should_click=True)
+        wait_for_img(img_name=f"trap_{trap_num}_caught", script_name=script_name, threshold=caught_threshold, y_offset=6, x_offset=4, should_click=True)
 
         # Wait for hunter exp (trap harvest)...
         if wait_for_img(img_name="hunter_exp", script_name=script_name):
