@@ -3,13 +3,14 @@ from API.Interface.General import setup_interface, is_otd_enabled, is_tab_open
 from API.Imaging.Image import wait_for_img, does_img_exist
 from API.Mouse import mouse_click
 import pyautogui as pag
+from API.Debug import write_debug
 
 script_name = "Double_Trap_Ceruleans"
 
 should_reset_traps = False
 bird_type = "cerulean"
 
-monitor_tile_from_trap_1 = 748, 740
+monitor_tile_from_trap_1 = 810, 740
 monitor_tile_from_trap_2 = 811, 424
 
 trap_tile_1 = 775, 367
@@ -37,21 +38,31 @@ def start_trapping_birds(curr_loop):
         is_tab_open("inventory", should_open=True)
         set_initial_traps()
 
+    i = 0
     while not should_reset_traps:
+        i += 1
+        write_debug(f'👀 While not should_reset_traps executed {i} time(s) - Checking traps...')
         if check_should_reset_traps():
-            print(f'✅ should_reset_traps flipped to TRUE')
+            write_debug(f'✔ should_reset_traps flipped to TRUE')
             should_reset_traps = True
+
         else:
-            high_alch()
+            write_debug(f"🧿 should_reset_traps = False. Dropping bird shit...")
+            drop_bird_shit()
+            # high_alch()
 
     # Reset traps that need it
     handle_trap_state()
     should_reset_traps = False
-    print(f'Traps handled and should_reset_traps set back to false.')
+    i = 0
+    print(f'🧿 Traps handled. should_reset_traps = False again - Exiting main...')
 
     return True
 
 
+# ----------------
+# INTERNAL METHODS:
+# ----------------
 def set_initial_traps():
     global monitor_tile_from_trap_2
     trap_2_from_1_xy = 869, 798
@@ -74,11 +85,20 @@ def check_should_reset_traps():
     global last_reset_trap_num
 
     if last_reset_trap_num == 2:
-        check_trap_num(1)
-        check_trap_num(2)
+        write_debug(f"Last trap was 2 - Checking 1 first...")
+        if check_trap_num(1):
+            write_debug(f"✔ Check_trap_num(1) returned true - skipping other checks to handle")
+            return True
+        if check_trap_num(2):
+            write_debug(f"🧿 Trap 2 needs reset - double checking Trap 1...")
+            check_trap_num(1)
     else:
-        check_trap_num(2)
-        check_trap_num(1)
+        if check_trap_num(2):
+            write_debug(f"✔ Check_trap_num(2) returned true - skipping other checks to handle")
+            return True
+        if check_trap_num(1):
+            write_debug(f"🧿 Trap 1 needs reset - double checking Trap 2...")
+            check_trap_num(2)
 
     if needs_reset_1 or needs_reset_2:
         print(f'✅ Check_should_reset returning True\nneeds_reset_1 = {needs_reset_1}\nneeds_reset_2 = {needs_reset_2}')
@@ -102,19 +122,17 @@ def handle_trap_state():
 
     if needs_reset_1 and needs_reset_2:
         # Both traps need resetting - go from one directly to the other - then back to monitor tile from second
-        print(f'Both traps need to be reset')
+        print(f'🧿 Both traps need to be reset')
         if reset_trap_num(1):
             # Since both traps need replacing, click trap 2 from here
             reset_trap_two_from_one()
             # Move back to monitor tile and begin checking trap status'
-            if not wait_for_img(img_name="monitor_tile_signal_from_2", script_name="Double_Trap_Ceruleans", threshold=0.90, max_wait_sec=6):
-                mouse_click(monitor_tile_from_trap_2)
-            else:
-                API.AntiBan.sleep_between(0.8, 0.9)
-                mouse_click(monitor_tile_from_trap_2)
+            move_back_to_monitor(from_tile=2)
             needs_reset_1 = False
             needs_reset_2 = False
             last_reset_trap_num = 2
+        else:
+            write_debug(f"⛔ Couldn't reset trap one & two for some reason...")
 
     else:
         # Check individually
@@ -122,11 +140,8 @@ def handle_trap_state():
             print(f'Only trap ONE needs resetting')
             reset_trap_num(1)
             # Move back to monitor tile
-            mouse_click(monitor_tile_from_trap_1)
-            if not wait_for_img(img_name="monitor_tile_signal_from_1", script_name="Double_Trap_Ceruleans", threshold=0.90, max_wait_sec=6):
-                mouse_click(monitor_tile_from_trap_1)
-            else:
-                API.AntiBan.sleep_between(0.7, 0.8)
+            # mouse_click(monitor_tile_from_trap_1)
+            move_back_to_monitor(from_tile=1)
 
             needs_reset_1 = False
             last_reset_trap_num = 1
@@ -134,11 +149,9 @@ def handle_trap_state():
         if needs_reset_2:
             print(f'Only trap TWO needs resetting')
             reset_trap_num(2)
-            mouse_click(monitor_tile_from_trap_2)
-            if not wait_for_img(img_name="monitor_tile_signal_from_2", script_name="Double_Trap_Ceruleans", threshold=0.90, max_wait_sec=6):
-                mouse_click(monitor_tile_from_trap_2)
-            else:
-                API.AntiBan.sleep_between(0.7, 0.8)
+            # mouse_click(monitor_tile_from_trap_2)
+            move_back_to_monitor(from_tile=2)
+
             needs_reset_2 = False
             last_reset_trap_num = 2
 
@@ -151,6 +164,7 @@ def handle_trap_state():
 # HELPERS
 # ---------
 def reset_trap_num(trap_num=1):
+    # If we're in here - one or both flags are True
     global trap_tile_1
     global trap_tile_2
 
@@ -162,56 +176,54 @@ def reset_trap_num(trap_num=1):
 
     is_tab_open("inventory", True)
 
-    # Check for caught trap separately - might need to empty invent
-    if wait_for_img(img_name=f"trap_{trap_num}_caught", script_name=script_name, threshold=caught_threshold, y_offset=4, x_offset=4):
-        API.AntiBan.sleep_between(0.3, 0.6)
-        wait_for_img(img_name=f"trap_{trap_num}_caught", script_name=script_name, threshold=caught_threshold, y_offset=4, x_offset=4, should_click=True)
+    # Check for CAUGHT trap separately - might need to empty invent
+    if wait_for_img(img_name=f"trap_{trap_num}_caught", script_name=script_name, threshold=caught_threshold):
+        API.AntiBan.sleep_between(0.3, 0.4)
+        # Click caught bird trap to dismantle...
+        wait_for_img(img_name=f"trap_{trap_num}_caught", script_name=script_name, threshold=caught_threshold, y_offset=6, x_offset=4, should_click=True)
+
+        # Wait for hunter exp (trap harvest)...
         if wait_for_img(img_name="hunter_exp", script_name=script_name):
             # Clicking the tile we want to set trap ONE on
             mouse_click(trap_tile_xy)
             API.AntiBan.sleep_between(1.2, 1.3)
             # Clicking a trap to set
             wait_for_img(img_name="inventory_trap", script_name=script_name, should_click=True)
-            API.AntiBan.sleep_between(5.0, 5.1)
+            # API.AntiBan.sleep_between(5.0, 5.1)
             return True
 
+        # Trap not harvested - most likely full inventory
         else:
             # Drop bird shit to make inventory space & try to set the trap again from current tile
-            is_otd_enabled(should_enable=True)
-            API.AntiBan.sleep_between(0.4, 0.6)
-            is_tab_open("inventory", True)
-            API.AntiBan.sleep_between(0.5, 0.7)
-            while does_img_exist(img_name="drop_1", script_name="Bird_Catcher", should_click=True,
-                                 threshold=0.9) and \
-                    does_img_exist(img_name="drop_2", script_name="Bird_Catcher", should_click=True):
-                print(f'Dropping bird shit from inventory...')
-            API.AntiBan.sleep_between(0.4, 0.5)
-            is_otd_enabled(False)
-            API.AntiBan.sleep_between(0.4, 0.5)
+            drop_bird_shit()
+            # Click trap reset tile to try picking up trap again after making inventory space
             wait_for_img(img_name=f"trap_{trap_num}_from_drop_invent", script_name="Double_Trap_Ceruleans", threshold=caught_threshold_from_drop, should_click=True, y_offset=5)
-            # Click track reset tile to try picking up trap again after making inventory space
             API.AntiBan.sleep_between(2.0, 2.1)
             # Move to trap reset tile
             mouse_click(trap_tile_xy)
             API.AntiBan.sleep_between(2.1, 2.3)
             # Clicking a trap to set
             does_img_exist(img_name="inventory_trap", script_name=script_name, should_click=True)
-            API.AntiBan.sleep_between(5.0, 5.1)
+            # API.AntiBan.sleep_between(5.0, 5.1)
             return True
-    # Check for down / pickup separate from caught - no need to empty inventory here
-    elif wait_for_img(img_name=f"trap_{trap_num}_down", script_name=script_name, threshold=down_threshold, should_click=True, x_offset=9, y_offset=8):
+
+    # Check for DOWN - no need to empty inventory here
+    elif wait_for_img(img_name=f"trap_{trap_num}_down", script_name=script_name, threshold=down_threshold, should_click=True, x_offset=9, y_offset=6):
         API.AntiBan.sleep_between(3.0, 3.1)
-        # Clicking the tile we want to set trap ONE on
+        # After picking up the downed trap - move to the tile to reset another
         mouse_click(trap_tile_xy)
         API.AntiBan.sleep_between(1.2, 1.3)
         # Clicking a trap to set
         wait_for_img(img_name="inventory_trap", script_name=script_name, should_click=True)
         API.AntiBan.sleep_between(5.0, 5.1)
         return True
+
+    # Check for trap PICKUP and click a single time - we'll move directly to the trap tile
     elif wait_for_img(img_name=f"trap_{trap_num}_pickup", script_name=script_name, threshold=reset_threshold, should_click=True):
         API.AntiBan.sleep_between(3.0, 3.1)
         wait_for_img(img_name="inventory_trap", script_name=script_name, should_click=True)
-        API.AntiBan.sleep_between(5.0, 5.1)
+        # API.AntiBan.sleep_between(5.0, 5.1)
+        return True
 
     print(f"⛔ Didn't find trap_{trap_num}_caught / down / reset. Returning False")
     return False
@@ -240,15 +252,44 @@ def reset_trap_two_from_one():
 
 def check_trap_num(trap_num):
 
-    if wait_for_img(img_name=f"trap_{trap_num}_caught", script_name=script_name, threshold=caught_threshold, max_wait_sec=3):
-        set_needs_reset(trap_num)
+    write_debug(f'🧿 Check_trap_num {trap_num} fired.')
 
-    elif wait_for_img(img_name=f"trap_{trap_num}_down", script_name=script_name, threshold=down_threshold, max_wait_sec=2):
+    if wait_for_img(img_name=f"trap_{trap_num}_caught", script_name=script_name, threshold=caught_threshold,
+                    max_wait_sec=3):
         set_needs_reset(trap_num)
+        write_debug(f"✔ Found CAUGHT for trap: {trap_num} - Needs reset = True")
+        return True
 
-    elif wait_for_img(img_name=f"trap_{trap_num}_pickup", script_name=script_name, threshold=reset_threshold, max_wait_sec=2):
+    elif wait_for_img(img_name=f"trap_{trap_num}_down", script_name=script_name, threshold=down_threshold,
+                      max_wait_sec=2):
         set_needs_reset(trap_num)
+        write_debug(f"✔ Found DOWN for trap: {trap_num} - Needs reset = True")
+        return True
 
+    elif wait_for_img(img_name=f"trap_{trap_num}_pickup", script_name=script_name, threshold=reset_threshold,
+                      max_wait_sec=2):
+        set_needs_reset(trap_num)
+        write_debug(f"✔ Found PICKUP for trap: {trap_num} - Needs reset = True")
+        return True
+
+    return False
+
+
+def drop_bird_shit():
+    is_otd_enabled(should_enable=True)
+    API.AntiBan.sleep_between(0.4, 0.6)
+
+    is_tab_open("inventory", True)
+    API.AntiBan.sleep_between(0.5, 0.7)
+
+    while does_img_exist(img_name="drop_1", script_name="Bird_Catcher", should_click=True,
+                         threshold=0.9) and \
+            does_img_exist(img_name="drop_2", script_name="Bird_Catcher", should_click=True):
+        print(f'Dropping bird shit from inventory...')
+
+    API.AntiBan.sleep_between(0.4, 0.5)
+    is_otd_enabled(False)
+    API.AntiBan.sleep_between(0.4, 0.5)
     return
 
 
@@ -260,6 +301,27 @@ def set_needs_reset(trap_num):
         needs_reset_1 = True
     else:
         needs_reset_2 = True
+    return
+
+
+def move_back_to_monitor(from_tile):
+    if from_tile == 1:
+        monitor_tile_xy = monitor_tile_from_trap_1
+    else:
+        monitor_tile_xy = monitor_tile_from_trap_2
+
+    if wait_for_img(img_name=f"trap_{from_tile}_set", script_name=script_name):
+        API.AntiBan.sleep_between(0.7, 0.8)
+        mouse_click(monitor_tile_xy)
+        if not wait_for_img(img_name=f"monitor_tile_signal_from_{from_tile}", script_name="Double_Trap_Ceruleans", threshold=0.85,
+                            max_wait_sec=6):
+            write_debug(f"❌ Couldn't find monitor_tile_signal_from_{from_tile} after trying to click there - clicking tile again.")
+            mouse_click(monitor_tile_xy)
+        else:
+            write_debug(f"🧿 We're back on Monitor tile from trap {from_tile}")
+
+    else:
+        write_debug(f"⛔ move_back_to_monitor couldn't find trap_{from_tile}_set image. Why?")
     return
 
 

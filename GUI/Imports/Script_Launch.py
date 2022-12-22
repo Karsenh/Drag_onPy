@@ -171,7 +171,7 @@ def launch_script(script_name="pisc_iron"):
             antiban_downtime_sec = 1
         case "troll_double_trap_ceruleans":
             selected_script = ScriptEnum.DOUBLE_TRAP_CERULEANS.value
-            antiban_likelihood = 30
+            antiban_likelihood = 100
             antiban_downtime_sec = 1
 
     is_timer_set = is_break_timer_set()
