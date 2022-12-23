@@ -74,7 +74,14 @@ def handle_next_jump():
 
     # If we're still on the course (jumps 1-5)
     if curr_jump_num < 6:
+        print(f'🦘 CURR JUMP {curr_jump_num}')
         # Check if the current jump rooftop has a mark of grace spawn we need to check...
+        if curr_jump_num == 4:
+            print(f'Manually jumping this one...')
+            jump_xy = 496, 535
+            mouse_click(jump_xy)
+            return True
+
         if curr_jump_num in jumps_with_mog:
             print("This roof has a Mark of Grace spawn that we're checking...")
 
@@ -94,7 +101,7 @@ def handle_next_jump():
                     return False
 
             else:
-                if not wait_for_img(img_name=f"jump_{curr_jump_num}", script_name="Seers_Rooftops", threshold=0.90, should_click=True):
+                if not wait_for_img(img_name=f"jump_{curr_jump_num}", script_name="Seers_Rooftops", threshold=0.86, should_click=True):
                     if wait_for_img(img_name=f"fall_on_{curr_jump_num}", script_name="Seers_Rooftops"):
                         print(f'We seem to have fallen looking for jump_num: {curr_jump_num} - but we can get up...')
                         if curr_jump_num == 2:
@@ -107,7 +114,7 @@ def handle_next_jump():
                     else:
                         return False
         else:
-            if not wait_for_img(img_name=f"jump_{curr_jump_num}", script_name="Seers_Rooftops", threshold=0.90, should_click=True):
+            if not wait_for_img(img_name=f"jump_{curr_jump_num}", script_name="Seers_Rooftops", threshold=0.86, should_click=True):
                 if wait_for_img(img_name=f"fall_on_{curr_jump_num}", script_name="Seers_Rooftops"):
                     print(f'We seem to have fallen looking for jump_num: {curr_jump_num} - but we can get up...')
                     if curr_jump_num == 2:
@@ -133,6 +140,5 @@ def handle_next_jump():
             return False
         print(f'Setting curr_jump_num ({curr_jump_num}) = 0 ')
         curr_jump_num = 0
-
 
     return True
