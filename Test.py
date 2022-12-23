@@ -37,10 +37,10 @@ clear_debug_log()
 
 # random_human_actions(max_downtime_seconds=12)
 # show_main_gui()
-# launch_script("rogue_cooker")
+launch_script("rogue_cooker")
 # start_canifis_rooftops(2)
 
-handle_auth_screens()
+# handle_auth_screens()
 
 
 

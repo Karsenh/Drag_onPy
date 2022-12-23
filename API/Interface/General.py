@@ -295,7 +295,7 @@ def is_on_login_screen(should_cont=True):
 
 
 def is_on_welcome_screen(should_cont=True):
-    if wait_for_img(img_name="welcome_screen", category="Auth", threshold=0.85) and should_cont:
+    if wait_for_img(img_name="welcome_screen", category="Auth", threshold=0.85, max_wait_sec=8) and should_cont:
         xy = 755, 593
         mouse_click(xy, 54, 34)
         return True
