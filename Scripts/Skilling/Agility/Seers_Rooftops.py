@@ -101,7 +101,7 @@ def handle_next_jump():
                     return False
 
             else:
-                if not wait_for_img(img_name=f"jump_{curr_jump_num}", script_name="Seers_Rooftops", threshold=0.86, should_click=True):
+                if not wait_for_img(img_name=f"jump_{curr_jump_num}", script_name="Seers_Rooftops", threshold=0.85, should_click=True, x_offset=10, y_offset=10):
                     if wait_for_img(img_name=f"fall_on_{curr_jump_num}", script_name="Seers_Rooftops"):
                         print(f'We seem to have fallen looking for jump_num: {curr_jump_num} - but we can get up...')
                         if curr_jump_num == 2:
@@ -114,7 +114,7 @@ def handle_next_jump():
                     else:
                         return False
         else:
-            if not wait_for_img(img_name=f"jump_{curr_jump_num}", script_name="Seers_Rooftops", threshold=0.86, should_click=True):
+            if not wait_for_img(img_name=f"jump_{curr_jump_num}", script_name="Seers_Rooftops", threshold=0.85, should_click=True, x_offset=10, y_offset=10):
                 if wait_for_img(img_name=f"fall_on_{curr_jump_num}", script_name="Seers_Rooftops"):
                     print(f'We seem to have fallen looking for jump_num: {curr_jump_num} - but we can get up...')
                     if curr_jump_num == 2:
