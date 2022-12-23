@@ -295,7 +295,7 @@ def is_on_login_screen(should_cont=True):
 
 
 def is_on_welcome_screen(should_cont=True):
-    if wait_for_img(img_name="welcome_screen", category="Auth", threshold=0.85) and should_cont:
+    if wait_for_img(img_name="welcome_screen", category="Auth", threshold=0.85, max_wait_sec=8) and should_cont:
         xy = 755, 593
         mouse_click(xy, 54, 34)
         return True
@@ -309,15 +309,18 @@ def handle_auth_screens():
         if is_on_dc_screen():
             if is_on_login_screen():
                 if is_on_welcome_screen():
+                    API.AntiBan.sleep_between(1.0, 1.1)
                     return True
 
     elif does_img_exist(img_name="login_screen", category="Auth", threshold=0.85):
         if is_on_login_screen():
             if is_on_welcome_screen():
+                API.AntiBan.sleep_between(1.0, 1.1)
                 return True
 
     elif does_img_exist(img_name="welcome_screen", category="Auth", threshold=0.85):
         if is_on_welcome_screen():
+            API.AntiBan.sleep_between(1.0, 1.1)
             return True
 
     else:
