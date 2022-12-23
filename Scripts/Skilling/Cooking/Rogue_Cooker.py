@@ -55,11 +55,11 @@ def start_rogue_cooking(curr_loop):
 
 def open_rogue_bank():
     # API.AntiBan.sleep_between(2.0, 2.1)
-    bank_sel_xy = 930, 450
+    bank_sel_xy = 950, 450
     mouse_long_click(bank_sel_xy)
     API.AntiBan.sleep_between(0.1, 0.8)
     if not wait_for_img(img_name="bank_emerald", script_name="Rogue_Cooker", should_click=True, x_offset=10, y_offset=5,
-                 threshold=0.95, max_wait_sec=5):
+                 threshold=0.90, max_wait_sec=5):
         return False
     # Wait for bank to be open, then proceed otherwise something went wrong
     if not wait_for_img(img_name="bank_is_open", script_name="Rogue_Cooker", threshold=0.95):
