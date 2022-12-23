@@ -82,11 +82,11 @@ def does_img_exist(img_name, script_name=None, category='Scripts', threshold=0.8
 
     # Read the template (disconnected)
     if script_name is not None:  # If it's a script name
-        # write_debug(f'Checking if {img_name}.png exists in {SCRIPTS_SCREEN_PATH}\{script_name}\{img_name}.png ... ')
+        write_debug(f'Checking for {img_name}.png in {SCRIPTS_SCREEN_PATH}\{script_name}\{img_name}.png ... ')
         template_img_path = f'{SCRIPTS_SCREEN_PATH}\{script_name}\{img_name}.png'
 
     else:  # If no script name - get Category
-        # write_debug(f'Checking if {img_name}.png exists in Comparators\{category}...')
+        write_debug(f'Checking for {img_name}.png in Comparators\{category}...')
         template_img_path = f'{ROOT_COMPARATORS_PATH}\{category}\{img_name}.png'
 
     template = cv2.imread(template_img_path, 0)

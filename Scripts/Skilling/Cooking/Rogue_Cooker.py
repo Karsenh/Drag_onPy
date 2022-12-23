@@ -27,7 +27,8 @@ def start_rogue_cooking(curr_loop):
             else:
                 write_debug(f'No level dialogue found. Opening bank to get food...')
 
-                open_rogue_bank()
+                if not open_rogue_bank():
+                    return False
 
                 deposit_all()
 
@@ -40,7 +41,8 @@ def start_rogue_cooking(curr_loop):
         # This is the first loop
         setup_interface("south", 5, "up")
         API.AntiBan.sleep_between(0.7, 0.8)
-        open_rogue_bank()
+        if not open_rogue_bank():
+            return False
         check_for_gauntlets()
         deposit_all()
         withdraw_food_to_cook()
@@ -53,10 +55,15 @@ def start_rogue_cooking(curr_loop):
 
 def open_rogue_bank():
     # API.AntiBan.sleep_between(2.0, 2.1)
-    rogue_bank_xy = 978, 441
-    bank_sel_xy = 979, 549
-    mouse_drag(rogue_bank_xy, bank_sel_xy)
-    API.AntiBan.sleep_between(2.1, 2.3)
+    bank_sel_xy = 930, 450
+    mouse_long_click(bank_sel_xy)
+    API.AntiBan.sleep_between(0.1, 0.8)
+    if not wait_for_img(img_name="bank_emerald", script_name="Rogue_Cooker", should_click=True, x_offset=10, y_offset=5,
+                 threshold=0.95, max_wait_sec=5):
+        return False
+    # Wait for bank to be open, then proceed otherwise something went wrong
+    if not wait_for_img(img_name="bank_is_open", script_name="Rogue_Cooker", threshold=0.95):
+        return False
     check_withdraw_qty('all', should_click=True)
     API.AntiBan.sleep_between(0.5, 0.6)
     if not check_if_bank_tab_open(tab_num=5, should_open=True, double_check=True):
@@ -78,7 +85,8 @@ def cook_food():
     mouse_click(fire_xy, max_x_dev=15, max_y_dev=13)
 
     # API.AntiBan.sleep_between(1.75, 1.8)
-    wait_for_img(img_name="cook_dialogue", script_name="Rogue_Cooker")
+    if not wait_for_img(img_name="cook_dialogue", script_name="Rogue_Cooker"):
+        return False
 
     if not does_img_exist(img_name="all_qty_selected", category="General", threshold=0.95):
         does_img_exist(img_name="all_qty", category="General", threshold=0.9, should_click=True, x_offset=8, y_offset=7)

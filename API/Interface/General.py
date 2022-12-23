@@ -23,31 +23,15 @@ def setup_interface(cam_dir="north", cam_distance=3, cam_angle="up"):
 def turn_compass(direction="south"):
     global compass_xy
 
-    match direction:
-        case "north":
-            if DEBUG_MODE:
-                print(f'Turning compass: {direction} - Moving to {compass_xy}')
-            xy = 1211, 72
-            mouse_click(xy)
-            return
-        case "east":
-            dir_xy = 1200, 172
-        case "south":
-            dir_xy = 1213, 217
-        case "west":
-            dir_xy = 1208, 254
-        case _:
-            print(f'ERROR: Direction {direction} not valid case.')
-    if DEBUG_MODE:
-        print(f'Turning compass: {direction} - Moving to {dir_xy}')
-    # Move mouse to compass & click down
-    mouse_move(compass_xy)
-    pag.mouseDown()
-    # Translate the relative coordinates of the direction x, y for dragTo()
-    trans_x, trans_y = translate_coords(dir_xy, update_coords=True)
-    r_dur = random.uniform(0.5, 0.74)
-    pag.dragTo(trans_x, trans_y, duration=r_dur)
-    return
+    if direction == "north":
+        mouse_click(compass_xy)
+    else:
+        mouse_long_click(compass_xy)
+        API.AntiBan.sleep_between(0.3, 1.1)
+        if not wait_for_img(img_name=f"compass_{direction}", category="Interface", should_click=True, threshold=0.90):
+            return False
+
+    return True
 
 
 def pitch_camera(direction="up"):
