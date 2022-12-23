@@ -80,6 +80,7 @@ def handle_next_jump():
 
             if wait_for_img(img_name=f"mog_on_{curr_jump_num}", script_name="Seers_Rooftops", threshold=0.9, should_click=True, x_offset=5, y_offset=5, max_wait_sec=2):
                 print(f'Found a Mark of Grace and clicked it... Looking for jump_{curr_jump_num}_from_mog')
+                API.AntiBan.sleep_between(0.8, 0.9)
 
                 if not wait_for_img(img_name=f"jump_{curr_jump_num}_from_mog", script_name="Seers_Rooftops", x_offset=12, should_click=True):
                     return False
@@ -95,6 +96,7 @@ def handle_next_jump():
 
             else:
                 if not wait_for_img(img_name=f"jump_{curr_jump_num}", script_name="Seers_Rooftops", threshold=0.90, should_click=True):
+                    print(f'💀 - We didnt find the jump')
                     if wait_for_img(img_name=f"fall_on_{curr_jump_num}", script_name="Seers_Rooftops"):
                         print(f'We seem to have fallen looking for jump_num: {curr_jump_num} - but we can get up...')
                         if curr_jump_num == 2:
@@ -107,7 +109,7 @@ def handle_next_jump():
                     else:
                         return False
         else:
-            if not wait_for_img(img_name=f"jump_{curr_jump_num}", script_name="Seers_Rooftops", threshold=0.90, should_click=True):
+            if not wait_for_img(img_name=f"jump_{curr_jump_num}", script_name="Seers_Rooftops", threshold=0.90, should_click=True, x_offset=10, y_offset=15):
                 if wait_for_img(img_name=f"fall_on_{curr_jump_num}", script_name="Seers_Rooftops"):
                     print(f'We seem to have fallen looking for jump_num: {curr_jump_num} - but we can get up...')
                     if curr_jump_num == 2:
