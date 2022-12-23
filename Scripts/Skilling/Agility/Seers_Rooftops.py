@@ -43,6 +43,13 @@ def alch_on_agility_drop():
             if not wait_for_img(img_name='high_alch', script_name='Seers_Rooftops', threshold=0.9, should_click=True):
                 print(f"Couldn't find alchemy spell despite magic tab being open")
                 # return False
+            else:
+                # We've clicked the high-alch spell - click the magic long
+                if wait_for_img(img_name="magic_long_note", script_name="Seers_Rooftops", x_offset=4, y_offset=4):
+                    print(f'Hovering mouse over magic long while we wait for agility jump...')
+                    mouse_move(get_existing_img_xy())
+                else:
+                    print(f'Found and alched magic_long_note')
         else:
             print(f"Couldn't open magic tab")
             # return False
