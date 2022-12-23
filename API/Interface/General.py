@@ -304,15 +304,24 @@ def is_on_welcome_screen(should_cont=True):
 
 
 def handle_auth_screens():
-    print(f'Disconnected screen? : {is_on_dc_screen(should_cont=True)}')
-    # is_on_dc_screen(should_cont=True)
-    # Check that we're not on login screen (click login if so)
-    print(f'Login screen? : {is_on_login_screen(should_cont=True)}')
-    # is_on_login_screen(should_cont=True)
-    # Check that we're not on the welcome screen (click 'Tap Here To Play' if so)
-    print(f'Welcome screen? : {is_on_welcome_screen(should_cont=True)}')
-    # is_on_welcome_screen(should_cont=True)
-    return
+
+    if does_img_exist(img_name="disconnected_screen", category="Auth", threshold=0.85):
+        if is_on_dc_screen():
+            if is_on_login_screen():
+                if is_on_welcome_screen():
+                    return True
+
+    elif does_img_exist(img_name="login_screen", category="Auth", threshold=0.85):
+        if is_on_login_screen():
+            if is_on_welcome_screen():
+                return True
+
+    elif does_img_exist(img_name="welcome_screen", category="Auth", threshold=0.85):
+        if is_on_welcome_screen():
+            return True
+
+    else:
+        return False
 
 
 def toggle_public_chat(state="on"):

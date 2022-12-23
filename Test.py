@@ -40,6 +40,8 @@ clear_debug_log()
 # launch_script("rogue_cooker")
 # start_canifis_rooftops(2)
 
+handle_auth_screens()
+
 
 
 # wait_for_img(img_name="trap_1_down", script_name="Double_Trap_Ceruleans", threshold=0.80)
