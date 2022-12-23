@@ -277,17 +277,16 @@ def check_skill_tab(max_sec=2.0, skill_to_check='random'):
 
 
 def is_on_dc_screen(should_cont=True):
-    if wait_for_img(img_name="disconnected_screen", category="Auth", threshold=0.85) and should_cont and should_cont:
+    if wait_for_img(img_name="disconnected_screen", category="Auth", threshold=0.85) and should_cont:
         xy = 755, 555
         mouse_click(xy)
-        API.AntiBan.sleep_between(3.0, 3.5)
         return True
 
     return False
 
 
 def is_on_login_screen(should_cont=True):
-    if wait_for_img(img_name="login_screen", category="Auth", threshold=0.85) and should_cont and should_cont:
+    if wait_for_img(img_name="login_screen", category="Auth", threshold=0.85) and should_cont:
         xy = 753, 471
         mouse_click(xy, 67, 23)
         return True
