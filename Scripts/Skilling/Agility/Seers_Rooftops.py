@@ -1,3 +1,5 @@
+import random
+
 import API.AntiBan
 from API.Mouse import mouse_click, mouse_move
 from API.Interface.General import setup_interface, is_tab_open
@@ -20,7 +22,8 @@ def start_seers_rooftops(curr_loop):
             return False
         curr_jump_num += 1
         print(f'Incrementing curr_jump_num +1 (now {curr_jump_num})')
-        alch_on_agility_drop()
+        if random.randint(1, 10) < 9:
+            alch_on_agility_drop()
 
     return True
 
