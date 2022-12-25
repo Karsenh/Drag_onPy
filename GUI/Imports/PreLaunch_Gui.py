@@ -24,6 +24,9 @@ def show_pre_launch_gui():
     e_min_label_prefix = Label(bt_frame_1, text="Every", background=frame_bg_color, font=break_font)
     e_min = Entry(bt_frame_1, textvariable=break_m, background=label_frame_bg_color, font=break_btn_font)
 
+    e_min_label_prefix.grid(row=1, column=1)
+    e_min.grid(row=1, column=2, columnspan=1, padx=20, pady=10)
+
     bt_frame_1.grid(row=1, column=1)
 
     return
