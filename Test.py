@@ -40,7 +40,10 @@ clear_debug_log()
 launch_script("seers_rooftops")
 # start_canifis_rooftops(2)
 
-# wait_for_img(img_name="jump_4", script_name="Seers_Rooftops", threshold=0.9)
+
+
+
+# wait_for_img(img_name="jump_1", script_name="Seers_Rooftops", threshold=0.9)
 
 # handle_auth_screens()
 

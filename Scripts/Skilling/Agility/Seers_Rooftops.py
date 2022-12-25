@@ -22,8 +22,8 @@ def start_seers_rooftops(curr_loop):
             return False
         curr_jump_num += 1
         print(f'Incrementing curr_jump_num +1 (now {curr_jump_num})')
-        if random.randint(1, 10) < 9:
-            alch_on_agility_drop()
+        # if random.randint(1, 10) < 9:
+        alch_on_agility_drop()
 
     return True
 
@@ -97,6 +97,7 @@ def handle_next_jump():
 
             if wait_for_img(img_name=f"mog_on_{curr_jump_num}", script_name="Seers_Rooftops", threshold=0.9, should_click=True, x_offset=5, y_offset=5, max_wait_sec=2):
                 print(f'Found a Mark of Grace and clicked it... Looking for jump_{curr_jump_num}_from_mog')
+                API.AntiBan.sleep_between(0.6, 0.7)
 
                 if not wait_for_img(img_name=f"jump_{curr_jump_num}_from_mog", script_name="Seers_Rooftops", x_offset=12, should_click=True):
                     return False
@@ -108,10 +109,11 @@ def handle_next_jump():
 
                 # Move to next jump from alt mog
                 if not wait_for_img(img_name=f"jump_{curr_jump_num}_from_mog_alt", script_name="Seers_Rooftops", should_click=True):
+                    print(f"⛔ Couldn't find jump_from_mog_alt for some reason...")
                     return False
 
             else:
-                if not wait_for_img(img_name=f"jump_{curr_jump_num}", script_name="Seers_Rooftops", threshold=0.85, should_click=True, x_offset=10, y_offset=10):
+                if not wait_for_img(img_name=f"jump_{curr_jump_num}", script_name="Seers_Rooftops", threshold=0.80, should_click=True, x_offset=10, y_offset=10):
                     if wait_for_img(img_name=f"fall_on_{curr_jump_num}", script_name="Seers_Rooftops"):
                         print(f'We seem to have fallen looking for jump_num: {curr_jump_num} - but we can get up...')
                         if curr_jump_num == 2:
@@ -124,7 +126,7 @@ def handle_next_jump():
                     else:
                         return False
         else:
-            if not wait_for_img(img_name=f"jump_{curr_jump_num}", script_name="Seers_Rooftops", threshold=0.85, should_click=True, x_offset=10, y_offset=10):
+            if not wait_for_img(img_name=f"jump_{curr_jump_num}", script_name="Seers_Rooftops", threshold=0.80, should_click=True, x_offset=10, y_offset=10):
                 if wait_for_img(img_name=f"fall_on_{curr_jump_num}", script_name="Seers_Rooftops"):
                     print(f'We seem to have fallen looking for jump_num: {curr_jump_num} - but we can get up...')
                     if curr_jump_num == 2:
@@ -139,7 +141,8 @@ def handle_next_jump():
 
     elif curr_jump_num == 6:
         print('click move_back image')
-        if not wait_for_img(img_name="move_back", script_name="Seers_Rooftops", threshold=0.9, should_click=True, max_wait_sec=15):
+        if not wait_for_img(img_name="move_back", script_name="Seers_Rooftops", threshold=0.9, should_click=True, x_offset=6,
+             y_offset=10, max_wait_sec=15):
             return False
     else:
         # else jump_num == 7 | reset it back to 1 (0 + 1) after restarting course
