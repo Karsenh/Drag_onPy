@@ -2,6 +2,9 @@ import API.AntiBan
 from API.Interface.General import setup_interface, is_hp_gt, is_tab_open
 from API.Interface.Bank import wait_for_open_bank, is_bank_tab_open, close_bank, is_withdraw_qty
 from API.Imaging.Image import does_img_exist, wait_for_img
+from API.Mouse import mouse_click, mouse_long_click
+
+script_name = "Ardy_Knights"
 
 selected_food = 'monkfish'
 food_tab_num = 5
@@ -14,64 +17,52 @@ pickpocket_count = 0
 
 
 def start_pickpocketing_ardy_knights(curr_loop):
-    global has_food
-    global has_necklace
 
     if curr_loop == 1:
-        setup_interface("west", 4, "up")
-        # Check/set what tile we're on - thieving_tile or bank_tile
-        set_curr_tile()
-
+        setup_interface("west", 4, "down")
+        API.AntiBan.sleep_between(0.6, 0.7)
         bank_handler()
+        open_coin_bag()
+        # Check/set what tile we're on - thieving_tile or bank_tile
 
-        thieving_handler()
+    if not set_curr_tile():
+        print(f'⛔ Current tile not recognized! Exiting...')
+        return False
 
+    thieving_handler()
 
+    bank_handler()
 
-            # Open bank and withdraw food
+    print(f'🔄 PICKPOCKET COUNT: {pickpocket_count}')
 
-
-        # Check if we have food in inventory
-            # If no invent food - click to open bank based on what tile we're on
-                #
-                # Check if we're in food tab - open if not
-                # Check if withdraw 10 is selected - select if not
-                # Withdraw the bank_<selected_food> (click twice for 20)
-            # If we have invent food - continue
-
-        # Move to thieving tile based on the tile we're currently on
-
-    # Check curr_health_gt(percent=10)
-        # If gt 10% - Thieve
-        # If lt 10% - Click inventory food
-            # If no inventory food - open bank from curr_tile
-            # Check if fish tab open - open if not
-            #
-
-    # Thieve()
-        # Check if coinpouch == 28
-        # If == 28 - Click coinpouch to open
-        # Else click ardy_knight_pickpocket_xy
-
-    # open_bank_from_curr_tile()
-        #
     return True
 
 
 def set_curr_tile():
     global curr_tile
+    attempts = 0
 
-    if does_img_exist(img_name="bank_tile", script_name="Ardy_Knights"):
+    if does_img_exist(img_name="bank_tile", script_name=script_name, threshold=0.9):
         curr_tile = "bank_tile"
         print(f'On bank tile - curr_tile = {curr_tile}')
-    elif does_img_exist(img_name="thieving_tile", script_name="Ardy_Knights"):
+    elif does_img_exist(img_name="thieving_tile", script_name=script_name):
         curr_tile = "thieving_tile"
         print(f'On thieving tile - curr_tile = {curr_tile}')
     else:
+        if attempts == 1:
+            print(f'Failed second attempt. Exiting...')
+            return False
         curr_tile = None
         print(f"Couldn't find either tile images (bank nor thieving) - curr_tile = {curr_tile}")
+        knight_potential_xy = 772, 418
+        mouse_long_click(knight_potential_xy)
+        wait_for_img(img_name="pickpocket_knight", script_name=script_name, should_click=True)
+        API.AntiBan.sleep_between(0.5, 0.6)
+        attempts += 1
+        print(f'Making another attempt...')
+        set_curr_tile()
 
-    return curr_tile
+    return True
 
 
 # Check if we have food / necklaces
@@ -83,12 +74,12 @@ def bank_handler():
     global has_necklace
 
     # Check if we need food
-    has_food = does_img_exist(img_name=f"inventory_{selected_food}", script_name="Ardy_Knights")
+    has_food = does_img_exist(img_name=f"inventory_{selected_food}", script_name=script_name, threshold=0.9)
     print(f'has_food = {has_food}')
 
     # If we're using necklaces, check if we need necklaces
     if use_dodgy_necklace:
-        has_necklace = does_img_exist(img_name='inventory_necklace', script_name="Ardy_Knights", threshold=0.9)
+        has_necklace = does_img_exist(img_name='inventory_necklace', script_name=script_name, threshold=0.9)
         print(f'has_necklace = {has_necklace}')
 
     # We have FOOD
@@ -98,14 +89,13 @@ def bank_handler():
         else:
             if has_necklace:
                 return True
-            else:
-                print(f'Food but no necklace')
 
     # Beyond this point we need food at least...
     open_ardy_bank()
 
     # Withdraw food
-    withdraw_food(selected_food)
+    if not has_food:
+        withdraw_food(selected_food)
 
     # Check if we need necklace and withdraw from appropriate tab
     if use_dodgy_necklace:
@@ -120,24 +110,43 @@ def bank_handler():
 
 def thieving_handler():
     global selected_food
-    knight_xy_from_bank = 12, 12
-    knight_xy_from_thieving = 113, 133
+    global use_dodgy_necklace
+    global pickpocket_count
+    global curr_tile
+
+    knight_xy_from_bank = 933, 370
+    knight_xy_from_thieving = 774, 478
 
     # Check health
     while not is_hp_gt(50):
         # If less than half - eat food
-        does_img_exist(img_name=f"inventory_{selected_food}", script_name="Ardy_Knights", should_click=True)
+        does_img_exist(img_name=f"inventory_{selected_food}", script_name=script_name, should_click=True, threshold=0.95)
         API.AntiBan.sleep_between(0.6, 0.7)
 
-    # Check if necklace equipped
-        # If not - click in inventory
+    if pickpocket_count % 10 == 1:
+        if use_dodgy_necklace:
+            # Check if necklace equipped - equip if not
+            handle_necklace_equip()
 
     # Check pickpocket count to determine whether to open inventory coin bag or not
+    if pickpocket_count % 8 == 1:
+        open_coin_bag()
+
+    if curr_tile == "thieving_tile":
+        mouse_click(knight_xy_from_thieving, min_num_clicks=2, max_num_clicks=4)
+
+    elif curr_tile == "bank_tile":
+        mouse_long_click(knight_xy_from_bank)
+        wait_for_img(img_name="pickpocket_knight", script_name=script_name, should_click=True, y_offset=5, x_offset=10)
+        API.AntiBan.sleep_between(0.8, 0.9)
+        curr_tile = "thieving_tile"
 
     # Check curr_tile and click knight_xy accordingly
         # Wait for thieving exp drop to confirm continuation
         # Increase pickpocket count
-
+    if wait_for_img(img_name="thieving_exp", script_name=script_name):
+        pickpocket_count += 1
+        thieving_handler()
 
     return
 
@@ -146,7 +155,7 @@ def thieving_handler():
 # HELPERS
 # --------
 def open_ardy_bank():
-    does_img_exist(img_name="ardy_bank", script_name="Ardy_Knights", should_click=True, threshold=0.9)
+    does_img_exist(img_name="ardy_bank", script_name=script_name, should_click=True, threshold=0.9)
     if not wait_for_open_bank():
         return False
     return
@@ -159,7 +168,7 @@ def withdraw_food(food_type):
 
     is_withdraw_qty(qty='10', should_click=True)
 
-    wait_for_img(img_name=f"bank_{food_type}", script_name="Ardy_Knights")
+    wait_for_img(img_name=f"bank_{food_type}", script_name=script_name, should_click=True)
 
     return
 
@@ -169,10 +178,27 @@ def withdraw_dodgy_necklace():
 
     is_bank_tab_open(tab_num=necklace_tab_num, should_open=True)
 
-    wait_for_img(img_name="bank_necklace", script_name="Ardy_Knights", should_click=True)
+    wait_for_img(img_name="bank_necklace", script_name=script_name, should_click=True)
 
     return
 
 
-def is_necklace_equipped():
-    is_tab_open(tab="equipment", )
+def handle_necklace_equip():
+    is_tab_open(tab="equipment", should_open=True)
+    # API.AntiBan.sleep_between(0.5, 0.6)
+
+    if not does_img_exist(img_name="equipped_necklace", script_name=script_name):
+        is_tab_open("inventory", should_open=True)
+        wait_for_img(img_name="inventory_necklace", script_name=script_name, should_click=True)
+        API.AntiBan.sleep_between(0.5, 0.6)
+    else:
+        is_tab_open("inventory", should_open=True)
+
+    return
+
+
+def open_coin_bag():
+    is_tab_open("inventory", should_open=True)
+    API.AntiBan.sleep_between(0.2, 0.3)
+    does_img_exist(img_name="inventory_coin_bag", script_name=script_name, should_click=True)
+    return

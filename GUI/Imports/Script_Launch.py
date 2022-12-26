@@ -21,6 +21,7 @@ from Scripts.Skilling.Agility.Canifis_Rooftops import start_canifis_rooftops
 from Scripts.Skilling.Agility.Seers_Rooftops import start_seers_rooftops
 from Scripts.Skilling.Hunter.Bird_Catcher import start_snaring_birds
 from Scripts.Skilling.Hunter.Double_Trap_Ceruleans import start_trapping_birds
+from Scripts.Skilling.Thieving.Pickpocketing.Ardy_Knights import start_pickpocketing_ardy_knights
 from API.Imaging.OCR.Skill_Levels import get_skill_level, ocr_skill_levels
 
 from enum import Enum
@@ -68,6 +69,7 @@ def launch_script(script_name="pisc_iron"):
         SEERS_ROOFTOPS = 20
         BIRD_SNARER = 21
         DOUBLE_TRAP_CERULEANS = 22
+        ARDY_KNIGHTS = 23
 
     all_scripts = [mine_iron_pisc, smith_gold_edge, run_gnome_course,
                    fish_draynor_shrimp, fish_barb_trout, barbarian_fishing,
@@ -76,7 +78,7 @@ def launch_script(script_name="pisc_iron"):
                    start_chop_fletching, start_blowing_glass, start_fletching_darts,
                    start_ploughing_for_favour, start_stealing_fruit, start_gilded_altar,
                    start_unf_pots, start_canifis_rooftops, start_seers_rooftops,
-                   start_snaring_birds, start_trapping_birds]
+                   start_snaring_birds, start_trapping_birds, start_pickpocketing_ardy_knights]
 
     match script_name:
         case "pisc_iron":
@@ -173,6 +175,10 @@ def launch_script(script_name="pisc_iron"):
             selected_script = ScriptEnum.DOUBLE_TRAP_CERULEANS.value
             antiban_likelihood = 100
             antiban_downtime_sec = 1
+        case "ardy_knights":
+            selected_script = ScriptEnum.ARDY_KNIGHTS.value
+            antiban_likelihood = 50
+            antiban_downtime_sec = 2
 
     is_timer_set = is_break_timer_set()
 

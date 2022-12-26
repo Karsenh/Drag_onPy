@@ -112,7 +112,7 @@ def is_tab_open(tab="inventory", should_open=True):
         case "equipment":
             check_tab_xy = EQUIPMENT_tab_xy
 
-    print(f'Check_tab_xy = {check_tab_xy}')
+    print(f'Check_tab_xy = {check_tab_xy} ({tab})')
 
     is_open = does_color_exist(open_tab_color, check_tab_xy)
 
@@ -364,6 +364,7 @@ def close_chatbox():
     API.AntiBan.sleep_between(0.4, 0.9)
 
     mouse_click(game_xy)
-    API.AntiBan.sleep_between(0.3, 0.6)
+    API.AntiBan.sleep_between(0.6, 0.7)
+
     mouse_click(game_xy)
     return

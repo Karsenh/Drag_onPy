@@ -38,8 +38,16 @@ clear_debug_log()
 
 # random_human_actions(max_downtime_seconds=12)
 # show_main_gui()
-# launch_script("seers_rooftops")
+launch_script("ardy_knights")
 # start_canifis_rooftops(2)
+
+
+
+
+
+# does_img_exist(img_name=f"inventory_monkfish", script_name="Ardy_Knights", should_click=True, threshold=0.95)
+
+# wait_for_img(img_name="bank_tile", script_name="Ardy_Knights")
 
 # wait_for_img(img_name="jump_4", script_name="Seers_Rooftops", threshold=0.9)
 
@@ -51,8 +59,6 @@ clear_debug_log()
 # is_hp_gt(50)
 
 # set_curr_tile()
-
-
 
 
 # wait_for_img(img_name="trap_1_down", script_name="Double_Trap_Ceruleans", threshold=0.80)
