@@ -2,7 +2,7 @@ import API.AntiBan
 from API.Interface.General import setup_interface, is_tab_open, is_otd_enabled
 from API.AntiBan import write_debug
 from API.Mouse import mouse_click, mouse_move
-from API.Interface.Bank import check_if_bank_tab_open
+from API.Interface.Bank import is_bank_tab_open
 from API.Imaging.Image import does_img_exist, wait_for_img, does_color_exist, get_existing_img_xy
 from API.Imports.Coords import BANK_qty_all
 from API.Imports.Coords import *
@@ -32,7 +32,7 @@ def burn_logs_at_ge(curr_loop):
         API.AntiBan.sleep_between(1.1, 1.8)
 
         # Check if on tab 3
-        check_if_bank_tab_open(tab_num=3, should_open=True)
+        is_bank_tab_open(tab_num=3, should_open=True)
 
         # Check if withdraw qty all
         check_withdraw_qty_all()

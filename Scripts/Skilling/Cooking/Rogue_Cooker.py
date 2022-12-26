@@ -4,7 +4,7 @@ import pyautogui as pag
 import API.AntiBan
 from API.Mouse import mouse_click, mouse_drag, mouse_long_click
 from API.Interface.General import setup_interface, get_xy_for_invent_slot
-from API.Interface.Bank import check_if_bank_tab_open, deposit_all, close_bank, check_withdraw_qty
+from API.Interface.Bank import is_bank_tab_open, deposit_all, close_bank, is_withdraw_qty
 from API.Imaging.Image import does_img_exist, wait_for_img
 from API.Debug import write_debug
 
@@ -64,9 +64,9 @@ def open_rogue_bank():
     # Wait for bank to be open, then proceed otherwise something went wrong
     if not wait_for_img(img_name="bank_is_open", script_name="Rogue_Cooker", threshold=0.95):
         return False
-    check_withdraw_qty('all', should_click=True)
+    is_withdraw_qty('all', should_click=True)
     API.AntiBan.sleep_between(0.5, 0.6)
-    if not check_if_bank_tab_open(tab_num=5, should_open=True, double_check=True):
+    if not is_bank_tab_open(tab_num=5, should_open=True, double_check=True):
         return False
     return True
 

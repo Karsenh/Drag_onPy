@@ -12,8 +12,9 @@ inventory_x, inventory_y = 1447, 403
 
 
 def setup_interface(cam_dir="north", cam_distance=3, cam_angle="up"):
+    close_chatbox
     turn_compass(direction=cam_dir)
-    API.AntiBan.sleep_between(0.6, 0.9)
+    API.AntiBan.sleep_between(0.5, 0.9)
     zoom_camera(notches=cam_distance)
     API.AntiBan.sleep_between(0.6, 0.9)
     pitch_camera(direction=cam_angle)
@@ -108,6 +109,8 @@ def is_tab_open(tab="inventory", should_open=True):
             check_tab_xy = QUEST_tab_xy
         case "magic":
             check_tab_xy = MAGIC_tab_xy
+        case "equipment":
+            check_tab_xy = EQUIPMENT_tab_xy
 
     print(f'Check_tab_xy = {check_tab_xy}')
 
@@ -350,4 +353,17 @@ def toggle_public_chat(state="on"):
         case "on":
             sel_state_xy = 293, 201
     mouse_drag(from_xy=public_chat_xy, to_xy=sel_state_xy)
+    return
+
+
+def close_chatbox():
+    all_xy = 83, 51
+    game_xy = 190, 53
+
+    mouse_click(all_xy)
+    API.AntiBan.sleep_between(0.4, 0.9)
+
+    mouse_click(game_xy)
+    API.AntiBan.sleep_between(0.3, 0.6)
+    mouse_click(game_xy)
     return
