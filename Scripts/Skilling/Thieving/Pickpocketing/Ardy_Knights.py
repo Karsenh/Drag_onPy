@@ -144,7 +144,7 @@ def thieving_handler():
     # Check curr_tile and click knight_xy accordingly
         # Wait for thieving exp drop to confirm continuation
         # Increase pickpocket count
-    if wait_for_img(img_name="thieving_exp", script_name=script_name):
+    if wait_for_img(img_name="thieving_exp", script_name=script_name, max_wait_sec=3):
         pickpocket_count += 1
         thieving_handler()
 

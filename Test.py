@@ -41,6 +41,8 @@ clear_debug_log()
 launch_script("ardy_knights")
 # start_canifis_rooftops(2)
 
+# does_img_exist(img_name="thieving_tile", script_name="Ardy_Knights", threshold=0.9)
+
 
 
 
