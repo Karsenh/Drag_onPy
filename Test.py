@@ -37,13 +37,17 @@ clear_debug_log()
 
 # random_human_actions(max_downtime_seconds=12)
 # show_main_gui()
-launch_script("seers_rooftops")
+# launch_script("seers_rooftops")
 # start_canifis_rooftops(2)
 
 # wait_for_img(img_name="jump_4", script_name="Seers_Rooftops", threshold=0.9)
 
 # handle_auth_screens()
 
+# setup_interface("west", 4, "down")
+
+
+is_hp_gt(50)
 
 
 # wait_for_img(img_name="trap_1_down", script_name="Double_Trap_Ceruleans", threshold=0.80)

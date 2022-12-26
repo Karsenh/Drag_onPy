@@ -182,6 +182,21 @@ def is_run_gt(percent=10):
         return True
 
 
+def is_hp_gt(percent=50):
+    half_hp_xy = 1175, 140
+
+    health_black_color = 19, 19, 19
+    health_red_color = 161, 6, 3
+
+    match percent:
+        case 50:
+            check_xy = half_hp_xy
+        case 10:
+            print(f'Finish this method out')
+    print(f'is_hp_gt(percent={percent}) : {get_color_at_coords(check_xy) > health_black_color}')
+    return get_color_at_coords(check_xy) > health_black_color
+
+
 # --- IMAGE MATCHING ---
 def is_inventory_full(should_cont=True, should_drop=False, start_slot=1, end_slot=27, should_close_after=False):
     does_exist = does_img_exist("inventory_full", category="General"), does_img_exist("inventory_full_fish", category="General")
