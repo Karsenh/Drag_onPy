@@ -16,11 +16,15 @@ curr_tile = None
 pickpocket_count = 0
 open_bank_attempts = 0
 
+
 def start_pickpocketing_ardy_knights(curr_loop):
 
     if curr_loop == 1:
-        setup_interface("west", 4, "down")
+        setup_interface("east", 4, "down")
         API.AntiBan.sleep_between(0.6, 0.7)
+        if not set_curr_tile():
+            print(f'Something went wrong trying to set tile on first loop. Exiting...')
+            return False
         bank_handler()
         open_coin_bag()
         # Check/set what tile we're on - thieving_tile or bank_tile
@@ -42,14 +46,16 @@ def set_curr_tile():
     global curr_tile
     attempts = 0
 
-    if does_img_exist(img_name="bank_tile", script_name=script_name, threshold=0.9):
+    if does_img_exist(img_name="bank_tile_from_east", script_name=script_name, threshold=0.95):
         curr_tile = "bank_tile"
-        print(f'On bank tile - curr_tile = {curr_tile}')
-    elif does_img_exist(img_name="thieving_tile", script_name=script_name):
+        print(f'🏦 On bank tile - curr_tile = {curr_tile}')
+
+    elif does_img_exist(img_name="thieving_tile_from_east", script_name=script_name, threshold=0.95):
         curr_tile = "thieving_tile"
-        print(f'On thieving tile - curr_tile = {curr_tile}')
+        print(f'🦝 On thieving tile - curr_tile = {curr_tile}')
+
     else:
-        if attempts == 1:
+        if attempts > 1:
             print(f'Failed second attempt. Exiting...')
             return False
         curr_tile = None
@@ -114,8 +120,8 @@ def thieving_handler():
     global pickpocket_count
     global curr_tile
 
-    knight_xy_from_bank = 933, 370
-    knight_xy_from_thieving = 774, 478
+    knight_xy_from_bank = 548, 514
+    knight_xy_from_thieving = 695, 475
 
     # Check health
     while not is_hp_gt(50):
@@ -123,18 +129,17 @@ def thieving_handler():
         does_img_exist(img_name=f"inventory_{selected_food}", script_name=script_name, should_click=True, threshold=0.95)
         API.AntiBan.sleep_between(0.6, 0.7)
 
-    if pickpocket_count % 10 == 1:
+    if pickpocket_count % 12 == 1:
         if use_dodgy_necklace:
             # Check if necklace equipped - equip if not
             handle_necklace_equip()
 
     # Check pickpocket count to determine whether to open inventory coin bag or not
-    if pickpocket_count % 8 == 1:
+    if pickpocket_count % 16 == 1:
         open_coin_bag()
 
     if curr_tile == "thieving_tile":
-        mouse_click(knight_xy_from_thieving, min_num_clicks=2, max_num_clicks=4)
-
+        mouse_click(knight_xy_from_thieving, min_num_clicks=3, max_num_clicks=6)
     elif curr_tile == "bank_tile":
         mouse_long_click(knight_xy_from_bank)
         wait_for_img(img_name="pickpocket_knight", script_name=script_name, should_click=True, y_offset=5, x_offset=10)
@@ -144,7 +149,7 @@ def thieving_handler():
     # Check curr_tile and click knight_xy accordingly
         # Wait for thieving exp drop to confirm continuation
         # Increase pickpocket count
-    if wait_for_img(img_name="thieving_exp", script_name=script_name, max_wait_sec=3):
+    if wait_for_img(img_name="thieving_exp", script_name=script_name, max_wait_sec=1):
         pickpocket_count += 1
         thieving_handler()
 
@@ -156,8 +161,15 @@ def thieving_handler():
 # --------
 def open_ardy_bank():
     global open_bank_attempts
+    global curr_tile
 
-    does_img_exist(img_name="ardy_bank", script_name=script_name, should_click=True, threshold=0.9)
+    if curr_tile == "thieving_tile":
+        bank_xy = 914, 308
+    elif curr_tile == "bank_tile":
+        bank_xy = 774, 401
+
+    mouse_click(bank_xy)
+
     if not wait_for_open_bank():
         if open_bank_attempts > 3:
             return False

@@ -178,7 +178,7 @@ def launch_script(script_name="pisc_iron"):
         case "ardy_knights":
             selected_script = ScriptEnum.ARDY_KNIGHTS.value
             antiban_likelihood = 50
-            antiban_downtime_sec = 2
+            antiban_downtime_sec = .5
 
     is_timer_set = is_break_timer_set()
 

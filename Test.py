@@ -41,6 +41,15 @@ clear_debug_log()
 launch_script("ardy_knights")
 # start_canifis_rooftops(2)
 
+
+# set_curr_tile()
+
+# does_img_exist(img_name="bank_tile_from_east", script_name="Ardy_Knights", threshold=0.95)
+# does_img_exist(img_name="thieving_tile_from_east", script_name="Ardy_Knights", threshold=0.95)
+
+# setup_interface("east", 4, "down")
+# does_img_exist(img_name="ardy_bank", script_name="Ardy_Knights", should_click=True, threshold=0.80)
+
 # does_img_exist(img_name="thieving_tile", script_name="Ardy_Knights", threshold=0.9)
 
 
