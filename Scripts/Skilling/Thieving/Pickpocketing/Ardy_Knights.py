@@ -135,11 +135,11 @@ def thieving_handler():
             handle_necklace_equip()
 
     # Check pickpocket count to determine whether to open inventory coin bag or not
-    if pickpocket_count % 16 == 1:
+    if pickpocket_count % 8 == 1:
         open_coin_bag()
 
     if curr_tile == "thieving_tile":
-        mouse_click(knight_xy_from_thieving, min_num_clicks=3, max_num_clicks=6)
+        mouse_click(knight_xy_from_thieving, min_num_clicks=3, max_num_clicks=5)
     elif curr_tile == "bank_tile":
         mouse_long_click(knight_xy_from_bank)
         wait_for_img(img_name="pickpocket_knight", script_name=script_name, should_click=True, y_offset=5, x_offset=10)

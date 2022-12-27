@@ -6,7 +6,7 @@ import pyautogui as pag
 
 
 #  Moves mouse to specified X, Y and clicks
-def mouse_click(xy, max_x_dev=2, max_y_dev=2, click_direction="left", max_num_clicks=1, min_num_clicks=1, max_int_delay=0.5):
+def mouse_click(xy, max_x_dev=2, max_y_dev=2, click_direction="left", max_num_clicks=1, min_num_clicks=1, max_int_delay=0.3):
     trans_x, trans_y = translate_coords(xy)
 
     if max_x_dev < 13:
