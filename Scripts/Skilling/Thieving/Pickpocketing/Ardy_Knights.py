@@ -14,7 +14,7 @@ has_food = False
 has_necklace = False
 curr_tile = None
 pickpocket_count = 0
-
+open_bank_attempts = 0
 
 def start_pickpocketing_ardy_knights(curr_loop):
 
@@ -155,10 +155,17 @@ def thieving_handler():
 # HELPERS
 # --------
 def open_ardy_bank():
+    global open_bank_attempts
+
     does_img_exist(img_name="ardy_bank", script_name=script_name, should_click=True, threshold=0.9)
     if not wait_for_open_bank():
-        return False
-    return
+        if open_bank_attempts > 3:
+            return False
+        open_bank_attempts += 1
+        open_ardy_bank()
+    else:
+        open_bank_attempts = 0
+        return True
 
 
 def withdraw_food(food_type):
