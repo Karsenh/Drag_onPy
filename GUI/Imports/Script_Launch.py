@@ -41,7 +41,7 @@ def launch_script(script_name="pisc_iron"):
     global curr_script_iteration
     global should_continue
 
-    write_debug("Pre-launch checks:")
+    write_debug(f"Pre-launch checks for: {script_name}")
     # Check that we're not on dc screen (click continue if so)
     handle_auth_screens()
 
@@ -175,7 +175,7 @@ def launch_script(script_name="pisc_iron"):
             selected_script = ScriptEnum.DOUBLE_TRAP_CERULEANS.value
             antiban_likelihood = 100
             antiban_downtime_sec = 1
-        case "ardy_knights":
+        case "Ardy_Knights":
             selected_script = ScriptEnum.ARDY_KNIGHTS.value
             antiban_likelihood = 50
             antiban_downtime_sec = .5
