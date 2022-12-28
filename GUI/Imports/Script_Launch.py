@@ -185,18 +185,26 @@ def launch_script(script_name="pisc_iron"):
     if is_timer_set:
         write_debug(f'🚩 Break Timer Set - Entering loop with break_handler()')
         while should_continue:
-            should_continue = all_scripts[selected_script](curr_script_iteration)
-            API.AntiBan.random_human_actions(max_downtime_seconds=antiban_downtime_sec, likelihood=antiban_likelihood)
+            if not all_scripts[selected_script](curr_script_iteration):
+                if not handle_auth_screens():
+                    should_continue = False
+
             break_handler()
 
             curr_script_iteration += 1
+            print(f'🔄 MAIN LOOP COUNT: {curr_script_iteration}')
+
     else:
         write_debug(f'🏳 NO Break Timer Set - Entering loop WITHOUT break_handler()')
         while should_continue:
-            should_continue = all_scripts[selected_script](curr_script_iteration)
+            if not all_scripts[selected_script](curr_script_iteration):
+                if not handle_auth_screens():
+                    should_continue = False
+
             API.AntiBan.random_human_actions(max_downtime_seconds=antiban_downtime_sec, likelihood=antiban_likelihood)
 
             curr_script_iteration += 1
+            print(f'🔄 MAIN LOOP COUNT: {curr_script_iteration}')
 
     return
 
