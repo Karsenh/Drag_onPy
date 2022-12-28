@@ -4,7 +4,7 @@ import tkinter
 from tkinter import Toplevel, LabelFrame, font, Entry, Label, StringVar, Tk, Button
 from GUI.Imports.PreLaunch_Gui.plg_images import get_plg_gui_images
 from PIL import ImageTk, Image
-from GUI.Imports.PreLaunch_Gui.plg_notes import get_plg_notes
+from GUI.Imports.PreLaunch_Gui.plg_notes import get_plg_data
 from GUI.Imports.Script_Launch import launch_script
 
 
@@ -86,7 +86,7 @@ def show_plg_notes_section(main_plg_frame, font_styles, script_name):
 
     notes_label_frame = LabelFrame(main_plg_frame, text="Notes", bg=frame_bg_color, pady=40, padx=40, width=250)
 
-    plg_notes = get_plg_notes()
+    plg_notes = get_plg_data()
 
     for note in plg_notes:
         if note.name == script_name:
