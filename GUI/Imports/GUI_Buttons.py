@@ -1,6 +1,6 @@
 from GUI.Imports.GUI_Frames import *
 from Scripts.Skilling.Mining.Iron.Pisc_Iron import *
-from GUI.Imports.PreLaunch_Gui.PreLaunch_Gui import show_pre_launch_gui
+from GUI.Imports.PreLaunch_Gui.PreLaunch_Gui import show_plg
 
 from GUI.Imports.Script_Launch import *
 
@@ -110,7 +110,7 @@ def get_all_btns(all_frames, all_images):
 
     # ---- SUB SKILL BTNS ----
     #     Attack
-    cow_killer_btn = Button(attack_frame, text="Cow Killer", image=cow_killer_map, height=100, width=100, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_pre_launch_gui())
+    cow_killer_btn = Button(attack_frame, text="Cow Killer", image=cow_killer_map, height=100, width=100, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_plg())
     attack_sub_btns = cow_killer_btn
 
     #     HP

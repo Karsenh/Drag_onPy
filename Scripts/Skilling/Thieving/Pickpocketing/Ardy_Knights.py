@@ -163,12 +163,14 @@ def open_ardy_bank():
     global open_bank_attempts
     global curr_tile
 
-    if curr_tile == "thieving_tile":
-        bank_xy = 914, 308
-    elif curr_tile == "bank_tile":
-        bank_xy = 774, 401
+    wait_for_img(img_name="ardy_bank", script_name="Ardy_Knights", should_click=True, max_clicks=2, threshold=0.95, max_wait_sec=10)
 
-    mouse_click(bank_xy)
+    # if curr_tile == "thieving_tile":
+    #     bank_xy = 914, 308
+    # elif curr_tile == "bank_tile":
+    #     bank_xy = 774, 401
+    #
+    # mouse_click(bank_xy)
 
     if not wait_for_open_bank():
         if open_bank_attempts > 3:
