@@ -15,8 +15,8 @@ def show_main_gui():
     root = Tk()
     root.title('Drag_onPy')
     root.iconbitmap(f'{pwd}\Icon.ico')
-    root_gui_height = 1225
-    root_gui_width = 675  #675
+    root_gui_height = 1050
+    root_gui_width = 550  #675
     root.configure(bg='#969488', height=root_gui_height, width=root_gui_width)
 
     dragon_py_hwnd = win32gui.FindWindow(None, 'Drag_onPy')
@@ -50,13 +50,13 @@ def show_main_gui():
     # Get the Main_Gui btns out to use in root
     gold_btn, skill_btn, minigames_btn, settings_btn, info_btn, bug_report_btn = main_gui_btns
 
-    gold_btn.grid(row=main_gui_row, column=1, pady=20, padx=15)
-    skill_btn.grid(row=main_gui_row, column=2, pady=20, padx=15)
-    minigames_btn.grid(row=main_gui_row, column=3, pady=20, padx=15)
+    gold_btn.grid(row=main_gui_row, column=1, pady=(15, 8), padx=15)
+    skill_btn.grid(row=main_gui_row, column=2, pady=(15, 8), padx=15)
+    minigames_btn.grid(row=main_gui_row, column=3, pady=(15, 8), padx=15)
 
-    settings_btn.grid(row=footer_row, column=1, columnspan=1, pady=20, padx=20)
-    info_btn.grid(row=footer_row, column=2, columnspan=1, pady=20)
-    bug_report_btn.grid(row=footer_row, column=3, columnspan=1, pady=20)
+    settings_btn.grid(row=footer_row, column=1, columnspan=1, pady=(15,10), padx=20)
+    info_btn.grid(row=footer_row, column=2, columnspan=1, pady=(15,10))
+    bug_report_btn.grid(row=footer_row, column=3, columnspan=1, pady=(15,10))
 
     root.mainloop()
     return

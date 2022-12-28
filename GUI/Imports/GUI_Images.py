@@ -11,7 +11,7 @@ def get_all_gui_images():
 
     # Main_Gui images
     gui_images_path = "Assets\Images\GUI_Images"
-    gold_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{gui_images_path}\Coins.png'))
+    gold_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{gui_images_path}\Gold.png'))
     skills_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{gui_images_path}\Stats2.png'))
     skull_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{gui_images_path}\Minigames.png'))
 

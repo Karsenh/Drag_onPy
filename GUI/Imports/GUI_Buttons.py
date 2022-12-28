@@ -57,7 +57,7 @@ def get_all_btns(all_frames, all_images):
 
     main_img_label = Label(main_frame, image=main_img, bg=frame_bg_color)
     main_img_label.image = main_img
-    main_img_label.grid(row=1, column=1, columnspan=5, pady=60)
+    main_img_label.grid(row=1, column=1, columnspan=3, pady=(8, 15))
 
     gold_btn = Button(main_frame, text="Gold", bg=btn_bg_color, activebackground=btn_active_bg_color, image=gold_img, command=lambda: show_gold_frame(all_frames, gold_gui_btns, toggle_active_frame, gui_btns))
     skill_btn = Button(main_frame, text="Leveling", bg=btn_bg_color, activebackground=btn_active_bg_color, image=skills_img, command=lambda: show_skill_frame(all_frames, skill_gui_btns, toggle_active_frame, gui_btns))
