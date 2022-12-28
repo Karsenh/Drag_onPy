@@ -121,7 +121,7 @@ def thieving_handler():
     global curr_tile
 
     knight_xy_from_bank = 548, 514
-    knight_xy_from_thieving = 695, 475
+    knight_xy_from_thieving = 702, 475
 
     # Check health
     while not is_hp_gt(50):
