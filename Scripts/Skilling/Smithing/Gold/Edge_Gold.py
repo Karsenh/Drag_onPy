@@ -1,7 +1,7 @@
 from API.Imaging.Image import get_existing_img_xy, does_img_exist, does_color_exist
 from API.Break_Timer.Break_Handler import *
 from API.Interface.General import is_otd_enabled, setup_interface, check_skill_tab, is_tab_open
-from API.Interface.Bank import deposit_all, check_if_bank_tab_open
+from API.Interface.Bank import deposit_all, is_bank_tab_open
 import keyboard
 from API.AntiBan import print_to_log
 import API.AntiBan
@@ -35,7 +35,7 @@ def smith_gold_edge(curr_loop):
         deposit_all(include_equipment=True)
 
         # 3. Checks if we're on mining tab - clicks mining tab if not
-        check_if_bank_tab_open(4, True)
+        is_bank_tab_open(4, True)
 
         # 4. Checks for goldsmithing gauntlets - withdraws & equips if found
         if check_for_gauntlets:
@@ -193,17 +193,17 @@ def bank_from_furnace():
         bank_booth_xy = 334, 622
         mouse_click(bank_booth_xy, 3, 4)
         API.AntiBan.sleep_between(5.9, 6.2)
-        check_if_bank_tab_open(tab_num=4, should_open=True)
+        is_bank_tab_open(tab_num=4, should_open=True)
     return
 
 
 def cbf_1():
     print('cbf 1 fired')
-    is_bank_open = check_if_bank_tab_open(tab_num=0, should_open=False), check_if_bank_tab_open(tab_num=4, should_open=False)
+    is_bank_open = is_bank_tab_open(tab_num=0, should_open=False), is_bank_tab_open(tab_num=4, should_open=False)
     if not is_bank_open:
         print(f'🏧 Not open. Opening...')
         bank_from_bank()
-        check_if_bank_tab_open(4, True)
+        is_bank_tab_open(4, True)
 
     return
 

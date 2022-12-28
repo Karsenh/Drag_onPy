@@ -3,7 +3,7 @@ import random
 from API.AntiBan import shutdown
 import API.AntiBan
 from API.Interface.General import setup_interface, is_tab_open
-from API.Interface.Bank import check_withdraw_qty, close_bank, check_if_bank_tab_open, deposit_all
+from API.Interface.Bank import is_withdraw_qty, close_bank, is_bank_tab_open, deposit_all
 from API.Imaging.Image import does_img_exist, get_existing_img_xy, wait_for_img
 from API.Mouse import mouse_click, mouse_long_click
 from API.Interface.General import get_xy_for_invent_slot
@@ -67,7 +67,7 @@ def withdraw_herbs_and_vials(curr_loop):
     else:
         print('first loop - checking for correct tab')
     #     Check we're on tab 6
-        check_if_bank_tab_open(tab_num=6, should_open=True)
+        is_bank_tab_open(tab_num=6, should_open=True)
         API.AntiBan.sleep_between(0.6, 0.9)
 
         withdraw_14(item=herb_type)
@@ -105,7 +105,7 @@ def make_unf_pots():
 
 # HELPERS
 def withdraw_14(item):
-    check_withdraw_qty("x", should_click=True)
+    is_withdraw_qty("x", should_click=True)
     API.AntiBan.sleep_between(0.5, 0.9)
 
     does_img_exist(img_name=f'{item}', script_name="Unf_Pots")

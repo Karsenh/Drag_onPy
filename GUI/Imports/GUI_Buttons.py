@@ -1,14 +1,12 @@
-from tkinter import *
 from GUI.Imports.GUI_Frames import *
 from Scripts.Skilling.Mining.Iron.Pisc_Iron import *
-from Scripts.Skilling.Smithing.Gold.Edge_Gold import *
-from GUI.Imports.PreLaunch_Gui import show_pre_launch_gui
+from GUI.Imports.PreLaunch_Gui.PreLaunch_Gui import show_plg
 
 from GUI.Imports.Script_Launch import *
 
 btn_active_bg_color = '#972b29'
 btn_bg_color = '#645747'
-
+plg_gui_active = 1
 
 def get_all_btns(all_frames, all_images):
 
@@ -59,7 +57,7 @@ def get_all_btns(all_frames, all_images):
 
     main_img_label = Label(main_frame, image=main_img, bg=frame_bg_color)
     main_img_label.image = main_img
-    main_img_label.grid(row=1, column=1, columnspan=5, pady=60)
+    main_img_label.grid(row=1, column=1, columnspan=3, pady=(8, 15))
 
     gold_btn = Button(main_frame, text="Gold", bg=btn_bg_color, activebackground=btn_active_bg_color, image=gold_img, command=lambda: show_gold_frame(all_frames, gold_gui_btns, toggle_active_frame, gui_btns))
     skill_btn = Button(main_frame, text="Leveling", bg=btn_bg_color, activebackground=btn_active_bg_color, image=skills_img, command=lambda: show_skill_frame(all_frames, skill_gui_btns, toggle_active_frame, gui_btns))
@@ -110,9 +108,12 @@ def get_all_btns(all_frames, all_images):
     construction_btn = Button(skill_frame, state="disabled", text="Construction", image=construction_img, height=skill_btn_height, width=skill_btn_width, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_ranged_frame(all_frames, toggle_active_frame, construction_frame, construction_sub_btns))
     hunter_btn = Button(skill_frame, state="disabled", text="Hunter", image=hunter_img, height=skill_btn_height, width=skill_btn_width, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_thieving_frame(all_frames, toggle_active_frame, thieving_frame, thieving_sub_btns))
 
+    btn_states = ["disabled", "active"]
+
+
     # ---- SUB SKILL BTNS ----
     #     Attack
-    cow_killer_btn = Button(attack_frame, text="Cow Killer", image=cow_killer_map, height=100, width=100, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_pre_launch_gui())
+    cow_killer_btn = Button(attack_frame, text="Cow Killer", image=cow_killer_map, height=100, width=100, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_plg("Ardy_Knights"))
     attack_sub_btns = cow_killer_btn
 
     #     HP

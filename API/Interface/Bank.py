@@ -1,4 +1,6 @@
 import random
+
+import API.Imaging.Image
 from API.Imaging.Image import does_color_exist
 from API.Imports.Coords import *
 from API.Mouse import mouse_click
@@ -16,7 +18,7 @@ def deposit_all(include_equipment=False):
     return
 
 
-def check_if_bank_tab_open(tab_num=0, should_open=True, double_check=True):
+def is_bank_tab_open(tab_num=0, should_open=True, double_check=True):
     # If the bank tab IS open...
     if does_img_exist(f"tab_{tab_num}", category="Banking", threshold=0.9):
         # return true
@@ -54,7 +56,7 @@ def close_bank():
     return
 
 
-def check_withdraw_qty(qty="all", should_click=True):
+def is_withdraw_qty(qty="all", should_click=True):
     all_sel_color = 122, 29, 27
     all_sel_xy = 768, 813
 
@@ -94,3 +96,8 @@ def check_withdraw_qty(qty="all", should_click=True):
         sleep_between(0.7, 0.9)
 
     return is_selected
+
+
+def wait_for_open_bank(max_wait_sec=8):
+    return API.Imaging.Image.wait_for_img(img_name="bank_is_open", category="Banking", max_wait_sec=max_wait_sec)
+

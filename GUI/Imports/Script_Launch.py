@@ -21,6 +21,7 @@ from Scripts.Skilling.Agility.Canifis_Rooftops import start_canifis_rooftops
 from Scripts.Skilling.Agility.Seers_Rooftops import start_seers_rooftops
 from Scripts.Skilling.Hunter.Bird_Catcher import start_snaring_birds
 from Scripts.Skilling.Hunter.Double_Trap_Ceruleans import start_trapping_birds
+from Scripts.Skilling.Thieving.Pickpocketing.Ardy_Knights import start_pickpocketing_ardy_knights
 from API.Imaging.OCR.Skill_Levels import get_skill_level, ocr_skill_levels
 
 from enum import Enum
@@ -40,7 +41,7 @@ def launch_script(script_name="pisc_iron"):
     global curr_script_iteration
     global should_continue
 
-    write_debug("Pre-launch checks:")
+    write_debug(f"Pre-launch checks for: {script_name}")
     # Check that we're not on dc screen (click continue if so)
     handle_auth_screens()
 
@@ -68,6 +69,7 @@ def launch_script(script_name="pisc_iron"):
         SEERS_ROOFTOPS = 20
         BIRD_SNARER = 21
         DOUBLE_TRAP_CERULEANS = 22
+        ARDY_KNIGHTS = 23
 
     all_scripts = [mine_iron_pisc, smith_gold_edge, run_gnome_course,
                    fish_draynor_shrimp, fish_barb_trout, barbarian_fishing,
@@ -76,7 +78,7 @@ def launch_script(script_name="pisc_iron"):
                    start_chop_fletching, start_blowing_glass, start_fletching_darts,
                    start_ploughing_for_favour, start_stealing_fruit, start_gilded_altar,
                    start_unf_pots, start_canifis_rooftops, start_seers_rooftops,
-                   start_snaring_birds, start_trapping_birds]
+                   start_snaring_birds, start_trapping_birds, start_pickpocketing_ardy_knights]
 
     match script_name:
         case "pisc_iron":
@@ -173,24 +175,36 @@ def launch_script(script_name="pisc_iron"):
             selected_script = ScriptEnum.DOUBLE_TRAP_CERULEANS.value
             antiban_likelihood = 100
             antiban_downtime_sec = 1
+        case "Ardy_Knights":
+            selected_script = ScriptEnum.ARDY_KNIGHTS.value
+            antiban_likelihood = 50
+            antiban_downtime_sec = .5
 
     is_timer_set = is_break_timer_set()
 
     if is_timer_set:
         write_debug(f'🚩 Break Timer Set - Entering loop with break_handler()')
         while should_continue:
-            should_continue = all_scripts[selected_script](curr_script_iteration)
-            API.AntiBan.random_human_actions(max_downtime_seconds=antiban_downtime_sec, likelihood=antiban_likelihood)
+            if not all_scripts[selected_script](curr_script_iteration):
+                if not handle_auth_screens():
+                    should_continue = False
+
             break_handler()
 
             curr_script_iteration += 1
+            print(f'🔄 MAIN LOOP COUNT: {curr_script_iteration}')
+
     else:
         write_debug(f'🏳 NO Break Timer Set - Entering loop WITHOUT break_handler()')
         while should_continue:
-            should_continue = all_scripts[selected_script](curr_script_iteration)
+            if not all_scripts[selected_script](curr_script_iteration):
+                if not handle_auth_screens():
+                    should_continue = False
+
             API.AntiBan.random_human_actions(max_downtime_seconds=antiban_downtime_sec, likelihood=antiban_likelihood)
 
             curr_script_iteration += 1
+            print(f'🔄 MAIN LOOP COUNT: {curr_script_iteration}')
 
     return
 

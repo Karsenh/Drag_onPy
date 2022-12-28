@@ -2,7 +2,7 @@ import random
 import pyautogui as pag
 import API.AntiBan
 from API.Interface.General import setup_interface, is_tab_open, get_xy_for_invent_slot
-from API.Interface.Bank import check_if_bank_tab_open, check_withdraw_qty, deposit_all
+from API.Interface.Bank import is_bank_tab_open, is_withdraw_qty, deposit_all
 from API.Imaging.Image import does_img_exist, wait_for_img
 from API.Mouse import mouse_click
 from API.Imaging.OCR.Skill_Levels import get_skill_level
@@ -40,11 +40,11 @@ def open_ge_bank(curr_loop):
 
     API.AntiBan.sleep_between(0.6, 0.9)
 
-    check_if_bank_tab_open(tab_num=2, should_open=True)
+    is_bank_tab_open(tab_num=2, should_open=True)
 
     API.AntiBan.sleep_between(0.8, 1.3)
 
-    print(f'withdraw_all not selected? {check_withdraw_qty(qty="all", should_click=True)}')
+    print(f'withdraw_all not selected? {is_withdraw_qty(qty="all", should_click=True)}')
 
     API.AntiBan.sleep_between(0.8, 1.3)
 

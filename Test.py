@@ -24,10 +24,11 @@ from Scripts.Skilling.Firemaking.GE_Log_Burner import burn_logs_at_ge, burn_logs
 from Scripts.MiniGames.Fishing_Trawler import repair_hole_until_finished, start_trawling
 import pyautogui as pag
 from API.Imaging.OCR.Skill_Levels import get_skill_level
-from API.Interface.Bank import check_withdraw_qty
+from API.Interface.Bank import is_withdraw_qty
 from Scripts.Skilling.Thieving.Stalls.Hosidius_Fruit import start_stealing_fruit
 from Scripts.Skilling.Agility.Canifis_Rooftops import start_canifis_rooftops, click_second_jump, click_third_jump
 from Scripts.Skilling.Agility.Seers_Rooftops import start_seers_rooftops, handle_next_jump, alch_on_agility_drop
+from Scripts.Skilling.Thieving.Pickpocketing.Ardy_Knights import set_curr_tile
 
 
 get_bluestacks_xy()
@@ -36,9 +37,17 @@ capture_bluestacks()
 clear_debug_log()
 
 # random_human_actions(max_downtime_seconds=12)
-# show_main_gui()
-launch_script("seers_rooftops")
-# start_canifis_rooftops(2)
+show_main_gui()
+# launch_script("ardy_knights")
+
+
+
+
+
+
+# does_img_exist(img_name=f"inventory_monkfish", script_name="Ardy_Knights", should_click=True, threshold=0.95)
+
+# wait_for_img(img_name="bank_tile", script_name="Ardy_Knights")
 
 
 
@@ -47,6 +56,12 @@ launch_script("seers_rooftops")
 
 # handle_auth_screens()
 
+# setup_interface("west", 4, "down")
+
+
+# is_hp_gt(50)
+
+# set_curr_tile()
 
 
 # wait_for_img(img_name="trap_1_down", script_name="Double_Trap_Ceruleans", threshold=0.80)
