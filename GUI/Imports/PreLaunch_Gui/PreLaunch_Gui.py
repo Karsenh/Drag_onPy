@@ -1,8 +1,11 @@
 import os
+import json
 import tkinter
 from tkinter import Toplevel, LabelFrame, font, Entry, Label, StringVar, Tk, Button
 from GUI.Imports.PreLaunch_Gui.plg_images import get_plg_gui_images
 from PIL import ImageTk, Image
+from GUI.Imports.PreLaunch_Gui.plg_notes import get_plg_notes
+from GUI.Imports.Script_Launch import launch_script
 
 
 frame_bg_color = '#969488'
@@ -39,7 +42,7 @@ def show_plg(script_name):
 
     # SCRIPT START BUTTON
     start_image = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\Assets\Images\GUI_Images\PreLaunch_Gui\start_btn.png'))
-    start_btn = Button(main_plg_frame, text="Defence", image=start_image, bg="#3e3529", activebackground=btn_active_bg_color)
+    start_btn = Button(main_plg_frame, text="Defence", image=start_image, bg="#3e3529", activebackground=btn_active_bg_color, command=lambda: launch_script(script_name))
     start_btn.photo = start_image
     start_btn.grid(row=5, column=1, pady=(30, 0))
 
@@ -83,13 +86,15 @@ def show_plg_notes_section(main_plg_frame, font_styles, script_name):
 
     notes_label_frame = LabelFrame(main_plg_frame, text="Notes", bg=frame_bg_color, pady=40, padx=40, width=250)
 
-    point = '\u2022'
+    plg_notes = get_plg_notes()
 
-    requirements_txt = f"{point} Splasher - Join 'SplashWords' cc to find world.\n{point} Full Rogues outfit."
-    issues_txt = f"{point} Stops without Splasher.\n{point} Stops if Knight moves from 2 tiles against North bank wall."
-    rating_txt = f"⭐⭐⭐\n(2-3hrs avg.)"
+    for note in plg_notes:
+        if note.name == script_name:
+            curr_script_notes = note
 
-
+    requirements_txt = curr_script_notes.requirements
+    issues_txt = curr_script_notes.known_issues
+    rating_txt = curr_script_notes.rtr
 
     msg = tkinter.Message(notes_label_frame, text=f"Requirements:", anchor='w', background=frame_bg_color, width=400, font=break_btn_font)
     msg.grid(row=1, column=1, columnspan=3)
