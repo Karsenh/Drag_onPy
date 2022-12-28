@@ -50,7 +50,7 @@ def set_curr_tile():
         curr_tile = "bank_tile"
         print(f'🏦 On bank tile - curr_tile = {curr_tile}')
 
-    elif does_img_exist(img_name="thieving_tile_from_east", script_name=script_name, threshold=0.95):
+    elif does_img_exist(img_name="thieving_tile_from_east", script_name=script_name, threshold=0.87):
         curr_tile = "thieving_tile"
         print(f'🦝 On thieving tile - curr_tile = {curr_tile}')
 
