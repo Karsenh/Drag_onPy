@@ -1,9 +1,7 @@
 import os
-import tkinter
 from tkinter import Toplevel, LabelFrame, font, Entry, Label, StringVar, Tk, Button
 from GUI.Imports.PreLaunch_Gui.plg_images import get_plg_gui_images
 from PIL import ImageTk, Image
-from GUI.Imports.PreLaunch_Gui.plg_notes import get_plg_data
 from GUI.Imports.Script_Launch import launch_script
 from GUI.Imports.PreLaunch_Gui.plg_options import show_plg_options
 import win32gui
