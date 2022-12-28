@@ -41,7 +41,6 @@ clear_debug_log()
 launch_script("ardy_knights")
 
 
-# wait_for_img(img_name="ardy_bank", script_name="Ardy_Knights", should_click=True, max_clicks=2, threshold=0.95, max_wait_sec=10)
 
 
 

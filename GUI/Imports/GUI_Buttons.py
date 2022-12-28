@@ -6,7 +6,7 @@ from GUI.Imports.Script_Launch import *
 
 btn_active_bg_color = '#972b29'
 btn_bg_color = '#645747'
-
+plg_gui_active = 1
 
 def get_all_btns(all_frames, all_images):
 
@@ -108,9 +108,12 @@ def get_all_btns(all_frames, all_images):
     construction_btn = Button(skill_frame, state="disabled", text="Construction", image=construction_img, height=skill_btn_height, width=skill_btn_width, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_ranged_frame(all_frames, toggle_active_frame, construction_frame, construction_sub_btns))
     hunter_btn = Button(skill_frame, state="disabled", text="Hunter", image=hunter_img, height=skill_btn_height, width=skill_btn_width, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_thieving_frame(all_frames, toggle_active_frame, thieving_frame, thieving_sub_btns))
 
+    btn_states = ["disabled", "active"]
+
+
     # ---- SUB SKILL BTNS ----
     #     Attack
-    cow_killer_btn = Button(attack_frame, text="Cow Killer", image=cow_killer_map, height=100, width=100, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_plg())
+    cow_killer_btn = Button(attack_frame, text="Cow Killer", image=cow_killer_map, height=100, width=100, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_plg("Ardy_Knights"))
     attack_sub_btns = cow_killer_btn
 
     #     HP
