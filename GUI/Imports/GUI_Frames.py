@@ -253,7 +253,7 @@ def show_skill_frame(all_frames, skill_gui_btns, t_active_frame, gui_btns):
     gold_frame.grid_remove()
     minigames_frame.grid_remove()
 
-    skill_frame.grid(row=sub_gui_row, column=1, columnspan=3, pady=50)
+    skill_frame.grid(row=sub_gui_row, column=1, columnspan=3, pady=15)
 
     # Top row
     attack_btn.grid(row=1, column=1, pady=skill_btn_y_pad, padx=skill_btn_x_pad)
