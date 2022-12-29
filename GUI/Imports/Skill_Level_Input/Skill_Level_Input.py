@@ -44,6 +44,9 @@ def show_skill_input_frame(skill_level_input_frame, t_active_frame, all_frames, 
         print(f'Found username ({username_from_file}) in {assets_path}\Levels.txt')
         user_hiscores = get_hiscores_for_user(username_from_file, user_search_sub_frame, t_active_frame, all_frames)
         initial_get = False
+    elif username_arg == "" and not initial_get:
+        print(f'Fetching HiScores for user from file (not intial and no arg passed): {username_arg}')
+        user_hiscores = get_hiscores_for_user(username_from_file, user_search_sub_frame, t_active_frame, all_frames)
     else:
         print(f'Fetching HiScores for user_arg: {username_arg}')
         user_hiscores = get_hiscores_for_user(username_arg, user_search_sub_frame, t_active_frame, all_frames)
@@ -56,7 +59,7 @@ def show_skill_input_frame(skill_level_input_frame, t_active_frame, all_frames, 
     username_lookup_btn.grid(row=2, column=1, columnspan=3, pady=10)
 
     # SKILL LEVEL INPUTS
-    skill_level_input_sub_frame = LabelFrame(skill_level_input_frame, text="Levels", bg=label_frame_bg_color, font=break_font, padx=50, pady=20)
+    skill_level_input_sub_frame = LabelFrame(skill_level_input_frame, text="Levels", bg=label_frame_bg_color, font=break_font, padx=40, pady=20)
     skill_level_input_sub_frame.grid(row=2)
 
     attack_level_var = tkinter.StringVar(skill_level_input_frame)
@@ -64,21 +67,21 @@ def show_skill_input_frame(skill_level_input_frame, t_active_frame, all_frames, 
     attack_label = Label(skill_level_input_sub_frame, text="Attack:", background=frame_bg_color, font=break_font)
     attack_input = Entry(skill_level_input_sub_frame, textvariable=attack_level_var, background=label_frame_bg_color, font=break_btn_font, width=3)
     attack_label.grid(row=3, column=1, padx=0)
-    attack_input.grid(row=3, column=2, padx=0)
+    attack_input.grid(row=3, column=2, pady=0, padx=(5, 15))
 
     hp_level_var = tkinter.StringVar(skill_level_input_sub_frame)
     hp_level_var.set(user_hiscores.skills['hitpoints'].level)
     hp_label = Label(skill_level_input_sub_frame, text="Hitpoints:", background=frame_bg_color, font=break_font)
     hp_input = Entry(skill_level_input_sub_frame, textvariable=hp_level_var, background=label_frame_bg_color, font=break_btn_font, width=3)
     hp_label.grid(row=3, column=3)
-    hp_input.grid(row=3, column=4)
+    hp_input.grid(row=3, column=4, padx=(5, 15))
 
     mining_level_var = tkinter.StringVar(skill_level_input_sub_frame)
     mining_level_var.set(user_hiscores.skills['mining'].level)
     mining_label = Label(skill_level_input_sub_frame, text="Mining:", background=frame_bg_color, font=break_font)
     mining_input = Entry(skill_level_input_sub_frame, textvariable=mining_level_var, background=label_frame_bg_color, font=break_btn_font, width=3)
     mining_label.grid(row=3, column=5)
-    mining_input.grid(row=3, column=6)
+    mining_input.grid(row=3, column=6, padx=(5, 15))
 
     return
 
