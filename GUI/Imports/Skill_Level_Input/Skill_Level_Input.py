@@ -34,6 +34,8 @@ def show_skill_input_frame(skill_level_input_frame, t_active_frame, all_frames, 
 
     if initial_get:
         username_var.set(username_from_file)
+    elif username_arg == "" and not initial_get:
+        username_var.set(username_from_file)
     else:
         username_var.set(username_arg)
 
