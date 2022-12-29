@@ -180,10 +180,10 @@ def reset_trap_num(trap_num=1):
     is_tab_open("inventory", True)
 
     # Check for CAUGHT trap separately - might need to empty invent
-    if does_img_exist(img_name=f"trap_{trap_num}_caught", script_name=script_name, threshold=caught_threshold):
+    if wait_for_img(img_name=f"trap_{trap_num}_caught", script_name=script_name, threshold=caught_threshold):
         API.AntiBan.sleep_between(0.4, 0.5)
         # Click caught bird trap to dismantle...
-        does_img_exist(img_name=f"trap_{trap_num}_caught", script_name=script_name, threshold=caught_threshold, y_offset=6, x_offset=4, should_click=True)
+        wait_for_img(img_name=f"trap_{trap_num}_caught", script_name=script_name, threshold=caught_threshold, y_offset=6, x_offset=4, should_click=True)
 
         # Wait for hunter exp (trap harvest)...
         if wait_for_img(img_name="hunter_exp", script_name=script_name):
@@ -234,7 +234,7 @@ def reset_trap_num(trap_num=1):
 
 def reset_trap_two_from_one():
     print(f'🧿 Reset_trap_two_from_one fired...')
-    if does_img_exist(img_name=f"trap_2_caught_from_1", script_name=script_name, threshold=0.90, should_click=True):
+    if wait_for_img(img_name=f"trap_2_caught_from_1", script_name=script_name, threshold=0.90, should_click=True, max_wait_sec=2):
         print(f'✔ Trap_2_Caught_from_1 found!')
         # API.AntiBan.sleep_between(5.0, 5.1)
         # Click the tile we want to set trap TWO on
@@ -253,7 +253,7 @@ def reset_trap_two_from_one():
             does_img_exist(img_name="inventory_trap", script_name=script_name, should_click=True)
             API.AntiBan.sleep_between(5.0, 5.1)
         return True
-    elif does_img_exist(img_name=f"trap_2_down_from_1", script_name=script_name, threshold=0.9, should_click=True, x_offset=5, y_offset=4):
+    elif wait_for_img(img_name=f"trap_2_down_from_1", script_name=script_name, threshold=0.9, should_click=True, x_offset=5, y_offset=4, max_wait_sec=2):
         print(f'✔ Trap two seen needing RESET from trap 2 down. Clicking...')
         API.AntiBan.sleep_between(5.0, 5.1)
         # Click the tile we want to set trap TWO on
