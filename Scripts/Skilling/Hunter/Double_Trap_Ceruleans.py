@@ -334,7 +334,7 @@ def move_back_to_monitor(from_tile):
     else:
         monitor_tile_xy = monitor_tile_from_trap_2
 
-    if wait_for_img(img_name=f"trap_{from_tile}_set", script_name=script_name):
+    if wait_for_img(img_name=f"trap_{from_tile}_set", script_name=script_name, max_wait_sec=8):
         API.AntiBan.sleep_between(0.7, 0.8)
         mouse_click(monitor_tile_xy)
         if not wait_for_img(img_name=f"monitor_tile_signal_from_{from_tile}", script_name="Double_Trap_Ceruleans", threshold=0.85,
