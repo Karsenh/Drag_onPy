@@ -70,6 +70,7 @@ def get_all_gui_images():
     construction_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{stats_path}\Construction.png'))
     hunter_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{stats_path}\Hunter.png'))
 
+    skill_input_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{stats_path}\Skill_Levels.png'))
 
     # Minigames images
     minigames_path = "Assets\Images\GUI_Images\Minigames"
@@ -86,7 +87,7 @@ def get_all_gui_images():
                        prayer_img, crafting_img, firemaking_img, \
                        magic_img, fletching_img, woodcutting_img, \
                        runecrafting_img, slayer_img, farming_img, \
-                       construction_img, hunter_img
+                       construction_img, hunter_img, skill_input_img
 
     minigames_images = trawler_img
 

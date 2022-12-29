@@ -105,13 +105,16 @@ def get_all_frames(root):
     construction_frame = LabelFrame(main_frame, text="Construction", bg=label_frame_bg_color, font=sub_gui_label_font)
     hunter_frame = LabelFrame(main_frame, text="Hunter", bg=label_frame_bg_color, font=sub_gui_label_font)
 
+    skill_level_input_frame = LabelFrame(main_frame, text="Skill Levels", bg=label_frame_bg_color, font=sub_gui_label_font)
+
     skill_sub_frames = mining_frame, smithing_frame, agility_frame, \
                        defence_frame, herblore_frame, fishing_frame, \
                        ranged_frame, thieving_frame, cooking_frame, \
                        prayer_frame, crafting_frame, firemaking_frame, \
                        magic_frame, fletching_frame, woodcutting_frame, \
                        runecrafting_frame, slayer_frame, farming_frame, \
-                       construction_frame, hunter_frame, attack_frame
+                       construction_frame, hunter_frame, attack_frame, \
+                       skill_level_input_frame
 
     # Import All Frames & All Images from GUI Imports
     all_frames = main_frame, gold_frame, skill_frame, minigames_frame, skill_sub_frames
@@ -246,7 +249,7 @@ def show_skill_frame(all_frames, skill_gui_btns, t_active_frame, gui_btns):
     prayer_btn, crafting_btn, firemaking_btn, \
     magic_btn, fletching_btn, woodcutting_btn, \
     runecrafting_btn, slayer_btn, farming_btn, \
-    construction_btn, hunter_btn = skill_gui_btns
+    construction_btn, hunter_btn, skill_level_input_btn = skill_gui_btns
 
     main_frame, gold_frame, skill_frame, minigames_frame, skill_sub_frame = all_frames
 
@@ -286,6 +289,8 @@ def show_skill_frame(all_frames, skill_gui_btns, t_active_frame, gui_btns):
     # Eighth row
     construction_btn.grid(row=8, column=1, pady=skill_btn_y_pad, padx=skill_btn_x_pad)
     hunter_btn.grid(row=8, column=2, pady=skill_btn_y_pad, padx=skill_btn_x_pad)
+
+    skill_level_input_btn.grid(row=8, column=3, pady=skill_btn_y_pad, padx=skill_btn_x_pad)
 
     # If is_active is false here, it was true when we clicked, therefore exit
     if not is_active:

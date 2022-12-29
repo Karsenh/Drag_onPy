@@ -1,6 +1,7 @@
 from GUI.Imports.GUI_Frames import *
 from Scripts.Skilling.Mining.Iron.Pisc_Iron import *
 from GUI.Imports.PreLaunch_Gui.PreLaunch_Gui import show_plg
+from GUI.Imports.Skill_Level_Input.Skill_Level_Input import show_skill_input_frame
 
 from GUI.Imports.Script_Launch import *
 
@@ -22,7 +23,8 @@ def get_all_btns(all_frames, all_images):
     prayer_frame, crafting_frame, firemaking_frame, \
     magic_frame, fletching_frame, woodcutting_frame, \
     runecrafting_frame, slayer_frame, farming_frame, \
-    construction_frame, hunter_frame, attack_frame \
+    construction_frame, hunter_frame, attack_frame, \
+    skill_level_input_frame \
         = skill_sub_frames
 
     # ---------- IMAGES ----------
@@ -38,7 +40,7 @@ def get_all_btns(all_frames, all_images):
     prayer_img, crafting_img, firemaking_img, \
     magic_img, fletching_img, woodcutting_img, \
     runecrafting_img, slayer_img, farming_img, \
-    construction_img, hunter_img \
+    construction_img, hunter_img, skill_input_img \
         = skill_gui_images
 
     trawler_img = minigames_images
@@ -108,7 +110,7 @@ def get_all_btns(all_frames, all_images):
     construction_btn = Button(skill_frame, state="disabled", text="Construction", image=construction_img, height=skill_btn_height, width=skill_btn_width, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_ranged_frame(all_frames, toggle_active_frame, construction_frame, construction_sub_btns))
     hunter_btn = Button(skill_frame, state="disabled", text="Hunter", image=hunter_img, height=skill_btn_height, width=skill_btn_width, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_thieving_frame(all_frames, toggle_active_frame, thieving_frame, thieving_sub_btns))
 
-    btn_states = ["disabled", "active"]
+    skill_level_input_btn = Button(skill_frame, text="Input Skill Levels", image=skill_input_img, height=skill_btn_height, width=skill_btn_width, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_skill_input_frame(skill_level_input_frame, toggle_active_frame, all_frames))
 
 
     # ---- SUB SKILL BTNS ----
@@ -199,7 +201,7 @@ def get_all_btns(all_frames, all_images):
                      prayer_btn, crafting_btn, firemaking_btn, \
                      magic_btn, fletching_btn, woodcutting_btn, \
                      runecrafting_btn, slayer_btn, farming_btn, \
-                     construction_btn, hunter_btn
+                     construction_btn, hunter_btn, skill_level_input_btn
 
     return main_gui_btns, gold_gui_btns, skill_gui_btns, minigames_sub_btns
 

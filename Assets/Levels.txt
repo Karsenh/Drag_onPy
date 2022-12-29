@@ -1,0 +1,27 @@
+duriel_ghost
+Rank: 1381921
+Total Level: 1193
+Total XP: 16361777
+Skill(name=attack, rank=-1, level=59, xp=271681)
+Skill(name=defence, rank=-1, level=30, xp=13380)
+Skill(name=strength, rank=-1, level=54, xp=165358)
+Skill(name=hitpoints, rank=-1, level=49, xp=96570)
+Skill(name=ranged, rank=-1, level=1, xp=12)
+Skill(name=prayer, rank=1338549, level=53, xp=144832)
+Skill(name=magic, rank=1346591, level=73, xp=1038689)
+Skill(name=cooking, rank=641705, level=80, xp=2021480)
+Skill(name=woodcutting, rank=924486, level=71, xp=825172)
+Skill(name=fletching, rank=558218, level=80, xp=1994544)
+Skill(name=fishing, rank=497668, level=80, xp=2016760)
+Skill(name=firemaking, rank=909130, level=71, xp=887852)
+Skill(name=crafting, rank=1037734, level=64, xp=448758)
+Skill(name=smithing, rank=1030828, level=61, xp=307731)
+Skill(name=mining, rank=760487, level=70, xp=802067)
+Skill(name=herblore, rank=326571, level=80, xp=1986137)
+Skill(name=agility, rank=457222, level=75, xp=1210491)
+Skill(name=thieving, rank=295274, level=80, xp=2061252)
+Skill(name=slayer, rank=-1, level=10, xp=1310)
+Skill(name=farming, rank=-1, level=5, xp=416)
+Skill(name=runecrafting, rank=-1, level=1, xp=20)
+Skill(name=hunter, rank=1195284, level=45, xp=67265)
+Skill(name=construction, rank=-1, level=1, xp=0)
