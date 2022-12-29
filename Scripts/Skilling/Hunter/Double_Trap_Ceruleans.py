@@ -36,6 +36,7 @@ def start_trapping_birds(curr_loop):
         setup_interface("north", 5, "up")
         API.AntiBan.sleep_between(1.0, 1.1)
         is_tab_open("inventory", should_open=True)
+        is_otd_enabled(should_enable=False)
         set_initial_traps()
 
     i = 0
@@ -157,7 +158,7 @@ def handle_trap_state():
             needs_reset_2 = False
             last_reset_trap_num = 2
 
-    API.AntiBan.sleep_between(2.0, 2.1)
+    # API.AntiBan.sleep_between(2.0, 2.1)
 
     return True
 
@@ -179,10 +180,10 @@ def reset_trap_num(trap_num=1):
     is_tab_open("inventory", True)
 
     # Check for CAUGHT trap separately - might need to empty invent
-    if wait_for_img(img_name=f"trap_{trap_num}_caught", script_name=script_name, threshold=caught_threshold):
+    if does_img_exist(img_name=f"trap_{trap_num}_caught", script_name=script_name, threshold=caught_threshold):
         API.AntiBan.sleep_between(0.4, 0.5)
         # Click caught bird trap to dismantle...
-        wait_for_img(img_name=f"trap_{trap_num}_caught", script_name=script_name, threshold=caught_threshold, y_offset=6, x_offset=4, should_click=True)
+        does_img_exist(img_name=f"trap_{trap_num}_caught", script_name=script_name, threshold=caught_threshold, y_offset=6, x_offset=4, should_click=True)
 
         # Wait for hunter exp (trap harvest)...
         if wait_for_img(img_name="hunter_exp", script_name=script_name):
@@ -190,7 +191,7 @@ def reset_trap_num(trap_num=1):
             mouse_click(trap_tile_xy)
             API.AntiBan.sleep_between(1.2, 1.3)
             # Clicking a trap to set
-            wait_for_img(img_name="inventory_trap", script_name=script_name, should_click=True)
+            does_img_exist(img_name="inventory_trap", script_name=script_name, should_click=True)
             # API.AntiBan.sleep_between(5.0, 5.1)
             return True
 
@@ -199,7 +200,7 @@ def reset_trap_num(trap_num=1):
             # Drop bird shit to make inventory space & try to set the trap again from current tile
             drop_bird_shit()
             # Click trap reset tile to try picking up trap again after making inventory space
-            wait_for_img(img_name=f"trap_{trap_num}_from_drop_invent", script_name="Double_Trap_Ceruleans", threshold=caught_threshold_from_drop, should_click=True, y_offset=5)
+            does_img_exist(img_name=f"trap_{trap_num}_from_drop_invent", script_name="Double_Trap_Ceruleans", threshold=caught_threshold_from_drop, should_click=True, y_offset=5)
             API.AntiBan.sleep_between(2.0, 2.1)
             # Move to trap reset tile
             mouse_click(trap_tile_xy)
@@ -210,20 +211,20 @@ def reset_trap_num(trap_num=1):
             return True
 
     # Check for DOWN - no need to empty inventory here
-    elif wait_for_img(img_name=f"trap_{trap_num}_down", script_name=script_name, threshold=down_threshold, should_click=True, x_offset=9, y_offset=6):
+    elif does_img_exist(img_name=f"trap_{trap_num}_down", script_name=script_name, threshold=down_threshold, should_click=True, x_offset=9, y_offset=6):
         API.AntiBan.sleep_between(3.0, 3.1)
         # After picking up the downed trap - move to the tile to reset another
         mouse_click(trap_tile_xy)
         API.AntiBan.sleep_between(1.2, 1.3)
         # Clicking a trap to set
-        wait_for_img(img_name="inventory_trap", script_name=script_name, should_click=True)
+        does_img_exist(img_name="inventory_trap", script_name=script_name, should_click=True)
         API.AntiBan.sleep_between(5.0, 5.1)
         return True
 
     # Check for trap PICKUP and click a single time - we'll move directly to the trap tile
-    elif wait_for_img(img_name=f"trap_{trap_num}_pickup", script_name=script_name, threshold=reset_threshold, should_click=True):
+    elif does_img_exist(img_name=f"trap_{trap_num}_pickup", script_name=script_name, threshold=reset_threshold, should_click=True):
         API.AntiBan.sleep_between(3.0, 3.1)
-        wait_for_img(img_name="inventory_trap", script_name=script_name, should_click=True)
+        does_img_exist(img_name="inventory_trap", script_name=script_name, should_click=True)
         API.AntiBan.sleep_between(5.0, 5.1)
         return True
 
@@ -277,20 +278,17 @@ def check_trap_num(trap_num):
 
     write_debug(f'🧿 Check_trap_num {trap_num} fired.')
 
-    if wait_for_img(img_name=f"trap_{trap_num}_caught", script_name=script_name, threshold=caught_threshold,
-                    max_wait_sec=3):
+    if does_img_exist(img_name=f"trap_{trap_num}_caught", script_name=script_name, threshold=caught_threshold):
         set_needs_reset(trap_num)
         write_debug(f"✔ Found CAUGHT for trap: {trap_num} - Needs reset = True")
         return True
 
-    elif wait_for_img(img_name=f"trap_{trap_num}_down", script_name=script_name, threshold=down_threshold,
-                      max_wait_sec=2):
+    elif does_img_exist(img_name=f"trap_{trap_num}_down", script_name=script_name, threshold=down_threshold):
         set_needs_reset(trap_num)
         write_debug(f"✔ Found DOWN for trap: {trap_num} - Needs reset = True")
         return True
 
-    elif wait_for_img(img_name=f"trap_{trap_num}_pickup", script_name=script_name, threshold=reset_threshold,
-                      max_wait_sec=2):
+    elif does_img_exist(img_name=f"trap_{trap_num}_pickup", script_name=script_name, threshold=reset_threshold):
         set_needs_reset(trap_num)
         write_debug(f"✔ Found PICKUP for trap: {trap_num} - Needs reset = True")
         return True
@@ -299,14 +297,16 @@ def check_trap_num(trap_num):
 
 
 def drop_bird_shit():
-    is_otd_enabled(should_enable=True)
+    if does_img_exist(img_name="drop_1", script_name="Bird_Catcher", should_click=True,
+                         threshold=0.9) or does_img_exist(img_name="drop_2", script_name="Bird_Catcher", should_click=True):
+        is_otd_enabled(should_enable=True)
     API.AntiBan.sleep_between(0.4, 0.6)
 
     is_tab_open("inventory", True)
     API.AntiBan.sleep_between(0.5, 0.7)
 
     while does_img_exist(img_name="drop_1", script_name="Bird_Catcher", should_click=True,
-                         threshold=0.9) and \
+                         threshold=0.9) or \
             does_img_exist(img_name="drop_2", script_name="Bird_Catcher", should_click=True):
         print(f'Dropping bird shit from inventory...')
 

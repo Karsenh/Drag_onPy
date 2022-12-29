@@ -17,7 +17,7 @@ def show_skill_input_frame(skill_level_input_frame, t_active_frame, all_frames, 
 
     skill_level_input_frame.grid(row=3, column=1, columnspan=5, pady=50)
 
-    user_search_sub_frame = LabelFrame(skill_level_input_frame, text="Lookup Level by User", bg=label_frame_bg_color, font=break_font)
+    user_search_sub_frame = LabelFrame(skill_level_input_frame, text="Load Levels by User", bg=label_frame_bg_color, font=break_font)
     user_search_sub_frame.grid(row=1, pady=(20, 5))
 
     print(f'Show_Skill_Input_Frame Fired')
@@ -61,7 +61,7 @@ def show_skill_input_frame(skill_level_input_frame, t_active_frame, all_frames, 
     username_lookup_btn.grid(row=2, column=1, columnspan=3, pady=10)
 
     # SKILL LEVEL INPUTS
-    skill_level_input_sub_frame = LabelFrame(skill_level_input_frame, text="Levels", bg=label_frame_bg_color, font=break_font, padx=40, pady=20)
+    skill_level_input_sub_frame = LabelFrame(skill_level_input_frame, text="Input Levels", bg=label_frame_bg_color, font=break_font, padx=40, pady=20)
     skill_level_input_sub_frame.grid(row=2)
 
     attack_level_var = tkinter.StringVar(skill_level_input_frame)

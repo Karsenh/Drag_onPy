@@ -139,6 +139,7 @@ def is_otd_enabled(should_enable=True):
             pag.press('space')
             xy = 48, 340
             mouse_click(xy)
+            API.AntiBan.sleep_between(0.3, 0.4)
         return True
     else:
         print(f'✖ OTD NOT Enabled')
@@ -147,6 +148,7 @@ def is_otd_enabled(should_enable=True):
             pag.press('space')
             xy = 48, 340
             mouse_click(xy)
+            API.AntiBan.sleep_between(0.3, 0.4)
         return False
 
 
