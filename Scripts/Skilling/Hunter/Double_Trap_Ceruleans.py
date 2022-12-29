@@ -338,7 +338,7 @@ def move_back_to_monitor(from_tile):
         API.AntiBan.sleep_between(0.7, 0.8)
         mouse_click(monitor_tile_xy)
         if not wait_for_img(img_name=f"monitor_tile_signal_from_{from_tile}", script_name="Double_Trap_Ceruleans", threshold=0.85,
-                            max_wait_sec=6):
+                            max_wait_sec=8):
             write_debug(f"❌ Couldn't find monitor_tile_signal_from_{from_tile} after trying to click there - clicking tile again.")
             mouse_click(monitor_tile_xy)
         else:
