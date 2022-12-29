@@ -66,7 +66,7 @@ def start_trapping_birds(curr_loop):
 # ----------------
 def set_initial_traps():
     global monitor_tile_from_trap_2
-    trap_2_from_1_xy = 869, 798
+    trap_2_from_1_xy = 869, 824
 
     does_img_exist(img_name="inventory_trap", script_name=script_name, should_click=True, x_offset=5, y_offset=5)
 

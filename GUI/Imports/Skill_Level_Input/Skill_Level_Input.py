@@ -15,7 +15,7 @@ def show_skill_input_frame(skill_level_input_frame, t_active_frame, all_frames, 
 
     is_active = t_active_frame("skill", all_frames)
 
-    skill_level_input_frame.grid(row=3, column=1, columnspan=5, pady=50)
+    skill_level_input_frame.grid(row=3, column=1, columnspan=4, pady=50)
 
     user_search_sub_frame = LabelFrame(skill_level_input_frame, text="Load Levels by User", bg=label_frame_bg_color, font=break_font)
     user_search_sub_frame.grid(row=1, pady=(20, 5))
@@ -61,29 +61,39 @@ def show_skill_input_frame(skill_level_input_frame, t_active_frame, all_frames, 
     username_lookup_btn.grid(row=2, column=1, columnspan=3, pady=10)
 
     # SKILL LEVEL INPUTS
-    skill_level_input_sub_frame = LabelFrame(skill_level_input_frame, text="Input Levels", bg=label_frame_bg_color, font=break_font, padx=40, pady=20)
-    skill_level_input_sub_frame.grid(row=2)
+    skill_level_input_sub_frame = LabelFrame(skill_level_input_frame, text="Input Levels", bg=label_frame_bg_color, font=break_font)
+    skill_level_input_sub_frame.grid(row=2, padx=(25, 10), pady=20)
 
-    attack_level_var = tkinter.StringVar(skill_level_input_frame)
-    attack_level_var.set(user_hiscores.skills['attack'].level)
-    attack_label = Label(skill_level_input_sub_frame, text="Attack:", background=frame_bg_color, font=break_font)
-    attack_input = Entry(skill_level_input_sub_frame, textvariable=attack_level_var, background=label_frame_bg_color, font=break_btn_font, width=3)
-    attack_label.grid(row=3, column=1, padx=0)
-    attack_input.grid(row=3, column=2, pady=0, padx=(5, 15))
+    add_new_skill_input("attack", skill_level_input_sub_frame, user_hiscores, row=3, start_col=1)
+    add_new_skill_input("hitpoints", skill_level_input_sub_frame, user_hiscores, row=3, start_col=3)
+    add_new_skill_input("mining", skill_level_input_sub_frame, user_hiscores, row=3, start_col=5)
 
-    hp_level_var = tkinter.StringVar(skill_level_input_sub_frame)
-    hp_level_var.set(user_hiscores.skills['hitpoints'].level)
-    hp_label = Label(skill_level_input_sub_frame, text="Hitpoints:", background=frame_bg_color, font=break_font)
-    hp_input = Entry(skill_level_input_sub_frame, textvariable=hp_level_var, background=label_frame_bg_color, font=break_btn_font, width=3)
-    hp_label.grid(row=3, column=3)
-    hp_input.grid(row=3, column=4, padx=(5, 15))
+    add_new_skill_input("strength", skill_level_input_sub_frame, user_hiscores, row=4, start_col=1)
+    add_new_skill_input("agility", skill_level_input_sub_frame, user_hiscores, row=4, start_col=3)
+    add_new_skill_input("smithing", skill_level_input_sub_frame, user_hiscores, row=4, start_col=5)
 
-    mining_level_var = tkinter.StringVar(skill_level_input_sub_frame)
-    mining_level_var.set(user_hiscores.skills['mining'].level)
-    mining_label = Label(skill_level_input_sub_frame, text="Mining:", background=frame_bg_color, font=break_font)
-    mining_input = Entry(skill_level_input_sub_frame, textvariable=mining_level_var, background=label_frame_bg_color, font=break_btn_font, width=3)
-    mining_label.grid(row=3, column=5)
-    mining_input.grid(row=3, column=6, padx=(5, 15))
+    add_new_skill_input("defence", skill_level_input_sub_frame, user_hiscores, row=5, start_col=1)
+    add_new_skill_input("herblore", skill_level_input_sub_frame, user_hiscores, row=5, start_col=3)
+    add_new_skill_input("fishing", skill_level_input_sub_frame, user_hiscores, row=5, start_col=5)
+
+    add_new_skill_input("ranged", skill_level_input_sub_frame, user_hiscores, row=6, start_col=1)
+    add_new_skill_input("thieving", skill_level_input_sub_frame, user_hiscores, row=6, start_col=3)
+    add_new_skill_input("cooking", skill_level_input_sub_frame, user_hiscores, row=6, start_col=5)
+
+    add_new_skill_input("prayer", skill_level_input_sub_frame, user_hiscores, row=7, start_col=1)
+    add_new_skill_input("crafting", skill_level_input_sub_frame, user_hiscores, row=7, start_col=3)
+    add_new_skill_input("firemaking", skill_level_input_sub_frame, user_hiscores, row=7, start_col=5)
+
+    add_new_skill_input("magic", skill_level_input_sub_frame, user_hiscores, row=8, start_col=1)
+    add_new_skill_input("fletching", skill_level_input_sub_frame, user_hiscores, row=8, start_col=3)
+    add_new_skill_input("woodcutting", skill_level_input_sub_frame, user_hiscores, row=8, start_col=5)
+
+    add_new_skill_input("runecrafting", skill_level_input_sub_frame, user_hiscores, row=9, start_col=1)
+    add_new_skill_input("slayer", skill_level_input_sub_frame, user_hiscores, row=9, start_col=3)
+    add_new_skill_input("farming", skill_level_input_sub_frame, user_hiscores, row=9, start_col=5)
+
+    add_new_skill_input("construction", skill_level_input_sub_frame, user_hiscores, row=10, start_col=1)
+    add_new_skill_input("hunter", skill_level_input_sub_frame, user_hiscores, row=10, start_col=3)
 
     return
 
@@ -116,3 +126,15 @@ def get_hiscores_for_user(username, skill_level_input_frame, t_active_frame, all
 
     return user_hiscores
 
+
+def add_new_skill_input(skill_name, skill_level_input_sub_frame, user_hiscores, row, start_col):
+    break_font = tkinter.font.Font(family='Helvetica', size=11, weight='normal')
+    break_btn_font = tkinter.font.Font(family='Helvetica', size=11, weight='bold')
+
+    mining_level_var = tkinter.StringVar(skill_level_input_sub_frame)
+    mining_level_var.set(user_hiscores.skills[f'{skill_name}'].level)
+    mining_label = Label(skill_level_input_sub_frame, text=f"{skill_name.capitalize()}:", background=frame_bg_color, font=break_font)
+    mining_input = Entry(skill_level_input_sub_frame, textvariable=mining_level_var, background=label_frame_bg_color, font=break_btn_font, width=3)
+    mining_label.grid(row=row, column=start_col, pady=(15, 0), sticky='W')
+    mining_input.grid(row=row, column=start_col+1, padx=(5, 15), pady=(15, 0))
+    return
