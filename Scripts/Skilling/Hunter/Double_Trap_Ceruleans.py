@@ -13,8 +13,8 @@ bird_type = "cerulean"
 monitor_tile_from_trap_1 = 810, 740
 monitor_tile_from_trap_2 = 811, 424
 
-trap_tile_1 = 775, 367
-trap_tile_2 = 779, 665
+trap_tile_1 = 849, 404
+trap_tile_2 = 846, 749
 
 needs_reset_1 = False
 needs_reset_2 = False
