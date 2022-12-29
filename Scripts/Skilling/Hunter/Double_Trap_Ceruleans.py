@@ -297,13 +297,15 @@ def check_trap_num(trap_num):
 
 
 def drop_bird_shit():
-    if does_img_exist(img_name="drop_1", script_name="Bird_Catcher", should_click=True,
-                         threshold=0.9) or does_img_exist(img_name="drop_2", script_name="Bird_Catcher", should_click=True):
-        is_otd_enabled(should_enable=True)
+
     API.AntiBan.sleep_between(0.4, 0.6)
 
     is_tab_open("inventory", True)
     API.AntiBan.sleep_between(0.5, 0.7)
+
+    if does_img_exist(img_name="drop_1", script_name="Bird_Catcher", should_click=True,
+                         threshold=0.9) or does_img_exist(img_name="drop_2", script_name="Bird_Catcher", should_click=True):
+        is_otd_enabled(should_enable=True)
 
     while does_img_exist(img_name="drop_1", script_name="Bird_Catcher", should_click=True,
                          threshold=0.9) or \
