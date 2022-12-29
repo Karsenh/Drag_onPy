@@ -184,8 +184,8 @@ def launch_script(script_name="pisc_iron"):
             antiban_downtime_sec = .5
         case "Kourend_Crab_Killer":
             selected_script = ScriptEnum.KOUREND_CRABS.value
-            antiban_likelihood = 25
-            antiban_downtime_sec = 2
+            antiban_likelihood = 10
+            antiban_downtime_sec = 4
 
     is_timer_set = is_break_timer_set()
 

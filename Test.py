@@ -38,8 +38,11 @@ clear_debug_log()
 
 # random_human_actions(max_downtime_seconds=12)
 # show_main_gui()
-launch_script("seers_rooftops")
+launch_script("Kourend_Crab_Killer")
 
+
+
+# does_img_exist(img_name="aggro_path_a_0", script_name="Kourend_Crab_Killer", threshold=0.98, should_click=True)
 
 
 # does_img_exist(img_name=f"inventory_monkfish", script_name="Ardy_Knights", should_click=True, threshold=0.95)

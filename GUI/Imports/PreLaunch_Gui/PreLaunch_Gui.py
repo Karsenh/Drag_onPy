@@ -55,19 +55,9 @@ def show_plg(script_name):
 
 
 def show_plg_start_section(main_plg_frame, font_styles, script_name):
-    break_font, break_btn_font = font_styles
-
-    # start_imgs, _ = get_plg_gui_images()
-    # start_tile_images, start_equipment_images, start_inventory_images = start_imgs
-    #
-    # st_ardy_knights = start_tile_images
-    #
-    # start_tile_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\Assets\Images\GUI_Images\PreLaunch_Gui\Start_Tile\{script_name}.png'))
-    # start_equip_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\Assets\Images\GUI_Images\PreLaunch_Gui\Start_Equipment\{script_name}.png'))
-    # start_invent_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\Assets\Images\GUI_Images\PreLaunch_Gui\Start_Inventory\{script_name}.png'))
     start_tile_image, start_equip_image, start_invent_image, _ = get_plg_gui_images(script_name)
 
-    start_info_frame = LabelFrame(main_plg_frame, text="Start Setup", bg=frame_bg_color, pady=20, padx=20)
+    start_info_frame = LabelFrame(main_plg_frame, text="Start Tile | Equipment | Inventory", bg=frame_bg_color, pady=20, padx=20)
 
     # Start_Tile
     start_tile_img_label = Label(start_info_frame, image=start_tile_image, background=frame_bg_color)
@@ -77,12 +67,12 @@ def show_plg_start_section(main_plg_frame, font_styles, script_name):
     # Start_Equipment
     start_equip_img_label = Label(start_info_frame, image=start_equip_image, background=frame_bg_color)
     start_equip_img_label.photo = start_equip_image
-    start_equip_img_label.grid(row=1, column=2)
+    start_equip_img_label.grid(row=1, column=2, padx=(25, 0))
 
     # Start_Inventory
     start_invent_img_label = Label(start_info_frame, image=start_invent_image, background=frame_bg_color)
     start_invent_img_label.photo = start_invent_image
-    start_invent_img_label.grid(row=1, column=3)
+    start_invent_img_label.grid(row=1, column=3, padx=(0, 0))
 
     start_info_frame.grid(row=2, column=1)
 
