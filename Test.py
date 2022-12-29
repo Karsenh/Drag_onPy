@@ -38,7 +38,7 @@ clear_debug_log()
 
 # random_human_actions(max_downtime_seconds=12)
 # show_main_gui()
-launch_script("Kourend_Crab_Killer")
+launch_script("troll_double_trap_ceruleans")
 
 
 

@@ -36,8 +36,8 @@ def start_killing_kourend_crabs(curr_loop):
             reset_aggro()
 
         # Find a crab to click
-        for i in range(0, 24):
-            if does_img_exist(img_name=f"crab_{i}", script_name=script_name, threshold=0.85, should_click=True):
+        for i in range(0, 27):
+            if does_img_exist(img_name=f"crab_{i}", script_name=script_name, threshold=0.80, should_click=True):
                 API.AntiBan.sleep_between(5.7, 5.8)
                 clicked_crabs += 1
                 print(f'🖱 Found a crab and clicked it - clicked_crabs now = {clicked_crabs}')
