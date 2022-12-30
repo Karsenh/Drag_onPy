@@ -29,7 +29,10 @@ def open_ge_bank(curr_loop):
     # ge_bank_xy = 679, 440
     # mouse_click(ge_bank_xy)
 
-    wait_for_img(img_name="bank_alt", script_name="GE_Glass_Blower", threshold=0.90, should_click=True, x_offset=39)
+    wait_for_img(img_name="bank_alt", script_name="GE_Glass_Blower", threshold=0.95, should_click=True, x_offset=36)
+
+    if not wait_for_img(img_name="bank_is_open", category="Banking", threshold=0.9):
+        return False
 
     API.AntiBan.sleep_between(3.0, 3.1)
 
