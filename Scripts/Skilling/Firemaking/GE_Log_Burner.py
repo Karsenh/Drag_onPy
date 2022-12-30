@@ -121,7 +121,7 @@ def burn_logs():
 
 
 def click_to_open_bank():
-    wait_for_img(img_name="bank_alt", script_name="GE_Log_Burner", threshold=0.95, y_offset=-6, should_click=True)
+    wait_for_img(img_name="bank_alt", script_name="GE_Log_Burner", threshold=0.96, y_offset=-6, should_click=True)
 
     if wait_for_img(img_name="bank_is_open", category="Banking"):
         return True
