@@ -34,7 +34,7 @@ def get_all_btns(all_frames, all_images):
     # Main_gui_images
     gold_img, skills_img, skull_img, settings_img, question_mark_img, bug_report_img = main_gui_images
     # Sub_gui_images
-    cball_img = gold_gui_images
+    cball_img, unf_pot_img = gold_gui_images
     attack_img, hp_img, mining_img, \
     strength_img, agility_img, smithing_img, \
     defence_img, herblore_img, fishing_img, \
@@ -74,9 +74,6 @@ def get_all_btns(all_frames, all_images):
 
     # Package up Gui_Btns to access values within each button
     gui_btns = gold_btn, skill_btn, minigames_btn
-
-    # (Main) Gold_gui_btns
-    cball_btn = Button(gold_frame, text="C'Balls", image=cball_img, bg='#545550', activebackground=btn_active_bg_color,)
 
     skill_btn_width = 100
     skill_btn_height = 60
@@ -204,7 +201,11 @@ def get_all_btns(all_frames, all_images):
 
     main_gui_btns = gold_btn, skill_btn, minigames_btn, settings_btn, info_btn, bug_report_btn
 
-    gold_gui_btns = cball_btn
+    # (Main) Gold_gui_btns
+    cball_btn = Button(gold_frame, text="C'Balls", image=cball_img,  height=100, width=100, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_plg("Edge_Cballs"))
+    unf_pots_btn = Button(gold_frame, text="Unf Pots", image=unf_pot_img,  height=100, width=100, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_plg("GE_Unf_Pots"))
+
+    gold_gui_btns = cball_btn, unf_pots_btn
 
     skill_gui_btns = attack_btn, hp_btn, minining_btn, \
                      strength_btn, agility_btn, smithing_btn, \

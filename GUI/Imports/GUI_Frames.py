@@ -215,7 +215,7 @@ def show_gold_frame(all_frames, gold_gui_btns, t_active_frame, gui_btns):
     skill_btn.configure(bg=btn_bg_color)
     minigames_btn.configure(bg=btn_bg_color)
 
-    cball_btn = gold_gui_btns
+    cball_btn, unf_pots_btn = gold_gui_btns
     main_frame, gold_frame, skill_frame, minigames_frame, skill_sub_frame = all_frames
 
     skill_frame.grid_remove()
@@ -224,6 +224,8 @@ def show_gold_frame(all_frames, gold_gui_btns, t_active_frame, gui_btns):
     gold_frame.grid(row=sub_gui_row, column=1, columnspan=5, pady=50)
 
     cball_btn.grid(row=1, column=1, padx=50, pady=35)
+
+    unf_pots_btn.grid(row=2, column=1, padx=50, pady=35)
 
     # If is_active is false here, it was true when we clicked, therefore exit
     if not is_active:

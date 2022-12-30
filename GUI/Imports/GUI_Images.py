@@ -28,6 +28,8 @@ def get_all_gui_images():
     # Gold_Gui images
     gold_path = "Assets\Images\GUI_Images\Gold"
     cballs_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{gold_path}\Cballs.png'))
+    unf_pot_img = ImageTk.PhotoImage(Image.open(f"{os.getcwd()}\{gold_path}\Herb_pot.png"))
+
 
     # Skills_Gui images
     # First Row
@@ -78,7 +80,7 @@ def get_all_gui_images():
 
     main_gui_images = gold_img, skills_img, skull_img, settings_img, question_mark_img, bug_report_img
 
-    gold_gui_images = cballs_img
+    gold_gui_images = cballs_img, unf_pot_img
 
     skill_gui_images = attack_img, hp_img, mining_img, \
                        strength_img, agility_img, smithing_img, \
