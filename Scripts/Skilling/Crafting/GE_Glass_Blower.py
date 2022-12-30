@@ -26,10 +26,10 @@ def start_blowing_glass(curr_loop):
 
 def open_ge_bank(curr_loop):
 
-    ge_bank_xy = 679, 440
-    mouse_click(ge_bank_xy)
+    # ge_bank_xy = 679, 440
+    # mouse_click(ge_bank_xy)
 
-    # does_img_exist(img_name="bank", script_name="GE_Glass_Blower", threshold=0.80, should_click=True, x_offset=25, y_offset=35)
+    wait_for_img(img_name="bank_alt", script_name="GE_Glass_Blower", threshold=0.90, should_click=True)
 
     API.AntiBan.sleep_between(3.0, 3.1)
 
