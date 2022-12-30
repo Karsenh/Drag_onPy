@@ -5,7 +5,7 @@ from API.Imaging.OCR.Skill_Levels import ocr_skill_levels
 from API.Imaging.Image import does_img_exist, wait_for_img
 from API.Interface.General import setup_interface, is_otd_enabled, get_xy_for_invent_slot, drop_inventory, is_tab_open
 from API.Mouse import mouse_click
-from API.Imaging.OCR.Skill_Levels import get_skill_level
+from API.Skill_Levels import get_skill_level
 
 curr_tree_num = 1
 

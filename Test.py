@@ -1,35 +1,9 @@
-import os
-import sys
-import time
-
-import API.AntiBan
-import Scripts.Skilling.Prayer.Gilded_Altar
-from API.Mouse import *
 from GUI.Main_GUI import *
 from API.Debug import clear_debug_log
 from API.Imaging.Image import *
-from API.AntiBan import *
-from API.Interface import *
-from API.Imports.Coords import *
-from enum import Enum
-from Scripts.Skilling.Smithing.Gold.Edge_Gold import *
 from API.Imaging.OCR.Run_Energy import *
-from Scripts.Skilling.Thieving.Stalls.Ardy_Cake import steal_ardy_cake
-from API.Imaging.OCR.Total_Exp import wait_for_exp_change
+
 # from Scripts.Skilling.Agility.Gnome_Course import *
-from GUI.Auth_GUI import *
-from Scripts.Skilling.Fishing.Trout.Barb_Trout import fish_barb_trout
-from Scripts.Skilling.Fishing.Barbarian.Barbarian_Fishing import barbarian_fishing
-from Scripts.Skilling.Firemaking.GE_Log_Burner import burn_logs_at_ge, burn_logs
-from Scripts.MiniGames.Fishing_Trawler import repair_hole_until_finished, start_trawling
-import pyautogui as pag
-from API.Imaging.OCR.Skill_Levels import get_skill_level
-from API.Interface.Bank import is_withdraw_qty
-from Scripts.Skilling.Thieving.Stalls.Hosidius_Fruit import start_stealing_fruit
-from Scripts.Skilling.Agility.Canifis_Rooftops import start_canifis_rooftops, click_second_jump, click_third_jump
-from Scripts.Skilling.Agility.Seers_Rooftops import start_seers_rooftops, handle_next_jump, alch_on_agility_drop
-from Scripts.Skilling.Thieving.Pickpocketing.Ardy_Knights import set_curr_tile
-from API.Skill_Levels import get_skill_level
 
 
 get_bluestacks_xy()
