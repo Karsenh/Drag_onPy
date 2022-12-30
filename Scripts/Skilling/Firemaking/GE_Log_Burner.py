@@ -123,7 +123,7 @@ def burn_logs():
 def click_to_open_bank():
     # bank_open_xy = 788, 483
     # mouse_click(bank_open_xy, max_x_dev=0, max_y_dev=0)
-    wait_for_img(img_name="bank_alt", script_name="GE_Log_Burner", threshold=0.95, y_offset=-10, should_click=True)
+    wait_for_img(img_name="bank_alt", script_name="GE_Log_Burner", threshold=0.95, y_offset=-6, should_click=True)
 
     if wait_for_img(img_name="bank_is_open", category="Banking"):
         return True
@@ -133,13 +133,14 @@ def click_to_open_bank():
         long_click_xy = get_existing_img_xy()
         mouse_long_click(long_click_xy)
         wait_for_img(img_name="open_bank_selection", script_name="GE_Log_Burner", threshold=0.9, should_click=True)
+        return True
 
     print(f"Couldn't find bank anything to open bank - Exiting...")
     return False
 
 
 def click_to_withdraw_logs():
-    does_img_exist(img_name=f"banked_{logs_to_use}_log", script_name="GE_Log_Burner", threshold=0.94, should_click=True,
+    does_img_exist(img_name=f"banked_{logs_to_use}_log", script_name="GE_Log_Burner", threshold=0.95, should_click=True,
                    x_offset=22, y_offset=15)
     API.AntiBan.sleep_between(0.5, 0.6)
     return
