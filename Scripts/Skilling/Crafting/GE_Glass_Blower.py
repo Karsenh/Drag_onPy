@@ -29,7 +29,7 @@ def open_ge_bank(curr_loop):
     # ge_bank_xy = 679, 440
     # mouse_click(ge_bank_xy)
 
-    wait_for_img(img_name="bank_alt", script_name="GE_Glass_Blower", threshold=0.90, should_click=True)
+    wait_for_img(img_name="bank_alt", script_name="GE_Glass_Blower", threshold=0.90, should_click=True, x_offset=39)
 
     API.AntiBan.sleep_between(3.0, 3.1)
 
