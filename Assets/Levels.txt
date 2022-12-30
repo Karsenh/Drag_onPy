@@ -1,27 +1,27 @@
-duriel_ghost
-Rank: 1343850
-Total Level: 1218
-Total XP: 16492977
-Skill(name=attack, rank=1905426, level=60, xp=277713)
+duriel ghost
+Rank: 1333300
+Total Level: 1225
+Total XP: 16551799
+Skill(name=attack, rank=1905687, level=60, xp=277713)
 Skill(name=defence, rank=-1, level=50, xp=103252)
 Skill(name=strength, rank=-1, level=54, xp=165358)
 Skill(name=hitpoints, rank=-1, level=52, xp=128382)
 Skill(name=ranged, rank=-1, level=1, xp=12)
-Skill(name=prayer, rank=1338821, level=53, xp=144837)
-Skill(name=magic, rank=1346855, level=73, xp=1038744)
-Skill(name=cooking, rank=641855, level=80, xp=2021480)
-Skill(name=woodcutting, rank=924703, level=71, xp=825172)
-Skill(name=fletching, rank=558419, level=80, xp=1994544)
-Skill(name=fishing, rank=497778, level=80, xp=2016760)
-Skill(name=firemaking, rank=909336, level=71, xp=887852)
-Skill(name=crafting, rank=1037931, level=64, xp=448758)
-Skill(name=smithing, rank=1031116, level=61, xp=307731)
-Skill(name=mining, rank=760722, level=70, xp=802067)
-Skill(name=herblore, rank=326656, level=80, xp=1986137)
-Skill(name=agility, rank=457335, level=75, xp=1210491)
-Skill(name=thieving, rank=295385, level=80, xp=2061252)
-Skill(name=slayer, rank=-1, level=10, xp=1310)
+Skill(name=prayer, rank=1339036, level=53, xp=144837)
+Skill(name=magic, rank=1347131, level=73, xp=1038744)
+Skill(name=cooking, rank=641983, level=80, xp=2021480)
+Skill(name=woodcutting, rank=924896, level=71, xp=825172)
+Skill(name=fletching, rank=558519, level=80, xp=1994544)
+Skill(name=fishing, rank=497855, level=80, xp=2016760)
+Skill(name=firemaking, rank=909548, level=71, xp=887852)
+Skill(name=crafting, rank=1038185, level=64, xp=448758)
+Skill(name=smithing, rank=1031328, level=61, xp=307731)
+Skill(name=mining, rank=760930, level=70, xp=802067)
+Skill(name=herblore, rank=326724, level=80, xp=1986137)
+Skill(name=agility, rank=457503, level=75, xp=1210491)
+Skill(name=thieving, rank=295470, level=80, xp=2061252)
+Skill(name=slayer, rank=-1, level=11, xp=1410)
 Skill(name=farming, rank=-1, level=5, xp=416)
 Skill(name=runecrafting, rank=-1, level=1, xp=20)
-Skill(name=hunter, rank=1190041, level=46, xp=70689)
+Skill(name=hunter, rank=1095591, level=52, xp=129411)
 Skill(name=construction, rank=-1, level=1, xp=0)

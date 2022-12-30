@@ -15,7 +15,7 @@ def show_skill_input_frame(skill_level_input_frame, t_active_frame, all_frames, 
 
     is_active = t_active_frame("skill", all_frames)
 
-    skill_level_input_frame.grid(row=3, column=1, columnspan=4, pady=50)
+    skill_level_input_frame.grid(row=3, column=1, columnspan=4, pady=20)
 
     user_search_sub_frame = LabelFrame(skill_level_input_frame, text="Load Levels by User", bg=label_frame_bg_color, font=break_font)
     user_search_sub_frame.grid(row=1, pady=(20, 5))
@@ -44,25 +44,25 @@ def show_skill_input_frame(skill_level_input_frame, t_active_frame, all_frames, 
 
     if username_from_file and initial_get:
         print(f'Found username ({username_from_file}) in {assets_path}\Levels.txt')
-        user_hiscores = get_hiscores_for_user(username_from_file, user_search_sub_frame, t_active_frame, all_frames)
+        user_hiscores = fetch_hiscores_for_user(username_from_file)
         initial_get = False
     elif username_arg == "" and not initial_get:
         print(f'Fetching HiScores for user from file (not intial and no arg passed): {username_arg}')
-        user_hiscores = get_hiscores_for_user(username_from_file, user_search_sub_frame, t_active_frame, all_frames)
+        user_hiscores = fetch_hiscores_for_user(username_from_file)
     else:
         print(f'Fetching HiScores for user_arg: {username_arg}')
-        user_hiscores = get_hiscores_for_user(username_arg, user_search_sub_frame, t_active_frame, all_frames)
+        user_hiscores = fetch_hiscores_for_user(username_arg)
 
     # username_label.grid(row=1, column=1)
     username_input.grid(row=1, column=1, padx=20, pady=10)
 
-    username_lookup_btn = Button(user_search_sub_frame, font=break_btn_font, text="Search User", bg=btn_bg_color, activebackground=btn_active_bg_color, command=lambda: show_skill_input_frame(skill_level_input_frame, t_active_frame, all_frames, username_arg=username_input.get()))
+    username_lookup_btn = Button(user_search_sub_frame, fg="white", font=break_btn_font, text="Search User", bg=btn_bg_color, activebackground=btn_active_bg_color, command=lambda: show_skill_input_frame(skill_level_input_frame, t_active_frame, all_frames, username_arg=username_input.get()))
 
     username_lookup_btn.grid(row=2, column=1, columnspan=3, pady=10)
 
     # SKILL LEVEL INPUTS
     skill_level_input_sub_frame = LabelFrame(skill_level_input_frame, text="Input Levels", bg=label_frame_bg_color, font=break_font)
-    skill_level_input_sub_frame.grid(row=2, padx=(25, 10), pady=20)
+    skill_level_input_sub_frame.grid(row=2, padx=(10, 10), pady=20)
 
     add_new_skill_input("attack", skill_level_input_sub_frame, user_hiscores, row=3, start_col=1)
     add_new_skill_input("hitpoints", skill_level_input_sub_frame, user_hiscores, row=3, start_col=3)
@@ -95,10 +95,13 @@ def show_skill_input_frame(skill_level_input_frame, t_active_frame, all_frames, 
     add_new_skill_input("construction", skill_level_input_sub_frame, user_hiscores, row=10, start_col=1)
     add_new_skill_input("hunter", skill_level_input_sub_frame, user_hiscores, row=10, start_col=3)
 
+    save_levels_btn = Button(skill_level_input_sub_frame, state='disabled', font=break_btn_font, text="Update Levels", bg=btn_bg_color, activebackground=btn_active_bg_color, command=lambda: update_levels_file(username_var.get(), user_hiscores))
+    save_levels_btn.grid(row=11, column=1, columnspan=6, pady="20")
+
     return
 
 
-def get_hiscores_for_user(username, skill_level_input_frame, t_active_frame, all_frames):
+def fetch_hiscores_for_user(username):
     global initial_get
 
     # raw_username = username.get()
@@ -118,13 +121,18 @@ def get_hiscores_for_user(username, skill_level_input_frame, t_active_frame, all
     print(f"Attack = {user_hiscores.skills['attack'].level}")
     print(f"Agility = {user_hiscores.skills['agility'].level}")
 
+    save_hs_to_file(username, user_hiscores)
+
+    return user_hiscores
+
+
+def save_hs_to_file(username, hiScores):
     assets_path = f"{os.getcwd()}\Assets"
 
     with open(f'{assets_path}\Levels.txt', 'w') as file:
-        file.write(f"{cleaned_username}\n")
-        file.write(str(user_hiscores))
-
-    return user_hiscores
+        file.write(f"{username}\n")
+        file.write(str(hiScores))
+    return
 
 
 def add_new_skill_input(skill_name, skill_level_input_sub_frame, user_hiscores, row, start_col):
@@ -137,4 +145,18 @@ def add_new_skill_input(skill_name, skill_level_input_sub_frame, user_hiscores, 
     mining_input = Entry(skill_level_input_sub_frame, textvariable=mining_level_var, background=label_frame_bg_color, font=break_btn_font, width=3)
     mining_label.grid(row=row, column=start_col, pady=(15, 0), sticky='W')
     mining_input.grid(row=row, column=start_col+1, padx=(5, 15), pady=(15, 0))
+    return
+
+
+def update_levels_file(username, user_hiscores):
+    assets_path = f"{os.getcwd()}\Assets"
+
+    with open(f'{assets_path}\Levels.txt', 'w') as file:
+        file.write(f"{username}\n")
+        file.write(str(user_hiscores))
+    return
+
+
+def get_level_from_file(skill_name):
+
     return
