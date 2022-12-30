@@ -70,6 +70,8 @@ def get_all_frames(root):
     main_frame.pack()
     main_frame.place(anchor='center', relx=0.5, rely=0.5)
 
+    combat_frame = LabelFrame(main_frame, text="Combat", bg=label_frame_bg_color, font=sub_gui_label_font)
+
     gold_frame = LabelFrame(main_frame, text="Money making", bg=label_frame_bg_color, font=sub_gui_label_font)
     skill_frame = LabelFrame(main_frame, text="Skill training", bg=label_frame_bg_color, font=sub_gui_label_font)
     minigames_frame = LabelFrame(main_frame, text="Minigames", bg=label_frame_bg_color, font=sub_gui_label_font)
@@ -114,7 +116,7 @@ def get_all_frames(root):
                        magic_frame, fletching_frame, woodcutting_frame, \
                        runecrafting_frame, slayer_frame, farming_frame, \
                        construction_frame, hunter_frame, attack_frame, \
-                       skill_level_input_frame
+                       skill_level_input_frame, hp_frame, strength_frame, combat_frame
 
     # Import All Frames & All Images from GUI Imports
     all_frames = main_frame, gold_frame, skill_frame, minigames_frame, skill_sub_frames
@@ -329,6 +331,37 @@ def show_minigames_frame(all_frames, minigames_sub_btns, t_active_frame, gui_btn
 # ---
 # SKILL FRAME - SUB-FRAMES
 # ---
+def show_combat_frame(all_frames, t_active_frame, combat_frame, combat_sub_btns):
+    _, _, _, _, skill_sub_frames = all_frames
+    kourend_crab_killer_btn, cow_killer_btn = combat_sub_btns
+
+    is_active = t_active_frame("skill", all_frames)
+    print(f'show_attack_frame - skill_frame - is_active: {is_active}')
+
+    combat_frame.grid(row=sub_gui_row, column=1, columnspan=5, pady=50)
+
+    combat_img_path = 'Assets\Images\GUI_Images\Stats\Combat'
+
+    sand_crab_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{combat_img_path}\Sand_Crab.png'))
+
+    crab_killer_label = Label(combat_frame, image=sand_crab_img, height=100, width=100, bg=label_frame_bg_color)
+    crab_killer_label.image = sand_crab_img
+
+    # Load button with ore
+    crab_killer_label.grid(row=2, column=1)
+    kourend_crab_killer_btn.grid(row=2, column=2, columnspan=2, pady=20, padx=30)
+
+    cow_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{combat_img_path}\Cow.png'))
+
+    cow_img_label = Label(combat_frame, image=cow_img, height=100, width=100, bg=label_frame_bg_color)
+    cow_img_label.image = cow_img
+
+    # Load button with ore
+    cow_img_label.grid(row=1, column=1)
+    cow_killer_btn.grid(row=1, column=2, columnspan=2, pady=20, padx=30)
+    return
+
+
 def show_attack_frame(all_frames, t_active_frame, attack_frame, attack_sub_btns):
     _, _, _, _, skill_sub_frames = all_frames
     cow_killer_btn = attack_sub_btns
@@ -396,8 +429,7 @@ def show_smithing_frame(all_frames, t_active_frame, smithing_frame, smithing_sub
 
 def show_agility_frame(all_frames, t_active_frame, agility_frame, agility_sub_btns):
     _, _, _, _, skill_sub_frames = all_frames
-    # _, _, agility_frame, _, _, _, _, _, _ = skill_sub_frames
-    gnome_course_btn, canifis_rooftops_btn = agility_sub_btns
+    gnome_course_btn, canifis_rooftops_btn, seers_rooftop_btn = agility_sub_btns
 
     is_active = t_active_frame("skill", all_frames)
     print(f'show_agility_frame - skill_frame - is_active: {is_active}')
@@ -407,6 +439,7 @@ def show_agility_frame(all_frames, t_active_frame, agility_frame, agility_sub_bt
     agility_path = 'Assets\Images\GUI_Images\Stats\Agility'
     gnome_course_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{agility_path}\Gnome_Course.png'))
     mog_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{agility_path}\Mog.png'))
+    high_alch_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{agility_path}\High_Alch.png'))
 
     gold_img_label = Label(agility_frame, image=gnome_course_img, height=100, width=100, bg=label_frame_bg_color)
     gold_img_label.image = gnome_course_img
@@ -414,12 +447,18 @@ def show_agility_frame(all_frames, t_active_frame, agility_frame, agility_sub_bt
     mog_img_label = Label(agility_frame, image=mog_img, height=100, width=100, bg=label_frame_bg_color)
     mog_img_label.image = mog_img
 
+    seers_img_label = Label(agility_frame, image=high_alch_img, height=100, width=100, bg=label_frame_bg_color)
+    seers_img_label.image = high_alch_img
+
     # Load button with ore
     gold_img_label.grid(row=1, column=1)
     gnome_course_btn.grid(row=1, column=2, columnspan=2, pady=20, padx=30)
 
     mog_img_label.grid(row=2, column=1)
     canifis_rooftops_btn.grid(row=2, column=2, columnspan=2, pady=20, padx=30)
+
+    seers_img_label.grid(row=3, column=1)
+    seers_rooftop_btn.grid(row=3, column=2, columnspan=2, pady=20, padx=30)
     return
 
 

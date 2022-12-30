@@ -1,4 +1,4 @@
-from Scripts.Skilling.Smithing.Gold.Edge_Gold import smith_gold_edge
+from Scripts.Skilling.Smithing.Edge_Gold import smith_gold_edge
 from Scripts.Skilling.Mining.Iron.Pisc_Iron import mine_iron_pisc
 from Scripts.Skilling.Agility.Gnome_Course import run_gnome_course
 from Scripts.Skilling.Fishing.Shrimp.Draynor_Shrimp import fish_draynor_shrimp
@@ -19,15 +19,13 @@ from Scripts.Skilling.Prayer.Gilded_Altar import start_gilded_altar
 from Scripts.Skilling.Herblore.Unf_Pots import start_unf_pots
 from Scripts.Skilling.Agility.Canifis_Rooftops import start_canifis_rooftops
 from Scripts.Skilling.Agility.Seers_Rooftops import start_seers_rooftops
-from Scripts.Skilling.Hunter.Bird_Catcher import start_snaring_birds
+from Scripts.Skilling.Hunter.Single_Trap_Crimsons import start_catching_crimsons
 from Scripts.Skilling.Hunter.Double_Trap_Ceruleans import start_trapping_birds
 from Scripts.Skilling.Thieving.Pickpocketing.Ardy_Knights import start_pickpocketing_ardy_knights
 from Scripts.Skilling.Combat.Kourend_Crab_Killer import start_killing_kourend_crabs
-from API.Imaging.OCR.Skill_Levels import get_skill_level, ocr_skill_levels
 
 from enum import Enum
 import API
-import keyboard
 from API.Debug import write_debug
 from API.Interface.General import handle_auth_screens
 from API.Break_Timer.Break_Handler import is_break_timer_set
@@ -80,7 +78,7 @@ def launch_script(script_name="pisc_iron"):
                    start_chop_fletching, start_blowing_glass, start_fletching_darts,
                    start_ploughing_for_favour, start_stealing_fruit, start_gilded_altar,
                    start_unf_pots, start_canifis_rooftops, start_seers_rooftops,
-                   start_snaring_birds, start_trapping_birds, start_pickpocketing_ardy_knights,
+                   start_catching_crimsons, start_trapping_birds, start_pickpocketing_ardy_knights,
                    start_killing_kourend_crabs]
 
     match script_name:
