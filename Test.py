@@ -41,6 +41,9 @@ clear_debug_log()
 # show_main_gui()
 launch_script("ge_log_burner")
 
+
+# wait_for_img(img_name="mobile_settings_tab", category="Interface", should_click=True)
+
 # wait_for_img(img_name="banked_yew_log", script_name="GE_Log_Burner", threshold=0.95, should_click=True)
 
 # get_skill_level("crafting")

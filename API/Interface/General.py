@@ -63,6 +63,9 @@ def zoom_camera(notches=1):
 
     is_tab_open("settings")
 
+    wait_for_img(img_name="mobile_settings_tab", category="Interface", should_click=True)
+    API.AntiBan.sleep_between(0.4, 0.6)
+
     mouse_click(notch_list[index], 0, 0)
 
     API.AntiBan.sleep_between(0.3, 0.7)

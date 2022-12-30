@@ -91,14 +91,14 @@ def move_to_start(move_xy):
 
 def burn_logs():
     i = 0
+
     if not does_img_exist(img_name=f"inventory_{logs_to_use}_log", script_name="GE_Log_Burner", category="Scripts", threshold=0.85, should_click=False):
         return False
+
     while does_img_exist(img_name=f"inventory_{logs_to_use}_log", script_name="GE_Log_Burner", category="Scripts", threshold=0.85, should_click=False):
         i += 1
 
         write_debug(f'BURN LOGS - {i}/28')
-        if i == 29:
-            return True
 
         does_img_exist(img_name="inventory_tinderbox", script_name="GE_Log_Burner", category="Scripts", threshold=.95, should_click=True, y_offset=6, x_offset=6)
         API.AntiBan.sleep_between(0.1, 0.2)
@@ -108,21 +108,19 @@ def burn_logs():
             next_log_xy = get_existing_img_xy()
             mouse_move(next_log_xy, max_x_dev=15, max_y_dev=15)
 
-            if wait_for_img(img_name="log_burned", script_name="GE_Log_Burner", category="Scripts", max_wait_sec=6):
+            if wait_for_img(img_name="log_burned", script_name="GE_Log_Burner", category="Scripts", max_wait_sec=3):
                 pag.click(button="left")
             else:
-                write_debug(f'Exp drop not seen!')
+                write_debug(f'Exp drop not seen! Clicking anyways because we saw a log here.')
                 pag.leftClick()
         else:
             does_img_exist(img_name=f"inventory_{logs_to_use}_log", script_name="GE_Log_Burner", category="Scripts", threshold=0.85, should_click=True, x_offset=15, y_offset=15)
 
-    wait_for_img(img_name="log_burned", script_name="GE_Log_Burner", category="Scripts", max_wait_sec=6)
+    # wait_for_img(img_name="log_burned", script_name="GE_Log_Burner", category="Scripts", max_wait_sec=6)
     return True
 
 
 def click_to_open_bank():
-    # bank_open_xy = 788, 483
-    # mouse_click(bank_open_xy, max_x_dev=0, max_y_dev=0)
     wait_for_img(img_name="bank_alt", script_name="GE_Log_Burner", threshold=0.95, y_offset=-6, should_click=True)
 
     if wait_for_img(img_name="bank_is_open", category="Banking"):
@@ -133,14 +131,18 @@ def click_to_open_bank():
         long_click_xy = get_existing_img_xy()
         mouse_long_click(long_click_xy)
         wait_for_img(img_name="open_bank_selection", script_name="GE_Log_Burner", threshold=0.9, should_click=True)
-        return True
+        if wait_for_img(img_name="bank_is_open", category="Banking"):
+            return True
+        else:
+            print(f'Tried to long press open bank but still couldnt seem to open bank - returning false...')
+            return False
 
     print(f"Couldn't find bank anything to open bank - Exiting...")
     return False
 
 
 def click_to_withdraw_logs():
-    does_img_exist(img_name=f"banked_{logs_to_use}_log", script_name="GE_Log_Burner", threshold=0.95, should_click=True,
+    wait_for_img(img_name=f"banked_{logs_to_use}_log", script_name="GE_Log_Burner", threshold=0.95, should_click=True,
                    x_offset=22, y_offset=15)
     API.AntiBan.sleep_between(0.5, 0.6)
     return
