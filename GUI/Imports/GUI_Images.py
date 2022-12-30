@@ -98,11 +98,12 @@ def get_all_gui_images():
 
     # Skill Sub-GUI
     skill_sub_path = "Assets\Images\GUI_Images\Stats"
+    map_path = "Assets\Images\GUI_Images\Stats\Map_Images"
     # (Map Button Images)
 
     # MINING
     #     Pisc_Iron
-    iron_pisc_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{skill_sub_path}\Mining\Iron_Pisc.png'))
+    iron_pisc_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{map_path}\Piscatoris_Map.png'))
 
     # SMITHING
     #     Edge_Gold
@@ -110,15 +111,15 @@ def get_all_gui_images():
 
     # AGILITY
     #     Gnome Course
-    gnome_course_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{skill_sub_path}\Agility\gnome_map.png'))
+    gnome_course_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{map_path}\Gnome_Stronghold_Map.png'))
     canifis_map_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{skill_sub_path}\Agility\canifis_map.png'))
-    seers_map_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{skill_sub_path}\Agility\Seers_Rooftops_Map.png'))
+    seers_map_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{map_path}\Seers_Map.png'))
 
     # FISHING
     #     Draynor Shrimp
     barb_trout_map_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{skill_sub_path}\Fishing\Barb_Trout_map.png'))
     #     Barb Trout
-    draynor_shrimp_map_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{skill_sub_path}\Fishing\Draynor_Shrimp_map.png'))
+    draynor_shrimp_map_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{map_path}\Draynor_Map.png'))
     #     Barbarian_Fishing
     barbarian_fishing_map_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{skill_sub_path}\Fishing\Barbarian_fishing_map.png'))
 
@@ -128,27 +129,27 @@ def get_all_gui_images():
 
     # COMBAT
     #     Cow_Killer
-    cow_killer_map_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{skill_sub_path}\Combat\Cow_killer_map.png'))
+    cow_killer_map_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{map_path}\Lummy_Map.png'))
 
     # FLETCHING / CRAFTING
-    ge_map_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{skill_sub_path}\Fletching\GE_map.png'))
+    ge_map_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{map_path}\GE_map.png'))
 
     # HERBLORE
     # uses GE map from above
 
     # PRAYER
-    remmy_map_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{skill_sub_path}\Prayer\Remmy_map.png'))
+    remmy_map_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{map_path}\Remmy_map.png'))
 
     # THIEVING
-    ardy_map_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{skill_sub_path}\Thieving\Ardy_map.png'))
-    hosidius_map_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{skill_sub_path}\Thieving\Hosidius_map.png'))
+    ardy_map_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{map_path}\Ardy_map.png'))
+    hosidius_map_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{map_path}\Hosidius_map.png'))
 
     # WOODCUTTING
-    lummy_map_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{skill_sub_path}\Woodcutting\Lummy_map.png'))
+    lummy_map_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{map_path}\Lummy_Map.png'))
 
     # HUNTER
-    corsair_cove_map_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{skill_sub_path}\Hunter\Corsair_Cove_Map.png'))
-    cerulean_map_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{skill_sub_path}\Hunter\Double_Trap_Ceruleans_Map.png'))
+    corsair_cove_map_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{map_path}\Corsair_Cove_Map.png'))
+    cerulean_map_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{map_path}\Keldagrim_Aisle_Map.png'))
 
     skilling_sub_gui_images = iron_pisc_img, edge_gold_img, gnome_course_img, \
                               draynor_shrimp_map_img, barb_trout_map_img, barbarian_fishing_map_img, \

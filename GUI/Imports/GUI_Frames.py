@@ -575,7 +575,7 @@ def show_cooking_frame(all_frames, t_active_frame, cooking_frame, cooking_sub_bt
 def show_thieving_frame(all_frames, t_active_frame, thieving_frame, thieving_sub_btns):
     _, _, _, _, skill_sub_frames = all_frames
 
-    draynor_man_btn, ardy_cake_btn, hosidius_btn = thieving_sub_btns
+    draynor_man_btn, ardy_cake_btn, hosidius_btn, ardy_knights_btn = thieving_sub_btns
 
     is_active = t_active_frame("skill", all_frames)
     print(f'show_fishing_frame - skill_frame - is_active: {is_active}')
@@ -602,6 +602,11 @@ def show_thieving_frame(all_frames, t_active_frame, thieving_frame, thieving_sub
     hosidius_fruit_label = Label(thieving_frame, image=hosidius_stall_img, height=100, width=100, bg=label_frame_bg_color)
     barb_trout_label.image = hosidius_stall_img
 
+    # Ardy Knights
+    knight_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{thieving_img_path}\Ardy_Knight.png'))
+
+    ardy_knight_label = Label(thieving_frame, image=knight_img, height=100, width=100, bg=label_frame_bg_color)
+    ardy_knight_label.image = knight_img
 
     draynor_man_label.grid(row=1, column=1, padx=35)
     draynor_man_btn.grid(row=1, column=2, columnspan=2, pady=20, padx=25)
@@ -611,6 +616,9 @@ def show_thieving_frame(all_frames, t_active_frame, thieving_frame, thieving_sub
 
     hosidius_fruit_label.grid(row=3, column=1, padx=35)
     hosidius_btn.grid(row=3, column=2, columnspan=2, pady=20, padx=25)
+
+    ardy_knight_label.grid(row=4, column=1, padx=35)
+    ardy_knights_btn.grid(row=4, column=2, columnspan=2, pady=20, padx=25)
     return
 
 
@@ -632,6 +640,37 @@ def show_firemaking_frame(all_frames, t_active_frame, firemaking_frame, firemaki
     # Load button with ore
     tinderbox_img_label.grid(row=1, column=1)
     ge_log_burner_btn.grid(row=1, column=2, columnspan=2, pady=20, padx=30)
+    return
+
+
+def show_hunter_frame(all_frames, t_active_frame, hunter_frame, hunter_sub_btns):
+    _, _, _, _, skill_sub_frames = all_frames
+    crimson_swift_btn, cerulean_twitch_btn = hunter_sub_btns
+
+    is_active = t_active_frame("skill", all_frames)
+    print(f'show_firemaking_frame - skill_frame - is_active: {is_active}')
+
+    hunter_frame.grid(row=sub_gui_row, column=1, columnspan=5, pady=50)
+
+    hunter_img_path = 'Assets\Images\GUI_Images\Stats\Hunter'
+    crimson_swift_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{hunter_img_path}\Crimson_Swift.png'))
+
+    crimson_swift_label = Label(hunter_frame, image=crimson_swift_img, height=100, width=100, bg=label_frame_bg_color)
+    crimson_swift_label.image = crimson_swift_img
+
+    # Load button with ore
+    crimson_swift_label.grid(row=1, column=1)
+    crimson_swift_btn.grid(row=1, column=2, columnspan=2, pady=20, padx=30)
+
+    # Cerulean Twitch
+    cerulean_twitch_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{hunter_img_path}\Cerulean_Twitch.png'))
+
+    cerulean_twitch_label = Label(hunter_frame, image=cerulean_twitch_img, height=100, width=100, bg=label_frame_bg_color)
+    cerulean_twitch_label.image = cerulean_twitch_img
+
+    # Load button with ore
+    cerulean_twitch_label.grid(row=2, column=1)
+    cerulean_twitch_btn.grid(row=2, column=2, columnspan=2, pady=20, padx=30)
     return
 
 
@@ -704,13 +743,32 @@ def show_woodcutting_frame(all_frames, t_active_frame, woodcutting_frame, woodcu
 
     woodcutting_frame.grid(row=sub_gui_row, column=1, columnspan=5, pady=50)
 
-    prayer_img_path = 'Assets\Images\GUI_Images\Stats\Woodcutting'
-    Shaft_log_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{prayer_img_path}\Chop_fletcher.png'))
+    woodcutting_image_path = 'Assets\Images\GUI_Images\Stats\Woodcutting'
+    shaft_log_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{woodcutting_image_path}\Chop_fletcher.png'))
 
-    chop_fletcher_label = Label(woodcutting_frame, image=Shaft_log_img, height=100, width=100, bg=label_frame_bg_color)
-    chop_fletcher_label.image = Shaft_log_img
+    chop_fletcher_label = Label(woodcutting_frame, image=shaft_log_img, height=100, width=100, bg=label_frame_bg_color)
+    chop_fletcher_label.image = shaft_log_img
 
     chop_fletcher_label.grid(row=1, column=1)
     chop_fletcher.grid(row=1, column=2, columnspan=2, pady=20, padx=30)
     return
 
+
+def show_farming_frame(all_frames, t_active_frame, farming_frame, woodcutting_sub_btns):
+    _, _, _, _, skill_sub_frames = all_frames
+    hosidius_plough_btn = woodcutting_sub_btns
+
+    is_active = t_active_frame("skill", all_frames)
+    print(f'show_farming_frame - skill_frame - is_active: {is_active}')
+
+    farming_frame.grid(row=sub_gui_row, column=1, columnspan=5, pady=50)
+
+    prayer_img_path = 'Assets\Images\GUI_Images\Stats\Farming'
+    plough_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{prayer_img_path}\Plough.png'))
+
+    hosidius_plough_label = Label(farming_frame, image=plough_img, height=100, width=100, bg=label_frame_bg_color)
+    hosidius_plough_label.image = plough_img
+
+    hosidius_plough_label.grid(row=1, column=1)
+    hosidius_plough_btn.grid(row=1, column=2, columnspan=2, pady=20, padx=30)
+    return
