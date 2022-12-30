@@ -29,6 +29,7 @@ from Scripts.Skilling.Thieving.Stalls.Hosidius_Fruit import start_stealing_fruit
 from Scripts.Skilling.Agility.Canifis_Rooftops import start_canifis_rooftops, click_second_jump, click_third_jump
 from Scripts.Skilling.Agility.Seers_Rooftops import start_seers_rooftops, handle_next_jump, alch_on_agility_drop
 from Scripts.Skilling.Thieving.Pickpocketing.Ardy_Knights import set_curr_tile
+from API.Skill_Levels import get_skill_level
 
 
 get_bluestacks_xy()
@@ -38,8 +39,10 @@ clear_debug_log()
 
 # random_human_actions(max_downtime_seconds=12)
 # show_main_gui()
-launch_script("troll_double_trap_ceruleans")
+# launch_script("troll_double_trap_ceruleans")
 
+
+get_skill_level("crafting")
 
 
 # does_img_exist(img_name="aggro_path_a_0", script_name="Kourend_Crab_Killer", threshold=0.98, should_click=True)

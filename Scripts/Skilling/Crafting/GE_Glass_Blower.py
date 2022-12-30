@@ -5,7 +5,7 @@ from API.Interface.General import setup_interface, is_tab_open, get_xy_for_inven
 from API.Interface.Bank import is_bank_tab_open, is_withdraw_qty, deposit_all
 from API.Imaging.Image import does_img_exist, wait_for_img
 from API.Mouse import mouse_click
-from API.Imaging.OCR.Skill_Levels import get_skill_level
+from API.Skill_Levels import get_skill_level
 
 
 def start_blowing_glass(curr_loop):
