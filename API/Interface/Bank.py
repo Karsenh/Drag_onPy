@@ -98,6 +98,6 @@ def is_withdraw_qty(qty="all", should_click=True):
     return is_selected
 
 
-def wait_for_open_bank(max_wait_sec=8):
+def is_bank_open(max_wait_sec=8):
     return API.Imaging.Image.wait_for_img(img_name="bank_is_open", category="Banking", max_wait_sec=max_wait_sec)
 

@@ -72,7 +72,7 @@ def get_color_at_coords(xy):
     return picture[x, y]
 
 
-def does_img_exist(img_name, script_name=None, category='Scripts', threshold=0.8, should_click=False, x_offset=8, y_offset=8, max_clicks=1):
+def does_img_exist(img_name, script_name=None, category='Scripts', threshold=0.8, should_click=False, x_offset=8, y_offset=8, max_clicks=1, img_sel="last"):
     global img_check_xy
     capture_bluestacks()
     img_rgb = cv2.imread(BS_SCREEN_PATH)
@@ -101,8 +101,13 @@ def does_img_exist(img_name, script_name=None, category='Scripts', threshold=0.8
         return False
     else:
         write_debug(f'✔ {img_name}.png found:\n loc[0] = {loc[0]}\nloc[1] = {loc[1]}')
-        #     Save the 'deepest' find of img's xy coords
-        img_check_xy = loc[1][len(loc[1])-1], loc[0][len(loc[0])-1]
+        if img_sel == "first":
+            # Save the first img find xy coords
+            img_check_xy = loc[1][0], loc[0][0]
+        else:
+            # Save the 'deepest' find of img's xy coords
+            img_check_xy = loc[1][len(loc[1])-1], loc[0][len(loc[0])-1]
+
         if should_click:
             img_x, img_y = img_check_xy
             adj_x = img_x + x_offset
@@ -116,12 +121,12 @@ def does_img_exist(img_name, script_name=None, category='Scripts', threshold=0.8
 # Search for a particular img on screen for a set amount of time
 #       Returns True if the image is found within the amount of time
 #       Returns False if the image is not found after trying for specified amount of time
-def wait_for_img(img_name, script_name=None, category="Scripts", max_wait_sec=5, threshold=0.8, should_click=False, x_offset=0, y_offset=0, max_clicks=1):
+def wait_for_img(img_name, script_name=None, category="Scripts", max_wait_sec=5, threshold=0.8, should_click=False, x_offset=0, y_offset=0, max_clicks=1, img_sel="last"):
     start_time = datetime.now()
     write_debug(f'⏲ Wait_For_Img Start Time: {start_time}')
 
     while not is_time_up(start_time, max_wait_sec):
-        img_found = does_img_exist(img_name, script_name=script_name, category=category, threshold=threshold, should_click=should_click, x_offset=x_offset, y_offset=y_offset, max_clicks=max_clicks)
+        img_found = does_img_exist(img_name, script_name=script_name, category=category, threshold=threshold, should_click=should_click, x_offset=x_offset, y_offset=y_offset, max_clicks=max_clicks, img_sel=img_sel)
         if img_found:
             # does_img_exist(img_name, script_name=script_name, category=category, threshold=threshold, should_click=should_click, x_offset=x_offset, y_offset=y_offset)
             return True
@@ -129,7 +134,6 @@ def wait_for_img(img_name, script_name=None, category="Scripts", max_wait_sec=5,
             # write_debug(f'Still checking for image...')
             # if max_wait_sec > 60:
             #     API.AntiBan.random_human_actions(max_downtime_seconds=6, likelihood=5, reopen_inventory=False)
-
     return False
 
 

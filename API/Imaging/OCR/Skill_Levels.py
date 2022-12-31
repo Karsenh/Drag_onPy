@@ -53,21 +53,3 @@ def ocr_skill_levels():
 
     print(f'Levels: {levels}')
     return
-
-
-def get_skill_level(skill):
-    if len(levels) == 0:
-        write_debug(f"Levels haven't been OCR'ed yet for some reason - Performing OCR on levels now...")
-        ocr_skill_levels()
-
-    match skill:
-        case "fletching":
-            write_debug(f'{skill} level: {levels[16]}')
-            return levels[10]
-        case "mining":
-            write_debug(f'{skill} level: {levels[2]}')
-            return levels[2]
-        case "crafting":
-            write_debug(f'{skill} level: {levels[13]}')
-            return 49
-    return

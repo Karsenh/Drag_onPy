@@ -8,7 +8,7 @@ should_reset = False
 bird_type = "cerulean"
 
 
-def start_snaring_birds(curr_loop):
+def start_catching_crimsons(curr_loop):
     global should_reset
 
     if curr_loop == 1:
