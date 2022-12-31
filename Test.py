@@ -39,7 +39,7 @@ clear_debug_log()
 
 # random_human_actions(max_downtime_seconds=12)
 # show_main_gui()
-launch_script("ge_glass_blower")
+launch_script("seers_rooftops")
 
 
 # wait_for_img(img_name="mobile_settings_tab", category="Interface", should_click=True)
