@@ -23,6 +23,7 @@ from Scripts.Skilling.Hunter.Single_Trap_Crimsons import start_catching_crimsons
 from Scripts.Skilling.Hunter.Double_Trap_Ceruleans import start_trapping_birds
 from Scripts.Skilling.Thieving.Pickpocketing.Ardy_Knights import start_pickpocketing_ardy_knights
 from Scripts.Skilling.Combat.Kourend_Crab_Killer import start_killing_kourend_crabs
+from Scripts.Skilling.Crafting.GE_Dhide_Bodies import start_crafting_dhide_bodies
 
 from enum import Enum
 import API
@@ -70,6 +71,7 @@ def launch_script(script_name="pisc_iron"):
         DOUBLE_TRAP_CERULEANS = 22
         ARDY_KNIGHTS = 23
         KOUREND_CRABS = 24
+        DHIDE_BODIES = 25
 
     all_scripts = [mine_iron_pisc, smith_gold_edge, run_gnome_course,
                    fish_draynor_shrimp, fish_barb_trout, barbarian_fishing,
@@ -79,7 +81,7 @@ def launch_script(script_name="pisc_iron"):
                    start_ploughing_for_favour, start_stealing_fruit, start_gilded_altar,
                    start_unf_pots, start_canifis_rooftops, start_seers_rooftops,
                    start_catching_crimsons, start_trapping_birds, start_pickpocketing_ardy_knights,
-                   start_killing_kourend_crabs]
+                   start_killing_kourend_crabs, start_crafting_dhide_bodies]
 
     match script_name:
         case "pisc_iron":
@@ -183,6 +185,10 @@ def launch_script(script_name="pisc_iron"):
         case "Kourend_Crab_Killer":
             selected_script = ScriptEnum.KOUREND_CRABS.value
             antiban_likelihood = 10
+            antiban_downtime_sec = 4
+        case "GE_Dhide_Bodies":
+            selected_script = ScriptEnum.DHIDE_BODIES.value
+            antiban_likelihood = 20
             antiban_downtime_sec = 4
 
     is_timer_set = is_break_timer_set()

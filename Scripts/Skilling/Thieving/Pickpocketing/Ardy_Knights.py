@@ -1,6 +1,6 @@
 import API.AntiBan
 from API.Interface.General import setup_interface, is_hp_gt, is_tab_open
-from API.Interface.Bank import wait_for_open_bank, is_bank_tab_open, close_bank, is_withdraw_qty
+from API.Interface.Bank import is_bank_open, is_bank_tab_open, close_bank, is_withdraw_qty
 from API.Imaging.Image import does_img_exist, wait_for_img
 from API.Mouse import mouse_click, mouse_long_click
 
@@ -172,7 +172,7 @@ def open_ardy_bank():
     #
     # mouse_click(bank_xy)
 
-    if not wait_for_open_bank():
+    if not is_bank_open():
         if open_bank_attempts > 3:
             return False
         open_bank_attempts += 1

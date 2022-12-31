@@ -295,7 +295,7 @@ def check_skill_tab(max_sec=2.0, skill_to_check='random'):
     print(f'elapsed time: {elapsed_time}')
     remaining_time = max_sec - elapsed_time
     print(f'remaining time: {remaining_time}')
-    time.sleep(remaining_time)
+    # time.sleep(remaining_time)
     return
 
 
