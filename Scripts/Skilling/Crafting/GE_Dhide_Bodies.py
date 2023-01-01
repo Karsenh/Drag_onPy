@@ -107,7 +107,7 @@ def craft_dhide_bodies():
     does_img_exist(img_name="Needle", script_name="GE_Dhide_Bodies", threshold=0.7, should_click=True)
     API.AntiBan.sleep_between(0.2, 0.7, 35)
     mouse_click(get_random_invent_slot_between(5, 9))
-    # does_img_exist(img_name="Inventory_Green_Leather", script_name="GE_Dhide_Bodies", threshold=0.9, should_click=True)
+    API.AntiBan.sleep_between(0.2, 0.9, 35)
     wait_for_img(img_name="Green_body_craft_btn", script_name=script_name, should_click=True)
     return
 
