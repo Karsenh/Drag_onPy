@@ -188,8 +188,8 @@ def launch_script(script_name="pisc_iron"):
             antiban_downtime_sec = 4
         case "GE_Dhide_Bodies":
             selected_script = ScriptEnum.DHIDE_BODIES.value
-            antiban_likelihood = 20
-            antiban_downtime_sec = 4
+            antiban_likelihood = 15
+            antiban_downtime_sec = 1
 
     is_timer_set = is_break_timer_set()
 

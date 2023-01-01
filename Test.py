@@ -1,3 +1,5 @@
+import random
+
 from GUI.Main_GUI import *
 from API.Debug import clear_debug_log
 from API.Imaging.Image import *
@@ -11,8 +13,13 @@ clear_debug_log()
 
 # random_human_actions(max_downtime_seconds=12)
 # show_main_gui()
-launch_script("GE_Dhide_Bodies")
+# launch_script("GE_Dhide_Bodies")
 
+rand_num = random.randint(1, 100)
+percent_chance = 90
+print(f'{rand_num}')
+print(f'{percent_chance}')
+print(f'{rand_num < percent_chance}')
 # wait_for_img(img_name="Ge_bank", script_name="GE_Dhide_Bodies", threshold=0.99, should_click=True, x_offset=30)
 # wait_for_img(img_name="Banked_green_leather", script_name="GE_Dhide_Bodies", should_click=True, x_offset=35, img_sel="first")
 

@@ -25,15 +25,19 @@ def start_crafting_dhide_bodies(curr_loop):
 
             open_ge_bank()
 
+            API.AntiBan.sleep_between(0.3, 1.1, likelihood=50)
+
             deposit_dhide_bodies()
 
             if not withdraw_leather():
                 write_debug(f'We must be out of {dragon_leather_color} dragon leather. Exiting...')
                 return False
 
-            API.AntiBan.sleep_between(0.4, 0.5)
+            API.AntiBan.sleep_between(0.4, 0.9)
 
             close_bank()
+
+            API.AntiBan.sleep_between(0.3, 1.1, likelihood=50)
 
             craft_dhide_bodies()
 
