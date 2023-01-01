@@ -41,7 +41,7 @@ def start_crafting_dhide_bodies(curr_loop):
 
             API.AntiBan.sleep_between(0.3, 1.1, likelihood=50)
 
-            craft_dhide_bodies()
+            return craft_dhide_bodies()
 
         else:
             print(f"Crafting exp drop seen - we're still crafting. Returning True...")
@@ -80,9 +80,7 @@ def start_crafting_dhide_bodies(curr_loop):
         # Close bank
         close_bank()
 
-        craft_dhide_bodies()
-
-    return True
+        return craft_dhide_bodies()
 
 
 def open_ge_bank():
@@ -108,8 +106,9 @@ def craft_dhide_bodies():
     API.AntiBan.sleep_between(0.2, 0.7, 35)
     mouse_click(get_random_invent_slot_between(5, 9))
     API.AntiBan.sleep_between(0.2, 0.9, 35)
-    wait_for_img(img_name="Green_body_craft_btn", script_name=script_name, should_click=True)
-    return
+    if not wait_for_img(img_name="Green_body_craft_btn", script_name=script_name, should_click=True):
+        return False
+    return True
 
 
 def did_level():
