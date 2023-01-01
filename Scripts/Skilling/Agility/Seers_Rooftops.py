@@ -94,7 +94,7 @@ def handle_next_jump():
         if curr_jump_num == 4:
             print(f'Manually jumping this one...')
             jump_xy = 496, 535
-            mouse_click(jump_xy)
+            mouse_click(jump_xy, min_num_clicks=2, max_num_clicks=2, max_int_delay=0.2)
             return True
 
         if curr_jump_num in jumps_with_mog:
