@@ -49,7 +49,7 @@ def start_crafting_dhide_bodies(curr_loop):
     else:
         # First loop - setup script
         print(f'This is the first loop')
-        setup_interface("north", 5, "up")
+        setup_interface("north", 4, "up")
         # Open bank
         if not open_ge_bank():
             return False
@@ -84,7 +84,7 @@ def start_crafting_dhide_bodies(curr_loop):
 
 
 def open_ge_bank():
-    wait_for_img(img_name="Ge_bank", script_name=script_name, threshold=0.90, should_click=True, x_offset=25)
+    wait_for_img(img_name="Ge_bank", script_name=script_name, threshold=0.85, should_click=True, x_offset=20)
     if is_bank_open():
         return True
     else:
