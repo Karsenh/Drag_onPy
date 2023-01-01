@@ -7,7 +7,11 @@ from API.Imaging.Image import wait_for_img, get_existing_img_xy, does_img_exist
 import pyautogui as pag
 
 curr_jump_num = 1
-alch_item = "green_dhide_body"
+alch_item = "green_dhide_body_note"
+
+# OPTIONS
+# Teleport to Seers
+# Alch / what to alch (magic long, green d'hide body, etc.)
 
 
 def start_seers_rooftops(curr_loop):
@@ -49,7 +53,7 @@ def alch_on_agility_drop():
                 # return False
             else:
                 # We've clicked the high-alch spell - click the magic long
-                if wait_for_img(img_name={alch_item}, script_name="Seers_Rooftops", x_offset=4, y_offset=4):
+                if wait_for_img(img_name=alch_item, script_name="Seers_Rooftops", x_offset=4, y_offset=4, threshold=0.95):
                     print(f'Hovering mouse over magic long while we wait for agility jump...')
                     mouse_move(get_existing_img_xy())
                 else:
@@ -59,7 +63,7 @@ def alch_on_agility_drop():
             # return False
     else:
         # 3. Hover mouse over magic_long_note with High-alch selected, waiting for agility exp before left clicking
-        if wait_for_img(img_name="magic_long_note", script_name="Seers_Rooftops", x_offset=4, y_offset=4):
+        if wait_for_img(img_name=alch_item, script_name="Seers_Rooftops", x_offset=4, y_offset=4, threshold=0.95):
             print(f'Hovering mouse over magic long while we wait for agility jump...')
             mouse_move(get_existing_img_xy())
 

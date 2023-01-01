@@ -166,7 +166,7 @@ def launch_script(script_name="pisc_iron"):
             selected_script = ScriptEnum.CANIFIS_ROOFTOPS.value
             antiban_likelihood = 25
             antiban_downtime_sec = 8
-        case "seers_rooftops":
+        case "Seers_Rooftops":
             selected_script = ScriptEnum.SEERS_ROOFTOPS.value
             antiban_likelihood = 50
             antiban_downtime_sec = 0.5

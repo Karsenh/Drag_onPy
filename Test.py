@@ -13,7 +13,7 @@ clear_debug_log()
 
 # random_human_actions(max_downtime_seconds=12)
 # show_main_gui()
-launch_script("GE_Dhide_Bodies")
+launch_script("Seers_Rooftops")
 
 
 # setup_interface("north", 4, "up")
