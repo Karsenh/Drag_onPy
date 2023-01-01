@@ -1,4 +1,4 @@
-from API.Interface.General import setup_interface, get_xy_for_invent_slot
+from API.Interface.General import setup_interface, get_xy_for_invent_slot, is_tab_open
 from API.Interface.Bank import is_bank_open, deposit_all, is_withdraw_qty, is_bank_tab_open, close_bank
 from API.Imaging.Image import wait_for_img, does_img_exist
 from API.Debug import write_debug
@@ -101,6 +101,7 @@ def withdraw_leather():
 
 
 def craft_dhide_bodies():
+    is_tab_open("inventory", True)
     does_img_exist(img_name="Needle", script_name="GE_Dhide_Bodies", threshold=0.7, should_click=True)
     does_img_exist(img_name="Inventory_Green_Leather", script_name="GE_Dhide_Bodies", threshold=0.9, should_click=True)
     wait_for_img(img_name="Green_body_craft_btn", script_name=script_name, should_click=True)
