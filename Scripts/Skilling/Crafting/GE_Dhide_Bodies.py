@@ -92,8 +92,7 @@ def open_ge_bank():
 
 
 def is_crafting():
-    is_tab_open("inventory", True)
-    return does_img_exist(img_name=f"Inventory_{dragon_leather_color}_leather", script_name="GE_Dhide_Bodies", threshold=0.8)
+    return wait_for_img(img_name="Crafting", category="Exp_Drops", max_wait_sec=3)
 
 
 def withdraw_leather():
