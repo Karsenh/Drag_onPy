@@ -228,16 +228,20 @@ def move_to_chest():
 
 def is_invent_full():
     teak_color_xy = 1354, 788
-    color_code = 177, 146, 92  # 178, 147, 92
+    color_code = [177, 146, 92]
 
     diff_tolerance = 10
-    color_diff = get_color_at_coords(teak_color_xy) - color_code  # 1, 1, 0 or # -1, -1, 0
+    teak_color = get_color_at_coords(teak_color_xy)
 
-    for val in color_diff:
-        if val < 0:
-            val * -1
-        if val > diff_tolerance:
+    i = 0
+    for val in teak_color:
+        curr_diff = val - color_code[i]
+        if curr_diff < 0:
+            curr_diff * -1
+        if curr_diff > diff_tolerance:
+            print(f'Returning False')
             return False
+
     return True
 
 # -------
