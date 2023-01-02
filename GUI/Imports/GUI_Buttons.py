@@ -53,7 +53,7 @@ def get_all_btns(all_frames, all_images):
     draynor_shrimp_map, barb_trout_map, barb_fishing_map, \
     rogue_cooking_map, cow_killer_map, ge_map, canifis_map_img, \
     remmy_map_img, ardy_map_img, hosidius_map_img, lummy_map_img, \
-    corsair_cove_map_img, cerulean_map_img, seers_map_img, \
+    corsair_cove_map_img, cerulean_map_img, seers_map_img, cwars_map_img\
         = skilling_sub_gui_images
 
     # MAIN_GUI_BTNS
@@ -177,8 +177,9 @@ def get_all_btns(all_frames, all_images):
     firemaking_sub_btns = ge_log_burner_btn
 
     #     Woodcutting
-    chop_fletcher_btn = Button(woodcutting_frame, text="GE Log Burner", image=lummy_map_img,  height=100, width=100, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_plg("lummy_chop_fletcher"))
-    woodcutting_sub_btns = chop_fletcher_btn
+    chop_fletcher_btn = Button(woodcutting_frame, text="Combo Chop Fletcher", image=lummy_map_img,  height=100, width=100, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_plg("lummy_chop_fletcher"))
+    cwars_teak_btn = Button(woodcutting_frame, text="Cwars Teak", image=cwars_map_img,  height=100, width=100, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_plg("Cwars_Teak"))
+    woodcutting_sub_btns = chop_fletcher_btn, cwars_teak_btn
 
     #     Hunter
     crimson_swift_btn = Button(hunter_frame, text="Crimson Swift (1)", image=corsair_cove_map_img,  height=100, width=100, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_plg("Single_Trap_Crimsons"))

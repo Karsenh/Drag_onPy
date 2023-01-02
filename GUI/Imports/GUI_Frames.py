@@ -585,42 +585,16 @@ def show_thieving_frame(all_frames, t_active_frame, thieving_frame, thieving_sub
     thieving_frame.grid(row=sub_gui_row, column=1, columnspan=5, pady=50)
 
     thieving_img_path = 'Assets\Images\GUI_Images\Stats\Thieving'
-
-    # Draynor Man
     draynor_man_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{thieving_img_path}\draynor_man.png'))
-
-    draynor_man_label = Label(thieving_frame, image=draynor_man_img, height=100, width=100, bg=label_frame_bg_color)
-    draynor_man_img.image = draynor_man_img
-
-    # Ardy Cake
     ardy_cake_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{thieving_img_path}\Cake.png'))
-
-    barb_trout_label = Label(thieving_frame, image=ardy_cake_img, height=100, width=100, bg=label_frame_bg_color)
-    ardy_cake_img.image = ardy_cake_img
-
-    # Hosidius Fruit
     hosidius_stall_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{thieving_img_path}\Fruit_stall.png'))
-
-    hosidius_fruit_label = Label(thieving_frame, image=hosidius_stall_img, height=100, width=100, bg=label_frame_bg_color)
-    barb_trout_label.image = hosidius_stall_img
-
-    # Ardy Knights
     knight_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{thieving_img_path}\Ardy_Knight.png'))
 
-    ardy_knight_label = Label(thieving_frame, image=knight_img, height=100, width=100, bg=label_frame_bg_color)
-    ardy_knight_label.image = knight_img
+    add_script_btn(thieving_frame, draynor_man_img, draynor_man_btn, 1)
+    add_script_btn(thieving_frame, ardy_cake_img, ardy_cake_btn, 2)
+    add_script_btn(thieving_frame, hosidius_stall_img, hosidius_btn, 3)
+    add_script_btn(thieving_frame, knight_img, ardy_knights_btn, 4)
 
-    draynor_man_label.grid(row=1, column=1, padx=35)
-    draynor_man_btn.grid(row=1, column=2, columnspan=2, pady=20, padx=25)
-
-    barb_trout_label.grid(row=2, column=1, padx=35)
-    ardy_cake_btn.grid(row=2, column=2, columnspan=2, pady=20, padx=25)
-
-    hosidius_fruit_label.grid(row=3, column=1, padx=35)
-    hosidius_btn.grid(row=3, column=2, columnspan=2, pady=20, padx=25)
-
-    ardy_knight_label.grid(row=4, column=1, padx=35)
-    ardy_knights_btn.grid(row=4, column=2, columnspan=2, pady=20, padx=25)
     return
 
 
@@ -738,7 +712,7 @@ def show_prayer_frame(all_frames, t_active_frame, prayer_frame, prayer_sub_btns)
 
 def show_woodcutting_frame(all_frames, t_active_frame, woodcutting_frame, woodcutting_sub_btns):
     _, _, _, _, skill_sub_frames = all_frames
-    chop_fletcher = woodcutting_sub_btns
+    chop_fletcher_btn, cwars_teak_btn = woodcutting_sub_btns
 
     is_active = t_active_frame("skill", all_frames)
     print(f'show_wooductting_frame - skill_frame - is_active: {is_active}')
@@ -747,12 +721,10 @@ def show_woodcutting_frame(all_frames, t_active_frame, woodcutting_frame, woodcu
 
     woodcutting_image_path = 'Assets\Images\GUI_Images\Stats\Woodcutting'
     shaft_log_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{woodcutting_image_path}\Chop_fletcher.png'))
+    teak_tree_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{woodcutting_image_path}\Teak_tree.png'))
 
-    chop_fletcher_label = Label(woodcutting_frame, image=shaft_log_img, height=100, width=100, bg=label_frame_bg_color)
-    chop_fletcher_label.image = shaft_log_img
-
-    chop_fletcher_label.grid(row=1, column=1)
-    chop_fletcher.grid(row=1, column=2, columnspan=2, pady=20, padx=30)
+    add_script_btn(woodcutting_frame, shaft_log_img, chop_fletcher_btn, 1)
+    add_script_btn(woodcutting_frame, teak_tree_img, cwars_teak_btn, 2)
     return
 
 
@@ -765,12 +737,22 @@ def show_farming_frame(all_frames, t_active_frame, farming_frame, woodcutting_su
 
     farming_frame.grid(row=sub_gui_row, column=1, columnspan=5, pady=50)
 
-    prayer_img_path = 'Assets\Images\GUI_Images\Stats\Farming'
-    plough_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{prayer_img_path}\Plough.png'))
+    farming_img_path = 'Assets\Images\GUI_Images\Stats\Farming'
+    plough_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{farming_img_path}\Plough.png'))
 
-    hosidius_plough_label = Label(farming_frame, image=plough_img, height=100, width=100, bg=label_frame_bg_color)
-    hosidius_plough_label.image = plough_img
+    add_script_btn(farming_frame, plough_img, hosidius_plough_btn, 1)
+    return
 
-    hosidius_plough_label.grid(row=1, column=1)
-    hosidius_plough_btn.grid(row=1, column=2, columnspan=2, pady=20, padx=30)
+
+# ------
+# HELPER
+# ------
+def add_script_btn(skill_frame, side_img, start_btn, row_num):
+    # teak_tree_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{woodcutting_image_path}\Teak_tree.png'))
+
+    teak_label = Label(skill_frame, image=side_img, height=100, width=100, bg=label_frame_bg_color)
+    teak_label.image = side_img
+
+    teak_label.grid(row=row_num, column=1)
+    start_btn.grid(row=row_num, column=2, columnspan=2, pady=20, padx=30)
     return
