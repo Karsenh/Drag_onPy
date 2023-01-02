@@ -15,21 +15,21 @@ clear_debug_log()
 
 # random_human_actions(max_downtime_seconds=12)
 # show_main_gui()
-# launch_script("Cwars_Teak")
+launch_script("Cwars_Teak")
 
-teak_color_xy = 1354, 788
-color_code = [177, 146, 92]  # 178, 147, 92
-
-diff_tolerance = 10
-teak_color = get_color_at_coords(teak_color_xy)
-
-i = 0
-for val in teak_color:
-    curr_diff = val - color_code[i]
-    if curr_diff < 0:
-        curr_diff * -1
-    if curr_diff > diff_tolerance:
-        print(f'Returning False')
+# teak_color_xy = 1354, 788
+# color_code = [177, 146, 92]  # 178, 147, 92
+#
+# diff_tolerance = 10
+# teak_color = get_color_at_coords(teak_color_xy)
+#
+# i = 0
+# for val in teak_color:
+#     curr_diff = val - color_code[i]
+#     if curr_diff < 0:
+#         curr_diff * -1
+#     if curr_diff > diff_tolerance:
+#         print(f'Returning False')
 
 
 

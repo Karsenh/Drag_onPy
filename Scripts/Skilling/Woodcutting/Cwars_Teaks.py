@@ -192,7 +192,7 @@ def move_to_teak_tree():
 
 
 def chop_teak():
-    return wait_for_img(img_name="Teak_tree", script_name=SCRIPT_NAME, should_click=True, max_wait_sec=10, threshold=0.8)
+    return wait_for_img(img_name="Teak_tree", script_name=SCRIPT_NAME, should_click=True, max_wait_sec=10, threshold=0.77)
 
 
 def run_to_cwars_bank():
