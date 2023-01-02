@@ -241,6 +241,7 @@ def is_invent_full():
         print(f'Val: {val} | Curr_diff: {curr_diff} | (is gt) Tolerance: {diff_tolerance} ?')
         if curr_diff < 0:
             curr_diff * -1
+            print(f'Curr_diff was neg: {curr_diff}')
         if curr_diff > diff_tolerance:
             print(f'Returning False')
             return False
