@@ -245,6 +245,7 @@ def is_invent_full():
         if curr_diff > diff_tolerance:
             print(f'Returning False')
             return False
+        i+=1
 
     return True
 
