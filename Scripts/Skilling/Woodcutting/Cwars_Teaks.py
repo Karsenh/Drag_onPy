@@ -233,9 +233,12 @@ def is_invent_full():
     diff_tolerance = 10
     teak_color = get_color_at_coords(teak_color_xy)
 
+    print(f'Teak Color: {teak_color}\nColor_code comparison: {color_code}')
+
     i = 0
     for val in teak_color:
         curr_diff = val - color_code[i]
+        print(f'Val: {val} | Curr_diff: {curr_diff} | (is gt) Tolerance: {diff_tolerance} ?')
         if curr_diff < 0:
             curr_diff * -1
         if curr_diff > diff_tolerance:
