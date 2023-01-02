@@ -18,6 +18,13 @@ clear_debug_log()
 launch_script("Cwars_Teak")
 
 
+# teak_color_xy = 1354, 788
+# color_code = 177, 146, 92
+# if color_code == get_color_at_coords(teak_color_xy):
+#     print('FOUND COLOR')
+# else:
+#     print(f'No Color Found!')
+
 # does_img_exist(img_name="teak_path_8", script_name="Cwars_Teak", threshold=0.90, should_click=True, x_offset=-4)
 
 # wait_for_img(img_name="bank_minimap", script_name='Cwars_Teak', should_click=True, x_offset=6)
@@ -29,10 +36,21 @@ launch_script("Cwars_Teak")
 # does_img_exist(img_name="Equipped_rod", script_name="Cwars_Teak")
 # wait_for_img(img_name="Teak_tree", script_name="Cwars_Teak", should_click=True, max_wait_sec=10)
 
-# for i in range(5, 9):
-#     if not wait_for_img(img_name=f"teak_path_{i}", script_name="Cwars_Teak", should_click=True, threshold=0.85,
-#                         max_wait_sec=20):
-#         print(f"Couldn't find teak_path_{i} - Exiting.")
+# for i in range(3, 8):
+#     if i < 8:
+#         if wait_for_img(img_name=f"teak_path_{i}", script_name="Cwars_Teak", threshold=0.92, max_wait_sec=20):
+#             if not does_img_exist(img_name=f"teak_path_{i}", script_name="Cwars_Teak", threshold=0.92,
+#                                   should_click=True):
+#                 print(f'does_path_img secondary search failed {i}.')
+#         else:
+#             print(f"Primary path_img search failed {i}")
+#     else:
+#         if wait_for_img(img_name="teak_path_8", script_name="Cwars_Teak", threshold=0.90, x_offset=-4, y_offset=6):
+#             if not does_img_exist(img_name="teak_path_8", script_name="Cwars_Teak", threshold=0.90, x_offset=-4,
+#                                   y_offset=6, should_click=True):
+#                 print(f'Secondary last path search failed.')
+#         else:
+#             print(f'Primary path search ({i}) not found')
 
 # does_img_exist(img_name="Teak_path_7", script_name="Cwars_Teak", threshold=0.9, should_click=True)
 
