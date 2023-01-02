@@ -38,6 +38,7 @@ def random_human_actions(max_downtime_seconds=3.0, likelihood=10, reopen_invento
 
     # Generate a random number between 1-10 (or likelihood)
     should_perform_actions = False
+
     if random.randint(1, likelihood) == likelihood:
         should_perform_actions = True
         write_debug(f"{should_perform_actions} (True?)")
@@ -61,37 +62,14 @@ def random_human_actions(max_downtime_seconds=3.0, likelihood=10, reopen_invento
             write_debug(f'Random human activity time not up - Doing something and sleeping between 0.1 - {time_remaining} seconds...')
 
             skill_or_quest_tab = random.randint(1, 10)
-            write_debug(f'skill_or_quest_tab = {skill_or_quest_tab} | if <= 4 (Skill)')
+
+            # write_debug(f'skill_or_quest_tab = {skill_or_quest_tab} | if <= 4 (Skill)')
+
             if skill_or_quest_tab <= 4:
                 write_debug(f'Checking Skill Tab...')
-                API.Interface.General.check_skill_tab(max_sec=4.0, skill_to_check="random")
+                API.Interface.General.check_skill_tab(max_sec=max_downtime_seconds, skill_to_check="random")
             else:
-                write_debug(f'🧙Checking Quest tab...')
-                API.Interface.General.is_tab_open("quest", should_open=True)
-                sleep_between(0.6, 1.1)
-
-                # Select a random Quest sub-tab (achievement, quests, combat, favour)
-                r_sub_tab = random.randint(0, 3)
-                cmb_tab = 1127, 400
-                quest_tab = 1204, 401
-                achievement_tab = 1282, 401
-                favour_tab = 1359, 400
-                sub_tab_xys = [ cmb_tab, quest_tab, achievement_tab, favour_tab]
-                tab_to_sel = sub_tab_xys[r_sub_tab]
-                mouse_click(tab_to_sel, max_x_dev=6, max_y_dev=5)
-                sleep_between(0.2, 0.4)
-
-                quest_list_hover_xy = 1212, 574
-                mouse_move(quest_list_hover_xy, 17, 23)
-                sleep_between(0.7, 1.2)
-                r_num_scrolls = random.randint(1, 3)
-                for i in range(1, r_num_scrolls):
-                    random_scroll = random.randint(-350, 350)
-                    write_debug(f'Scrolling: {random_scroll}')
-                    pag.hscroll(random_scroll)
-                    sleep_between(0.2, 0.5)
-                sleep_between(0.6, 2.6)
-                API.Interface.General.is_tab_open("inventory", should_open=reopen_inventory)
+                check_quest_tab(reopen_inventory=reopen_inventory)
 
             elapsed_time = datetime.now() - start_time
             time_remaining = max_downtime_seconds - elapsed_time.total_seconds()
@@ -118,3 +96,38 @@ def shutdown(script_name, reason):
     with open(f'{pwd}\Misc\Stop_Log.txt', 'w') as f:
         f.write(f'{current_time}: {reason}')
     return False
+
+
+def check_quest_tab(reopen_inventory):
+    write_debug(f'🧙Checking Quest tab...')
+    API.Interface.General.is_tab_open("quest", should_open=True)
+    sleep_between(0.6, 1.1)
+
+    # Select a random Quest sub-tab (achievement, quests, combat, favour)
+    r_sub_tab = random.randint(0, 3)
+    cmb_tab = 1127, 400
+    quest_tab = 1204, 401
+    achievement_tab = 1282, 401
+    favour_tab = 1359, 400
+    sub_tab_xys = [cmb_tab, quest_tab, achievement_tab, favour_tab]
+    tab_to_sel = sub_tab_xys[r_sub_tab]
+    mouse_click(tab_to_sel, max_x_dev=6, max_y_dev=5)
+    sleep_between(0.2, 0.4)
+
+    quest_list_hover_xy = 1212, 574
+    mouse_move(quest_list_hover_xy, 17, 23)
+    sleep_between(0.7, 1.2)
+    r_num_scrolls = random.randint(1, 3)
+    for i in range(1, r_num_scrolls):
+        random_scroll = random.randint(-350, 350)
+        write_debug(f'Scrolling: {random_scroll}')
+        pag.hscroll(random_scroll)
+        sleep_between(0.2, 0.5)
+    sleep_between(0.6, 2.6)
+    API.Interface.General.is_tab_open("inventory", should_open=reopen_inventory)
+    return
+
+
+def check_equipment_tab():
+
+    return

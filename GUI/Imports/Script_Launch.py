@@ -194,7 +194,7 @@ def launch_script(script_name="pisc_iron"):
             antiban_downtime_sec = 1
         case "Cwars_Teak":
             selected_script = ScriptEnum.CWARS_TEAK.value
-            antiban_likelihood = 15
+            antiban_likelihood = 10
             antiban_downtime_sec = 1
 
     is_timer_set = is_break_timer_set()

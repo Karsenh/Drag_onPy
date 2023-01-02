@@ -219,7 +219,7 @@ def drop_teaks():
 
 
 def is_still_chopping():
-    return wait_for_img(img_name="Woodcutting", category="Exp_Drops", max_wait_sec=8)
+    return wait_for_img(img_name="Woodcutting", category="Exp_Drops", max_wait_sec=6)
 
 
 def move_to_chest():

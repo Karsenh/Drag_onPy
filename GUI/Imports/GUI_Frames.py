@@ -345,22 +345,10 @@ def show_combat_frame(all_frames, t_active_frame, combat_frame, combat_sub_btns)
     combat_img_path = 'Assets\Images\GUI_Images\Stats\Combat'
 
     sand_crab_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{combat_img_path}\Sand_Crab.png'))
-
-    crab_killer_label = Label(combat_frame, image=sand_crab_img, height=100, width=100, bg=label_frame_bg_color)
-    crab_killer_label.image = sand_crab_img
-
-    # Load button with ore
-    crab_killer_label.grid(row=2, column=1)
-    kourend_crab_killer_btn.grid(row=2, column=2, columnspan=2, pady=20, padx=30)
-
     cow_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{combat_img_path}\Cow.png'))
 
-    cow_img_label = Label(combat_frame, image=cow_img, height=100, width=100, bg=label_frame_bg_color)
-    cow_img_label.image = cow_img
-
-    # Load button with ore
-    cow_img_label.grid(row=1, column=1)
-    cow_killer_btn.grid(row=1, column=2, columnspan=2, pady=20, padx=30)
+    add_script_btn(combat_frame, cow_img, cow_killer_btn, 1)
+    add_script_btn(combat_frame, sand_crab_img, kourend_crab_killer_btn, 2)
     return
 
 
@@ -376,19 +364,13 @@ def show_attack_frame(all_frames, t_active_frame, attack_frame, attack_sub_btns)
     cow_img_path = 'Assets\Images\GUI_Images\Stats\Combat'
     cow_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{cow_img_path}\Cow.png'))
 
-    cow_img_label = Label(attack_frame, image=cow_img, height=100, width=100, bg=label_frame_bg_color)
-    cow_img_label.image = cow_img
-
-    # Load button with ore
-    cow_img_label.grid(row=1, column=1)
-    cow_killer_btn.grid(row=1, column=2, columnspan=2, pady=20, padx=30)
     return
 
 
 def show_mining_frame(all_frames, t_active_frame, mining_frame, mining_sub_btns):
     # Close skill_frame
     _, _, _, _, skill_sub_frames = all_frames
-    iron_pisc_btn = mining_sub_btns
+    pisc_iron_btn = mining_sub_btns
 
     is_active = t_active_frame("skill", all_frames)
     print(f'show_mining_frame - skill_frame - is_active: {is_active}')
@@ -398,12 +380,7 @@ def show_mining_frame(all_frames, t_active_frame, mining_frame, mining_sub_btns)
     mining_path = 'Assets\Images\GUI_Images\Stats\Mining'
     iron_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{mining_path}\iron_ore.png'))
 
-    iron_img_label = Label(mining_frame, image=iron_img, height=100, width=100, bg=label_frame_bg_color)
-    iron_img_label.image = iron_img
-
-    # Load button with ore
-    iron_img_label.grid(row=1, column=1)
-    iron_pisc_btn.grid(row=1, column=2, columnspan=2, pady=20, padx=30)
+    add_script_btn(mining_frame, iron_img, pisc_iron_btn, 1)
     return
 
 
@@ -420,12 +397,7 @@ def show_smithing_frame(all_frames, t_active_frame, smithing_frame, smithing_sub
     smithing_path = 'Assets\Images\GUI_Images\Stats\Smithing'
     gold_bar_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{smithing_path}\gold_bar.png'))
 
-    gold_img_label = Label(smithing_frame, image=gold_bar_img, height=100, width=100, bg=label_frame_bg_color)
-    gold_img_label.image = gold_bar_img
-
-    # Load button with ore
-    gold_img_label.grid(row=1, column=1)
-    edge_gold_btn.grid(row=1, column=2, columnspan=2, pady=20, padx=30)
+    add_script_btn(smithing_frame, gold_bar_img, edge_gold_btn, 1)
     return
 
 
@@ -443,24 +415,9 @@ def show_agility_frame(all_frames, t_active_frame, agility_frame, agility_sub_bt
     mog_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{agility_path}\Mog.png'))
     high_alch_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{agility_path}\High_Alch.png'))
 
-    gold_img_label = Label(agility_frame, image=gnome_course_img, height=100, width=100, bg=label_frame_bg_color)
-    gold_img_label.image = gnome_course_img
-
-    mog_img_label = Label(agility_frame, image=mog_img, height=100, width=100, bg=label_frame_bg_color)
-    mog_img_label.image = mog_img
-
-    seers_img_label = Label(agility_frame, image=high_alch_img, height=100, width=100, bg=label_frame_bg_color)
-    seers_img_label.image = high_alch_img
-
-    # Load button with ore
-    gold_img_label.grid(row=1, column=1)
-    gnome_course_btn.grid(row=1, column=2, columnspan=2, pady=20, padx=30)
-
-    mog_img_label.grid(row=2, column=1)
-    canifis_rooftops_btn.grid(row=2, column=2, columnspan=2, pady=20, padx=30)
-
-    seers_img_label.grid(row=3, column=1)
-    seers_rooftop_btn.grid(row=3, column=2, columnspan=2, pady=20, padx=30)
+    add_script_btn(agility_frame, gnome_course_img, gnome_course_btn, 1)
+    add_script_btn(agility_frame, mog_img, canifis_rooftops_btn, 2)
+    add_script_btn(agility_frame, high_alch_img, seers_rooftop_btn, 3)
     return
 
 
@@ -470,18 +427,6 @@ def show_defence_frame(all_frames, t_active_frame, defence_frame, defence_sub_bt
 
     is_active = t_active_frame("skill", all_frames)
     print(f'show_defence_frame - skill_frame - is_active: {is_active}')
-
-    defence_frame.grid(row=sub_gui_row, column=1, columnspan=5, pady=50)
-
-    defence_img_path = 'Assets\Images\GUI_Images\Stats\Defence'
-    gnome_course_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{defence_img_path}\Gnome_Course.png'))
-
-    gold_img_label = Label(defence_frame, image=gnome_course_img, height=100, width=100, bg=label_frame_bg_color)
-    gnome_course_img.image = gnome_course_img
-
-    # Load button with ore
-    gold_img_label.grid(row=1, column=1)
-    # gnome_course_btn.grid(row=1, column=2, columnspan=2, pady=20, padx=30)
     return
 
 
@@ -497,18 +442,12 @@ def show_herblore_frame(all_frames, t_active_frame, herblore_frame, herblore_sub
     herblore_img_path = 'Assets\Images\GUI_Images\Stats\Herblore'
     unf_pot_img = ImageTk.PhotoImage(Image.open(f"{os.getcwd()}\{herblore_img_path}\Herb_pot.png"))
 
-    unf_port_label = Label(herblore_frame, image=unf_pot_img, height=100, width=100, bg=label_frame_bg_color)
-    unf_port_label.image = unf_pot_img
-
-    # Load button with ore
-    unf_port_label.grid(row=1, column=1)
-    unf_pot_btn.grid(row=1, column=2, columnspan=2, pady=20, padx=30)
+    add_script_btn(herblore_frame, unf_pot_img, unf_pot_btn, 1)
     return
 
 
 def show_fishing_frame(all_frames, t_active_frame, fishing_frame, fishing_sub_btns):
     _, _, _, _, skill_sub_frames = all_frames
-    # _, _, _, _, _, fishing_frame, _, _, _ = skill_sub_frames
 
     draynor_shrimp_btn, barb_trout_btn, barb_fishing_btn = fishing_sub_btns
 
@@ -519,29 +458,13 @@ def show_fishing_frame(all_frames, t_active_frame, fishing_frame, fishing_sub_bt
 
     fishing_img_path = 'Assets\Images\GUI_Images\Stats\Fishing'
 
-    draynor_man_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{fishing_img_path}\Shrimp.png'))
-
-    draynor_man_label = Label(fishing_frame, image=draynor_man_img, height=100, width=100, bg=label_frame_bg_color)
-    draynor_man_img.image = draynor_man_img
-
-    ardy_cake_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{fishing_img_path}\Trout.png'))
-
-    barb_trout_label = Label(fishing_frame, image=ardy_cake_img, height=100, width=100, bg=label_frame_bg_color)
-    ardy_cake_img.image = ardy_cake_img
-
+    shimp_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{fishing_img_path}\Shrimp.png'))
+    trout_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{fishing_img_path}\Trout.png'))
     barb_fishing_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{fishing_img_path}\leaping_sturgeon.png'))
 
-    barb_fishing_label = Label(fishing_frame, image=barb_fishing_img, height=100, width=100, bg=label_frame_bg_color)
-    barb_fishing_img.image = barb_fishing_img
-
-    draynor_man_label.grid(row=1, column=1, padx=35)
-    draynor_shrimp_btn.grid(row=1, column=2, columnspan=2, pady=20, padx=25)
-
-    barb_trout_label.grid(row=2, column=1, padx=35)
-    barb_trout_btn.grid(row=2, column=2, columnspan=2, pady=20, padx=25)
-
-    barb_fishing_label.grid(row=3, column=1, padx=35)
-    barb_fishing_btn.grid(row=3, column=2, columnspan=2, pady=20, padx=25)
+    add_script_btn(fishing_frame, shimp_img, draynor_shrimp_btn, 1)
+    add_script_btn(fishing_frame, trout_img, barb_trout_btn, 2)
+    add_script_btn(fishing_frame, barb_fishing_img, barb_fishing_btn, 3)
     return
 
 
@@ -561,16 +484,10 @@ def show_cooking_frame(all_frames, t_active_frame, cooking_frame, cooking_sub_bt
 
     cooking_img_path = 'Assets\Images\GUI_Images\Stats\Cooking'
 
-    # Draynor Man
     fire_gif = Image.open(f'{os.getcwd()}\{cooking_img_path}\Fire.png')
-    rogue_cooker_map_image = ImageTk.PhotoImage(fire_gif)
+    fire_img = ImageTk.PhotoImage(fire_gif)
 
-    rogue_cooker_label = Label(cooking_frame, image=rogue_cooker_map_image, height=100, width=100, bg=label_frame_bg_color)
-    rogue_cooker_map_image.image = rogue_cooker_map_image
-
-    rogue_cooker_label.grid(row=1, column=1, padx=35)
-    rogue_cooker_btn.grid(row=1, column=2, columnspan=2, pady=20, padx=25)
-
+    add_script_btn(cooking_frame, fire_img, rogue_cooker_btn, 1)
     return
 
 
@@ -585,42 +502,16 @@ def show_thieving_frame(all_frames, t_active_frame, thieving_frame, thieving_sub
     thieving_frame.grid(row=sub_gui_row, column=1, columnspan=5, pady=50)
 
     thieving_img_path = 'Assets\Images\GUI_Images\Stats\Thieving'
-
-    # Draynor Man
     draynor_man_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{thieving_img_path}\draynor_man.png'))
-
-    draynor_man_label = Label(thieving_frame, image=draynor_man_img, height=100, width=100, bg=label_frame_bg_color)
-    draynor_man_img.image = draynor_man_img
-
-    # Ardy Cake
     ardy_cake_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{thieving_img_path}\Cake.png'))
-
-    barb_trout_label = Label(thieving_frame, image=ardy_cake_img, height=100, width=100, bg=label_frame_bg_color)
-    ardy_cake_img.image = ardy_cake_img
-
-    # Hosidius Fruit
     hosidius_stall_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{thieving_img_path}\Fruit_stall.png'))
-
-    hosidius_fruit_label = Label(thieving_frame, image=hosidius_stall_img, height=100, width=100, bg=label_frame_bg_color)
-    barb_trout_label.image = hosidius_stall_img
-
-    # Ardy Knights
     knight_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{thieving_img_path}\Ardy_Knight.png'))
 
-    ardy_knight_label = Label(thieving_frame, image=knight_img, height=100, width=100, bg=label_frame_bg_color)
-    ardy_knight_label.image = knight_img
+    add_script_btn(thieving_frame, draynor_man_img, draynor_man_btn, 1)
+    add_script_btn(thieving_frame, ardy_cake_img, ardy_cake_btn, 2)
+    add_script_btn(thieving_frame, hosidius_stall_img, hosidius_btn, 3)
+    add_script_btn(thieving_frame, knight_img, ardy_knights_btn, 4)
 
-    draynor_man_label.grid(row=1, column=1, padx=35)
-    draynor_man_btn.grid(row=1, column=2, columnspan=2, pady=20, padx=25)
-
-    barb_trout_label.grid(row=2, column=1, padx=35)
-    ardy_cake_btn.grid(row=2, column=2, columnspan=2, pady=20, padx=25)
-
-    hosidius_fruit_label.grid(row=3, column=1, padx=35)
-    hosidius_btn.grid(row=3, column=2, columnspan=2, pady=20, padx=25)
-
-    ardy_knight_label.grid(row=4, column=1, padx=35)
-    ardy_knights_btn.grid(row=4, column=2, columnspan=2, pady=20, padx=25)
     return
 
 
@@ -636,12 +527,7 @@ def show_firemaking_frame(all_frames, t_active_frame, firemaking_frame, firemaki
     firemaking_img_path = 'Assets\Images\GUI_Images\Stats\Firemaking'
     tinderbox_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{firemaking_img_path}\Tinderbox.png'))
 
-    tinderbox_img_label = Label(firemaking_frame, image=tinderbox_img, height=100, width=100, bg=label_frame_bg_color)
-    tinderbox_img_label.image = tinderbox_img
-
-    # Load button with ore
-    tinderbox_img_label.grid(row=1, column=1)
-    ge_log_burner_btn.grid(row=1, column=2, columnspan=2, pady=20, padx=30)
+    add_script_btn(firemaking_frame, tinderbox_img, ge_log_burner_btn, 1)
     return
 
 
@@ -656,23 +542,10 @@ def show_hunter_frame(all_frames, t_active_frame, hunter_frame, hunter_sub_btns)
 
     hunter_img_path = 'Assets\Images\GUI_Images\Stats\Hunter'
     crimson_swift_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{hunter_img_path}\Crimson_Swift.png'))
-
-    crimson_swift_label = Label(hunter_frame, image=crimson_swift_img, height=100, width=100, bg=label_frame_bg_color)
-    crimson_swift_label.image = crimson_swift_img
-
-    # Load button with ore
-    crimson_swift_label.grid(row=1, column=1)
-    crimson_swift_btn.grid(row=1, column=2, columnspan=2, pady=20, padx=30)
-
-    # Cerulean Twitch
     cerulean_twitch_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{hunter_img_path}\Cerulean_Twitch.png'))
 
-    cerulean_twitch_label = Label(hunter_frame, image=cerulean_twitch_img, height=100, width=100, bg=label_frame_bg_color)
-    cerulean_twitch_label.image = cerulean_twitch_img
-
-    # Load button with ore
-    cerulean_twitch_label.grid(row=2, column=1)
-    cerulean_twitch_btn.grid(row=2, column=2, columnspan=2, pady=20, padx=30)
+    add_script_btn(hunter_frame, crimson_swift_img, crimson_swift_btn, 1)
+    add_script_btn(hunter_frame, cerulean_twitch_img, cerulean_twitch_btn, 2)
     return
 
 
@@ -688,11 +561,7 @@ def show_fletching_frame(all_frames, t_active_frame, fletching_frame, fletching_
     fletching_img_path = 'Assets\Images\GUI_Images\Stats\Fletching'
     dart_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{fletching_img_path}\Dart.png'))
 
-    dart_img_label = Label(fletching_frame, image=dart_img, height=100, width=100, bg=label_frame_bg_color)
-    dart_img_label.image = dart_img
-
-    dart_img_label.grid(row=1, column=1)
-    ge_dart_fletcher_btn.grid(row=1, column=2, columnspan=2, pady=20, padx=30)
+    add_script_btn(fletching_frame, dart_img, ge_dart_fletcher_btn, 1)
     return
 
 
@@ -705,14 +574,10 @@ def show_crafting_frame(all_frames, t_active_frame, crafting_frame, crafting_sub
 
     crafting_frame.grid(row=sub_gui_row, column=1, columnspan=5, pady=50)
 
-    fletching_img_path = 'Assets\Images\GUI_Images\Stats\Crafting'
-    dart_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{fletching_img_path}\Molten_glass.png'))
+    crafting_img_path = 'Assets\Images\GUI_Images\Stats\Crafting'
+    molten_glass_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{crafting_img_path}\Molten_glass.png'))
 
-    dart_img_label = Label(crafting_frame, image=dart_img, height=100, width=100, bg=label_frame_bg_color)
-    dart_img_label.image = dart_img
-
-    dart_img_label.grid(row=1, column=1)
-    ge_glass_blower_btn.grid(row=1, column=2, columnspan=2, pady=20, padx=30)
+    add_script_btn(crafting_frame, molten_glass_img, ge_glass_blower_btn, 1)
     return
 
 
@@ -728,17 +593,13 @@ def show_prayer_frame(all_frames, t_active_frame, prayer_frame, prayer_sub_btns)
     prayer_img_path = 'Assets\Images\GUI_Images\Stats\Prayer'
     gilded_altar_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{prayer_img_path}\Gilded_altar.png'))
 
-    prayer_img_label = Label(prayer_frame, image=gilded_altar_img, height=100, width=100, bg=label_frame_bg_color)
-    prayer_img_label.image = gilded_altar_img
-
-    prayer_img_label.grid(row=1, column=1)
-    gilded_altar_btn.grid(row=1, column=2, columnspan=2, pady=20, padx=30)
+    add_script_btn(prayer_frame, gilded_altar_img, gilded_altar_btn, 1)
     return
 
 
 def show_woodcutting_frame(all_frames, t_active_frame, woodcutting_frame, woodcutting_sub_btns):
     _, _, _, _, skill_sub_frames = all_frames
-    chop_fletcher = woodcutting_sub_btns
+    chop_fletcher_btn, cwars_teak_btn = woodcutting_sub_btns
 
     is_active = t_active_frame("skill", all_frames)
     print(f'show_wooductting_frame - skill_frame - is_active: {is_active}')
@@ -747,12 +608,10 @@ def show_woodcutting_frame(all_frames, t_active_frame, woodcutting_frame, woodcu
 
     woodcutting_image_path = 'Assets\Images\GUI_Images\Stats\Woodcutting'
     shaft_log_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{woodcutting_image_path}\Chop_fletcher.png'))
+    teak_tree_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{woodcutting_image_path}\Teak_tree.png'))
 
-    chop_fletcher_label = Label(woodcutting_frame, image=shaft_log_img, height=100, width=100, bg=label_frame_bg_color)
-    chop_fletcher_label.image = shaft_log_img
-
-    chop_fletcher_label.grid(row=1, column=1)
-    chop_fletcher.grid(row=1, column=2, columnspan=2, pady=20, padx=30)
+    add_script_btn(woodcutting_frame, shaft_log_img, chop_fletcher_btn, 1)
+    add_script_btn(woodcutting_frame, teak_tree_img, cwars_teak_btn, 2)
     return
 
 
@@ -765,12 +624,22 @@ def show_farming_frame(all_frames, t_active_frame, farming_frame, woodcutting_su
 
     farming_frame.grid(row=sub_gui_row, column=1, columnspan=5, pady=50)
 
-    prayer_img_path = 'Assets\Images\GUI_Images\Stats\Farming'
-    plough_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{prayer_img_path}\Plough.png'))
+    farming_img_path = 'Assets\Images\GUI_Images\Stats\Farming'
+    plough_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{farming_img_path}\Plough.png'))
 
-    hosidius_plough_label = Label(farming_frame, image=plough_img, height=100, width=100, bg=label_frame_bg_color)
-    hosidius_plough_label.image = plough_img
+    add_script_btn(farming_frame, plough_img, hosidius_plough_btn, 1)
+    return
 
-    hosidius_plough_label.grid(row=1, column=1)
-    hosidius_plough_btn.grid(row=1, column=2, columnspan=2, pady=20, padx=30)
+
+# ------
+# HELPER
+# ------
+def add_script_btn(skill_frame, side_img, start_btn, row_num):
+    # teak_tree_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{woodcutting_image_path}\Teak_tree.png'))
+
+    teak_label = Label(skill_frame, image=side_img, height=100, width=100, bg=label_frame_bg_color)
+    teak_label.image = side_img
+
+    teak_label.grid(row=row_num, column=1)
+    start_btn.grid(row=row_num, column=2, columnspan=2, pady=20, padx=30)
     return
