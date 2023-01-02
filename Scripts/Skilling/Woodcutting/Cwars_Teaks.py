@@ -43,7 +43,7 @@ def start_chopping_teaks(curr_loop):
         print(f'This is not the first loop - doing main shit.')
 
         # Check if inventory is full - bank or drop if not
-        if INVENT_FULL:
+        if is_invent_full():
             if SHOULD_BANK:
                 if SHOULD_USE_ROD:
                     print(f'Using rod to cwars bank')
@@ -76,22 +76,10 @@ def start_chopping_teaks(curr_loop):
             print(f'SAW EXP - STILL CHOPPING: teak_attemps = {TEAK_ATTEMPTS} (now 0) & clicked_teak = {CLICKED_TEAK}')
             TEAK_ATTEMPTS = 0
             return True
-        else:
-            # If we clicked the teak but we're not still chopping
-            # if CLICKED_TEAK:
-            #     print(f"Clicked_teak previously but didn't see exp - increasing teak_attempts = {TEAK_ATTEMPTS}")
-            #     if TEAK_ATTEMPTS == 1:
-            #         print(f'Exceeded teak_attempts = {TEAK_ATTEMPTS}\nInventory_full = {INVENT_FULL} RETURNING.')
-            #         INVENT_FULL = True
-            #         return True
-            #     TEAK_ATTEMPTS += 1
-            if is_invent_full():
-                INVENT_FULL = True
-                return True
 
-            CLICKED_TEAK = chop_teak()
-            print(f'🪓 Clicked to chop teak - clicked_teak = {CLICKED_TEAK}')
-            return True
+        CLICKED_TEAK = chop_teak()
+        print(f'🪓 Clicked to chop teak - clicked_teak = {CLICKED_TEAK}')
+        return True
 
     else:
         print(f'This is the first loop')
@@ -240,11 +228,17 @@ def move_to_chest():
 
 def is_invent_full():
     teak_color_xy = 1354, 788
-    color_code = 177, 146, 92
-    if color_code == get_color_at_coords(teak_color_xy):
-        return True
-    else:
-        return False
+    color_code = 177, 146, 92  # 178, 147, 92
+
+    diff_tolerance = 10
+    color_diff = get_color_at_coords(teak_color_xy) - color_code  # 1, 1, 0 or # -1, -1, 0
+
+    for val in color_diff:
+        if val < 0:
+            val * -1
+        if val > diff_tolerance:
+            return False
+    return True
 
 # -------
 # HELPERS
