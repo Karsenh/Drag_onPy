@@ -118,7 +118,7 @@ def check_for_gauntlets():
         # Equip cooking gauntlets in inventory
         invent_gauntlets_xy = get_xy_for_invent_slot(1)
         mouse_long_click(invent_gauntlets_xy)
-        does_img_exist(img_name="wear", category="General", threshold=0.95, should_click=True, y_offset=15, x_offset=5)
+        does_img_exist(img_name="Wear", category="General", threshold=0.95, should_click=True, y_offset=15, x_offset=5)
         API.AntiBan.sleep_between(0.4, 0.5)
 
     return

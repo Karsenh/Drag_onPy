@@ -25,6 +25,7 @@ from Scripts.Skilling.Thieving.Pickpocketing.Ardy_Knights import start_pickpocke
 from Scripts.Skilling.Combat.Kourend_Crab_Killer import start_killing_kourend_crabs
 from Scripts.Skilling.Crafting.GE_Dhide_Bodies import start_crafting_dhide_bodies
 from Scripts.Skilling.Woodcutting.Cwars_Teaks import start_chopping_teaks
+from Scripts.Skilling.Combination.GE_Superheat_Gold import start_superheating_gold
 
 from enum import Enum
 import API
@@ -74,6 +75,7 @@ def launch_script(script_name="pisc_iron"):
         KOUREND_CRABS = 24
         DHIDE_BODIES = 25
         CWARS_TEAK = 26
+        GE_SUPERHEAT_GOLD = 27
 
     all_scripts = [mine_iron_pisc, smith_gold_edge, run_gnome_course,
                    fish_draynor_shrimp, fish_barb_trout, barbarian_fishing,
@@ -83,7 +85,7 @@ def launch_script(script_name="pisc_iron"):
                    start_ploughing_for_favour, start_stealing_fruit, start_gilded_altar,
                    start_unf_pots, start_canifis_rooftops, start_seers_rooftops,
                    start_catching_crimsons, start_trapping_birds, start_pickpocketing_ardy_knights,
-                   start_killing_kourend_crabs, start_crafting_dhide_bodies, start_chopping_teaks]
+                   start_killing_kourend_crabs, start_crafting_dhide_bodies, start_chopping_teaks, start_superheating_gold]
 
     match script_name:
         case "pisc_iron":
@@ -196,6 +198,10 @@ def launch_script(script_name="pisc_iron"):
             selected_script = ScriptEnum.CWARS_TEAK.value
             antiban_likelihood = 10
             antiban_downtime_sec = 1
+        case "GE_Superheat_Gold":
+            selected_script = ScriptEnum.GE_SUPERHEAT_GOLD.value
+            antiban_likelihood = 20
+            antiban_downtime_sec = 4
 
     is_timer_set = is_break_timer_set()
 

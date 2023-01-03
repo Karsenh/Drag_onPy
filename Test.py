@@ -15,8 +15,11 @@ clear_debug_log()
 
 # random_human_actions(max_downtime_seconds=12)
 # show_main_gui()
-launch_script("GE_Dhide_Bodies")
+launch_script("GE_Superheat_Gold")
 
+
+# does_img_exist(img_name="Ge_Bank", script_name="GE_Superheat_Gold", should_click=True, threshold=0.98, x_offset=10, min_clicks=2, max_clicks=3)
+# does_img_exist(img_name="Bansked_Nats", script_name="GE_Superheat_Gold", should_click=True, x_offset=30, threshold=0.99)
 # does_img_exist(img_name="Needle", script_name="GE_Dhide_Bodies", threshold=0.95, should_click=True)
 
 # wait_for_img(img_name="Ge_bank", script_name="GE_Dhide_Bodies", threshold=0.88, should_click=True, x_offset=20)

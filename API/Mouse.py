@@ -30,6 +30,8 @@ def mouse_click(xy, max_x_dev=2, max_y_dev=2, click_direction="left", max_num_cl
     elif max_num_clicks > 1:
         num_clicks = random.randint(min_num_clicks, max_num_clicks)
         print(f'Clicking {click_direction} once @ x: {move_x} | y: {move_y}')
+        move_xy = move_x, move_y
+        # mouse_move(move_xy)
         for x in range(num_clicks):
             r_sleep = random.uniform(0.1, max_int_delay)
             pag.click(button=click_direction, x=move_x, y=move_y)
