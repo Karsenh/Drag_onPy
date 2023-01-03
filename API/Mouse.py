@@ -21,17 +21,19 @@ def mouse_click(xy, max_x_dev=2, max_y_dev=2, click_direction="left", max_num_cl
         organic_y = random.randint(5, max_y_dev)
         move_y = trans_y + organic_y
 
-    API.AntiBan.sleep_between(0.2, 0.3)
+    # API.AntiBan.sleep_between(0.2, 0.3)
 
-    if max_num_clicks > 1:
-        num_clicks = random.randint(min_num_clicks, max_num_clicks)
-    else:
-        num_clicks = max_num_clicks
-
-    for x in range(num_clicks):
-        r_sleep = random.uniform(0.1, max_int_delay)
+    if max_num_clicks == 1:
+        print(f'Clicking {click_direction} once @ x: {move_x} | y: {move_y}')
         pag.click(button=click_direction, x=move_x, y=move_y)
-        time.sleep(r_sleep)
+
+    elif max_num_clicks > 1:
+        num_clicks = random.randint(min_num_clicks, max_num_clicks)
+        print(f'Clicking {click_direction} once @ x: {move_x} | y: {move_y}')
+        for x in range(num_clicks):
+            r_sleep = random.uniform(0.1, max_int_delay)
+            pag.click(button=click_direction, x=move_x, y=move_y)
+            time.sleep(r_sleep)
 
     return
 

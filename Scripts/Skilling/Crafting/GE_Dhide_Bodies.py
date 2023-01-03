@@ -2,7 +2,7 @@ import random
 
 from API.Interface.General import setup_interface, get_xy_for_invent_slot, is_tab_open
 from API.Interface.Bank import is_bank_open, deposit_all, is_withdraw_qty, is_bank_tab_open, close_bank
-from API.Imaging.Image import wait_for_img, does_img_exist
+from API.Imaging.Image import wait_for_img, does_img_exist, get_existing_img_xy
 from API.Debug import write_debug
 from API.Mouse import mouse_click
 import pyautogui as pag
@@ -11,7 +11,7 @@ import API.AntiBan
 dragon_leather_color = "green"
 jewelry_tab_num = 2
 script_name = "GE_Dhide_Bodies"
-
+CRAFTING_ATTEMPTS = 0
 
 def start_crafting_dhide_bodies(curr_loop):
     if curr_loop != 1:
@@ -76,6 +76,7 @@ def start_crafting_dhide_bodies(curr_loop):
         if not withdraw_leather():
             write_debug(f'We must be out of {dragon_leather_color} dragon leather. Exiting...')
             return False
+        API.AntiBan.sleep_between(0.3, 0.5)
 
         # Close bank
         close_bank()
@@ -84,7 +85,12 @@ def start_crafting_dhide_bodies(curr_loop):
 
 
 def open_ge_bank():
-    wait_for_img(img_name="Ge_bank", script_name=script_name, threshold=0.88, should_click=True, x_offset=20)
+    # wait_for_img(img_name="Ge_bank", script_name=script_name, threshold=0.87, should_click=True, x_offset=20)
+    API.AntiBan.sleep_between(0.3, 0.4)
+
+    ge_bank_xy = 710, 443
+    mouse_click(ge_bank_xy)
+
     if is_bank_open():
         return True
     else:
@@ -92,7 +98,7 @@ def open_ge_bank():
 
 
 def is_crafting():
-    return wait_for_img(img_name="Crafting", category="Exp_Drops", max_wait_sec=3)
+    return wait_for_img(img_name="Crafting", category="Exp_Drops", max_wait_sec=2)
 
 
 def withdraw_leather():
@@ -101,13 +107,24 @@ def withdraw_leather():
 
 
 def craft_dhide_bodies():
+    global CRAFTING_ATTEMPTS
+
     is_tab_open("inventory", True)
     does_img_exist(img_name="Needle", script_name="GE_Dhide_Bodies", threshold=0.95, should_click=True)
-    API.AntiBan.sleep_between(0.2, 0.7, 35)
+    API.AntiBan.sleep_between(0.3, 0.4)
+    API.AntiBan.sleep_between(0.2, 0.5, 35)
     mouse_click(get_random_invent_slot_between(5, 9))
+    API.AntiBan.sleep_between(0.3, 0.4)
     API.AntiBan.sleep_between(0.2, 0.9, 35)
-    if not wait_for_img(img_name="Green_body_craft_btn", script_name=script_name, should_click=True):
-        return False
+    if not wait_for_img(img_name="Green_body_craft_btn", script_name=script_name):
+        craft_dhide_bodies()
+        CRAFTING_ATTEMPTS += 1
+        if CRAFTING_ATTEMPTS > 2:
+            return False
+    else:
+        CRAFTING_ATTEMPTS = 0
+        mouse_click(get_existing_img_xy(), max_x_dev=14, max_y_dev=14)
+        API.AntiBan.sleep_between(1.0, 1.1)
     return True
 
 
