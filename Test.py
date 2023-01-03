@@ -3,10 +3,12 @@ from API.Debug import clear_debug_log
 from API.Imaging.Image import *
 from API.Imaging.OCR.Run_Energy import *
 from API.Imports.Paths import BS_SCREEN_PATH
+from GUI.Imports.Script_Launch import launch_script
 import sys
+from pynput import keyboard
 
 
-def on_press(key):
+def terminate_app(key):
     try:
         print(f'Key {key} pressed')
 
@@ -29,7 +31,7 @@ def __main__():
     clear_debug_log()
 
     # show_main_gui()
-    launch_script("GE_Superheat_Gold")
+    launch_script("Seers_Rooftops")
 
     return
 
