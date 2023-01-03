@@ -31,6 +31,10 @@ def start_seers_rooftops(curr_loop):
         # if random.randint(1, 10) < 9:
         if SHOULD_ALCH:
             alch_on_agility_drop()
+        else:
+            if not wait_for_img(img_name="agility_exp", script_name="Seers_Rooftops", max_wait_sec=15):
+                CURR_JUMP_NUM -= 1
+                print(f'Didnt see exp drop - trying previous jump again on next loop...')
 
     return True
 
