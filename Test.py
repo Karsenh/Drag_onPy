@@ -29,7 +29,9 @@ def __main__():
     clear_debug_log()
 
     # show_main_gui()
-    launch_script("GE_Superheat_Gold")
+    # launch_script("Seers_Rooftops")
+    wait_for_img(img_name="move_back_alt", script_name="Seers_Rooftops", threshold=0.9, should_click=True, x_offset=25,
+                 y_offset=18, max_wait_sec=15)
 
     return
 

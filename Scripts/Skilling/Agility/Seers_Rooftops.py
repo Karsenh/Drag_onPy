@@ -100,7 +100,7 @@ def handle_next_jump():
         if curr_jump_num in jumps_with_mog:
             print("This roof has a Mark of Grace spawn that we're checking...")
 
-            if wait_for_img(img_name=f"mog_on_{curr_jump_num}", script_name="Seers_Rooftops", threshold=0.9, should_click=True, x_offset=5, y_offset=5, max_wait_sec=2):
+            if does_img_exist(img_name=f"mog_on_{curr_jump_num}", script_name="Seers_Rooftops", threshold=0.9, should_click=True, x_offset=5, y_offset=5, max_wait_sec=2):
                 print(f'Found a Mark of Grace and clicked it... Looking for jump_{curr_jump_num}_from_mog')
                 API.AntiBan.sleep_between(0.6, 0.7)
 
@@ -109,7 +109,7 @@ def handle_next_jump():
 
             # Check if an alt mog is present...
             elif curr_jump_num in jumps_with_alt_mog and\
-                    wait_for_img(img_name=f"mog_on_{curr_jump_num}_alt", script_name="Seers_Rooftops", threshold=0.9, should_click=True, x_offset=5, y_offset=5, max_wait_sec=2):
+                    does_img_exist(img_name=f"mog_on_{curr_jump_num}_alt", script_name="Seers_Rooftops", threshold=0.9, should_click=True, x_offset=5, y_offset=5, max_wait_sec=2):
                 print(f'Found a ALT Mark of Grace and clicked it... Looking for jump_{curr_jump_num}_from_mog')
 
                 # Move to next jump from alt mog
@@ -150,8 +150,8 @@ def handle_next_jump():
 
     elif curr_jump_num == 6:
         print('click move_back image')
-        if not wait_for_img(img_name="move_back", script_name="Seers_Rooftops", threshold=0.9, should_click=True, x_offset=6,
-             y_offset=10, max_wait_sec=15):
+        if not wait_for_img(img_name="move_back_alt", script_name="Seers_Rooftops", threshold=0.9, should_click=True, x_offset=25,
+                 y_offset=18, max_wait_sec=15):
             return False
     else:
         # else jump_num == 7 | reset it back to 1 (0 + 1) after restarting course
