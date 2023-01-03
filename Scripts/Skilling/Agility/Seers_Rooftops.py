@@ -152,8 +152,8 @@ def handle_next_jump():
 
     elif CURR_JUMP_NUM == 6:
         print('click move_back image')
-        if not wait_for_img(img_name="move_back", script_name="Seers_Rooftops", threshold=0.9, should_click=True, x_offset=6,
-             y_offset=10, max_wait_sec=15):
+        if not wait_for_img(img_name="move_back_alt", script_name="Seers_Rooftops", threshold=0.9, should_click=True, x_offset=25,
+                 y_offset=18, max_wait_sec=15):
             return False
     else:
         # else jump_num == 7 | reset it back to 1 (0 + 1) after restarting course
