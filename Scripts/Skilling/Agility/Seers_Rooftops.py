@@ -7,7 +7,8 @@ from API.Imaging.Image import wait_for_img, get_existing_img_xy, does_img_exist
 import pyautogui as pag
 
 CURR_JUMP_NUM = 1
-alch_item = "green_dhide_body_note"
+ALCH_ITEM = "magic_long_note"
+SHOULD_ALCH = True
 
 # OPTIONS
 # Teleport to Seers
@@ -28,7 +29,8 @@ def start_seers_rooftops(curr_loop):
         CURR_JUMP_NUM += 1
         print(f'Incrementing curr_jump_num +1 (now {CURR_JUMP_NUM})')
         # if random.randint(1, 10) < 9:
-        alch_on_agility_drop()
+        if SHOULD_ALCH:
+            alch_on_agility_drop()
 
     return True
 
@@ -42,6 +44,7 @@ def begin_course():
 
 def alch_on_agility_drop():
     global CURR_JUMP_NUM
+    global SHOULD_ALCH
 
     API.AntiBan.sleep_between(0.2, 0.8)
 
@@ -53,7 +56,7 @@ def alch_on_agility_drop():
                 # return False
             else:
                 # We've clicked the high-alch spell - click the magic long
-                if wait_for_img(img_name=alch_item, script_name="Seers_Rooftops", x_offset=4, y_offset=4, threshold=0.95):
+                if wait_for_img(img_name=ALCH_ITEM, script_name="Seers_Rooftops", x_offset=4, y_offset=4, threshold=0.95):
                     print(f'Hovering mouse over magic long while we wait for agility jump...')
                     mouse_move(get_existing_img_xy())
                 else:
@@ -63,9 +66,13 @@ def alch_on_agility_drop():
             # return False
     else:
         # 3. Hover mouse over magic_long_note with High-alch selected, waiting for agility exp before left clicking
-        if wait_for_img(img_name=alch_item, script_name="Seers_Rooftops", x_offset=4, y_offset=4, threshold=0.95):
+        if wait_for_img(img_name=ALCH_ITEM, script_name="Seers_Rooftops", x_offset=4, y_offset=4, threshold=0.95):
             print(f'Hovering mouse over magic long while we wait for agility jump...')
             mouse_move(get_existing_img_xy())
+        else:
+            print(f'No more {ALCH_ITEM}s in inventory. Stopping Alching')
+            SHOULD_ALCH = False
+            return
 
     if CURR_JUMP_NUM != 7:
         if wait_for_img(img_name="agility_exp", script_name="Seers_Rooftops", max_wait_sec=15):
