@@ -1,4 +1,3 @@
-import API.AntiBan
 from GUI.Main_GUI import *
 from API.Debug import clear_debug_log
 from API.Imaging.Image import *

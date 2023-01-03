@@ -374,3 +374,11 @@ def close_chatbox():
 
     mouse_click(game_xy)
     return
+
+
+def handle_level_dialogue():
+    if does_img_exist(img_name="level_up", category="General"):
+        pag.press('space')
+        API.AntiBan.sleep_between(1.1, 2.3)
+        pag.press('space')
+    return
