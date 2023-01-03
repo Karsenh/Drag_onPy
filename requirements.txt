@@ -9,3 +9,4 @@ pywin32==305
 pytesseract==0.3.10
 pymongo==4.3.3
 python-osrsapi==0.0.4
+pynput==1.7.6

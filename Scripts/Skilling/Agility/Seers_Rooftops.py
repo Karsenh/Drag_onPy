@@ -119,6 +119,23 @@ def handle_next_jump():
 
             else:
                 if not wait_for_img(img_name=f"jump_{curr_jump_num}", script_name="Seers_Rooftops", threshold=0.80, should_click=True, x_offset=10, y_offset=10):
+                    if not wait_for_img(img_name=f"jump_{curr_jump_num-1}", script_name="Seers_Rooftops", threshold=0.80,
+                                        should_click=True, x_offset=10, y_offset=10):
+                        if wait_for_img(img_name=f"fall_on_{curr_jump_num}", script_name="Seers_Rooftops"):
+                            print(f'We seem to have fallen looking for jump_num: {curr_jump_num} - but we can get up...')
+                            if curr_jump_num == 2:
+                                recover_xy = 1176, 586
+                            if curr_jump_num == 3:
+                                recover_xy = 1204, 338
+                            # Reset the jump number since we're back to the start
+                            curr_jump_num = 0
+                            mouse_click(recover_xy)
+                        else:
+                            return False
+        else:
+            if not wait_for_img(img_name=f"jump_{curr_jump_num}", script_name="Seers_Rooftops", threshold=0.80, should_click=True, x_offset=10, y_offset=10):
+                print(f"Couldn't find curr_jump_num ({curr_jump_num} - Looking for previous jump before looking for fall")
+                if not wait_for_img(img_name=f"jump_{curr_jump_num-1}", script_name="Seers_Rooftops", threshold=0.8, should_click=True, x_offset=10, y_offset=10, max_wait_sec=3):
                     if wait_for_img(img_name=f"fall_on_{curr_jump_num}", script_name="Seers_Rooftops"):
                         print(f'We seem to have fallen looking for jump_num: {curr_jump_num} - but we can get up...')
                         if curr_jump_num == 2:
@@ -130,19 +147,6 @@ def handle_next_jump():
                         mouse_click(recover_xy)
                     else:
                         return False
-        else:
-            if not wait_for_img(img_name=f"jump_{curr_jump_num}", script_name="Seers_Rooftops", threshold=0.80, should_click=True, x_offset=10, y_offset=10):
-                if wait_for_img(img_name=f"fall_on_{curr_jump_num}", script_name="Seers_Rooftops"):
-                    print(f'We seem to have fallen looking for jump_num: {curr_jump_num} - but we can get up...')
-                    if curr_jump_num == 2:
-                        recover_xy = 1176, 586
-                    if curr_jump_num == 3:
-                        recover_xy = 1204, 338
-                    # Reset the jump number since we're back to the start
-                    curr_jump_num = 0
-                    mouse_click(recover_xy)
-                else:
-                    return False
 
     elif curr_jump_num == 6:
         print('click move_back image')

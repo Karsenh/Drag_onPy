@@ -5,9 +5,16 @@ from API.Setup import get_bluestacks_region
 from tkinter import *
 import os
 import win32gui
+from pynput import keyboard
+import sys
 
 
 # Main_Gui images
+def terminate_app(key, root):
+    if str(key) == "Key.end":
+        print(f'⛔ Script Terminated by User.')
+        root.destroy()
+        sys.exit(-99)
 
 
 def show_main_gui():
@@ -19,19 +26,23 @@ def show_main_gui():
     root_gui_width = 550  #675
     root.configure(bg='#969488', height=root_gui_height, width=root_gui_width)
 
+    listener = keyboard.Listener(
+        on_press=lambda event: terminate_app(event, root))
+    listener.start()
+
     dragon_py_hwnd = win32gui.FindWindow(None, 'Drag_onPy')
     if not dragon_py_hwnd:
         print(f'⛔ Drag_onPy window not found!')
 
     x1, y1, x2, y2 = get_bluestacks_region()
 
-    print(f'bs x1 y1: {x1}, {y1}')
+    # print(f'bs x1 y1: {x1}, {y1}')
     # x1y1 = x1, y1
     # x, y = translate_coords(x1y1, update_coords=True)
     app_x = x1 - root_gui_width
     app_y = y1
 
-    print(f'📈 app_x: {app_x} app_y: {app_y}')
+    # print(f'📈 app_x: {app_x} app_y: {app_y}')
     root.geometry(f"{root_gui_width}x{root_gui_height}+{app_x}+{app_y}")
 
     # win32gui.MoveWindow(dragon_py_hwnd, app_x, app_y, app_y2, app_x2, True)
@@ -61,8 +72,4 @@ def show_main_gui():
     root.mainloop()
     return
 
-
-def exit_app():
-    exit(-1)
-    return
 

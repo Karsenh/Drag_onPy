@@ -175,7 +175,8 @@ def superheat_gold_ore():
     is_tab_open("magic", should_open=True)
 
     while should_continue:
-        wait_for_img(img_name="Superheat_Spell", script_name=SCRIPT_NAME, should_click=True, x_offset=6, y_offset=6)
+        if not wait_for_img(img_name="Superheat_Spell", script_name=SCRIPT_NAME, should_click=True, x_offset=6, y_offset=6):
+            is_tab_open("magic", True)
         should_continue = wait_for_img(img_name="Inventory_Gold_Ore", threshold=0.95, script_name=SCRIPT_NAME, img_sel="random", max_wait_sec=2)
 
         if not should_continue:

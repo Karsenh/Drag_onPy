@@ -38,6 +38,8 @@ curr_script_iteration = 1
 should_continue = True
 
 
+
+
 # script_name passed into individual buttons in GUI corresponding to individual scripts
 def launch_script(script_name="pisc_iron"):
     global curr_script_iteration
@@ -229,14 +231,6 @@ def launch_script(script_name="pisc_iron"):
             curr_script_iteration += 1
             print(f'🔄 MAIN LOOP COUNT: {curr_script_iteration}')
 
-    return
-
-
-def quit_prog():
-    global should_continue
-    should_continue = False
-    write_debug(f'User terminated script with ESC hotkey - Exiting...')
-    exit(-2)
     return
 
 
