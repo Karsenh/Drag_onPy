@@ -102,7 +102,7 @@ def withdraw_leather():
 
 def craft_dhide_bodies():
     is_tab_open("inventory", True)
-    does_img_exist(img_name="Needle", script_name="GE_Dhide_Bodies", threshold=0.7, should_click=True)
+    does_img_exist(img_name="Needle", script_name="GE_Dhide_Bodies", threshold=0.95, should_click=True)
     API.AntiBan.sleep_between(0.2, 0.7, 35)
     mouse_click(get_random_invent_slot_between(5, 9))
     API.AntiBan.sleep_between(0.2, 0.9, 35)

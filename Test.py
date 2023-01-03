@@ -15,8 +15,9 @@ clear_debug_log()
 
 # random_human_actions(max_downtime_seconds=12)
 # show_main_gui()
-launch_script("GE_Dhide_Bodies")
+# launch_script("GE_Dhide_Bodies")
 
+does_img_exist(img_name="Needle", script_name="GE_Dhide_Bodies", threshold=0.95, should_click=True)
 
 # wait_for_img(img_name="Ge_bank", script_name="GE_Dhide_Bodies", threshold=0.88, should_click=True, x_offset=20)
 # teak_color_xy = 1354, 788
