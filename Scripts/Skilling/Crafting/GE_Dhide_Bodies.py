@@ -84,7 +84,7 @@ def start_crafting_dhide_bodies(curr_loop):
 
 
 def open_ge_bank():
-    wait_for_img(img_name="Ge_bank", script_name=script_name, threshold=0.85, should_click=True, x_offset=20)
+    wait_for_img(img_name="Ge_bank", script_name=script_name, threshold=0.88, should_click=True, x_offset=20)
     if is_bank_open():
         return True
     else:

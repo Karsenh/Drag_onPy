@@ -15,8 +15,10 @@ clear_debug_log()
 
 # random_human_actions(max_downtime_seconds=12)
 # show_main_gui()
-launch_script("Cwars_Teak")
+launch_script("GE_Dhide_Bodies")
 
+
+# wait_for_img(img_name="Ge_bank", script_name="GE_Dhide_Bodies", threshold=0.88, should_click=True, x_offset=20)
 # teak_color_xy = 1354, 788
 # color_code = [177, 146, 92]  # 178, 147, 92
 #
