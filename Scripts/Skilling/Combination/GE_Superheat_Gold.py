@@ -176,7 +176,7 @@ def superheat_gold_ore():
 
     while should_continue:
         wait_for_img(img_name="Superheat_Spell", script_name=SCRIPT_NAME, should_click=True, x_offset=6, y_offset=6)
-        should_continue = wait_for_img(img_name="Inventory_Gold_Ore", threshold=0.9, script_name=SCRIPT_NAME, img_sel="random", max_wait_sec=2)
+        should_continue = wait_for_img(img_name="Inventory_Gold_Ore", threshold=0.95, script_name=SCRIPT_NAME, img_sel="random", max_wait_sec=2)
 
         if not should_continue:
 
