@@ -6,7 +6,6 @@ from API.Imports.Paths import BS_SCREEN_PATH
 from GUI.Imports.Script_Launch import launch_script
 import sys
 from pynput import keyboard
-from Scripts.Skilling.Construction.Con_Larders import set_plank_type
 
 
 def terminate_app(key):
@@ -34,10 +33,6 @@ def __main__():
     # show_main_gui()
 
     launch_script("Con_Larders")
-
-    # set_plank_type()
-    # does_img_exist(img_name="Noted_Inventory_Oak_Planks", script_name="Con_Larders", threshold=0.95, should_click=True)
-    # does_img_exist(img_name="Noted_Inventory_Regular_Planks", script_name="Con_Larders", threshold=0.95, should_click=True)
 
     return
 
