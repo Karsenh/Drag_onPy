@@ -26,6 +26,7 @@ from Scripts.Skilling.Combat.Kourend_Crab_Killer import start_killing_kourend_cr
 from Scripts.Skilling.Crafting.GE_Dhide_Bodies import start_crafting_dhide_bodies
 from Scripts.Skilling.Woodcutting.Cwars_Teaks import start_chopping_teaks
 from Scripts.Skilling.Combination.GE_Superheat_Gold import start_superheating_gold
+from Scripts.Skilling.Construction.Con_Larders import start_constructing_larders
 
 from enum import Enum
 import API
@@ -34,16 +35,14 @@ from API.Interface.General import handle_auth_screens
 from API.Break_Timer.Break_Handler import is_break_timer_set
 from API.Break_Timer.Break_Handler import break_handler
 
-curr_script_iteration = 1
-should_continue = True
-
-
+CURR_SCRIPT_LOOP = 1
+SHOULD_CONTINUE = True
 
 
 # script_name passed into individual buttons in GUI corresponding to individual scripts
 def launch_script(script_name="pisc_iron"):
-    global curr_script_iteration
-    global should_continue
+    global CURR_SCRIPT_LOOP
+    global SHOULD_CONTINUE
 
     write_debug(f"Pre-launch checks for: {script_name}")
     # Check that we're not on dc screen (click continue if so)
@@ -78,6 +77,7 @@ def launch_script(script_name="pisc_iron"):
         DHIDE_BODIES = 25
         CWARS_TEAK = 26
         GE_SUPERHEAT_GOLD = 27
+        CON_LARDERS = 28
 
     all_scripts = [mine_iron_pisc, smith_gold_edge, run_gnome_course,
                    fish_draynor_shrimp, fish_barb_trout, barbarian_fishing,
@@ -87,7 +87,8 @@ def launch_script(script_name="pisc_iron"):
                    start_ploughing_for_favour, start_stealing_fruit, start_gilded_altar,
                    start_unf_pots, start_canifis_rooftops, start_seers_rooftops,
                    start_catching_crimsons, start_trapping_birds, start_pickpocketing_ardy_knights,
-                   start_killing_kourend_crabs, start_crafting_dhide_bodies, start_chopping_teaks, start_superheating_gold]
+                   start_killing_kourend_crabs, start_crafting_dhide_bodies, start_chopping_teaks,
+                   start_superheating_gold, start_constructing_larders]
 
     match script_name:
         case "pisc_iron":
@@ -204,37 +205,41 @@ def launch_script(script_name="pisc_iron"):
             selected_script = ScriptEnum.GE_SUPERHEAT_GOLD.value
             antiban_likelihood = 20
             antiban_downtime_sec = 4
+        case "Con_Larders":
+            selected_script = ScriptEnum.CON_LARDERS.value
+            antiban_likelihood = 20
+            antiban_downtime_sec = 6
 
     is_timer_set = is_break_timer_set()
 
     if is_timer_set:
         write_debug(f'🚩 Break Timer Set - Entering loop with break_handler()')
-        while should_continue:
-            if not all_scripts[selected_script](curr_script_iteration):
+        while SHOULD_CONTINUE:
+            if not all_scripts[selected_script](CURR_SCRIPT_LOOP):
                 if not handle_auth_screens():
-                    should_continue = False
+                    SHOULD_CONTINUE = False
 
             break_handler()
 
-            curr_script_iteration += 1
-            print(f'🔄 MAIN LOOP COUNT: {curr_script_iteration}')
+            CURR_SCRIPT_LOOP += 1
+            print(f'🔄 MAIN LOOP COUNT: {CURR_SCRIPT_LOOP}')
 
     else:
         write_debug(f'🏳 NO Break Timer Set - Entering loop WITHOUT break_handler()')
-        while should_continue:
-            if not all_scripts[selected_script](curr_script_iteration):
+        while SHOULD_CONTINUE:
+            if not all_scripts[selected_script](CURR_SCRIPT_LOOP):
                 if not handle_auth_screens():
-                    should_continue = False
+                    SHOULD_CONTINUE = False
 
             API.AntiBan.random_human_actions(max_downtime_seconds=antiban_downtime_sec, likelihood=antiban_likelihood)
 
-            curr_script_iteration += 1
-            print(f'🔄 MAIN LOOP COUNT: {curr_script_iteration}')
+            CURR_SCRIPT_LOOP += 1
+            print(f'🔄 MAIN LOOP COUNT: {CURR_SCRIPT_LOOP}')
 
     return
 
 
 def set_curr_iteration(new_val):
-    global curr_script_iteration
-    curr_script_iteration = new_val
+    global CURR_SCRIPT_LOOP
+    CURR_SCRIPT_LOOP = new_val
     return
