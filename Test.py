@@ -32,7 +32,7 @@ def __main__():
 
     # show_main_gui()
 
-    launch_script("Seers_Rooftops")
+    launch_script("GE_Superheat_Gold")
 
     return
 
