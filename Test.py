@@ -6,6 +6,7 @@ from API.Imports.Paths import BS_SCREEN_PATH
 from GUI.Imports.Script_Launch import launch_script
 import sys
 from pynput import keyboard
+from Scripts.Skilling.Construction.Con_Larders import set_plank_type
 
 
 def terminate_app(key):
