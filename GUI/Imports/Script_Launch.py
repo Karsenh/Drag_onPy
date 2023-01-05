@@ -28,6 +28,7 @@ from Scripts.Skilling.Woodcutting.Cwars_Teaks import start_chopping_teaks
 from Scripts.Skilling.Combination.GE_Superheat_Gold import start_superheating_gold
 from Scripts.Skilling.Construction.Con_Larders import start_constructing_larders
 from Scripts.Skilling.Construction.Con_Mahog_Tables import start_constructing_tables
+from Scripts.Skilling.Hunter.Desert_Lizards import start_catching_desert_lizards
 
 from enum import Enum
 import API
@@ -80,7 +81,7 @@ def launch_script(script_name="pisc_iron"):
         GE_SUPERHEAT_GOLD = 27
         CON_LARDERS = 28
         CON_MAHOG_TABLES = 29
-
+        DESERT_LIZARDS = 30
     all_scripts = [mine_iron_pisc, smith_gold_edge, run_gnome_course,
                    fish_draynor_shrimp, fish_barb_trout, barbarian_fishing,
                    pickpocket_draynor_man, steal_ardy_cake, burn_logs_at_ge,
@@ -90,7 +91,8 @@ def launch_script(script_name="pisc_iron"):
                    start_unf_pots, start_canifis_rooftops, start_seers_rooftops,
                    start_catching_crimsons, start_trapping_birds, start_pickpocketing_ardy_knights,
                    start_killing_kourend_crabs, start_crafting_dhide_bodies, start_chopping_teaks,
-                   start_superheating_gold, start_constructing_larders, start_constructing_tables]
+                   start_superheating_gold, start_constructing_larders, start_constructing_tables,
+                   start_catching_desert_lizards]
 
     match script_name:
         case "pisc_iron":
@@ -213,6 +215,10 @@ def launch_script(script_name="pisc_iron"):
             antiban_downtime_sec = 6
         case "Con_Mahog_Tables":
             selected_script = ScriptEnum.CON_MAHOG_TABLES.value
+            antiban_likelihood = 25
+            antiban_downtime_sec = 1
+        case "Desert_Lizards":
+            selected_script = ScriptEnum.DESERT_LIZARDS.value
             antiban_likelihood = 25
             antiban_downtime_sec = 1
 

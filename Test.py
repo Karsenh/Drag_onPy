@@ -32,11 +32,9 @@ def __main__():
 
     # show_main_gui()
 
-    launch_script("Con_Mahog_Tables")
+    launch_script("Desert_Lizards")
+    # setup_interface("west", 3, "up")
 
-    # does_img_exist(img_name="Pay_Selection", script_name="Con_Mahog_Tables", threshold=0.9, should_click=True)
-    # test_xy = 788, 650
-    # mouse_long_click(test_xy)
 
     return
 
