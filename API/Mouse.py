@@ -74,8 +74,11 @@ def mouse_move(xy, max_x_dev=0, max_y_dev=0):
 def mouse_long_click(xy):
     move_x, move_y = translate_coords(xy, update_coords=False)
 
-    pag.mouseDown(move_x, move_y)
-    API.AntiBan.sleep_between(0.7, 0.8)
+    move_xy = move_x, move_y
+    mouse_move(xy)
+
+    pag.mouseDown()
+    API.AntiBan.sleep_between(0.5, 0.6)
     pag.mouseUp()
     return
 

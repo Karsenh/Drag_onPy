@@ -204,19 +204,19 @@ def build_larder():
 def leave_house():
     is_tab_open("settings", should_open=True)
 
-    if not wait_for_img(img_name="House_Control_Settings", category="Interface", should_click=True):
-        if not wait_for_img(img_name="Control_Settings_Tab", category="Interface", should_click=True):
+    if not wait_for_img(img_name="Control_Settings_House_Options", category="Interface", should_click=True):
+        if not wait_for_img(img_name="Controls_Settings_Tab", category="Interface", should_click=True):
             print(f'⛔ Something went wrong trying to find control settings tab in Settings menu')
             return False
         else:
-            if not wait_for_img(img_name="House_Control_Settings", category="Interface", should_click=True):
+            if not wait_for_img(img_name="Control_Settings_House_Options", category="Interface", should_click=True):
                 print(f'⛔ Couldnt find House control settings button')
             else:
-                if not wait_for_img(img_name="Leave_House_Control_Setting", category="Interface", should_click=True):
+                if not wait_for_img(img_name="House_Option_Leave_House", category="Interface", should_click=True):
                     print(f'⛔ Couldnt find Button to leave house')
                     return False
     else:
-        if not wait_for_img(img_name="Leave_House_Control_Setting", category="Interface", should_click=True):
+        if not wait_for_img(img_name="House_Option_Leave_House", category="Interface", should_click=True):
             print(f'⛔ Clicked House_Control_Settings but cant find Leave House Button')
             return False
         else:
