@@ -43,12 +43,7 @@ def start_constructing_tables(curr_loop):
 
         if BUILD_NUM == 5:
             print(f"wait_for_planks didn't find planks and BUILD_NUM == 4")
-            # if call_butler():
-            #     if need_to_pay_butler():
-            #         pay_butler()
-            #     if not wait_for_planks():
-            #         print(f"⛔ Couldn't find planks and tried to pay butler but something went wrong.")
-            #         return False
+
             BUILD_NUM = 1
 
     else:
