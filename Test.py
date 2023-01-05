@@ -33,7 +33,7 @@ def __main__():
 
     # show_main_gui()
 
-    launch_script("Con_Larders")
+    launch_script("Cwars_Teak")
 
     # set_plank_type()
     # does_img_exist(img_name="Noted_Inventory_Oak_Planks", script_name="Con_Larders", threshold=0.95, should_click=True)
