@@ -9,51 +9,59 @@ SCRIPT_NAME = "Con_Mahog_Tables"
 BUILD_ATTEMPTS = 0
 REMOVE_ATTEMPTS = 0
 
+BUILD_NUM = 1
+
 
 def start_constructing_tables(curr_loop):
+    global BUILD_NUM
+
     if curr_loop != 1:
         print(f'Not first loop')
-        # Craft 3 table and remove two (craft, remove / craft, remove / craft - fetch_planks - remove / craft - remove
-        if not wait_for_planks():
-            print(f'Cant find planks at the beginning of build operation - checking if we need to pay butler')
-            if call_butler():
-                if need_to_pay_butler():
-                    pay_butler()
-                if not wait_for_planks():
-                    print(f"⛔ Couldn't find planks and tried to pay butler but something went wrong.")
-                    return False
+        if BUILD_NUM == 1:
+            if not wait_for_planks(quick=True):
+                if call_butler():
+                    if need_to_pay_butler():
+                        pay_butler()
+                    if not wait_for_planks():
+                        print(f"⛔ Couldn't find planks and tried to pay butler but something went wrong.")
+                        return False
+        # If our inventory is NOT full...
+        # if not wait_for_planks(quick=True):
+        if BUILD_NUM != 3:
+            print(f"{BUILD_NUM} - Loop {curr_loop}")
+            build_table()
+            print(f"{BUILD_NUM} - Loop {curr_loop}")
+            remove_table()
+        else:
+            print(f"Third Build - Loop {curr_loop} - BUILD_NUM = {BUILD_NUM}")
+            build_table()
+            fetch_planks()
+            print(f"Third Remove - Loop {curr_loop}")
+            remove_table()
 
-        print(f"First Build - Loop {curr_loop}")
-        build_table()
-        print(f"First Remove - Loop {curr_loop}")
-        remove_table()
+        BUILD_NUM += 1
 
-        print(f"Second Build - Loop {curr_loop}")
-        build_table()
-        print(f"Second Remove - Loop {curr_loop}")
-        remove_table()
-
-        print(f"Third Build - Loop {curr_loop}")
-        build_table()
-        fetch_planks()
-        print(f"Third Remove - Loop {curr_loop}")
-        remove_table()
-
-        print(f"Fourth / Final Build - Loop {curr_loop}")
-        build_table()
-        print(f"Fourth / Final Remove - Loop {curr_loop}")
-        remove_table()
+        if BUILD_NUM == 5:
+            print(f"wait_for_planks didn't find planks and BUILD_NUM == 4")
+            # if call_butler():
+            #     if need_to_pay_butler():
+            #         pay_butler()
+            #     if not wait_for_planks():
+            #         print(f"⛔ Couldn't find planks and tried to pay butler but something went wrong.")
+            #         return False
+            BUILD_NUM = 1
 
     else:
         print(f'This is the first loop')
         setup_interface("east", 5, "up")
 
         # Check inventory to see if we already have planks
-        if wait_for_planks():
+        if wait_for_planks(quick=True):
             return True
         else:
             # Get planks if we don't have them
-            return fetch_planks()
+            fetch_planks()
+            return wait_for_planks()
 
     return True
 
@@ -98,11 +106,14 @@ def fetch_planks():
     return True
 
 
-def wait_for_planks():
+def wait_for_planks(quick=False):
     # Wait for full inventory planks
     is_tab_open("inventory", should_open=True)
 
-    return does_img_exist(img_name="Full_Inventory_Planks", script_name="Con_Mahog_Tables", threshold=0.92)
+    if not quick:
+        return wait_for_img(img_name="Full_Inventory_Planks", script_name="Con_Mahog_Tables", threshold=0.92, max_wait_sec=8)
+    else:
+        return does_img_exist(img_name="Full_Inventory_Planks", script_name="Con_Mahog_Tables", threshold=0.92)
 
 
 # -------
@@ -161,7 +172,12 @@ def build_table():
 
     if not wait_for_img(img_name="Empty_Table", script_name="Con_Mahog_Tables", threshold=0.9, max_wait_sec=3):
         print(f"⛔ Couldn't find empty table - Exiting")
-        return False
+        if remove_table():
+            print(f'Attempting to build table after removing')
+            build_table()
+        else:
+            print(f'Couldnt build or remove')
+            return False
 
     mouse_long_click(get_existing_img_xy())
 
