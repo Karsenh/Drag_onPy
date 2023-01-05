@@ -21,7 +21,7 @@ def mouse_click(xy, max_x_dev=2, max_y_dev=2, click_direction="left", max_num_cl
         organic_y = random.randint(5, max_y_dev)
         move_y = trans_y + organic_y
 
-    # API.AntiBan.sleep_between(0.2, 0.3)
+    API.AntiBan.sleep_between(0.1, 0.3)
 
     if max_num_clicks == 1:
         print(f'Clicking {click_direction} once @ x: {move_x} | y: {move_y}')

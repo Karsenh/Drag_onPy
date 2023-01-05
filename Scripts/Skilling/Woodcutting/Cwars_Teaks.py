@@ -22,7 +22,7 @@ TEAK_ATTEMPTS = 0
 CLICKED_TEAK = False
 INVENT_FULL = False
 
-START_LOCATION = "tree"
+START_LOCATION = "teak"
 
 # OPTIONS
 # Bank or Drop logs
