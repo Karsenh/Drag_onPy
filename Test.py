@@ -32,7 +32,7 @@ def __main__():
 
     # show_main_gui()
 
-    launch_script("Cwars_Teak")
+    launch_script("Desert_Lizards")
 
 
     # Spec available color = (30, 144, 172) @ 1242, 273

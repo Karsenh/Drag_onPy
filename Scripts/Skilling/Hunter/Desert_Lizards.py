@@ -123,7 +123,7 @@ def fix_trap(trap_to_fix):
         TRAP_CHECK_ORDER.insert(2, AT_TRAP)
         print(f'TRAP_CHECK_ORDER NOW: {TRAP_CHECK_ORDER}')
 
-        if not wait_for_img(img_name=f"Reset_Trap_{trap_num}_Caught", script_name=SCRIPT_NAME, should_click=True, threshold=0.7, max_wait_sec=3):
+        if not wait_for_img(img_name=f"Reset_Trap_{trap_num}_Caught", script_name=SCRIPT_NAME, should_click=True, threshold=0.72, max_wait_sec=3, img_sel="first"):
             wait_for_img(img_name=f"Reset_Trap_{trap_num}_Down", script_name=SCRIPT_NAME, should_click=True, threshold=0.7)
     else:
         print(f'STATE = 🔻{state}🔻 for TRAP {trap_num}')

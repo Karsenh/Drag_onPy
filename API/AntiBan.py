@@ -11,10 +11,15 @@ import API
 
 
 def sleep_between(min_seconds, max_seconds, likelihood=100):
-    if random.randint(1, 100) < likelihood:
+    if likelihood == 100:
         r_sleep = random.uniform(min_seconds, max_seconds)
         write_debug(f'🎲 Selecting random time between {min_seconds} & {max_seconds}\n💤 Sleeping for {r_sleep} ms')
         time.sleep(r_sleep)
+    else:
+        if random.randint(1, 100) < likelihood:
+            r_sleep = random.uniform(min_seconds, max_seconds)
+            write_debug(f'🎲 Selecting random time between {min_seconds} & {max_seconds}\n💤 Sleeping for {r_sleep} ms')
+            time.sleep(r_sleep)
     return
 
 

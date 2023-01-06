@@ -194,7 +194,7 @@ def move_to_teak_tree():
 
 
 def chop_teak():
-    if wait_for_img(img_name="Teak_tree", script_name=SCRIPT_NAME, max_wait_sec=10, threshold=0.77):
+    if wait_for_img(img_name="Teak_tree", script_name=SCRIPT_NAME, max_wait_sec=10, threshold=0.75):
         print(f'🌴 Found teak - Clicking adjusted x - y')
         x, y = get_existing_img_xy()
         adjusted_xy = x+10, y+32
