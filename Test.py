@@ -32,10 +32,10 @@ def __main__():
 
     # show_main_gui()
 
-    # launch_script("Desert_Lizards")
-    does_img_exist(img_name="Reset_Trap_1_Caught", script_name="Desert_Lizards", threshold=0.7, should_click=True)
+    launch_script("Desert_Lizards")
+    # does_img_exist(img_name="Drop_Lizard", script_name="Desert_Lizards", threshold=0.9, should_click=True)
     # setup_interface("west", 3, "up")
-    # wait_for_img(img_name="Trap_1_Caught_From_2", script_name="Desert_Lizards", threshold=0.9, should_click=True, max_wait_sec=3, x_offset=10, y_offset=6)
+
 
 
     return

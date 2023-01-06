@@ -62,7 +62,7 @@ def check_traps_from(curr_trap_num):
         # Second time checking and above - check in LIFO order (closest)
         check_order = TRAP_CHECK_ORDER
 
-    print(f'Iterating over check_order: {check_order.reverse()}')
+    print(f'Iterating over check_order: {check_order}')
     for trap_num in check_order:
         print(f'Checking trap: {trap_num}')
         bad_trap = check_trap(check_trap_num=trap_num, at_trap=curr_trap_num)
@@ -75,10 +75,11 @@ def check_traps_from(curr_trap_num):
 def check_trap(check_trap_num, at_trap):
     global AT_TRAP
 
-    if wait_for_img(img_name=f"Trap_{check_trap_num}_Caught_From_{at_trap}", script_name=SCRIPT_NAME, threshold=CHECK_TRAP_THRESH, max_wait_sec=2):
+    if wait_for_img(img_name=f"Trap_{check_trap_num}_Caught_From_{at_trap}", script_name=SCRIPT_NAME, threshold=CHECK_TRAP_THRESH, max_wait_sec=5):
         print(f'🟢 TRAP {check_trap_num} 🧤 CAUGHT from {at_trap}')
         return f"{check_trap_num}_Caught"
-    if wait_for_img(img_name=f"Trap_{check_trap_num}_Down_From_{at_trap}", script_name=SCRIPT_NAME, threshold=CHECK_TRAP_THRESH, max_wait_sec=2):
+
+    if does_img_exist(img_name=f"Trap_{check_trap_num}_Down_From_{at_trap}", script_name=SCRIPT_NAME, threshold=0.95):
         print(f'🟢 TRAP {check_trap_num} 🔻 DOWN from {at_trap}')
         return f"{check_trap_num}_Down"
 
@@ -92,22 +93,55 @@ def fix_trap(trap_to_fix):
     trap_num = trap_to_fix.split("_")[0]
     state = trap_to_fix.split("_")[1]
 
-    # does_img_exist(img_name=f"Trap_{trap_num}_{state}_From_{AT_TRAP}", script_name=SCRIPT_NAME, threshold=0.9, should_click=True)
-
-    # If Down
-    if state == "Down":
-        print(f'STATE = 🔻{state}🔻 for TRAP {trap_num}')
     # If Caught
-    else:
+    if state == "Caught":
         print(f'STATE = 🧤{state}🧤 for TRAP {trap_num}')
-
-        # match (trap_num):
-        #     case
-
-        mouse_click(get_existing_img_xy())
+        x, y = get_existing_img_xy()
+        adjusted_xy = x+16, y+25
+        if AT_TRAP == 2:
+            if trap_num == 3:
+                print(f'❄ Custom offset for caught 3 from 2')
+                adjusted_xy = x+6, y+35
+        mouse_click(adjusted_xy)
         wait_for_img(img_name="Hunter", category="Exp_Drops")
 
-    #
+        is_tab_open("inventory", True)
+        does_img_exist(img_name="Drop_Lizard", script_name=SCRIPT_NAME, threshold=0.9, should_click=True)
+        is_tab_open("inventory", False)
+
+        print(f'AT_TRAP Before: {AT_TRAP}')
+        AT_TRAP = int(trap_num)
+        print(f'AT_TRAP NOW: {AT_TRAP}\nTRAP_CHECK_ORDER = {TRAP_CHECK_ORDER}')
+        TRAP_CHECK_ORDER.remove(AT_TRAP)
+        TRAP_CHECK_ORDER.insert(2, AT_TRAP)
+        print(f'TRAP_CHECK_ORDER NOW: {TRAP_CHECK_ORDER}')
+
+        if not wait_for_img(img_name=f"Reset_Trap_{trap_num}_Caught", script_name=SCRIPT_NAME, should_click=True, threshold=0.7, max_wait_sec=3):
+            wait_for_img(img_name=f"Reset_Trap_{trap_num}_Down", script_name=SCRIPT_NAME, should_click=True, threshold=0.7)
+    else:
+        print(f'STATE = 🔻{state}🔻 for TRAP {trap_num}')
+        x, y = get_existing_img_xy()
+        adjusted_xy = x+15, y+12
+        mouse_click(adjusted_xy)
+        API.AntiBan.sleep_between(4.0, 4.1)
+
+        print(f'AT_TRAP Before: {AT_TRAP}')
+        AT_TRAP = int(trap_num)
+        print(f'AT_TRAP NOW: {AT_TRAP}\nTRAP_CHECK_ORDER = {TRAP_CHECK_ORDER}')
+        TRAP_CHECK_ORDER.remove(AT_TRAP)
+        # TRAP_CHECK_ORDER.append(AT_TRAP)
+        TRAP_CHECK_ORDER.insert(2, AT_TRAP)
+        print(f'TRAP_CHECK_ORDER NOW: {TRAP_CHECK_ORDER}')
+
+        underneath_xy = 760, 465
+        mouse_click(underneath_xy, min_num_clicks=2, max_num_clicks=3)
+
+        if not wait_for_img(img_name=f"Reset_Trap_{trap_num}_Caught", script_name=SCRIPT_NAME, should_click=True, threshold=0.7, max_wait_sec=3):
+            if AT_TRAP == 3:
+                wait_for_img(img_name=f"Reset_Trap_{trap_num}_Down", script_name="Desert_Lizards", threshold=0.7,
+                             should_click=True)
+
+    API.AntiBan.sleep_between(1.0, 1.1)
     return
 
 
