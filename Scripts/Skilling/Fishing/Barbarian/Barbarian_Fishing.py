@@ -15,10 +15,10 @@ def barbarian_fishing(curr_loop):
     if curr_loop == 1:
         setup_interface("east", 2, "up")
         is_otd_enabled(True)
-        is_tab_open("inventory", should_open=False)
+        is_tab_open("inventory", should_be_open=False)
         click_barbarian_fish()
 
-    is_tab_open("inventory", should_open=False)
+    is_tab_open("inventory", should_be_open=False)
 
     if is_inventory_full(should_cont=True, should_drop=True, start_slot=1, end_slot=26, should_close_after=True):
         if not any(click_barbarian_fish()):

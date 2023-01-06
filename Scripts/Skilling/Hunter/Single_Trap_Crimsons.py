@@ -88,7 +88,7 @@ def check_for_dead_snare():
 
 
 def alch():
-    is_tab_open("magic", should_open=True)
+    is_tab_open("magic", should_be_open=True)
     API.AntiBan.sleep_between(0.3, 0.5)
     does_img_exist(img_name="high_alch", script_name="Seers_Rooftops", should_click=True)
     API.AntiBan.sleep_between(0.4, 0.8)

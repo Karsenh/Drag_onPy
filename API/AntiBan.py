@@ -67,7 +67,7 @@ def random_human_actions(max_downtime_seconds=3.0, likelihood=10, reopen_invento
 
             if skill_or_quest_tab <= 4:
                 write_debug(f'Checking Skill Tab...')
-                API.Interface.General.check_skill_tab(max_sec=max_downtime_seconds, skill_to_check="random")
+                API.Interface.General.check_skill_tab(max_sec=max_downtime_seconds, skill_to_check="random", should_reopen_inventory=reopen_inventory)
             else:
                 check_quest_tab(reopen_inventory=reopen_inventory)
 
@@ -100,7 +100,7 @@ def shutdown(script_name, reason):
 
 def check_quest_tab(reopen_inventory):
     write_debug(f'🧙Checking Quest tab...')
-    API.Interface.General.is_tab_open("quest", should_open=True)
+    API.Interface.General.is_tab_open("quest", should_be_open=True)
     sleep_between(0.6, 1.1)
 
     # Select a random Quest sub-tab (achievement, quests, combat, favour)
@@ -126,7 +126,10 @@ def check_quest_tab(reopen_inventory):
             sleep_between(0.2, 0.5)
 
     sleep_between(0.6, 2.6)
-    API.Interface.General.is_tab_open("inventory", should_open=reopen_inventory)
+    if not reopen_inventory:
+        API.Interface.General.is_tab_open("quest", should_be_open=False)
+
+    API.Interface.General.is_tab_open("inventory", should_be_open=reopen_inventory)
     return
 
 

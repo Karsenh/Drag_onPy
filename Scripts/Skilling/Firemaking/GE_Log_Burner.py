@@ -21,7 +21,7 @@ def burn_logs_at_ge(curr_loop):
         is_otd_enabled(False)
         API.AntiBan.sleep_between(0.3, 1.3)
 
-        is_tab_open("inventory", should_open=True)
+        is_tab_open("inventory", should_be_open=True)
         API.AntiBan.sleep_between(1.0, 1.5)
 
         if not click_to_open_bank():

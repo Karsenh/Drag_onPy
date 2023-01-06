@@ -78,7 +78,7 @@ def zoom_camera(notches=1):
 
 def drop_inventory(from_spot_num=1, to_spot_num=27, should_random_skip=False, should_close_after=False, should_disable_otd_after=False):
     # Open inventory if not open
-    is_tab_open("inventory", should_open=True)
+    is_tab_open("inventory", should_be_open=True)
     is_otd_enabled(should_enable=True)
 
     API.AntiBan.sleep_between(1.4, 1.9)
@@ -93,13 +93,13 @@ def drop_inventory(from_spot_num=1, to_spot_num=27, should_random_skip=False, sh
 
     if should_close_after:
         API.AntiBan.sleep_between(0.8, 1.1)
-        is_tab_open("inventory", should_open=False)
+        is_tab_open("inventory", should_be_open=False)
 
     return
 
 
 # --- COLOR MATCHING ---
-def is_tab_open(tab="inventory", should_open=True):
+def is_tab_open(tab="inventory", should_be_open=True):
     open_tab_color = 106, 35, 26
 
     match tab:
@@ -121,11 +121,11 @@ def is_tab_open(tab="inventory", should_open=True):
     is_open = does_color_exist(open_tab_color, check_tab_xy)
 
     if not is_open:
-        if should_open:
+        if should_be_open:
             mouse_click(check_tab_xy)
             is_open = True
     else:
-        if not should_open:
+        if not should_be_open:
             mouse_click(check_tab_xy)
             is_open = False
 
@@ -248,13 +248,13 @@ def get_xy_for_invent_slot(slot_num):
     return slot_1_x + x_offset, slot_1_y + y_offset
 
 
-def check_skill_tab(max_sec=2.0, skill_to_check='random'):
+def check_skill_tab(max_sec=2.0, skill_to_check='random', should_reopen_inventory=True):
     # check skill passed in as arg
     start = time.time()
     write_debug(f'Start time: {start}\nOpening Skill tab')
-    is_tab_open("skill", should_open=True)
+    is_tab_open("skill", should_be_open=True)
     write_debug(f'skill tab: {SKILL_tab_xy}')
-    is_tab_open("skill", should_open=True)
+    # is_tab_open("skill", should_be_open=True)
     API.AntiBan.sleep_between(0.4, 1.3)
     if max_sec >= 2.0:
         diff = max_sec - 1.3
@@ -289,7 +289,10 @@ def check_skill_tab(max_sec=2.0, skill_to_check='random'):
         mouse_click(skill_to_check_xy)
         API.AntiBan.sleep_between(1, diff)
 
-    is_tab_open("inventory", should_open=True)
+    is_tab_open("inventory", should_be_open=should_reopen_inventory)
+    if not should_reopen_inventory:
+        is_tab_open("skill", should_be_open=False)
+
     end = time.time()
     print(f'end: {end}')
     elapsed_time = start - end

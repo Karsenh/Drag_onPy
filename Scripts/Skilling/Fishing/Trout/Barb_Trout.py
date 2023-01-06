@@ -15,7 +15,7 @@ def fish_barb_trout(curr_loop):
         setup_interface("west", 2, "up")
         is_otd_enabled(should_enable=True)
         API.AntiBan.sleep_between(0.8, 2.3)
-        is_tab_open(tab="inventory", should_open=False)
+        is_tab_open(tab="inventory", should_be_open=False)
         API.AntiBan.sleep_between(1.1, 2.1)
 
     handle_level_dialogue()

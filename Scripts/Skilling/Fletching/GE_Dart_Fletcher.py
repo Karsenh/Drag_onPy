@@ -27,6 +27,6 @@ def start_fletching_darts(curr_loop):
         API.AntiBan.sleep_between(0.6, 0.9)
         is_otd_enabled(False)
         API.AntiBan.sleep_between(0.6, 0.9)
-        is_tab_open("inventory", should_open=True)
+        is_tab_open("inventory", should_be_open=True)
 
     return True

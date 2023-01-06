@@ -48,7 +48,7 @@ def fletch_logs(should_drop_recursive=True):
     should_drop_fletched_items = True
     slot_1_xy = get_xy_for_invent_slot(slot_num=1)
 
-    is_tab_open("inventory", should_open=True)
+    is_tab_open("inventory", should_be_open=True)
 
     mouse_click(slot_1_xy)
     API.AntiBan.sleep_between(0.7, 1.1)

@@ -35,7 +35,7 @@ def start_trapping_birds(curr_loop):
     if curr_loop == 1:
         setup_interface("north", 5, "up")
         API.AntiBan.sleep_between(1.0, 1.1)
-        is_tab_open("inventory", should_open=True)
+        is_tab_open("inventory", should_be_open=True)
         is_otd_enabled(should_enable=False)
         set_initial_traps()
 
@@ -351,7 +351,7 @@ def move_back_to_monitor(from_tile):
 
 
 def high_alch():
-    is_tab_open("magic", should_open=True)
+    is_tab_open("magic", should_be_open=True)
     API.AntiBan.sleep_between(0.3, 0.5)
     does_img_exist(img_name="high_alch", script_name="Seers_Rooftops", should_click=True)
     API.AntiBan.sleep_between(0.4, 0.8)

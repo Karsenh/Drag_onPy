@@ -103,7 +103,7 @@ def fetch_planks():
 
 def wait_for_planks(quick=False):
     # Wait for full inventory planks
-    is_tab_open("inventory", should_open=True)
+    is_tab_open("inventory", should_be_open=True)
 
     if not quick:
         return wait_for_img(img_name="Full_Inventory_Planks", script_name="Con_Mahog_Tables", threshold=0.92, max_wait_sec=8)
@@ -130,7 +130,7 @@ def call_butler():
     if click_butler():
         return True
 
-    is_tab_open("settings", should_open=True)
+    is_tab_open("settings", should_be_open=True)
 
     if not wait_for_img(img_name="Control_Settings_House_Options", category="Interface", should_click=True):
         if not wait_for_img(img_name="Controls_Settings_Tab", category="Interface", should_click=True):

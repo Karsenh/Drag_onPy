@@ -93,7 +93,7 @@ def check_equipment():
     global NEEDS_STAFF
     global NEEDS_GAUNTLETS
 
-    is_tab_open("equipment", should_open=True)
+    is_tab_open("equipment", should_be_open=True)
 
     if does_img_exist(img_name="Equipped_Fire_Staff", script_name=SCRIPT_NAME):
         NEEDS_STAFF = False
@@ -172,7 +172,7 @@ def superheat_gold_ore():
     # while should_continue:
 
     img_sels = ["first", "last"]
-    is_tab_open("magic", should_open=True)
+    is_tab_open("magic", should_be_open=True)
 
     while should_continue:
         if not wait_for_img(img_name="Superheat_Spell", script_name=SCRIPT_NAME, should_click=True, x_offset=6, y_offset=6):

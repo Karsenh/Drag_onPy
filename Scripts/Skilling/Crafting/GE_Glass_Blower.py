@@ -14,7 +14,7 @@ def start_blowing_glass(curr_loop):
         if not did_level_crafting():
             if curr_loop == 1:
                 setup_interface("north", 4, "up")
-                is_tab_open("inventory", should_open=True)
+                is_tab_open("inventory", should_be_open=True)
                 API.AntiBan.sleep_between(0.8, 1.3)
 
             open_ge_bank(curr_loop)

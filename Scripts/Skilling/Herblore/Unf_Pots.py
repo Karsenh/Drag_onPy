@@ -16,7 +16,7 @@ herb_start_time = None
 def start_unf_pots(curr_loop):
     if curr_loop == 1:
         setup_interface("west", 5, "down")
-        is_tab_open("inventory", should_open=True)
+        is_tab_open("inventory", should_be_open=True)
 
     open_bank()
 

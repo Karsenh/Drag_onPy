@@ -10,7 +10,7 @@ def start_ploughing_for_favour(curr_loop):
 
     API.AntiBan.sleep_between(1.3, 1.5)
 
-    is_tab_open("inventory", should_open=False)
+    is_tab_open("inventory", should_be_open=False)
 
     if curr_loop % 2 == 0:
         plough_west()

@@ -205,21 +205,21 @@ def withdraw_dodgy_necklace():
 
 
 def handle_necklace_equip():
-    is_tab_open(tab="equipment", should_open=True)
+    is_tab_open(tab="equipment", should_be_open=True)
     # API.AntiBan.sleep_between(0.5, 0.6)
 
     if not does_img_exist(img_name="equipped_necklace", script_name=script_name):
-        is_tab_open("inventory", should_open=True)
+        is_tab_open("inventory", should_be_open=True)
         wait_for_img(img_name="inventory_necklace", script_name=script_name, should_click=True)
         API.AntiBan.sleep_between(0.5, 0.6)
     else:
-        is_tab_open("inventory", should_open=True)
+        is_tab_open("inventory", should_be_open=True)
 
     return
 
 
 def open_coin_bag():
-    is_tab_open("inventory", should_open=True)
+    is_tab_open("inventory", should_be_open=True)
     API.AntiBan.sleep_between(0.2, 0.3)
     does_img_exist(img_name="inventory_coin_bag", script_name=script_name, should_click=True)
     return

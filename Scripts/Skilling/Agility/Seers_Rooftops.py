@@ -41,7 +41,7 @@ def start_seers_rooftops(curr_loop):
 
 def begin_course():
     setup_interface("north", 1, "up")
-    is_tab_open("magic", should_open=True)
+    is_tab_open("magic", should_be_open=True)
     wait_for_img(img_name='course_start', script_name='Seers_Rooftops', should_click=True, threshold=0.95, x_offset=-20, y_offset=75)
     return
 
@@ -54,7 +54,7 @@ def alch_on_agility_drop():
 
     if not wait_for_img(img_name='high_alch', script_name='Seers_Rooftops', threshold=0.8, should_click=True):
         # 2. If not found - check if Magic tab is open and search for high-alch again, clicking if found.
-        if is_tab_open("magic", should_open=True):
+        if is_tab_open("magic", should_be_open=True):
             if not wait_for_img(img_name='high_alch', script_name='Seers_Rooftops', threshold=0.9, should_click=True):
                 print(f"Couldn't find alchemy spell despite magic tab being open")
                 # return False

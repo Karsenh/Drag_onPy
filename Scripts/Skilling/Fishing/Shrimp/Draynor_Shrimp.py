@@ -12,7 +12,7 @@ def fish_draynor_shrimp(curr_loop):
     if curr_loop == 1:
         setup_interface(cam_dir="east", cam_distance=3, cam_angle="up")
 
-        is_tab_open("inventory", should_open=False)
+        is_tab_open("inventory", should_be_open=False)
 
         if not bank():
             return False

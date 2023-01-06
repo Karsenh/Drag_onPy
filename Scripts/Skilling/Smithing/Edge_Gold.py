@@ -165,7 +165,7 @@ def check_for_level():
                 check_skill_tab(max_sec=4.0, skill_to_check="smithing")
             else:
                 print(f'🧙Checking Quest tab')
-                is_tab_open("quest", should_open=True)
+                is_tab_open("quest", should_be_open=True)
                 API.AntiBan.sleep_between(0.5, 1.3)
                 quest_list_hover_xy = 1212, 574
                 mouse_move(quest_list_hover_xy, 17, 23)
@@ -174,7 +174,7 @@ def check_for_level():
                 print(f'Scrolling: {random_scroll}')
                 pag.hscroll(random_scroll)
                 API.AntiBan.sleep_between(0.6, 2.6)
-                is_tab_open("inventory", should_open=True)
+                is_tab_open("inventory", should_be_open=True)
 
     return
 

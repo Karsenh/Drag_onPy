@@ -10,7 +10,7 @@ levels = []
 def ocr_skill_levels():
     global levels
 
-    is_tab_open(tab="skill", should_open=True)
+    is_tab_open(tab="skill", should_be_open=True)
 
     API.AntiBan.sleep_between(0.9, 1.4)
 
@@ -49,7 +49,7 @@ def ocr_skill_levels():
             curr_x_diff = 0
             curr_y_diff += 53.5
 
-    is_tab_open(tab="inventory", should_open=True)
+    is_tab_open(tab="inventory", should_be_open=True)
 
     print(f'Levels: {levels}')
     return

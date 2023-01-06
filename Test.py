@@ -34,6 +34,7 @@ def __main__():
 
     launch_script("Desert_Lizards")
     # setup_interface("west", 3, "up")
+    # wait_for_img(img_name="Trap_1_Caught_From_2", script_name="Desert_Lizards", threshold=0.9, should_click=True, max_wait_sec=3, x_offset=10, y_offset=6)
 
 
     return

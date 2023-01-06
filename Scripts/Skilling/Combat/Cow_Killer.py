@@ -16,7 +16,7 @@ def start_killing_cows(curr_loop):
     if curr_loop == 1:
         setup_interface("south", 2, "up")
 
-    is_tab_open("inventory", should_open=False)
+    is_tab_open("inventory", should_be_open=False)
 
     coords = 115, 133
     dead_red_col = 200, 0, 0

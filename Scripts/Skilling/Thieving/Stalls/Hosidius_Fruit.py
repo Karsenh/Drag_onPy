@@ -8,7 +8,7 @@ def start_stealing_fruit(curr_loop):
     if curr_loop == 1:
         setup_interface("west", 2, "up")
 
-    is_tab_open(tab="inventory", should_open=False)
+    is_tab_open(tab="inventory", should_be_open=False)
 
     steal_from_fruit_stall()
 

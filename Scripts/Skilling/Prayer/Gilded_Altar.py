@@ -17,7 +17,7 @@ def start_gilded_altar(curr_loop):
     global should_return_normally
 
     if curr_loop == 1:
-        is_tab_open("inventory", should_open=True)
+        is_tab_open("inventory", should_be_open=True)
         API.AntiBan.sleep_between(0.6, 0.7)
         setup_interface("south", 3, "up")
         API.AntiBan.sleep_between(0.6, 0.7)

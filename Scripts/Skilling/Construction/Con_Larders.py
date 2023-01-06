@@ -202,7 +202,7 @@ def build_larder():
 
 
 def leave_house():
-    is_tab_open("settings", should_open=True)
+    is_tab_open("settings", should_be_open=True)
 
     if not wait_for_img(img_name="Control_Settings_House_Options", category="Interface", should_click=True):
         if not wait_for_img(img_name="Controls_Settings_Tab", category="Interface", should_click=True):

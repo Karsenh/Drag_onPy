@@ -25,7 +25,7 @@ def start_killing_kourend_crabs(curr_loop):
     # If we're not getting hp_exp for six seconds:
         # Click other crabs to aggro
 
-    is_tab_open("inventory", should_open=False)
+    is_tab_open("inventory", should_be_open=False)
 
     # Else - we're fighting crabs
     if not wait_for_img(img_name="hp_exp", script_name=script_name, max_wait_sec=6, threshold=0.90):
