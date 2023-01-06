@@ -32,7 +32,14 @@ def __main__():
 
     # show_main_gui()
 
-    launch_script("Desert_Lizards")
+    launch_script("Cwars_Teak")
+
+
+    # Spec available color = (30, 144, 172) @ 1242, 273
+    # NO spec color = (18, 18, 18)
+
+
+
     # does_img_exist(img_name="Drop_Lizard", script_name="Desert_Lizards", threshold=0.9, should_click=True)
     # setup_interface("west", 3, "up")
 

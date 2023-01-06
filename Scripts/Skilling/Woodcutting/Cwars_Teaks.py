@@ -22,7 +22,7 @@ TEAK_ATTEMPTS = 0
 CLICKED_TEAK = False
 INVENT_FULL = False
 
-START_LOCATION = "teak"
+START_LOCATION = "teak"  # bank or teak
 
 # OPTIONS
 # Bank or Drop logs
@@ -41,6 +41,8 @@ def start_chopping_teaks(curr_loop):
 
     if curr_loop != 1:
         print(f'This is not the first loop - doing main shit.')
+
+        spec_if_available()
 
         # Check if inventory is full - bank or drop if not
         if is_invent_full():
@@ -192,7 +194,13 @@ def move_to_teak_tree():
 
 
 def chop_teak():
-    return wait_for_img(img_name="Teak_tree", script_name=SCRIPT_NAME, should_click=True, max_wait_sec=10, threshold=0.77)
+    if wait_for_img(img_name="Teak_tree", script_name=SCRIPT_NAME, max_wait_sec=10, threshold=0.77):
+        print(f'🌴 Found teak - Clicking adjusted x - y')
+        x, y = get_existing_img_xy()
+        adjusted_xy = x+10, y+32
+        mouse_click(adjusted_xy)
+        return True
+    return False
 
 
 def run_to_cwars_bank():
@@ -249,6 +257,20 @@ def is_invent_full():
 
     return True
 
+
+def spec_if_available():
+    spec_avail_color = 30, 144, 172
+
+    color_xy = 1242, 273
+    curr_color_at_full_spec = get_color_at_coords(color_xy)
+
+    if curr_color_at_full_spec < spec_avail_color:
+        print(f'Not enough Spec!')
+    else:
+        print(f'We have spec!')
+        spec_xy = 1243, 292
+        mouse_click(spec_xy)
+    return
 # -------
 # HELPERS
 # -------
