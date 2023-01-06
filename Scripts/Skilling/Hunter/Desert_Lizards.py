@@ -1,6 +1,7 @@
 import API.AntiBan
 from API.Interface.General import setup_interface, is_tab_open, is_otd_enabled
-from API.Imaging.Image import does_img_exist, wait_for_img
+from API.Imaging.Image import does_img_exist, wait_for_img, get_existing_img_xy
+from API.Mouse import mouse_click
 
 SCRIPT_NAME = "Desert_Lizards"
 
@@ -86,9 +87,12 @@ def check_trap(check_trap_num, at_trap):
 
 def fix_trap(trap_to_fix):
     global AT_TRAP
+
     print(f'⚙ trap_to_fix = {trap_to_fix}')
     trap_num = trap_to_fix.split("_")[0]
     state = trap_to_fix.split("_")[1]
+
+    # does_img_exist(img_name=f"Trap_{trap_num}_{state}_From_{AT_TRAP}", script_name=SCRIPT_NAME, threshold=0.9, should_click=True)
 
     # If Down
     if state == "Down":
@@ -96,16 +100,20 @@ def fix_trap(trap_to_fix):
     # If Caught
     else:
         print(f'STATE = 🧤{state}🧤 for TRAP {trap_num}')
+
+        # match (trap_num):
+        #     case
+
+        mouse_click(get_existing_img_xy())
+        wait_for_img(img_name="Hunter", category="Exp_Drops")
+
+    #
     return
 
 
 # -------
 # HELPERS
 # -------
-
-
-
-
 def intl_interface_setup():
     setup_interface("west", 3, "up")
     is_tab_open('inventory', False)
