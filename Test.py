@@ -32,18 +32,117 @@ def __main__():
 
     # show_main_gui()
 
-    launch_script("Desert_Lizards")
+    launch_script("Red_Lizards")
+
+    # CAUGHT - testing
+    # wait_for_img(img_name="Reset_Trap_1_Caught_From_3", script_name="Red_Lizards", threshold=0.95, should_click=True)
+    underneath_xy = 743, 462
 
 
-    # Spec available color = (30, 144, 172) @ 1242, 273
-    # NO spec color = (18, 18, 18)
+    # ✅ 1 from 1
+    # (✔✔CAUGHT)
+    # wait_for_img(img_name="Trap_1_Caught_From_1", script_name="Red_Lizards", threshold=0.95, should_click=True)
+    # sleep_between(1.0, 1.1)
+    # wait_for_img(img_name="Reset_Trap_1_Caught_From_1", script_name="Red_Lizards", threshold=0.95, should_click=True)
 
+    # (✔✔DOWN)
+    # wait_for_img(img_name="Trap_1_Down_From_1", script_name="Red_Lizards", threshold=0.95, should_click=True)
+    # sleep_between(1.0, 1.1)
+    # wait_for_img(img_name="Reset_Trap_1_Down", script_name="Red_Lizards", threshold=0.95, should_click=True)
 
+    # ✅ 1 from 2
+    # (✔✔✔CAUGHT)
+    # wait_for_img(img_name="Trap_1_Caught_From_2", script_name="Red_Lizards", threshold=0.95, should_click=True)
+    # sleep_between(1.0, 1.1)
+    # wait_for_img(img_name="Reset_Trap_1_Caught_From_2", script_name="Red_Lizards", threshold=0.95, should_click=True)
 
-    # does_img_exist(img_name="Drop_Lizard", script_name="Desert_Lizards", threshold=0.9, should_click=True)
-    # setup_interface("west", 3, "up")
+    # (✔✔DOWN)
+    # wait_for_img(img_name="Trap_1_Down_From_2", script_name="Red_Lizards", threshold=0.95, should_click=True)
+    # sleep_between(1.0, 1.1)
+    # wait_for_img(img_name="Reset_Trap_1_Down", script_name="Red_Lizards", threshold=0.8, should_click=True)
 
+    # ✅ 1 from 3
+    # (✔✔✔CAUGHT)
+    # wait_for_img(img_name="Trap_1_Caught_From_3", script_name="Red_Lizards", threshold=0.95, should_click=True)
+    # sleep_between(1.0, 1.1)
+    # wait_for_img(img_name="Reset_Trap_1_Caught_From_3", script_name="Red_Lizards", threshold=0.95, should_click=True)
 
+    # (✔DOWN)
+    # wait_for_img(img_name="Trap_1_Down_From_3", script_name="Red_Lizards", threshold=0.95, should_click=True)
+    # sleep_between(1.0, 1.1)
+    # wait_for_img(img_name="Reset_Trap_1_Down", script_name="Red_Lizards", threshold=0.85, should_click=True)
+
+    # -----2-----
+
+    # ✅ 2 from 1
+    # (✔✔CAUGHT)
+    # wait_for_img(img_name="Trap_2_Caught_From_1", script_name="Red_Lizards", threshold=0.95, should_click=True)
+    # sleep_between(1.0, 1.1)
+    # wait_for_img(img_name="Reset_Trap_2_Caught_From_1", script_name="Red_Lizards", threshold=0.95, should_click=True)
+
+    # (✔✔DOWN)
+    # wait_for_img(img_name="Trap_2_Down_From_1", script_name="Red_Lizards", threshold=0.95, should_click=True)
+    # sleep_between(2.0, 2.1)
+    # wait_for_img(img_name="Reset_Trap_2_Down", script_name="Red_Lizards", threshold=0.85, should_click=True)
+
+    # ✅ 2 from 2
+    # (✔✔CAUGHT)
+    # wait_for_img(img_name="Trap_2_Caught_From_2", script_name="Red_Lizards", threshold=0.95, should_click=True)
+    # sleep_between(1.0, 1.1)
+    # wait_for_img(img_name="Reset_Trap_2_Caught_From_2", script_name="Red_Lizards", threshold=0.95, should_click=True)
+
+    # (✔✔DOWN)
+    # wait_for_img(img_name="Trap_2_Down_From_2", script_name="Red_Lizards", threshold=0.95, should_click=True)
+    # sleep_between(1.0, 1.1)
+    # wait_for_img(img_name="Reset_Trap_2_Down", script_name="Red_Lizards", threshold=0.95, should_click=True)
+
+    # ✅ 2 from 3
+    # (✔✔✔CAUGHT)
+    # wait_for_img(img_name="Trap_2_Caught_From_3", script_name="Red_Lizards", threshold=0.95, should_click=True)
+    # sleep_between(1.0, 1.1)
+    # wait_for_img(img_name="Reset_Trap_2_Caught_From_3", script_name="Red_Lizards", threshold=0.95, should_click=True)
+
+    # (✔✔DOWN)
+    # wait_for_img(img_name="Trap_2_Down_From_3", script_name="Red_Lizards", threshold=0.95, should_click=True)
+    # sleep_between(1.0, 1.1)
+    # wait_for_img(img_name="Reset_Trap_2_Down", script_name="Red_Lizards", threshold=0.85, should_click=True)
+
+    # -----3-----
+
+    # ✅ 3 from 1
+    # (✔✔CAUGHT)
+    # wait_for_img(img_name="Trap_3_Caught_From_1", script_name="Red_Lizards", threshold=0.95, should_click=True)
+    # sleep_between(1.0, 1.1)
+    # wait_for_img(img_name="Reset_Trap_3_Caught_From_1", script_name="Red_Lizards", threshold=0.95, should_click=True)
+
+    # (✔✔✔DOWN)
+    # wait_for_img(img_name="Trap_3_Down_From_1", script_name="Red_Lizards", threshold=0.95, should_click=True)
+    # sleep_between(2.0, 2.1)
+    # mouse_click(underneath_xy)
+    # wait_for_img(img_name="Reset_Trap_3_Down", script_name="Red_Lizards", threshold=0.85, should_click=True)
+
+    # ✅ 3 from 2
+    # (✔✔CAUGHT)
+    # wait_for_img(img_name="Trap_3_Caught_From_2", script_name="Red_Lizards", threshold=0.95, should_click=True)
+    # sleep_between(1.0, 1.1)
+    # wait_for_img(img_name="Reset_Trap_3_Caught_From_2", script_name="Red_Lizards", threshold=0.95, should_click=True)
+
+    # (✔✔✔DOWN)
+    # wait_for_img(img_name="Trap_3_Down_From_2", script_name="Red_Lizards", threshold=0.95, should_click=True)
+    # sleep_between(2.0, 2.1)
+    # mouse_click(underneath_xy)
+    # wait_for_img(img_name="Reset_Trap_3_Down", script_name="Red_Lizards", threshold=0.85, should_click=True)
+
+    # ✅ 3 from 3
+    # (✔✔✔CAUGHT)
+    # wait_for_img(img_name="Trap_3_Caught_From_3", script_name="Red_Lizards", threshold=0.95, should_click=True)
+    # sleep_between(1.0, 1.1)
+    # wait_for_img(img_name="Reset_Trap_3_Caught_From_3", script_name="Red_Lizards", threshold=0.95, should_click=True)
+
+    # (✔✔✔DOWN)
+    # wait_for_img(img_name="Trap_3_Down_From_3", script_name="Red_Lizards", threshold=0.95, should_click=True)
+    # sleep_between(1.0, 1.1)
+    # wait_for_img(img_name="Reset_Trap_3_Down", script_name="Red_Lizards", threshold=0.95, should_click=True)
 
     return
 
