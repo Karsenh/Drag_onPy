@@ -9,10 +9,10 @@ AT_TRAP = None
 INTL_CHECK = True
 TRAP_CHECK_ORDER = []
 
-INTL_TRAP_THRESH = 0.85
+INTL_TRAP_THRESH = 0.82
 
 # Trap State Detection
-CAUGHT_THRESH = 0.92
+CAUGHT_THRESH = 0.80
 DOWN_THRESH = 0.85
 LIZARD_DOWN_THRESH = 0.80
 
@@ -33,7 +33,7 @@ def start_catching_red_lizards(curr_loop):
 
     else:
         print(f'First loop')
-        # intl_interface_setup()
+        intl_interface_setup()
 
         set_intl_trap(1)
         set_intl_trap(2)
@@ -50,7 +50,11 @@ def set_intl_trap(trap_num):
     global AT_TRAP
     global TRAP_CHECK_ORDER
 
-    if wait_for_img(img_name=f"Set_intl_trap_{trap_num}", script_name=SCRIPT_NAME, should_click=True, threshold=INTL_TRAP_THRESH, y_offset=10, x_offset=6):
+    x_offset = 6
+    if trap_num == 3:
+        x_offset == 18
+
+    if wait_for_img(img_name=f"Set_intl_trap_{trap_num}", script_name=SCRIPT_NAME, should_click=True, threshold=INTL_TRAP_THRESH, y_offset=10, x_offset=x_offset):
         AT_TRAP = trap_num
         TRAP_CHECK_ORDER.append(trap_num)
         print(f'🟢 Setting initial trap: {trap_num}\n🟢 AT_TRAP set = {AT_TRAP}\n🟢 TRAP_CHECK_ORDER = {TRAP_CHECK_ORDER}')
@@ -126,7 +130,7 @@ def fix_trap(trap_to_fix):
     if state == "Caught":
         print(f'STATE = 🧤{state}🧤 for TRAP {trap_num} AT_TRAP {AT_TRAP}')
         x, y = get_existing_img_xy()
-        adjusted_xy = x, y
+        adjusted_xy = x+8, y+20
 
         mouse_click(adjusted_xy)
         wait_for_img(img_name="Hunter", category="Exp_Drops")
