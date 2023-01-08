@@ -141,7 +141,7 @@ def launch_script(script_name="pisc_iron"):
             selected_script = ScriptEnum.TRAWLER.value
             antiban_likelihood = 20
             antiban_downtime_sec = 0.5
-        case "cow_killer":
+        case "Cow_Killer":
             selected_script = ScriptEnum.COW_KILLER.value
             antiban_likelihood = 25
             antiban_downtime_sec = 2.75
