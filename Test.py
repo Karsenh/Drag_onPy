@@ -52,7 +52,7 @@ def __main__():
 
     # ✅ 1 from 2
     # (✔✔✔CAUGHT)
-    # wait_for_img(img_name="Trap_1_Caught_From_2", script_name="Red_Lizards", threshold=0.95, should_click=True)
+    # wait_for_img(img_name="Trap_1_Caught_From_2", script_name="Red_Lizards", threshold=0.80, should_click=True)
     # sleep_between(1.0, 1.1)
     # wait_for_img(img_name="Reset_Trap_1_Caught_From_2", script_name="Red_Lizards", threshold=0.95, should_click=True)
 
