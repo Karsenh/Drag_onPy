@@ -32,7 +32,7 @@ def __main__():
 
     # show_main_gui()
 
-    launch_script("Red_Lizards")
+    launch_script("GE_Superheat_Gold")
 
     # CAUGHT - testing
     # wait_for_img(img_name="Reset_Trap_1_Caught_From_3", script_name="Red_Lizards", threshold=0.95, should_click=True)

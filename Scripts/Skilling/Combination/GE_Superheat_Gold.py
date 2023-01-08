@@ -134,8 +134,9 @@ def withdraw_nats():
 
 def withdraw_gauntlets():
     global SMITHING_TAB_NUM
+    gauntlet_tab = 8
 
-    is_bank_tab_open(tab_num=SMITHING_TAB_NUM, should_open=True)
+    is_bank_tab_open(tab_num=gauntlet_tab, should_open=True)
 
     does_img_exist(img_name="Banked_Goldsmith_Gauntlets", script_name=SCRIPT_NAME, should_click=True)
     API.AntiBan.sleep_between(0.9, 1.2)
