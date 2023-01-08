@@ -1,5 +1,7 @@
 import random
 
+import numpy.random
+
 import API.AntiBan
 from API.Mouse import mouse_click, mouse_long_click
 from API.Interface.Bank import is_bank_open, is_bank_tab_open, close_bank, deposit_all, is_withdraw_qty
@@ -69,6 +71,8 @@ def start_superheating_gold(curr_loop):
         withdraw_nats()
 
         withdraw_gold_ore()
+
+        API.AntiBan.sleep_between(0.2, 0.3)
 
         close_bank()
 
@@ -173,19 +177,61 @@ def superheat_gold_ore():
 
     img_sels = ["first", "last"]
     is_tab_open("magic", should_be_open=True)
+    gold_ore_slots = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28]
+    # Shuffle inventory slots of gold for random selection order
+    numpy.random.shuffle(gold_ore_slots)
 
-    while should_continue:
+    print(f'RANDOM SHUFFLE ARR = {gold_ore_slots}')
+    # API.AntiBan.sleep_between(5.0, 5.1)
+
+    curr_gold_slot = 2
+    curr_slot_idx = 0
+
+    while gold_ore_slots:
         if not wait_for_img(img_name="Superheat_Spell", script_name=SCRIPT_NAME, should_click=True, x_offset=6, y_offset=6):
             is_tab_open("magic", True)
-        should_continue = wait_for_img(img_name="Inventory_Gold_Ore", threshold=0.95, script_name=SCRIPT_NAME, img_sel="random", max_wait_sec=2)
+            if not wait_for_img(img_name="Superheat_Spell", script_name=SCRIPT_NAME, should_click=True, x_offset=6, y_offset=6):
+                return False
 
-        if not should_continue:
+        r_slot = random.randint(0, len(gold_ore_slots) - 1)
+        API.AntiBan.sleep_between(0.1, 0.6, likelihood=32)
+        print(f'gold_ore_slots[curr_slot]: {gold_ore_slots[r_slot]}\nr_slot: {r_slot}')
 
-            return
-        else:
-            # API.AntiBan.sleep_between(0.1, 0.3)
-            mouse_click(get_existing_img_xy())
-            API.AntiBan.sleep_between(0.2, 0.4)
+        curr_invent_xy = get_xy_for_invent_slot(gold_ore_slots[r_slot])
+        gold_ore_slots.remove(curr_gold_slot)
+        mouse_click(curr_invent_xy)
+        curr_gold_slot += 1
+
+
+
+
+    #
+    # for i in range(0, 28):
+    #     if not wait_for_img(img_name="Superheat_Spell", script_name=SCRIPT_NAME, should_click=True, x_offset=6, y_offset=6):
+    #         is_tab_open("magic", True)
+    #         if not wait_for_img(img_name="Superheat_Spell", script_name=SCRIPT_NAME, should_click=True, x_offset=6, y_offset=6):
+    #             return False
+    #
+    #     API.AntiBan.sleep_between(0.1, 0.6, likelihood=32)
+    #     print(f'slot: {gold_ore_slots[i]} where i = {i}')
+    #     curr_invent_xy = get_xy_for_invent_slot(gold_ore_slots[i])
+    #     gold_ore_slots.remove(curr_gold_slot)
+    #     mouse_click(curr_invent_xy)
+    #
+    #     curr_gold_slot += 1
+        # API.AntiBan.sleep_between(0.1, 0.2, likelihood=50)
+
+    # while should_continue:
+    #     if not wait_for_img(img_name="Superheat_Spell", script_name=SCRIPT_NAME, should_click=True, x_offset=6, y_offset=6):
+    #         is_tab_open("magic", True)
+    #     should_continue = wait_for_img(img_name="Inventory_Gold_Ore", threshold=0.95, script_name=SCRIPT_NAME, img_sel="random", max_wait_sec=2)
+    #
+    #     if not should_continue:
+    #
+    #         return
+    #     else:
+    # API.AntiBan.sleep_between(0.1, 0.3)
+    # mouse_click(get_existing_img_xy())
     # for i in range(27):
     #     wait_for_img(img_name="Superheat_Spell", script_name=SCRIPT_NAME, should_click=True, x_offset=6, y_offset=6)
     #     wait_for_img(img_name="Inventory_Gold_Ore", script_name=SCRIPT_NAME, img_sel="random")
