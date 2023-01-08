@@ -42,18 +42,12 @@ def start_superheating_gold(curr_loop):
 
         superheat_gold_ore()
 
+        API.AntiBan.sleep_between(0.5, 0.6)
+
     else:
         print(f'This is the first loop')
         setup_interface("east", 4, "up")
 
-        # Open bank
-        # Deposit all
-        # Go to Magic tab and withdraw Fire staff / Equip
-        # Deposit all again (in case something was worn
-        # If USE GAUNTLETS - go to smithing tab and withdraw / Equip gauntlets
-        # Deposit all again
-        # Go back to magic tab and withdraw nats
-        # Go back to smithing tab and withdraw gold ore
         check_equipment()
 
         if not open_ge_bank():
