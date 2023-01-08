@@ -77,7 +77,7 @@ def open_ge_bank():
 
     # ge_bank_xy = 710, 443
     # mouse_click(ge_bank_xy, min_num_clicks=2)
-    wait_for_img(img_name="Ge_Bank", script_name="GE_Superheat_Gold", should_click=True, threshold=0.95, x_offset=10, min_clicks=2, max_clicks=3)
+    wait_for_img(img_name="Ge_Bank", script_name="GE_Superheat_Gold", should_click=True, threshold=0.95, x_offset=10, min_clicks=1, max_clicks=2)
 
     if is_bank_open():
         return True
