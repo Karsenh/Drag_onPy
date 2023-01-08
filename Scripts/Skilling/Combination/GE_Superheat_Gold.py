@@ -42,8 +42,6 @@ def start_superheating_gold(curr_loop):
 
         superheat_gold_ore()
 
-        API.AntiBan.sleep_between(0.5, 0.6)
-
     else:
         print(f'This is the first loop')
         setup_interface("east", 4, "up")
@@ -196,39 +194,6 @@ def superheat_gold_ore():
         mouse_click(curr_invent_xy)
         curr_gold_slot += 1
 
-
-
-
-    #
-    # for i in range(0, 28):
-    #     if not wait_for_img(img_name="Superheat_Spell", script_name=SCRIPT_NAME, should_click=True, x_offset=6, y_offset=6):
-    #         is_tab_open("magic", True)
-    #         if not wait_for_img(img_name="Superheat_Spell", script_name=SCRIPT_NAME, should_click=True, x_offset=6, y_offset=6):
-    #             return False
-    #
-    #     API.AntiBan.sleep_between(0.1, 0.6, likelihood=32)
-    #     print(f'slot: {gold_ore_slots[i]} where i = {i}')
-    #     curr_invent_xy = get_xy_for_invent_slot(gold_ore_slots[i])
-    #     gold_ore_slots.remove(curr_gold_slot)
-    #     mouse_click(curr_invent_xy)
-    #
-    #     curr_gold_slot += 1
-        # API.AntiBan.sleep_between(0.1, 0.2, likelihood=50)
-
-    # while should_continue:
-    #     if not wait_for_img(img_name="Superheat_Spell", script_name=SCRIPT_NAME, should_click=True, x_offset=6, y_offset=6):
-    #         is_tab_open("magic", True)
-    #     should_continue = wait_for_img(img_name="Inventory_Gold_Ore", threshold=0.95, script_name=SCRIPT_NAME, img_sel="random", max_wait_sec=2)
-    #
-    #     if not should_continue:
-    #
-    #         return
-    #     else:
-    # API.AntiBan.sleep_between(0.1, 0.3)
-    # mouse_click(get_existing_img_xy())
-    # for i in range(27):
-    #     wait_for_img(img_name="Superheat_Spell", script_name=SCRIPT_NAME, should_click=True, x_offset=6, y_offset=6)
-    #     wait_for_img(img_name="Inventory_Gold_Ore", script_name=SCRIPT_NAME, img_sel="random")
-    #     mouse_click(get_existing_img_xy())
+        API.AntiBan.sleep_between(0.8, 0.9)
 
     return
