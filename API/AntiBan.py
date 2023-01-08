@@ -70,7 +70,7 @@ def random_human_actions(max_downtime_seconds=3.0, likelihood=10, reopen_invento
 
             # write_debug(f'skill_or_quest_tab = {skill_or_quest_tab} | if <= 4 (Skill)')
 
-            if skill_or_quest_tab <= 4:
+            if skill_or_quest_tab <= 6:
                 write_debug(f'Checking Skill Tab...')
                 API.Interface.General.check_skill_tab(max_sec=max_downtime_seconds, skill_to_check="random", should_reopen_inventory=reopen_inventory)
             else:
