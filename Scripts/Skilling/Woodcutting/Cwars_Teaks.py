@@ -217,10 +217,6 @@ def teleport_to_cwars_bank():
 def drop_teaks():
     is_otd_enabled(should_enable=True)
     is_tab_open("inventory", True)
-    # i = 0
-    # while does_img_exist(img_name="Inventory_teak", script_name=SCRIPT_NAME, should_click=True):
-    #     i += 1
-    #     print(f'Dropping teak log {i} from inventory.')
     drop_inventory(from_spot_num=1, to_spot_num=28)
     is_otd_enabled(should_enable=False)
     return

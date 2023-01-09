@@ -25,6 +25,7 @@ from Scripts.Skilling.Thieving.Pickpocketing.Ardy_Knights import start_pickpocke
 from Scripts.Skilling.Combat.Kourend_Crab_Killer import start_killing_kourend_crabs
 from Scripts.Skilling.Crafting.GE_Dhide_Bodies import start_crafting_dhide_bodies
 from Scripts.Skilling.Woodcutting.Cwars_Teaks import start_chopping_teaks
+from Scripts.Skilling.Woodcutting.SW_Teaks import start_chopping_sw_teaks
 from Scripts.Skilling.Combination.GE_Superheat_Gold import start_superheating_gold
 from Scripts.Skilling.Construction.Con_Larders import start_constructing_larders
 from Scripts.Skilling.Construction.Con_Mahog_Tables import start_constructing_tables
@@ -86,6 +87,8 @@ def launch_script(script_name="pisc_iron"):
         CON_MAHOG_TABLES = 29
         DESERT_LIZARDS = 30
         RED_LIZARDS = 31
+        SW_TEAKS = 32
+
     all_scripts = [mine_iron_pisc, smith_gold_edge, run_gnome_course,
                    fish_draynor_shrimp, fish_barb_trout, barbarian_fishing,
                    pickpocket_draynor_man, steal_ardy_cake, burn_logs_at_ge,
@@ -96,7 +99,7 @@ def launch_script(script_name="pisc_iron"):
                    start_catching_crimsons, start_trapping_birds, start_pickpocketing_ardy_knights,
                    start_killing_kourend_crabs, start_crafting_dhide_bodies, start_chopping_teaks,
                    start_superheating_gold, start_constructing_larders, start_constructing_tables,
-                   start_catching_desert_lizards, start_catching_red_lizards]
+                   start_catching_desert_lizards, start_catching_red_lizards, start_chopping_sw_teaks]
 
     match script_name:
         case "pisc_iron":
@@ -231,6 +234,11 @@ def launch_script(script_name="pisc_iron"):
             antiban_likelihood = 25
             antiban_downtime_sec = 1
             reopen_invent = False
+        case "SW_Teaks":
+            selected_script = ScriptEnum.SW_TEAKS.value
+            antiban_likelihood = 15
+            antiban_downtime_sec = 4
+            reopen_invent = True
 
     is_timer_set = is_break_timer_set()
 

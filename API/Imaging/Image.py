@@ -14,7 +14,7 @@ from datetime import datetime
 import pyautogui as pag
 
 
-img_check_xy = 0, 0
+LATEST_IMG_XY = 0, 0
 
 
 def capture_img_region(window_x, window_y, window_x2, window_y2, image_name):
@@ -74,8 +74,8 @@ def get_color_at_coords(xy):
     return picture[x, y]
 
 
-def does_img_exist(img_name, script_name=None, category='Scripts', threshold=0.8, should_click=False, x_offset=8, y_offset=8, min_clicks=1, max_clicks=1, img_sel="last"):
-    global img_check_xy
+def does_img_exist(img_name, script_name=None, category='Scripts', threshold=0.8, should_click=False, x_offset=8, y_offset=8, min_clicks=1, max_clicks=1, img_sel="last", click_middle=False):
+    global LATEST_IMG_XY
     capture_bluestacks()
     img_rgb = cv2.imread(BS_SCREEN_PATH)
 
@@ -93,6 +93,11 @@ def does_img_exist(img_name, script_name=None, category='Scripts', threshold=0.8
 
     template = cv2.imread(template_img_path, 0)
 
+    print(f'🔴 template shape: {template.shape}')
+    temp_height, temp_width = template.shape
+    temp_middle_height = temp_height / 2
+    temp_middle_width = temp_width / 2
+
     res = cv2.matchTemplate(img_gray, template, cv2.TM_CCOEFF_NORMED)
 
     # Store the coordinates of matched area in a numpy array
@@ -105,35 +110,51 @@ def does_img_exist(img_name, script_name=None, category='Scripts', threshold=0.8
         write_debug(f'✔ {img_name}.png found:\n loc[0] = {loc[0]}\nloc[1] = {loc[1]}')
         if img_sel == "first":
             # Save the first img find xy coords
-            img_check_xy = loc[1][0], loc[0][0]
+            LATEST_IMG_XY = loc[1][0], loc[0][0]
         elif img_sel == "random":
             r_x = random.randint(0, len(loc[1])-1)
             r_y = random.randint(0, len(loc[0])-1)
             print(f'Random img returning')
-            img_check_xy = loc[1][r_x], loc[0][r_y]
+            LATEST_IMG_XY = loc[1][r_x], loc[0][r_y]
         else:
             # Save the 'deepest' find of img's xy coords
-            img_check_xy = loc[1][len(loc[1])-1], loc[0][len(loc[0])-1]
+            LATEST_IMG_XY = loc[1][len(loc[1]) - 1], loc[0][len(loc[0]) - 1]
 
         if should_click:
-            img_x, img_y = img_check_xy
-            adj_x = img_x + x_offset
-            adj_y = img_y + y_offset
-            adj_xy = adj_x, adj_y
-            mouse_click(adj_xy, min_num_clicks=min_clicks, max_num_clicks=max_clicks)
-        write_debug(f'{img_check_xy} saved to img_check_xy global')
+            if click_middle:
+                print(f'Clicking calculated middle of template image.')
+                img_x, img_y = LATEST_IMG_XY
+                adj_x = img_x + temp_middle_width
+                adj_y = img_y + temp_middle_height
+                adj_xy = adj_x, adj_y
+                mouse_click(adj_xy, min_num_clicks=min_clicks, max_num_clicks=max_clicks)
+            else:
+                img_x, img_y = LATEST_IMG_XY
+                adj_x = img_x + x_offset
+                adj_y = img_y + y_offset
+                adj_xy = adj_x, adj_y
+                mouse_click(adj_xy, min_num_clicks=min_clicks, max_num_clicks=max_clicks)
+        write_debug(f'{LATEST_IMG_XY} saved to img_check_xy global')
         return True
 
 
 # Search for a particular img on screen for a set amount of time
 #       Returns True if the image is found within the amount of time
 #       Returns False if the image is not found after trying for specified amount of time
-def wait_for_img(img_name, script_name=None, category="Scripts", max_wait_sec=5, threshold=0.8, should_click=False, x_offset=0, y_offset=0, min_clicks=1, max_clicks=1, img_sel="last"):
+def wait_for_img(img_name, script_name=None, category="Scripts",
+                 max_wait_sec=5, threshold=0.8,
+                 should_click=False, x_offset=0, y_offset=0,
+                 min_clicks=1, max_clicks=1,
+                 img_sel="last", click_middle="False"):
     start_time = datetime.now()
     write_debug(f'⏲ Wait_For_Img Start Time: {start_time}')
 
     while not is_time_up(start_time, max_wait_sec):
-        img_found = does_img_exist(img_name, script_name=script_name, category=category, threshold=threshold, should_click=should_click, x_offset=x_offset, y_offset=y_offset, min_clicks=min_clicks, max_clicks=max_clicks, img_sel=img_sel)
+        img_found = does_img_exist(img_name, script_name=script_name, category=category,
+                                   threshold=threshold, should_click=should_click,
+                                   x_offset=x_offset, y_offset=y_offset,
+                                   min_clicks=min_clicks, max_clicks=max_clicks,
+                                   img_sel=img_sel, click_middle=click_middle)
         if img_found:
             # does_img_exist(img_name, script_name=script_name, category=category, threshold=threshold, should_click=should_click, x_offset=x_offset, y_offset=y_offset)
             return True
@@ -145,7 +166,7 @@ def wait_for_img(img_name, script_name=None, category="Scripts", max_wait_sec=5,
 
 
 def get_existing_img_xy():
-    return img_check_xy
+    return LATEST_IMG_XY
 
 
 def find_color_xy(img_path, search_color):

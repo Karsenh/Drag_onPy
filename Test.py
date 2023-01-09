@@ -32,7 +32,12 @@ def __main__():
 
     # show_main_gui()
 
-    launch_script("Cwars_Teak")
+    launch_script("SW_Teaks")
+
+    # setup_interface("west", 4, "up")
+
+
+
 
     # CAUGHT - testing
     # wait_for_img(img_name="Reset_Trap_1_Caught_From_3", script_name="Red_Lizards", threshold=0.95, should_click=True)
