@@ -48,7 +48,7 @@ def start_chopping_sw_teaks(curr_loop):
 
     else:
         print(f'First loop!')
-        # setup_interface('west', 4, 'up')
+        setup_interface('west', 4, 'up')
 
         if is_invent_full():
             drop_teaks()
