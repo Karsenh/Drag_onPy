@@ -31,6 +31,7 @@ from Scripts.Skilling.Construction.Con_Larders import start_constructing_larders
 from Scripts.Skilling.Construction.Con_Mahog_Tables import start_constructing_tables
 from Scripts.Skilling.Hunter.Desert_Lizards import start_catching_desert_lizards
 from Scripts.Skilling.Hunter.Red_Lizards import start_catching_red_lizards
+from Scripts.Skilling.Runecrafting.Cwars_Lavas import start_crafting_lavas
 
 from enum import Enum
 import API
@@ -88,6 +89,7 @@ def launch_script(script_name="pisc_iron"):
         DESERT_LIZARDS = 30
         RED_LIZARDS = 31
         SW_TEAKS = 32
+        CWARS_LAVAS = 33
 
     all_scripts = [mine_iron_pisc, smith_gold_edge, run_gnome_course,
                    fish_draynor_shrimp, fish_barb_trout, barbarian_fishing,
@@ -99,7 +101,8 @@ def launch_script(script_name="pisc_iron"):
                    start_catching_crimsons, start_trapping_birds, start_pickpocketing_ardy_knights,
                    start_killing_kourend_crabs, start_crafting_dhide_bodies, start_chopping_teaks,
                    start_superheating_gold, start_constructing_larders, start_constructing_tables,
-                   start_catching_desert_lizards, start_catching_red_lizards, start_chopping_sw_teaks]
+                   start_catching_desert_lizards, start_catching_red_lizards, start_chopping_sw_teaks,
+                   start_crafting_lavas]
 
     match script_name:
         case "pisc_iron":
@@ -236,6 +239,11 @@ def launch_script(script_name="pisc_iron"):
             reopen_invent = False
         case "SW_Teaks":
             selected_script = ScriptEnum.SW_TEAKS.value
+            antiban_likelihood = 15
+            antiban_downtime_sec = 4
+            reopen_invent = True
+        case "Cwars_Lavas":
+            selected_script = ScriptEnum.CWARS_LAVAS.value
             antiban_likelihood = 15
             antiban_downtime_sec = 4
             reopen_invent = True

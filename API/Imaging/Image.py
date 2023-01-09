@@ -129,6 +129,7 @@ def does_img_exist(img_name, script_name=None, category='Scripts', threshold=0.8
                 adj_xy = adj_x, adj_y
                 mouse_click(adj_xy, min_num_clicks=min_clicks, max_num_clicks=max_clicks)
             else:
+                print(f'Clicking with xy offset')
                 img_x, img_y = LATEST_IMG_XY
                 adj_x = img_x + x_offset
                 adj_y = img_y + y_offset
@@ -145,7 +146,7 @@ def wait_for_img(img_name, script_name=None, category="Scripts",
                  max_wait_sec=5, threshold=0.8,
                  should_click=False, x_offset=0, y_offset=0,
                  min_clicks=1, max_clicks=1,
-                 img_sel="last", click_middle="False"):
+                 img_sel="last", click_middle=False):
     start_time = datetime.now()
     write_debug(f'⏲ Wait_For_Img Start Time: {start_time}')
 
