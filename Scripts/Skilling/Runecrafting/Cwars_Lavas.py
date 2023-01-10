@@ -60,7 +60,7 @@ def start_crafting_lavas(curr_loop):
         API.AntiBan.sleep_between(0.5, 0.6)
     else:
         print(f'This is the first loop - setting up interface etc.')
-        # setup_interface("north", 1, "up")
+        setup_interface("north", 1, "up")
         set_inventory_items(curr_loop)
         set_equipped_items(curr_loop)
 
@@ -369,7 +369,7 @@ def cast_imbue():
 
 def craft_lavas():
     is_tab_open("inventory", True)
-    wait_for_img(img_name="Inventory_Earth_Runes", script_name="Cwars_Lavas", should_click=True, click_middle=True, threshold=0.90)
+    wait_for_img(img_name="Inventory_Earth_Runes", script_name="Cwars_Lavas", should_click=True, click_middle=True, threshold=0.85)
     wait_for_img(img_name="Fire_Altar", script_name="Cwars_Lavas", should_click=True, threshold=0.92, click_middle=True)
     return
 
