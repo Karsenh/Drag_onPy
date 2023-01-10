@@ -244,8 +244,8 @@ def launch_script(script_name="pisc_iron"):
             reopen_invent = True
         case "Cwars_Lavas":
             selected_script = ScriptEnum.CWARS_LAVAS.value
-            antiban_likelihood = 15
-            antiban_downtime_sec = 4
+            antiban_likelihood = 12
+            antiban_downtime_sec = 5
             reopen_invent = True
 
     is_timer_set = is_break_timer_set()
