@@ -14,7 +14,7 @@ STAFF_EQUIPPED = False
 RUNE_POUCH_INVENT = False
 EARTH_RUNES_INVENT = False
 
-POUCHES_TO_USE_ARR = ["Small", "Medium"]
+POUCHES_TO_USE_ARR = ["Small", "Medium", "Large"]
 HAS_ESS_POUCH_ARR = []
 DEGRADED_POUCH_EXISTS = False
 
@@ -220,7 +220,7 @@ def fill_pouches():
     global POUCHES_TO_USE_ARR
 
     for pouch_size in POUCHES_TO_USE_ARR:
-        if pouch_size == "Large" or pouch_size == "Giant":
+        if pouch_size == "Giant":
             withdraw_ess()
         fill_pouch(pouch_size)
 
@@ -247,7 +247,7 @@ def empty_pouches():
     global POUCHES_TO_USE_ARR
 
     for pouch_size in POUCHES_TO_USE_ARR:
-        if pouch_size == "Large":
+        if pouch_size == "Giant":
             craft_lavas()
         empty_pouch(pouch_size)
 
