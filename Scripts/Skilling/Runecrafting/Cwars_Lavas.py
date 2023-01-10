@@ -21,6 +21,15 @@ DEGRADED_POUCH_EXISTS = False
 MAGIC_BANK_TAB = 1
 JEWELRY_BANK_TAB = 2
 
+CACHED_SMALL_FILL_XY = None
+CACHED_SMALL_EMPTY_XY = None
+
+CACHED_MEDIUM_FILL_XY = None
+CACHED_MEDIUM_EMPTY_XY = None
+
+CACHED_LARGE_FILL_XY = None
+CACHED_LARGE_EMPTY_XY = None
+
 
 def start_crafting_lavas(curr_loop):
     if curr_loop != 1:
@@ -42,6 +51,7 @@ def start_crafting_lavas(curr_loop):
         teleport_to_duel_arena()
         move_to_ruins()
         move_to_altar()
+        API.AntiBan.sleep_between(0.6, 0.7)
         cast_imbue()
         craft_lavas()
         empty_pouches()
@@ -210,9 +220,37 @@ def open_bank_chest():
 
 
 def fill_pouch(pouch_size):
+    global CACHED_SMALL_FILL_XY
+    global CACHED_MEDIUM_FILL_XY
+    global CACHED_LARGE_FILL_XY
+
     does_img_exist(img_name=f"Inventory_{pouch_size}_Pouch", script_name="Cwars_Lavas", threshold=0.95, img_sel="first")
     mouse_long_click(get_existing_img_xy())
-    wait_for_img(img_name="Fill", category="General", should_click=True, click_middle=True, threshold=0.9, max_wait_sec=2)
+
+    match pouch_size:
+        case "Small":
+            if CACHED_SMALL_FILL_XY:
+                mouse_click(CACHED_SMALL_FILL_XY)
+            else:
+                wait_for_img(img_name="Fill", category="General", should_click=True, click_middle=True, threshold=0.9, max_wait_sec=2)
+                CACHED_SMALL_FILL_XY = get_existing_img_xy()
+        case "Medium":
+            if CACHED_MEDIUM_FILL_XY:
+                mouse_click(CACHED_MEDIUM_FILL_XY)
+            else:
+                wait_for_img(img_name="Fill", category="General", should_click=True, click_middle=True, threshold=0.9, max_wait_sec=2)
+                CACHED_MEDIUM_FILL_XY = get_existing_img_xy()
+        case "Large":
+            if CACHED_LARGE_FILL_XY:
+                mouse_click(CACHED_LARGE_FILL_XY)
+            else:
+                wait_for_img(img_name="Fill", category="General", should_click=True, click_middle=True, threshold=0.9, max_wait_sec=2)
+                CACHED_LARGE_FILL_XY = get_existing_img_xy()
+
+
+    # does_img_exist(img_name=f"Inventory_{pouch_size}_Pouch", script_name="Cwars_Lavas", threshold=0.95, img_sel="first")
+    # mouse_long_click(get_existing_img_xy())
+    # wait_for_img(img_name="Fill", category="General", should_click=True, click_middle=True, threshold=0.9, max_wait_sec=2)
     return
 
 
@@ -232,6 +270,10 @@ def fill_pouches():
 def empty_pouch(pouch_size):
     global DEGRADED_POUCH_EXISTS
 
+    global CACHED_SMALL_EMPTY_XY
+    global CACHED_MEDIUM_FILL_XY
+    global CACHED_LARGE_FILL_XY
+
     if not does_img_exist(img_name=f"Inventory_{pouch_size}_Pouch", script_name="Cwars_Lavas", threshold=0.95, img_sel="first"):
         if does_img_exist(img_name=f"Inventory_{pouch_size}_Pouch_Degraded", script_name="Cwars_Lavas", threshold=0.90):
             print(f'Found Degraded {pouch_size} pouch - setting Degraded Exists to True')
@@ -239,8 +281,27 @@ def empty_pouch(pouch_size):
             return
     else:
         mouse_long_click(get_existing_img_xy())
-        wait_for_img(img_name="Empty", category="General", should_click=True, click_middle=True, threshold=0.9)
-    return
+
+        match pouch_size:
+            case "Small":
+                if CACHED_SMALL_EMPTY_XY:
+                    mouse_click(CACHED_SMALL_EMPTY_XY)
+                else:
+                    wait_for_img(img_name="Empty", category="General", should_click=True, click_middle=True, threshold=0.9, max_wait_sec=2)
+                    CACHED_SMALL_EMPTY_XY = get_existing_img_xy()
+            case "Medium":
+                if CACHED_MEDIUM_FILL_XY:
+                    mouse_click(CACHED_MEDIUM_FILL_XY)
+                else:
+                    wait_for_img(img_name="Empty", category="General", should_click=True, click_middle=True, threshold=0.9, max_wait_sec=2)
+                    CACHED_MEDIUM_FILL_XY = get_existing_img_xy()
+            case "Large":
+                if CACHED_LARGE_FILL_XY:
+                    mouse_click(CACHED_LARGE_FILL_XY)
+                else:
+                    wait_for_img(img_name="Empty", category="General", should_click=True, click_middle=True, threshold=0.9, max_wait_sec=2)
+                    CACHED_LARGE_FILL_XY = get_existing_img_xy()
+        return
 
 
 def empty_pouches():
@@ -280,7 +341,6 @@ def move_to_altar():
 def cast_imbue():
     is_tab_open("magic", True)
     wait_for_img(img_name="Imbue_Spell", script_name="Cwars_Lavas", should_click=True, threshold=0.8, click_middle=True)
-    API.AntiBan.sleep_between(0.7, 0.8)
     return
 
 
