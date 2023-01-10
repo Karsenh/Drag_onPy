@@ -37,6 +37,7 @@ def __main__():
 
     launch_script("Cwars_Lavas")
 
+
     # does_img_exist(img_name="Inventory_Medium_Pouch_Degraded", script_name="Cwars_Lavas", threshold=0.90, should_click=True)
 
     # wait_for_img(img_name="Inventory_Rod", script_name="Cwars_Lavas", threshold=0.95, img_sel="first", should_click=True)

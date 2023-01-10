@@ -115,7 +115,7 @@ def replenish_missing_items():
     if not ROD_EQUIPPED:
         is_bank_tab_open(JEWELRY_BANK_TAB, True)
         is_withdraw_qty(qty="1", should_click=True)
-        does_img_exist(img_name="Banked_Rod", script_name="Cwars_Lavas", should_click=True, threshold=0.99)
+        does_img_exist(img_name="Banked_Rod", script_name="Cwars_Lavas", should_click=True, threshold=0.985)
         API.AntiBan.sleep_between(1, 1.1)
         wait_for_img(img_name="Inventory_Rod", script_name="Cwars_Lavas", threshold=0.95, img_sel="first")
         mouse_long_click(get_existing_img_xy())
@@ -330,6 +330,7 @@ def fix_pouches():
         wait_for_img(img_name="Tap_To_Cont", script_name="Cwars_Lavas", should_click=True, click_middle=True, threshold=0.9, max_wait_sec=10)
         wait_for_img(img_name="Repair_Pouches", script_name="Cwars_Lavas", should_click=True, click_middle=True, threshold=0.9)
         wait_for_img(img_name="Tap_To_Cont", script_name="Cwars_Lavas", should_click=True, click_middle=True, threshold=0.9, max_wait_sec=10)
+        DEGRADED_POUCH_EXISTS = False
 
     return
 
