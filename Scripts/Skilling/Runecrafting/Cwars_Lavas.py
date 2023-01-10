@@ -60,7 +60,7 @@ def start_crafting_lavas(curr_loop):
         API.AntiBan.sleep_between(0.5, 0.6)
     else:
         print(f'This is the first loop - setting up interface etc.')
-        setup_interface("north", 1, "up")
+        # setup_interface("north", 1, "up")
         set_inventory_items(curr_loop)
         set_equipped_items(curr_loop)
 
@@ -227,21 +227,26 @@ def fill_pouch(pouch_size):
     does_img_exist(img_name=f"Inventory_{pouch_size}_Pouch", script_name="Cwars_Lavas", threshold=0.95, img_sel="first")
     mouse_long_click(get_existing_img_xy())
 
+    print(f'small pouch fill vals: {CACHED_SMALL_FILL_XY}\nmedium: {CACHED_MEDIUM_FILL_XY}\nlarge: {CACHED_LARGE_FILL_XY}')
+
     match pouch_size:
         case "Small":
             if CACHED_SMALL_FILL_XY:
+                print(f'Cached_small_fill_xy = {CACHED_SMALL_FILL_XY}')
                 mouse_click(CACHED_SMALL_FILL_XY)
             else:
                 wait_for_img(img_name="Fill", category="General", should_click=True, click_middle=True, threshold=0.9, max_wait_sec=2)
                 CACHED_SMALL_FILL_XY = get_existing_img_xy()
         case "Medium":
             if CACHED_MEDIUM_FILL_XY:
+                print(f'Cached_medium_fill_xy = {CACHED_MEDIUM_FILL_XY}')
                 mouse_click(CACHED_MEDIUM_FILL_XY)
             else:
                 wait_for_img(img_name="Fill", category="General", should_click=True, click_middle=True, threshold=0.9, max_wait_sec=2)
                 CACHED_MEDIUM_FILL_XY = get_existing_img_xy()
         case "Large":
             if CACHED_LARGE_FILL_XY:
+                print(f'Cached_large_fill_xy = {CACHED_LARGE_FILL_XY}')
                 mouse_click(CACHED_LARGE_FILL_XY)
             else:
                 wait_for_img(img_name="Fill", category="General", should_click=True, click_middle=True, threshold=0.9, max_wait_sec=2)
@@ -271,8 +276,8 @@ def empty_pouch(pouch_size):
     global DEGRADED_POUCH_EXISTS
 
     global CACHED_SMALL_EMPTY_XY
-    global CACHED_MEDIUM_FILL_XY
-    global CACHED_LARGE_FILL_XY
+    global CACHED_MEDIUM_EMPTY_XY
+    global CACHED_LARGE_EMPTY_XY
 
     if not does_img_exist(img_name=f"Inventory_{pouch_size}_Pouch", script_name="Cwars_Lavas", threshold=0.95, img_sel="first"):
         if does_img_exist(img_name=f"Inventory_{pouch_size}_Pouch_Degraded", script_name="Cwars_Lavas", threshold=0.90):
@@ -290,17 +295,17 @@ def empty_pouch(pouch_size):
                     wait_for_img(img_name="Empty", category="General", should_click=True, click_middle=True, threshold=0.9, max_wait_sec=2)
                     CACHED_SMALL_EMPTY_XY = get_existing_img_xy()
             case "Medium":
-                if CACHED_MEDIUM_FILL_XY:
-                    mouse_click(CACHED_MEDIUM_FILL_XY)
+                if CACHED_MEDIUM_EMPTY_XY:
+                    mouse_click(CACHED_MEDIUM_EMPTY_XY)
                 else:
                     wait_for_img(img_name="Empty", category="General", should_click=True, click_middle=True, threshold=0.9, max_wait_sec=2)
-                    CACHED_MEDIUM_FILL_XY = get_existing_img_xy()
+                    CACHED_MEDIUM_EMPTY_XY = get_existing_img_xy()
             case "Large":
-                if CACHED_LARGE_FILL_XY:
-                    mouse_click(CACHED_LARGE_FILL_XY)
+                if CACHED_LARGE_EMPTY_XY:
+                    mouse_click(CACHED_LARGE_EMPTY_XY)
                 else:
                     wait_for_img(img_name="Empty", category="General", should_click=True, click_middle=True, threshold=0.9, max_wait_sec=2)
-                    CACHED_LARGE_FILL_XY = get_existing_img_xy()
+                    CACHED_LARGE_EMPTY_XY = get_existing_img_xy()
         return
 
 
