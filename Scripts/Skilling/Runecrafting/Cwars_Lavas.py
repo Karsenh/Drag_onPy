@@ -203,7 +203,7 @@ def move_to_bank_chest():
 
 
 def open_bank_chest():
-    wait_for_img(img_name="Bank_Chest", script_name="Cwars_Lavas", threshold=0.7)
+    wait_for_img(img_name="Bank_Chest", script_name="Cwars_Lavas", threshold=0.7, max_wait_sec=8)
     API.AntiBan.sleep_between(1.1, 1.2)
     does_img_exist(img_name="Bank_Chest", script_name="Cwars_Lavas", should_click=True, threshold=0.7)
     return is_bank_open()
