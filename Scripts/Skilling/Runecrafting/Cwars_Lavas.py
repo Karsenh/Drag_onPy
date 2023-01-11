@@ -32,6 +32,7 @@ CACHED_LARGE_FILL_XY = None
 CACHED_LARGE_EMPTY_XY = None
 
 CACHED_EARTHS_XY = None
+CACHED_BANKED_ESS_XY = None
 
 
 def start_crafting_lavas(curr_loop):
@@ -221,10 +222,21 @@ def replenish_missing_items():
 
 
 def withdraw_ess():
+    global CACHED_BANKED_ESS_XY
+
     is_bank_tab_open(MAGIC_BANK_TAB, True)
     is_withdraw_qty("all", True)
-    return wait_for_img(img_name="Banked_Ess", script_name="Cwars_Lavas", threshold=0.97, should_click=True, click_middle=True,
-                 img_sel="last")
+    if CACHED_BANKED_ESS_XY:
+        mouse_click(CACHED_BANKED_ESS_XY)
+        return True
+    else:
+        if wait_for_img(img_name="Banked_Ess", script_name="Cwars_Lavas", threshold=0.97, should_click=True, click_middle=True, img_sel="last"):
+            x, y = get_existing_img_xy()
+            adj_xy = x+6, y+6
+            CACHED_BANKED_ESS_XY = adj_xy
+            return True
+        else:
+            return False
 
 
 def move_to_bank_chest():
