@@ -126,7 +126,7 @@ def replenish_missing_items():
         is_bank_tab_open(JEWELRY_BANK_TAB, True)
         is_withdraw_qty(qty="1", should_click=True)
         does_img_exist(img_name="Banked_Rod", script_name="Cwars_Lavas", should_click=True, threshold=0.985)
-        API.AntiBan.sleep_between(1, 1.1)
+        API.AntiBan.sleep_between(1.5, 1.6)
         wait_for_img(img_name="Inventory_Rod", script_name="Cwars_Lavas", threshold=0.95, img_sel="first")
         mouse_long_click(get_existing_img_xy())
         wait_for_img(img_name="Wear", category="General", should_click=True, click_middle=True)
@@ -136,7 +136,7 @@ def replenish_missing_items():
         is_bank_tab_open(JEWELRY_BANK_TAB, True)
         is_withdraw_qty("1", True)
         does_img_exist(img_name="Banked_Necklace", script_name="Cwars_Lavas", threshold=0.97, should_click=True, click_middle=True)
-        API.AntiBan.sleep_between(1, 1.1)
+        API.AntiBan.sleep_between(1.5, 1.6)
         wait_for_img(img_name="Inventory_Necklace", script_name="Cwars_Lavas", threshold=0.95, img_sel="first")
         mouse_long_click(get_existing_img_xy())
         wait_for_img(img_name="Wear", category="General", should_click=True, click_middle=True)
@@ -163,7 +163,7 @@ def replenish_missing_items():
     if not STAFF_EQUIPPED:
         is_bank_tab_open(MAGIC_BANK_TAB, True)
         is_withdraw_qty("1", True)
-        does_img_exist(img_name="Banked_Steam_Staff", script_name="Cwars_Lavas", threshold=0.995, should_click=True,
+        does_img_exist(img_name="Banked_Steam_Staff", script_name="Cwars_Lavas", threshold=0.994, should_click=True,
                        click_middle=True)
         API.AntiBan.sleep_between(1, 1.1)
         if wait_for_img(img_name="Inventory_Staff", script_name="Cwars_Lavas", threshold=0.95, img_sel="first"):

@@ -35,10 +35,8 @@ def __main__():
 
     # show_main_gui()
 
-    # launch_script("Cwars_Lavas")
+    launch_script("Cwars_Lavas")
 
-    does_img_exist(img_name="Banked_Steam_Staff", script_name="Cwars_Lavas", threshold=0.994, should_click=True,
-                   click_middle=True)
 
     # does_img_exist(img_name="Inventory_Medium_Pouch_Degraded", script_name="Cwars_Lavas", threshold=0.90, should_click=True)
 
