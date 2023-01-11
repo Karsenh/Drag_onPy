@@ -104,25 +104,7 @@ def move_to_altar(curr_loop):
                     if owner_not_found == len(ads_to_check):
                         print(f'Couldnt find any owners online - exiting...')
                         return False
-            # if not does_img_exist(img_name="workless_ad", script_name="Gilded_Altar", threshold=0.90, should_click=True,
-            #                x_offset=700, y_offset=20) \
-            # and not does_img_exist(img_name="workless_ad2", script_name="Gilded_Altar", threshold=0.90, should_click=True,
-            #                x_offset=700, y_offset=20) \
-            # and not does_img_exist(img_name="og_ad", script_name="Gilded_Altar", threshold=0.90, should_click=True,
-            #                x_offset=700, y_offset=20) \
-            # and not does_img_exist(img_name="og_ad2", script_name="Gilded_Altar", threshold=0.90, should_click=True,
-            #                x_offset=700, y_offset=20):
 
-
-            # if not does_img_exist(img_name="workless_ad", script_name="Gilded_Altar", threshold=0.90, should_click=True,
-            #                x_offset=700, y_offset=20) \
-            # and not does_img_exist(img_name="workless_ad2", script_name="Gilded_Altar", threshold=0.90, should_click=True,
-            #                x_offset=700, y_offset=20) \
-            # and not does_img_exist(img_name="og_ad", script_name="Gilded_Altar", threshold=0.90, should_click=True,
-            #                x_offset=700, y_offset=20) \
-            # and not does_img_exist(img_name="og_ad2", script_name="Gilded_Altar", threshold=0.90, should_click=True,
-            #                x_offset=700, y_offset=20):
-            #     return False
         else:
             # visit last
             does_img_exist(img_name="house_ad", script_name="Gilded_Altar", threshold=0.9)
@@ -131,11 +113,8 @@ def move_to_altar(curr_loop):
             safe_ad_xy = x+15, y+25
             mouse_long_click(safe_ad_xy)
             does_img_exist(img_name="visit_last", script_name="Gilded_Altar", threshold=0.9, should_click=True)
-            # mouse_move(safe_ad_xy)
-            # visit_last_xy = 679, 723
-            # mouse_drag(from_xy=ad_xy, to_xy=visit_last_xy)
 
-        API.AntiBan.sleep_between(4.0, 4.1)
+        API.AntiBan.sleep_between(5.0, 5.1)
         mouse_click(altar_xy)
         API.AntiBan.sleep_between(1.0, 1.1)
 
