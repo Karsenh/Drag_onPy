@@ -397,7 +397,7 @@ def teleport_to_duel_arena():
 
     is_tab_open("equipment", True)
     if CACHED_EQUIPPED_ROD_XY:
-        mouse_click(CACHED_EQUIPPED_ROD_XY)
+        mouse_long_click(CACHED_EQUIPPED_ROD_XY)
     else:
         if wait_for_img(img_name="Equipped_Rod", script_name="Cwars_Lavas", threshold=0.9):
             x, y = get_existing_img_xy()
@@ -455,21 +455,32 @@ def craft_lavas():
 def teleport_to_cwars():
     global ROD_EQUIPPED
     global NECK_EQUIPPED
+    global CACHED_EQUIPPED_ROD_XY
+    global CACHED_CWARS_TELE_XY
 
     is_tab_open("equipment", True)
 
     if not does_img_exist(img_name="Equipped_Necklace", script_name="Cwars_Lavas", threshold=0.9):
         NECK_EQUIPPED = False
 
-    does_img_exist(img_name="Equipped_Rod", script_name="Cwars_Lavas", threshold=0.95)
-    x, y = get_existing_img_xy()
-    adjusted_xy = x+10, y+10
-    mouse_long_click(adjusted_xy)
+    if CACHED_EQUIPPED_ROD_XY:
+        mouse_long_click(CACHED_EQUIPPED_ROD_XY)
+    else:
+        does_img_exist(img_name="Equipped_Rod", script_name="Cwars_Lavas", threshold=0.95)
+        x, y = get_existing_img_xy()
+        adjusted_xy = x+10, y+10
+        mouse_long_click(adjusted_xy)
 
     if does_img_exist(img_name="Last_Rod_Charge", script_name="Cwars_Lavas", threshold=0.85):
         ROD_EQUIPPED = False
 
-    wait_for_img(img_name="Castle_Wars", category="Teleports", should_click=True, click_middle=True, threshold=0.95)
+    if CACHED_CWARS_TELE_XY:
+        mouse_click(CACHED_CWARS_TELE_XY)
+    else:
+        wait_for_img(img_name="Castle_Wars", category="Teleports", should_click=True, click_middle=True, threshold=0.95)
+        x, y = get_existing_img_xy()
+        adj_xy = x + 10, y + 5
+        CACHED_CWARS_TELE_XY = adj_xy
     return
 
 
