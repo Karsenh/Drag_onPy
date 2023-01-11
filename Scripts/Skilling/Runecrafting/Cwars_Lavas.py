@@ -1,11 +1,12 @@
 import API.AntiBan
-from API.Interface.General import setup_interface, is_tab_open
+from API.Interface.General import setup_interface, is_tab_open, is_run_gt, is_run_on
 from API.Interface.Bank import is_bank_open, is_bank_tab_open, is_withdraw_qty, close_bank, deposit_all
 from API.Imaging.Image import wait_for_img, does_img_exist, get_existing_img_xy
 from API.Mouse import mouse_click, mouse_long_click
 from API.Debug import write_debug
 
 USE_STAMS = True
+NEEDS_STAM = False
 
 ROD_EQUIPPED = False
 NECK_EQUIPPED = False
@@ -21,6 +22,7 @@ DEGRADED_POUCH_EXISTS = False
 
 MAGIC_BANK_TAB = 1
 JEWELRY_BANK_TAB = 2
+HERBLORE_BANK_TAK = 6
 
 CACHED_SMALL_FILL_XY = None
 CACHED_SMALL_EMPTY_XY = None
@@ -45,6 +47,7 @@ def start_crafting_lavas(curr_loop):
         print(f'Not the first loop')
 
         # Add check for run energy gt however much needed for full run - if not wd stam and use
+        check_run()
 
         # Add check for degraded pouches
         fix_pouches()
@@ -134,6 +137,8 @@ def replenish_missing_items():
     global POUCHES_TO_USE_ARR
     global HAS_ESS_POUCH_ARR
 
+    global NEEDS_STAM
+
     print(f'⁉️ROD_EQUIPPED = {ROD_EQUIPPED}'
           f'\nNECK_EQUIPPED = {NECK_EQUIPPED}'
           f'\nTIARA_EQUIPPED = {TIARA_EQUIPPED}'
@@ -143,8 +148,30 @@ def replenish_missing_items():
           f'\nPOUCHES_TO_USE_ARR = {POUCHES_TO_USE_ARR}'
           f'\nHAS_ESS_POUCH_ARR = {HAS_ESS_POUCH_ARR}')
 
+    if NEEDS_STAM:
+        is_bank_tab_open("6", True)
+        deposit_ess()
+        is_withdraw_qty("1", True)
+        does_img_exist(img_name="Banked_Stam_4", script_name="Cwars_Lavas", threshold=0.97, should_click=True,
+                       click_middle=True)
+        close_bank()
+        does_img_exist(img_name="Inventory_Stam", script_name="Cwars_Lavas", threshold=0.95, should_click=True, click_middle=True)
+        x, y, = get_existing_img_xy()
+        adj_stam_xy = x+2, y+12
+        for i in range(3):
+            API.AntiBan.sleep_between(3.0, 3.1)
+            mouse_click(adj_stam_xy)
+        if wait_for_img(img_name="Inventory_Vial", script_name="Cwars_Lavas", threshold=0.97, max_wait_sec=3):
+            x, y = get_existing_img_xy()
+            adj_vial_xy = x+2, y+16
+            mouse_long_click(adj_vial_xy)
+            does_img_exist(img_name="Drop", category="General", threshold=0.9, should_click=True, click_middle=True)
+        NEEDS_STAM = False
+        open_bank_chest()
+
     if not ROD_EQUIPPED:
         is_bank_tab_open(JEWELRY_BANK_TAB, True)
+        deposit_ess()
         is_withdraw_qty(qty="1", should_click=True)
         does_img_exist(img_name="Banked_Rod", script_name="Cwars_Lavas", should_click=True, threshold=0.985)
         API.AntiBan.sleep_between(1.5, 1.6)
@@ -155,6 +182,7 @@ def replenish_missing_items():
 
     if not NECK_EQUIPPED:
         is_bank_tab_open(JEWELRY_BANK_TAB, True)
+        deposit_ess()
         is_withdraw_qty("1", True)
         if not does_img_exist(img_name="Banked_Necklace", script_name="Cwars_Lavas", threshold=0.97, should_click=True, click_middle=True):
             write_debug(f"Failed to find banked Binding Necklace")
@@ -174,6 +202,7 @@ def replenish_missing_items():
 
     if not TIARA_EQUIPPED:
         is_bank_tab_open(MAGIC_BANK_TAB, True)
+        deposit_ess()
         is_withdraw_qty("1", True)
         if not does_img_exist(img_name="Banked_Tiara", script_name="Cwars_Lavas", should_click=True, click_middle=True,
                        threshold=0.95):
@@ -187,6 +216,7 @@ def replenish_missing_items():
 
     if not STAFF_EQUIPPED:
         is_bank_tab_open(MAGIC_BANK_TAB, True)
+        deposit_ess()
         is_withdraw_qty("1", True)
         if not wait_for_img(img_name="Banked_Steam_Staff", script_name="Cwars_Lavas", threshold=0.992, should_click=True,
                        click_middle=True):
@@ -202,12 +232,14 @@ def replenish_missing_items():
     if not RUNE_POUCH_INVENT:
         print(f'Rune Pouch Missing')
         is_bank_tab_open(MAGIC_BANK_TAB, True)
+        deposit_ess()
         is_withdraw_qty(qty="1", should_click=True)
         RUNE_POUCH_INVENT = does_img_exist(img_name="Banked_Rune_Pouch", script_name="Cwars_Lavas", should_click=True, click_middle=True)
 
     if not any(HAS_ESS_POUCH_ARR):
         print(f'Missing at least one essence pouch')
         is_bank_tab_open(MAGIC_BANK_TAB, True)
+        deposit_ess()
         is_withdraw_qty(qty="1", should_click=True)
         pouch_idx = 0
         for has_pouch in HAS_ESS_POUCH_ARR:
@@ -220,10 +252,17 @@ def replenish_missing_items():
     if not EARTH_RUNES_INVENT:
         print(f'Earth Runes Missing')
         is_bank_tab_open(MAGIC_BANK_TAB, True)
+        deposit_ess()
         is_withdraw_qty(qty="all", should_click=True)
         EARTH_RUNES_INVENT = does_img_exist(img_name="Banked_Earth_Runes", script_name="Cwars_Lavas", should_click=True, click_middle=True, threshold=0.98)
 
     return True
+
+
+def deposit_ess():
+    is_withdraw_qty("all", True)
+    does_img_exist(img_name="Inventory_Ess", script_name="Cwars_Lavas", threshold=0.9, should_click=True, click_middle=True)
+    return
 
 
 def withdraw_ess():
@@ -508,3 +547,11 @@ def fix_pouches():
     return
 
 
+def check_run():
+    global USE_STAMS
+    global NEEDS_STAM
+
+    if not is_run_gt(percent="10"):
+        NEEDS_STAM = True
+
+    return
