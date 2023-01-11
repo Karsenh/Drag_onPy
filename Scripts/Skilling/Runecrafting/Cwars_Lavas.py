@@ -263,7 +263,7 @@ def fill_pouch(pouch_size):
                     CACHED_SMALL_FILL_XY = get_existing_img_xy()
                 else:
                     print(f"Couldn't find Small Fill Image to save XY - Checking for Empty.")
-                    if does_img_exist(img_name="Empty", script_name="Cwars_Lavas", threshold=0.9):
+                    if does_img_exist(img_name="Empty", category="General", threshold=0.9):
                         CACHED_SMALL_EMPTY_XY = get_existing_img_xy()
                         CACHED_SMALL_FILL_XY = CACHED_SMALL_EMPTY_XY
             return
@@ -277,7 +277,7 @@ def fill_pouch(pouch_size):
                     CACHED_MEDIUM_FILL_XY = get_existing_img_xy()
                 else:
                     print(f"Couldn't find Medium Fill Image to save XY - returning.")
-                    if does_img_exist(img_name="Empty", script_name="Cwars_Lavas", threshold=0.9):
+                    if does_img_exist(img_name="Empty", category="General", threshold=0.9):
                         CACHED_MEDIUM_EMPTY_XY = get_existing_img_xy()
                         CACHED_MEDIUM_FILL_XY = CACHED_MEDIUM_EMPTY_XY
             return
@@ -291,7 +291,7 @@ def fill_pouch(pouch_size):
                     CACHED_LARGE_FILL_XY = get_existing_img_xy()
                 else:
                     print(f"Couldn't find Large Fill Image to save XY - returning.")
-                    if does_img_exist(img_name="Empty", script_name="Cwars_Lavas", threshold=0.9):
+                    if does_img_exist(img_name="Empty", category="General", threshold=0.9):
                         CACHED_LARGE_EMPTY_XY = get_existing_img_xy()
                         CACHED_LARGE_FILL_XY = CACHED_LARGE_EMPTY_XY
             return
