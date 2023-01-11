@@ -128,7 +128,7 @@ def check_quest_tab(reopen_inventory):
             random_scroll = random.randint(-350, 350)
             write_debug(f'Scrolling: {random_scroll}')
             pag.hscroll(random_scroll)
-            sleep_between(0.2, 0.5)
+            sleep_between(0.3, 0.5)
 
     sleep_between(0.6, 2.6)
     if not reopen_inventory:

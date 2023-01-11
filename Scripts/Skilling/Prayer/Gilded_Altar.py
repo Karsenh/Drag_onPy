@@ -71,7 +71,7 @@ def move_to_altar(curr_loop):
     # Move to the house ad tile near the poh portal
     mouse_click(house_ad_tile_xy)
 
-    API.AntiBan.sleep_between(4.0, 4.1)
+    API.AntiBan.sleep_between(5.0, 5.1)
 
     # Wait for house_ad image (we're next to house ad)
     if wait_for_img(img_name="house_ad", script_name="Gilded_Altar", threshold=0.75, max_wait_sec=8):
