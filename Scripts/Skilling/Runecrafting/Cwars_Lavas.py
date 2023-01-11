@@ -402,6 +402,7 @@ def teleport_to_duel_arena():
         if wait_for_img(img_name="Equipped_Rod", script_name="Cwars_Lavas", threshold=0.9):
             x, y = get_existing_img_xy()
             adj_xy = x+10, y+10
+            mouse_long_click(CACHED_EQUIPPED_ROD_XY)
             CACHED_EQUIPPED_ROD_XY = adj_xy
         else:
             write_debug(f"Failed to find Equipped rod")
@@ -470,6 +471,7 @@ def teleport_to_cwars():
         x, y = get_existing_img_xy()
         adjusted_xy = x+10, y+10
         mouse_long_click(adjusted_xy)
+        CACHED_EQUIPPED_ROD_XY = adjusted_xy
 
     if does_img_exist(img_name="Last_Rod_Charge", script_name="Cwars_Lavas", threshold=0.85):
         ROD_EQUIPPED = False
