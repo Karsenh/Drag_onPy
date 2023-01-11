@@ -232,7 +232,7 @@ def withdraw_ess():
     else:
         if wait_for_img(img_name="Banked_Ess", script_name="Cwars_Lavas", threshold=0.97, should_click=True, click_middle=True, img_sel="last"):
             x, y = get_existing_img_xy()
-            adj_xy = x+6, y+6
+            adj_xy = x+22, y+6
             CACHED_BANKED_ESS_XY = adj_xy
             return True
         else:
