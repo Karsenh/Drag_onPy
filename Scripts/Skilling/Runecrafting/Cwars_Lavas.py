@@ -31,6 +31,8 @@ CACHED_MEDIUM_EMPTY_XY = None
 CACHED_LARGE_FILL_XY = None
 CACHED_LARGE_EMPTY_XY = None
 
+CACHED_EARTHS_XY = None
+
 
 def start_crafting_lavas(curr_loop):
     if curr_loop != 1:
@@ -264,8 +266,10 @@ def fill_pouch(pouch_size):
                 else:
                     print(f"Couldn't find Small Fill Image to save XY - Checking for Empty.")
                     if does_img_exist(img_name="Empty", category="General", threshold=0.9):
-                        CACHED_SMALL_EMPTY_XY = get_existing_img_xy()
-                        CACHED_SMALL_FILL_XY = CACHED_SMALL_EMPTY_XY
+                        x, y = get_existing_img_xy()
+                        adj_xy = x + 10, y + 8
+                        CACHED_SMALL_FILL_XY = adj_xy
+                        does_img_exist(img_name="Cancel", script_name="Cwars_Lavas", threshold=0.9, should_click=True, click_middle=True)
             return
 
         case "Medium":
@@ -278,8 +282,10 @@ def fill_pouch(pouch_size):
                 else:
                     print(f"Couldn't find Medium Fill Image to save XY - returning.")
                     if does_img_exist(img_name="Empty", category="General", threshold=0.9):
-                        CACHED_MEDIUM_EMPTY_XY = get_existing_img_xy()
-                        CACHED_MEDIUM_FILL_XY = CACHED_MEDIUM_EMPTY_XY
+                        x, y = get_existing_img_xy()
+                        adj_xy = x + 10, y + 8
+                        CACHED_MEDIUM_FILL_XY = adj_xy
+                        does_img_exist(img_name="Cancel", script_name="Cwars_Lavas", threshold=0.9, should_click=True, click_middle=True)
             return
 
         case "Large":
@@ -292,8 +298,10 @@ def fill_pouch(pouch_size):
                 else:
                     print(f"Couldn't find Large Fill Image to save XY - returning.")
                     if does_img_exist(img_name="Empty", category="General", threshold=0.9):
-                        CACHED_LARGE_EMPTY_XY = get_existing_img_xy()
-                        CACHED_LARGE_FILL_XY = CACHED_LARGE_EMPTY_XY
+                        x, y = get_existing_img_xy()
+                        adj_xy = x + 10, y + 8
+                        CACHED_LARGE_FILL_XY = adj_xy
+                        does_img_exist(img_name="Cancel", script_name="Cwars_Lavas", threshold=0.9, should_click=True, click_middle=True)
             return
     return
 
@@ -398,8 +406,15 @@ def cast_imbue():
 
 
 def craft_lavas():
+    global CACHED_EARTHS_XY
+
     is_tab_open("inventory", True)
-    wait_for_img(img_name="Inventory_Earth_Runes", script_name="Cwars_Lavas", should_click=True, click_middle=True, threshold=0.85)
+    if CACHED_EARTHS_XY:
+        mouse_click(CACHED_EARTHS_XY)
+    else:
+        wait_for_img(img_name="Inventory_Earth_Runes", script_name="Cwars_Lavas", should_click=True, click_middle=True, threshold=0.85)
+        CACHED_EARTHS_XY = get_existing_img_xy()
+
     wait_for_img(img_name="Fire_Altar", script_name="Cwars_Lavas", should_click=True, threshold=0.92, click_middle=True)
     return
 
