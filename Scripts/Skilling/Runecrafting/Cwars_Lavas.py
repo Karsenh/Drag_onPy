@@ -34,6 +34,11 @@ CACHED_LARGE_EMPTY_XY = None
 CACHED_EARTHS_XY = None
 CACHED_BANKED_ESS_XY = None
 
+CACHED_CWARS_TELE_XY = None
+CACHED_DA_TELE_XY = None
+
+CACHED_EQUIPPED_ROD_XY = None
+
 
 def start_crafting_lavas(curr_loop):
     if curr_loop != 1:
@@ -387,12 +392,28 @@ def empty_pouches():
 
 
 def teleport_to_duel_arena():
+    global CACHED_DA_TELE_XY
+    global CACHED_EQUIPPED_ROD_XY
+
     is_tab_open("equipment", True)
-    wait_for_img(img_name="Equipped_Rod", script_name="Cwars_Lavas", threshold=0.9)
-    x, y = get_existing_img_xy()
-    adjusted_xy = x+10, y+10
-    mouse_long_click(adjusted_xy)
-    wait_for_img(img_name="Duel_Arena", category="Teleports", threshold=0.8, should_click=True, click_middle=True)
+    if CACHED_EQUIPPED_ROD_XY:
+        mouse_click(CACHED_EQUIPPED_ROD_XY)
+    else:
+        if wait_for_img(img_name="Equipped_Rod", script_name="Cwars_Lavas", threshold=0.9):
+            x, y = get_existing_img_xy()
+            adj_xy = x+10, y+10
+            CACHED_EQUIPPED_ROD_XY = adj_xy
+        else:
+            write_debug(f"Failed to find Equipped rod")
+            return False
+
+    if CACHED_DA_TELE_XY:
+        mouse_click(CACHED_DA_TELE_XY)
+    else:
+        wait_for_img(img_name="Duel_Arena", category="Teleports", threshold=0.8, should_click=True, click_middle=True)
+        x, y = get_existing_img_xy()
+        adj_xy = x+8, y+5
+        CACHED_DA_TELE_XY = adj_xy
     return
 
 
@@ -427,7 +448,7 @@ def craft_lavas():
         wait_for_img(img_name="Inventory_Earth_Runes", script_name="Cwars_Lavas", should_click=True, click_middle=True, threshold=0.85)
         CACHED_EARTHS_XY = get_existing_img_xy()
 
-    wait_for_img(img_name="Fire_Altar", script_name="Cwars_Lavas", should_click=True, threshold=0.92, click_middle=True)
+    wait_for_img(img_name="Fire_Altar", script_name="Cwars_Lavas", should_click=True, threshold=0.92, x_offset=20)
     return
 
 
