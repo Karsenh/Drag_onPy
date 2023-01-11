@@ -153,7 +153,7 @@ def replenish_missing_items():
         is_bank_tab_open(MAGIC_BANK_TAB, True)
         is_withdraw_qty("1", True)
         does_img_exist(img_name="Banked_Tiara", script_name="Cwars_Lavas", should_click=True, click_middle=True,
-                       threshold=0.96)
+                       threshold=0.95)
         API.AntiBan.sleep_between(1, 1.1)
         wait_for_img(img_name="Inventory_Tiara", script_name="Cwars_Lavas", threshold=0.95, img_sel="first")
         mouse_long_click(get_existing_img_xy())
@@ -185,7 +185,7 @@ def replenish_missing_items():
         for has_pouch in HAS_ESS_POUCH_ARR:
             if not has_pouch:
                 need_pouch_size = POUCHES_TO_USE_ARR[pouch_idx]
-                does_img_exist(img_name=f"Banked_{need_pouch_size}_Pouch", script_name="Cwars_Lavas", threshold=0.96, should_click=True, click_middle=True)
+                does_img_exist(img_name=f"Banked_{need_pouch_size}_Pouch", script_name="Cwars_Lavas", threshold=0.94, should_click=True, click_middle=True)
 
             pouch_idx += 1
 
@@ -201,7 +201,7 @@ def replenish_missing_items():
 def withdraw_ess():
     is_bank_tab_open(MAGIC_BANK_TAB, True)
     is_withdraw_qty("all", True)
-    return wait_for_img(img_name="Banked_Ess", script_name="Cwars_Lavas", threshold=0.98, should_click=True, click_middle=True,
+    return wait_for_img(img_name="Banked_Ess", script_name="Cwars_Lavas", threshold=0.97, should_click=True, click_middle=True,
                  img_sel="last")
 
 
@@ -358,7 +358,7 @@ def move_to_ruins():
 
 
 def move_to_altar():
-    return wait_for_img(img_name="Move_to_altar", script_name="Cwars_Lavas", threshold=0.98, should_click=True, x_offset=60, y_offset=-12)
+    return wait_for_img(img_name="Move_to_altar", script_name="Cwars_Lavas", threshold=0.96, should_click=True, x_offset=60, y_offset=-12)
 
 
 def cast_imbue():

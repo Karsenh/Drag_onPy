@@ -175,7 +175,7 @@ def launch_script(script_name="pisc_iron"):
             selected_script = ScriptEnum.HOSIDIUS_FRUIT.value
             antiban_likelihood = 10
             antiban_downtime_sec = 10
-        case "gilded_altar":
+        case "Gilded_Altar":
             selected_script = ScriptEnum.GILDED_ALTAR.value
             antiban_likelihood = 20
             antiban_downtime_sec = 5
