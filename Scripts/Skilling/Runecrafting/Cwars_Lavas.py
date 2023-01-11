@@ -278,7 +278,7 @@ def fill_pouch(pouch_size):
                 print(f'Cached_small_fill_xy = {CACHED_SMALL_FILL_XY}')
                 mouse_click(CACHED_SMALL_FILL_XY)
             else:
-                if wait_for_img(img_name="Fill", category="General", should_click=True, click_middle=True, threshold=0.9, max_wait_sec=2):
+                if wait_for_img(img_name="Fill", category="General", should_click=True, click_middle=True, threshold=0.9, max_wait_sec=1):
                     CACHED_SMALL_FILL_XY = get_existing_img_xy()
                 else:
                     print(f"Couldn't find Small Fill Image to save XY - Checking for Empty.")
@@ -294,7 +294,7 @@ def fill_pouch(pouch_size):
                 print(f'Cached_medium_fill_xy = {CACHED_MEDIUM_FILL_XY}')
                 mouse_click(CACHED_MEDIUM_FILL_XY)
             else:
-                if wait_for_img(img_name="Fill", category="General", should_click=True, click_middle=True, threshold=0.9, max_wait_sec=2):
+                if wait_for_img(img_name="Fill", category="General", should_click=True, click_middle=True, threshold=0.9, max_wait_sec=1):
                     CACHED_MEDIUM_FILL_XY = get_existing_img_xy()
                 else:
                     print(f"Couldn't find Medium Fill Image to save XY - returning.")
@@ -310,7 +310,7 @@ def fill_pouch(pouch_size):
                 print(f'Cached_large_fill_xy = {CACHED_LARGE_FILL_XY}')
                 mouse_click(CACHED_LARGE_FILL_XY)
             else:
-                if wait_for_img(img_name="Fill", category="General", should_click=True, click_middle=True, threshold=0.9, max_wait_sec=2):
+                if wait_for_img(img_name="Fill", category="General", should_click=True, click_middle=True, threshold=0.9, max_wait_sec=1):
                     CACHED_LARGE_FILL_XY = get_existing_img_xy()
                 else:
                     print(f"Couldn't find Large Fill Image to save XY - returning.")
@@ -402,8 +402,8 @@ def teleport_to_duel_arena():
         if wait_for_img(img_name="Equipped_Rod", script_name="Cwars_Lavas", threshold=0.9):
             x, y = get_existing_img_xy()
             adj_xy = x+10, y+10
-            mouse_long_click(CACHED_EQUIPPED_ROD_XY)
             CACHED_EQUIPPED_ROD_XY = adj_xy
+            mouse_long_click(CACHED_EQUIPPED_ROD_XY)
         else:
             write_debug(f"Failed to find Equipped rod")
             return False
@@ -470,8 +470,8 @@ def teleport_to_cwars():
         does_img_exist(img_name="Equipped_Rod", script_name="Cwars_Lavas", threshold=0.95)
         x, y = get_existing_img_xy()
         adjusted_xy = x+10, y+10
-        mouse_long_click(adjusted_xy)
         CACHED_EQUIPPED_ROD_XY = adjusted_xy
+        mouse_long_click(CACHED_EQUIPPED_ROD_XY)
 
     if does_img_exist(img_name="Last_Rod_Charge", script_name="Cwars_Lavas", threshold=0.85):
         ROD_EQUIPPED = False
