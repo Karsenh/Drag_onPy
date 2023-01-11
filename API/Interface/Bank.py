@@ -93,7 +93,7 @@ def is_withdraw_qty(qty="all", should_click=True):
 
     if not is_selected and should_click:
         mouse_click(coords_to_check)
-        sleep_between(0.7, 0.9)
+        sleep_between(0.3, 0.4)
 
     return is_selected
 

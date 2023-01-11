@@ -93,7 +93,7 @@ def does_img_exist(img_name, script_name=None, category='Scripts', threshold=0.8
 
     template = cv2.imread(template_img_path, 0)
 
-    print(f'🔴 template shape: {template.shape}')
+    # print(f'🔴 template shape: {template.shape}')
     temp_height, temp_width = template.shape
     temp_middle_height = temp_height / 2
     temp_middle_width = temp_width / 2

@@ -79,7 +79,7 @@ def mouse_long_click(xy):
 
     pag.mouseDown()
     # API.AntiBan.sleep_between(0.4, 0.5)
-    time.sleep(0.45)
+    time.sleep(0.35)
     pag.mouseUp()
     return
 

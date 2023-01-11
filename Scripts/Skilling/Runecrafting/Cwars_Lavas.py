@@ -52,7 +52,8 @@ def start_crafting_lavas(curr_loop):
         fill_pouches()
         close_bank()
         teleport_to_duel_arena()
-        move_to_ruins()
+        if not move_to_ruins():
+            return False
         move_to_altar()
         API.AntiBan.sleep_between(0.6, 0.7)
         cast_imbue()
@@ -173,7 +174,7 @@ def replenish_missing_items():
         API.AntiBan.sleep_between(1, 1.1)
         wait_for_img(img_name="Inventory_Tiara", script_name="Cwars_Lavas", threshold=0.95, img_sel="first")
         mouse_long_click(get_existing_img_xy())
-        wait_for_img(img_name="Wear", category="General", should_click=True, click_middle=True)
+        TIARA_EQUIPPED = wait_for_img(img_name="Wear", category="General", should_click=True, click_middle=True)
         deposit_all()
 
     if not STAFF_EQUIPPED:
@@ -188,6 +189,7 @@ def replenish_missing_items():
             mouse_long_click(get_existing_img_xy())
             wait_for_img(img_name="Wield", category="General", should_click=True, click_middle=True)
             deposit_all()
+            STAFF_EQUIPPED = True
 
     if not RUNE_POUCH_INVENT:
         print(f'Rune Pouch Missing')
@@ -367,7 +369,9 @@ def teleport_to_duel_arena():
 
 
 def move_to_ruins():
-    wait_for_img(img_name="Minimap_Ruins", script_name="Cwars_Lavas", should_click=True, threshold=0.92, y_offset=4, x_offset=-6)
+    if not wait_for_img(img_name="Minimap_Ruins", script_name="Cwars_Lavas", should_click=True, threshold=0.90, y_offset=4, x_offset=-6):
+        write_debug(f"Failed to find Minimap_Ruins... Exiting.")
+        return False
     if not wait_for_img(img_name="Enter_Ruins", script_name="Cwars_Lavas", threshold=0.80, max_wait_sec=10, should_click=True, click_middle=True):
         print(f'Couldnt find Enter Ruins image - manually entering')
         manual_enter_ruins_xy = 810, 314
