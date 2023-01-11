@@ -244,6 +244,10 @@ def fill_pouch(pouch_size):
     global CACHED_MEDIUM_FILL_XY
     global CACHED_LARGE_FILL_XY
 
+    global CACHED_SMALL_EMPTY_XY
+    global CACHED_MEDIUM_EMPTY_XY
+    global CACHED_LARGE_EMPTY_XY
+
     does_img_exist(img_name=f"Inventory_{pouch_size}_Pouch", script_name="Cwars_Lavas", threshold=0.95, img_sel="first")
     mouse_long_click(get_existing_img_xy())
 
@@ -258,8 +262,12 @@ def fill_pouch(pouch_size):
                 if wait_for_img(img_name="Fill", category="General", should_click=True, click_middle=True, threshold=0.9, max_wait_sec=2):
                     CACHED_SMALL_FILL_XY = get_existing_img_xy()
                 else:
-                    print(f"Couldn't find Small Fill Image to save XY - returning.")
-                    return
+                    print(f"Couldn't find Small Fill Image to save XY - Checking for Empty.")
+                    if does_img_exist(img_name="Empty", script_name="Cwars_Lavas", threshold=0.9):
+                        CACHED_SMALL_EMPTY_XY = get_existing_img_xy()
+                        CACHED_SMALL_FILL_XY = CACHED_SMALL_EMPTY_XY
+            return
+
         case "Medium":
             if CACHED_MEDIUM_FILL_XY:
                 print(f'Cached_medium_fill_xy = {CACHED_MEDIUM_FILL_XY}')
@@ -269,7 +277,11 @@ def fill_pouch(pouch_size):
                     CACHED_MEDIUM_FILL_XY = get_existing_img_xy()
                 else:
                     print(f"Couldn't find Medium Fill Image to save XY - returning.")
-                    return
+                    if does_img_exist(img_name="Empty", script_name="Cwars_Lavas", threshold=0.9):
+                        CACHED_MEDIUM_EMPTY_XY = get_existing_img_xy()
+                        CACHED_MEDIUM_FILL_XY = CACHED_MEDIUM_EMPTY_XY
+            return
+
         case "Large":
             if CACHED_LARGE_FILL_XY:
                 print(f'Cached_large_fill_xy = {CACHED_LARGE_FILL_XY}')
@@ -279,12 +291,10 @@ def fill_pouch(pouch_size):
                     CACHED_LARGE_FILL_XY = get_existing_img_xy()
                 else:
                     print(f"Couldn't find Large Fill Image to save XY - returning.")
-                    return
-
-
-    # does_img_exist(img_name=f"Inventory_{pouch_size}_Pouch", script_name="Cwars_Lavas", threshold=0.95, img_sel="first")
-    # mouse_long_click(get_existing_img_xy())
-    # wait_for_img(img_name="Fill", category="General", should_click=True, click_middle=True, threshold=0.9, max_wait_sec=2)
+                    if does_img_exist(img_name="Empty", script_name="Cwars_Lavas", threshold=0.9):
+                        CACHED_LARGE_EMPTY_XY = get_existing_img_xy()
+                        CACHED_LARGE_FILL_XY = CACHED_LARGE_EMPTY_XY
+            return
     return
 
 
@@ -297,7 +307,6 @@ def fill_pouches():
         fill_pouch(pouch_size)
 
     withdraw_ess()
-
     return
 
 
@@ -354,7 +363,6 @@ def empty_pouches():
         if pouch_size == "Giant":
             craft_lavas()
         empty_pouch(pouch_size)
-
     return
 
 
@@ -436,21 +444,6 @@ def fix_pouches():
         wait_for_img(img_name="Repair_Pouches", script_name="Cwars_Lavas", should_click=True, click_middle=True, threshold=0.9)
         wait_for_img(img_name="Tap_To_Cont", script_name="Cwars_Lavas", should_click=True, click_middle=True, threshold=0.9, max_wait_sec=10)
         DEGRADED_POUCH_EXISTS = False
-
     return
 
-
-# PSEUDO-CODE
-
-
-# Start - cwars bank chest
-
-# Check equipment - Ring of Dueling
-    # ROD_EQUIPPED = True
-# Check equipment - Binding Necklace
-    # NECK_EQUIPPED = True
-# Check equipment - Fire tiara
-    # TIARA_EQUIPPED = True
-# Check equipment - Mist staff
-    # STAFF_EQUIPPED = True
 
