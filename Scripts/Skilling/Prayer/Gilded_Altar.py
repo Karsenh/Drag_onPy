@@ -45,6 +45,8 @@ def unnote_bones():
     global phials_xy
     tries = 0
 
+    is_tab_open("inventory", True)
+
     # wait till we see phials
     if wait_for_img(img_name="phials", script_name="Gilded_Altar", threshold=0.75, max_wait_sec=10):
         mouse_click(INVENT_slot_1)
