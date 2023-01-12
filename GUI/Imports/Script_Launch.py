@@ -32,6 +32,7 @@ from Scripts.Skilling.Construction.Con_Mahog_Tables import start_constructing_ta
 from Scripts.Skilling.Hunter.Desert_Lizards import start_catching_desert_lizards
 from Scripts.Skilling.Hunter.Red_Lizards import start_catching_red_lizards
 from Scripts.Skilling.Runecrafting.Cwars_Lavas import start_crafting_lavas
+from Scripts.Skilling.Mining.Motherlode_Miner import start_motherlode_mining
 
 from enum import Enum
 import API
@@ -90,6 +91,7 @@ def launch_script(script_name="pisc_iron"):
         RED_LIZARDS = 31
         SW_TEAKS = 32
         CWARS_LAVAS = 33
+        MOTHERLODE_MINER = 34
 
     all_scripts = [mine_iron_pisc, smith_gold_edge, run_gnome_course,
                    fish_draynor_shrimp, fish_barb_trout, barbarian_fishing,
@@ -102,7 +104,7 @@ def launch_script(script_name="pisc_iron"):
                    start_killing_kourend_crabs, start_crafting_dhide_bodies, start_chopping_teaks,
                    start_superheating_gold, start_constructing_larders, start_constructing_tables,
                    start_catching_desert_lizards, start_catching_red_lizards, start_chopping_sw_teaks,
-                   start_crafting_lavas]
+                   start_crafting_lavas, start_motherlode_mining]
 
     match script_name:
         case "pisc_iron":
@@ -246,6 +248,11 @@ def launch_script(script_name="pisc_iron"):
             selected_script = ScriptEnum.CWARS_LAVAS.value
             antiban_likelihood = 12
             antiban_downtime_sec = 5
+            reopen_invent = True
+        case "Motherlode_Miner":
+            selected_script = ScriptEnum.MOTHERLODE_MINER.value
+            antiban_likelihood = 25
+            antiban_downtime_sec = 3
             reopen_invent = True
 
     is_timer_set = is_break_timer_set()

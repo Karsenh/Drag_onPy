@@ -65,6 +65,22 @@ def does_color_exist(check_color, xy):
         return False
 
 
+def does_color_exist_in_thresh(color_xy, check_color, threshold=15):
+    curr_color = get_color_at_coords(color_xy)
+    curr_color_idx = 0
+    for val in curr_color:
+        print(f'Val: {val}')
+        curr_color_diff = check_color[curr_color_idx] - val
+        if curr_color_diff < -1:
+            curr_color_diff = curr_color_diff * -1
+        print(f'Curr_color_diff = {curr_color_diff} > {threshold} (thresh) ? {curr_color_diff > threshold}')
+        if curr_color_diff > threshold:
+            return False
+
+        curr_color_idx += 1
+    return True
+
+
 def get_color_at_coords(xy):
     x, y = xy
     capture_bluestacks()
