@@ -17,7 +17,8 @@ def start_motherlode_mining(curr_loop):
             # Drop shit off in sluice and deposit ore in bank then return and continue mining
             move_to_midway_from("Ore")
             mine_midway_obstacle("Ore")
-            move_to_sluice()
+            if not move_to_sluice():
+                return False
             curr_spot = fix_broken_wheels()
             API.AntiBan.sleep_between(0.3, 0.4)
 
@@ -30,15 +31,16 @@ def start_motherlode_mining(curr_loop):
 
             load_hopper_from(curr_spot)
             claim_ore()
-            deposit_ore()
+            if not deposit_ore():
+                return False
             move_to_midway_from("Box")
+            CURR_SPOT = 1
             if mine_midway_obstacle("Box"):
                 if resume_spot_1_from_midway():
-                    CURR_SPOT = 1
                     API.AntiBan.sleep_between(3.0, 3.1)
                     return True
                 else:
-                    manual_spot_1_xy = 771, 119
+                    manual_spot_1_xy = 771, 130
                     mouse_click(manual_spot_1_xy)
                     API.AntiBan.sleep_between(3.5, 3.6)
         if not is_mining():
@@ -84,12 +86,12 @@ def is_mining():
 
 
 def is_invent_full():
+    global CURR_SPOT
     is_tab_open("inventory", True)
     ore_color_xy = 1348, 800  # 31, 34, 31
     exists_color = 35, 35, 35
     if get_color_at_coords(ore_color_xy) > exists_color:
         print(f'No ore found in last inventory slot')
-        is_tab_open("inventory", False)
         return False
     else:
         print(f'Found ore in last inventory slot')
@@ -104,9 +106,13 @@ def find_and_mine_next_spot():
     global CURR_SPOT
     global SEARCHING_FOR_SPOT
 
+    attempts = 0
     search_offset = 1
 
     print(f"Find_and_mine CURR_SPOT: {CURR_SPOT} | SEARCHING_FOR_SPOT = {SEARCHING_FOR_SPOT} | search_offset = {search_offset}")
+
+    if CURR_SPOT > 8:
+        is_tab_open("inventory", False)
 
     if CURR_SPOT == 11:
         is_tab_open("inventory", False)
@@ -115,23 +121,35 @@ def find_and_mine_next_spot():
             CURR_SPOT = 1
         else:
             # Manually click
-            manual_spot_1_xy = 1123, 678
+            manual_spot_1_xy = 1073, 717
             mouse_click(manual_spot_1_xy)
 
         API.AntiBan.sleep_between(3.0, 3.1)
         return
 
     while SEARCHING_FOR_SPOT:
+        print(f'ATTEMPS: {attempts} | ')
         if CURR_SPOT+search_offset == 12:
             search_offset = 1
-        if does_img_exist(img_name=f"Spot_{CURR_SPOT+search_offset}_From_{CURR_SPOT}", script_name="Motherlode_Miner", threshold=0.97, should_click=True, click_middle=True):
-            SEARCHING_FOR_SPOT = False
-            CURR_SPOT = CURR_SPOT+search_offset
-            print(f'Found and moving to new ore from {CURR_SPOT-search_offset}- Setting CURR_SPOT: {CURR_SPOT}')
-            API.AntiBan.sleep_between(3.5, 3.6)
-            return
+            attempts += 1
+        if attempts < 4:
+            if does_img_exist(img_name=f"Spot_{CURR_SPOT+search_offset}_From_{CURR_SPOT}", script_name="Motherlode_Miner", threshold=0.96, should_click=True, click_middle=True):
+                SEARCHING_FOR_SPOT = False
+                CURR_SPOT = CURR_SPOT+search_offset
+                attempts = 0
+                print(f'Found and moving to new ore from {CURR_SPOT-search_offset}- Setting CURR_SPOT: {CURR_SPOT}')
+                API.AntiBan.sleep_between(3.5, 3.6)
+                return
+            else:
+                search_offset += 1
         else:
-            search_offset += 1
+            if does_img_exist(img_name=f"Spot_{search_offset}_From_{CURR_SPOT}", script_name="Motherlode_Miner", threshold=0.97, should_click=True, click_middle=True):
+                SEARCHING_FOR_SPOT = False
+                attempts = 0
+                CURR_SPOT = CURR_SPOT+search_offset
+                print(f'Found and moving to new ore from {CURR_SPOT-search_offset}- Setting CURR_SPOT: {CURR_SPOT}')
+                API.AntiBan.sleep_between(3.5, 3.6)
+                return
 
     return
 
@@ -159,6 +177,9 @@ def mine_midway_obstacle(from_spot="Ore"):
         if does_img_exist(img_name=f"Midway_Rock_From_{from_spot}_2", script_name="Motherlode_Miner", threshold=0.9, should_click=True, click_middle=True):
             wait_for_img(img_name="Mining", category="Exp_Drops", threshold=0.90, max_wait_sec=10)
             return True
+        if does_img_exist(img_name=f"Midway_Rock_From_{from_spot}_3", script_name="Motherlode_Miner", threshold=0.9, should_click=True, click_middle=True):
+            wait_for_img(img_name="Mining", category="Exp_Drops", threshold=0.90, max_wait_sec=10)
+            return True
         else:
             print(f'Should manually click based on from_spot')
     return False
@@ -166,10 +187,12 @@ def mine_midway_obstacle(from_spot="Ore"):
 
 def move_to_sluice():
     # wait_for_img(img_name="Mining", category="Exp_Drops", threshold=0.90, max_wait_sec=10)
-    does_img_exist(img_name="Minimap_Sluice", script_name="Motherlode_Miner", threshold=0.9, should_click=True, click_middle=True)
+    if not does_img_exist(img_name="Minimap_Sluice", script_name="Motherlode_Miner", threshold=0.9, should_click=True, click_middle=True):
+        print(f"Failed to find Minimap Sluice move click")
+        return False
     is_tab_open("inventory", False)
     is_water_running()
-    return
+    return True
 
 
 def is_water_running():
@@ -222,34 +245,36 @@ def claim_ore():
             print(f"Claimed ore from sack - depositing")
             return True
         else:
-            does_img_exist(img_name="Empty_Sack", script_name="Motherlode_Miner", threshold=0.90)
-            print(f'Ore NOT claimed from sack for some reason - found empty sack. Water might have stopped.')
-            # Increase claim attempts
-            corner_xy = 1335, 123
-            mouse_click(corner_xy)
-            is_tab_open("inventory", False)
-            API.AntiBan.sleep_between(3.4, 3.5)
-            wait_for_img(img_name="Move_to_Corner", script_name="Motherlode_Miner", threshold=0.99, should_click=True)
-            curr_spot = fix_broken_wheels()
-            load_hopper_from(curr_spot)
-            if claim_ore():
-                return True
-            else:
-                return False
+            if does_img_exist(img_name="Empty_Sack", script_name="Motherlode_Miner", threshold=0.90):
+                print(f'Ore NOT claimed from sack for some reason - found empty sack. Water might have stopped.')
+                # Increase claim attempts
+                corner_xy = 1335, 123
+                mouse_click(corner_xy)
+                is_tab_open("inventory", False)
+                API.AntiBan.sleep_between(3.4, 3.5)
+                wait_for_img(img_name="Move_to_Corner", script_name="Motherlode_Miner", threshold=0.99, should_click=True)
+                curr_spot = fix_broken_wheels()
+                load_hopper_from(curr_spot)
+                if claim_ore():
+                    return True
+                else:
+                    return False
     else:
         print(f"Failed to find Claim Sack from Hopper for some reason")
         return False
 
 
 def deposit_ore():
-    minimap_deposit_box = 1368, 237
+    minimap_deposit_box = 1372, 233
     mouse_click(minimap_deposit_box)
 
-    if wait_for_img(img_name="Deposit_Box", script_name="Motherlode_Miner", threshold=0.98, should_click=True, click_middle=True):
+    if wait_for_img(img_name="Deposit_Box", script_name="Motherlode_Miner", threshold=0.92, should_click=True, click_middle=True, max_wait_sec=10):
         if wait_for_img(img_name="Inventory_Btn", script_name="Motherlode_Miner", threshold=0.85, should_click=True, click_middle=True):
             if wait_for_img(img_name="Hammer_Box", script_name="Motherlode_Miner", threshold=0.85, should_click=True, click_middle=True, max_wait_sec=14):
-                API.AntiBan.sleep_between(4.0, 4.1)
-                return True
+                if wait_for_img(img_name="Got_Hammer", script_name="Motherlode_Miner", threshold=0.9, max_wait_sec=8):
+                    return True
+
+    print(f"Something went wrong while depositing the ore...")
     return False
 
 
