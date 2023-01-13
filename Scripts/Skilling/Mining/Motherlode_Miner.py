@@ -236,10 +236,10 @@ def load_hopper_from(spot="Corner"):
 
 
 def claim_ore():
-    if wait_for_img(img_name="Claim_Sack", script_name="Motherlode_Miner", threshold=0.90):
+    if wait_for_img(img_name="Claim_Sack", script_name="Motherlode_Miner", threshold=0.85):
 
         API.AntiBan.sleep_between(1.0, 1.1)
-        does_img_exist(img_name="Claim_Sack", script_name="Motherlode_Miner", threshold=0.9, should_click=True, click_middle=True)
+        does_img_exist(img_name="Claim_Sack", script_name="Motherlode_Miner", threshold=0.85, should_click=True, click_middle=True)
 
         if wait_for_img(img_name="Collected_Ore", script_name="Motherlode_Miner", threshold=0.92, max_wait_sec=10):
             print(f"Claimed ore from sack - depositing")
