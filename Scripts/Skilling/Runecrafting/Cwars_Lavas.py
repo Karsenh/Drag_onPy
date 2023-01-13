@@ -65,7 +65,9 @@ def start_crafting_lavas(curr_loop):
         teleport_to_duel_arena()
         if not move_to_ruins():
             return False
-        move_to_altar()
+        if not move_to_altar():
+            manual_click_xy = 1044, 764
+            mouse_click(manual_click_xy)
         API.AntiBan.sleep_between(0.6, 0.7)
         cast_imbue()
         craft_lavas()
@@ -261,7 +263,12 @@ def replenish_missing_items():
 
 def deposit_ess():
     is_withdraw_qty("all", True)
-    does_img_exist(img_name="Inventory_Ess", script_name="Cwars_Lavas", threshold=0.9, should_click=True, click_middle=True)
+    if does_img_exist(img_name="Inventory_Ess", script_name="Cwars_Lavas", threshold=0.9):
+        x, y = get_existing_img_xy()
+        if x > 1000:
+            adj_xy = x+7, y+6
+            mouse_click(adj_xy)
+
     return
 
 

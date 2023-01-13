@@ -35,8 +35,9 @@ def __main__():
 
     # show_main_gui()
 
-    launch_script("Motherlode_Miner")
+    launch_script("Cwars_Lavas")
 
+    # wait_for_img(img_name="Claim_Sack", script_name="Motherlode_Miner", threshold=0.90, should_click=True, click_middle=True)
 
     # does_img_exist(img_name="Minimap_Midway_From_Box_Alt", script_name="Motherlode_Miner", threshold=0.95, should_click=True, x_offset=-1)
     # does_img_exist(img_name="Minimap_Midway_From_Box", script_name="Motherlode_Miner", threshold=0.9, should_click=True, y_offset=4)

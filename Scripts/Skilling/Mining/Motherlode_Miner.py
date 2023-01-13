@@ -48,7 +48,7 @@ def start_motherlode_mining(curr_loop):
 
     else:
         print(f"This is the first loop")
-        # setup_interface("west", 2, "up")
+        setup_interface("west", 2, "up")
         # Start in front of ore 1 on the west side
         start_mining_first_spot()
 
@@ -87,15 +87,20 @@ def is_mining():
 
 def is_invent_full():
     global CURR_SPOT
+    if does_img_exist(img_name="Too_Full", script_name="Motherlode_Miner", threshold=0.9):
+        print(f'Inventory full chat image found')
+        return True
+
     is_tab_open("inventory", True)
     ore_color_xy = 1348, 800  # 31, 34, 31
     exists_color = 35, 35, 35
-    if get_color_at_coords(ore_color_xy) > exists_color:
-        print(f'No ore found in last inventory slot')
-        return False
-    else:
-        print(f'Found ore in last inventory slot')
+
+    if does_color_exist_in_thresh(ore_color_xy, exists_color, 20):
+        print(f'Ore found in last inventory slot')
         return True
+    else:
+        print(f'No ore in last inventory slot')
+        return False
 
 
 def start_mining_first_spot():
@@ -236,10 +241,10 @@ def load_hopper_from(spot="Corner"):
 
 
 def claim_ore():
-    if wait_for_img(img_name="Claim_Sack", script_name="Motherlode_Miner", threshold=0.85):
+    if wait_for_img(img_name="Claim_Sack", script_name="Motherlode_Miner", threshold=0.90):
 
         API.AntiBan.sleep_between(1.0, 1.1)
-        does_img_exist(img_name="Claim_Sack", script_name="Motherlode_Miner", threshold=0.85, should_click=True, click_middle=True)
+        does_img_exist(img_name="Claim_Sack", script_name="Motherlode_Miner", threshold=0.90, should_click=True, click_middle=True)
 
         if wait_for_img(img_name="Collected_Ore", script_name="Motherlode_Miner", threshold=0.92, max_wait_sec=10):
             print(f"Claimed ore from sack - depositing")
