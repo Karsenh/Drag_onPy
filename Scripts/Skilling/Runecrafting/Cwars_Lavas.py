@@ -66,7 +66,7 @@ def start_crafting_lavas(curr_loop):
         if not move_to_ruins():
             return False
         if not move_to_altar():
-            manual_click_xy = 1044, 764
+            manual_click_xy = 1067, 763
             mouse_click(manual_click_xy)
         API.AntiBan.sleep_between(0.6, 0.7)
         cast_imbue()
