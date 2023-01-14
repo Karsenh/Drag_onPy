@@ -35,7 +35,10 @@ def __main__():
 
     # show_main_gui()
 
-    launch_script("Cwars_Lavas")
+    # launch_script("Cwars_Lavas")
+
+    does_img_exist(img_name="Combat_Chop", category="Interface", threshold=0.9, should_click=True, click_middle=True)
+
 
     # wait_for_img(img_name="Claim_Sack", script_name="Motherlode_Miner", threshold=0.90, should_click=True, click_middle=True)
 

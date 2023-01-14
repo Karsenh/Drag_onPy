@@ -69,3 +69,5 @@ EXIT_tab_xy = 1426, 787
 MAGIC_tab_xy = 35, 523
 
 EQUIPMENT_tab_xy = 1428, 460
+
+COMBAT_tab_xy = 34, 395

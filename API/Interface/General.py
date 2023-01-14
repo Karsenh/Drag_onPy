@@ -115,6 +115,8 @@ def is_tab_open(tab="inventory", should_be_open=True):
             check_tab_xy = MAGIC_tab_xy
         case "equipment":
             check_tab_xy = EQUIPMENT_tab_xy
+        case "combat":
+            check_tab_xy = COMBAT_tab_xy
 
     print(f'Check_tab_xy = {check_tab_xy} ({tab})')
 
