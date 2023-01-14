@@ -10,37 +10,49 @@ ATTACK_STYLE = "Defense"
 # 1 = NW tip (4 crabs)
 CRAB_SPOT = 1
 
+CURR_SPOT = 1
+
 
 def start_killing_kourend_crabs(curr_loop):
     global ATTACK_STYLE
     if curr_loop != 1:
-        if not is_fighting_crab(wait=6):
+        if not is_fighting_crab(wait=8):
             print(f'Not fighting crabs - Resetting aggro')
             reset_aggro()
 
     else:
-        setup_interface("east", 2, "up")
+        setup_interface("east", 1, "up")
         set_attack_style(ATTACK_STYLE)
+        set_curr_spot()
     return True
 
 
 def reset_aggro():
-    reset_xy = 1355, 73
-    move_back_xy = 1327, 275
+    global CURR_SPOT
 
-    if does_img_exist(img_name="Reset_Spot", script_name=SCRIPT_NAME, threshold=0.9):
-        run_sleep = handle_run()
-        mouse_click(reset_xy)
-        print(f'RUN SLEEP TIME: {run_sleep}')
-        API.AntiBan.sleep_between(run_sleep, run_sleep+1)
+    handle_run()
 
-    if does_img_exist(img_name="Training_Spot", script_name=SCRIPT_NAME, threshold=0.9):
-        run_sleep2 = handle_run()
-        mouse_click(move_back_xy)
-        print(f'RUN SLEEP_2 TIME: {run_sleep2}')
-        API.AntiBan.sleep_between(run_sleep2, run_sleep2+1)
+    if CURR_SPOT == 1:
+        print(f'case 1')
+        return move_to_spot(2)
+    else:
+        print(f'case 2')
+        return move_to_spot(1)
 
-    return True
+
+def set_curr_spot():
+    global CURR_SPOT
+
+    if does_img_exist(img_name="At_Spot_1", script_name=SCRIPT_NAME, threshold=0.9):
+        print(f'AT SPOT ONE')
+        CURR_SPOT = 1
+    elif does_img_exist(img_name="At_Spot_2", script_name=SCRIPT_NAME, threshold=0.9):
+        print(f'AT SPOT TWO')
+        CURR_SPOT = 2
+    else:
+        print(f'Couldnt find either spot images - set to none!')
+        CURR_SPOT = None
+    return
 
 
 def is_fighting_crab(wait):
@@ -95,3 +107,33 @@ def handle_run():
 # -------
 # HELPERS
 # -------
+
+def move_to_spot(spot_num):
+    global CURR_SPOT
+
+    if does_img_exist(img_name=f"Move_To_Spot_{spot_num}_A", script_name="Kourend_Crab_Killer", threshold=0.9,
+                      should_click=True, click_middle=True):
+        API.AntiBan.sleep_between(4.0, 4.1)
+        if wait_for_img(img_name=f"Move_To_Spot_{spot_num}_B", script_name="Kourend_Crab_Killer", threshold=0.9,
+                          should_click=True, click_middle=True, max_wait_sec=10):
+            API.AntiBan.sleep_between(5.0, 5.1)
+            CURR_SPOT = spot_num
+            return True
+        else:
+            # Cant find second move to spot image moving back to original spots
+            does_img_exist(img_name=f"Cancel_Move_To_{spot_num}")
+
+    else:
+        # First move to spot img not found - we're likely not on right tile - recenter
+        if CURR_SPOT == 2:
+            if does_img_exist(img_name=f"Reposition_Spot_2", script_name=SCRIPT_NAME, should_click=True, threshold=0.9, x_offset=-35, y_offset=40):
+                return True
+            else:
+                return False
+        elif CURR_SPOT == 1:
+            if does_img_exist(img_name=f"Reposition_Spot_1", script_name=SCRIPT_NAME, threshold=0.9, should_click=True):
+                return True
+            else:
+                return False
+
+        return False

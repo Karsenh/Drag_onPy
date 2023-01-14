@@ -35,7 +35,17 @@ def __main__():
 
     # show_main_gui()
 
-    launch_script("Kourend_Crab_Killer")
+    # launch_script("Kourend_Crab_Killer")
+
+    # does_img_exist(img_name=f"Reposition_Spot_2", script_name="Kourend_Crab_Killer", should_click=True, threshold=0.9,
+    #                x_offset=-40, y_offset=35)
+
+    does_img_exist(img_name='Move_To_Spot_2_A', script_name="Kourend_Crab_Killer", threshold=0.9, should_click=True, click_middle=True)
+
+
+
+    # does_img_exist(img_name="Move_To_Spot_2_A", script_name="Kourend_Crab_Killer", threshold=0.9, should_click=True, click_middle=True)
+
 
     # wait_for_img(img_name="Claim_Sack", script_name="Motherlode_Miner", threshold=0.90, should_click=True, click_middle=True)
 
