@@ -70,7 +70,7 @@ def start_crafting_lavas(curr_loop):
             mouse_click(manual_click_xy)
         API.AntiBan.sleep_between(0.6, 0.7)
         cast_imbue()
-        craft_lavas()
+        craft_lavas(y_offset=-20)
         empty_pouches()
         craft_lavas()
         teleport_to_cwars()
@@ -294,7 +294,7 @@ def move_to_bank_chest():
     if does_img_exist(img_name="Bank_Chest", script_name="Cwars_Lavas", threshold=0.7):
         return True
     else:
-        return wait_for_img(img_name="Minimap_Bank", script_name="Cwars_Lavas", should_click=True, threshold=0.9, y_offset=4)
+        return wait_for_img(img_name="Minimap_Bank", script_name="Cwars_Lavas", should_click=True, threshold=0.85, y_offset=4)
 
 
 def open_bank_chest():
@@ -465,10 +465,10 @@ def teleport_to_duel_arena():
 
 
 def move_to_ruins():
-    if not wait_for_img(img_name="Minimap_Ruins", script_name="Cwars_Lavas", should_click=True, threshold=0.90, y_offset=4, x_offset=-6):
+    if not wait_for_img(img_name="Minimap_Ruins", script_name="Cwars_Lavas", should_click=True, threshold=0.90, y_offset=4, x_offset=-6, max_wait_sec=15):
         write_debug(f"Failed to find Minimap_Ruins... Exiting.")
         return False
-    if not wait_for_img(img_name="Enter_Ruins", script_name="Cwars_Lavas", threshold=0.80, max_wait_sec=10, should_click=True, click_middle=True):
+    if not wait_for_img(img_name="Enter_Ruins", script_name="Cwars_Lavas", threshold=0.80, max_wait_sec=15, should_click=True, click_middle=True):
         print(f'Couldnt find Enter Ruins image - manually entering')
         manual_enter_ruins_xy = 810, 314
         mouse_click(manual_enter_ruins_xy)
@@ -476,7 +476,10 @@ def move_to_ruins():
 
 
 def move_to_altar():
-    return wait_for_img(img_name="Move_to_altar", script_name="Cwars_Lavas", threshold=0.96, should_click=True, x_offset=60, y_offset=-12)
+    minimap_altar_xy = 1394, 232
+    mouse_click(minimap_altar_xy)
+    # wait_for_img(img_name="Move_to_altar", script_name="Cwars_Lavas", threshold=0.96, should_click=True, x_offset=60, y_offset=-12)
+    return True
 
 
 def cast_imbue():
@@ -485,7 +488,7 @@ def cast_imbue():
     return
 
 
-def craft_lavas():
+def craft_lavas(y_offset=0):
     global CACHED_EARTHS_XY
 
     is_tab_open("inventory", True)
@@ -495,7 +498,7 @@ def craft_lavas():
         wait_for_img(img_name="Inventory_Earth_Runes", script_name="Cwars_Lavas", should_click=True, click_middle=True, threshold=0.85)
         CACHED_EARTHS_XY = get_existing_img_xy()
 
-    wait_for_img(img_name="Fire_Altar", script_name="Cwars_Lavas", should_click=True, threshold=0.92, x_offset=6)
+    wait_for_img(img_name="Fire_Altar", script_name="Cwars_Lavas", should_click=True, threshold=0.92, x_offset=6, y_offset=y_offset)
     return
 
 
