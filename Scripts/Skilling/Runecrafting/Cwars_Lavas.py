@@ -70,7 +70,7 @@ def start_crafting_lavas(curr_loop):
             mouse_click(manual_click_xy)
         API.AntiBan.sleep_between(0.6, 0.7)
         cast_imbue()
-        craft_lavas(y_offset=-20)
+        craft_lavas()
         empty_pouches()
         craft_lavas()
         teleport_to_cwars()
@@ -175,9 +175,9 @@ def replenish_missing_items():
         is_bank_tab_open(JEWELRY_BANK_TAB, True)
         deposit_ess()
         is_withdraw_qty(qty="1", should_click=True)
-        does_img_exist(img_name="Banked_Rod", script_name="Cwars_Lavas", should_click=True, threshold=0.985)
+        does_img_exist(img_name="Banked_Rod", script_name="Cwars_Lavas", should_click=True, threshold=0.97)
         API.AntiBan.sleep_between(1.5, 1.6)
-        wait_for_img(img_name="Inventory_Rod", script_name="Cwars_Lavas", threshold=0.95, img_sel="first")
+        wait_for_img(img_name="Inventory_Rod", script_name="Cwars_Lavas", threshold=0.95, img_sel="last")
         mouse_long_click(get_existing_img_xy())
         wait_for_img(img_name="Wear", category="General", should_click=True, click_middle=True)
         ROD_EQUIPPED = True
@@ -190,7 +190,7 @@ def replenish_missing_items():
             write_debug(f"Failed to find banked Binding Necklace")
             return False
         API.AntiBan.sleep_between(1.5, 1.6)
-        wait_for_img(img_name="Inventory_Necklace", script_name="Cwars_Lavas", threshold=0.95, img_sel="first")
+        wait_for_img(img_name="Inventory_Necklace", script_name="Cwars_Lavas", threshold=0.95)
         mouse_long_click(get_existing_img_xy())
         wait_for_img(img_name="Wear", category="General", should_click=True, click_middle=True)
         NECK_EQUIPPED = True
@@ -465,7 +465,7 @@ def teleport_to_duel_arena():
 
 
 def move_to_ruins():
-    if not wait_for_img(img_name="Minimap_Ruins", script_name="Cwars_Lavas", should_click=True, threshold=0.90, y_offset=4, x_offset=-6, max_wait_sec=15):
+    if not wait_for_img(img_name="Minimap_Ruins", script_name="Cwars_Lavas", should_click=True, threshold=0.90, y_offset=4, x_offset=-6, max_wait_sec=30):
         write_debug(f"Failed to find Minimap_Ruins... Exiting.")
         return False
     if not wait_for_img(img_name="Enter_Ruins", script_name="Cwars_Lavas", threshold=0.80, max_wait_sec=15, should_click=True, click_middle=True):
