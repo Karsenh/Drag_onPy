@@ -180,9 +180,32 @@ def is_run_on(should_click=False):
 def is_run_gt(percent=10):
     off_color = 14, 14, 14
 
-    if percent <= 10:
+    if percent <= 9:
         xy = 1215, 265
         message = '12 percent.'
+    elif percent >= 10 and percent < 19:
+        message = '10-19 % hp'
+    elif percent >= 20 and percent < 29:
+        message = '20 - 29 % hp'
+    elif percent >= 30 and percent < 39:
+        message = '30 - 39 %'
+    elif percent >= 40 and percent < 49:
+        message = '40 - 49 %'
+    elif percent >= 50 and percent < 59:
+        message = '50 - 59 %'
+    elif percent >= 60 and percent < 69:
+        message = '60 - 39 %'
+    elif percent >= 30 and percent < 69:
+        message = '30 - 39 %'
+    elif percent >= 70 and percent < 79:
+        message = '70 - 79 %'
+    elif percent >= 80 and percent < 89:
+        message = '80 - 89 %'
+    elif percent >= 90 and percent < 99:
+        xy = 1188, 122
+        message = '80 - 89 %'
+    else:
+        message = '100% health'
 
     color_at_coords = get_color_at_coords(xy)
     if color_at_coords < off_color:
@@ -258,38 +281,94 @@ def check_skill_tab(max_sec=2.0, skill_to_check='random', should_reopen_inventor
     write_debug(f'skill tab: {SKILL_tab_xy}')
     # is_tab_open("skill", should_be_open=True)
     API.AntiBan.sleep_between(0.4, 1.3)
+
+    skills_array = [
+        SKILL_XY_ATTACK,
+        SKILL_XY_STRENGTH,
+        SKILL_XY_DEFENSE,
+        SKILL_XY_RANGE,
+        SKILL_XY_PRAYER,
+        SKILL_XY_MAGIC,
+        SKILL_XY_RC,
+        SKILL_XY_CON,
+        SKILL_XY_HP,
+        SKILL_XY_AGILITY,
+        SKILL_XY_HERBLORE,
+        SKILL_XY_THIEVING,
+        SKILL_XY_CRAFTING,
+        SKILL_XY_FLETCHING,
+        SKILL_XY_SLAYER,
+        SKILL_XY_HUNTER,
+        SKILL_XY_MINING,
+        SKILL_XY_SMITHING,
+        SKILL_XY_FISHING,
+        SKILL_XY_COOKING,
+        SKILL_XY_FIREMAKING,
+        SKILL_XY_WOODCUTTING,
+        SKILL_XY_FARMING
+    ]
+
     if max_sec >= 2.0:
         diff = max_sec - 1.3
-        print(f'smithing skill {SKILL_smithing}')
-        if skill_to_check == "random":
-            skill_to_check = random.randint(1, 5)
-            match skill_to_check:
-                case 1:
-                    skill_to_check_xy = SKILL_smithing
-                    write_debug(f'{skill_to_check_xy}')
-                case 2:
-                    skill_to_check_xy = SKILL_fishing
-                    write_debug(f'{skill_to_check_xy}')
-                case 3:
-                    skill_to_check_xy = SKILL_agility
-                    write_debug(f'{skill_to_check_xy}')
-                case 4:
-                    skill_to_check_xy = SKILL_attack
-                    write_debug(f'{skill_to_check_xy}')
-                case 5:
-                    skill_to_check_xy = SKILL_defence
-                    write_debug(f'{skill_to_check_xy}')
-                case 6:
-                    skill_to_check_xy = SKILL_strength
-                    write_debug(f'{skill_to_check_xy}')
+        if skill_to_check.lower() == "random":
+            skill_num = random.randint(0, 22)
+            skill_to_check = skills_array[skill_num]
+            write_debug(f'Skill to check: {skill_to_check}')
         else:
-            match skill_to_check:
+            match skill_to_check.lower():
+                case "attack":
+                    skill_num = 0
+                case "strength":
+                    skill_num = 1
+                case "defense":
+                    skill_num = 2
+                case "range":
+                    skill_num = 3
+                case "prayer":
+                    skill_num = 4
+                case "magic":
+                    skill_num = 5
+                case "rc":
+                    skill_num = 6
+                case "con":
+                    skill_num = 7
+                case "hp":
+                    skill_num = 8
+                case "agility":
+                    skill_num = 9
+                case "herblore":
+                    skill_num = 10
+                case "thieving":
+                    skill_num = 11
+                case "crafting":
+                    skill_num = 12
+                case "slayer":
+                    skill_num = 13
+                case "hunter":
+                    skill_num = 14
+                case "mining":
+                    skill_num = 15
                 case "smithing":
-                    skill_to_check_xy = SKILL_smithing
+                    skill_num = 16
                 case "fishing":
-                    skill_to_check_xy = SKILL_fishing
-        mouse_click(skill_to_check_xy)
-        API.AntiBan.sleep_between(1, diff)
+                    skill_num = 17
+                case "cooking":
+                    skill_num = 18
+                case "firemaking":
+                    skill_num = 19
+                case "woodcutting":
+                    skill_num = 20
+                case "farming":
+                    skill_num = 21
+
+        skill_to_check = skills_array[skill_num]
+        write_debug(f'Skill to check: {skill_to_check}')
+
+        mouse_click(skill_to_check)
+        if diff < 1:
+            API.AntiBan.sleep_between(0.2, 0.3)
+        else:
+            API.AntiBan.sleep_between(1, diff)
 
     is_tab_open("inventory", should_be_open=should_reopen_inventory)
     if not should_reopen_inventory:
