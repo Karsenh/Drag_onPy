@@ -9,6 +9,11 @@ from API.AntiBan import print_to_log, sleep_between
 import keyboard
 
 
+def open_ge_bank():
+    # Opens GE bank from diagonal tile (SE) while facing EAST zoomed all the way in
+    return
+
+
 def deposit_all(include_equipment=False):
     # If the bank is not open
     mouse_click(BANK_dep_inventory)
