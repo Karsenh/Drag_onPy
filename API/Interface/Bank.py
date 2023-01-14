@@ -6,12 +6,17 @@ from API.Imports.Coords import *
 from API.Mouse import mouse_click
 from API.Imaging.Image import does_img_exist
 from API.AntiBan import print_to_log, sleep_between
+from API.Debug import write_debug
 import keyboard
 
 
 def open_ge_bank():
     # Opens GE bank from diagonal tile (SE) while facing EAST zoomed all the way in
-    return
+    does_img_exist(img_name="GE_SE_6_Zoom_Bank", category="Banking", threshold=0.90, should_click=True, click_middle=True)
+    bank_open = is_bank_open()
+    if not bank_open:
+        write_debug(f'Something went wrong while opening the GE bank')
+    return bank_open
 
 
 def deposit_all(include_equipment=False):
