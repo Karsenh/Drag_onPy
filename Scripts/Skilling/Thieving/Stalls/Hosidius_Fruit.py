@@ -31,7 +31,7 @@ def steal_from_fruit_stall():
 
 
 def bank_fruit():
-    if is_run_gt(percent=10):
+    if is_run_gt(percent=9):
         is_run_on(should_click=True)
         sleep1 = 1.4, 1.5
     else:
@@ -46,7 +46,7 @@ def bank_fruit():
 
     API.AntiBan.sleep_between(a, b)
 
-    if is_run_gt(percent=10):
+    if is_run_gt(percent=9):
         sleep2 = 10.1, 10.2
     else:
         sleep2 = 25.0, 25.1
@@ -57,7 +57,7 @@ def bank_fruit():
     mouse_click(bank_1_xy, max_x_dev=0, max_y_dev=0)
     API.AntiBan.sleep_between(a, b)
 
-    if is_run_gt(percent=10):
+    if is_run_gt(percent=9):
         sleep3 = 9.1, 9.2
     else:
         sleep3 = 26.0, 26.1
@@ -68,7 +68,7 @@ def bank_fruit():
     mouse_click(bank_2_xy, max_x_dev=0, max_y_dev=0)
     API.AntiBan.sleep_between(a, b)
 
-    if is_run_gt(percent=10):
+    if is_run_gt(percent=9):
         sleep4 = 2.1, 2.2
     else:
         sleep4 = 7.0, 7.1
@@ -92,7 +92,7 @@ def bank_fruit():
     API.AntiBan.sleep_between(1.0, 1.1)
 
     # Make our way back to the fruit stall
-    if is_run_gt(percent=10):
+    if is_run_gt(percent=9):
         sleep5 = 6.1, 6.2
     else:
         sleep5 = 22.0, 22.1
@@ -106,7 +106,7 @@ def bank_fruit():
     fruit_2_xy = 1329, 291
     mouse_click(fruit_2_xy)
 
-    if is_run_gt(percent=10):
+    if is_run_gt(percent=9):
         sleep6 = 7.1, 7.2
     else:
         sleep6 = 21.0, 21.1
@@ -118,7 +118,7 @@ def bank_fruit():
     fruit_last_xy = 1414, 233
     # 1415, 227
     mouse_click(fruit_last_xy, max_y_dev=0, max_x_dev=0)
-    if is_run_gt(percent=10):
+    if is_run_gt(percent=9):
         sleep6 = 5.5, 5.6
     else:
         sleep6 = 18.0, 18.1

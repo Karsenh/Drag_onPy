@@ -561,7 +561,7 @@ def check_run():
     global USE_STAMS
     global NEEDS_STAM
 
-    if not is_run_gt(percent=10):
+    if not is_run_gt(percent=9):
         NEEDS_STAM = True
 
     return

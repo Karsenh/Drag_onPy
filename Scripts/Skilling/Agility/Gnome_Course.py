@@ -41,7 +41,7 @@ def run_gnome_course(_):
 
     print(f'♾ ITERATION: {i} - Clicking {curr_msg} @ xy: {obstacle_xys[i]}')
 
-    if is_run_gt(percent=10):
+    if is_run_gt(percent=9):
         if is_run_on():
             sleep_times = run_sleep_times
         else:
