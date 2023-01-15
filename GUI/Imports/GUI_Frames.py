@@ -370,7 +370,7 @@ def show_attack_frame(all_frames, t_active_frame, attack_frame, attack_sub_btns)
 def show_mining_frame(all_frames, t_active_frame, mining_frame, mining_sub_btns):
     # Close skill_frame
     _, _, _, _, skill_sub_frames = all_frames
-    pisc_iron_btn = mining_sub_btns
+    pisc_iron_btn, motherlode_miner_btn = mining_sub_btns
 
     is_active = t_active_frame("skill", all_frames)
     print(f'show_mining_frame - skill_frame - is_active: {is_active}')
@@ -379,8 +379,10 @@ def show_mining_frame(all_frames, t_active_frame, mining_frame, mining_sub_btns)
 
     mining_path = 'Assets\Images\GUI_Images\Stats\Mining'
     iron_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{mining_path}\iron_ore.png'))
+    gold_nugget_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{mining_path}\Gold_Nugget.png'))
 
     add_script_btn(mining_frame, iron_img, pisc_iron_btn, 1)
+    add_script_btn(mining_frame, gold_nugget_img, motherlode_miner_btn, 2)
     return
 
 
@@ -533,7 +535,7 @@ def show_firemaking_frame(all_frames, t_active_frame, firemaking_frame, firemaki
 
 def show_hunter_frame(all_frames, t_active_frame, hunter_frame, hunter_sub_btns):
     _, _, _, _, skill_sub_frames = all_frames
-    crimson_swift_btn, cerulean_twitch_btn = hunter_sub_btns
+    crimson_swift_btn, cerulean_twitch_btn, orange_lizard_btn, red_lizard_btn = hunter_sub_btns
 
     is_active = t_active_frame("skill", all_frames)
     print(f'show_firemaking_frame - skill_frame - is_active: {is_active}')
@@ -543,9 +545,13 @@ def show_hunter_frame(all_frames, t_active_frame, hunter_frame, hunter_sub_btns)
     hunter_img_path = 'Assets\Images\GUI_Images\Stats\Hunter'
     crimson_swift_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{hunter_img_path}\Crimson_Swift.png'))
     cerulean_twitch_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{hunter_img_path}\Cerulean_Twitch.png'))
+    orange_lizard_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{hunter_img_path}\Orange_Lizard.png'))
+    red_lizard_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{hunter_img_path}\Red_Lizard.png'))
 
     add_script_btn(hunter_frame, crimson_swift_img, crimson_swift_btn, 1)
     add_script_btn(hunter_frame, cerulean_twitch_img, cerulean_twitch_btn, 2)
+    add_script_btn(hunter_frame, orange_lizard_img, orange_lizard_btn, 3)
+    add_script_btn(hunter_frame, red_lizard_img, red_lizard_btn, 4)
     return
 
 

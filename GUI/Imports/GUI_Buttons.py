@@ -63,7 +63,8 @@ def get_all_btns(all_frames, all_images):
     draynor_shrimp_map, barb_trout_map, barb_fishing_map, \
     rogue_cooking_map, cow_killer_map, ge_map, canifis_map_img, \
     remmy_map_img, ardy_map_img, hosidius_map_img, lummy_map_img, \
-    corsair_cove_map_img, cerulean_map_img, seers_map_img, cwars_map_img\
+    corsair_cove_map_img, cerulean_map_img, seers_map_img, cwars_map_img, \
+    motherlode_map_img, ourania_map_img, uzer_map_img \
         = skilling_sub_gui_images
 
     # MAIN_GUI_BTNS
@@ -136,7 +137,8 @@ def get_all_btns(all_frames, all_images):
 
     #     Mining
     iron_pisc_btn = Button(mining_frame, text="Pisc Iron", image=pisc_iron_img, height=SCRIPT_START_BTN_HEIGHT, width=SCRIPT_START_BTN_WIDTH, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_plg("pisc_iron"))
-    mining_sub_btns = iron_pisc_btn
+    motherlode_miner_btn = Button(mining_frame, text="Motherlode Miner", image=motherlode_map_img, height=SCRIPT_START_BTN_HEIGHT, width=SCRIPT_START_BTN_WIDTH, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_plg("Motherlode_Miner"))
+    mining_sub_btns = iron_pisc_btn, motherlode_miner_btn
 
     #     Agility
     gnome_course_btn = Button(agility_frame, text="Gnome Agility", image=gnome_course_img,  height=SCRIPT_START_BTN_HEIGHT, width=SCRIPT_START_BTN_WIDTH, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_plg("Gnome_Course"))
@@ -193,7 +195,9 @@ def get_all_btns(all_frames, all_images):
     #     Hunter
     crimson_swift_btn = Button(hunter_frame, text="Crimson Swift (1)", image=corsair_cove_map_img,  height=SCRIPT_START_BTN_HEIGHT, width=SCRIPT_START_BTN_WIDTH, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_plg("Single_Trap_Crimsons"))
     cerulean_twitch_btn = Button(hunter_frame, text="Cerulean Twitch (2)", image=cerulean_map_img,  height=SCRIPT_START_BTN_HEIGHT, width=SCRIPT_START_BTN_WIDTH, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_plg("Double_Trap_Ceruleans"))
-    hunter_sub_btns = crimson_swift_btn, cerulean_twitch_btn
+    orange_lizards_btn = Button(hunter_frame, text="Orange Lizard (3)", image=uzer_map_img,  height=SCRIPT_START_BTN_HEIGHT, width=SCRIPT_START_BTN_WIDTH, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_plg("Desert_Lizards"))
+    red_lizards_btn = Button(hunter_frame, text="Red Lizard (3)", image=ourania_map_img,  height=SCRIPT_START_BTN_HEIGHT, width=SCRIPT_START_BTN_WIDTH, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_plg("Red_Lizards"))
+    hunter_sub_btns = crimson_swift_btn, cerulean_twitch_btn, orange_lizards_btn, red_lizards_btn
 
     #     Farming
     hosidius_plough_btn = Button(farming_frame, text="Fishing Trawler", image=hosidius_map_img,  height=SCRIPT_START_BTN_HEIGHT, width=SCRIPT_START_BTN_WIDTH, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_plg("Hosidius_Plough"))
@@ -210,7 +214,7 @@ def get_all_btns(all_frames, all_images):
     construction_sub_btns = larder_btn, table_btn
 
     #     Minigames Buttons
-    fishing_trawler_btn = Button(minigames_frame, text="Fishing Trawler", image=trawler_img, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_plg("fishing_trawler"))
+    fishing_trawler_btn = Button(minigames_frame, text="Fishing Trawler", image=trawler_img, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_plg("Fishing_Trawler"))
     minigames_sub_btns = fishing_trawler_btn
 
     main_gui_btns = gold_btn, skill_btn, minigames_btn, settings_btn, info_btn, bug_report_btn

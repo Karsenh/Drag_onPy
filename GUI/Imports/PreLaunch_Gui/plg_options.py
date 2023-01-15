@@ -41,7 +41,22 @@ def show_plg_options(main_plg_frame, font_styles, script_name):
         case "Poh_Table":
             option_1 = tkinter.Checkbutton(script_options_frame, text="Wood", font=break_font, background=frame_bg_color)
             option_1.grid(row=1, column=1)
+        case "Kourend_Crab_Killer":
+            option_1 = tkinter.Radiobutton(script_options_frame, text="Attack", font=break_font, background=frame_bg_color)
+            option_1.grid(row=1, column=1)
+            option_1 = tkinter.Radiobutton(script_options_frame, text="Strength", font=break_font, background=frame_bg_color)
+            option_1.grid(row=1, column=2)
+            option_1 = tkinter.Radiobutton(script_options_frame, text="Defense", font=break_font, background=frame_bg_color)
+            option_1.grid(row=1, column=3)
+            option_1 = tkinter.Radiobutton(script_options_frame, text="Range", font=break_font, background=frame_bg_color)
+            option_1.grid(row=1, column=4)
 
+            option_1 = tkinter.Checkbutton(script_options_frame, text="Super Attack", font=break_font, background=frame_bg_color)
+            option_1.grid(row=2, column=1, pady=10, padx=10, columnspan=2)
+            option_1 = tkinter.Checkbutton(script_options_frame, text="Super Strength", font=break_font, background=frame_bg_color)
+            option_1.grid(row=2, column=3, pady=10, padx=10, columnspan=2)
+            option_1 = tkinter.Checkbutton(script_options_frame, text="Range Potion", font=break_font, background=frame_bg_color)
+            option_1.grid(row=2, column=5, pady=10, padx=10, columnspan=2)
 
     script_options_frame.grid(row=4, column=1)
 
