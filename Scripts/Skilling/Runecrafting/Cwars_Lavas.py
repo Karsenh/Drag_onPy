@@ -176,8 +176,21 @@ def replenish_missing_items():
         deposit_ess()
         is_withdraw_qty(qty="1", should_click=True)
         does_img_exist(img_name="Banked_Rod", script_name="Cwars_Lavas", should_click=True, threshold=0.97)
-        API.AntiBan.sleep_between(1.5, 1.6)
-        wait_for_img(img_name="Inventory_Rod", script_name="Cwars_Lavas", threshold=0.95, img_sel="last")
+        API.AntiBan.sleep_between(1.2, 1.3)
+
+        got_invent_ring = False
+        attempts = 0
+        while not got_invent_ring:
+            wait_for_img(img_name="Inventory_Rod", script_name="Cwars_Lavas", threshold=0.95, img_sel="first")
+            x, y = get_existing_img_xy()
+            print(f'x = {x} (gt 1k?)')
+            if x > 1000:
+                got_invent_ring = True
+            elif attempts > 10:
+                write_debug(f'Failed to find inventory Ring of Dueling after withdraw')
+                return False
+            attempts += 1
+
         mouse_long_click(get_existing_img_xy())
         wait_for_img(img_name="Wear", category="General", should_click=True, click_middle=True)
         ROD_EQUIPPED = True
@@ -190,7 +203,20 @@ def replenish_missing_items():
             write_debug(f"Failed to find banked Binding Necklace")
             return False
         API.AntiBan.sleep_between(1.5, 1.6)
-        wait_for_img(img_name="Inventory_Necklace", script_name="Cwars_Lavas", threshold=0.95)
+
+        got_invent_neck = False
+        attempts = 0
+        while not got_invent_neck:
+            wait_for_img(img_name="Inventory_Necklace", script_name="Cwars_Lavas", threshold=0.95, img_sel="first")
+            x, y = get_existing_img_xy()
+            print(f'neck x = {x} (gt 1k?)')
+            if x > 1000:
+                got_invent_neck = True
+            elif attempts > 10:
+                write_debug(f'Failed to find inventory Ring of Dueling after withdraw')
+                return False
+            attempts += 1
+
         mouse_long_click(get_existing_img_xy())
         wait_for_img(img_name="Wear", category="General", should_click=True, click_middle=True)
         NECK_EQUIPPED = True
@@ -220,7 +246,7 @@ def replenish_missing_items():
         is_bank_tab_open(MAGIC_BANK_TAB, True)
         deposit_ess()
         is_withdraw_qty("1", True)
-        if not wait_for_img(img_name="Banked_Steam_Staff", script_name="Cwars_Lavas", threshold=0.992, should_click=True,
+        if not wait_for_img(img_name="Banked_Steam_Staff", script_name="Cwars_Lavas", threshold=0.96, should_click=True,
                        click_middle=True):
             write_debug(f"Failed to find required mystic steam staff in bank")
             return False
@@ -262,13 +288,12 @@ def replenish_missing_items():
 
 
 def deposit_ess():
-    is_withdraw_qty("all", True)
     if does_img_exist(img_name="Inventory_Ess", script_name="Cwars_Lavas", threshold=0.9):
+        is_withdraw_qty("all", True)
         x, y = get_existing_img_xy()
         if x > 1000:
             adj_xy = x+7, y+6
             mouse_click(adj_xy)
-
     return
 
 
