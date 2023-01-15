@@ -33,6 +33,9 @@ CACHED_MEDIUM_EMPTY_XY = None
 CACHED_LARGE_FILL_XY = None
 CACHED_LARGE_EMPTY_XY = None
 
+CACHED_GIANT_FILL_XY = None
+CACHED_GIANT_EMPTY_XY = None
+
 CACHED_EARTHS_XY = None
 CACHED_BANKED_ESS_XY = None
 
@@ -219,9 +222,11 @@ def replenish_missing_items():
         # API.AntiBan.sleep_between(1, 1.1)
         if not wait_for_invent_item_xy("Inventory_Tiara"):
             return False
-        mouse_long_click(get_existing_img_xy())
+        invent_spot = get_existing_img_xy()
+        mouse_long_click(invent_spot)
         TIARA_EQUIPPED = wait_for_img(img_name="Wear", category="General", should_click=True, click_middle=True)
-        deposit_all()
+        API.AntiBan.sleep_between(0.3, 0.7)
+        mouse_click(invent_spot)
 
     if not STAFF_EQUIPPED:
         is_bank_tab_open(MAGIC_BANK_TAB, True)
@@ -234,10 +239,11 @@ def replenish_missing_items():
         # API.AntiBan.sleep_between(1, 1.1)
         if not wait_for_invent_item_xy("Inventory_Staff"):
             return False
-        mouse_long_click(get_existing_img_xy())
-        wait_for_img(img_name="Wield", category="General", should_click=True, click_middle=True)
-        deposit_all()
-        STAFF_EQUIPPED = True
+        invent_spot = get_existing_img_xy()
+        mouse_long_click(invent_spot)
+        STAFF_EQUIPPED = wait_for_img(img_name="Wield", category="General", should_click=True, click_middle=True)
+        API.AntiBan.sleep_between(0.3, 0.7)
+        mouse_click(invent_spot)
 
     if not RUNE_POUCH_INVENT:
         print(f'Rune Pouch Missing')
@@ -264,7 +270,7 @@ def replenish_missing_items():
         is_bank_tab_open(MAGIC_BANK_TAB, True)
         deposit_ess()
         is_withdraw_qty(qty="all", should_click=True)
-        EARTH_RUNES_INVENT = does_img_exist(img_name="Banked_Earth_Runes", script_name="Cwars_Lavas", should_click=True, click_middle=True, threshold=0.98)
+        EARTH_RUNES_INVENT = does_img_exist(img_name="Banked_Earth_Runes", script_name="Cwars_Lavas", should_click=True, click_middle=True, threshold=0.96)
 
     return True
 
@@ -326,6 +332,7 @@ def fill_pouch(pouch_size):
     global CACHED_SMALL_FILL_XY
     global CACHED_MEDIUM_FILL_XY
     global CACHED_LARGE_FILL_XY
+    global CACHED_GIANT_FILL_XY
 
     global CACHED_SMALL_EMPTY_XY
     global CACHED_MEDIUM_EMPTY_XY
@@ -386,6 +393,22 @@ def fill_pouch(pouch_size):
                         CACHED_LARGE_FILL_XY = adj_xy
                         does_img_exist(img_name="Cancel", script_name="Cwars_Lavas", threshold=0.9, should_click=True, click_middle=True)
             return
+
+        case "Giant":
+            if CACHED_GIANT_FILL_XY:
+                print(f'Cached_giant_fill_xy = {CACHED_GIANT_FILL_XY}')
+                mouse_click(CACHED_GIANT_FILL_XY)
+            else:
+                if wait_for_img(img_name="Fill", category="General", should_click=True, click_middle=True, threshold=0.9, max_wait_sec=1):
+                    CACHED_GIANT_FILL_XY = get_existing_img_xy()
+                else:
+                    print(f"Couldn't find Large Fill Image to save XY - returning.")
+                    if does_img_exist(img_name="Empty", category="General", threshold=0.9):
+                        x, y = get_existing_img_xy()
+                        adj_xy = x + 10, y + 8
+                        CACHED_GIANT_FILL_XY = adj_xy
+                        does_img_exist(img_name="Cancel", script_name="Cwars_Lavas", threshold=0.9, should_click=True, click_middle=True)
+            return
     return
 
 
@@ -407,6 +430,7 @@ def empty_pouch(pouch_size):
     global CACHED_SMALL_EMPTY_XY
     global CACHED_MEDIUM_EMPTY_XY
     global CACHED_LARGE_EMPTY_XY
+    global CACHED_GIANT_EMPTY_XY
 
     if not does_img_exist(img_name=f"Inventory_{pouch_size}_Pouch", script_name="Cwars_Lavas", threshold=0.95, img_sel="first"):
         if does_img_exist(img_name=f"Inventory_{pouch_size}_Pouch_Degraded", script_name="Cwars_Lavas", threshold=0.90):
@@ -441,6 +465,16 @@ def empty_pouch(pouch_size):
                 else:
                     if wait_for_img(img_name="Empty", category="General", should_click=True, click_middle=True, threshold=0.9, max_wait_sec=2):
                         CACHED_LARGE_EMPTY_XY = get_existing_img_xy()
+                    else:
+                        print(f"Couldn't find Large Empty image to save XY - returning")
+                        return
+
+            case "Giant":
+                if CACHED_GIANT_EMPTY_XY:
+                    mouse_click(CACHED_GIANT_EMPTY_XY)
+                else:
+                    if wait_for_img(img_name="Empty", category="General", should_click=True, click_middle=True, threshold=0.9, max_wait_sec=2):
+                        CACHED_GIANT_EMPTY_XY = get_existing_img_xy()
                     else:
                         print(f"Couldn't find Large Empty image to save XY - returning")
                         return
@@ -485,8 +519,7 @@ def teleport_to_duel_arena():
 
 
 def move_to_ruins():
-    # if not wait_for_img(img_name="Minimap_Ruins", script_name="Cwars_Lavas", should_click=True, threshold=0.90, y_offset=4, x_offset=-6, max_wait_sec=30):
-    if not wait_for_img(img_name="Minimap_Ruins_Alt", script_name="Cwars_Lavas", should_click=True, threshold=0.90, y_offset=-60, x_offset=0, max_wait_sec=30):
+    if not wait_for_img(img_name="Minimap_Ruins_Alt", script_name="Cwars_Lavas", should_click=True, threshold=0.90, y_offset=-35, x_offset=-2, max_wait_sec=30):
         write_debug(f"Failed to find Minimap_Ruins... Exiting.")
         return False
     if not wait_for_img(img_name="Enter_Ruins", script_name="Cwars_Lavas", threshold=0.80, max_wait_sec=15, should_click=True, click_middle=True):
@@ -499,7 +532,6 @@ def move_to_ruins():
 def move_to_altar():
     minimap_altar_xy = 1394, 232
     mouse_click(minimap_altar_xy)
-    # wait_for_img(img_name="Move_to_altar", script_name="Cwars_Lavas", threshold=0.96, should_click=True, x_offset=60, y_offset=-12)
     return True
 
 
@@ -589,17 +621,7 @@ def check_run():
 
 
 def wait_for_invent_item_xy(img_name):
-    got_invent_item = False
-    attempts = 0
-    while not got_invent_item:
-        wait_for_img(img_name=img_name, script_name="Cwars_Lavas", threshold=0.92, img_sel="last")
-        x, y = get_existing_img_xy()
-        print(f'x = {x} (gt 1k?)')
-        if x > 1000:
-            got_invent_item = True
-            return True
-        attempts += 1
-        if attempts > 10:
-            write_debug(f'Failed to find inventory Ring of Dueling after withdraw')
-            return False
+    return wait_for_img(img_name=img_name, script_name="Cwars_Lavas", threshold=0.90, img_sel="inventory")
+
+
 

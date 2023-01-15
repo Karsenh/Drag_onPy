@@ -120,10 +120,10 @@ def does_img_exist(img_name, script_name=None, category='Scripts', threshold=0.8
     loc = np.where(res >= threshold)
 
     if len(loc[0]) == 0 and len(loc[1]) == 0:
-        # write_debug(f'✖ {img_name}.png NOT found within game window.\n {loc[0]} {loc[1]}')
+        write_debug(f'✖ {img_name}.png NOT found within game window.\n {loc[0]} {loc[1]}')
         return False
     else:
-        write_debug(f'✔ {img_name}.png found:\n loc[0] = {loc[0]}\nloc[1] = {loc[1]}')
+        write_debug(f'✔ {img_name}.png found:\nloc[1] (x)= {loc[1]}\n loc[0] (y)= {loc[0]}')
         if img_sel == "first":
             # Save the first img find xy coords
             LATEST_IMG_XY = loc[1][0], loc[0][0]
@@ -132,9 +132,21 @@ def does_img_exist(img_name, script_name=None, category='Scripts', threshold=0.8
             r_y = random.randint(0, len(loc[0])-1)
             print(f'Random img returning')
             LATEST_IMG_XY = loc[1][r_x], loc[0][r_y]
+        elif img_sel == "inventory":
+            invent_x = max(loc[1])
+            invent_y_idx = np.where(loc[1] == invent_x)[0][0]  # [0] indicates the first item found within array of found x values
+            invent_y = loc[0][invent_y_idx]
+            print(f'Inventory x: {invent_x} @ idx {invent_y_idx}\nIvenntory y: {invent_y}')
+            if invent_x > 1070 and invent_y > 370:
+                print(f'✔ X: {invent_x} Y: {invent_y} within Inventory XY Bounds - Setting LATEST_IMG_XY')
+                LATEST_IMG_XY = invent_x, invent_y
+            else:
+                print(f'✖ X: {invent_x} Y: {invent_y} NOT within Inventory XY Bounds')
+                return False
         else:
             # Save the 'deepest' find of img's xy coords
             LATEST_IMG_XY = loc[1][len(loc[1]) - 1], loc[0][len(loc[0]) - 1]
+            write_debug(f'EXISTING_IMG_XY = {LATEST_IMG_XY}')
 
         if should_click:
             if click_middle:

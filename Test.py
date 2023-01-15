@@ -38,6 +38,9 @@ def __main__():
 
     launch_script("Cwars_Lavas")
 
+
+    # wait_for_img(img_name="Inventory_Rod", script_name="Cwars_Lavas", threshold=0.92, img_sel="inventory")
+
     return
 
 
