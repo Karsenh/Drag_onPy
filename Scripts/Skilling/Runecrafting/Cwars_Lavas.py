@@ -436,49 +436,51 @@ def empty_pouch(pouch_size):
         if does_img_exist(img_name=f"Inventory_{pouch_size}_Pouch_Degraded", script_name="Cwars_Lavas", threshold=0.90):
             print(f'Found Degraded {pouch_size} pouch - setting Degraded Exists to True')
             DEGRADED_POUCH_EXISTS = True
+        else:
+            print(f'Found neither {pouch_size} pouch or degraded {pouch_size} pouch.')
             return
-    else:
-        mouse_long_click(get_existing_img_xy())
 
-        match pouch_size:
-            case "Small":
-                if CACHED_SMALL_EMPTY_XY:
-                    mouse_click(CACHED_SMALL_EMPTY_XY)
-                else:
-                    if wait_for_img(img_name="Empty", category="General", should_click=True, click_middle=True, threshold=0.9, max_wait_sec=2):
-                        CACHED_SMALL_EMPTY_XY = get_existing_img_xy()
-                    else:
-                        print(f"Couldn't find Small Empty image to save XY - returning")
-                        return
-            case "Medium":
-                if CACHED_MEDIUM_EMPTY_XY:
-                    mouse_click(CACHED_MEDIUM_EMPTY_XY)
-                else:
-                    if wait_for_img(img_name="Empty", category="General", should_click=True, click_middle=True, threshold=0.9, max_wait_sec=2):
-                        CACHED_MEDIUM_EMPTY_XY = get_existing_img_xy()
-                    else:
-                        print(f"Couldn't find Medium Empty image to save XY - returning")
-                        return
-            case "Large":
-                if CACHED_LARGE_EMPTY_XY:
-                    mouse_click(CACHED_LARGE_EMPTY_XY)
-                else:
-                    if wait_for_img(img_name="Empty", category="General", should_click=True, click_middle=True, threshold=0.9, max_wait_sec=2):
-                        CACHED_LARGE_EMPTY_XY = get_existing_img_xy()
-                    else:
-                        print(f"Couldn't find Large Empty image to save XY - returning")
-                        return
+    mouse_long_click(get_existing_img_xy())
 
-            case "Giant":
-                if CACHED_GIANT_EMPTY_XY:
-                    mouse_click(CACHED_GIANT_EMPTY_XY)
+    match pouch_size:
+        case "Small":
+            if CACHED_SMALL_EMPTY_XY:
+                mouse_click(CACHED_SMALL_EMPTY_XY)
+            else:
+                if wait_for_img(img_name="Empty", category="General", should_click=True, click_middle=True, threshold=0.9, max_wait_sec=2):
+                    CACHED_SMALL_EMPTY_XY = get_existing_img_xy()
                 else:
-                    if wait_for_img(img_name="Empty", category="General", should_click=True, click_middle=True, threshold=0.9, max_wait_sec=2):
-                        CACHED_GIANT_EMPTY_XY = get_existing_img_xy()
-                    else:
-                        print(f"Couldn't find Large Empty image to save XY - returning")
-                        return
-        return
+                    print(f"Couldn't find Small Empty image to save XY - returning")
+                    return
+        case "Medium":
+            if CACHED_MEDIUM_EMPTY_XY:
+                mouse_click(CACHED_MEDIUM_EMPTY_XY)
+            else:
+                if wait_for_img(img_name="Empty", category="General", should_click=True, click_middle=True, threshold=0.9, max_wait_sec=2):
+                    CACHED_MEDIUM_EMPTY_XY = get_existing_img_xy()
+                else:
+                    print(f"Couldn't find Medium Empty image to save XY - returning")
+                    return
+        case "Large":
+            if CACHED_LARGE_EMPTY_XY:
+                mouse_click(CACHED_LARGE_EMPTY_XY)
+            else:
+                if wait_for_img(img_name="Empty", category="General", should_click=True, click_middle=True, threshold=0.9, max_wait_sec=2):
+                    CACHED_LARGE_EMPTY_XY = get_existing_img_xy()
+                else:
+                    print(f"Couldn't find Large Empty image to save XY - returning")
+                    return
+
+        case "Giant":
+            if CACHED_GIANT_EMPTY_XY:
+                mouse_click(CACHED_GIANT_EMPTY_XY)
+            else:
+                if wait_for_img(img_name="Empty", category="General", should_click=True, click_middle=True, threshold=0.9, max_wait_sec=2):
+                    CACHED_GIANT_EMPTY_XY = get_existing_img_xy()
+                else:
+                    print(f"Couldn't find Large Empty image to save XY - returning")
+                    return
+    return
 
 
 def empty_pouches():
