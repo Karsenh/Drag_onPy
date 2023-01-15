@@ -33,7 +33,7 @@ from Scripts.Skilling.Hunter.Desert_Lizards import start_catching_desert_lizards
 from Scripts.Skilling.Hunter.Red_Lizards import start_catching_red_lizards
 from Scripts.Skilling.Runecrafting.Cwars_Lavas import start_crafting_lavas
 from Scripts.Skilling.Mining.Motherlode_Miner import start_motherlode_mining
-from Scripts.Skilling.Farming.GE_Sulpher_Fertalizer import start_making_fertalizer
+from Scripts.Skilling.Farming.GE_Sulphurous_Fertilizer import start_making_fertalizer
 
 from enum import Enum
 import API
@@ -93,7 +93,7 @@ def launch_script(script_name="pisc_iron"):
         SW_TEAKS = 32
         CWARS_LAVAS = 33
         MOTHERLODE_MINER = 34
-        SULPHER_FERTALIZER = 35
+        SULPHUROUS_FERTILIZER = 35
 
     all_scripts = [mine_iron_pisc, smith_gold_edge, run_gnome_course,
                    fish_draynor_shrimp, fish_barb_trout, barbarian_fishing,
@@ -223,11 +223,11 @@ def launch_script(script_name="pisc_iron"):
             selected_script = ScriptEnum.GE_SUPERHEAT_GOLD.value
             antiban_likelihood = 20
             antiban_downtime_sec = 4
-        case "Con_Larders":
+        case "Poh_Larders":
             selected_script = ScriptEnum.CON_LARDERS.value
             antiban_likelihood = 20
             antiban_downtime_sec = 6
-        case "Con_Mahog_Tables":
+        case "Poh_Mahogany_Tables":
             selected_script = ScriptEnum.CON_MAHOG_TABLES.value
             antiban_likelihood = 25
             antiban_downtime_sec = 1
@@ -256,8 +256,8 @@ def launch_script(script_name="pisc_iron"):
             antiban_likelihood = 25
             antiban_downtime_sec = 3
             reopen_invent = True
-        case "GE_Sulpher_Fertalizer":
-            selected_script = ScriptEnum.SULPHER_FERTALIZER.value
+        case "GE_Sulphurous_Fertilizer":
+            selected_script = ScriptEnum.SULPHUROUS_FERTILIZER.value
             antiban_likelihood = 25
             antiban_downtime_sec = 3
             reopen_invent = True

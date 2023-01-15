@@ -22,6 +22,26 @@ def show_plg_options(main_plg_frame, font_styles, script_name):
             option_1.grid(row=1, column=1)
             option_1 = tkinter.Checkbutton(script_options_frame, text="Use Ring of Dueling", font=break_font, background=frame_bg_color)
             option_1.grid(row=1, column=2)
+        case "Cwars_Lavas":
+            option_1 = tkinter.Radiobutton(script_options_frame, text="Small Pouch", font=break_font, background=frame_bg_color)
+            option_1.grid(row=1, column=1)
+            option_1 = tkinter.Radiobutton(script_options_frame, text="Medium Pouch", font=break_font, background=frame_bg_color)
+            option_1.grid(row=1, column=2)
+            option_1 = tkinter.Radiobutton(script_options_frame, text="Large Pouch", font=break_font, background=frame_bg_color)
+            option_1.grid(row=1, column=3)
+            option_1 = tkinter.Radiobutton(script_options_frame, text="Giant Pouch", font=break_font, background=frame_bg_color)
+            option_1.grid(row=1, column=4)
+        case "Poh_Larder":
+            option_1 = tkinter.Checkbutton(script_options_frame, text="Wood", font=break_font, background=frame_bg_color)
+            option_1.grid(row=1, column=1)
+            option_1 = tkinter.Checkbutton(script_options_frame, text="Oak", font=break_font, background=frame_bg_color)
+            option_1.grid(row=1, column=2)
+            option_1 = tkinter.Checkbutton(script_options_frame, text="Level-based", font=break_font, background=frame_bg_color)
+            option_1.grid(row=1, column=3)
+        case "Poh_Table":
+            option_1 = tkinter.Checkbutton(script_options_frame, text="Wood", font=break_font, background=frame_bg_color)
+            option_1.grid(row=1, column=1)
+
 
     script_options_frame.grid(row=4, column=1)
 

@@ -7,8 +7,8 @@ from API.Debug import write_debug
 import pyautogui as pag
 import numpy as np
 
-SCRIPT_NAME = "GE_Sulpher_Fertalizer"
-HERB_BANK_TAB_NUM = 6
+SCRIPT_NAME = "GE_Sulphurous_Fertilizer"
+HERB_BANK_TAB_NUM = 9
 
 
 def start_making_fertalizer(curr_loop):
@@ -104,7 +104,7 @@ def withdraw_salt():
 
 
 def withdraw_compost():
-    return wait_for_img(img_name="Banked_Compost", script_name="GE_Sulpher_Fertalizer", threshold=0.96, should_click=True, click_middle=True)
+    return wait_for_img(img_name="Banked_Compost", script_name="GE_Sulphurous_Fertilizer", threshold=0.96, should_click=True, click_middle=True)
 
 
 def is_processing():

@@ -599,7 +599,7 @@ def show_prayer_frame(all_frames, t_active_frame, prayer_frame, prayer_sub_btns)
 
 def show_woodcutting_frame(all_frames, t_active_frame, woodcutting_frame, woodcutting_sub_btns):
     _, _, _, _, skill_sub_frames = all_frames
-    chop_fletcher_btn, cwars_teak_btn = woodcutting_sub_btns
+    chop_fletcher_btn, sw_teaks_btn = woodcutting_sub_btns
 
     is_active = t_active_frame("skill", all_frames)
     print(f'show_wooductting_frame - skill_frame - is_active: {is_active}')
@@ -611,13 +611,13 @@ def show_woodcutting_frame(all_frames, t_active_frame, woodcutting_frame, woodcu
     teak_tree_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{woodcutting_image_path}\Teak_tree.png'))
 
     add_script_btn(woodcutting_frame, shaft_log_img, chop_fletcher_btn, 1)
-    add_script_btn(woodcutting_frame, teak_tree_img, cwars_teak_btn, 2)
+    add_script_btn(woodcutting_frame, teak_tree_img, sw_teaks_btn, 2)
     return
 
 
 def show_farming_frame(all_frames, t_active_frame, farming_frame, woodcutting_sub_btns):
     _, _, _, _, skill_sub_frames = all_frames
-    hosidius_plough_btn = woodcutting_sub_btns
+    hosidius_plough_btn, sulpher_fert_btn = woodcutting_sub_btns
 
     is_active = t_active_frame("skill", all_frames)
     print(f'show_farming_frame - skill_frame - is_active: {is_active}')
@@ -626,8 +626,44 @@ def show_farming_frame(all_frames, t_active_frame, farming_frame, woodcutting_su
 
     farming_img_path = 'Assets\Images\GUI_Images\Stats\Farming'
     plough_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{farming_img_path}\Plough.png'))
+    sulph_fert = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{farming_img_path}\Sulphurous_Fertilizer.png'))
 
     add_script_btn(farming_frame, plough_img, hosidius_plough_btn, 1)
+    add_script_btn(farming_frame, sulph_fert, sulpher_fert_btn, 2)
+    return
+
+
+def show_runecrafting_frame(all_frames, t_active_frame, rc_frame, runecrafting_sub_btns):
+    _, _, _, _, skill_sub_frames = all_frames
+    cwars_lava_btn = runecrafting_sub_btns
+
+    is_active = t_active_frame("skill", all_frames)
+    print(f'show_farming_frame - skill_frame - is_active: {is_active}')
+
+    rc_frame.grid(row=sub_gui_row, column=1, columnspan=5, pady=50)
+
+    rc_img_path = 'Assets\Images\GUI_Images\Stats\Runecrafting'
+    lava_rune_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{rc_img_path}\Lava_Rune.png'))
+
+    add_script_btn(rc_frame, lava_rune_img, cwars_lava_btn, 1)
+    return
+
+
+def show_construction_frame(all_frames, t_active_frame, construction_frame, construction_sub_btns):
+    _, _, _, _, skill_sub_frames = all_frames
+    larder_btn, table_btn = construction_sub_btns
+
+    is_active = t_active_frame("skill", all_frames)
+    print(f'Show Construction Frame - skill_frame - is_active: {is_active}')
+
+    construction_frame.grid(row=sub_gui_row, column=1, columnspan=5, pady=50)
+
+    construction_img_path = 'Assets\Images\GUI_Images\Stats\Construction'
+    larder_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{construction_img_path}\Larder.png'))
+    table_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{construction_img_path}\Table.png'))
+
+    add_script_btn(construction_frame, larder_img, larder_btn, 1)
+    add_script_btn(construction_frame, table_img, table_btn, 2)
     return
 
 
