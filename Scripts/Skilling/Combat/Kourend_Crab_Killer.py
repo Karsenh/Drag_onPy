@@ -36,7 +36,7 @@ def start_killing_kourend_crabs(curr_loop):
 
 
 def check_health():
-    if not is_hp_gt(percent=9):
+    if not is_hp_gt(percent=50):
         eat_foot()
     return
 
