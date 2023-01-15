@@ -17,7 +17,7 @@ def start_killing_kourend_crabs(curr_loop):
     global CURR_SPOT
 
     if curr_loop != 1:
-        if not is_fighting_crab(wait=8):
+        if not is_fighting_crab(wait=10):
             print(f'Not fighting crabs - Resetting aggro')
             handle_run()
             if not reset_spot_1():
@@ -55,7 +55,7 @@ def reset_spot_1():
     API.AntiBan.sleep_between(6.5, 6.6)
 
     return wait_for_img(img_name="At_Spot_1", script_name="Kourend_Crab_Killer",
-                 threshold=0.95, should_click=True, x_offset=55, y_offset=0, max_wait_sec=15)
+                 threshold=0.94, should_click=True, x_offset=55, y_offset=0, max_wait_sec=15)
 
 
 def set_curr_spot():
