@@ -597,9 +597,9 @@ def wait_for_invent_item_xy(img_name):
         print(f'x = {x} (gt 1k?)')
         if x > 1000:
             got_invent_item = True
+            return True
         attempts += 1
         if attempts > 10:
             write_debug(f'Failed to find inventory Ring of Dueling after withdraw')
             return False
-    return True
 
