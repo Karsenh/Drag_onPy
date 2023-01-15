@@ -1,5 +1,5 @@
 import API.AntiBan
-from API.Interface.General import setup_interface, is_tab_open, is_run_on, is_run_gt
+from API.Interface.General import setup_interface, is_tab_open, is_run_on, is_run_gt, is_hp_gt
 from API.Imaging.Image import wait_for_img, does_img_exist
 from API.Mouse import mouse_click
 from API.Debug import write_debug
@@ -19,11 +19,9 @@ def start_killing_kourend_crabs(curr_loop):
     global CURR_SPOT
 
     if curr_loop != 1:
-        if not is_fighting_crab(wait=10):
-
         check_health()
 
-        if not is_fighting_crab(wait=8):
+        if not is_fighting_crab(wait=10):
             print(f'Not fighting crabs - Resetting aggro')
             handle_run()
             if not reset_spot_1():

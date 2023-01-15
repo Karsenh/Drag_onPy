@@ -36,7 +36,7 @@ def __main__():
 
     # show_main_gui()
 
-    launch_script("GE_Sulphurous_Fertilizer")
+    launch_script("Kourend_Crab_Killer")
 
     return
 
