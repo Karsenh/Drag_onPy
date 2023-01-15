@@ -16,7 +16,7 @@ STAFF_EQUIPPED = False
 RUNE_POUCH_INVENT = False
 EARTH_RUNES_INVENT = False
 
-POUCHES_TO_USE_ARR = ["Small", "Medium", "Large"]
+POUCHES_TO_USE_ARR = ["Small", "Medium", "Large", "Giant"]
 HAS_ESS_POUCH_ARR = []
 DEGRADED_POUCH_EXISTS = False
 
@@ -465,7 +465,8 @@ def teleport_to_duel_arena():
 
 
 def move_to_ruins():
-    if not wait_for_img(img_name="Minimap_Ruins", script_name="Cwars_Lavas", should_click=True, threshold=0.90, y_offset=4, x_offset=-6, max_wait_sec=30):
+    # if not wait_for_img(img_name="Minimap_Ruins", script_name="Cwars_Lavas", should_click=True, threshold=0.90, y_offset=4, x_offset=-6, max_wait_sec=30):
+    if not wait_for_img(img_name="Minimap_Ruins_Alt", script_name="Cwars_Lavas", should_click=True, threshold=0.90, y_offset=-60, x_offset=0, max_wait_sec=30):
         write_debug(f"Failed to find Minimap_Ruins... Exiting.")
         return False
     if not wait_for_img(img_name="Enter_Ruins", script_name="Cwars_Lavas", threshold=0.80, max_wait_sec=15, should_click=True, click_middle=True):
