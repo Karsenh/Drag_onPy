@@ -22,6 +22,7 @@ def start_killing_kourend_crabs(curr_loop):
             handle_run()
             if not reset_spot_1():
                 return False
+            API.AntiBan.sleep_between(3.0, 3.1)
 
     else:
         setup_interface("west", 1, "up")
@@ -40,7 +41,7 @@ def reset_spot_1():
 
     # Arrow image before heading back
     if not wait_for_img(img_name=f"Reset_Spot_1_Agg_B", script_name="Kourend_Crab_Killer",
-                        threshold=RESET_IMG_THRESH, should_click=True, max_wait_sec=10):
+                        threshold=0.95, should_click=True, max_wait_sec=10):
         manual_xy = 1367, 270
         mouse_click(manual_xy)
 
@@ -54,7 +55,7 @@ def reset_spot_1():
     API.AntiBan.sleep_between(6.5, 6.6)
 
     return wait_for_img(img_name="At_Spot_1", script_name="Kourend_Crab_Killer",
-                 threshold=0.97, should_click=True, x_offset=55, y_offset=0, max_wait_sec=10)
+                 threshold=0.95, should_click=True, x_offset=55, y_offset=0, max_wait_sec=15)
 
 
 def set_curr_spot():

@@ -36,7 +36,7 @@ def __main__():
 
     # show_main_gui()
 
-    launch_script("Cwars_Lavas")
+    launch_script("Kourend_Crab_Killer")
 
     return
 
