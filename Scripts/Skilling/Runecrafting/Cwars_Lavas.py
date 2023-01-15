@@ -141,7 +141,7 @@ def replenish_missing_items():
 
     global NEEDS_STAM
 
-    print(f'⁉️ROD_EQUIPPED = {ROD_EQUIPPED}'
+    print(f'⁉\nROD_EQUIPPED = {ROD_EQUIPPED}'
           f'\nNECK_EQUIPPED = {NECK_EQUIPPED}'
           f'\nTIARA_EQUIPPED = {TIARA_EQUIPPED}'
           f'\nSTAFF_EQUIPPED = {STAFF_EQUIPPED}'
@@ -176,8 +176,11 @@ def replenish_missing_items():
         deposit_ess()
         is_withdraw_qty(qty="1", should_click=True)
         does_img_exist(img_name="Banked_Rod", script_name="Cwars_Lavas", should_click=True, threshold=0.97)
-        API.AntiBan.sleep_between(1.5, 1.6)
-        wait_for_img(img_name="Inventory_Rod", script_name="Cwars_Lavas", threshold=0.95, img_sel="last")
+        API.AntiBan.sleep_between(1.2, 1.3)
+
+        if not wait_for_invent_item_xy("Inventory_Rod"):
+            return False
+
         mouse_long_click(get_existing_img_xy())
         wait_for_img(img_name="Wear", category="General", should_click=True, click_middle=True)
         ROD_EQUIPPED = True
@@ -189,8 +192,11 @@ def replenish_missing_items():
         if not does_img_exist(img_name="Banked_Necklace", script_name="Cwars_Lavas", threshold=0.97, should_click=True, click_middle=True):
             write_debug(f"Failed to find banked Binding Necklace")
             return False
-        API.AntiBan.sleep_between(1.5, 1.6)
-        wait_for_img(img_name="Inventory_Necklace", script_name="Cwars_Lavas", threshold=0.95)
+        # API.AntiBan.sleep_between(1.5, 1.6)
+
+        if not wait_for_invent_item_xy("Inventory_Necklace"):
+            return False
+
         mouse_long_click(get_existing_img_xy())
         wait_for_img(img_name="Wear", category="General", should_click=True, click_middle=True)
         NECK_EQUIPPED = True
@@ -210,8 +216,9 @@ def replenish_missing_items():
                        threshold=0.95):
             write_debug(f"Failed to find banked Tiara")
             return False
-        API.AntiBan.sleep_between(1, 1.1)
-        wait_for_img(img_name="Inventory_Tiara", script_name="Cwars_Lavas", threshold=0.95, img_sel="first")
+        # API.AntiBan.sleep_between(1, 1.1)
+        if not wait_for_invent_item_xy("Inventory_Tiara"):
+            return False
         mouse_long_click(get_existing_img_xy())
         TIARA_EQUIPPED = wait_for_img(img_name="Wear", category="General", should_click=True, click_middle=True)
         deposit_all()
@@ -220,16 +227,17 @@ def replenish_missing_items():
         is_bank_tab_open(MAGIC_BANK_TAB, True)
         deposit_ess()
         is_withdraw_qty("1", True)
-        if not wait_for_img(img_name="Banked_Steam_Staff", script_name="Cwars_Lavas", threshold=0.992, should_click=True,
+        if not wait_for_img(img_name="Banked_Steam_Staff", script_name="Cwars_Lavas", threshold=0.96, should_click=True,
                        click_middle=True):
             write_debug(f"Failed to find required mystic steam staff in bank")
             return False
-        API.AntiBan.sleep_between(1, 1.1)
-        if wait_for_img(img_name="Inventory_Staff", script_name="Cwars_Lavas", threshold=0.95, img_sel="first"):
-            mouse_long_click(get_existing_img_xy())
-            wait_for_img(img_name="Wield", category="General", should_click=True, click_middle=True)
-            deposit_all()
-            STAFF_EQUIPPED = True
+        # API.AntiBan.sleep_between(1, 1.1)
+        if not wait_for_invent_item_xy("Inventory_Staff"):
+            return False
+        mouse_long_click(get_existing_img_xy())
+        wait_for_img(img_name="Wield", category="General", should_click=True, click_middle=True)
+        deposit_all()
+        STAFF_EQUIPPED = True
 
     if not RUNE_POUCH_INVENT:
         print(f'Rune Pouch Missing')
@@ -247,7 +255,7 @@ def replenish_missing_items():
         for has_pouch in HAS_ESS_POUCH_ARR:
             if not has_pouch:
                 need_pouch_size = POUCHES_TO_USE_ARR[pouch_idx]
-                does_img_exist(img_name=f"Banked_{need_pouch_size}_Pouch", script_name="Cwars_Lavas", threshold=0.94, should_click=True, click_middle=True)
+                does_img_exist(img_name=f"Banked_{need_pouch_size}_Pouch", script_name="Cwars_Lavas", threshold=0.92, should_click=True, click_middle=True)
 
             pouch_idx += 1
 
@@ -262,14 +270,24 @@ def replenish_missing_items():
 
 
 def deposit_ess():
-    is_withdraw_qty("all", True)
-    if does_img_exist(img_name="Inventory_Ess", script_name="Cwars_Lavas", threshold=0.9):
-        x, y = get_existing_img_xy()
-        if x > 1000:
-            adj_xy = x+7, y+6
-            mouse_click(adj_xy)
+    inventory_ess_found = False
+    attempts = 0
+    while not inventory_ess_found:
+        if does_img_exist(img_name="Inventory_Ess", script_name="Cwars_Lavas", threshold=0.9, img_sel="first"):
+            x, y = get_existing_img_xy()
+            if x > 1000:
+                print(f'Inventory Essence found!')
+                inventory_ess_found = True
+        if attempts > 2:
+            return False
+        attempts += 1
 
-    return
+    is_withdraw_qty("all", True)
+    x, y = get_existing_img_xy()
+    if x > 1000:
+        adj_xy = x+7, y+6
+        mouse_click(adj_xy)
+    return True
 
 
 def withdraw_ess():
@@ -313,6 +331,8 @@ def fill_pouch(pouch_size):
     global CACHED_MEDIUM_EMPTY_XY
     global CACHED_LARGE_EMPTY_XY
 
+    # if not wait_for_invent_item_xy(f"Inventory_{pouch_size}_Pouch"):
+    #     return False
     does_img_exist(img_name=f"Inventory_{pouch_size}_Pouch", script_name="Cwars_Lavas", threshold=0.95, img_sel="first")
     mouse_long_click(get_existing_img_xy())
 
@@ -566,3 +586,20 @@ def check_run():
         NEEDS_STAM = True
 
     return
+
+
+def wait_for_invent_item_xy(img_name):
+    got_invent_item = False
+    attempts = 0
+    while not got_invent_item:
+        wait_for_img(img_name=img_name, script_name="Cwars_Lavas", threshold=0.92, img_sel="last")
+        x, y = get_existing_img_xy()
+        print(f'x = {x} (gt 1k?)')
+        if x > 1000:
+            got_invent_item = True
+        attempts += 1
+        if attempts > 10:
+            write_debug(f'Failed to find inventory Ring of Dueling after withdraw')
+            return False
+    return True
+
