@@ -51,7 +51,7 @@ def reset_spot_1():
 
     # Arrow image before heading back
     if not wait_for_img(img_name=f"Reset_Spot_1_Agg_B", script_name="Kourend_Crab_Killer",
-                        threshold=0.95, should_click=True, max_wait_sec=10):
+                        threshold=0.92, should_click=True, max_wait_sec=10):
         manual_xy = 1367, 270
         mouse_click(manual_xy)
 
