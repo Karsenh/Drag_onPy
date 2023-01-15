@@ -20,7 +20,7 @@ def start_making_fertalizer(curr_loop):
         # If not - enter here and rebank for more shit
     else:
         print(f'First loop')
-        # setup_interface('east', 5, 'up')
+        setup_interface('east', 5, 'up')
         # Get shit out of bank
         # Start processing
         # Return true
@@ -57,7 +57,7 @@ def bank_for_mats(curr_loop):
 
     API.AntiBan.sleep_between(0.3, 0.4)
 
-    if curr_loop == 1:
+    if curr_loop == 2:
         # Set withdraw to x
         is_withdraw_qty("x", True)
         # Right click salt peter and withdraw 14
@@ -70,11 +70,11 @@ def bank_for_mats(curr_loop):
             write_debug(f'Something went wrong while withdrawing salt normally')
             return False
 
-        if not withdraw_compost():
-            write_debug(f'Something went wrong while withdrawing compost')
-            return False
+    if not withdraw_compost():
+        write_debug(f'Something went wrong while withdrawing compost')
+        return False
 
-        API.AntiBan.sleep_between(0.2, 0.8)
+    API.AntiBan.sleep_between(0.2, 0.8)
 
     close_bank()
 
@@ -104,7 +104,7 @@ def withdraw_salt():
 
 
 def withdraw_compost():
-    return wait_for_img(img_name="Banked_Compost", script_name="GE_Sulphurous_Fertilizer", threshold=0.96, should_click=True, click_middle=True)
+    return wait_for_img(img_name="Banked_Compost", script_name="GE_Sulphurous_Fertilizer", threshold=0.94, should_click=True, click_middle=True)
 
 
 def is_processing():
