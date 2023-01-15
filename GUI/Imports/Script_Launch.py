@@ -147,7 +147,7 @@ def launch_script(script_name="pisc_iron"):
             selected_script = ScriptEnum.GE_LOGS.value
             antiban_likelihood = 15
             antiban_downtime_sec = 3
-        case "fishing_trawler":
+        case "Fishing_Trawler":
             selected_script = ScriptEnum.TRAWLER.value
             antiban_likelihood = 20
             antiban_downtime_sec = 0.5

@@ -106,6 +106,7 @@ def get_all_gui_images():
     # MINING
     #     Pisc_Iron
     iron_pisc_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{map_path}\Piscatoris_Map.png'))
+    motherlode_map_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{map_path}\Motherlode_Mine_Map.png'))
 
     # SMITHING
     #     Edge_Gold
@@ -153,12 +154,15 @@ def get_all_gui_images():
     # HUNTER
     corsair_cove_map_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{map_path}\Corsair_Cove_Map.png'))
     cerulean_map_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{map_path}\Keldagrim_Aisle_Map.png'))
+    ourania_map_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{map_path}\Ourania_Map.png'))
+    uzer_map_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{map_path}\Map_Uzer.png'))
 
     skilling_sub_gui_images = iron_pisc_img, edge_gold_img, gnome_course_img, \
                               draynor_shrimp_map_img, barb_trout_map_img, barbarian_fishing_map_img, \
                               rogue_den_map_img, cow_killer_map_img, ge_map_img, canifis_map_img, \
                               remmy_map_img, ardy_map_img, hosidius_map_img, lummy_map_img, \
-                              corsair_cove_map_img, cerulean_map_img, seers_map_img, cwars_map_img
+                              corsair_cove_map_img, cerulean_map_img, seers_map_img, cwars_map_img, \
+                              motherlode_map_img, ourania_map_img, uzer_map_img
 
     return main_gui_images, gold_gui_images, skill_gui_images, minigames_images, skilling_sub_gui_images
 

@@ -11,6 +11,8 @@ ATTACK_STYLE = "Defense"
 # 1 = NW tip (4 crabs)
 CURR_SPOT = 1
 
+SUPPORTED_FOOD_ARR = ["Monkfish"]
+
 
 def start_killing_kourend_crabs(curr_loop):
     global ATTACK_STYLE
@@ -18,6 +20,10 @@ def start_killing_kourend_crabs(curr_loop):
 
     if curr_loop != 1:
         if not is_fighting_crab(wait=10):
+
+        check_health()
+
+        if not is_fighting_crab(wait=8):
             print(f'Not fighting crabs - Resetting aggro')
             handle_run()
             if not reset_spot_1():
@@ -29,6 +35,12 @@ def start_killing_kourend_crabs(curr_loop):
         set_attack_style(ATTACK_STYLE)
         # set_curr_spot()
     return True
+
+
+def check_health():
+    if not is_hp_gt(percent=9):
+        eat_foot()
+    return
 
 
 def reset_spot_1():
@@ -123,3 +135,15 @@ def handle_run():
                 else:
                     # API.AntiBan.sleep_between(28.0, 28.1)
                     return 28
+
+
+def eat_foot():
+    use_food = None
+
+    is_tab_open('inventory', True)
+
+    for curr_food in SUPPORTED_FOOD_ARR:
+        if does_img_exist(img_name=f"Inventory_{curr_food}", script_name="Kourend_Crab_Killer", threshold=0.9):
+            use_food = curr_food
+
+    return does_img_exist(img_name=f"Inventory_{use_food}", script_name="Kourend_Crab_Killer", should_click=True, click_middle=True, threshold=0.9)

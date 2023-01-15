@@ -16,14 +16,9 @@ def start_making_fertalizer(curr_loop):
         print(f'Not first loop')
         bank_for_mats(curr_loop)
         process_buckets()
-        # Look for farming exp drops
-        # If not - enter here and rebank for more shit
     else:
         print(f'First loop')
         setup_interface('east', 5, 'up')
-        # Get shit out of bank
-        # Start processing
-        # Return true
     return True
 
 
