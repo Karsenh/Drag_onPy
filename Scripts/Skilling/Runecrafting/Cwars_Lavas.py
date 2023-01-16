@@ -521,7 +521,7 @@ def teleport_to_duel_arena():
 
 
 def move_to_ruins():
-    if not wait_for_img(img_name="Minimap_Ruins_Alt", script_name="Cwars_Lavas", should_click=True, threshold=0.90, y_offset=-35, x_offset=-2, max_wait_sec=30):
+    if not wait_for_img(img_name="Minimap_Ruins_Alt", script_name="Cwars_Lavas", should_click=True, threshold=0.94, y_offset=-130, x_offset=0, max_wait_sec=30):
         write_debug(f"Failed to find Minimap_Ruins... Exiting.")
         return False
     if not wait_for_img(img_name="Enter_Ruins", script_name="Cwars_Lavas", threshold=0.80, max_wait_sec=15, should_click=True, click_middle=True):
