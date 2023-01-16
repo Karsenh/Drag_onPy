@@ -8,7 +8,7 @@ import pyautogui as pag
 import numpy as np
 
 SCRIPT_NAME = "GE_Sulphurous_Fertilizer"
-HERB_BANK_TAB_NUM = 9
+HERB_BANK_TAB_NUM = 1
 
 
 def start_making_fertalizer(curr_loop):
