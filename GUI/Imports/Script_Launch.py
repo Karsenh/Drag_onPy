@@ -52,6 +52,7 @@ def launch_script(script_name="pisc_iron"):
     global SHOULD_CONTINUE
 
     reopen_invent = True
+    always_sleep = True
 
     write_debug(f"Pre-launch checks for: {script_name}")
     # Check that we're not on dc screen (click continue if so)
@@ -251,16 +252,19 @@ def launch_script(script_name="pisc_iron"):
             antiban_likelihood = 12
             antiban_downtime_sec = 5
             reopen_invent = True
+            always_sleep = False
         case "Motherlode_Miner":
             selected_script = ScriptEnum.MOTHERLODE_MINER.value
             antiban_likelihood = 25
             antiban_downtime_sec = 3
             reopen_invent = True
+            always_sleep = False
         case "GE_Sulphurous_Fertilizer":
             selected_script = ScriptEnum.SULPHUROUS_FERTILIZER.value
             antiban_likelihood = 25
             antiban_downtime_sec = 3
             reopen_invent = True
+            always_sleep = False
 
     is_timer_set = is_break_timer_set()
 
@@ -283,7 +287,7 @@ def launch_script(script_name="pisc_iron"):
                 if not handle_auth_screens():
                     SHOULD_CONTINUE = False
 
-            API.AntiBan.random_human_actions(max_downtime_seconds=antiban_downtime_sec, likelihood=antiban_likelihood, reopen_inventory=reopen_invent)
+            API.AntiBan.random_human_actions(max_downtime_seconds=antiban_downtime_sec, likelihood=antiban_likelihood, always_sleep=always_sleep,  reopen_inventory=reopen_invent)
 
             CURR_SCRIPT_LOOP += 1
             print(f'🔄 MAIN LOOP COUNT: {CURR_SCRIPT_LOOP}')

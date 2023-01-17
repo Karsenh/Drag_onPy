@@ -38,7 +38,7 @@ def print_to_log(text):
     return
 
 
-def random_human_actions(max_downtime_seconds=3.0, likelihood=10, reopen_inventory=True):
+def random_human_actions(max_downtime_seconds=3.0, likelihood=10, always_sleep=True, reopen_inventory=True):
     start_time = datetime.now()
 
     # Generate a random number between 1-10 (or likelihood)
@@ -87,7 +87,10 @@ def random_human_actions(max_downtime_seconds=3.0, likelihood=10, reopen_invento
                 sleep_between(0.1, time_remaining)
     else:
         write_debug(f'Not performing human interactions - {should_perform_actions} - Sleeping instead.')
-        sleep_between(0.1, max_seconds=max_downtime_seconds)
+        if always_sleep:
+            sleep_between(min_seconds=0.1, max_seconds=max_downtime_seconds)
+        else:
+            sleep_between(0.1, 0.12)
     return
 
 
