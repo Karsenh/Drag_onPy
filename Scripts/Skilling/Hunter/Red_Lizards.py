@@ -12,7 +12,7 @@ TRAP_CHECK_ORDER = []
 INTL_TRAP_THRESH = 0.82
 
 # Trap State Detection
-CAUGHT_THRESH = 0.86
+CAUGHT_THRESH = 0.85
 DOWN_THRESH = 0.80
 LIZARD_DOWN_THRESH = 0.80
 
@@ -52,7 +52,7 @@ def set_intl_trap(trap_num):
 
     x_offset = 6
     if trap_num == 3:
-        print(f'Xoffset 25')
+        print(f'X offset 30')
         x_offset = 30
 
     if wait_for_img(img_name=f"Set_intl_trap_{trap_num}", script_name=SCRIPT_NAME, should_click=True, threshold=INTL_TRAP_THRESH, y_offset=10, x_offset=x_offset):
