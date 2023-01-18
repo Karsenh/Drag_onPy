@@ -77,7 +77,7 @@ def start_crafting_lavas(curr_loop):
         empty_pouches()
         craft_lavas()
         teleport_to_cwars()
-        API.AntiBan.sleep_between(0.5, 0.6)
+        # API.AntiBan.sleep_between(0.5, 0.6)
     else:
         print(f'This is the first loop - setting up interface etc.')
         setup_interface("north", 1, "up")
@@ -521,7 +521,7 @@ def teleport_to_duel_arena():
 
 
 def move_to_ruins():
-    if not wait_for_img(img_name="Minimap_Ruins_Alt", script_name="Cwars_Lavas", should_click=True, threshold=0.94, y_offset=-130, x_offset=0, max_wait_sec=30):
+    if not wait_for_img(img_name="Minimap_Ruins_Alt", script_name="Cwars_Lavas", should_click=True, threshold=0.9, y_offset=-130, x_offset=0, max_wait_sec=30):
         write_debug(f"Failed to find Minimap_Ruins... Exiting.")
         return False
     if not wait_for_img(img_name="Enter_Ruins", script_name="Cwars_Lavas", threshold=0.80, max_wait_sec=15, should_click=True, click_middle=True):
@@ -565,7 +565,7 @@ def teleport_to_cwars():
 
     is_tab_open("equipment", True)
 
-    if not does_img_exist(img_name="Equipped_Necklace", script_name="Cwars_Lavas", threshold=0.9):
+    if not does_img_exist(img_name="Equipped_Necklace", script_name="Cwars_Lavas", threshold=0.88):
         NECK_EQUIPPED = False
 
     if CACHED_EQUIPPED_ROD_XY:
