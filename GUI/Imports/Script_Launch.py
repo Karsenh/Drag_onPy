@@ -34,9 +34,10 @@ from Scripts.Skilling.Hunter.Red_Lizards import start_catching_red_lizards
 from Scripts.Skilling.Runecrafting.Cwars_Lavas import start_crafting_lavas
 from Scripts.Skilling.Mining.Motherlode_Miner import start_motherlode_mining
 from Scripts.Skilling.Farming.GE_Sulphurous_Fertilizer import start_making_fertalizer
+from Scripts.Skilling.Farming.Tithe_Farmer import start_tithe_farming
 
-from enum import Enum
 import API
+from enum import Enum
 from API.Debug import write_debug
 from API.Interface.General import handle_auth_screens
 from API.Break_Timer.Break_Handler import is_break_timer_set
@@ -52,6 +53,7 @@ def launch_script(script_name="pisc_iron"):
     global SHOULD_CONTINUE
 
     reopen_invent = True
+    always_sleep = True
 
     write_debug(f"Pre-launch checks for: {script_name}")
     # Check that we're not on dc screen (click continue if so)
@@ -94,6 +96,7 @@ def launch_script(script_name="pisc_iron"):
         CWARS_LAVAS = 33
         MOTHERLODE_MINER = 34
         SULPHUROUS_FERTILIZER = 35
+        TITHE_FARMER = 36
 
     all_scripts = [mine_iron_pisc, smith_gold_edge, run_gnome_course,
                    fish_draynor_shrimp, fish_barb_trout, barbarian_fishing,
@@ -106,7 +109,7 @@ def launch_script(script_name="pisc_iron"):
                    start_killing_kourend_crabs, start_crafting_dhide_bodies, start_chopping_teaks,
                    start_superheating_gold, start_constructing_larders, start_constructing_tables,
                    start_catching_desert_lizards, start_catching_red_lizards, start_chopping_sw_teaks,
-                   start_crafting_lavas, start_motherlode_mining, start_making_fertalizer]
+                   start_crafting_lavas, start_motherlode_mining, start_making_fertalizer, start_tithe_farming]
 
     match script_name:
         case "pisc_iron":
@@ -251,16 +254,25 @@ def launch_script(script_name="pisc_iron"):
             antiban_likelihood = 12
             antiban_downtime_sec = 5
             reopen_invent = True
+            always_sleep = False
         case "Motherlode_Miner":
             selected_script = ScriptEnum.MOTHERLODE_MINER.value
             antiban_likelihood = 25
             antiban_downtime_sec = 3
             reopen_invent = True
+            always_sleep = False
         case "GE_Sulphurous_Fertilizer":
             selected_script = ScriptEnum.SULPHUROUS_FERTILIZER.value
             antiban_likelihood = 25
             antiban_downtime_sec = 3
             reopen_invent = True
+            always_sleep = False
+        case "Tithe_Farmer":
+            selected_script = ScriptEnum.TITHE_FARMER.value
+            antiban_likelihood = 25
+            antiban_downtime_sec = 3
+            reopen_invent = True
+            always_sleep = False
 
     is_timer_set = is_break_timer_set()
 
@@ -283,7 +295,7 @@ def launch_script(script_name="pisc_iron"):
                 if not handle_auth_screens():
                     SHOULD_CONTINUE = False
 
-            API.AntiBan.random_human_actions(max_downtime_seconds=antiban_downtime_sec, likelihood=antiban_likelihood, reopen_inventory=reopen_invent)
+            API.AntiBan.random_human_actions(max_downtime_seconds=antiban_downtime_sec, likelihood=antiban_likelihood, always_sleep=always_sleep,  reopen_inventory=reopen_invent)
 
             CURR_SCRIPT_LOOP += 1
             print(f'🔄 MAIN LOOP COUNT: {CURR_SCRIPT_LOOP}')

@@ -44,6 +44,14 @@ CACHED_DA_TELE_XY = None
 
 CACHED_EQUIPPED_ROD_XY = None
 
+CACHED_BANKED_ROD = None
+CACHED_BANKED_NECKLACE = None
+
+CACHED_INVENT_SMALL_POUCH = None
+CACHED_INVENT_MEDIUM_POUCH = None
+CACHED_INVENT_LARGE_POUCH = None
+CACHED_INVENT_GIANT_POUCH = None
+
 
 def start_crafting_lavas(curr_loop):
     if curr_loop != 1:
@@ -52,8 +60,9 @@ def start_crafting_lavas(curr_loop):
         # Add check for run energy gt however much needed for full run - if not wd stam and use
         check_run()
 
-        # Add check for degraded pouches
-        fix_pouches()
+        if check_for_degraded_pouches():
+            # Add check for degraded pouches
+            fix_pouches()
 
         if not optimal_bank_open():
             move_to_bank_chest()
@@ -76,6 +85,7 @@ def start_crafting_lavas(curr_loop):
         craft_lavas()
         empty_pouches()
         craft_lavas()
+        check_for_degraded_pouches()
         teleport_to_cwars()
         # API.AntiBan.sleep_between(0.5, 0.6)
     else:
@@ -142,6 +152,9 @@ def replenish_missing_items():
     global POUCHES_TO_USE_ARR
     global HAS_ESS_POUCH_ARR
 
+    global CACHED_BANKED_ROD
+    global CACHED_BANKED_NECKLACE
+
     global NEEDS_STAM
 
     print(f'⁉\nROD_EQUIPPED = {ROD_EQUIPPED}'
@@ -178,13 +191,23 @@ def replenish_missing_items():
         is_bank_tab_open(JEWELRY_BANK_TAB, True)
         deposit_ess()
         is_withdraw_qty(qty="1", should_click=True)
-        does_img_exist(img_name="Banked_Rod", script_name="Cwars_Lavas", should_click=True, threshold=0.97)
-        API.AntiBan.sleep_between(1.2, 1.3)
+        if CACHED_BANKED_ROD:
+            mouse_click(CACHED_BANKED_ROD)
+        else:
+            if not does_img_exist(img_name="Banked_Rod", script_name="Cwars_Lavas", should_click=True, threshold=0.97):
+                print(f'Failed to find banked Rod')
+                return False
+
+        x, y = get_existing_img_xy()
+        adj_xy = x+6, y+6
+        CACHED_BANKED_ROD = adj_xy
 
         if not wait_for_invent_item_xy("Inventory_Rod"):
             return False
 
-        mouse_long_click(get_existing_img_xy())
+        x, y = get_existing_img_xy()
+        adj_xy = x+6, y+6
+        mouse_long_click(adj_xy)
         wait_for_img(img_name="Wear", category="General", should_click=True, click_middle=True)
         ROD_EQUIPPED = True
 
@@ -192,15 +215,23 @@ def replenish_missing_items():
         is_bank_tab_open(JEWELRY_BANK_TAB, True)
         deposit_ess()
         is_withdraw_qty("1", True)
-        if not does_img_exist(img_name="Banked_Necklace", script_name="Cwars_Lavas", threshold=0.97, should_click=True, click_middle=True):
-            write_debug(f"Failed to find banked Binding Necklace")
-            return False
-        # API.AntiBan.sleep_between(1.5, 1.6)
+        if CACHED_BANKED_NECKLACE:
+            mouse_click(CACHED_BANKED_NECKLACE)
+        else:
+            if not does_img_exist(img_name="Banked_Necklace", script_name="Cwars_Lavas", threshold=0.97, should_click=True, click_middle=True):
+                print(f'Failed to find banked necklace')
+                return False
+
+        x, y = get_existing_img_xy()
+        adj_xy = x+6, y+6
+        CACHED_BANKED_NECKLACE = adj_xy
 
         if not wait_for_invent_item_xy("Inventory_Necklace"):
             return False
 
-        mouse_long_click(get_existing_img_xy())
+        x, y = get_existing_img_xy()
+        adj_xy = x+6, y+6
+        mouse_long_click(adj_xy)
         wait_for_img(img_name="Wear", category="General", should_click=True, click_middle=True)
         NECK_EQUIPPED = True
 
@@ -276,22 +307,10 @@ def replenish_missing_items():
 
 
 def deposit_ess():
-    inventory_ess_found = False
-    attempts = 0
-    while not inventory_ess_found:
-        if does_img_exist(img_name="Inventory_Ess", script_name="Cwars_Lavas", threshold=0.9, img_sel="first"):
-            x, y = get_existing_img_xy()
-            if x > 1000:
-                print(f'Inventory Essence found!')
-                inventory_ess_found = True
-        if attempts > 2:
-            return False
-        attempts += 1
-
-    is_withdraw_qty("all", True)
-    x, y = get_existing_img_xy()
-    if x > 1000:
-        adj_xy = x+7, y+6
+    if wait_for_invent_item_xy("Inventory_Ess", threshold=0.94):
+        print(f'Depositing ess found in inventory')
+        x, y = get_existing_img_xy()
+        adj_xy = x+6, y+6
         mouse_click(adj_xy)
     return True
 
@@ -324,7 +343,7 @@ def move_to_bank_chest():
 def open_bank_chest():
     wait_for_img(img_name="Bank_Chest", script_name="Cwars_Lavas", threshold=0.7, max_wait_sec=8)
     API.AntiBan.sleep_between(0.8, 0.9)
-    does_img_exist(img_name="Bank_Chest", script_name="Cwars_Lavas", should_click=True, threshold=0.7)
+    does_img_exist(img_name="Bank_Chest", script_name="Cwars_Lavas", should_click=True, threshold=0.7, x_offset=-5, y_offset=-10)
     return is_bank_open()
 
 
@@ -334,19 +353,33 @@ def fill_pouch(pouch_size):
     global CACHED_LARGE_FILL_XY
     global CACHED_GIANT_FILL_XY
 
-    global CACHED_SMALL_EMPTY_XY
-    global CACHED_MEDIUM_EMPTY_XY
-    global CACHED_LARGE_EMPTY_XY
+    global CACHED_INVENT_SMALL_POUCH
+    global CACHED_INVENT_MEDIUM_POUCH
+    global CACHED_INVENT_LARGE_POUCH
+    global CACHED_INVENT_GIANT_POUCH
 
     # if not wait_for_invent_item_xy(f"Inventory_{pouch_size}_Pouch"):
     #     return False
-    does_img_exist(img_name=f"Inventory_{pouch_size}_Pouch", script_name="Cwars_Lavas", threshold=0.95, img_sel="first")
-    mouse_long_click(get_existing_img_xy())
+    # does_img_exist(img_name=f"Inventory_{pouch_size}_Pouch", script_name="Cwars_Lavas", threshold=0.95, img_sel="first")
+    # mouse_long_click(get_existing_img_xy())
 
     print(f'small pouch fill vals: {CACHED_SMALL_FILL_XY}\nmedium: {CACHED_MEDIUM_FILL_XY}\nlarge: {CACHED_LARGE_FILL_XY}')
 
     match pouch_size:
         case "Small":
+            if CACHED_INVENT_SMALL_POUCH:
+                mouse_long_click(CACHED_INVENT_SMALL_POUCH)
+            else:
+                if not wait_for_invent_item_xy("Inventory_Small_Pouch", threshold=0.96):
+                    return
+
+                # does_img_exist(img_name=f"Inventory_Small_Pouch", script_name="Cwars_Lavas", threshold=0.95,
+                #                img_sel="first")
+                x, y = get_existing_img_xy()
+                adj_xy = x+6, y+6
+                CACHED_INVENT_SMALL_POUCH = adj_xy
+                mouse_long_click(CACHED_INVENT_SMALL_POUCH)
+
             if CACHED_SMALL_FILL_XY:
                 print(f'Cached_small_fill_xy = {CACHED_SMALL_FILL_XY}')
                 mouse_click(CACHED_SMALL_FILL_XY)
@@ -363,6 +396,19 @@ def fill_pouch(pouch_size):
             return
 
         case "Medium":
+            if CACHED_INVENT_MEDIUM_POUCH:
+                mouse_long_click(CACHED_INVENT_MEDIUM_POUCH)
+            else:
+                if not wait_for_invent_item_xy("Inventory_Medium_Pouch", threshold=0.96):
+                    return
+
+                # does_img_exist(img_name=f"Inventory_Medium_Pouch", script_name="Cwars_Lavas", threshold=0.95,
+                #                img_sel="first")
+                x, y = get_existing_img_xy()
+                adj_xy = x + 6, y + 6
+                CACHED_INVENT_MEDIUM_POUCH = adj_xy
+                mouse_long_click(CACHED_INVENT_MEDIUM_POUCH)
+
             if CACHED_MEDIUM_FILL_XY:
                 print(f'Cached_medium_fill_xy = {CACHED_MEDIUM_FILL_XY}')
                 mouse_click(CACHED_MEDIUM_FILL_XY)
@@ -379,6 +425,19 @@ def fill_pouch(pouch_size):
             return
 
         case "Large":
+            if CACHED_INVENT_LARGE_POUCH:
+                mouse_long_click(CACHED_INVENT_LARGE_POUCH)
+            else:
+                if not wait_for_invent_item_xy("Inventory_Large_Pouch", threshold=0.96):
+                    return
+
+                # does_img_exist(img_name=f"Inventory_Large_Pouch", script_name="Cwars_Lavas", threshold=0.95,
+                #                img_sel="first")
+                x, y = get_existing_img_xy()
+                adj_xy = x + 6, y + 6
+                CACHED_INVENT_LARGE_POUCH = adj_xy
+                mouse_long_click(CACHED_INVENT_LARGE_POUCH)
+
             if CACHED_LARGE_FILL_XY:
                 print(f'Cached_large_fill_xy = {CACHED_LARGE_FILL_XY}')
                 mouse_click(CACHED_LARGE_FILL_XY)
@@ -395,6 +454,18 @@ def fill_pouch(pouch_size):
             return
 
         case "Giant":
+            if CACHED_INVENT_GIANT_POUCH:
+                mouse_long_click(CACHED_INVENT_GIANT_POUCH)
+            else:
+                if not wait_for_invent_item_xy("Inventory_Giant_Pouch", threshold=0.96):
+                    return
+                # does_img_exist(img_name=f"Inventory_Giant_Pouch", script_name="Cwars_Lavas", threshold=0.96,
+                #                img_sel="first")
+                x, y = get_existing_img_xy()
+                adj_xy = x + 6, y + 6
+                CACHED_INVENT_GIANT_POUCH = adj_xy
+                mouse_long_click(CACHED_INVENT_GIANT_POUCH)
+
             if CACHED_GIANT_FILL_XY:
                 print(f'Cached_giant_fill_xy = {CACHED_GIANT_FILL_XY}')
                 mouse_click(CACHED_GIANT_FILL_XY)
@@ -424,6 +495,19 @@ def fill_pouches():
     return
 
 
+def check_for_degraded_pouches():
+    global DEGRADED_POUCH_EXISTS
+
+    is_tab_open("inventory", True)
+
+    for pouch_size in POUCHES_TO_USE_ARR:
+        if pouch_size != "Small":
+            if does_img_exist(img_name=f"Inventory_{pouch_size}_Pouch_Degraded", script_name="Cwars_Lavas", threshold=0.90):
+                DEGRADED_POUCH_EXISTS = True
+                return True
+    return False
+
+
 def empty_pouch(pouch_size):
     global DEGRADED_POUCH_EXISTS
 
@@ -432,53 +516,99 @@ def empty_pouch(pouch_size):
     global CACHED_LARGE_EMPTY_XY
     global CACHED_GIANT_EMPTY_XY
 
-    if not does_img_exist(img_name=f"Inventory_{pouch_size}_Pouch", script_name="Cwars_Lavas", threshold=0.95, img_sel="first"):
-        if does_img_exist(img_name=f"Inventory_{pouch_size}_Pouch_Degraded", script_name="Cwars_Lavas", threshold=0.90):
-            print(f'Found Degraded {pouch_size} pouch - setting Degraded Exists to True')
-            DEGRADED_POUCH_EXISTS = True
-        else:
-            print(f'Found neither {pouch_size} pouch or degraded {pouch_size} pouch.')
-            return
+    global CACHED_INVENT_SMALL_POUCH
+    global CACHED_INVENT_MEDIUM_POUCH
+    global CACHED_INVENT_LARGE_POUCH
+    global CACHED_INVENT_GIANT_POUCH
 
-    mouse_long_click(get_existing_img_xy())
+    # if not does_img_exist(img_name=f"Inventory_{pouch_size}_Pouch", script_name="Cwars_Lavas", threshold=0.95, img_sel="first"):
+    #     if does_img_exist(img_name=f"Inventory_{pouch_size}_Pouch_Degraded", script_name="Cwars_Lavas", threshold=0.90):
+    #         print(f'Found Degraded {pouch_size} pouch - setting Degraded Exists to True')
+    #         DEGRADED_POUCH_EXISTS = True
+    #     else:
+    #         print(f'Found neither {pouch_size} pouch or degraded {pouch_size} pouch.')
+    #         return
+    #
+    # mouse_long_click(get_existing_img_xy())
 
     match pouch_size:
         case "Small":
+            if CACHED_INVENT_SMALL_POUCH:
+                print(f'CACHED INVENT SMALL POUCH')
+                mouse_long_click(CACHED_INVENT_SMALL_POUCH)
+            else:
+                if does_img_exist(img_name=f"Inventory_Small_Pouch", script_name="Cwars_Lavas", threshold=0.95, img_sel="first") or does_img_exist(img_name=f"Inventory_Small_Pouch_Degraded", script_name="Cwars_Lavas",threshold=0.90):
+                    x, y = get_existing_img_xy()
+                    adj_xy = x + 6, y + 6
+                    mouse_long_click(adj_xy)
+                else:
+                    return
+
             if CACHED_SMALL_EMPTY_XY:
+                print(f'CACHED SMALL EMPTY')
                 mouse_click(CACHED_SMALL_EMPTY_XY)
             else:
                 if wait_for_img(img_name="Empty", category="General", should_click=True, click_middle=True, threshold=0.9, max_wait_sec=2):
                     CACHED_SMALL_EMPTY_XY = get_existing_img_xy()
                 else:
-                    print(f"Couldn't find Small Empty image to save XY - returning")
+                    print(f"Couldn't find SMALL Empty image to save XY - returning")
                     return
+
         case "Medium":
+            if CACHED_INVENT_MEDIUM_POUCH:
+                mouse_long_click(CACHED_INVENT_MEDIUM_POUCH)
+            else:
+                if does_img_exist(img_name=f"Inventory_Medium_Pouch", script_name="Cwars_Lavas", threshold=0.95, img_sel="first") or does_img_exist(img_name=f"Inventory_Medium_Pouch_Degraded", script_name="Cwars_Lavas", threshold=0.90):
+                    x, y = get_existing_img_xy()
+                    adj_xy = x + 6, y + 6
+                    mouse_long_click(adj_xy)
+
             if CACHED_MEDIUM_EMPTY_XY:
                 mouse_click(CACHED_MEDIUM_EMPTY_XY)
             else:
-                if wait_for_img(img_name="Empty", category="General", should_click=True, click_middle=True, threshold=0.9, max_wait_sec=2):
+                if wait_for_img(img_name="Empty", category="General", should_click=True, click_middle=True,
+                                threshold=0.9, max_wait_sec=2):
                     CACHED_MEDIUM_EMPTY_XY = get_existing_img_xy()
                 else:
-                    print(f"Couldn't find Medium Empty image to save XY - returning")
+                    print(f"Couldn't find MEDIUM Empty image to save XY - returning")
                     return
+
         case "Large":
+            if CACHED_INVENT_LARGE_POUCH:
+                mouse_long_click(CACHED_INVENT_LARGE_POUCH)
+            else:
+                if does_img_exist(img_name=f"Inventory_Large_Pouch", script_name="Cwars_Lavas", threshold=0.95, img_sel="first") or does_img_exist(img_name=f"Inventory_Large_Pouch_Degraded", script_name="Cwars_Lavas", threshold=0.90):
+                    x, y = get_existing_img_xy()
+                    adj_xy = x + 6, y + 6
+                    mouse_long_click(adj_xy)
+
             if CACHED_LARGE_EMPTY_XY:
                 mouse_click(CACHED_LARGE_EMPTY_XY)
             else:
-                if wait_for_img(img_name="Empty", category="General", should_click=True, click_middle=True, threshold=0.9, max_wait_sec=2):
+                if wait_for_img(img_name="Empty", category="General", should_click=True, click_middle=True,
+                                threshold=0.9, max_wait_sec=2):
                     CACHED_LARGE_EMPTY_XY = get_existing_img_xy()
                 else:
-                    print(f"Couldn't find Large Empty image to save XY - returning")
+                    print(f"Couldn't find LARGE Empty image to save XY - returning")
                     return
 
         case "Giant":
+            if CACHED_INVENT_GIANT_POUCH:
+                mouse_long_click(CACHED_INVENT_GIANT_POUCH)
+            else:
+                if does_img_exist(img_name=f"Inventory_Giant_Pouch", script_name="Cwars_Lavas", threshold=0.95, img_sel="first") or does_img_exist(img_name=f"Inventory_Giant_Pouch_Degraded", script_name="Cwars_Lavas", threshold=0.90):
+                    x, y = get_existing_img_xy()
+                    adj_xy = x + 6, y + 6
+                    mouse_long_click(adj_xy)
+
             if CACHED_GIANT_EMPTY_XY:
                 mouse_click(CACHED_GIANT_EMPTY_XY)
             else:
-                if wait_for_img(img_name="Empty", category="General", should_click=True, click_middle=True, threshold=0.9, max_wait_sec=2):
+                if wait_for_img(img_name="Empty", category="General", should_click=True, click_middle=True,
+                                threshold=0.9, max_wait_sec=2):
                     CACHED_GIANT_EMPTY_XY = get_existing_img_xy()
                 else:
-                    print(f"Couldn't find Large Empty image to save XY - returning")
+                    print(f"Couldn't find GIANT Empty image to save XY - returning")
                     return
     return
 
@@ -622,8 +752,8 @@ def check_run():
     return
 
 
-def wait_for_invent_item_xy(img_name):
-    return wait_for_img(img_name=img_name, script_name="Cwars_Lavas", threshold=0.90, img_sel="inventory")
+def wait_for_invent_item_xy(img_name, threshold=0.9):
+    return wait_for_img(img_name=img_name, script_name="Cwars_Lavas", threshold=threshold, img_sel="inventory", max_wait_sec=2)
 
 
 

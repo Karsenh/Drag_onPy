@@ -5,6 +5,7 @@ from API.Imaging.Image import *
 from API.Imaging.OCR.Run_Energy import *
 from API.Imports.Paths import BS_SCREEN_PATH
 from GUI.Imports.Script_Launch import launch_script
+from Scripts.Skilling.Farming.Tithe_Farmer import resupply_seeds
 from Scripts.Skilling.Runecrafting.Cwars_Lavas import set_equipped_items, set_inventory_items, fill_pouches, \
     withdraw_ess, empty_pouches, teleport_to_duel_arena, craft_lavas, move_to_ruins, move_to_altar, cast_imbue, \
     teleport_to_cwars
@@ -36,8 +37,11 @@ def __main__():
 
     # show_main_gui()
 
-    launch_script("Cwars_Lavas")
+    launch_script("Tithe_Farmer")
 
+    # resupply_seeds()
+
+    # fill_empty_cans()
 
     # wait_for_img(img_name="Inventory_Rod", script_name="Cwars_Lavas", threshold=0.92, img_sel="inventory")
 
@@ -45,5 +49,10 @@ def __main__():
 
 
 __main__()
+
+
+
+
+
 
 
