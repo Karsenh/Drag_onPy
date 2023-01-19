@@ -39,6 +39,12 @@ def __main__():
 
     launch_script("Tithe_Farmer")
 
+    # wait_for_img(img_name="Minimap_Farm_Start", script_name="Tithe_Farmer", threshold=0.9, should_click=True, y_offset=2)
+
+
+    # wait_for_img(img_name="Minimap_Farm_Start", script_name="Tithe_Farmer", threshold=0.97, should_click=True,
+    #              click_middle=True)
+    # wait_for_img(img_name="Start_Tile", script_name="Tithe_Farmer", threshold=0.95, should_click=True)
     # resupply_seeds()
 
     # fill_empty_cans()

@@ -3,7 +3,7 @@ from API.Interface.General import setup_interface, is_tab_open, get_xy_for_inven
 import API.AntiBan
 from API.Mouse import mouse_click
 
-SEED_TO_USE = "34"
+SEED_TO_USE = "54"
 
 # Spot      PLANT    |    WATER
 spot_1 = [[800, 480], [800, 480]]  # ✔
@@ -36,8 +36,7 @@ def start_tithe_farming(curr_loop):
 
 def check_if_at_start():
     if not does_img_exist(img_name="Farm_Start_Flag", script_name="Tithe_Farmer", threshold=0.92):
-        if does_img_exist(img_name="Minimap_Farm_Start", script_name="Tithe_Farmer", threshold=0.8, should_click=True,
-                     y_offset=22):
+        if wait_for_img(img_name="Minimap_Farm_Start", script_name="Tithe_Farmer", threshold=0.9, should_click=True, y_offset=3):
             return wait_for_img(img_name="Farm_Start_Flag", script_name="Tithe_Farmer", threshold=0.92, max_wait_sec=15)
     return True
 
@@ -83,7 +82,7 @@ def harvest_both_sections(curr_loop):
     move_to_water_from_points()
     fill_empty_cans()
     # Every 5th farm 'run' we'll be out of seeds and need to resupply
-    if curr_loop % 5 == 0:
+    if curr_loop % 6 == 0:
         resupply_seeds()
         API.AntiBan.sleep_between(3.4, 3.5)
     move_to_farm_start()
@@ -116,14 +115,15 @@ def move_to_section_2():
     other_side_xy = 780, 630
     API.AntiBan.sleep_between(0.3, 0.4)
     mouse_click(other_side_xy)
-    return wait_for_img(img_name="Section_2_Flag", script_name="Tithe_Farmer", threshold=0.84)
+    # API.AntiBan.sleep_between(3.5, 3.6)
+    return wait_for_img(img_name="Section_2_Flag", script_name="Tithe_Farmer", threshold=0.8, max_wait_sec=15)
 
 
 def move_back_from_section_2():
     move_back_xy = 765, 135
     mouse_click(move_back_xy)
-    API.AntiBan.sleep_between(7.8, 7.9)
-    return
+    API.AntiBan.sleep_between(7.0, 7.1)
+    return wait_for_img(img_name="Minimap_Farm_Start", script_name="Tithe_Farmer", threshold=0.9)
 
 
 def deposit_points():
@@ -158,9 +158,8 @@ def harvest_plants():
 def move_to_farm_start():
     global CURR_WATER_CAN_SLOT
     # From doorway
-    wait_for_img(img_name="Minimap_Farm_Start", script_name="Tithe_Farmer", threshold=0.8, should_click=True, y_offset=20)
-    wait_for_img(img_name="Farm_Start_Flag", script_name="Tithe_Farmer", threshold=0.92, max_wait_sec=15)
-    return
+    wait_for_img(img_name="Minimap_Farm_Start", script_name="Tithe_Farmer", threshold=0.9, should_click=True, y_offset=3)
+    return wait_for_img(img_name="Farm_Start_Flag", script_name="Tithe_Farmer", threshold=0.92, max_wait_sec=15)
 
 
 def plant_and_water():
@@ -199,7 +198,7 @@ def increase_can_slot():
     return
 
 
-def wait_between_plants(i, min_even_sec=2.3, min_odd_sec=2.7):
+def wait_between_plants(i, min_even_sec=2.4, min_odd_sec=2.8):
     if i % 2 == 0:
         API.AntiBan.sleep_between(min_even_sec, min_even_sec+0.1)
     else:
