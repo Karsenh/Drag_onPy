@@ -164,7 +164,7 @@ def fix_trap(trap_to_fix):
         print(f'From_Trap: {from_trap}')
         TRAP_CHECK_ORDER.remove(AT_TRAP)
         # TRAP_CHECK_ORDER.append(AT_TRAP)
-        TRAP_CHECK_ORDER.insert(2, AT_TRAP)
+        TRAP_CHECK_ORDER.insert(2, AT_TRAP)  # check current trap last
         print(f'TRAP_CHECK_ORDER NOW: {TRAP_CHECK_ORDER}')
 
         underneath_xy = 748, 462

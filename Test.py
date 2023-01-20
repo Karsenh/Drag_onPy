@@ -37,7 +37,12 @@ def __main__():
 
     # show_main_gui()
 
-    launch_script("Red_Lizards")
+    # launch_script("Red_Lizards")
+
+    SCRIPT_NAME = "Red_Lizards_v2"
+    NUM_TRAPS = 3
+
+
 
     # wait_for_img(img_name="Minimap_Farm_Start", script_name="Tithe_Farmer", threshold=0.9, should_click=True, y_offset=2)
 
