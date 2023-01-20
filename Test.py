@@ -37,7 +37,7 @@ def __main__():
 
     # show_main_gui()
 
-    launch_script("Cwars_Lavas")
+    launch_script("Red_Lizards")
 
     # wait_for_img(img_name="Minimap_Farm_Start", script_name="Tithe_Farmer", threshold=0.9, should_click=True, y_offset=2)
 
