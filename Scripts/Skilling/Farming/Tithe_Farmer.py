@@ -181,7 +181,7 @@ def water_plants():
 
 def wait_between_plants(i, min_even_sec=2.4, min_odd_sec=2.8):
     if i == 1:
-        API.AntiBan.sleep_between(1.1, 1.2)
+        API.AntiBan.sleep_between(1.2, 1.3)
         return
     if i % 2 == 0:
         API.AntiBan.sleep_between(min_even_sec, min_even_sec+0.05)
