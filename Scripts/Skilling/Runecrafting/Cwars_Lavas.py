@@ -194,7 +194,7 @@ def replenish_missing_items(curr_loop):
         if CACHED_BANKED_ROD:
             mouse_click(CACHED_BANKED_ROD)
         else:
-            if not does_img_exist(img_name="Banked_Rod", script_name="Cwars_Lavas", should_click=True, threshold=0.97):
+            if not does_img_exist(img_name="Banked_Rod", script_name="Cwars_Lavas", threshold=0.97):
                 print(f'Failed to find banked Rod')
                 return False
             else:
@@ -219,13 +219,14 @@ def replenish_missing_items(curr_loop):
         if CACHED_BANKED_NECKLACE:
             mouse_click(CACHED_BANKED_NECKLACE)
         else:
-            if not does_img_exist(img_name="Banked_Necklace", script_name="Cwars_Lavas", threshold=0.97, should_click=True, click_middle=True):
+            if not does_img_exist(img_name="Banked_Necklace", script_name="Cwars_Lavas", threshold=0.97):
                 print(f'Failed to find banked necklace')
                 return False
             else:
                 x, y = get_existing_img_xy()
                 adj_xy = x+6, y+6
                 CACHED_BANKED_NECKLACE = adj_xy
+                mouse_click(CACHED_BANKED_NECKLACE)
 
         if not wait_for_invent_item_xy("Inventory_Necklace"):
             return False
