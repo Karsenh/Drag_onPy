@@ -187,12 +187,17 @@ def plant_and_water():
         if does_img_exist(img_name=f"Seed_{SEED_TO_USE}", script_name="Tithe_Farmer", threshold=0.85, should_click=True, click_middle=True):
             # Plant seed
             mouse_click(spot[0])
+
             # Click water can
-            # mouse_click(get_xy_for_invent_slot(CURR_WATER_CAN_SLOT))
             click_watering_can()
+
+            # Wait to use water can on planted seed
             wait_between_plants(i)
+
+            # Water seed
             mouse_click(spot[1])
-            # API.AntiBan.sleep_between(1.0, 1.1)
+
+            # Pause briefly after watering to use next seed
             wait_between_plants(i, 1.0, 1.1)
         else:
             print(f'⛔ No seeds found in inventory!')
@@ -216,7 +221,6 @@ def water_plants():
     is_tab_open("inventory", True)
     i = 1
     for spot in plant_and_water_xys:
-        # mouse_click(get_xy_for_invent_slot(CURR_WATER_CAN_SLOT))
         click_watering_can()
         mouse_click(spot[0])
         wait_between_plants(i)
@@ -224,7 +228,7 @@ def water_plants():
     return
 
 
-def wait_between_plants(i, min_even_sec=2.4, min_odd_sec=2.8):
+def wait_between_plants(i, min_even_sec=2.3, min_odd_sec=2.7):
     if i == 1:
         API.AntiBan.sleep_between(1.2, 1.3)
         return
