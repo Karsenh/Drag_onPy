@@ -2,7 +2,7 @@ import API.AntiBan
 from API.Imaging.Image import does_img_exist, wait_for_img, get_existing_img_xy
 from API.Interface.General import setup_interface, is_tab_open
 from API.Mouse import mouse_long_click, mouse_click, mouse_move
-from API.Skill_Levels import get_skill_level
+from GUI.Imports.Skill_Level_Input.Skill_Level_Input import get_skill_level
 
 
 SCRIPT_NAME = "Con_Larders"

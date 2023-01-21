@@ -1,9 +1,12 @@
+import API.AntiBan
+from API.Debug import write_debug
+from GUI.Imports.Skill_Level_Input.Skill_Level_Input import get_skill_level
 from API.Imaging.Image import does_img_exist, wait_for_img
 from API.Interface.General import setup_interface, is_tab_open, get_xy_for_invent_slot
-import API.AntiBan
 from API.Mouse import mouse_click
 
 SEED_TO_USE = "54"
+USE_GRICOLLER_CAN = True
 
 # Spot      PLANT    |    WATER
 spot_1 = [[800, 480], [800, 480]]  # ✔
@@ -30,6 +33,8 @@ def start_tithe_farming(curr_loop):
     else:
         print(f'First loop - setup')
         setup_interface('south', 1, 'up')
+        if not set_seed_to_use():
+            return False
         check_if_at_start()
     return True
 
@@ -79,8 +84,8 @@ def harvest_both_sections(curr_loop):
     # move_back_from_section_2()
     # move_to_water()
     deposit_points()
-    move_to_water_from_points()
-    fill_empty_cans()
+    # move_to_water_from_points()
+    fill_empty_cans(curr_loop)
     # Every 5th farm 'run' we'll be out of seeds and need to resupply
     if curr_loop % 6 == 0:
         resupply_seeds()
@@ -88,6 +93,24 @@ def harvest_both_sections(curr_loop):
     move_to_farm_start()
     increase_can_slot()
     return
+
+
+def set_seed_to_use():
+    global SEED_TO_USE
+
+    farming_level = get_skill_level(skill_name="farming", should_update_file=True)
+
+    if 34 <= farming_level < 54:
+        SEED_TO_USE = "34"
+    elif 54 <= farming_level < 74:
+        SEED_TO_USE = "54"
+    elif farming_level > 74:
+        SEED_TO_USE = "74"
+    else:
+        write_debug(f"Couldn't Set Seed due to insufficient farming level: {farming_level}")
+        return False
+
+    return True
 
 
 def resupply_seeds():
@@ -100,11 +123,17 @@ def resupply_seeds():
     return
 
 
-def fill_empty_cans():
+def fill_empty_cans(curr_loop):
     is_tab_open("inventory", True)
-    does_img_exist(img_name="Empty_Watering_Can", script_name="Tithe_Farmer", threshold=0.9, should_click=True, click_middle=True)
-    wait_for_img(img_name="Water_Barrel", script_name="Tithe_Farmer", threshold=0.85, should_click=True, click_middle=True, max_wait_sec=15)
-    API.AntiBan.sleep_between(16.0, 16.1)
+    if not USE_GRICOLLER_CAN:
+        does_img_exist(img_name="Empty_Watering_Can", script_name="Tithe_Farmer", threshold=0.9, should_click=True, click_middle=True)
+        wait_for_img(img_name="Water_Barrel", script_name="Tithe_Farmer", threshold=0.85, should_click=True, click_middle=True, max_wait_sec=15)
+        API.AntiBan.sleep_between(16.0, 16.1)
+    else:
+        if curr_loop % 12 == 0:
+            click_watering_can()
+            wait_for_img(img_name="Water_Barrel", script_name="Tithe_Farmer", threshold=0.85, should_click=True,
+                         click_middle=True, max_wait_sec=15)
     return
 
 
@@ -159,20 +188,36 @@ def plant_and_water():
             # Plant seed
             mouse_click(spot[0])
             # Click water can
-            mouse_click(get_xy_for_invent_slot(CURR_WATER_CAN_SLOT))
+            # mouse_click(get_xy_for_invent_slot(CURR_WATER_CAN_SLOT))
+            click_watering_can()
             wait_between_plants(i)
             mouse_click(spot[1])
             # API.AntiBan.sleep_between(1.0, 1.1)
             wait_between_plants(i, 1.0, 1.1)
+        else:
+            print(f'⛔ No seeds found in inventory!')
+            return
         i += 1
     return
+
+
+def click_watering_can():
+    if USE_GRICOLLER_CAN:
+        if not does_img_exist(img_name="Gricollers_Can", script_name="Tithe_Farmer", threshold=0.95, should_click=True, click_middle=True):
+            write_debug(f"Failed to find Gricoller's Can in inventory")
+            return False
+    else:
+        mouse_click(get_xy_for_invent_slot(CURR_WATER_CAN_SLOT))
+
+    return True
 
 
 def water_plants():
     is_tab_open("inventory", True)
     i = 1
     for spot in plant_and_water_xys:
-        mouse_click(get_xy_for_invent_slot(CURR_WATER_CAN_SLOT))
+        # mouse_click(get_xy_for_invent_slot(CURR_WATER_CAN_SLOT))
+        click_watering_can()
         mouse_click(spot[0])
         wait_between_plants(i)
         i += 1

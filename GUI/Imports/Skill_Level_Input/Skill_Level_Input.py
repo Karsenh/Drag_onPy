@@ -3,6 +3,7 @@ import os
 from tkinter import Toplevel, LabelFrame, Label, Entry, Button
 from GUI.Imports.GUI_Frames import frame_bg_color, label_frame_bg_color, btn_bg_color, btn_active_bg_color
 from osrs_api import Hiscores
+from API.Debug import write_debug
 
 initial_get = True
 
@@ -95,9 +96,22 @@ def show_skill_input_frame(skill_level_input_frame, t_active_frame, all_frames, 
     add_new_skill_input("construction", skill_level_input_sub_frame, user_hiscores, row=10, start_col=1)
     add_new_skill_input("hunter", skill_level_input_sub_frame, user_hiscores, row=10, start_col=3)
 
-    save_levels_btn = Button(skill_level_input_sub_frame, state='disabled', font=break_btn_font, text="Update Levels", bg=btn_bg_color, activebackground=btn_active_bg_color, command=lambda: update_levels_file(username_var.get(), user_hiscores))
+    save_levels_btn = Button(skill_level_input_sub_frame, state='disabled', font=break_btn_font, text="Update Levels", bg=btn_bg_color, activebackground=btn_active_bg_color, command=lambda: save_hs_to_file(username_var.get(), user_hiscores))
     save_levels_btn.grid(row=11, column=1, columnspan=6, pady="20")
 
+    return
+
+
+def add_new_skill_input(skill_name, skill_level_input_sub_frame, user_hiscores, row, start_col):
+    break_font = tkinter.font.Font(family='Helvetica', size=11, weight='normal')
+    break_btn_font = tkinter.font.Font(family='Helvetica', size=11, weight='bold')
+
+    mining_level_var = tkinter.StringVar(skill_level_input_sub_frame)
+    mining_level_var.set(user_hiscores.skills[f'{skill_name}'].level)
+    mining_label = Label(skill_level_input_sub_frame, text=f"{skill_name.capitalize()}:", background=frame_bg_color, font=break_font)
+    mining_input = Entry(skill_level_input_sub_frame, textvariable=mining_level_var, background=label_frame_bg_color, font=break_btn_font, width=3)
+    mining_label.grid(row=row, column=start_col, pady=(15, 0), sticky='W')
+    mining_input.grid(row=row, column=start_col+1, padx=(5, 15), pady=(15, 0))
     return
 
 
@@ -118,8 +132,6 @@ def fetch_hiscores_for_user(username):
     user_hiscores = Hiscores(cleaned_username)
 
     print(f'hiscores for: {cleaned_username} = \n{user_hiscores}')
-    print(f"Attack = {user_hiscores.skills['attack'].level}")
-    print(f"Agility = {user_hiscores.skills['agility'].level}")
 
     save_hs_to_file(username, user_hiscores)
 
@@ -135,28 +147,45 @@ def save_hs_to_file(username, hiScores):
     return
 
 
-def add_new_skill_input(skill_name, skill_level_input_sub_frame, user_hiscores, row, start_col):
-    break_font = tkinter.font.Font(family='Helvetica', size=11, weight='normal')
-    break_btn_font = tkinter.font.Font(family='Helvetica', size=11, weight='bold')
+def get_skill_level(skill_name="agility", should_update_file=False):
+    levels_txt_file_path = f'{os.getcwd()}\Assets\Levels.txt'
 
-    mining_level_var = tkinter.StringVar(skill_level_input_sub_frame)
-    mining_level_var.set(user_hiscores.skills[f'{skill_name}'].level)
-    mining_label = Label(skill_level_input_sub_frame, text=f"{skill_name.capitalize()}:", background=frame_bg_color, font=break_font)
-    mining_input = Entry(skill_level_input_sub_frame, textvariable=mining_level_var, background=label_frame_bg_color, font=break_btn_font, width=3)
-    mining_label.grid(row=row, column=start_col, pady=(15, 0), sticky='W')
-    mining_input.grid(row=row, column=start_col+1, padx=(5, 15), pady=(15, 0))
-    return
+    if should_update_file:
+        with open(levels_txt_file_path, 'r') as file:
+            username = file.readline().replace("\n", "")
+        # Fetch hiscores and update file
+        hi_scores = fetch_hiscores_for_user(username)
+        save_hs_to_file(username, hi_scores)
+        write_debug(f'✔Updated Skill levels file for {username}')
+
+    search_skill = f'={skill_name}'
+    search_line = ""
+    with open(levels_txt_file_path, "r") as file:
+        file_lines = file.readlines()
+        for line in file_lines:
+            if search_skill in line:
+                print(f'Line contains skill_name: {line}')
+                search_line = line
+            # print(f'line: {line}')
+
+    if search_line:
+        trimmed_level = search_line.split('level=')[1].split(',')[0]
+        print(f'trimmed_level = {trimmed_level}')
+        return int(trimmed_level)
+
+    else:
+        return None
 
 
-def update_levels_file(username, user_hiscores):
-    assets_path = f"{os.getcwd()}\Assets"
+def update_skill_level(skill, specific_level=None, increment=True):
+    if not increment:
+        if not specific_level:
+            write_debug(f'Need to specify a level to update if not incrementing by 1.')
+            return False
+        else:
+            print(f'Updating skill: {skill} in file to specific_level: {specific_level}')
+    else:
+        # Increment the skill arg by one
+        write_debug(f'Incrementing skill: {skill} in file to {get_skill_level(skill)+1}')
 
-    with open(f'{assets_path}\Levels.txt', 'w') as file:
-        file.write(f"{username}\n")
-        file.write(str(user_hiscores))
-    return
-
-
-def get_level_from_file(skill_name):
-
-    return
+    return True

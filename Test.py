@@ -1,14 +1,12 @@
 import API.AntiBan
-from GUI.Main_GUI import *
+from GUI.Main_GUI import show_main_gui
 from API.Debug import clear_debug_log
 from API.Imaging.Image import *
 from API.Imaging.OCR.Run_Energy import *
 from API.Imports.Paths import BS_SCREEN_PATH
 from GUI.Imports.Script_Launch import launch_script
-from Scripts.Skilling.Farming.Tithe_Farmer import resupply_seeds
-from Scripts.Skilling.Runecrafting.Cwars_Lavas import set_equipped_items, set_inventory_items, fill_pouches, \
-    withdraw_ess, empty_pouches, teleport_to_duel_arena, craft_lavas, move_to_ruins, move_to_altar, cast_imbue, \
-    teleport_to_cwars
+from GUI.Imports.Skill_Level_Input.Skill_Level_Input import get_skill_level, update_skill_level
+
 import sys
 from pynput import keyboard
 
@@ -37,12 +35,14 @@ def __main__():
 
     # show_main_gui()
 
-    # launch_script("Red_Lizards")
+    launch_script("Tithe_Farmer")
+
+
 
     SCRIPT_NAME = "Red_Lizards_v2"
     NUM_TRAPS = 3
 
-
+    # print(f'farming level: {get_skill_level("farming")}')
 
     # wait_for_img(img_name="Minimap_Farm_Start", script_name="Tithe_Farmer", threshold=0.9, should_click=True, y_offset=2)
 
