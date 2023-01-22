@@ -66,18 +66,21 @@ def does_color_exist(check_color, xy):
 
 
 def does_color_exist_in_thresh(color_xy, check_color, threshold=15):
+    print("\n- Checking if Color Exists in Threshold -")
     curr_color = get_color_at_coords(color_xy)
     curr_color_idx = 0
     for val in curr_color:
-        print(f'Val: {val}')
+        print(f'Color at {color_xy} val {curr_color_idx}: {val}')
         curr_color_diff = check_color[curr_color_idx] - val
         if curr_color_diff < -1:
             curr_color_diff = curr_color_diff * -1
-        print(f'Curr_color_diff = {curr_color_diff} > {threshold} (thresh) ? {curr_color_diff > threshold}')
+        print(f'Curr_color_diff: {curr_color_diff} > Specific Thresh: {threshold} ? {curr_color_diff > threshold}')
         if curr_color_diff > threshold:
+            print(f'✖ Check Color ({check_color}) not found within threshold ({threshold}) @ coords: {color_xy}')
             return False
 
         curr_color_idx += 1
+    print(f'✔ FOUND Check Color ({check_color}) not found within threshold ({threshold}) @ coords: {color_xy}')
     return True
 
 

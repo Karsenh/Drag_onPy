@@ -35,8 +35,15 @@ def __main__():
 
     # show_main_gui()
 
-    launch_script("Tithe_Farmer")
+    # launch_script("Red_Lizards")
 
+
+    setup_interface('west', 3, 'up')
+
+    # check_coords = 860, 466
+    # get_color_at_coords(check_coords)
+    # Yellow = 183, 150, 14
+    # Green = 42, 171, 50
 
 
     SCRIPT_NAME = "Red_Lizards_v2"

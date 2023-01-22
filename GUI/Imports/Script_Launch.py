@@ -30,7 +30,7 @@ from Scripts.Skilling.Combination.GE_Superheat_Gold import start_superheating_go
 from Scripts.Skilling.Construction.Con_Larders import start_constructing_larders
 from Scripts.Skilling.Construction.Con_Mahog_Tables import start_constructing_tables
 from Scripts.Skilling.Hunter.Desert_Lizards import start_catching_desert_lizards
-from Scripts.Skilling.Hunter.Red_Lizards import start_catching_red_lizards
+from Scripts.Skilling.Hunter.Red_Lizards_v2 import start_catching_red_lizards
 from Scripts.Skilling.Runecrafting.Cwars_Lavas import start_crafting_lavas
 from Scripts.Skilling.Mining.Motherlode_Miner import start_motherlode_mining
 from Scripts.Skilling.Farming.GE_Sulphurous_Fertilizer import start_making_fertalizer
