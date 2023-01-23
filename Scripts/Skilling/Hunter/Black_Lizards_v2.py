@@ -57,7 +57,7 @@ class SpotCoords:
 # From Trap 1
 s1f1_region_xys = 723, 360, 767, 415
 s2f1_region_xys = 513, 366, 568, 416
-s3f1_region_xys = 341, 438, 390, 525
+s3f1_region_xys = 341, 438, 415, 525
 s4f1_region_xys = 586, 593, 634, 703
 s5f1_region_xys = 870, 500, 920, 633
 # Claim caught lizard
@@ -141,7 +141,7 @@ s3f3_claim_xy = 661, 501
 s4f3_claim_xy = 983, 725
 s5f3_claim_xy = 1328, 629
 # Pickup Rope (second click is always directly under)
-s1f3_pickup_xy = 966, 676
+s1f3_pickup_xy = 1113, 438
 s2f3_pickup_xy = 889, 439
 s3f3_pickup_xy = 740, 531
 s4f3_pickup_xy = 969, 678
@@ -153,7 +153,7 @@ s3f3_reset_caught_xy = 677, 500
 s4f3_reset_caught_xy = 840, 511
 s5f3_reset_caught_xy = 841, 512
 # Reset xys relative (Down)
-s1f3_reset_down_xy = 761, 518
+s1f3_reset_down_xy = 756, 355
 s2f3_reset_down_xy = 753, 354
 s3f3_reset_down_xy = 658, 450
 s4f3_reset_down_xy = 760, 517
@@ -261,7 +261,7 @@ def start_catching_black_lizards(curr_loop):
 
     else:
         print(f'This is the first loop')
-        # setup_interface('west', 3, 'up')
+        setup_interface('west', 3, 'up')
         if not set_initial_traps():
             return False
         is_tab_open('inventory', False)
