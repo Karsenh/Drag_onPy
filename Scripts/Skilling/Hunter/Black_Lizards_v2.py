@@ -119,7 +119,7 @@ s5f2_reset_caught_xy = 841, 513
 s1f2_reset_down_xy = 754, 355
 s2f2_reset_down_xy = 737, 358
 s3f2_reset_down_xy = 656, 448
-s4f2_reset_down_xy = 760, 578
+s4f2_reset_down_xy = 760, 516
 s5f2_reset_down_xy = 761, 519
 
 spot_2_coords = SpotCoords(s1f2_region_xys, s2f2_region_xys, s3f2_region_xys, s4f2_region_xys, s5f2_region_xys,
@@ -147,7 +147,7 @@ s3f3_pickup_xy = 740, 531
 s4f3_pickup_xy = 969, 678
 s5f3_pickup_xy = 1279, 590
 # Reset xys relative (Caught)
-s1f3_reset_caught_xy = 760, 594
+s1f3_reset_caught_xy = 831, 343
 s2f3_reset_caught_xy = 829, 349
 s3f3_reset_caught_xy = 677, 500
 s4f3_reset_caught_xy = 840, 511
@@ -222,7 +222,7 @@ s5f5_pickup_xy = 757, 533
 # Reset xys relative (Caught)
 s1f5_reset_caught_xy = 663, 366
 s2f5_reset_caught_xy = 661, 352
-s4f5_reset_caught_xy = 581, 426
+s4f5_reset_caught_xy = 663, 516
 s3f5_reset_caught_xy = 664, 520
 s5f5_reset_caught_xy = 761, 584
 # Reset xys relative (Down)
@@ -322,10 +322,10 @@ def check_traps_from(curr_at_trap_num):
     for i in TRAP_CHECK_ORDER:
         print(f'--- Checking Trap {i} From {curr_at_trap_num} ----\nTrap_Check_Order = {TRAP_CHECK_ORDER}')
 
-        if does_color_exist_in_sub_image(curr_check_trap_region_xys[i], color_yellow, 'Trap_Color_Check'):
+        if does_color_exist_in_sub_image(curr_check_trap_region_xys[i], color_yellow, 'Yellow_Check', color_tolerance=10):
             print(f'🟡 Found for spot {i} from trap {curr_at_trap_num}')
 
-        elif does_color_exist_in_sub_image(curr_check_trap_region_xys[i], color_green, 'Trap_Color_Check'):
+        elif does_color_exist_in_sub_image(curr_check_trap_region_xys[i], color_green, 'Green_Check'):
             print(f'🟢 Found for spot {i} from trap {curr_at_trap_num}')
             mouse_click(curr_trap_claim_coords[i])
 
@@ -340,8 +340,18 @@ def check_traps_from(curr_at_trap_num):
             return
         else:
             print(f'🔴 Neither color found for spot {i} - Searching for Green again then Clicking Net to pick up if not found again')
-            API.AntiBan.sleep_between(1.4, 1.5)
-            if does_color_exist_in_sub_image(curr_check_trap_region_xys[i], color_green, 'Trap_Color_Sec_Check'):
+            if wait_for_img(img_name=f"trap_down_{i}_from_{curr_at_trap_num}", script_name="Black_Lizards", threshold=0.92, should_click=True, click_middle=True, max_wait_sec=2):
+                API.AntiBan.sleep_between(2.8, 2.9)
+                second_pickup_xy = 744, 457
+                if i == 4 and curr_at_trap_num == 2:
+                    API.AntiBan.sleep_between(0.6, 0.7)
+                    second_pickup_xy = 752, 466
+
+                mouse_click(second_pickup_xy, min_num_clicks=2, max_num_clicks=3)
+                print(f'✔ Picked up rope and net from ground - Time to reset trap {i} @ {curr_trap_reset_down_coord[i]}')
+                mouse_click(curr_trap_reset_down_coord[i])
+                update_curr_trap_data(i)
+            elif does_color_exist_in_sub_image(curr_check_trap_region_xys[i], color_green, 'Trap_Color_Sec_Check'):
                 print(f'🔴🟢 Found green on the second pass - Clicking to Claim trap {i} @ {curr_trap_claim_coords[i]}')
                 mouse_click(curr_trap_claim_coords[i])
 
@@ -353,9 +363,8 @@ def check_traps_from(curr_at_trap_num):
                 mouse_click(curr_trap_reset_caught_coord[i])
                 update_curr_trap_data(i)
             else:
-                print(f'🥅 must be on the ground - Clicking to Pickup Rope (then net) for trap {i} @ {curr_trap_pickup_coords[i]}')
+                print(f'🥅 must be on the ground and couldnt find image - Clicking to Pickup Rope (then net) for trap {i} @ {curr_trap_pickup_coords[i]}')
                 mouse_click(curr_trap_pickup_coords[i])
-
                 API.AntiBan.sleep_between(3.4, 3.5)
                 second_pickup_xy = 744, 457
                 mouse_click(second_pickup_xy, min_num_clicks=2, max_num_clicks=3)
