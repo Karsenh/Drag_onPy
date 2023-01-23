@@ -35,33 +35,32 @@ def __main__():
 
     # show_main_gui()
 
-    # launch_script("Red_Lizards")
+    launch_script("Black_Lizards")
 
 
-    setup_interface('west', 3, 'up')
+    # capture_img_region(90, 475, 280, 543, "test")
 
-    # check_coords = 860, 466
-    # get_color_at_coords(check_coords)
-    # Yellow = 183, 150, 14
-    # Green = 42, 171, 50
+    # yellow_coords = 761, 376
+    # get_color_at_coords(yellow_coords)
+    # mouse_move(yellow_coords)
 
+    # WORKING PARAMETERS FOR s1f1
+    # test_region = 737, 360, 779, 380
+    # yellow_color = 160, 132, 8
+    # green_color = 29, 163, 51
 
-    SCRIPT_NAME = "Red_Lizards_v2"
-    NUM_TRAPS = 3
+    # test_region = 1018, 397, 1120, 517
+    # yellow_color = 160, 132, 8
+    # green_color = 29, 163, 51
+    # if does_color_exist_in_sub_image(test_region, yellow_color, 'Trap_Color'):
+    #     print(f'Found 🟡')
+    # else:
+    #     print(f'No Yellow Found')
+    # if does_color_exist_in_sub_image(test_region, green_color, 'Trap_Color'):
+    #     print(f'Found 🟢')
+    # else:
+    #     print(f'No Green Found')
 
-    # print(f'farming level: {get_skill_level("farming")}')
-
-    # wait_for_img(img_name="Minimap_Farm_Start", script_name="Tithe_Farmer", threshold=0.9, should_click=True, y_offset=2)
-
-
-    # wait_for_img(img_name="Minimap_Farm_Start", script_name="Tithe_Farmer", threshold=0.97, should_click=True,
-    #              click_middle=True)
-    # wait_for_img(img_name="Start_Tile", script_name="Tithe_Farmer", threshold=0.95, should_click=True)
-    # resupply_seeds()
-
-    # fill_empty_cans()
-
-    # wait_for_img(img_name="Inventory_Rod", script_name="Cwars_Lavas", threshold=0.92, img_sel="inventory")
 
     return
 
