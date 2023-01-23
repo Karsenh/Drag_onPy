@@ -1,12 +1,13 @@
 import API.AntiBan
 from API.Debug import write_debug
 from GUI.Imports.Skill_Level_Input.Skill_Level_Input import get_skill_level
-from API.Imaging.Image import does_img_exist, wait_for_img
+from API.Imaging.Image import does_img_exist, wait_for_img, get_existing_img_xy
 from API.Interface.General import setup_interface, is_tab_open, get_xy_for_invent_slot
 from API.Mouse import mouse_click
 
 SEED_TO_USE = "54"
 USE_GRICOLLER_CAN = True
+CACHED_GC_XY = None
 
 # Spot      PLANT    |    WATER
 spot_1 = [[800, 480], [800, 480]]  # ✔
@@ -40,7 +41,7 @@ def start_tithe_farming(curr_loop):
 
 
 def check_if_at_start():
-    if not does_img_exist(img_name="Farm_Start_Flag", script_name="Tithe_Farmer", threshold=0.92):
+    if not does_img_exist(img_name="Farm_Start_Flag", script_name="Tithe_Farmer", threshold=0.90):
         if wait_for_img(img_name="Minimap_Farm_Start", script_name="Tithe_Farmer", threshold=0.9, should_click=True, y_offset=3):
             return wait_for_img(img_name="Farm_Start_Flag", script_name="Tithe_Farmer", threshold=0.92, max_wait_sec=15)
     return True
@@ -104,7 +105,7 @@ def set_seed_to_use():
         SEED_TO_USE = "34"
     elif 54 <= farming_level < 74:
         SEED_TO_USE = "54"
-    elif farming_level > 74:
+    elif farming_level >= 74:
         SEED_TO_USE = "74"
     else:
         write_debug(f"Couldn't Set Seed due to insufficient farming level: {farming_level}")
@@ -115,10 +116,10 @@ def set_seed_to_use():
 
 def resupply_seeds():
     # From water barrel
-    wait_for_img(img_name="Door_In", script_name="Tithe_Farmer", threshold=0.9, should_click=True, click_middle=True)
-    wait_for_img(img_name="Seed_Table", script_name="Tithe_Farmer", threshold=0.95, should_click=True, click_middle=True)
+    wait_for_img(img_name="Door_In", script_name="Tithe_Farmer", threshold=0.88, should_click=True, click_middle=True)
+    wait_for_img(img_name="Seed_Table", script_name="Tithe_Farmer", threshold=0.9, should_click=True, click_middle=True)
     wait_for_img(img_name=f"Seed_{SEED_TO_USE}_Selection", script_name="Tithe_Farmer", threshold=0.9, should_click=True, click_middle=True)
-    API.AntiBan.sleep_between(0.2,0.3)
+    API.AntiBan.sleep_between(0.2, 0.3)
     wait_for_img(img_name=f"Door_Out", script_name="Tithe_Farmer", threshold=0.9, should_click=True, click_middle=True, min_clicks=3,max_clicks=4)
     return
 
@@ -192,7 +193,7 @@ def plant_and_water():
             click_watering_can()
 
             # Wait to use water can on planted seed
-            wait_between_plants(i)
+            wait_between_plants(i, min_even_sec=2.0, min_odd_sec=2.3)
 
             # Water seed
             mouse_click(spot[1])
@@ -207,10 +208,19 @@ def plant_and_water():
 
 
 def click_watering_can():
+    global CACHED_GC_XY
+
     if USE_GRICOLLER_CAN:
-        if not does_img_exist(img_name="Gricollers_Can", script_name="Tithe_Farmer", threshold=0.95, should_click=True, click_middle=True):
-            write_debug(f"Failed to find Gricoller's Can in inventory")
-            return False
+        if CACHED_GC_XY:
+            mouse_click(CACHED_GC_XY)
+        else:
+            if does_img_exist(img_name="Gricollers_Can", script_name="Tithe_Farmer", threshold=0.95, should_click=True, click_middle=True):
+                x, y = get_existing_img_xy()
+                adj_xy = x+5, y+5
+                CACHED_GC_XY = adj_xy
+            else:
+                write_debug(f"Failed to find Gricoller's Can in inventory")
+                return False
     else:
         mouse_click(get_xy_for_invent_slot(CURR_WATER_CAN_SLOT))
 

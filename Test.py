@@ -37,9 +37,11 @@ def __main__():
 
     launch_script("Tithe_Farmer")
 
+    # setup_interface('north', 3, 'up')
 
 
-    SCRIPT_NAME = "Red_Lizards_v2"
+
+    SCRIPT_NAME = "Tithe_Farmer"
     NUM_TRAPS = 3
 
     # print(f'farming level: {get_skill_level("farming")}')

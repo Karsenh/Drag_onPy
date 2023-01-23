@@ -34,7 +34,6 @@ def start_catching_red_lizards(curr_loop):
         print(f'Not first loop')
         if trap_requires_action(get_at_trap()):
             fix_trap()
-
     else:
         print(f'This is the first loop')
         setup_interface('north', 3, 'up')
@@ -43,7 +42,6 @@ def start_catching_red_lizards(curr_loop):
 
 
 def set_initial_traps():
-
     for curr_trap_num in range(1, NUM_TRAPS + 1):
         if not wait_for_img(img_name=f"Set_Trap_{curr_trap_num}", script_name=SCRIPT_NAME, threshold=0.85, should_click=True, click_middle=True, max_wait_sec=8):
             print(f'Failed to find Set_Trap_{curr_trap_num} - Exiting.')
