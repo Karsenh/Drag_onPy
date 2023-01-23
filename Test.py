@@ -45,7 +45,7 @@ def __main__():
     #
     #
     #
-    # test_region = 870, 500, 920, 633
+    # test_region = 341, 438, 415, 525
     # yellow_color = 160, 132, 8
     # green_color = 29, 163, 51
     # if does_color_exist_in_sub_image(test_region, yellow_color, 'Trap_Color'):
