@@ -26,8 +26,7 @@ def capture_img_region(window_x, window_y, window_x2, window_y2, image_name):
     run_y2 = window_y2 - window_y
     img_path = fr'{CUSTOM_IMG_PATH}\{image_name}.png'
 
-    pag.screenshot(imageFilename=img_path, region=(run_x1, run_y1, run_x2, run_y2))
-    return
+    return pag.screenshot(imageFilename=img_path, region=(run_x1, run_y1, run_x2, run_y2))
 
 
 def capture_bluestacks():
@@ -41,11 +40,15 @@ def capture_bluestacks():
     return
 
 
-def does_color_exist(check_color, xy):
+def does_color_exist(check_color, xy, img_path=""):
     # Take screenshot of BlueStacks window only
     capture_bluestacks()
+    if img_path == "":
+        print(f'Img_Path not provided - Using BS_SCREEN_PATH')
+        img_path = BS_SCREEN_PATH
+
     # Opens the screenshot taken
-    image = Image.open(f'{BS_SCREEN_PATH}')
+    image = Image.open(img_path)
     # Load the image into memory
     picture = image.load()
     # Pull x, y from region arg
@@ -66,19 +69,43 @@ def does_color_exist(check_color, xy):
 
 
 def does_color_exist_in_thresh(color_xy, check_color, threshold=15):
+    print("\n- Checking if Color Exists in Threshold -")
     curr_color = get_color_at_coords(color_xy)
     curr_color_idx = 0
     for val in curr_color:
-        print(f'Val: {val}')
+        print(f'Color at {color_xy} val {curr_color_idx}: {val}')
         curr_color_diff = check_color[curr_color_idx] - val
         if curr_color_diff < -1:
             curr_color_diff = curr_color_diff * -1
-        print(f'Curr_color_diff = {curr_color_diff} > {threshold} (thresh) ? {curr_color_diff > threshold}')
+        print(f'Curr_color_diff: {curr_color_diff} > Specific Thresh: {threshold} ? {curr_color_diff > threshold}')
         if curr_color_diff > threshold:
+            print(f'✖ Check Color ({check_color}) not found within threshold ({threshold}) @ coords: {color_xy}')
             return False
 
         curr_color_idx += 1
+    print(f'✔ FOUND Check Color ({check_color}) not found within threshold ({threshold}) @ coords: {color_xy}')
     return True
+
+
+def does_color_exist_in_sub_image(region_coords, color, img_name, color_tolerance=5, count_min=100):
+    x1, y1, x2, y2 = region_coords
+    img = capture_img_region(x1, y1, x2, y2, img_name)
+
+    a, b, c = color
+    color_lower = a-color_tolerance, b-color_tolerance, c-color_tolerance
+    color_upper = a+color_tolerance, b+color_tolerance, c+color_tolerance
+
+    img = np.array(img)
+
+    thresh = cv2.inRange(img, color_lower, color_upper)
+
+    count = np.sum(np.nonzero(thresh))
+    print(f'count = {count}')
+
+    cv2.imwrite(f"{CUSTOM_IMG_PATH}\Thresh_img.png", thresh)
+
+
+    return count > count_min
 
 
 def get_color_at_coords(xy):

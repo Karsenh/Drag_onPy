@@ -91,20 +91,4 @@ def authenticate_user(form_vals, auth_top):
         auth_top.destroy()
         show_main_gui()
 
-    # Search User collection for that email
-
-    #   If no user - throw error.         - User doesn't exist
-
-    # Compare pass entry hash to db hash
-
-    #   If not matching - throw error.    - User info (password) incorrect
-
-    # Check if correct user has HWID
-
-    #   If so - check if it's current HWID being used
-    #       - If not - throw error.       - Too many systems attempting to access.
-
-    #   If not - add current HWID to user doc
-
-    #   Display Main_GUI
     return

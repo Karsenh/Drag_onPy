@@ -35,16 +35,27 @@ def __main__():
 
     # show_main_gui()
 
-    launch_script("Tithe_Farmer")
+    launch_script("Black_Lizards")
 
-    # setup_interface('north', 3, 'up')
-
-
-
-    SCRIPT_NAME = "Tithe_Farmer"
-    NUM_TRAPS = 3
-
-    # print(f'farming level: {get_skill_level("farming")}')
+    # capture_img_region(90, 475, 280, 543, "test")
+    #
+    # yellow_coords = 761, 376
+    # get_color_at_coords(yellow_coords)
+    # mouse_move(yellow_coords)
+    #
+    #
+    #
+    # test_region = 870, 500, 920, 633
+    # yellow_color = 160, 132, 8
+    # green_color = 29, 163, 51
+    # if does_color_exist_in_sub_image(test_region, yellow_color, 'Trap_Color'):
+    #     print(f'Found 🟡')
+    # else:
+    #     print(f'No Yellow Found')
+    # if does_color_exist_in_sub_image(test_region, green_color, 'Trap_Color'):
+    #     print(f'Found 🟢')
+    # else:
+    #     print(f'No Green Found')
 
     # wait_for_img(img_name="Minimap_Farm_Start", script_name="Tithe_Farmer", threshold=0.9, should_click=True, y_offset=2)
 
