@@ -262,25 +262,71 @@ def start_catching_black_lizards(curr_loop):
     else:
         print(f'This is the first loop')
         setup_interface('west', 3, 'up')
-        if not set_initial_traps():
-            return False
+        drop_existing_lizards()
+        set_initial_traps()
         is_tab_open('inventory', False)
     return True
 
 
-def set_initial_traps():
+def drop_existing_lizards():
+    is_tab_open('inventory', True)
+    should_drop = True
+    while should_drop:
+        should_drop = does_img_exist(img_name="Black_Lizard", script_name="Black_Lizards", threshold=0.9, should_click=True, click_middle=True)
     is_tab_open('inventory', False)
-    for curr_trap_num in range(0, NUM_TRAPS):
-        if not wait_for_img(img_name=f"Set_Trap_{curr_trap_num}", script_name=SCRIPT_NAME, threshold=0.8, should_click=True, click_middle=True, max_wait_sec=8):
-            print(f'Failed to find Set_Trap_{curr_trap_num} - Exiting.')
-            return False
-        else:
-            update_curr_trap_data(curr_trap_num)
-            API.AntiBan.sleep_between(4.1, 4.2)
-            if curr_trap_num == 1:
-                API.AntiBan.sleep_between(1.0, 1.1)
-    API.AntiBan.sleep_between(1.0, 1.1)
+    return
+
+
+def set_initial_traps():
+    # is_tab_open('inventory', False)
+    # for curr_trap_num in range(0, NUM_TRAPS):
+    #     if not wait_for_img(img_name=f"Set_Trap_{curr_trap_num}", script_name=SCRIPT_NAME, threshold=0.8, should_click=True, click_middle=True, max_wait_sec=8):
+    #         print(f'Failed to find Set_Trap_{curr_trap_num} - Exiting.')
+    #         return False
+    #     else:
+    #         update_curr_trap_data(curr_trap_num)
+    #         API.AntiBan.sleep_between(4.1, 4.2)
+    #         if curr_trap_num == 1:
+    #             API.AntiBan.sleep_between(1.0, 1.1)
+    # API.AntiBan.sleep_between(1.0, 1.1)
+
+    traps = ["Set_Trap_0", "Set_Trap_1", "Set_Trap_2", "Set_Trap_3", "Set_Trap_4"]
+
+    curr_trap_num = 0
+    for trap in traps:
+        does_img_exist(img_name=trap, script_name="Black_Lizards", threshold=0.8, should_click=True, click_middle=True)
+        match curr_trap_num:
+            case 0:
+                print(f'First Trap')
+                API.AntiBan.sleep_between(4.2, 4.3)
+            case 1:
+                print(f'First Trap')
+                API.AntiBan.sleep_between(5.3, 5.4)
+            case 2:
+                print(f'First Trap')
+                API.AntiBan.sleep_between(5.1, 5.2)
+            case 3:
+                print(f'First Trap')
+                API.AntiBan.sleep_between(5.0, 5.1)
+            case 4:
+                print(f'First Trap')
+                API.AntiBan.sleep_between(5.1, 5.2)
+        update_curr_trap_data(curr_trap_num)
+        curr_trap_num += 1
+
     return True
+
+
+def set_initial_traps_manually():
+    i = 0
+    for xy in set_trap_xys:
+        mouse_click(xy)
+        API.AntiBan.sleep_between(4.125, 4.25)
+        if i == 1:
+            API.AntiBan.sleep_between(1.0, 1.1)
+        i += 1
+    API.AntiBan.sleep_between(1.0, 1.1)
+    return
 
 
 def update_curr_trap_data(curr_trap_num):
