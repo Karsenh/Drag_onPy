@@ -254,7 +254,8 @@ def start_catching_black_lizards(curr_loop):
         print(f'Not first loop')
         attempts = 0
         while attempts < 20:
-            check_traps_from(get_at_trap())
+            if not check_traps_from(get_at_trap()):
+                return False
             attempts += 1
 
         return True
@@ -278,22 +279,10 @@ def drop_existing_lizards():
 
 
 def set_initial_traps():
-    # is_tab_open('inventory', False)
-    # for curr_trap_num in range(0, NUM_TRAPS):
-    #     if not wait_for_img(img_name=f"Set_Trap_{curr_trap_num}", script_name=SCRIPT_NAME, threshold=0.8, should_click=True, click_middle=True, max_wait_sec=8):
-    #         print(f'Failed to find Set_Trap_{curr_trap_num} - Exiting.')
-    #         return False
-    #     else:
-    #         update_curr_trap_data(curr_trap_num)
-    #         API.AntiBan.sleep_between(4.1, 4.2)
-    #         if curr_trap_num == 1:
-    #             API.AntiBan.sleep_between(1.0, 1.1)
-    # API.AntiBan.sleep_between(1.0, 1.1)
-
     traps = ["Set_Trap_0", "Set_Trap_1", "Set_Trap_2", "Set_Trap_3", "Set_Trap_4"]
-
     curr_trap_num = 0
     for trap in traps:
+        is_otd_enabled(should_enable=True)
         does_img_exist(img_name=trap, script_name="Black_Lizards", threshold=0.8, should_click=True, click_middle=True)
         match curr_trap_num:
             case 0:
@@ -356,7 +345,7 @@ def check_traps_from(curr_at_trap_num):
 
     color_green = 29, 163, 51
     color_yellow = 160, 132, 8
-    check_threshold = 20
+    color_tolerance = 15
 
     curr_check_trap_region_xys = [curr_check_coords.t1_ss_xy, curr_check_coords.t2_ss_xy, curr_check_coords.t3_ss_xy, curr_check_coords.t4_ss_xy, curr_check_coords.t5_ss_xy]
 
@@ -368,7 +357,7 @@ def check_traps_from(curr_at_trap_num):
     for i in TRAP_CHECK_ORDER:
         print(f'--- Checking Trap {i} From {curr_at_trap_num} ----\nTrap_Check_Order = {TRAP_CHECK_ORDER}')
 
-        if does_color_exist_in_sub_image(curr_check_trap_region_xys[i], color_yellow, 'Yellow_Check', color_tolerance=10):
+        if does_color_exist_in_sub_image(curr_check_trap_region_xys[i], color_yellow, 'Yellow_Check', color_tolerance=color_tolerance):
             print(f'🟡 Found for spot {i} from trap {curr_at_trap_num}')
 
         elif does_color_exist_in_sub_image(curr_check_trap_region_xys[i], color_green, 'Green_Check'):
@@ -379,11 +368,12 @@ def check_traps_from(curr_at_trap_num):
             print(f'✔ Claimed Caught Lizard - Time to reset trap {i} @ {curr_trap_reset_caught_coord[i]}')
             if not drop_lizard():
                 print(f'Failed to find lizard to drop')
+                return False
             is_tab_open('inventory', False)
             mouse_click(curr_trap_reset_caught_coord[i])
             update_curr_trap_data(i)
             API.AntiBan.sleep_between(4.5, 4.6)
-            return
+            return True
         else:
             print(f'🔴 Neither color found for spot {i} - Searching for Green again then Clicking Net to pick up if not found again')
             if wait_for_img(img_name=f"trap_down_{i}_from_{curr_at_trap_num}", script_name="Black_Lizards", threshold=0.92, should_click=True, click_middle=True, max_wait_sec=2):
@@ -409,6 +399,7 @@ def check_traps_from(curr_at_trap_num):
                 print(f'✔ Claimed Caught Lizard - Time to reset trap {i} @ {curr_trap_reset_caught_coord[i]}')
                 if not drop_lizard():
                     print(f'Failed to find lizard to drop')
+                    return False
                 is_tab_open('inventory', False)
                 mouse_click(curr_trap_reset_caught_coord[i])
                 update_curr_trap_data(i)
@@ -422,7 +413,7 @@ def check_traps_from(curr_at_trap_num):
                 mouse_click(curr_trap_reset_down_coord[i])
                 update_curr_trap_data(i)
             API.AntiBan.sleep_between(5.0, 5.1)
-            return
+            return True
 
 
 def fix_trap(from_trap_num, fix_trap_num, fix_reason):
