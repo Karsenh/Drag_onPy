@@ -223,7 +223,7 @@ s5f5_pickup_xy = 757, 533
 s1f5_reset_caught_xy = 663, 366
 s2f5_reset_caught_xy = 661, 352
 s4f5_reset_caught_xy = 663, 516
-s3f5_reset_caught_xy = 664, 520
+s3f5_reset_caught_xy = 580, 425
 s5f5_reset_caught_xy = 761, 584
 # Reset xys relative (Down)
 s1f5_reset_down_xy = 734, 356
@@ -346,8 +346,12 @@ def check_traps_from(curr_at_trap_num):
                 if i == 4 and curr_at_trap_num == 2:
                     API.AntiBan.sleep_between(0.6, 0.7)
                     second_pickup_xy = 752, 466
+                if i == 2 and curr_at_trap_num == 4:
+                    API.AntiBan.sleep_between(0.6, 0.7)
+                    second_pickup_xy = 752, 466
 
                 mouse_click(second_pickup_xy, min_num_clicks=2, max_num_clicks=3)
+                API.AntiBan.sleep_between(0.2, 0.3)
                 print(f'✔ Picked up rope and net from ground - Time to reset trap {i} @ {curr_trap_reset_down_coord[i]}')
                 mouse_click(curr_trap_reset_down_coord[i])
                 update_curr_trap_data(i)

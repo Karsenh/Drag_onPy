@@ -279,7 +279,7 @@ def launch_script(script_name="pisc_iron"):
             selected_script = ScriptEnum.BLACK_LIZARDS.value
             antiban_likelihood = 25
             antiban_downtime_sec = 3
-            reopen_invent = True
+            reopen_invent = False
             always_sleep = False
 
     is_timer_set = is_break_timer_set()
