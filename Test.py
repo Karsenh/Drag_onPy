@@ -37,15 +37,16 @@ def __main__():
 
     launch_script("Black_Lizards")
 
+
+
+
     # capture_img_region(90, 475, 280, 543, "test")
     #
     # yellow_coords = 761, 376
     # get_color_at_coords(yellow_coords)
     # mouse_move(yellow_coords)
-    #
-    #
-    #
-    # test_region = 341, 438, 415, 525
+
+    # test_region = 377, 362, 443, 420
     # yellow_color = 160, 132, 8
     # green_color = 29, 163, 51
     # if does_color_exist_in_sub_image(test_region, yellow_color, 'Trap_Color'):
