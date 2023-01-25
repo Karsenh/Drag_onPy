@@ -228,7 +228,6 @@ def check_traps_from(curr_at_trap_num):
 
         if color_exists(curr_check_trap_regions[curr_check_trap_num], yellow_color, 'Chin_Yellow_Check'):
             handle_yellow_found(curr_check_trap_num, curr_at_trap_num, spot_emojis)
-            return True
 
         elif color_exists(curr_check_trap_regions[curr_check_trap_num], green_color, 'Chin_Green_Check'):
             return handle_green_found(curr_check_trap_num, curr_at_trap_num, curr_check_trap_claim_coords, curr_check_trap_tile_coords, spot_emojis)

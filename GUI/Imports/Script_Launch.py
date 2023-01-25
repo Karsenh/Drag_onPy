@@ -286,8 +286,8 @@ def launch_script(script_name="pisc_iron"):
             always_sleep = False
         case "Red_Chins":
             selected_script = ScriptEnum.RED_CHINS.value
-            antiban_likelihood = 25
-            antiban_downtime_sec = 3
+            antiban_likelihood = 30
+            antiban_downtime_sec = 2
             reopen_invent = False
             always_sleep = False
 
