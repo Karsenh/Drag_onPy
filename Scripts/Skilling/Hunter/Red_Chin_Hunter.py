@@ -170,11 +170,13 @@ def set_initial_traps():
     curr_trap_num = 0
     for coords in trap_tile_coords:
         print(f'Setting Trap: {curr_trap_num} (i) then moving trap tile {curr_trap_num+1} @ coords: {coords}')
-        update_curr_trap_state(curr_trap_num)
+        # update_curr_trap_state(curr_trap_num)
         if not does_img_exist(img_name="Inventory_Box_Trap", script_name="Red_Chins", threshold=0.9, should_click=True, click_middle=True):
             print('Failed to find Inventory Box Trap to set on initial trap setup.')
             return False
-        API.AntiBan.sleep_between(4.9, 5.0)
+        API.AntiBan.sleep_between(2.0, 2.1)
+        if not trap_is_set(curr_trap_num):
+            return False
         mouse_long_click(coords)
         wait_for_img(img_name="Walk_Here", script_name="Red_Chins", should_click=True, click_middle=True, threshold=0.9)
         API.AntiBan.sleep_between(0.3, 0.4)
@@ -186,7 +188,9 @@ def set_initial_traps():
                 return False
         curr_trap_num += 1
 
-    update_curr_trap_state(NUM_TRAPS-1)
+    # update_curr_trap_state(NUM_TRAPS-1)
+    if not trap_is_set(curr_trap_num):
+        return False
     print(f'TRAP_CHECK_ORDER = {TRAP_CHECK_ORDER}')
     is_tab_open('inventory', False)
     API.AntiBan.sleep_between(4.8, 4.9)
@@ -241,6 +245,7 @@ def check_traps_from(curr_at_trap_num):
             while attempts <= 3:
                 if color_exists(curr_check_trap_regions[curr_check_trap_num], yellow_color, 'Chin_Yellow_Check'):
                     handle_yellow_found(curr_check_trap_num, curr_at_trap_num, spot_emojis)
+                    return True
 
                 elif color_exists(curr_check_trap_regions[curr_check_trap_num], green_color, 'Chin_Green_Check'):
                     return handle_green_found(curr_check_trap_num, curr_at_trap_num, curr_check_trap_claim_coords,
@@ -361,7 +366,7 @@ def trap_is_set(curr_check_trap_num):
     found_yellow = False
     search_attempts = 0
 
-    while not found_yellow and search_attempts <= 25:
+    while not found_yellow and search_attempts <= 50:
         print(f'Searching for yellow adjacent to us @ {yellow_check_region} total of {search_attempts} times')
         update_curr_trap_state(curr_check_trap_num)
         found_yellow = does_color_exist_in_sub_image(yellow_check_region, yellow_color, 'Adj_Yellow_Wait', color_tolerance=25)
