@@ -4,9 +4,9 @@ from API.Interface.General import setup_interface, is_otd_enabled, is_tab_open
 from API.Imaging.Image import does_img_exist, wait_for_img, does_color_exist_in_thresh, does_color_exist_in_sub_image
 
 
-CURR_AT_TRAP = 4
+CURR_AT_TRAP = None
 
-TRAP_CHECK_ORDER = [0, 1, 2, 3, 4]
+TRAP_CHECK_ORDER = []
 
 NUM_TRAPS = 5
 
@@ -44,13 +44,13 @@ t1f1_claim_xy = 850, 470
 t2f1_claim_xy = 616, 456
 t3f1_claim_xy = 860, 703
 t4f1_claim_xy = 603, 677
-t5f1_claim_xy = 638, 567
+t5f1_claim_xy = 733, 595
 
 t1f1_tile_xy = 850, 470
 t2f1_tile_xy = 616, 456
 t3f1_tile_xy = 766, 603
 t4f1_tile_xy = 730, 605
-t5f1_tile_xy = 638, 567
+t5f1_tile_xy = 733, 595
 
 spot_1_coords = SpotCoords(t1f1_ss_region_xy, t2f1_ss_region_xy, t3f1_ss_region_xy, t4f1_ss_region_xy, t5f1_ss_region_xy,
                            t1f1_claim_xy, t2f1_claim_xy, t3f1_claim_xy, t4f1_claim_xy, t5f1_claim_xy,
@@ -105,7 +105,7 @@ spot_3_coords = SpotCoords(t1f3_ss_region_xy, t2f3_ss_region_xy, t3f3_ss_region_
 
 t1f4_ss_region_xy = 1060, 264, 1100, 353
 t2f4_ss_region_xy = 830, 255, 875, 347
-t3f4_ss_region_xy = 1070, 468, 114, 564
+t3f4_ss_region_xy = 1070, 468, 1114, 564
 t4f4_ss_region_xy = 826, 458, 888, 555
 t5f4_ss_region_xy = 945, 358, 994, 457
 
@@ -156,19 +156,21 @@ def start_catching_chins(curr_loop):
 
     else:
         print(f'First Loop - performing setup.')
-        # setup_interface('north', 4, 'up')
+        setup_interface('north', 4, 'up')
 
-        # set_initial_traps()
+        set_initial_traps()
 
     return True
 
 
 def set_initial_traps():
     trap_tile_coords = [[615, 454], [1060, 688], [610, 485], [945, 402]]
+    is_tab_open('inventory', True)
 
     curr_trap_num = 0
     for coords in trap_tile_coords:
         print(f'Setting Trap: {curr_trap_num} (i) then moving trap tile {curr_trap_num+1} @ coords: {coords}')
+        update_curr_trap_state(curr_trap_num)
         if not does_img_exist(img_name="Inventory_Box_Trap", script_name="Red_Chins", threshold=0.9, should_click=True, click_middle=True):
             print('Failed to find Inventory Box Trap to set on initial trap setup.')
             return False
@@ -181,10 +183,12 @@ def set_initial_traps():
             API.AntiBan.sleep_between(1.3, 1.4)
             if not does_img_exist(img_name="Inventory_Box_Trap", script_name="Red_Chins", threshold=0.9, should_click=True, click_middle=True):
                 return False
-        update_curr_trap_state(curr_trap_num)
         curr_trap_num += 1
+
+    update_curr_trap_state(NUM_TRAPS-1)
     print(f'TRAP_CHECK_ORDER = {TRAP_CHECK_ORDER}')
-    API.AntiBan.sleep_between(1.0, 1.1)
+    is_tab_open('inventory', False)
+    API.AntiBan.sleep_between(4.8, 4.9)
     return True
 
 
@@ -292,7 +296,7 @@ def set_box_trap():
     is_tab_open('inventory', True)
     did_trap_set = does_img_exist(img_name="Inventory_Box_Trap", script_name="Red_Chins", threshold=0.9, should_click=True, click_middle=True)
     is_tab_open('inventory', False)
-    API.AntiBan.sleep_between(5.1, 5.2)
+    API.AntiBan.sleep_between(4.8, 4.9)
     return did_trap_set
 
 
@@ -300,7 +304,7 @@ def set_box_trap():
 def color_exists(region, color, img_name):
     print(f'Checking color: {color} @ region: {region}')
     # 25 color tolerance working but not with very little timer remaining - trying 35
-    return does_color_exist_in_sub_image(region, color, img_name, color_tolerance=35)
+    return does_color_exist_in_sub_image(region, color, img_name, color_tolerance=35, count_min=5)
 
 
 # HANDLE COLORS
@@ -313,9 +317,9 @@ def handle_yellow_found(curr_check_trap_num, curr_at_trap_num, spot_emojis):
 def handle_green_found(curr_check_trap_num, curr_at_trap_num, curr_check_trap_claim_coords, curr_check_trap_tile_coords, spot_emojis):
     print(f'🟢 Found for spot {curr_check_trap_num} from trap {curr_at_trap_num}')
     spot_emojis.insert(curr_check_trap_num, '🟢')
-    mouse_click(curr_check_trap_claim_coords[curr_check_trap_num])
+    mouse_click(curr_check_trap_claim_coords[curr_check_trap_num], min_num_clicks=2, max_num_clicks=3)
     API.AntiBan.sleep_between(3.0, 3.1)
-    mouse_click(curr_check_trap_tile_coords[curr_check_trap_num])
+    mouse_click(curr_check_trap_tile_coords[curr_check_trap_num], min_num_clicks=2, max_num_clicks=3)
     API.AntiBan.sleep_between(0.3, 0.4)
     update_curr_trap_state(curr_check_trap_num)
     return set_box_trap()
@@ -324,9 +328,9 @@ def handle_green_found(curr_check_trap_num, curr_at_trap_num, curr_check_trap_cl
 def handle_red_found(curr_check_trap_num, curr_at_trap_num, curr_check_trap_claim_coords, curr_check_trap_tile_coords, spot_emojis):
     print(f'🔴 Found for spot {curr_check_trap_num} from trap {curr_at_trap_num}')
     spot_emojis.insert(curr_check_trap_num, '🔴')
-    mouse_click(curr_check_trap_claim_coords[curr_check_trap_num])
+    mouse_click(curr_check_trap_claim_coords[curr_check_trap_num], min_num_clicks=2, max_num_clicks=3)
     API.AntiBan.sleep_between(3.0, 3.1)
-    mouse_click(curr_check_trap_tile_coords[curr_check_trap_num])
+    mouse_click(curr_check_trap_tile_coords[curr_check_trap_num], min_num_clicks=2, max_num_clicks=3)
     API.AntiBan.sleep_between(0.3, 0.4)
     update_curr_trap_state(curr_check_trap_num)
     return set_box_trap()
