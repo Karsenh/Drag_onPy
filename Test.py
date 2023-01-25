@@ -38,8 +38,15 @@ def __main__():
     launch_script("Red_Chins")
 
 
+
     # -- Red Chins --
 
+    # yellow_check_region = 835, 430, 881, 475
+    # yellow_color = 160, 132, 8
+    # exists = does_color_exist_in_sub_image(yellow_check_region, yellow_color, 'Adj_Yellow_Wait_test', color_tolerance=25)
+    # print(f'exists: {exists}')
+
+    # did_click_reset = wait_for_img(img_name="Reset_Trap", script_name="Red_Chins", threshold=0.8, should_click=True, click_middle=True)
 
     # setup_interface('north', 4, 'up')
 

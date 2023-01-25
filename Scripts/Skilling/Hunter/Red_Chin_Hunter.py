@@ -1,5 +1,5 @@
 import API.AntiBan
-from API.Mouse import mouse_click, mouse_move
+from API.Mouse import mouse_click, mouse_move, mouse_long_click
 from API.Interface.General import setup_interface, is_otd_enabled, is_tab_open
 from API.Imaging.Image import does_img_exist, wait_for_img, does_color_exist_in_thresh, does_color_exist_in_sub_image
 
@@ -34,7 +34,7 @@ class SpotCoords:
         self.t5_reset_tile_xy = t5_reset_tile_xy
 
 
-t1f1_ss_region_xy = 880, 520, 830, 425
+t1f1_ss_region_xy = 830, 425, 880, 520
 t2f1_ss_region_xy = 622, 425, 668, 510
 t3f1_ss_region_xy = 840, 663, 885, 745
 t4f1_ss_region_xy = 580, 657, 635, 730
@@ -135,13 +135,13 @@ t5f5_ss_region_xy = 830, 427, 880, 527
 t1f5_claim_xy = 972, 385
 t2f5_claim_xy = 740, 380
 t3f5_claim_xy = 977, 615
-t4f5_claim_xy = 940, 570
+t4f5_claim_xy = 751, 608
 t5f5_claim_xy = 856, 474
 
 t1f5_tile_xy = 881, 473
 t2f5_tile_xy = 740, 380
 t3f5_tile_xy = 882, 490
-t4f5_tile_xy = 940, 570
+t4f5_tile_xy = 751, 608
 t5f5_tile_xy = 856, 474
 
 spot_5_coords = SpotCoords(t1f5_ss_region_xy, t2f5_ss_region_xy, t3f5_ss_region_xy, t4f5_ss_region_xy, t5f5_ss_region_xy,
@@ -175,7 +175,8 @@ def set_initial_traps():
             print('Failed to find Inventory Box Trap to set on initial trap setup.')
             return False
         API.AntiBan.sleep_between(4.9, 5.0)
-        mouse_click(coords)
+        mouse_long_click(coords)
+        wait_for_img(img_name="Walk_Here", script_name="Red_Chins", should_click=True, click_middle=True, threshold=0.9)
         API.AntiBan.sleep_between(0.3, 0.4)
         if curr_trap_num == 1:
             API.AntiBan.sleep_between(1.2, 1.3)
@@ -251,10 +252,15 @@ def check_traps_from(curr_at_trap_num):
 
             if attempts == 4:
                 print(f'Manually picking up presumed down trap since no other colors found')
-                mouse_click(curr_check_trap_claim_coords[curr_check_trap_num], min_num_clicks=2, max_num_clicks=3)
-                API.AntiBan.sleep_between(2.2, 2.3)
-                update_curr_trap_state(curr_check_trap_num)
-                set_box_trap()
+                mouse_long_click(curr_check_trap_claim_coords[curr_check_trap_num])
+                wait_for_img(img_name="Lay_Trap", script_name="Red_Chins", threshold=0.8, should_click=True, click_middle=True)
+
+                # mouse_click(curr_check_trap_claim_coords[curr_check_trap_num], min_num_clicks=2, max_num_clicks=3)
+                API.AntiBan.sleep_between(5.2, 5.3)
+                # update_curr_trap_state(curr_check_trap_num)
+                if not trap_is_set(curr_check_trap_num):
+                    return False
+                # set_box_trap()
                 print(f'Curr at trap: {get_curr_at_trap()} (post update)')
                 return True
 
@@ -317,22 +323,51 @@ def handle_yellow_found(curr_check_trap_num, curr_at_trap_num, spot_emojis):
 def handle_green_found(curr_check_trap_num, curr_at_trap_num, curr_check_trap_claim_coords, curr_check_trap_tile_coords, spot_emojis):
     print(f'🟢 Found for spot {curr_check_trap_num} from trap {curr_at_trap_num}')
     spot_emojis.insert(curr_check_trap_num, '🟢')
-    mouse_click(curr_check_trap_claim_coords[curr_check_trap_num], min_num_clicks=2, max_num_clicks=3)
-    API.AntiBan.sleep_between(3.0, 3.1)
-    mouse_click(curr_check_trap_tile_coords[curr_check_trap_num], min_num_clicks=2, max_num_clicks=3)
-    API.AntiBan.sleep_between(0.3, 0.4)
-    update_curr_trap_state(curr_check_trap_num)
-    return set_box_trap()
+
+    print(f'Curr_claim_coords: {curr_check_trap_claim_coords[curr_check_trap_num]}')
+
+    mouse_long_click(curr_check_trap_claim_coords[curr_check_trap_num])
+    did_click_check_trap = wait_for_img(img_name="Reset_Trap", script_name="Red_Chins", threshold=0.8, should_click=True, click_middle=True)
+
+    if did_click_check_trap:
+        saw_exp_drop = wait_for_img(img_name="Hunter", category="Exp_Drops", threshold=0.85)
+
+        if saw_exp_drop:
+            print(f'Saw exp drop - waiting for 5 seconds')
+            update_curr_trap_state(curr_check_trap_num)
+            API.AntiBan.sleep_between(5.1, 5.2)
+            return trap_is_set(curr_check_trap_num)
+
+    return False
 
 
 def handle_red_found(curr_check_trap_num, curr_at_trap_num, curr_check_trap_claim_coords, curr_check_trap_tile_coords, spot_emojis):
     print(f'🔴 Found for spot {curr_check_trap_num} from trap {curr_at_trap_num}')
     spot_emojis.insert(curr_check_trap_num, '🔴')
-    mouse_click(curr_check_trap_claim_coords[curr_check_trap_num], min_num_clicks=2, max_num_clicks=3)
-    API.AntiBan.sleep_between(3.0, 3.1)
-    mouse_click(curr_check_trap_tile_coords[curr_check_trap_num], min_num_clicks=2, max_num_clicks=3)
-    API.AntiBan.sleep_between(0.3, 0.4)
-    update_curr_trap_state(curr_check_trap_num)
-    return set_box_trap()
 
+    print(f'curr_claim_coords: {curr_check_trap_claim_coords[curr_check_trap_num]}')
+    mouse_long_click(curr_check_trap_claim_coords[curr_check_trap_num])
+    did_click_reset = wait_for_img(img_name="Reset_Trap", script_name="Red_Chins", threshold=0.8, should_click=True, click_middle=True)
+
+    if did_click_reset:
+        API.AntiBan.sleep_between(7.1, 7.2)
+        return trap_is_set(curr_check_trap_num)
+
+
+def trap_is_set(curr_check_trap_num):
+    yellow_check_region = 835, 430, 881, 475
+    yellow_color = 160, 132, 8
+    found_yellow = False
+    search_attempts = 0
+
+    while not found_yellow and search_attempts <= 25:
+        print(f'Searching for yellow adjacent to us @ {yellow_check_region} total of {search_attempts} times')
+        update_curr_trap_state(curr_check_trap_num)
+        found_yellow = does_color_exist_in_sub_image(yellow_check_region, yellow_color, 'Adj_Yellow_Wait', color_tolerance=25)
+        if found_yellow:
+            return True
+        search_attempts += 1
+
+    print(f'⛔ Returning False from Trap_is_set')
+    return False
 
