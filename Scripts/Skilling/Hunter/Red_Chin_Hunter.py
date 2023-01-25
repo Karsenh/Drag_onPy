@@ -259,14 +259,20 @@ def check_traps_from(curr_at_trap_num):
             if attempts > 5:
                 print(f'Manually picking up presumed down trap since no other colors found')
                 mouse_long_click(curr_check_trap_claim_coords[curr_check_trap_num])
-                wait_for_img(img_name="Lay_Trap", script_name="Red_Chins", threshold=0.8, should_click=True, click_middle=True)
+                if not wait_for_img(img_name="Lay_Trap", script_name="Red_Chins", threshold=0.8, should_click=True, click_middle=True):
+                    if not wait_for_img(img_name="Cancel", script_name="Red_Chins", threshold=0.8, should_click=True, click_middle=True):
+                        print(f'Failed to find cancel after failing to find Lay trap in manual reset')
+                    else:
+                        mouse_long_click(curr_check_trap_claim_coords[curr_check_trap_num])
+                        if not wait_for_img(img_name="Lay_Trap", script_name="Red_Chins", threshold=0.8, should_click=True, click_middle=True):
+                            if not wait_for_img(img_name="Reset_Trap", script_name="Red_Chins", threshold=0.9,
+                                                should_click=True, click_middle=True):
+                                print(f'Faied to find ')
+                                return False
 
-                # mouse_click(curr_check_trap_claim_coords[curr_check_trap_num], min_num_clicks=2, max_num_clicks=3)
                 API.AntiBan.sleep_between(5.2, 5.3)
-                # update_curr_trap_state(curr_check_trap_num)
                 if not trap_is_set(curr_check_trap_num):
                     return False
-                # set_box_trap()
                 print(f'Curr at trap: {get_curr_at_trap()} (post update)')
                 return True
 

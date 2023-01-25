@@ -35,7 +35,7 @@ def __main__():
 
     # show_main_gui()
 
-    launch_script("Red_Chins")
+    launch_script("Kourend_Crab_Killer")
 
 
 
