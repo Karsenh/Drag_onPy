@@ -134,7 +134,7 @@ t5f5_ss_region_xy = 830, 427, 880, 527
 
 t1f5_claim_xy = 972, 385
 t2f5_claim_xy = 740, 380
-t3f5_claim_xy = 985, 580
+t3f5_claim_xy = 977, 615
 t4f5_claim_xy = 940, 570
 t5f5_claim_xy = 856, 474
 
@@ -296,7 +296,7 @@ def set_box_trap():
     is_tab_open('inventory', True)
     did_trap_set = does_img_exist(img_name="Inventory_Box_Trap", script_name="Red_Chins", threshold=0.9, should_click=True, click_middle=True)
     is_tab_open('inventory', False)
-    API.AntiBan.sleep_between(4.8, 4.9)
+    API.AntiBan.sleep_between(5.0, 5.1)
     return did_trap_set
 
 
