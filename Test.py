@@ -35,10 +35,47 @@ def __main__():
 
     # show_main_gui()
 
-    launch_script("Black_Lizards")
+    launch_script("Red_Chins")
+
+
+    # -- Red Chins --
+
+
+    # setup_interface('north', 4, 'up')
+
+    # GET COLOR AT XY
+    # red_coords = 864, 482
+    # get_color_at_coords(red_coords)
+    # mouse_move(red_coords)
+
+    # TEST IF COLOR EXISTS IN REGION
+    # test_region = 960, 546, 1008, 631
+    # yellow_color = 160, 132, 8
+    # green_color = 29, 163, 51
+    # red_color = 209, 50, 46
+    # test_colors = [ yellow_color, green_color, red_color ]
+    # i = 0
+    # for curr_color in test_colors:
+    #     i += 1
+    #     match i:
+    #         case 1:
+    #             color_emoji = "🟡"
+    #             color_text = "Yellow"
+    #         case 2:
+    #             color_emoji = "🟢"
+    #             color_text = "Green"
+    #         case 3:
+    #             color_emoji = "🔴"
+    #             color_text = "Red"
+    #
+    #     if does_color_exist_in_sub_image(test_region, curr_color, 'Chin_color_test', color_tolerance=25):
+    #         print(f'Found {color_emoji}')
+    #     else:
+    #         print(f'{color_text} Not Found')
 
 
 
+    # -- Black Lizards --
 
     # capture_img_region(90, 475, 280, 543, "test")
     #
@@ -49,6 +86,7 @@ def __main__():
     # test_region = 377, 362, 443, 420
     # yellow_color = 160, 132, 8
     # green_color = 29, 163, 51
+    # red_color = 209, 50, 46
     # if does_color_exist_in_sub_image(test_region, yellow_color, 'Trap_Color'):
     #     print(f'Found 🟡')
     # else:
