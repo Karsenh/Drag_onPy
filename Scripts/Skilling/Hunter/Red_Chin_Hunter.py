@@ -2,6 +2,7 @@ import API.AntiBan
 from API.Mouse import mouse_click, mouse_move, mouse_long_click
 from API.Interface.General import setup_interface, is_otd_enabled, is_tab_open
 from API.Imaging.Image import does_img_exist, wait_for_img, does_color_exist_in_thresh, does_color_exist_in_sub_image
+import pyautogui as pag
 
 
 CURR_AT_TRAP = None
@@ -241,7 +242,7 @@ def check_traps_from(curr_at_trap_num):
             print(f'Checking again...')
             API.AntiBan.sleep_between(0.4, 0.5)
             attempts = 0
-            while attempts <= 3:
+            while attempts <= 6:
                 if color_exists(curr_check_trap_regions[curr_check_trap_num], yellow_color, 'Chin_Yellow_Check'):
                     handle_yellow_found(curr_check_trap_num, curr_at_trap_num, spot_emojis)
                     return True
@@ -255,7 +256,7 @@ def check_traps_from(curr_at_trap_num):
                                             curr_check_trap_tile_coords, spot_emojis)
                 attempts += 1
 
-            if attempts == 4:
+            if attempts > 5:
                 print(f'Manually picking up presumed down trap since no other colors found')
                 mouse_long_click(curr_check_trap_claim_coords[curr_check_trap_num])
                 wait_for_img(img_name="Lay_Trap", script_name="Red_Chins", threshold=0.8, should_click=True, click_middle=True)
@@ -315,7 +316,7 @@ def set_box_trap():
 def color_exists(region, color, img_name):
     print(f'Checking color: {color} @ region: {region}')
     # 25 color tolerance working but not with very little timer remaining - trying 35
-    return does_color_exist_in_sub_image(region, color, img_name, color_tolerance=35, count_min=5)
+    return does_color_exist_in_sub_image(region, color, img_name, color_tolerance=36, count_min=5)
 
 
 # HANDLE COLORS
@@ -339,8 +340,9 @@ def handle_green_found(curr_check_trap_num, curr_at_trap_num, curr_check_trap_cl
 
         if saw_exp_drop:
             print(f'Saw exp drop - waiting for 5 seconds')
+            handle_level_dialogue()
             update_curr_trap_state(curr_check_trap_num)
-            API.AntiBan.sleep_between(5.1, 5.2)
+            API.AntiBan.sleep_between(3.1, 3.2)
             return trap_is_set(curr_check_trap_num)
 
     return False
@@ -376,3 +378,10 @@ def trap_is_set(curr_check_trap_num):
     print(f'⛔ Returning False from Trap_is_set')
     return False
 
+
+def handle_level_dialogue():
+    if wait_for_img(img_name="level_up", category="General", max_wait_sec=2):
+        pag.press('space')
+        API.AntiBan.sleep_between(1.1, 2.3)
+        pag.press('space')
+    return
