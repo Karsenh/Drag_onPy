@@ -44,28 +44,36 @@ def check_health():
 def reset_spot_1():
     RESET_IMG_THRESH = 0.9
 
+    is_tab_open('inventory', True)
+    is_tab_open('inventory', False)
+
     if not does_img_exist(img_name=f"Move_1", script_name="Kourend_Crab_Killer",
                           threshold=RESET_IMG_THRESH, should_click=True, click_middle=True):
         print(f'Failed to find Move_1')
-        # manual_xy = 1324, 296
-        # mouse_click(manual_xy)
+        manual_xy = 1383, 418
+        mouse_click(manual_xy)
+
+    API.AntiBan.sleep_between(6.7, 6.8)
 
     # Arrow image before heading back
     if not wait_for_img(img_name=f"Move_2", script_name="Kourend_Crab_Killer",
                         threshold=RESET_IMG_THRESH, should_click=True, click_middle=True):
-        manual_xy = 1367, 270
-        mouse_click(manual_xy)
+        print(f'Failed to find Move_2')
+        # manual_xy = 1367, 270
+        # mouse_click(manual_xy)
 
-    API.AntiBan.sleep_between(4.5, 4.6)
+    API.AntiBan.sleep_between(5.5, 5.6)
 
     if not wait_for_img(img_name=f"Move_3", script_name="Kourend_Crab_Killer",
                         threshold=RESET_IMG_THRESH, should_click=True, click_middle=True):
-        manual_xy = 1367, 270
-        mouse_click(manual_xy)
+        print(f'Failed to find Move_3')
 
-    API.AntiBan.sleep_between(6.5, 6.6)
+        # manual_xy = 1367, 270
+        # mouse_click(manual_xy)
 
-    return wait_for_img(img_name="Move_4", script_name="Kourend_Crab_Killer", threshold=0.95, should_click=True, y_offset=-20)
+    API.AntiBan.sleep_between(8.0, 8.1)
+
+    return wait_for_img(img_name="Move_4", script_name="Kourend_Crab_Killer", threshold=0.95, should_click=True, y_offset=-20, x_offset=6)
 
 
 def set_curr_spot():
