@@ -35,8 +35,11 @@ def __main__():
 
     # show_main_gui()
 
-    launch_script("Kourend_Crab_Killer")
+    # launch_script("Kourend_Crab_Killer")
 
+
+    does_img_exist(img_name="Move_3", script_name="Kourend_Crab_Killer", threshold=0.9, should_click=True, click_middle=True)
+    does_img_exist(img_name="Move_4", script_name="Kourend_Crab_Killer", threshold=0.95, should_click=True, y_offset=-20)
 
 
     # -- Red Chins --

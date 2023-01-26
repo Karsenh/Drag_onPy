@@ -29,7 +29,7 @@ def start_killing_kourend_crabs(curr_loop):
             API.AntiBan.sleep_between(3.0, 3.1)
 
     else:
-        setup_interface("west", 1, "up")
+        setup_interface("north", 1, "up")
         set_attack_style(ATTACK_STYLE)
         # set_curr_spot()
     return True
@@ -42,30 +42,30 @@ def check_health():
 
 
 def reset_spot_1():
-    RESET_IMG_THRESH = 0.96
+    RESET_IMG_THRESH = 0.9
 
-    if not does_img_exist(img_name=f"Reset_Spot_1_Agg_A", script_name="Kourend_Crab_Killer",
-                          threshold=RESET_IMG_THRESH, should_click=True, x_offset=30, y_offset=28):
-        manual_xy = 1324, 296
-        mouse_click(manual_xy)
+    if not does_img_exist(img_name=f"Move_1", script_name="Kourend_Crab_Killer",
+                          threshold=RESET_IMG_THRESH, should_click=True, click_middle=True):
+        print(f'Failed to find Move_1')
+        # manual_xy = 1324, 296
+        # mouse_click(manual_xy)
 
     # Arrow image before heading back
-    if not wait_for_img(img_name=f"Reset_Spot_1_Agg_B", script_name="Kourend_Crab_Killer",
-                        threshold=0.92, should_click=True, max_wait_sec=10):
+    if not wait_for_img(img_name=f"Move_2", script_name="Kourend_Crab_Killer",
+                        threshold=RESET_IMG_THRESH, should_click=True, click_middle=True):
         manual_xy = 1367, 270
         mouse_click(manual_xy)
 
     API.AntiBan.sleep_between(4.5, 4.6)
 
-    if not wait_for_img(img_name=f"Reset_Spot_1_Agg_Back_A", script_name="Kourend_Crab_Killer",
-                        threshold=RESET_IMG_THRESH, should_click=True, x_offset=40, max_wait_sec=10):
+    if not wait_for_img(img_name=f"Move_3", script_name="Kourend_Crab_Killer",
+                        threshold=RESET_IMG_THRESH, should_click=True, click_middle=True):
         manual_xy = 1367, 270
         mouse_click(manual_xy)
 
     API.AntiBan.sleep_between(6.5, 6.6)
 
-    return wait_for_img(img_name="At_Spot_1", script_name="Kourend_Crab_Killer",
-                 threshold=0.94, should_click=True, x_offset=55, y_offset=0, max_wait_sec=15)
+    return wait_for_img(img_name="Move_4", script_name="Kourend_Crab_Killer", threshold=0.95, should_click=True, y_offset=-20)
 
 
 def set_curr_spot():
