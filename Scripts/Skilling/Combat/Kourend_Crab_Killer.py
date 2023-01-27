@@ -122,7 +122,7 @@ def handle_run():
             if is_run_gt(percent=90):
                 is_run_on(True)
     else:
-        if does_img_exist(img_name="Inventory_Stamina_4", script_name="Kourend_Crab_Killer", threshold=0.94,
+        if does_img_exist(img_name="Inventory_Stamina_3", script_name="Kourend_Crab_Killer", threshold=0.94,
                           should_click=True, click_middle=True) and is_run_on(True):
             # API.AntiBan.sleep_between(16.0, 16.1)
             return 16
