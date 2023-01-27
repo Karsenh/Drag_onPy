@@ -6,6 +6,7 @@ from API.Imaging.OCR.Run_Energy import *
 from API.Imports.Paths import BS_SCREEN_PATH
 from GUI.Imports.Script_Launch import launch_script
 from GUI.Imports.Skill_Level_Input.Skill_Level_Input import get_skill_level, update_skill_level
+from API.Interface.Bank import is_bank_tab_open
 
 import sys
 from pynput import keyboard
@@ -35,9 +36,26 @@ def __main__():
 
     # show_main_gui()
 
-    launch_script("Kourend_Crab_Killer")
+    launch_script("Blast_Furnace")
 
+    # open_color = 106, 35, 26
     #
+    # find_color_xy(BS_SCREEN_PATH, open_color)
+    # does_img_exist(img_name='Banked_Coal', script_name='Blast_Furnace', threshold=0.95, should_click=True, click_middle=True)
+    # does_img_exist(img_name='K', category='Banking', should_click=True, click_middle=True)
+    # does_img_exist(img_name='Deposit_Coins', script_name='Blast_Furnace', threshold=0.9, should_click=True, click_middle=True)
+
+    # setup_interface('north', 1, 'up')
+
+    SCRIPT_NAME = 'Blast_Furnace'
+
+    # does_img_exist(img_name="Bank_From_Bank", script_name=SCRIPT_NAME, threshold=0.95, should_click=True, click_middle=True)
+    # wait_for_img(img_name="Coffer_From_Bank", script_name=SCRIPT_NAME, threshold=0.8, should_click=True, click_middle=True)
+    # does_img_exist(img_name="Bank_From_Coffer", script_name=SCRIPT_NAME, threshold=0.95, should_click=True, click_middle=True)
+    # does_img_exist(img_name="Bank_From_Coffer", script_name=SCRIPT_NAME, threshold=0.95, should_click=True, click_middle=True)
+    # does_img_exist(img_name="Need_To_Deposit_Money", script_name=SCRIPT_NAME, threshold=0.95, should_click=True, click_middle=True)
+
+
     # does_img_exist(img_name="Move_3", script_name="Kourend_Crab_Killer", threshold=0.9, should_click=True, click_middle=True)
     # does_img_exist(img_name="Move_4", script_name="Kourend_Crab_Killer", threshold=0.95, should_click=True, y_offset=-20)
 

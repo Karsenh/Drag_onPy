@@ -37,6 +37,7 @@ from Scripts.Skilling.Runecrafting.Cwars_Lavas import start_crafting_lavas
 from Scripts.Skilling.Mining.Motherlode_Miner import start_motherlode_mining
 from Scripts.Skilling.Farming.GE_Sulphurous_Fertilizer import start_making_fertalizer
 from Scripts.Skilling.Farming.Tithe_Farmer import start_tithe_farming
+from Scripts.Skilling.Smithing.Blast_Furnace import start_blasting
 
 import API
 from enum import Enum
@@ -101,6 +102,7 @@ def launch_script(script_name="pisc_iron"):
         TITHE_FARMER = 36
         BLACK_LIZARDS = 37
         RED_CHINS = 38
+        BLAST_FURNACE = 39
 
     all_scripts = [mine_iron_pisc, smith_gold_edge, run_gnome_course,
                    fish_draynor_shrimp, fish_barb_trout, barbarian_fishing,
@@ -114,7 +116,7 @@ def launch_script(script_name="pisc_iron"):
                    start_superheating_gold, start_constructing_larders, start_constructing_tables,
                    start_catching_desert_lizards, start_catching_red_lizards, start_chopping_sw_teaks,
                    start_crafting_lavas, start_motherlode_mining, start_making_fertalizer, start_tithe_farming,
-                   start_catching_black_lizards, start_catching_chins]
+                   start_catching_black_lizards, start_catching_chins, start_blasting]
 
     match script_name:
         case "pisc_iron":
@@ -290,7 +292,12 @@ def launch_script(script_name="pisc_iron"):
             antiban_downtime_sec = 2
             reopen_invent = False
             always_sleep = False
-
+        case "Blast_Furnace":
+            selected_script = ScriptEnum.BLAST_FURNACE.value
+            antiban_likelihood = 30
+            antiban_downtime_sec = 2
+            reopen_invent = False
+            always_sleep = False
 
     is_timer_set = is_break_timer_set()
 

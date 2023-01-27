@@ -1,34 +1,338 @@
+import random
+
 import API.AntiBan
 from API.Mouse import mouse_click, mouse_move, mouse_long_click
-from API.Interface.General import setup_interface, is_otd_enabled, is_tab_open
-from API.Imaging.Image import does_img_exist, wait_for_img, does_color_exist_in_thresh, does_color_exist_in_sub_image
+from API.Interface.General import setup_interface, is_otd_enabled, is_tab_open, get_xy_for_invent_slot, is_run_on, is_run_gt
+from API.Interface.Bank import close_bank, is_bank_open, is_bank_tab_open, is_withdraw_qty
+from API.Imaging.Image import does_img_exist, wait_for_img, does_color_exist_in_thresh, does_color_exist_in_sub_image, get_existing_img_xy
 import pyautogui as pag
+
+SCRIPT_NAME = "Blast_Furnace"
+BANK_TAB = 1
+ORE_TYPE = 'Addy'  # Mith, Addy, Rune, Gold
+
+# Cached coordinates
+CACHED_BANK_COAL_XY = None
+CACHED_INVENT_COAL_BAG_XY = None
+CACHED_FILL_COAL_BAG_XY = None
+CACHED_EMPTY_XY = None
 
 
 def start_blasting(curr_loop):
     if curr_loop != 1:
         print(f'Not first loop')
+        # Open the bank from bar claim - wait for it to open and if not return false
+        if not open_bank_from_bars():
+            return False
+
+        # Deposit bars in inventory
+        deposit_bars()
+        # Drink stam if necessary
+        handle_run()
+        # Fill Coal Pouch
+        fill_coal_bag()
+        # Fill Inventory with coal
+        withdraw_coal()
+        # Click Belt
+        click_belt_from_bank()
+        # Wait for coal deposit
+        wait_for_belt_deposit('coal')
+        # Empty coal bag
+        empty_coal_bag()
+        # Deposit Coal
+        click_belt_from_belt()
+        # Wait for coal deposit
+        wait_for_belt_deposit('coal')
+        # Click bank from belt - wait for bank open (10 seconds) - return false if not
+        if not open_bank_from_belt():
+            return False
+        handle_run()
+        # Fill Coal Pouch
+        fill_coal_bag()
+        # Fill Inventory with ore
+        withdraw_ore(ORE_TYPE)
+        # Deposit ore on belt
+        click_belt_from_bank()
+        wait_for_belt_deposit('addy')
+        empty_coal_bag()
+        click_belt_from_belt()
+        # API.AntiBan.sleep_between(0.4, 0.5)
+        wait_for_belt_deposit('coal')
+        return claim_bars()
+
     else:
         print(f'First loop!')
-        setup_interface('north', 1, 'up')
-
-    return True
+        # setup_interface('north', 1, 'up')
+        open_bank_from_bank()
+        handle_run()
+        deposit_money_into_coffer()
+        withdraw_coal_bag()
+        fill_coal_bag()
+        withdraw_coal()
+        click_belt_from_bank()
+        wait_for_belt_deposit('coal')
+        empty_coal_bag()
+        click_belt_from_belt()
+        wait_for_belt_deposit('coal')
+        open_bank_from_belt()
+        handle_run()
+        fill_coal_bag()
+        withdraw_ore(ORE_TYPE)
+        click_belt_from_bank()
+        wait_for_belt_deposit('addy')
+        empty_coal_bag()
+        click_belt_from_belt()
+        wait_for_belt_deposit('coal')
+        return claim_bars()
 
 
 def deposit_money_into_coffer():
+    withdraw_72k()
+    close_bank()
+    open_coffer_from_bank()
+    deposit_72k()
+    open_bank_from_coffer()
     return
 
 
-# Start at bank chest
-# Deposit 72k into coffer
-# Withdraw coal bag & ice gloves / equip gloves and bank anything that was equipped
-# Fill coal bag
-# Withdraw coal
-# Click belt to deposit
-# Empty coal bag after depositing and deposit again
-# Click bank from belt and wait for open
-# Fill coal and withdraw adamant ore
-# Click belt to deposit
-# Empty bag and deposit again
-# Click bank
-# Start over from withdrawing coal
+def handle_run():
+    global NEED_STAM
+
+    if not is_run_gt(9):
+        print(f"We're low on run energy! Need Stamina pot")
+        NEED_STAM = True
+
+        is_withdraw_qty('1', True)
+
+        if not does_img_exist(img_name='Banked_Stamina_4', script_name=SCRIPT_NAME, threshold=0.94, should_click=True, click_middle=True):
+            return False
+        if not wait_for_img(img_name='Inventory_Stamina_4', script_name=SCRIPT_NAME, img_sel='inventory', threshold=0.9):
+            return False
+        close_bank()
+
+        is_tab_open('inventory', True)
+
+        x, y = get_existing_img_xy()
+        inventory_stamina_xy = x+6, y+6
+
+        for i in range(0, 5):
+            mouse_click(inventory_stamina_xy)
+            API.AntiBan.sleep_between(1.1, 1.2)
+
+        is_run_on(True)
+
+        open_bank_from_bank()
+        if not is_bank_open():
+            return False
+
+        is_withdraw_qty('all', True)
+
+        mouse_click(inventory_stamina_xy)
+    return True
+
+
+def open_bank_from_belt():
+    wait_for_img(img_name='Bank_From_Belt', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True)
+    return is_bank_open(max_wait_sec=10)
+
+
+def claim_bars():
+    bar_claim_xy = 696, 597
+    mouse_click(bar_claim_xy)
+
+    API.AntiBan.sleep_between(4.0, 4.1)
+
+    # From belt
+    if not does_img_exist(img_name='Bar_Claim', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True):
+        # print(f'Failed to find Bar Dispenser - Exiting.')
+        manual_bar_claim = 752, 422
+        mouse_click(manual_bar_claim)
+
+    if not wait_for_img(img_name='Claim_Bars_Open', script_name=SCRIPT_NAME, threshold=0.9, max_wait_sec=10):
+        return False
+
+    # ToDo Add check to make sure 'all' is selected
+    pag.press('space')
+    return wait_for_img(img_name='Bars_Claimed', script_name=SCRIPT_NAME, threshold=0.9)
+
+
+def wait_for_belt_deposit(ore):
+    ore_present = True
+    attempts = 0
+
+    print(f'Opening inventory to check when the ore has been deposited on the belt.')
+
+    API.AntiBan.sleep_between(0.5, 0.6)
+
+    is_tab_open('inventory', True)
+
+    while ore_present and attempts < 100:
+        ore_present = does_img_exist(img_name=f'Inventory_{ore}', script_name=SCRIPT_NAME, threshold=0.9)
+        attempts += 1
+
+    return ore_present
+
+
+def open_bank_from_bars():
+    print(f'🏦 Opening bank from bar claim')
+    if not does_img_exist(img_name='Bank_From_Bars', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True):
+        bank_from_bar_xy = 1000, 628
+        mouse_click(bank_from_bar_xy)
+    return is_bank_open(max_wait_sec=10)
+
+
+def open_bank_from_coffer():
+    if not does_img_exist(img_name="Bank_From_Coffer", script_name=SCRIPT_NAME, threshold=0.90, should_click=True, click_middle=True):
+        return False
+    else:
+        return is_bank_open(max_wait_sec=6)
+
+
+def open_bank_from_bank():
+    if not does_img_exist(img_name="Bank_From_Bank", script_name=SCRIPT_NAME, threshold=0.90, should_click=True, click_middle=True):
+        return False
+    else:
+        return is_bank_open(max_wait_sec=5)
+
+
+def open_coffer_from_bank():
+    manual_coffer_xy = 697, 456
+
+    if not wait_for_img(img_name="Coffer_From_Bank", script_name=SCRIPT_NAME, threshold=0.8, should_click=True, click_middle=True, max_wait_sec=3):
+        print(f'Failed to find Coffer_From_Bank img - 🤖 Manually clicking')
+        mouse_click(manual_coffer_xy)
+    return True
+
+
+# HELPERS
+def withdraw_72k():
+    is_bank_tab_open(0, True)
+
+    print(f'First loop - withdrawing x')
+    if not does_img_exist(img_name='Banked_Coins', script_name=SCRIPT_NAME, threshold=0.9):
+        print(f'Banked_Coins Not Found!')
+        return False
+
+    x, y = get_existing_img_xy()
+    banked_coins_xy = x + 6, y + 6
+
+    mouse_long_click(banked_coins_xy)
+
+    # Click to withdraw 'x' gold
+    does_img_exist(img_name='withdraw_x', category='Banking', should_click=True, click_middle=True, threshold=0.95)
+
+    API.AntiBan.sleep_between(0.9, 1.0)
+
+    pag.press('7')
+    pag.press('2')
+
+    return does_img_exist(img_name='K', category='Banking', threshold=0.94, should_click=True, click_middle=True)
+
+
+def deposit_72k():
+    if not wait_for_img(img_name='Deposit_Coins', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True):
+        return False
+
+    API.AntiBan.sleep_between(0.8, 0.9)
+    pag.press('7')
+    pag.press('2')
+    return does_img_exist(img_name='K', category='Banking', should_click=True, click_middle=True)
+
+
+def withdraw_coal_bag():
+    is_bank_tab_open(1, True)
+    return does_img_exist(img_name='Banked_Coal_Bag', script_name=SCRIPT_NAME, img_sel="banked", threshold=0.95, should_click=True, click_middle=True)
+
+
+def fill_coal_bag():
+    global CACHED_INVENT_COAL_BAG_XY
+    global CACHED_FILL_COAL_BAG_XY
+
+    is_bank_tab_open(BANK_TAB, True)
+
+    if CACHED_INVENT_COAL_BAG_XY:
+        print(f'CACHED_INVENT_COAL_BAG: (Exists): {CACHED_INVENT_COAL_BAG_XY}')
+        mouse_long_click(CACHED_INVENT_COAL_BAG_XY)
+    else:
+        if not wait_for_img(img_name='Inventory_Coal_Bag', script_name='Blast_Furnace', img_sel='inventory', threshold=0.9):
+            return False
+        x, y = get_existing_img_xy()
+        CACHED_INVENT_COAL_BAG_XY = x + 6, y + 6
+        print(f'CACHED_INVENT_COAL_BAG: (NOT exists): {CACHED_INVENT_COAL_BAG_XY}')
+        mouse_long_click(CACHED_INVENT_COAL_BAG_XY)
+
+    # if CACHED_FILL_COAL_BAG_XY:
+    #     mouse_click(CACHED_FILL_COAL_BAG_XY)
+    #     print(f'CACHED_FILL_COAL_BAG_XY: (Exists): {CACHED_FILL_COAL_BAG_XY}')
+    #
+    # else:
+    if not does_img_exist(img_name='Fill_Coal_Bag', script_name='Blast_Furnace', threshold=0.95, should_click=True, click_middle=True):
+        return False
+    # x, y = get_existing_img_xy()
+    # CACHED_FILL_COAL_BAG_XY = x + 6, y + 6
+    # print(f'CACHED_FILL_COAL_BAG_XY: (NOT exists): {CACHED_FILL_COAL_BAG_XY}')
+    # mouse_click(CACHED_FILL_COAL_BAG_XY)
+
+    API.AntiBan.sleep_between(0.3, 0.4)
+    return True
+
+
+def withdraw_coal():
+    is_withdraw_qty('all', True)
+    return does_img_exist(img_name='Banked_Coal', script_name=SCRIPT_NAME, threshold=0.95, should_click=True, click_middle=True)
+
+
+def withdraw_ore(type=ORE_TYPE):
+    is_withdraw_qty('all', None)
+    return does_img_exist(img_name=f'Banked_{ORE_TYPE}', script_name=SCRIPT_NAME, threshold=0.95, should_click=True, click_middle=True)
+
+
+def deposit_bars():
+    r_slot = random.randint(2, 27)
+    mouse_click(get_xy_for_invent_slot(r_slot))
+    return
+
+
+def click_belt_from_bank():
+    furnace_xy = 633, 226
+    mouse_click(furnace_xy)
+    API.AntiBan.sleep_between(0.8, 0.9)
+    return
+
+
+def click_belt_from_belt():
+    furance_xy = 778, 455
+    mouse_click(furance_xy)
+    return
+
+
+def empty_coal_bag():
+    global CACHED_INVENT_COAL_BAG_XY
+    global CACHED_EMPTY_XY
+
+    is_tab_open('inventory', True)
+
+    # Long click the inventory coal bag
+    if CACHED_INVENT_COAL_BAG_XY:
+        mouse_long_click(CACHED_INVENT_COAL_BAG_XY)
+    else:
+        if not does_img_exist(img_name='Inventory_Coal_Bag', script_name=SCRIPT_NAME, threshold=0.9):
+            return False
+        x, y = get_existing_img_xy()
+        CACHED_INVENT_COAL_BAG_XY = x + 6, y + 6
+        mouse_long_click(CACHED_INVENT_COAL_BAG_XY)
+
+    # Click 'Empty'
+    if CACHED_EMPTY_XY:
+        mouse_click(CACHED_EMPTY_XY)
+    else:
+        if not does_img_exist(img_name='Empty_Coal_Bag', script_name='Blast_Furnace', threshold=0.9):
+            return False
+
+        x, y = get_existing_img_xy()
+        CACHED_EMPTY_XY = x + 6, y + 6
+        mouse_click(CACHED_EMPTY_XY)
+
+    return wait_for_img(img_name='Coal_Bag_Is_Empty', script_name='Blast_Furnace', threshold=0.9)
+
+

@@ -170,6 +170,18 @@ def does_img_exist(img_name, script_name=None, category='Scripts', threshold=0.8
             else:
                 print(f'✖ X: {invent_x} Y: {invent_y} NOT within Inventory XY Bounds')
                 return False
+        elif img_sel == "banked":
+            invent_x = min(loc[1])
+            invent_y_idx = np.where(loc[1] == invent_x)[0][
+                0]  # [0] indicates the first item found within array of found x values
+            invent_y = loc[0][invent_y_idx]
+            print(f'Inventory x: {invent_x} @ idx {invent_y_idx}\nIvenntory y: {invent_y}')
+            if invent_x < 1000 and invent_y > 370:
+                print(f'✔ X: {invent_x} Y: {invent_y} within Inventory XY Bounds - Setting LATEST_IMG_XY')
+                LATEST_IMG_XY = invent_x, invent_y
+            else:
+                print(f'✖ X: {invent_x} Y: {invent_y} NOT within Inventory XY Bounds')
+                return False
         else:
             # Save the 'deepest' find of img's xy coords
             LATEST_IMG_XY = loc[1][len(loc[1]) - 1], loc[0][len(loc[0]) - 1]

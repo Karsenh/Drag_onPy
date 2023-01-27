@@ -35,7 +35,7 @@ BANK_all_tab_xys = BANK_tab_0, BANK_tab_1, BANK_tab_2, BANK_tab_3, BANK_tab_4, B
 # INTERFACE TABS
 # -----
 # INVENTORY
-INVENT_tab_xy = 1426, 392
+INVENT_tab_xy = 1429, 373
 
 INVENT_slot_1 = 1140, 420
 

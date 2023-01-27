@@ -1,4 +1,4 @@
-from API.Imaging.Image import does_img_exist, does_color_exist, get_color_at_coords, wait_for_img
+from API.Imaging.Image import does_img_exist, does_color_exist, get_color_at_coords, wait_for_img, does_color_exist_in_thresh
 from API.Mouse import *
 from API.Imports.Coords import *
 from API.Debug import DEBUG_MODE, write_debug
@@ -120,7 +120,7 @@ def is_tab_open(tab="inventory", should_be_open=True):
 
     print(f'Check_tab_xy = {check_tab_xy} ({tab})')
 
-    is_open = does_color_exist(open_tab_color, check_tab_xy)
+    is_open = does_color_exist_in_thresh(check_tab_xy, open_tab_color, 15)
 
     if not is_open:
         if should_be_open:
@@ -179,6 +179,8 @@ def is_run_on(should_click=False):
 
 def is_run_gt(percent=10):
     off_color = 14, 14, 14
+
+    # ToDo finish out all the xy coords for color checks
 
     if percent <= 9:
         xy = 1215, 265
