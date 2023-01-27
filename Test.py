@@ -36,7 +36,7 @@ def __main__():
 
     # show_main_gui()
 
-    launch_script("Blast_Furnace")
+    launch_script("Motherlode_Miner")
 
     # open_color = 106, 35, 26
     #

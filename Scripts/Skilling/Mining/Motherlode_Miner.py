@@ -65,7 +65,9 @@ def is_mining():
     bright_yellow_check = 167, 137, 5
     dark_yellow_check = 80, 65, 14
 
-    if does_color_exist_in_thresh(dark_yellow_xy, dark_yellow_check, threshold=20) or does_color_exist_in_thresh(bright_yellow_xy, bright_yellow_check, threshold=20) or does_color_exist_in_thresh(dark_yellow_xy, bright_yellow_check, threshold=20):
+    if does_color_exist_in_thresh(dark_yellow_xy, dark_yellow_check, threshold=20) \
+            or does_color_exist_in_thresh(bright_yellow_xy, bright_yellow_check, threshold=20) \
+            or does_color_exist_in_thresh(dark_yellow_xy, bright_yellow_check, threshold=20):
         # 167, 137, 5
         print(f"Saw yellow ore wheel. - No longer Mining.")
         SEARCHING_FOR_SPOT = True
@@ -128,12 +130,13 @@ def find_and_mine_next_spot():
             # Manually click
             manual_spot_1_xy = 1073, 717
             mouse_click(manual_spot_1_xy)
+            CURR_SPOT = 1
 
         API.AntiBan.sleep_between(3.0, 3.1)
         return
 
     while SEARCHING_FOR_SPOT:
-        print(f'ATTEMPS: {attempts} | ')
+        print(f'ATTEMPTS: {attempts} | ')
         if CURR_SPOT+search_offset == 12:
             search_offset = 1
             attempts += 1
