@@ -1,6 +1,6 @@
 import API.AntiBan
 from API.Interface.General import setup_interface, is_tab_open
-from API.Imaging.Image import get_color_at_coords, does_img_exist, wait_for_img, does_color_exist_in_thresh
+from API.Imaging.Image import get_color_at_coords, does_img_exist, wait_for_img, does_color_exist_in_thresh, does_color_exist_in_sub_image
 from API.Mouse import mouse_click, mouse_long_click
 
 CURR_SPOT = 1
@@ -21,13 +21,6 @@ def start_motherlode_mining(curr_loop):
                 return False
             curr_spot = fix_broken_wheels()
             API.AntiBan.sleep_between(0.3, 0.4)
-
-            # if not is_water_running():
-            #     # curr_spot = 'wheel_1' or 'wheel_2'
-            #     curr_spot = fix_broken_wheels()
-            # else:
-            #     curr_spot = "Corner"
-            #     API.AntiBan.sleep_between(0.2, 0.3)
 
             load_hopper_from(curr_spot)
             claim_ore()
@@ -65,9 +58,9 @@ def is_mining():
     bright_yellow_check = 167, 137, 5
     dark_yellow_check = 80, 65, 14
 
-    if does_color_exist_in_thresh(dark_yellow_xy, dark_yellow_check, threshold=20) \
-            or does_color_exist_in_thresh(bright_yellow_xy, bright_yellow_check, threshold=20) \
-            or does_color_exist_in_thresh(dark_yellow_xy, bright_yellow_check, threshold=20):
+    yellow_check_region = 730, 380, 760, 430
+
+    if does_color_exist_in_sub_image(yellow_check_region, dark_yellow_check, 'Motherlode_Yellow_Check', color_tolerance=10):
         # 167, 137, 5
         print(f"Saw yellow ore wheel. - No longer Mining.")
         SEARCHING_FOR_SPOT = True
