@@ -36,20 +36,17 @@ def __main__():
 
     # show_main_gui()
 
-    # launch_script("Motherlode_Miner")
+    launch_script("Motherlode_Miner")
 
-    # setup_interface("west", 2, "up")
+    # dark_yellow_check = 80, 65, 14
+    #
+    # yellow_check_region = 750, 380, 760, 420
+    #
+    # if does_color_exist_in_sub_image(yellow_check_region, dark_yellow_check, 'Motherlode_Yellow_Check', color_tolerance=5, count_min=5):
+    #     print(f"Saw yellow ore wheel. - No longer Mining.")
 
-    bright_yellow_xy = 761, 383
-    dark_yellow_xy = 747, 414
+    # does_img_exist(img_name='Failsafe_Move_To_Hopper', script_name='Motherlode_Miner', threshold=0.9, should_click=True, x_offset=4, y_offset=-2)
 
-    bright_yellow_check = 167, 137, 5
-    dark_yellow_check = 80, 65, 14
-
-    yellow_check_region = 740, 380, 750, 430
-
-    if does_color_exist_in_sub_image(yellow_check_region, dark_yellow_check, 'Motherlode_Yellow_Check', color_tolerance=10):
-        print(f'Found yellow wheel')
     # open_color = 106, 35, 26
     #
     # find_color_xy(BS_SCREEN_PATH, open_color)

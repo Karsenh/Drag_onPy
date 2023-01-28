@@ -58,10 +58,9 @@ def is_mining():
     bright_yellow_check = 167, 137, 5
     dark_yellow_check = 80, 65, 14
 
-    yellow_check_region = 730, 380, 760, 430
+    yellow_check_region = 750, 380, 760, 420
 
-    if does_color_exist_in_sub_image(yellow_check_region, dark_yellow_check, 'Motherlode_Yellow_Check', color_tolerance=10):
-        # 167, 137, 5
+    if does_color_exist_in_sub_image(yellow_check_region, dark_yellow_check, 'Motherlode_Yellow_Check', color_tolerance=5, count_min=5):
         print(f"Saw yellow ore wheel. - No longer Mining.")
         SEARCHING_FOR_SPOT = True
         MINING_ATTEMPTS = 0
@@ -105,6 +104,7 @@ def start_mining_first_spot():
 def find_and_mine_next_spot():
     global CURR_SPOT
     global SEARCHING_FOR_SPOT
+    global MINING_ATTEMPTS
 
     attempts = 0
     search_offset = 1
@@ -134,23 +134,27 @@ def find_and_mine_next_spot():
             search_offset = 1
             attempts += 1
         if attempts < 4:
+            print(f'attempts lt 4')
             if does_img_exist(img_name=f"Spot_{CURR_SPOT+search_offset}_From_{CURR_SPOT}", script_name="Motherlode_Miner", threshold=0.96, should_click=True, click_middle=True):
                 SEARCHING_FOR_SPOT = False
+                MINING_ATTEMPTS = 0
                 CURR_SPOT = CURR_SPOT+search_offset
-                attempts = 0
                 print(f'Found and moving to new ore from {CURR_SPOT-search_offset}- Setting CURR_SPOT: {CURR_SPOT}')
                 API.AntiBan.sleep_between(3.5, 3.6)
                 return
             else:
                 search_offset += 1
         else:
+            print(f'attempts gt 4')
             if does_img_exist(img_name=f"Spot_{search_offset}_From_{CURR_SPOT}", script_name="Motherlode_Miner", threshold=0.97, should_click=True, click_middle=True):
                 SEARCHING_FOR_SPOT = False
-                attempts = 0
+                MINING_ATTEMPTS = 0
                 CURR_SPOT = CURR_SPOT+search_offset
                 print(f'Found and moving to new ore from {CURR_SPOT-search_offset}- Setting CURR_SPOT: {CURR_SPOT}')
                 API.AntiBan.sleep_between(3.5, 3.6)
                 return
+            else:
+                search_offset += 1
 
     return
 
@@ -201,18 +205,31 @@ def is_water_running():
 
 
 def fix_broken_wheels():
-    if does_img_exist(img_name="Broken_Wheel_1", script_name="Motherlode_Miner", threshold=0.98, should_click=True, click_middle=True):
-        wait_for_img(img_name="Smithing", category="Exp_Drops", threshold=0.92, max_wait_sec=15)
-        if does_img_exist(img_name="Broken_Wheel_2_From_1", script_name="Motherlode_Miner", threshold=0.98, should_click=True, click_middle=True):
+    if does_img_exist(img_name="Broken_Wheel_1", script_name="Motherlode_Miner", threshold=0.96, should_click=True, click_middle=True):
+        if not wait_for_img(img_name="Smithing", category="Exp_Drops", threshold=0.92, max_wait_sec=15):
+            if does_img_exist(img_name='Failsafe_Move_To_Hopper', script_name='Motherlode_Miner', threshold=0.9, should_click=True, x_offset=4, y_offset=-2):
+                if not wait_for_img(img_name='Failsafe_Hopper_From_Hopper', script_name='Motherlode_Miner', threshold=0.95, should_click=True, click_middle=True):
+                    return False
+        if does_img_exist(img_name="Broken_Wheel_2_From_1", script_name="Motherlode_Miner", threshold=0.96, should_click=True, click_middle=True):
             API.AntiBan.sleep_between(1.0, 1.1)
-            wait_for_img(img_name="Smithing", category="Exp_Drops", threshold=0.92, max_wait_sec=12)
+            if not wait_for_img(img_name="Smithing", category="Exp_Drops", threshold=0.92, max_wait_sec=12):
+                if does_img_exist(img_name='Failsafe_Move_To_Hopper', script_name='Motherlode_Miner', threshold=0.9,
+                                  should_click=True, x_offset=4, y_offset=-2):
+                    if not wait_for_img(img_name='Failsafe_Hopper_From_Hopper', script_name='Motherlode_Miner',
+                                        threshold=0.95, should_click=True, click_middle=True):
+                        return False
             return "Wheel_2"
         else:
             return "Wheel_1"
     else:
         if does_img_exist(img_name="Broken_Wheel_2", script_name="Motherlode_Miner", threshold=0.92, should_click=True, click_middle=True):
             API.AntiBan.sleep_between(3.0, 3.1)
-            wait_for_img(img_name="Smithing", category="Exp_Drops", threshold=0.92, max_wait_sec=12)
+            if not wait_for_img(img_name="Smithing", category="Exp_Drops", threshold=0.92, max_wait_sec=12):
+                if does_img_exist(img_name='Failsafe_Move_To_Hopper', script_name='Motherlode_Miner', threshold=0.9,
+                                  should_click=True, x_offset=4, y_offset=-2):
+                    if not wait_for_img(img_name='Failsafe_Hopper_From_Hopper', script_name='Motherlode_Miner',
+                                        threshold=0.95, should_click=True, click_middle=True):
+                        return False
             return "Wheel_2"
         else:
             return "Corner"

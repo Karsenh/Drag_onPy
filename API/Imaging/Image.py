@@ -104,7 +104,6 @@ def does_color_exist_in_sub_image(region_coords, color, img_name, color_toleranc
 
     cv2.imwrite(f"{CUSTOM_IMG_PATH}\Thresh_img.png", thresh)
 
-
     return count > count_min
 
 
