@@ -254,6 +254,8 @@ def load_hopper_from(spot="Corner"):
 
 
 def claim_ore():
+    claim_attempts = 0
+
     if wait_for_img(img_name="Claim_Sack", script_name="Motherlode_Miner", threshold=0.90):
 
         API.AntiBan.sleep_between(1.0, 1.1)
@@ -266,17 +268,20 @@ def claim_ore():
             if does_img_exist(img_name="Empty_Sack", script_name="Motherlode_Miner", threshold=0.90):
                 print(f'Ore NOT claimed from sack for some reason - found empty sack. Water might have stopped.')
                 # Increase claim attempts
-                corner_xy = 1335, 123
-                mouse_click(corner_xy)
-                is_tab_open("inventory", False)
-                API.AntiBan.sleep_between(3.4, 3.5)
-                wait_for_img(img_name="Move_to_Corner", script_name="Motherlode_Miner", threshold=0.99, should_click=True)
-                curr_spot = fix_broken_wheels()
-                load_hopper_from(curr_spot)
-                if claim_ore():
-                    return True
-                else:
-                    return False
+                if claim_attempts <= 3:
+                    claim_attempts += 1
+                    corner_xy = 1335, 123
+                    mouse_click(corner_xy)
+                    is_tab_open("inventory", False)
+                    API.AntiBan.sleep_between(3.4, 3.5)
+                    wait_for_img(img_name="Move_to_Corner", script_name="Motherlode_Miner", threshold=0.95, should_click=True, y_offset=8)
+                    API.AntiBan.sleep_between(2.0, 2.1)
+                    curr_spot = fix_broken_wheels()
+                    load_hopper_from(curr_spot)
+                    if claim_ore():
+                        return True
+                    else:
+                        return False
     else:
         print(f"Failed to find Claim Sack from Hopper for some reason")
         return False

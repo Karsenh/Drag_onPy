@@ -7,6 +7,7 @@ from API.Imports.Paths import BS_SCREEN_PATH
 from GUI.Imports.Script_Launch import launch_script
 from GUI.Imports.Skill_Level_Input.Skill_Level_Input import get_skill_level, update_skill_level
 from API.Interface.Bank import is_bank_tab_open
+from Scripts.Skilling.Mining.Motherlode_Miner import claim_ore
 
 import sys
 from pynput import keyboard
@@ -36,7 +37,9 @@ def __main__():
 
     # show_main_gui()
 
-    launch_script("Motherlode_Miner")
+    # launch_script("Motherlode_Miner")
+
+    claim_ore()
 
     # dark_yellow_check = 80, 65, 14
     #
