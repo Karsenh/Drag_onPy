@@ -122,6 +122,7 @@ def handle_run():
         is_run_on(True)
 
         open_bank_from_bank()
+
         if not is_bank_open():
             return False
 
@@ -150,29 +151,35 @@ def claim_bars():
 
     while not can_claim_bars:
         claim_attempts += 1
+        print(f'Checking if we can_claim_bars... claim_attempts: {claim_attempts}')
         can_claim_bars = does_color_exist_in_sub_image(bar_claim_region, green_color, 'Can_Claim_Green_Check', count_min=100, color_tolerance=15)
         if claim_attempts > 30:
             return False
 
     if can_claim_bars:
-        if not wait_for_img(img_name='Bar_Claim', script_name=SCRIPT_NAME, threshold=0.9):
-            # print(f'Failed to find Bar Dispenser - Exiting.')
-            manual_bar_claim = 752, 422
-            mouse_long_click(manual_bar_claim)
-        else:
-            click_to_claim = get_existing_img_xy()
-            mouse_long_click(click_to_claim)
+        long_click_dispenser()
 
-        if not does_img_exist(img_name='Take_Bars', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True):
+        if not take_bars():
             print(f'Failed to find "Take" option after right clicking bar claim.')
-            return False
+            if not does_img_exist(img_name='Cancel_Take_Bars', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True):
+                print(f'Failed to find cancel take bars to retry as well')
+                return False
+            else:
+                long_click_dispenser()
+                if not take_bars():
+                    print(f'Something has really gone wrong... Exiting.')
+                    return False
 
         if not wait_for_img(img_name='Claim_Bars_Open', script_name=SCRIPT_NAME, threshold=0.9, max_wait_sec=10):
+            print(f'')
             return False
 
-    # ToDo Add check to make sure 'all' is selected
+        # ToDo Add check to make sure 'all' is selected
         pag.press('space')
         return wait_for_img(img_name='Bars_Claimed', script_name=SCRIPT_NAME, threshold=0.9)
+    else:
+        print(f'Can_Claim_Bars is false... exiting.')
+        return False
 
 
 def wait_for_belt_deposit(ore):
@@ -194,21 +201,21 @@ def wait_for_belt_deposit(ore):
 
 def open_bank_from_bars():
     print(f'🏦 Opening bank from bar claim')
-    if not does_img_exist(img_name='Bank_From_Bars', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True):
+    if not does_img_exist(img_name='Bank_From_Bars', script_name=SCRIPT_NAME, threshold=0.85, should_click=True, click_middle=True):
         bank_from_bar_xy = 1000, 628
         mouse_click(bank_from_bar_xy)
     return is_bank_open(max_wait_sec=10)
 
 
 def open_bank_from_coffer():
-    if not does_img_exist(img_name="Bank_From_Coffer", script_name=SCRIPT_NAME, threshold=0.90, should_click=True, click_middle=True):
+    if not wait_for_img(img_name="Bank_From_Coffer", script_name=SCRIPT_NAME, threshold=0.85, should_click=True, click_middle=True):
         return False
     else:
         return is_bank_open(max_wait_sec=6)
 
 
 def open_bank_from_bank():
-    if not does_img_exist(img_name="Bank_From_Bank", script_name=SCRIPT_NAME, threshold=0.90, should_click=True, click_middle=True):
+    if not does_img_exist(img_name="Bank_From_Bank", script_name=SCRIPT_NAME, threshold=0.80, should_click=True, click_middle=True):
         return False
     else:
         return is_bank_open(max_wait_sec=5)
@@ -280,17 +287,8 @@ def fill_coal_bag():
         print(f'CACHED_INVENT_COAL_BAG: (NOT exists): {CACHED_INVENT_COAL_BAG_XY}')
         mouse_long_click(CACHED_INVENT_COAL_BAG_XY)
 
-    # if CACHED_FILL_COAL_BAG_XY:
-    #     mouse_click(CACHED_FILL_COAL_BAG_XY)
-    #     print(f'CACHED_FILL_COAL_BAG_XY: (Exists): {CACHED_FILL_COAL_BAG_XY}')
-    #
-    # else:
     if not does_img_exist(img_name='Fill_Coal_Bag', script_name='Blast_Furnace', threshold=0.95, should_click=True, click_middle=True):
         return False
-    # x, y = get_existing_img_xy()
-    # CACHED_FILL_COAL_BAG_XY = x + 6, y + 6
-    # print(f'CACHED_FILL_COAL_BAG_XY: (NOT exists): {CACHED_FILL_COAL_BAG_XY}')
-    # mouse_click(CACHED_FILL_COAL_BAG_XY)
 
     API.AntiBan.sleep_between(0.3, 0.4)
     return True
@@ -355,3 +353,16 @@ def empty_coal_bag():
     return wait_for_img(img_name='Coal_Bag_Is_Empty', script_name='Blast_Furnace', threshold=0.9)
 
 
+def long_click_dispenser():
+    if not wait_for_img(img_name='Bar_Claim', script_name=SCRIPT_NAME, threshold=0.9):
+        # print(f'Failed to find Bar Dispenser - Exiting.')
+        manual_bar_claim = 752, 422
+        mouse_long_click(manual_bar_claim)
+    else:
+        click_to_claim = get_existing_img_xy()
+        mouse_long_click(click_to_claim)
+    return
+
+
+def take_bars():
+    return does_img_exist(img_name='Take_Bars', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True)
