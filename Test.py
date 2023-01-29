@@ -37,9 +37,17 @@ def __main__():
 
     # show_main_gui()
 
-    # launch_script("Motherlode_Miner")
+    launch_script("Blast_Furnace")
 
-    claim_ore()
+    # color_xy = 299, 157
+    #
+    # get_color_at_coords(color_xy)
+    #
+    # bar_claim_region = 292, 140, 350, 167
+    # green_color = 39, 159, 31
+    # does_color_exist_in_sub_image(bar_claim_region, green_color, 'Can_Claim_Green_Check', count_min=100, color_tolerance=10)
+
+    # claim_ore()
 
     # dark_yellow_check = 80, 65, 14
     #

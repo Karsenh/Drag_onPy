@@ -201,7 +201,7 @@ def move_to_sluice():
 
 
 def is_water_running():
-    return wait_for_img(img_name="Running_Water", script_name="Motherlode_Miner", threshold=0.7, max_wait_sec=10)
+    return wait_for_img(img_name="Running_Water", script_name="Motherlode_Miner", threshold=0.68, max_wait_sec=11)
 
 
 def fix_broken_wheels():

@@ -62,7 +62,7 @@ def start_blasting(curr_loop):
 
     else:
         print(f'First loop!')
-        # setup_interface('north', 1, 'up')
+        setup_interface('north', 1, 'up')
         open_bank_from_bank()
         handle_run()
         deposit_money_into_coffer()
@@ -117,7 +117,7 @@ def handle_run():
 
         for i in range(0, 5):
             mouse_click(inventory_stamina_xy)
-            API.AntiBan.sleep_between(1.1, 1.2)
+            API.AntiBan.sleep_between(1.3, 1.4)
 
         is_run_on(True)
 
@@ -137,23 +137,42 @@ def open_bank_from_belt():
 
 
 def claim_bars():
+    can_claim_bars = False
+    claim_attempts = 0
+
     bar_claim_xy = 696, 597
     mouse_click(bar_claim_xy)
 
     API.AntiBan.sleep_between(4.0, 4.1)
 
-    # From belt
-    if not does_img_exist(img_name='Bar_Claim', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True):
-        # print(f'Failed to find Bar Dispenser - Exiting.')
-        manual_bar_claim = 752, 422
-        mouse_click(manual_bar_claim)
+    bar_claim_region = 292, 140, 350, 167
+    green_color = 39, 159, 31
 
-    if not wait_for_img(img_name='Claim_Bars_Open', script_name=SCRIPT_NAME, threshold=0.9, max_wait_sec=10):
-        return False
+    while not can_claim_bars:
+        claim_attempts += 1
+        can_claim_bars = does_color_exist_in_sub_image(bar_claim_region, green_color, 'Can_Claim_Green_Check', count_min=100, color_tolerance=15)
+        if claim_attempts > 30:
+            return False
+
+    if can_claim_bars:
+        if not wait_for_img(img_name='Bar_Claim', script_name=SCRIPT_NAME, threshold=0.9):
+            # print(f'Failed to find Bar Dispenser - Exiting.')
+            manual_bar_claim = 752, 422
+            mouse_long_click(manual_bar_claim)
+        else:
+            click_to_claim = get_existing_img_xy()
+            mouse_long_click(click_to_claim)
+
+        if not does_img_exist(img_name='Take_Bars', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True):
+            print(f'Failed to find "Take" option after right clicking bar claim.')
+            return False
+
+        if not wait_for_img(img_name='Claim_Bars_Open', script_name=SCRIPT_NAME, threshold=0.9, max_wait_sec=10):
+            return False
 
     # ToDo Add check to make sure 'all' is selected
-    pag.press('space')
-    return wait_for_img(img_name='Bars_Claimed', script_name=SCRIPT_NAME, threshold=0.9)
+        pag.press('space')
+        return wait_for_img(img_name='Bars_Claimed', script_name=SCRIPT_NAME, threshold=0.9)
 
 
 def wait_for_belt_deposit(ore):
@@ -198,7 +217,7 @@ def open_bank_from_bank():
 def open_coffer_from_bank():
     manual_coffer_xy = 697, 456
 
-    if not wait_for_img(img_name="Coffer_From_Bank", script_name=SCRIPT_NAME, threshold=0.8, should_click=True, click_middle=True, max_wait_sec=3):
+    if not wait_for_img(img_name="Coffer_From_Bank", script_name=SCRIPT_NAME, threshold=0.72, should_click=True, click_middle=True, max_wait_sec=3):
         print(f'Failed to find Coffer_From_Bank img - 🤖 Manually clicking')
         mouse_click(manual_coffer_xy)
     return True
