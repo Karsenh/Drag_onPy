@@ -108,6 +108,7 @@ def handle_run():
             return False
         if not wait_for_img(img_name='Inventory_Stamina_4', script_name=SCRIPT_NAME, img_sel='inventory', threshold=0.9):
             return False
+
         close_bank()
 
         is_tab_open('inventory', True)
@@ -115,11 +116,12 @@ def handle_run():
         x, y = get_existing_img_xy()
         inventory_stamina_xy = x+6, y+6
 
-        for i in range(0, 5):
+        for i in range(1, 5):
             mouse_click(inventory_stamina_xy)
-            API.AntiBan.sleep_between(1.3, 1.4)
+            API.AntiBan.sleep_between(1.5, 1.6)
 
         is_run_on(True)
+        API.AntiBan.sleep_between(0.3, 0.4)
 
         open_bank_from_bank()
 
@@ -154,7 +156,10 @@ def claim_bars():
         print(f'Checking if we can_claim_bars... claim_attempts: {claim_attempts}')
         can_claim_bars = does_color_exist_in_sub_image(bar_claim_region, green_color, 'Can_Claim_Green_Check', count_min=100, color_tolerance=15)
         if claim_attempts > 30:
-            return False
+            if not handle_level_dialogue():
+                return False
+            else:
+                can_claim_bars = does_color_exist_in_sub_image(bar_claim_region, green_color, 'Can_Claim_Green_Check', count_min=100, color_tolerance=15)
 
     if can_claim_bars:
         long_click_dispenser()
@@ -171,11 +176,28 @@ def claim_bars():
                     return False
 
         if not wait_for_img(img_name='Claim_Bars_Open', script_name=SCRIPT_NAME, threshold=0.9, max_wait_sec=10):
-            print(f'')
-            return False
+            # print(f'')
+            long_click_dispenser()
+
+            if not take_bars():
+                print(f'Failed to find "Take" option after right clicking bar claim.')
+                if not does_img_exist(img_name='Cancel_Take_Bars', script_name=SCRIPT_NAME, threshold=0.9,
+                                      should_click=True, click_middle=True):
+                    print(f'Failed to find cancel take bars to retry as well')
+                    return False
+                else:
+                    long_click_dispenser()
+                    if not take_bars():
+                        print(f'Something has really gone wrong... Exiting.')
+                        return False
 
         # ToDo Add check to make sure 'all' is selected
-        pag.press('space')
+
+        if not wait_for_img(img_name='Click_Bar_Chat', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True):
+            print(f'Failed to find bar to click')
+            return False
+
+        # pag.press('space')
         return wait_for_img(img_name='Bars_Claimed', script_name=SCRIPT_NAME, threshold=0.9)
     else:
         print(f'Can_Claim_Bars is false... exiting.')
@@ -188,7 +210,7 @@ def wait_for_belt_deposit(ore):
 
     print(f'Opening inventory to check when the ore has been deposited on the belt.')
 
-    API.AntiBan.sleep_between(0.5, 0.6)
+    API.AntiBan.sleep_between(2.0, 2.1)
 
     is_tab_open('inventory', True)
 
@@ -201,6 +223,7 @@ def wait_for_belt_deposit(ore):
 
 def open_bank_from_bars():
     print(f'🏦 Opening bank from bar claim')
+    # is_tab_open('inventory', False)
     if not does_img_exist(img_name='Bank_From_Bars', script_name=SCRIPT_NAME, threshold=0.85, should_click=True, click_middle=True):
         bank_from_bar_xy = 1000, 628
         mouse_click(bank_from_bar_xy)
@@ -258,11 +281,11 @@ def withdraw_72k():
 def deposit_72k():
     if not wait_for_img(img_name='Deposit_Coins', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True):
         return False
-
-    API.AntiBan.sleep_between(0.8, 0.9)
+    wait_for_img(img_name='K', category='Banking', threshold=0.9, should_click=True, click_middle=True)
+    # API.AntiBan.sleep_between(0.8, 0.9)
     pag.press('7')
     pag.press('2')
-    return does_img_exist(img_name='K', category='Banking', should_click=True, click_middle=True)
+    return does_img_exist(img_name='K', category='Banking', threshold=0.9, should_click=True, click_middle=True)
 
 
 def withdraw_coal_bag():
@@ -366,3 +389,14 @@ def long_click_dispenser():
 
 def take_bars():
     return does_img_exist(img_name='Take_Bars', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True)
+
+
+def handle_level_dialogue():
+    if does_img_exist("level_up", category="General"):
+        pag.press('space')
+        API.AntiBan.sleep_between(1.1, 2.3)
+        pag.press('space')
+        API.AntiBan.sleep_between(0.8, 1.7)
+        return True
+    else:
+        return False

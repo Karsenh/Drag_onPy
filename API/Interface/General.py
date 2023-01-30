@@ -1,4 +1,4 @@
-from API.Imaging.Image import does_img_exist, does_color_exist, get_color_at_coords, wait_for_img, does_color_exist_in_thresh
+from API.Imaging.Image import does_img_exist, does_color_exist, get_color_at_coords, wait_for_img, does_color_exist_in_thresh, does_color_exist_in_sub_image
 from API.Mouse import *
 from API.Imports.Coords import *
 from API.Debug import DEBUG_MODE, write_debug
@@ -159,22 +159,18 @@ def is_otd_enabled(should_enable=True):
 
 
 def is_run_on(should_click=False):
-    run_check_xy = 1210, 255
-    run_rgb = get_color_at_coords(run_check_xy)
-    run_on_color = 236, 218, 103
-    run_off_color = 145, 100, 59
-    if run_rgb == run_on_color:
-        print(f'🥾 ✔ Run is ON with RGB: {run_rgb}')
+    bar_claim_region = 1190, 230, 1230, 270
+    run_on_yellow_color = 205, 167, 1
+
+    if does_color_exist_in_sub_image(bar_claim_region, run_on_yellow_color, 'Can_Claim_Green_Check', count_min=100, color_tolerance=10):
+        print(f'🏃‍♂️ON!')
         return True
-    if run_rgb == run_off_color:
-        print(f'🥾 ❌ Run is OFF with RGB: {run_rgb}')
+    else:
+        print(f'🏃‍♂️OFF!')
         if should_click:
             run_xy = 1206, 248
             mouse_click(run_xy)
-        return False
-    else:
-        print(f'❌ Color: {run_rgb} not detected for 🥾 run energy.')
-        return False
+        return does_color_exist_in_sub_image(bar_claim_region, run_on_yellow_color, 'Can_Claim_Green_Check', count_min=100, color_tolerance=10)
 
 
 def is_run_gt(percent=10):
