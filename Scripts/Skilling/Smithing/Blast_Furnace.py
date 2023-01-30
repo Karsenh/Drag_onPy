@@ -444,7 +444,7 @@ def long_click_dispenser():
 
 
 def take_bars():
-    return does_img_exist(img_name='Take_Bars', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True)
+    return does_img_exist(img_name='Take_Bars', script_name=SCRIPT_NAME, threshold=0.94, should_click=True, click_middle=True)
 
 
 def handle_level_dialogue():
