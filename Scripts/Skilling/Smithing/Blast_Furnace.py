@@ -65,7 +65,7 @@ def start_blasting(curr_loop):
         setup_interface('north', 1, 'up')
         open_bank_from_bank()
         handle_run()
-        deposit_money_into_coffer()
+        # deposit_money_into_coffer()
         withdraw_coal_bag()
         fill_coal_bag()
         withdraw_coal()
