@@ -181,6 +181,9 @@ def claim_bars():
                     return False
 
         if not wait_for_img(img_name='Claim_Bars_Open', script_name=SCRIPT_NAME, threshold=0.9, max_wait_sec=10):
+
+            does_img_exist(img_name='Cancel_Take_Bars', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True)
+
             # print(f'')
             long_click_dispenser()
 
@@ -366,7 +369,7 @@ def withdraw_ore():
     if CACHED_BANKED_ORE_XY:
         mouse_click(CACHED_BANKED_ORE_XY)
     else:
-        if not does_img_exist(img_name=f'Banked_{ORE_TYPE}', script_name=SCRIPT_NAME, threshold=0.95, should_click=True, click_middle=True):
+        if not does_img_exist(img_name=f'Banked_{ORE_TYPE}', script_name=SCRIPT_NAME, threshold=0.95):
             return False
         else:
             x, y = get_existing_img_xy()
