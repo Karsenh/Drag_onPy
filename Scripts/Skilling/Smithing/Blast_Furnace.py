@@ -13,6 +13,7 @@ ORE_TYPE = 'Addy'  # Mith, Addy, Rune, Gold
 
 # Cached coordinates
 CACHED_BANKED_COAL_XY = None
+CACHED_BANKED_ORE_XY = None
 CACHED_INVENT_COAL_BAG_XY = None
 CACHED_FILL_COAL_BAG_XY = None
 CACHED_EMPTY_XY = None
@@ -341,10 +342,11 @@ def withdraw_coal():
     global CACHED_BANKED_COAL_XY
 
     is_withdraw_qty('all', True)
+
     if CACHED_BANKED_COAL_XY:
         mouse_click(CACHED_BANKED_COAL_XY)
     else:
-        if not does_img_exist(img_name='Banked_Coal', script_name=SCRIPT_NAME, threshold=0.95, should_click=True, click_middle=True):
+        if not does_img_exist(img_name='Banked_Coal', script_name=SCRIPT_NAME, threshold=0.95):
             return False
         else:
             x, y = get_existing_img_xy()
