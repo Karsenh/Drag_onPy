@@ -89,11 +89,16 @@ def harvest_both_sections(curr_loop):
     # move_to_water_from_points()
     fill_empty_cans(curr_loop)
     # Every 5th farm 'run' we'll be out of seeds and need to resupply
-    if curr_loop % 6 == 0:
+    print(f'Curr_Loop: {curr_loop} - Should resupply? ({curr_loop % 6 == 0})')
+
+    if curr_loop % 5 == 0:
+        print(f'🌱 Resupplying seeds')
         resupply_seeds()
         API.AntiBan.sleep_between(3.4, 3.5)
+
     if not move_to_farm_start():
         return False
+
     increase_can_slot()
     return True
 
