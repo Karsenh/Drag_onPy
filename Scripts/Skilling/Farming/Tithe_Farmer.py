@@ -30,14 +30,15 @@ CURR_WATER_CAN_SLOT = 1
 def start_tithe_farming(curr_loop):
     if curr_loop != 1:
         print(f'Not the first loop')
-        full_farm_cycle(curr_loop)
+        return full_farm_cycle(curr_loop)
     else:
         print(f'First loop - setup')
         setup_interface('south', 1, 'up')
         if not set_seed_to_use():
             return False
-        check_if_at_start()
-    return True
+        # TODO - Add Fill Watering Cans before moving to start just to be sure
+        # TODO - Add check for Spade / Dibber
+        return check_if_at_start()
 
 
 def check_if_at_start():
@@ -50,8 +51,7 @@ def check_if_at_start():
 def full_farm_cycle(curr_loop):
     plant_and_water_both_sections()
     water_both_sections()
-    harvest_both_sections(curr_loop)
-    return
+    return harvest_both_sections(curr_loop)
 
 
 def plant_and_water_both_sections():
@@ -79,7 +79,8 @@ def water_both_sections():
 
 def harvest_both_sections(curr_loop):
     harvest_plants()
-    move_to_section_2()
+    if not move_to_section_2():
+        return False
     increase_can_slot()
     harvest_plants()
     # move_back_from_section_2()
@@ -88,12 +89,18 @@ def harvest_both_sections(curr_loop):
     # move_to_water_from_points()
     fill_empty_cans(curr_loop)
     # Every 5th farm 'run' we'll be out of seeds and need to resupply
-    if curr_loop % 6 == 0:
+    print(f'Curr_Loop: {curr_loop} - Should resupply? ({curr_loop % 6 == 0})')
+
+    if curr_loop % 5 == 0:
+        print(f'🌱 Resupplying seeds')
         resupply_seeds()
         API.AntiBan.sleep_between(3.4, 3.5)
-    move_to_farm_start()
+
+    if not move_to_farm_start():
+        return False
+
     increase_can_slot()
-    return
+    return True
 
 
 def set_seed_to_use():
