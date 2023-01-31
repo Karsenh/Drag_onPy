@@ -37,7 +37,9 @@ def __main__():
 
     # show_main_gui()
 
-    launch_script("Blast_Furnace")
+    # launch_script("Blast_Furnace")
+
+    setup_interface('south', 1, 'up')
 
     # color_xy = 1222, 250
     # #
