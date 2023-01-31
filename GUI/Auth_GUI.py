@@ -87,8 +87,31 @@ def authenticate_user(form_vals, auth_top):
     # Connect to mongoDb
     is_authenticated = get_user(email, password)
 
+    if not is_authenticated:
+        print(f'⛔ User not authenticated.')
+        return -1
+    else:
+        print(f'✅ User successfully authenticated.')
+
+
+    print(f'💳 Checking Licenses...')
+
+    user_licenses = get_user_licenses(email)
+
+    if not user_licenses:
+        print(f'⛔ No licenses found for user {email}.')
+    else:
+        print(f'✅ Successfully retrieved {len(user_licenses)} licenses for user {email}.')
+
     if is_authenticated:
         auth_top.destroy()
         show_main_gui()
 
     return
+
+
+def get_user_licenses(email):
+    # Fetch all the licenses associated with the authenticated users email
+
+    return
+
