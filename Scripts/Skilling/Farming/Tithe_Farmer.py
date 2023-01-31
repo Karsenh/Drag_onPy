@@ -154,10 +154,11 @@ def move_to_section_2():
 
 def move_back_from_section_2():
     move_back_xy = 765, 135
+    API.AntiBan.sleep_between(0.1, 0.2)
     mouse_click(move_back_xy)
     API.AntiBan.sleep_between(7.0, 7.1)
-    if not wait_for_img(img_name="Minimap_Farm_Start", script_name="Tithe_Farmer", threshold=0.9):
-        mouse_click(move_back_xy)
+    if not wait_for_img(img_name="Minimap_Farm_Start", script_name="Tithe_Farmer", threshold=0.9, min_clicks=2, max_clicks=3):
+        mouse_click(move_back_xy, min_num_clicks=2, max_num_clicks=3)
         return wait_for_img(img_name="Minimap_Farm_Start", script_name="Tithe_Farmer", threshold=0.9)
     else:
         return True
