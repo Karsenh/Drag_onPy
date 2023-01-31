@@ -126,7 +126,7 @@ def resupply_seeds(curr_loop):
     if curr_loop % 12 == 0:
         wait_for_img(img_name="Door_From_Water_Barrel", script_name="Tithe_Farmer", threshold=0.82, should_click=True, click_middle=True)
     else:
-        wait_for_img(img_name="Door_Out", script_name="Tithe_Farmer", threshold=0.82, should_click=True, click_middle=True)
+        wait_for_img(img_name="Door_In", script_name="Tithe_Farmer", threshold=0.82, should_click=True, click_middle=True)
     wait_for_img(img_name="Seed_Table", script_name="Tithe_Farmer", threshold=0.9, should_click=True, click_middle=True)
     wait_for_img(img_name=f"Seed_{SEED_TO_USE}_Selection", script_name="Tithe_Farmer", threshold=0.9, should_click=True, click_middle=True)
     API.AntiBan.sleep_between(0.2, 0.3)
