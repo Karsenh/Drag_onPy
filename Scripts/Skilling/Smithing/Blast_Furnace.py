@@ -365,7 +365,7 @@ def withdraw_ore():
 
     print(f'Withdrawing_Ore')
 
-    is_withdraw_qty('all', None)
+    is_withdraw_qty('all', True)
     if CACHED_BANKED_ORE_XY:
         mouse_click(CACHED_BANKED_ORE_XY)
     else:
