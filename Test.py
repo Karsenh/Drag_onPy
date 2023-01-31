@@ -37,9 +37,7 @@ def __main__():
 
     # show_main_gui()
 
-    # launch_script("Blast_Furnace")
-
-    setup_interface('south', 1, 'up')
+    launch_script("Tithe_Farmer")
 
     # color_xy = 1222, 250
     # #

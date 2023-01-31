@@ -93,7 +93,7 @@ def harvest_both_sections(curr_loop):
 
     if curr_loop % 5 == 0:
         print(f'🌱 Resupplying seeds')
-        resupply_seeds()
+        resupply_seeds(curr_loop)
         API.AntiBan.sleep_between(3.4, 3.5)
 
     if not move_to_farm_start():
@@ -121,9 +121,12 @@ def set_seed_to_use():
     return True
 
 
-def resupply_seeds():
+def resupply_seeds(curr_loop):
     # From water barrel
-    wait_for_img(img_name="Door_In", script_name="Tithe_Farmer", threshold=0.88, should_click=True, click_middle=True)
+    if curr_loop % 12 == 0:
+        wait_for_img(img_name="Door_From_Water_Barrel", script_name="Tithe_Farmer", threshold=0.82, should_click=True, click_middle=True)
+    else:
+        wait_for_img(img_name="Door_In", script_name="Tithe_Farmer", threshold=0.82, should_click=True, click_middle=True)
     wait_for_img(img_name="Seed_Table", script_name="Tithe_Farmer", threshold=0.9, should_click=True, click_middle=True)
     wait_for_img(img_name=f"Seed_{SEED_TO_USE}_Selection", script_name="Tithe_Farmer", threshold=0.9, should_click=True, click_middle=True)
     API.AntiBan.sleep_between(0.2, 0.3)
@@ -135,12 +138,12 @@ def fill_empty_cans(curr_loop):
     is_tab_open("inventory", True)
     if not USE_GRICOLLER_CAN:
         does_img_exist(img_name="Empty_Watering_Can", script_name="Tithe_Farmer", threshold=0.9, should_click=True, click_middle=True)
-        wait_for_img(img_name="Water_Barrel", script_name="Tithe_Farmer", threshold=0.85, should_click=True, click_middle=True, max_wait_sec=15)
+        wait_for_img(img_name="Water_Barrel_From_Points", script_name="Tithe_Farmer", threshold=0.8, should_click=True, click_middle=True, max_wait_sec=15)
         API.AntiBan.sleep_between(16.0, 16.1)
     else:
         if curr_loop % 12 == 0:
             click_watering_can()
-            wait_for_img(img_name="Water_Barrel", script_name="Tithe_Farmer", threshold=0.85, should_click=True,
+            wait_for_img(img_name="Water_Barrel_From_Points", script_name="Tithe_Farmer", threshold=0.8, should_click=True,
                          click_middle=True, max_wait_sec=15)
     return
 
@@ -154,9 +157,14 @@ def move_to_section_2():
 
 def move_back_from_section_2():
     move_back_xy = 765, 135
-    mouse_click(move_back_xy)
+    API.AntiBan.sleep_between(0.1, 0.2)
+    mouse_click(move_back_xy, min_num_clicks=2, max_num_clicks=3)
     API.AntiBan.sleep_between(7.0, 7.1)
-    return wait_for_img(img_name="Minimap_Farm_Start", script_name="Tithe_Farmer", threshold=0.9)
+    if not wait_for_img(img_name="Minimap_Farm_Start", script_name="Tithe_Farmer", threshold=0.9):
+        mouse_click(move_back_xy, min_num_clicks=2, max_num_clicks=3)
+        return wait_for_img(img_name="Minimap_Farm_Start", script_name="Tithe_Farmer", threshold=0.9)
+    else:
+        return True
 
 
 def move_to_water_from_points():
