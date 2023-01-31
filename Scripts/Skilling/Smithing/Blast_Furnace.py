@@ -18,6 +18,7 @@ CACHED_INVENT_COAL_BAG_XY = None
 CACHED_FILL_COAL_BAG_XY = None
 CACHED_EMPTY_XY = None
 CACHED_BANK_FROM_BARS_XY = None
+CACHED_BANK_FROM_BELT_XY = None
 
 
 def start_blasting(curr_loop):
@@ -138,7 +139,18 @@ def handle_run():
 
 
 def open_bank_from_belt():
-    wait_for_img(img_name='Bank_From_Belt', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True)
+    global CACHED_BANK_FROM_BELT_XY
+
+    if CACHED_BANK_FROM_BELT_XY:
+        mouse_click(CACHED_BANK_FROM_BELT_XY)
+    else:
+        if not wait_for_img(img_name='Bank_From_Belt', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True):
+            return False
+        else:
+            x, y = get_existing_img_xy()
+            CACHED_BANK_FROM_BELT_XY = x+6, y+6
+            mouse_click(CACHED_BANK_FROM_BELT_XY)
+
     return is_bank_open(max_wait_sec=10)
 
 
