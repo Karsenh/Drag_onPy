@@ -37,7 +37,42 @@ def __main__():
 
     # show_main_gui()
 
-    launch_script("Tithe_Farmer")
+    # launch_script("Tithe_Farmer")
+
+    RESET_IMG_THRESH = 0.9
+
+    # if not does_img_exist(img_name=f"Move_1", script_name="Kourend_Crab_Killer",
+    #                       threshold=RESET_IMG_THRESH, should_click=True, click_middle=True):
+    #     print(f'Failed to find Move_1')
+    #     manual_xy = 1383, 418
+    #     mouse_click(manual_xy)
+    #
+    # API.AntiBan.sleep_between(6.7, 6.8)
+    #
+    # # Arrow image before heading back
+    # if not wait_for_img(img_name=f"Move_2_Alt", script_name="Kourend_Crab_Killer",
+    #                     threshold=RESET_IMG_THRESH, should_click=True, click_middle=True):
+    #     print(f'Failed to find Move_2')
+    #     # manual_xy = 1367, 270
+    #     # mouse_click(manual_xy)
+    #
+    # API.AntiBan.sleep_between(5.5, 5.6)
+
+    if not wait_for_img(img_name=f"Move_3_Alt", script_name="Kourend_Crab_Killer",
+                        threshold=RESET_IMG_THRESH, should_click=True, x_offset=-60, y_offset=30):
+        print(f'Failed to find Move_3')
+
+    API.AntiBan.sleep_between(5.0, 5.1)
+
+    if not wait_for_img(img_name=f"Can_Move_Back", script_name="Kourend_Crab_Killer",
+                        threshold=0.97):
+        print(f'Failed to find Can_Move_Back rock')
+    else:
+        API.AntiBan.sleep_between(0.3, 0.4)
+        crab_spot_xy = 137, 508
+        mouse_click(crab_spot_xy)
+
+
 
     # color_xy = 1222, 250
     # #
