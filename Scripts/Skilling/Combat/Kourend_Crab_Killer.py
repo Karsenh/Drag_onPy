@@ -50,34 +50,31 @@ def reset_spot_1():
     if not does_img_exist(img_name=f"Move_1", script_name="Kourend_Crab_Killer",
                           threshold=RESET_IMG_THRESH, should_click=True, click_middle=True):
         print(f'Failed to find Move_1')
-        manual_xy = 1383, 418
+        manual_xy = 1383, 414
         mouse_click(manual_xy)
 
     API.AntiBan.sleep_between(6.7, 6.8)
 
     # Arrow image before heading back
-    if not wait_for_img(img_name=f"Move_2_Alt", script_name="Kourend_Crab_Killer",
-                        threshold=RESET_IMG_THRESH, should_click=True, click_middle=True):
+    if not wait_for_img(img_name=f"Move_2_Alt", script_name="Kourend_Crab_Killer", threshold=RESET_IMG_THRESH, should_click=True, click_middle=True):
         print(f'Failed to find Move_2')
         # manual_xy = 1367, 270
         # mouse_click(manual_xy)
 
-    API.AntiBan.sleep_between(5.5, 5.6)
+    API.AntiBan.sleep_between(6.2, 6.3)
 
-    if not wait_for_img(img_name=f"Move_3_Alt", script_name="Kourend_Crab_Killer",
-                        threshold=RESET_IMG_THRESH, should_click=True, x_offset=-60, y_offset=30):
+    if not wait_for_img(img_name=f"Move_3_Alt", script_name="Kourend_Crab_Killer", threshold=RESET_IMG_THRESH, should_click=True, x_offset=-60, y_offset=30):
         print(f'Failed to find Move_3')
         return False
 
-    API.AntiBan.sleep_between(5.0, 5.1)
+    API.AntiBan.sleep_between(6.5, 6.6)
 
-    if not wait_for_img(img_name=f"Can_Move_Back", script_name="Kourend_Crab_Killer",
-                        threshold=0.92):
+    if not wait_for_img(img_name=f"Can_Move_Back", script_name="Kourend_Crab_Killer", threshold=0.96):
         print(f'Failed to find Can_Move_Back rock')
         return False
     else:
         API.AntiBan.sleep_between(0.3, 0.4)
-        crab_spot_xy = 130, 525
+        crab_spot_xy = 128, 510
         mouse_click(crab_spot_xy)
         API.AntiBan.sleep_between(5.0, 5.1)
         return True
