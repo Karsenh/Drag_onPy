@@ -145,6 +145,7 @@ def fill_empty_cans(curr_loop):
             click_watering_can()
             wait_for_img(img_name="Water_Barrel_From_Points", script_name="Tithe_Farmer", threshold=0.8, should_click=True,
                          click_middle=True, max_wait_sec=15)
+            API.AntiBan.sleep_between(1.0, 1.1)
     return
 
 

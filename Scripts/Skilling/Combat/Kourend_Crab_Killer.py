@@ -30,7 +30,7 @@ def start_killing_kourend_crabs(curr_loop):
 
     else:
         setup_interface("north", 1, "up")
-        set_attack_style(ATTACK_STYLE)
+        # set_attack_style(ATTACK_STYLE)
         # set_curr_spot()
     return True
 
@@ -72,12 +72,12 @@ def reset_spot_1():
     API.AntiBan.sleep_between(5.0, 5.1)
 
     if not wait_for_img(img_name=f"Can_Move_Back", script_name="Kourend_Crab_Killer",
-                        threshold=0.97):
+                        threshold=0.92):
         print(f'Failed to find Can_Move_Back rock')
         return False
     else:
         API.AntiBan.sleep_between(0.3, 0.4)
-        crab_spot_xy = 137, 508
+        crab_spot_xy = 130, 525
         mouse_click(crab_spot_xy)
         API.AntiBan.sleep_between(5.0, 5.1)
         return True
