@@ -1,3 +1,4 @@
+from Database.Script_Access import kourend_crab_killer_btn_state
 from GUI.Imports.GUI_Frames import *
 from Scripts.Skilling.Mining.Iron.Pisc_Iron import *
 from GUI.Imports.PreLaunch_Gui.PreLaunch_Gui import show_plg
@@ -87,7 +88,6 @@ def get_all_btns(all_frames, all_images):
     gui_btns = gold_btn, skill_btn, minigames_btn
 
 
-
     # (Main) Skill_gui_btns
     attack_btn = Button(skill_frame, text="Attack", image=attack_img, height=SKILL_BTN_HEIGHT, width=SKILL_BTN_WIDTH, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_combat_frame(all_frames, toggle_active_frame, combat_frame, combat_sub_btns))
     hp_btn = Button(skill_frame, text="HP", image=hp_img, height=SKILL_BTN_HEIGHT, width=SKILL_BTN_WIDTH, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_combat_frame(all_frames, toggle_active_frame, combat_frame, combat_sub_btns))
@@ -124,10 +124,9 @@ def get_all_btns(all_frames, all_images):
 
 
     # ---- SUB SKILL BTNS ----
-
     #     Combat
     cow_killer_btn = Button(combat_frame, text="Cow Killer", image=cow_killer_map, height=SCRIPT_START_BTN_HEIGHT, width=SCRIPT_START_BTN_WIDTH, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_plg("Ardy_Knights"))
-    sand_crab_killer_btn = Button(combat_frame, text="Kouren Crab Killer", image=hosidius_map_img, height=SCRIPT_START_BTN_HEIGHT, width=SCRIPT_START_BTN_WIDTH, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_plg("Kourend_Crab_Killer"))
+    sand_crab_killer_btn = Button(combat_frame, state=kourend_crab_killer_btn_state.state, text="Kouren Crab Killer", image=hosidius_map_img, height=SCRIPT_START_BTN_HEIGHT, width=SCRIPT_START_BTN_WIDTH, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_plg("Kourend_Crab_Killer"))
     combat_sub_btns = sand_crab_killer_btn, cow_killer_btn
 
     #     Ranged

@@ -1,6 +1,9 @@
 from tkinter import StringVar, LabelFrame, Tk, Label, Entry, Button, Frame
 import os
 import re
+
+from API.Debug import write_debug
+from Database.Script_Access import set_script_access
 from GUI.Imports.GUI_Frames import btn_bg_color, btn_active_bg_color, frame_bg_color, label_frame_bg_color
 from Database.Connection import get_user
 from GUI.Main_GUI import show_main_gui
@@ -64,11 +67,46 @@ def authenticate_user(form_vals, auth_top):
     email, password = form_vals
 
     email = email.get()
+    email = email.lower()
+
     password = password.get()
 
-    email = email.lower()
     print(f'🗝 Authenticating user with:\nEmail: {email}\nPassword: {password}')
 
+    if not validate_input(email, password):
+        write_debug(f'⛔ Failed to validate auth input')
+        return -1
+
+    # Connect to mongoDb and get user
+    authed_user = get_user(email, password)
+
+    if not authed_user:
+        print(f'⛔ User not authenticated.')
+        return -1
+    else:
+        print(f'✅ User {authed_user.email} successfully authenticated.')
+
+    # Set script access based on (verified) licenses
+
+    print(f'💳 Checking Licenses...')
+
+    print(f'user_licenses = {authed_user.licenses_arr}')
+
+    if not authed_user.licenses_arr:
+        print(f'⛔ No licenses found for user {email}.')
+        return -1
+    else:
+        print(f'✅ Successfully retrieved {len(authed_user.licenses_arr)} licenses for user {email}.')
+        set_script_access(authed_user.licenses_arr)
+
+    if authed_user:
+        auth_top.destroy()
+        show_main_gui()
+
+    return
+
+
+def validate_input(email, password):
     # **Validate the email REGEX
     regex = '^[a-zA-Z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$'
 
@@ -76,42 +114,13 @@ def authenticate_user(form_vals, auth_top):
         print(f'✅ Valid email')
     else:
         print(f'⛔ Not a valid email')
-        return -1
+        return False
 
     if not password:
         print(f'⛔ Password field must be provided')
-        return -1
+        return False
     else:
         print(f'✅ Password provided')
 
-    # Connect to mongoDb
-    is_authenticated = get_user(email, password)
-
-    if not is_authenticated:
-        print(f'⛔ User not authenticated.')
-        return -1
-    else:
-        print(f'✅ User successfully authenticated.')
-
-
-    print(f'💳 Checking Licenses...')
-
-    user_licenses = get_user_licenses(email)
-
-    if not user_licenses:
-        print(f'⛔ No licenses found for user {email}.')
-    else:
-        print(f'✅ Successfully retrieved {len(user_licenses)} licenses for user {email}.')
-
-    if is_authenticated:
-        auth_top.destroy()
-        show_main_gui()
-
-    return
-
-
-def get_user_licenses(email):
-    # Fetch all the licenses associated with the authenticated users email
-
-    return
+    return True
 
