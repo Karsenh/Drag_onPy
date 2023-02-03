@@ -41,9 +41,9 @@ def start_blasting(curr_loop):
         # Click Belt
         click_belt_from_bank()
         # Wait for coal deposit
-        wait_for_belt_deposit('coal')
+        # wait_for_belt_deposit('coal')
         # Empty coal bag
-        empty_coal_bag()
+        empty_coal_bag('coal')
         # Deposit Coal
         click_belt_from_belt()
         # Wait for coal deposit
@@ -58,8 +58,8 @@ def start_blasting(curr_loop):
         withdraw_ore()
         # Deposit ore on belt
         click_belt_from_bank()
-        wait_for_belt_deposit('addy')
-        empty_coal_bag()
+        # wait_for_belt_deposit('addy')
+        empty_coal_bag('addy')
         click_belt_from_belt()
         # API.AntiBan.sleep_between(0.4, 0.5)
         # wait_for_belt_deposit('coal')
@@ -75,8 +75,8 @@ def start_blasting(curr_loop):
         fill_coal_bag()
         withdraw_coal()
         click_belt_from_bank()
-        wait_for_belt_deposit('coal')
-        empty_coal_bag()
+        # wait_for_belt_deposit('coal')
+        empty_coal_bag('coal')
         click_belt_from_belt()
         # wait_for_belt_deposit('coal')
         open_bank_from_belt()
@@ -84,8 +84,8 @@ def start_blasting(curr_loop):
         fill_coal_bag()
         withdraw_ore()
         click_belt_from_bank()
-        wait_for_belt_deposit('addy')
-        empty_coal_bag()
+        # wait_for_belt_deposit('addy')
+        empty_coal_bag('addy')
         click_belt_from_belt()
         # wait_for_belt_deposit('coal')
         return claim_bars()
@@ -416,10 +416,11 @@ def click_belt_from_belt():
     print(f'Clicking ')
     furance_xy = 778, 455
     mouse_click(furance_xy)
+    API.AntiBan.sleep_between(0.1, 0.2)
     return
 
 
-def empty_coal_bag():
+def empty_coal_bag(ore_type):
     global CACHED_INVENT_COAL_BAG_XY
     global CACHED_EMPTY_XY
 
@@ -434,6 +435,10 @@ def empty_coal_bag():
         x, y = get_existing_img_xy()
         CACHED_INVENT_COAL_BAG_XY = x + 6, y + 6
         mouse_long_click(CACHED_INVENT_COAL_BAG_XY)
+
+    if not wait_for_belt_deposit(ore_type):
+        print(f'Failed to see us deposit {ore_type} onto belt')
+        return False
 
     # Click 'Empty'
     if CACHED_EMPTY_XY:
