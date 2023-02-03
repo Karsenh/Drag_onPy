@@ -241,7 +241,11 @@ def wait_for_belt_deposit(ore):
         ore_present = does_img_exist(img_name=f'Inventory_{ore}', script_name=SCRIPT_NAME, threshold=0.9)
         attempts += 1
 
-    return ore_present
+    if attempts == 100:
+        print(f'Attempts to find inventory_{ore} = {attempts}')
+        return False
+
+    return True
 
 
 def open_bank_from_bars():
