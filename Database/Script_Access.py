@@ -15,22 +15,30 @@ all_scripts = [kourend_crab_killer_btn_state, red_chin_btn_state]
 
 
 def set_script_access(user_licenses):
-    print(f"set_access 🔥'ed - license: {user_licenses}")
+    print(f"set_script_access 🔥'ed - user_licenses: {user_licenses}")
 
     for lic in user_licenses:
-        print(f'Calling set_script_access for license: {lic}')
-        decoded_lic = jwt.decode(lic, "your-256-bit-secret", algorithms=["HS256"])
-        print(f'decoded_lic: {decoded_lic}')
-        update_script_state(decoded_lic)
+        print(f'Decoding License and setting Script Access for license: {lic}')
+
+        try:
+            decoded_lic = jwt.decode(lic, "your-256-bit-secret", algorithms=["HS256"])
+            print(f'decoded_lic: {decoded_lic}')
+            update_script_state(decoded_lic)
+        except:
+            print(f'decoded token is invalid - likely expired. Remove from user doc.')
+            return False
+
+
     # license_obj = json.load(license)
 
     print(f'kourend_crab_killer: {kourend_crab_killer_btn_state.state}')
-    return
+    return True
 
 
 def update_script_state(decoded_lic):
     enabled = 'enabled'
     disabled = 'disabled'
+
     if decoded_lic['category'] == 'all_access':
         print(f'👑 - All Access Granted')
         for script in all_scripts:
