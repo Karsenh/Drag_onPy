@@ -233,7 +233,7 @@ def wait_for_belt_deposit(ore):
 
     print(f'Opening inventory to check when the ore has been deposited on the belt.')
 
-    API.AntiBan.sleep_between(2.0, 2.1)
+    API.AntiBan.sleep_between(1.0, 1.1)
 
     is_tab_open('inventory', True)
 
