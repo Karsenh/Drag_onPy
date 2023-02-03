@@ -412,7 +412,7 @@ def click_belt_from_bank():
     print(f'Clicking_belt_from_bank')
     furnace_xy = 633, 226
     mouse_click(furnace_xy)
-    API.AntiBan.sleep_between(0.8, 0.9)
+    API.AntiBan.sleep_between(1.5, 1.6)
     return
 
 
