@@ -20,6 +20,8 @@ CACHED_EMPTY_XY = None
 CACHED_BANK_FROM_BARS_XY = None
 CACHED_BANK_FROM_BELT_XY = None
 
+CACHED_TAKE_BARS_XY = None
+
 
 def start_blasting(curr_loop):
     if curr_loop != 1:
@@ -45,7 +47,7 @@ def start_blasting(curr_loop):
         # Deposit Coal
         click_belt_from_belt()
         # Wait for coal deposit
-        wait_for_belt_deposit('coal')
+        # wait_for_belt_deposit('coal')
         # Click bank from belt - wait for bank open (10 seconds) - return false if not
         if not open_bank_from_belt():
             return False
@@ -60,7 +62,7 @@ def start_blasting(curr_loop):
         empty_coal_bag()
         click_belt_from_belt()
         # API.AntiBan.sleep_between(0.4, 0.5)
-        wait_for_belt_deposit('coal')
+        # wait_for_belt_deposit('coal')
         return claim_bars()
 
     else:
@@ -76,7 +78,7 @@ def start_blasting(curr_loop):
         wait_for_belt_deposit('coal')
         empty_coal_bag()
         click_belt_from_belt()
-        wait_for_belt_deposit('coal')
+        # wait_for_belt_deposit('coal')
         open_bank_from_belt()
         handle_run()
         fill_coal_bag()
@@ -85,7 +87,7 @@ def start_blasting(curr_loop):
         wait_for_belt_deposit('addy')
         empty_coal_bag()
         click_belt_from_belt()
-        wait_for_belt_deposit('coal')
+        # wait_for_belt_deposit('coal')
         return claim_bars()
 
 
@@ -121,7 +123,7 @@ def handle_run():
         inventory_stamina_xy = x+6, y+6
 
         for i in range(1, 5):
-            mouse_click(inventory_stamina_xy)
+            mouse_click(inventory_stamina_xy, min_num_clicks=2, max_num_clicks=3)
             API.AntiBan.sleep_between(1.5, 1.6)
 
         is_run_on(True)
@@ -218,7 +220,8 @@ def claim_bars():
             return False
 
         # pag.press('space')
-        return wait_for_img(img_name='Bars_Claimed', script_name=SCRIPT_NAME, threshold=0.9)
+        # return wait_for_img(img_name='Bars_Claimed', script_name=SCRIPT_NAME, threshold=0.9)
+        return True
     else:
         print(f'Can_Claim_Bars is false... exiting.')
         return False
@@ -230,7 +233,7 @@ def wait_for_belt_deposit(ore):
 
     print(f'Opening inventory to check when the ore has been deposited on the belt.')
 
-    API.AntiBan.sleep_between(2.0, 2.1)
+    API.AntiBan.sleep_between(1.0, 1.1)
 
     is_tab_open('inventory', True)
 
@@ -340,16 +343,18 @@ def fill_coal_bag():
         mouse_long_click(CACHED_INVENT_COAL_BAG_XY)
 
     if CACHED_FILL_COAL_BAG_XY:
+        print(f'CACHED_FILL Exists: {CACHED_FILL_COAL_BAG_XY}')
         mouse_click(CACHED_FILL_COAL_BAG_XY)
     else:
         if not does_img_exist(img_name='Fill_Coal_Bag', script_name='Blast_Furnace', threshold=0.9):
+            print(f'Failed to find Fill_Coal_Bag on first loop to set cache')
             return False
         else:
             x, y = get_existing_img_xy()
             CACHED_FILL_COAL_BAG_XY = x + 6, y + 4
             mouse_click(CACHED_FILL_COAL_BAG_XY)
 
-    API.AntiBan.sleep_between(0.3, 0.4)
+    # API.AntiBan.sleep_between(0.3, 0.4)
     return True
 
 
@@ -456,7 +461,19 @@ def long_click_dispenser():
 
 
 def take_bars():
-    return does_img_exist(img_name='Take_Bars', script_name=SCRIPT_NAME, threshold=0.92, should_click=True, click_middle=True)
+    global CACHED_TAKE_BARS_XY
+
+    if CACHED_TAKE_BARS_XY:
+        mouse_click(CACHED_TAKE_BARS_XY)
+    else:
+        if not does_img_exist(img_name='Take_Bars', script_name=SCRIPT_NAME, threshold=0.92):
+            return False
+
+        x, y = get_existing_img_xy()
+        CACHED_TAKE_BARS_XY = x+6, y+6
+        mouse_click(CACHED_TAKE_BARS_XY)
+
+    return True
 
 
 def handle_level_dialogue():
