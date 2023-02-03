@@ -47,7 +47,7 @@ def start_blasting(curr_loop):
         # Deposit Coal
         click_belt_from_belt()
         # Wait for coal deposit
-        wait_for_belt_deposit('coal')
+        # wait_for_belt_deposit('coal')
         # Click bank from belt - wait for bank open (10 seconds) - return false if not
         if not open_bank_from_belt():
             return False
