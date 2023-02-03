@@ -87,7 +87,7 @@ def start_blasting(curr_loop):
         wait_for_belt_deposit('addy')
         empty_coal_bag()
         click_belt_from_belt()
-        wait_for_belt_deposit('coal')
+        # wait_for_belt_deposit('coal')
         return claim_bars()
 
 
@@ -343,9 +343,11 @@ def fill_coal_bag():
         mouse_long_click(CACHED_INVENT_COAL_BAG_XY)
 
     if CACHED_FILL_COAL_BAG_XY:
+        print(f'CACHED_FILL Exists: {CACHED_FILL_COAL_BAG_XY}')
         mouse_click(CACHED_FILL_COAL_BAG_XY)
     else:
         if not does_img_exist(img_name='Fill_Coal_Bag', script_name='Blast_Furnace', threshold=0.9):
+            print(f'Failed to find Fill_Coal_Bag on first loop to set cache')
             return False
         else:
             x, y = get_existing_img_xy()
