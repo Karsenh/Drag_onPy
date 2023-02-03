@@ -78,7 +78,7 @@ def start_blasting(curr_loop):
         wait_for_belt_deposit('coal')
         empty_coal_bag()
         click_belt_from_belt()
-        wait_for_belt_deposit('coal')
+        # wait_for_belt_deposit('coal')
         open_bank_from_belt()
         handle_run()
         fill_coal_bag()
