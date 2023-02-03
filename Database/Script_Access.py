@@ -28,7 +28,6 @@ def set_script_access(user_licenses):
             print(f'decoded token is invalid - likely expired. Remove from user doc.')
             return False
 
-
     # license_obj = json.load(license)
 
     print(f'kourend_crab_killer: {kourend_crab_killer_btn_state.state}')

@@ -475,7 +475,7 @@ def take_bars():
     if CACHED_TAKE_BARS_XY:
         mouse_click(CACHED_TAKE_BARS_XY)
     else:
-        if not does_img_exist(img_name='Take_Bars', script_name=SCRIPT_NAME, threshold=0.92):
+        if not does_img_exist(img_name='Take_Bars', script_name=SCRIPT_NAME, threshold=0.94):
             return False
 
         x, y = get_existing_img_xy()
