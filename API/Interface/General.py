@@ -159,10 +159,10 @@ def is_otd_enabled(should_enable=True):
 
 
 def is_run_on(should_click=False):
-    bar_claim_region = 1190, 230, 1230, 270
+    run_region_coords = 1190, 230, 1230, 270
     run_on_yellow_color = 205, 167, 1
 
-    if does_color_exist_in_sub_image(bar_claim_region, run_on_yellow_color, 'Can_Claim_Green_Check', count_min=100, color_tolerance=10):
+    if does_color_exist_in_sub_image(run_region_coords, run_on_yellow_color, 'Run_On_Check', count_min=100, color_tolerance=10):
         print(f'🏃‍♂️ON!')
         return True
     else:
@@ -170,7 +170,7 @@ def is_run_on(should_click=False):
         if should_click:
             run_xy = 1206, 248
             mouse_click(run_xy)
-        return does_color_exist_in_sub_image(bar_claim_region, run_on_yellow_color, 'Can_Claim_Green_Check', count_min=100, color_tolerance=10)
+        return does_color_exist_in_sub_image(run_region_coords, run_on_yellow_color, 'Run_On_Check', count_min=100, color_tolerance=10)
 
 
 def is_run_gt(percent=10):
