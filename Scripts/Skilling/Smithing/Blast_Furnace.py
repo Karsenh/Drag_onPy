@@ -343,7 +343,7 @@ def fill_coal_bag():
             return False
         x, y = get_existing_img_xy()
         CACHED_INVENT_COAL_BAG_XY = x + 6, y + 6
-        print(f'CACHED_INVENT_COAL_BAG: (NOT exists): {CACHED_INVENT_COAL_BAG_XY}')
+        print(f'CACHED_INVENT_COAL_BAG: (NOT exists) setting now: {CACHED_INVENT_COAL_BAG_XY}')
         mouse_long_click(CACHED_INVENT_COAL_BAG_XY)
 
     if CACHED_FILL_COAL_BAG_XY:
