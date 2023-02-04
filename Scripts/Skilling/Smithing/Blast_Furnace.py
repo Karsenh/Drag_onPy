@@ -331,7 +331,7 @@ def fill_coal_bag():
         if not wait_for_img(img_name='Inventory_Coal_Bag', script_name='Blast_Furnace', img_sel='inventory', threshold=0.9):
             return False
         x, y = get_existing_img_xy()
-        CACHED_INVENT_COAL_BAG_XY = x + 6, y + 6
+        CACHED_INVENT_COAL_BAG_XY = x, y
         print(f'CACHED_INVENT_COAL_BAG: (NOT exists) setting now: {CACHED_INVENT_COAL_BAG_XY}')
         mouse_long_click(CACHED_INVENT_COAL_BAG_XY)
 
