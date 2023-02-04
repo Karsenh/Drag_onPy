@@ -470,19 +470,7 @@ def long_click_dispenser():
 
 
 def take_bars():
-    global CACHED_TAKE_BARS_XY
-
-    if CACHED_TAKE_BARS_XY:
-        mouse_click(CACHED_TAKE_BARS_XY)
-    else:
-        if not does_img_exist(img_name='Take_Bars', script_name=SCRIPT_NAME, threshold=0.94):
-            return False
-
-        x, y = get_existing_img_xy()
-        CACHED_TAKE_BARS_XY = x+6, y+6
-        mouse_click(CACHED_TAKE_BARS_XY)
-
-    return True
+    return does_img_exist(img_name='Take_Bars', script_name=SCRIPT_NAME, threshold=0.94, should_click=True, click_middle=True)
 
 
 def handle_level_dialogue():
