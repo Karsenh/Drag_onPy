@@ -129,10 +129,10 @@ def handle_run():
         is_run_on(True)
         API.AntiBan.sleep_between(0.3, 0.4)
 
-        open_bank_from_bank()
-
-        if not is_bank_open():
-            return False
+        if not open_bank_from_bank():
+            # Try twice
+            if not open_bank_from_bank():
+                return False
 
         is_withdraw_qty('all', True)
 
@@ -180,25 +180,13 @@ def claim_bars():
                 can_claim_bars = does_color_exist_in_sub_image(bar_claim_region, green_color, 'Can_Claim_Green_Check', count_min=100, color_tolerance=15)
 
     if can_claim_bars:
-        long_click_dispenser()
-
-        if not take_bars():
-            print(f'Failed to find "Take" option after right clicking bar claim.')
-
-            if not does_img_exist(img_name='Cancel_Take_Bars', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True):
-                print(f'Failed to find cancel take bars on retry as well')
-                return False
-            else:
-                long_click_dispenser()
-                if not take_bars():
-                    print(f'Something has really gone wrong... Exiting.')
-                    return False
+        print(f'Can claim bars - true')
+        if not wait_for_img(img_name='Bar_Claim', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True, min_clicks=2, max_clicks=3):
+            print(f'Failed to find Bar_Claim')
+            return False
 
         if not wait_for_img(img_name='Claim_Bars_Open', script_name=SCRIPT_NAME, threshold=0.9, max_wait_sec=10):
 
-            does_img_exist(img_name='Cancel_Take_Bars', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True)
-
-            # print(f'')
             long_click_dispenser()
 
             if not take_bars():
@@ -219,8 +207,6 @@ def claim_bars():
             print(f'Failed to find bar to click')
             return False
 
-        # pag.press('space')
-        # return wait_for_img(img_name='Bars_Claimed', script_name=SCRIPT_NAME, threshold=0.9)
         return True
     else:
         print(f'Can_Claim_Bars is false... exiting.')
