@@ -39,12 +39,6 @@ def __main__():
 
     launch_script("Blast_Furnace")
 
-
-
-
-
-
-
     # color_xy = 1222, 250
     # #
     # get_color_at_coords(color_xy)

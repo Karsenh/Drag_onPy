@@ -252,7 +252,11 @@ def open_bank_from_bars():
             CACHED_BANK_FROM_BARS_XY = x + 6, y + 6
             mouse_click(CACHED_BANK_FROM_BARS_XY)
 
-    return is_bank_open(max_wait_sec=10)
+    if not is_bank_open(max_wait_sec=10):
+        if not does_img_exist(img_name='Bank_From_Bank', script_name=SCRIPT_NAME, threshold=0.8, should_click=True, click_middle=True):
+            return False
+
+    return True
 
 
 def open_bank_from_coffer():
