@@ -377,6 +377,7 @@ def withdraw_ore():
 
     is_withdraw_qty('all', True)
     if CACHED_BANKED_ORE_XY:
+        mouse_move(CACHED_BANKED_ORE_XY)
         mouse_click(CACHED_BANKED_ORE_XY)
     else:
         if not does_img_exist(img_name=f'Banked_{ORE_TYPE}', script_name=SCRIPT_NAME, threshold=0.95):
