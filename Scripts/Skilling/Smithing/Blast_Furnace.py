@@ -123,8 +123,8 @@ def handle_run():
         inventory_stamina_xy = x+6, y+6
 
         for i in range(1, 5):
-            mouse_click(inventory_stamina_xy, min_num_clicks=2, max_num_clicks=3)
-            API.AntiBan.sleep_between(1.5, 1.6)
+            mouse_click(inventory_stamina_xy)
+            API.AntiBan.sleep_between(1.6, 1.7)
 
         is_run_on(True)
         API.AntiBan.sleep_between(0.3, 0.4)
