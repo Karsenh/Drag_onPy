@@ -181,9 +181,12 @@ def claim_bars():
 
     if can_claim_bars:
         print(f'Can claim bars - true')
-        if not wait_for_img(img_name='Bar_Claim', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True, min_clicks=2, max_clicks=3):
+        if not wait_for_img(img_name='Bar_Claim', script_name=SCRIPT_NAME, threshold=0.9):
             print(f'Failed to find Bar_Claim')
             return False
+        else:
+            click_bar_claim_xy = 752, 437
+            mouse_click(click_bar_claim_xy, min_num_clicks=2, max_num_clicks=3)
 
         if not wait_for_img(img_name='Claim_Bars_Open', script_name=SCRIPT_NAME, threshold=0.9, max_wait_sec=10):
 
