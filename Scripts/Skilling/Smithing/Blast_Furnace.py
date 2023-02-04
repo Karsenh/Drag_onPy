@@ -348,8 +348,9 @@ def fill_coal_bag():
             return False
         else:
             x, y = get_existing_img_xy()
-            CACHED_FILL_COAL_BAG_XY = x + 6, y + 4
+            CACHED_FILL_COAL_BAG_XY = x, y
             mouse_click(CACHED_FILL_COAL_BAG_XY)
+            print(f'CACHED fill option not found - set to {CACHED_FILL_COAL_BAG_XY}')
 
     # API.AntiBan.sleep_between(0.3, 0.4)
     return True
@@ -427,6 +428,7 @@ def empty_coal_bag(ore_type):
 
     # Long click the inventory coal bag
     if CACHED_INVENT_COAL_BAG_XY:
+        print(f'Cached invent coal bag exists: {CACHED_INVENT_COAL_BAG_XY}')
         mouse_long_click(CACHED_INVENT_COAL_BAG_XY)
     else:
         if not does_img_exist(img_name='Inventory_Coal_Bag', script_name=SCRIPT_NAME, threshold=0.9):
@@ -434,6 +436,7 @@ def empty_coal_bag(ore_type):
         x, y = get_existing_img_xy()
         CACHED_INVENT_COAL_BAG_XY = x + 6, y + 6
         mouse_long_click(CACHED_INVENT_COAL_BAG_XY)
+        print(f'CACHED invent coal bag NOT exists: set to - {CACHED_INVENT_COAL_BAG_XY}')
 
     if not wait_for_belt_deposit(ore_type):
         print(f'Failed to see us deposit {ore_type} onto belt')
