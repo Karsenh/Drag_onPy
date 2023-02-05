@@ -9,6 +9,12 @@ SCRIPT_NAME = "Con_Mahog_Tables"
 BUILD_ATTEMPTS = 0
 REMOVE_ATTEMPTS = 0
 
+BUILD_TABLE_XY = None
+SEL_BUILD_XY = None
+
+REMOVE_TABLE_XY = None
+SEL_REMOVE_XY = None
+
 BUILD_NUM = 1
 
 
@@ -164,9 +170,11 @@ def repeat_last_fetch():
 
 def build_table():
     global BUILD_ATTEMPTS
+    global BUILD_TABLE_XY
+    global SEL_BUILD_XY
 
     if not wait_for_img(img_name="Empty_Table", script_name="Con_Mahog_Tables", threshold=0.9, max_wait_sec=3):
-        print(f"⛔ Couldn't find empty table - Exiting")
+        print(f"⛔ Couldn't find empty table - checking if table already there and removing if so.")
         if remove_table():
             print(f'Attempting to build table after removing')
             build_table()
@@ -174,16 +182,24 @@ def build_table():
             print(f'Couldnt build or remove')
             return False
 
-    mouse_long_click(get_existing_img_xy())
+    BUILD_TABLE_XY = get_existing_img_xy()
+    mouse_long_click(BUILD_TABLE_XY)
 
-    if not wait_for_img(img_name="Build", script_name="Con_Mahog_Tables", should_click=True, threshold=0.9,
-                        max_wait_sec=2):
-        if BUILD_ATTEMPTS < 2:
-            BUILD_ATTEMPTS += 1
-            build_table()
-        else:
-            print(f"⛔ Attempted to build {BUILD_ATTEMPTS} times and failed every time - exiting.")
-            return False
+    if SEL_BUILD_XY:
+        mouse_click(SEL_BUILD_XY)
+    else:
+        if not wait_for_img(img_name="Build", script_name="Con_Mahog_Tables", threshold=0.9,
+                            max_wait_sec=2):
+            if BUILD_ATTEMPTS < 2:
+                BUILD_ATTEMPTS += 1
+                build_table()
+            else:
+                print(f"⛔ Attempted to build {BUILD_ATTEMPTS} times and failed every time - exiting.")
+                return False
+
+        x, y = get_existing_img_xy()
+        SEL_BUILD_XY = x + 6, y + 5
+        mouse_click(SEL_BUILD_XY)
 
     if not wait_for_img(img_name="Create_Mahogany_Table", script_name="Con_Mahog_Tables", should_click=True, threshold=0.9):
         print(f"⛔ Couldn't find Mahogany Table Selection in Construction Menu")
@@ -199,20 +215,30 @@ def build_table():
 
 def remove_table():
     global REMOVE_ATTEMPTS
+    global REMOVE_TABLE_XY
+    global SEL_REMOVE_XY
 
     if not wait_for_img(img_name="Built_Table", script_name="Con_Mahog_Tables", threshold=0.98, max_wait_sec=3):
         print(f"⛔ Couldn't find built table to remove - exiting.")
         return False
 
-    mouse_long_click(get_existing_img_xy())
+    REMOVE_TABLE_XY = get_existing_img_xy()
+    mouse_long_click(REMOVE_TABLE_XY)
 
-    if not wait_for_img(img_name="Remove", script_name="Con_Mahog_Tables", should_click=True, threshold=0.9, max_wait_sec=3):
-        if REMOVE_ATTEMPTS < 2:
-            REMOVE_ATTEMPTS += 1
-            remove_table()
+    if SEL_REMOVE_XY:
+        mouse_click(SEL_REMOVE_XY)
+    else:
+        if not wait_for_img(img_name="Remove", script_name="Con_Mahog_Tables", threshold=0.9, max_wait_sec=3):
+            if REMOVE_ATTEMPTS < 2:
+                REMOVE_ATTEMPTS += 1
+                remove_table()
+            else:
+                print(f"⛔ Attempted to remove built table {REMOVE_ATTEMPTS} times and failed. Exiting")
+                return False
         else:
-            print(f"⛔ Attempted to remove built table {REMOVE_ATTEMPTS} times and failed. Exiting")
-            return False
+            x, y = get_existing_img_xy()
+            SEL_REMOVE_XY = x + 6, y + 5
+            mouse_click(SEL_REMOVE_XY)
 
     return wait_for_img(img_name="Yes_Remove", script_name="Con_Mahog_Tables", should_click=True, threshold=0.9, max_wait_sec=3)
 
