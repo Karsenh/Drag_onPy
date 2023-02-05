@@ -77,7 +77,7 @@ def move_to_house(curr_loop):
         return False
 
     x, y = get_existing_img_xy()
-    CACHED_ALTAR_XY = x, y+10
+    CACHED_ALTAR_XY = x, y+18
     # Inside house here
     return True
 
@@ -219,7 +219,7 @@ def click_portal_to_leave():
 
 
 def click_back_to_phials():
-    phials_house_xy = 650, 737
+    phials_house_xy = 1326, 214
     mouse_click(phials_house_xy)
 
     API.AntiBan.sleep_between(5.0, 5.1)
