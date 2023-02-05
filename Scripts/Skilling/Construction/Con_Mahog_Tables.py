@@ -205,7 +205,7 @@ def build_table():
         mouse_click(SEL_BUILD_XY)
 
     if CACHED_SEL_MAHOG_TABLE:
-        API.AntiBan.sleep_between(0.6, 0.7)
+        API.AntiBan.sleep_between(0.7, 0.8)
         mouse_click(CACHED_SEL_MAHOG_TABLE)
     else:
         if not wait_for_img(img_name="Create_Mahogany_Table", script_name="Con_Mahog_Tables", should_click=True, threshold=0.9):
@@ -249,7 +249,7 @@ def remove_table():
             mouse_click(SEL_REMOVE_XY)
 
     if CACHED_YES_REMOVE_XY:
-        API.AntiBan.sleep_between(0.5, 0.6)
+        API.AntiBan.sleep_between(0.7, 0.8)
         mouse_click(CACHED_YES_REMOVE_XY)
     else:
         if not wait_for_img(img_name="Yes_Remove", script_name="Con_Mahog_Tables", should_click=True, threshold=0.9, max_wait_sec=3):
