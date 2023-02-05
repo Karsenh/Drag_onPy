@@ -182,8 +182,7 @@ def build_table():
             print(f'Couldnt build or remove')
             return False
 
-    BUILD_TABLE_XY = get_existing_img_xy()
-    mouse_long_click(BUILD_TABLE_XY)
+    mouse_long_click(get_existing_img_xy())
 
     if SEL_BUILD_XY:
         mouse_click(SEL_BUILD_XY)
@@ -205,10 +204,10 @@ def build_table():
         print(f"⛔ Couldn't find Mahogany Table Selection in Construction Menu")
         return False
 
-    if wait_for_img(img_name="Construction", category="Exp_Drops"):
-        print(f'Saw exp drop')
-    else:
-        print(f'No exp drop seen!')
+    # if wait_for_img(img_name="Construction", category="Exp_Drops"):
+    #     print(f'Saw exp drop')
+    # else:
+    #     print(f'No exp drop seen!')
 
     return True
 
