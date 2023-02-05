@@ -125,7 +125,17 @@ def use_bones_with_phials():
 
     while attempts < max_attempts:
         for i in range(1, num_phials_imgs+1):
-            if does_img_exist(img_name=f'phials_{i}', script_name=SCRIPT_NAME, threshold=0.75, should_click=True, click_middle=True):
+            if does_img_exist(img_name=f'phials_{i}', script_name=SCRIPT_NAME, threshold=0.80):
+                x, y = get_existing_img_xy()
+                phials_xy = x+3,y+6
+                mouse_long_click(phials_xy)
+                if not wait_for_img(img_name='use_bones_with_phials', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True):
+                    if not wait_for_img(img_name='cancel', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True):
+                        return False
+                    mouse_long_click(phials_xy)
+                    if not wait_for_img(img_name='use_bones_with_phials', script_name=SCRIPT_NAME, threshold=0.9,
+                                        should_click=True, click_middle=True):
+                        return False
                 return True
         attempts += 1
 
