@@ -130,12 +130,10 @@ def use_bones_with_phials():
                 phials_xy = x+3,y+6
                 mouse_long_click(phials_xy)
                 if not wait_for_img(img_name='use_bones_with_phials', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True):
-                    if not wait_for_img(img_name='cancel', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True):
-                        return False
-                    mouse_long_click(phials_xy)
-                    if not wait_for_img(img_name='use_bones_with_phials', script_name=SCRIPT_NAME, threshold=0.9,
-                                        should_click=True, click_middle=True):
-                        return False
+                    if not wait_for_img(img_name='use_bones_with_phials_highlighted', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True):
+                        if not wait_for_img(img_name='cancel', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True):
+                            return False
+
                 return True
         attempts += 1
 
