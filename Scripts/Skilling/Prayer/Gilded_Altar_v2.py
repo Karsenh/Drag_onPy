@@ -30,7 +30,7 @@ def start_worshipping_bones(curr_loop):
 
     else:
         print(f'This is the first loop')
-        # setup_interface('north', 2, 'up')
+        setup_interface('north', 2, 'up')
 
     return True
 
@@ -125,7 +125,7 @@ def use_bones_with_phials():
 
     while attempts < max_attempts:
         for i in range(1, num_phials_imgs+1):
-            if does_img_exist(img_name=f'phials_{i}', script_name=SCRIPT_NAME, threshold=0.8, should_click=True, click_middle=True):
+            if does_img_exist(img_name=f'phials_{i}', script_name=SCRIPT_NAME, threshold=0.75, should_click=True, click_middle=True):
                 return True
         attempts += 1
 
