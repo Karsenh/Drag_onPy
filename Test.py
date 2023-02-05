@@ -37,9 +37,15 @@ def __main__():
 
     # show_main_gui()
 
-    # launch_script("Gilded_Altar")
+    launch_script("Gilded_Altar")
 
-    setup_interface("south", 3, "up")
+
+    SCRIPT_NAME = 'Gilded_Altar_v2'
+
+
+
+    # wait_for_img(img_name='')
+
 
     # color_xy = 1222, 250
     # #

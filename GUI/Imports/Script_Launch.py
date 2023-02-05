@@ -15,7 +15,7 @@ from Scripts.Skilling.Crafting.GE_Glass_Blower import start_blowing_glass
 from Scripts.Skilling.Fletching.GE_Dart_Fletcher import start_fletching_darts
 from Scripts.MiniGames.Hosidius_Plough import start_ploughing_for_favour
 from Scripts.Skilling.Thieving.Stalls.Hosidius_Fruit import start_stealing_fruit
-from Scripts.Skilling.Prayer.Gilded_Altar import start_gilded_altar
+from Scripts.Skilling.Prayer.Gilded_Altar_v2 import start_worshipping_bones
 from Scripts.Skilling.Herblore.Unf_Pots import start_unf_pots
 from Scripts.Skilling.Agility.Canifis_Rooftops import start_canifis_rooftops
 from Scripts.Skilling.Agility.Seers_Rooftops import start_seers_rooftops
@@ -109,7 +109,7 @@ def launch_script(script_name="pisc_iron"):
                    pickpocket_draynor_man, steal_ardy_cake, burn_logs_at_ge,
                    start_trawling, start_killing_cows, start_rogue_cooking,
                    start_chop_fletching, start_blowing_glass, start_fletching_darts,
-                   start_ploughing_for_favour, start_stealing_fruit, start_gilded_altar,
+                   start_ploughing_for_favour, start_stealing_fruit, start_worshipping_bones,
                    start_unf_pots, start_canifis_rooftops, start_seers_rooftops,
                    start_catching_crimsons, start_trapping_birds, start_pickpocketing_ardy_knights,
                    start_killing_kourend_crabs, start_crafting_dhide_bodies, start_chopping_teaks,
