@@ -114,7 +114,7 @@ def move_to_altar(curr_loop):
             x, y = ad_xy
             safe_ad_xy = x+15, y+25
             mouse_long_click(safe_ad_xy)
-            does_img_exist(img_name="visit_last", script_name="Gilded_Altar", threshold=0.9, should_click=True)
+            wait_for_img(img_name="visit_last", script_name="Gilded_Altar", threshold=0.88, should_click=True)
 
         API.AntiBan.sleep_between(5.0, 5.1)
         mouse_click(altar_xy)
