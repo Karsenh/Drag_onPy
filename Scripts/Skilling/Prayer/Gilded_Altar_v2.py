@@ -77,7 +77,7 @@ def move_to_house(curr_loop):
         return False
 
     x, y = get_existing_img_xy()
-    CACHED_ALTAR_XY = x, y+10
+    CACHED_ALTAR_XY = x, y+18
     # Inside house here
     return True
 
