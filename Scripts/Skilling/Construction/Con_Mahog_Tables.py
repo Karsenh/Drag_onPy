@@ -15,6 +15,9 @@ SEL_BUILD_XY = None
 REMOVE_TABLE_XY = None
 SEL_REMOVE_XY = None
 
+CACHED_SEL_MAHOG_TABLE = None
+CACHED_YES_REMOVE_XY = None
+
 BUILD_NUM = 1
 
 
@@ -172,6 +175,7 @@ def build_table():
     global BUILD_ATTEMPTS
     global BUILD_TABLE_XY
     global SEL_BUILD_XY
+    global CACHED_SEL_MAHOG_TABLE
 
     if not wait_for_img(img_name="Empty_Table", script_name="Con_Mahog_Tables", threshold=0.9, max_wait_sec=3):
         print(f"⛔ Couldn't find empty table - checking if table already there and removing if so.")
@@ -200,9 +204,14 @@ def build_table():
         SEL_BUILD_XY = x + 6, y + 5
         mouse_click(SEL_BUILD_XY)
 
-    if not wait_for_img(img_name="Create_Mahogany_Table", script_name="Con_Mahog_Tables", should_click=True, threshold=0.9):
-        print(f"⛔ Couldn't find Mahogany Table Selection in Construction Menu")
-        return False
+    if CACHED_SEL_MAHOG_TABLE:
+        API.AntiBan.sleep_between(0.6, 0.7)
+        mouse_click(CACHED_SEL_MAHOG_TABLE)
+    else:
+        if not wait_for_img(img_name="Create_Mahogany_Table", script_name="Con_Mahog_Tables", should_click=True, threshold=0.9):
+            print(f"⛔ Couldn't find Mahogany Table Selection in Construction Menu")
+            return False
+        CACHED_SEL_MAHOG_TABLE = get_existing_img_xy()
 
     # if wait_for_img(img_name="Construction", category="Exp_Drops"):
     #     print(f'Saw exp drop')
@@ -216,13 +225,13 @@ def remove_table():
     global REMOVE_ATTEMPTS
     global REMOVE_TABLE_XY
     global SEL_REMOVE_XY
+    global CACHED_YES_REMOVE_XY
 
     if not wait_for_img(img_name="Built_Table", script_name="Con_Mahog_Tables", threshold=0.98, max_wait_sec=3):
         print(f"⛔ Couldn't find built table to remove - exiting.")
         return False
 
-    REMOVE_TABLE_XY = get_existing_img_xy()
-    mouse_long_click(REMOVE_TABLE_XY)
+    mouse_long_click(get_existing_img_xy())
 
     if SEL_REMOVE_XY:
         mouse_click(SEL_REMOVE_XY)
@@ -239,7 +248,15 @@ def remove_table():
             SEL_REMOVE_XY = x + 6, y + 5
             mouse_click(SEL_REMOVE_XY)
 
-    return wait_for_img(img_name="Yes_Remove", script_name="Con_Mahog_Tables", should_click=True, threshold=0.9, max_wait_sec=3)
+    if CACHED_YES_REMOVE_XY:
+        API.AntiBan.sleep_between(0.5, 0.6)
+        mouse_click(CACHED_YES_REMOVE_XY)
+    else:
+        if not wait_for_img(img_name="Yes_Remove", script_name="Con_Mahog_Tables", should_click=True, threshold=0.9, max_wait_sec=3):
+            return False
+        CACHED_YES_REMOVE_XY = get_existing_img_xy()
+
+    return True
 
 
 def tap_to_continue_dialogue():
