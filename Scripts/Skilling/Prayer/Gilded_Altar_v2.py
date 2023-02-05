@@ -31,6 +31,8 @@ def start_worshipping_bones(curr_loop):
     else:
         print(f'This is the first loop')
         setup_interface('north', 2, 'up')
+        toggle_public_chat("off")
+        is_tab_open('inventory', True)
 
     return True
 
@@ -47,8 +49,8 @@ def unnote_bones():
         if not does_img_exist(img_name='too_full', script_name=SCRIPT_NAME, threshold=0.8):
             return False
 
-    if not wait_for_img(img_name='exchange_success', script_name=SCRIPT_NAME, threshold=0.8):
-        print(f'Failed to find exchange successful - are we full already?')
+    # if not wait_for_img(img_name='exchange_success', script_name=SCRIPT_NAME, threshold=0.8):
+    #     print(f'Failed to find exchange successful - are we full already?')
 
     does_img_exist(img_name='tap_to_cont', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True)
 
@@ -127,14 +129,17 @@ def use_bones_with_phials():
         for i in range(1, num_phials_imgs+1):
             if does_img_exist(img_name=f'phials_{i}', script_name=SCRIPT_NAME, threshold=0.80):
                 x, y = get_existing_img_xy()
-                phials_xy = x+3,y+6
+                phials_xy = x+3, y+6
                 mouse_long_click(phials_xy)
-                if not wait_for_img(img_name='use_bones_with_phials', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True):
-                    if not wait_for_img(img_name='use_bones_with_phials_highlighted', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True):
+
+                if not wait_for_img(img_name='use_bones_with_phials', script_name=SCRIPT_NAME, threshold=0.85, should_click=True, click_middle=True):
+                    if not wait_for_img(img_name='use_bones_with_phials_highlighted', script_name=SCRIPT_NAME, threshold=0.85, should_click=True, click_middle=True):
                         if not wait_for_img(img_name='cancel', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True):
                             return False
-
-                return True
+                    else:
+                        return True
+                else:
+                    return True
         attempts += 1
 
     print(f'Failed to find Phials to use noted bones with.')
@@ -142,14 +147,14 @@ def use_bones_with_phials():
 
 
 def sel_exchange_all():
-    return wait_for_img(img_name='exchange_all', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True)
+    return wait_for_img(img_name='exchange_all', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True, max_wait_sec=4)
 
 
 def long_click_house_box():
     attempts = 0
-    max_attempts = 6
+    max_attempts = 10
 
-    while attempts < max_attempts:
+    while attempts <= max_attempts:
         for i in range(1, 3):
             if does_img_exist(img_name=f'house_box_{i}', script_name=SCRIPT_NAME, threshold=0.7):
                 x, y = get_existing_img_xy()

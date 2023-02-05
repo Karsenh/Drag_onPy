@@ -435,12 +435,13 @@ def handle_auth_screens():
 
 def toggle_public_chat(state="on"):
     public_chat_xy = 291, 59
+    mouse_long_click(public_chat_xy)
+
     match state:
         case "off":
-            sel_state_xy = 283, 285
+            does_img_exist(img_name='show_none', category='Interface', threshold=0.9, should_click=True, click_middle=True)
         case "on":
-            sel_state_xy = 293, 201
-    mouse_drag(from_xy=public_chat_xy, to_xy=sel_state_xy)
+            does_img_exist(img_name='show_standard', category='Interface', threshold=0.9, should_click=True, click_middle=True)
     return
 
 

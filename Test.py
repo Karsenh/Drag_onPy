@@ -37,7 +37,7 @@ def __main__():
 
     # show_main_gui()
 
-    launch_script("Gilded_Altar")
+    launch_script("Poh_Mahogany_Tables")
 
 
     SCRIPT_NAME = 'Gilded_Altar_v2'
