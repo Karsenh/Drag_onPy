@@ -153,8 +153,13 @@ def open_bank_from_belt():
             CACHED_BANK_FROM_BELT_XY = x+6, y+6
             mouse_click(CACHED_BANK_FROM_BELT_XY)
 
-    return is_bank_open(max_wait_sec=10)
+    if not is_bank_open(max_wait_sec=10):
+        if not open_bank_from_bank():
+            return False
+        else:
+            API.AntiBan.sleep_between(0.6, 0.7)
 
+    return True
 
 def claim_bars():
     can_claim_bars = False
@@ -253,8 +258,10 @@ def open_bank_from_bars():
             mouse_click(CACHED_BANK_FROM_BARS_XY)
 
     if not is_bank_open(max_wait_sec=10):
-        if not does_img_exist(img_name='Bank_From_Bank', script_name=SCRIPT_NAME, threshold=0.8, should_click=True, click_middle=True):
+        if not open_bank_from_bank():
             return False
+        else:
+            API.AntiBan.sleep_between(0.7, 0.8)
 
     return True
 
