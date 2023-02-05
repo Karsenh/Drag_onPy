@@ -128,15 +128,16 @@ def worship_bones(wait_sec=60):
     global should_return_normally
 
     start_time = datetime.datetime.now()
+
     if does_img_exist(img_name="invent_d_bones", script_name="Gilded_Altar", threshold=0.9):
         d_bone_xy = get_existing_img_xy()
         mouse_long_click(d_bone_xy)
         does_img_exist(img_name="use_d_bones", script_name="Gilded_Altar", should_click=True)
 
-    API.AntiBan.sleep_between(0.6, 0.98)
+    API.AntiBan.sleep_between(0.8, 1.2)
 
     # does_img_exist(img_name="gilded_altar", script_name="Gilded_Altar", threshold=0.80, should_click=True)
-    altar_xy = 846, 487
+    altar_xy = 850, 450
     mouse_click(altar_xy)
 
     API.AntiBan.sleep_between(1.0, 1.1)
