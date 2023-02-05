@@ -155,7 +155,10 @@ def long_click_house_box():
 
 
 def sel_visit_last():
-    return wait_for_img(img_name='visit_last_house', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True)
+    if not wait_for_img(img_name='visit_last_house', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True):
+        if not wait_for_img(img_name='visit_last_house_2', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True):
+            return False
+    return True
 
 
 def sel_view_list():
