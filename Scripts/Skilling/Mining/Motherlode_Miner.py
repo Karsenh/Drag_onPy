@@ -208,6 +208,7 @@ def fix_broken_wheels():
     if does_img_exist(img_name="Broken_Wheel_1", script_name="Motherlode_Miner", threshold=0.96, should_click=True, click_middle=True):
         if not wait_for_img(img_name="Smithing", category="Exp_Drops", threshold=0.92, max_wait_sec=15):
             if does_img_exist(img_name='Failsafe_Move_To_Hopper', script_name='Motherlode_Miner', threshold=0.9, should_click=True, x_offset=4, y_offset=-2):
+                API.AntiBan.sleep_between(5.0, 5.1)
                 if not wait_for_img(img_name='Failsafe_Hopper_From_Hopper', script_name='Motherlode_Miner', threshold=0.95, should_click=True, click_middle=True):
                     return False
         if does_img_exist(img_name="Broken_Wheel_2_From_1", script_name="Motherlode_Miner", threshold=0.96, should_click=True, click_middle=True):
