@@ -239,8 +239,8 @@ def launch_script(script_name="pisc_iron"):
             antiban_downtime_sec = 6
         case "Poh_Mahogany_Tables":
             selected_script = ScriptEnum.CON_MAHOG_TABLES.value
-            antiban_likelihood = 25
-            antiban_downtime_sec = 1
+            antiban_likelihood = 0
+            antiban_downtime_sec = 0.5
         case "Desert_Lizards":
             selected_script = ScriptEnum.DESERT_LIZARDS.value
             antiban_likelihood = 25
@@ -288,13 +288,13 @@ def launch_script(script_name="pisc_iron"):
             always_sleep = False
         case "Red_Chins":
             selected_script = ScriptEnum.RED_CHINS.value
-            antiban_likelihood = 30
+            antiban_likelihood = 15
             antiban_downtime_sec = 2
             reopen_invent = False
             always_sleep = False
         case "Blast_Furnace":
             selected_script = ScriptEnum.BLAST_FURNACE.value
-            antiban_likelihood = 30
+            antiban_likelihood = 15
             antiban_downtime_sec = 2
             reopen_invent = False
             always_sleep = False

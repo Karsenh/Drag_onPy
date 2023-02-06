@@ -44,7 +44,7 @@ def random_human_actions(max_downtime_seconds=3.0, likelihood=10, always_sleep=T
     # Generate a random number between 1-10 (or likelihood)
     should_perform_actions = False
 
-    if random.randint(1, likelihood) == likelihood:
+    if random.randint(1, 100) <= likelihood:
         should_perform_actions = True
         write_debug(f"{should_perform_actions} (True?)")
     else:
