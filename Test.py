@@ -37,10 +37,11 @@ def __main__():
 
     # show_main_gui()
 
-    launch_script("Poh_Mahogany_Tables")
+    launch_script("Blast_Furnace")
 
+    # SCRIPT_NAME = 'Blast_Furnace'
+    # does_img_exist(img_name=f'Banked_Rune', script_name=SCRIPT_NAME, threshold=0.95)
 
-    SCRIPT_NAME = 'Gilded_Altar_v2'
 
 
 

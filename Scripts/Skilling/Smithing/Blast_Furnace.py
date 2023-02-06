@@ -9,7 +9,7 @@ import pyautogui as pag
 
 SCRIPT_NAME = "Blast_Furnace"
 BANK_TAB = 1
-ORE_TYPE = 'Addy'  # Mith, Addy, Rune, Gold
+ORE_TYPE = 'Rune'  # Mith, Addy, Rune, Gold
 
 # Cached coordinates
 CACHED_BANKED_COAL_XY = None
@@ -25,7 +25,11 @@ CACHED_TAKE_BARS_XY = None
 
 def start_blasting(curr_loop):
     if curr_loop != 1:
-        print(f'Not first loop')
+        print(f'♾ CURR LOOP: {curr_loop}')
+        # Curr_loop == 2 (+27 coal)
+        # Curr_loop == 3 (+54 coal)
+        # Curr_loop == 4 (+81 coal)
+
         # Open the bank from bar claim - wait for it to open and if not return false
         if not open_bank_from_bars():
             return False
@@ -34,6 +38,16 @@ def start_blasting(curr_loop):
         deposit_bars()
         # Drink stam if necessary
         handle_run()
+
+        if ORE_TYPE == 'Rune' and curr_loop % 4 == 0:
+            print(f'Need to get coal bag and rune invent here')
+            fill_coal_bag()
+            withdraw_ore()
+            click_belt_from_bank()
+            empty_coal_bag(ORE_TYPE)
+            click_belt_from_belt()
+            return claim_bars()
+
         # Fill Coal Pouch
         fill_coal_bag()
         # Fill Inventory with coal
@@ -51,15 +65,27 @@ def start_blasting(curr_loop):
         # Click bank from belt - wait for bank open (10 seconds) - return false if not
         if not open_bank_from_belt():
             return False
+
         handle_run()
         # Fill Coal Pouch
         fill_coal_bag()
+
+        if ORE_TYPE == 'Rune':
+            withdraw_coal()
+            click_belt_from_bank()
+            empty_coal_bag('coal')
+            click_belt_from_belt()
+            if not open_bank_from_belt():
+                return False
+            handle_run()
+            fill_coal_bag()
+
         # Fill Inventory with ore
         withdraw_ore()
         # Deposit ore on belt
         click_belt_from_bank()
         # wait_for_belt_deposit('addy')
-        empty_coal_bag('addy')
+        empty_coal_bag(ORE_TYPE)
         click_belt_from_belt()
         # API.AntiBan.sleep_between(0.4, 0.5)
         # wait_for_belt_deposit('coal')
@@ -75,17 +101,25 @@ def start_blasting(curr_loop):
         fill_coal_bag()
         withdraw_coal()
         click_belt_from_bank()
-        # wait_for_belt_deposit('coal')
         empty_coal_bag('coal')
         click_belt_from_belt()
-        # wait_for_belt_deposit('coal')
         open_bank_from_belt()
         handle_run()
         fill_coal_bag()
+
+        if ORE_TYPE == 'Rune':
+            withdraw_coal()
+            click_belt_from_bank()
+            empty_coal_bag('coal')
+            click_belt_from_belt()
+            if not open_bank_from_belt():
+                return False
+            handle_run()
+            fill_coal_bag()
+
         withdraw_ore()
         click_belt_from_bank()
-        # wait_for_belt_deposit('addy')
-        empty_coal_bag('addy')
+        empty_coal_bag(ORE_TYPE)
         click_belt_from_belt()
         # wait_for_belt_deposit('coal')
         return claim_bars()
@@ -346,18 +380,23 @@ def fill_coal_bag():
         print(f'CACHED_INVENT_COAL_BAG: (NOT exists) setting now: {CACHED_INVENT_COAL_BAG_XY}')
         mouse_long_click(CACHED_INVENT_COAL_BAG_XY)
 
-    if CACHED_FILL_COAL_BAG_XY:
-        print(f'CACHED_FILL Exists: {CACHED_FILL_COAL_BAG_XY}')
-        mouse_click(CACHED_FILL_COAL_BAG_XY)
-    else:
-        if not does_img_exist(img_name='Fill_Coal_Bag', script_name='Blast_Furnace', threshold=0.9):
+    # if CACHED_FILL_COAL_BAG_XY:
+    #     print(f'CACHED_FILL Exists: {CACHED_FILL_COAL_BAG_XY}')
+    #     mouse_click(CACHED_FILL_COAL_BAG_XY)
+    # else:
+    if not does_img_exist(img_name='Fill_Coal_Bag', script_name='Blast_Furnace', threshold=0.9):
+        if not does_img_exist(img_name='Empty_Coal_Bag', script_name=SCRIPT_NAME, threshold=0.9):
             print(f'Failed to find Fill_Coal_Bag on first loop to set cache')
             return False
         else:
-            x, y = get_existing_img_xy()
-            CACHED_FILL_COAL_BAG_XY = x, y
-            mouse_click(CACHED_FILL_COAL_BAG_XY)
-            print(f'CACHED fill option not found - set to {CACHED_FILL_COAL_BAG_XY}')
+            # We went to fill but saw empty instead because coal bag is already full
+            return True
+    else:
+        # x, y = get_existing_img_xy()
+        # CACHED_FILL_COAL_BAG_XY = x, y
+        # mouse_click(CACHED_FILL_COAL_BAG_XY)
+        mouse_click(get_existing_img_xy())
+        # print(f'CACHED Fill option not saved - set to {CACHED_FILL_COAL_BAG_XY}')
 
     # API.AntiBan.sleep_between(0.3, 0.4)
     return True
