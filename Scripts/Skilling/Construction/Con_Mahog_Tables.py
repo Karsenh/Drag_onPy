@@ -33,7 +33,8 @@ def start_constructing_tables(curr_loop):
                         pay_butler()
                     if not wait_for_planks():
                         print(f"⛔ Couldn't find planks and tried to pay butler but something went wrong.")
-                        return False
+                        if not fetch_planks():
+                            return False
         # If our inventory is NOT full...
         # if not wait_for_planks(quick=True):
         if BUILD_NUM != 3:
