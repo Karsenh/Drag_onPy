@@ -249,7 +249,22 @@ def claim_bars():
 
         if not wait_for_img(img_name='Click_Bar_Chat', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True):
             print(f'Failed to find bar to click')
-            return False
+            if not does_img_exist(img_name='Too_Full', script_name=SCRIPT_NAME, threshold=0.9):
+                return False
+            else:
+                print(f'Inventory is full for some reason - we must still have ore to deposit')
+                belt_from_claim_xy = 1365, 380
+                mouse_click(belt_from_claim_xy)
+                if does_img_exist(img_name='Inventory_Coal', script_name=SCRIPT_NAME, threshold=0.92):
+                    ore = 'Coal'
+                elif does_img_exist(img_name=f'Iventory_{ORE_TYPE}', script_name=SCRIPT_NAME, threshold=0.92):
+                    ore = ORE_TYPE
+                else:
+                    print(f'Inventory was full but we failed to find the ore type in the inventory - is it bars?')
+                if not wait_for_belt_deposit(ore):
+                    return False
+                if not claim_bars():
+                    return False
 
         return True
     else:
