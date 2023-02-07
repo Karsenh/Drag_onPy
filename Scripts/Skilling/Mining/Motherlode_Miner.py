@@ -60,7 +60,7 @@ def is_mining():
 
     yellow_check_region = 750, 380, 760, 420
 
-    if does_color_exist_in_sub_image(yellow_check_region, dark_yellow_check, 'Motherlode_Yellow_Check', color_tolerance=5, count_min=5):
+    if does_color_exist_in_sub_image(yellow_check_region, dark_yellow_check, 'Motherlode_Yellow_Check', color_tolerance=2, count_min=5):
         print(f"Saw yellow ore wheel. - No longer Mining.")
         SEARCHING_FOR_SPOT = True
         MINING_ATTEMPTS = 0
@@ -130,9 +130,11 @@ def find_and_mine_next_spot():
 
     while SEARCHING_FOR_SPOT:
         print(f'ATTEMPTS: {attempts} | ')
+
         if CURR_SPOT+search_offset == 12:
             search_offset = 1
             attempts += 1
+
         if attempts < 4:
             print(f'attempts lt 4')
             if does_img_exist(img_name=f"Spot_{CURR_SPOT+search_offset}_From_{CURR_SPOT}", script_name="Motherlode_Miner", threshold=0.96, should_click=True, click_middle=True):
