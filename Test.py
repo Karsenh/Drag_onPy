@@ -24,6 +24,11 @@ def terminate_app(key):
         print(f'special key {key} pressed')
 
 
+def get_region_for_xy(xy_coords):
+    x, y = xy_coords
+    return x - 5, y - 5, x + 5, y + 5
+
+
 def __main__():
 
     listener = keyboard.Listener(
@@ -37,7 +42,11 @@ def __main__():
 
     # show_main_gui()
 
-    launch_script("Blast_Furnace")
+    launch_script("Motherlode_Miner")
+
+
+
+
 
     # SCRIPT_NAME = 'Blast_Furnace'
     # does_img_exist(img_name=f'Banked_Rune', script_name=SCRIPT_NAME, threshold=0.95)
@@ -169,6 +178,7 @@ def __main__():
 
 
 __main__()
+
 
 
 

@@ -264,8 +264,8 @@ def launch_script(script_name="pisc_iron"):
             always_sleep = False
         case "Motherlode_Miner":
             selected_script = ScriptEnum.MOTHERLODE_MINER.value
-            antiban_likelihood = 25
-            antiban_downtime_sec = 3
+            antiban_likelihood = 5
+            antiban_downtime_sec = 4
             reopen_invent = True
             always_sleep = False
         case "GE_Sulphurous_Fertilizer":
@@ -276,13 +276,13 @@ def launch_script(script_name="pisc_iron"):
             always_sleep = False
         case "Tithe_Farmer":
             selected_script = ScriptEnum.TITHE_FARMER.value
-            antiban_likelihood = 25
+            antiban_likelihood = 10
             antiban_downtime_sec = 3
             reopen_invent = True
             always_sleep = False
         case "Black_Lizards":
             selected_script = ScriptEnum.BLACK_LIZARDS.value
-            antiban_likelihood = 25
+            antiban_likelihood = 10
             antiban_downtime_sec = 3
             reopen_invent = False
             always_sleep = False
