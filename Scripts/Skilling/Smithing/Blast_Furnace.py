@@ -195,9 +195,11 @@ def open_bank_from_belt():
 
     return True
 
+
 def claim_bars():
     can_claim_bars = False
     claim_attempts = 0
+    max_claim_attempts = 100
 
     # Move to bar dispenser
     bar_dispenser_xy = 696, 597
@@ -212,7 +214,7 @@ def claim_bars():
         claim_attempts += 1
         print(f'Checking if we can_claim_bars... claim_attempts: {claim_attempts}')
         can_claim_bars = does_color_exist_in_sub_image(bar_claim_region, green_color, 'Can_Claim_Green_Check', count_min=100, color_tolerance=15)
-        if claim_attempts > 30:
+        if claim_attempts > max_claim_attempts:
             if not handle_level_dialogue():
                 return False
             else:
