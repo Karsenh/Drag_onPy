@@ -41,7 +41,7 @@ def update_script_state(decoded_lic):
     if decoded_lic['category'] == 'all_access':
         print(f'👑 - All Access Granted')
         for script in all_scripts:
-            script.state = 'enabled'
+            script.state = 'active'
     elif decoded_lic['category'] == 'package':
         print(f'📦 - Package Access')
     elif decoded_lic['category'] == 'individual':
