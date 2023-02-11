@@ -37,7 +37,10 @@ def __main__():
 
     # show_main_gui()
 
-    launch_script("Blast_Furnace")
+    launch_script("SW_Teaks")
+
+
+    # wait_for_img(img_name=f"Minimap_Midway_From_Ore_Alt", script_name="Motherlode_Miner", threshold=0.92, should_click=True, x_offset=14, y_offset=2)
 
     # SCRIPT_NAME = 'Blast_Furnace'
     # does_img_exist(img_name=f'Banked_Rune', script_name=SCRIPT_NAME, threshold=0.95)

@@ -33,7 +33,7 @@ def start_motherlode_mining(curr_loop):
                     API.AntiBan.sleep_between(3.0, 3.1)
                     return True
                 else:
-                    manual_spot_1_xy = 771, 130
+                    manual_spot_1_xy = 772, 205
                     mouse_click(manual_spot_1_xy)
                     API.AntiBan.sleep_between(3.5, 3.6)
         if not is_mining():
@@ -167,7 +167,7 @@ def move_to_midway_from(spot="Ore"):
         mouse_click(xy)
         return True
     else:
-        if wait_for_img(img_name=f"Minimap_Midway_From_{spot}", script_name="Motherlode_Miner", threshold=0.9, should_click=True, x_offset=5, y_offset=3):
+        if wait_for_img(img_name=f"Minimap_Midway_From_Ore_Alt", script_name="Motherlode_Miner", threshold=0.92, should_click=True, x_offset=14, y_offset=2):
             return True
 
     return False
@@ -207,17 +207,20 @@ def is_water_running():
 
 
 def fix_broken_wheels():
+    smithing_threshold = 0.86
+
     if does_img_exist(img_name="Broken_Wheel_1", script_name="Motherlode_Miner", threshold=0.96, should_click=True, click_middle=True):
-        if not wait_for_img(img_name="Smithing", category="Exp_Drops", threshold=0.92, max_wait_sec=15):
+        if not wait_for_img(img_name="Smithing", category="Exp_Drops", threshold=smithing_threshold, max_wait_sec=15):
             if does_img_exist(img_name='Failsafe_Move_To_Hopper', script_name='Motherlode_Miner', threshold=0.9, should_click=True, x_offset=4, y_offset=-2):
                 API.AntiBan.sleep_between(5.0, 5.1)
                 if not wait_for_img(img_name='Failsafe_Hopper_From_Hopper', script_name='Motherlode_Miner', threshold=0.95, should_click=True, click_middle=True):
                     return False
         if does_img_exist(img_name="Broken_Wheel_2_From_1", script_name="Motherlode_Miner", threshold=0.96, should_click=True, click_middle=True):
             API.AntiBan.sleep_between(1.0, 1.1)
-            if not wait_for_img(img_name="Smithing", category="Exp_Drops", threshold=0.92, max_wait_sec=12):
+            if not wait_for_img(img_name="Smithing", category="Exp_Drops", threshold=smithing_threshold, max_wait_sec=12):
                 if does_img_exist(img_name='Failsafe_Move_To_Hopper', script_name='Motherlode_Miner', threshold=0.9,
                                   should_click=True, x_offset=4, y_offset=-2):
+                    API.AntiBan.sleep_between(8.0, 8.1)
                     if not wait_for_img(img_name='Failsafe_Hopper_From_Hopper', script_name='Motherlode_Miner',
                                         threshold=0.95, should_click=True, click_middle=True):
                         return False
@@ -227,9 +230,10 @@ def fix_broken_wheels():
     else:
         if does_img_exist(img_name="Broken_Wheel_2", script_name="Motherlode_Miner", threshold=0.92, should_click=True, click_middle=True):
             API.AntiBan.sleep_between(3.0, 3.1)
-            if not wait_for_img(img_name="Smithing", category="Exp_Drops", threshold=0.92, max_wait_sec=12):
+            if not wait_for_img(img_name="Smithing", category="Exp_Drops", threshold=smithing_threshold, max_wait_sec=12):
                 if does_img_exist(img_name='Failsafe_Move_To_Hopper', script_name='Motherlode_Miner', threshold=0.9,
                                   should_click=True, x_offset=4, y_offset=-2):
+                    API.AntiBan.sleep_between(5.0, 5.1)
                     if not wait_for_img(img_name='Failsafe_Hopper_From_Hopper', script_name='Motherlode_Miner',
                                         threshold=0.95, should_click=True, click_middle=True):
                         return False
@@ -240,7 +244,12 @@ def fix_broken_wheels():
 
 def load_hopper_from(spot="Corner"):
     # spots: "Corner", "Wheel_1", "Wheel_2"
-    moving_to_hopper = does_img_exist(img_name=f"Hopper_From_{spot}", script_name="Motherlode_Miner", threshold=0.95, should_click=True, click_middle=True)
+    if spot == 'Corner':
+        spot_thresh = 0.9
+    else:
+        spot_thresh = 0.97
+
+    moving_to_hopper = does_img_exist(img_name=f"Hopper_From_{spot}", script_name="Motherlode_Miner", threshold=spot_thresh, should_click=True, click_middle=True)
 
     if moving_to_hopper:
         match spot:
