@@ -4,14 +4,17 @@ import jwt
 
 class ScriptAccess:
     def __init__(self, btn_state):
-        self.state = btn_state
+        self.btn_state = btn_state
 
 
-kourend_crab_killer_btn_state = ScriptAccess('disabled')
-barb_fisher_btn_state = ScriptAccess('disabled')
-red_chin_btn_state = ScriptAccess('disabled')
+kourend_crab_killer_script = ScriptAccess('disabled')
+cow_killer_script = ScriptAccess('disabled')
+pisc_iron_script = ScriptAccess('disabled')
+barb_fisher_script = ScriptAccess('disabled')
+red_chin_script = ScriptAccess('disabled')
+motherlode_mine_script = ScriptAccess('disabled')
 
-all_scripts = [kourend_crab_killer_btn_state, red_chin_btn_state]
+all_scripts = [kourend_crab_killer_script, cow_killer_script, pisc_iron_script, barb_fisher_script, red_chin_script, motherlode_mine_script]
 
 
 def set_script_access(user_licenses):
@@ -30,13 +33,12 @@ def set_script_access(user_licenses):
 
     # license_obj = json.load(license)
 
-    print(f'kourend_crab_killer: {kourend_crab_killer_btn_state.state}')
     return True
 
 
 def update_script_state(decoded_lic):
-    enabled = 'enabled'
-    disabled = 'disabled'
+    enabled = 'active'
+    # disabled = 'disabled'
 
     if decoded_lic['category'] == 'all_access':
         print(f'👑 - All Access Granted')
@@ -48,9 +50,11 @@ def update_script_state(decoded_lic):
         print(f'📃 - Individual Script')
         match(decoded_lic['name']):
             case 'kourend_crab_killer':
-                kourend_crab_killer_btn_state.state = enabled
+                kourend_crab_killer_script.state = enabled
+            case 'cow_killer':
+                cow_killer_script.btn_state = enabled
             case 'barb_fisher':
-                barb_fisher_btn_state.state = enabled
+                barb_fisher_script.state = enabled
             case 'red_chin_hunter':
-                red_chin_btn_state.state = enabled
+                red_chin_script.state = enabled
     return

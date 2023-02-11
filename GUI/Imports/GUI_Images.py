@@ -98,6 +98,10 @@ def get_all_gui_images():
     # SUB-SUB-GUIs
     # ---
 
+    start_btn_img_path = "Assets\Images\GUI_Images\Show_Info_Btn.png"
+    start_btn_img = ImageTk.PhotoImage(Image.open(start_btn_img_path))
+
+
     # Skill Sub-GUI
     skill_sub_path = "Assets\Images\GUI_Images\Stats"
     map_path = "Assets\Images\GUI_Images\Stats\Map_Images"
@@ -162,7 +166,7 @@ def get_all_gui_images():
                               rogue_den_map_img, cow_killer_map_img, ge_map_img, canifis_map_img, \
                               remmy_map_img, ardy_map_img, hosidius_map_img, lummy_map_img, \
                               corsair_cove_map_img, cerulean_map_img, seers_map_img, cwars_map_img, \
-                              motherlode_map_img, ourania_map_img, uzer_map_img
+                              motherlode_map_img, ourania_map_img, uzer_map_img, start_btn_img
 
     return main_gui_images, gold_gui_images, skill_gui_images, minigames_images, skilling_sub_gui_images
 

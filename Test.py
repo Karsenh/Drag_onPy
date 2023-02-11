@@ -37,8 +37,12 @@ def __main__():
 
     # show_main_gui()
 
-    launch_script("SW_Teaks")
+    launch_script("Blast_Furnace")
 
+    # SCRIPT_NAME = 'Blast_Furnace'
+    # ORE_TYPE = 'Rune'
+    # # does_img_exist(img_name='Banked_Coal', script_name=SCRIPT_NAME, threshold=0.90)
+    # does_img_exist(img_name=f'Banked_{ORE_TYPE}', script_name=SCRIPT_NAME, threshold=0.90)
 
     # wait_for_img(img_name=f"Minimap_Midway_From_Ore_Alt", script_name="Motherlode_Miner", threshold=0.92, should_click=True, x_offset=14, y_offset=2)
 

@@ -47,7 +47,7 @@ def show_plg(script_name):
 
         # SCRIPT START BUTTON
         start_image = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\Assets\Images\GUI_Images\PreLaunch_Gui\start_btn.png'))
-        start_btn = Button(main_plg_frame, text="Defence", image=start_image, bg="#3e3529", activebackground=btn_active_bg_color, command=lambda: launch_script(script_name))
+        start_btn = Button(main_plg_frame, text="Defence", image=start_image, bg="#3e3529", activebackground=btn_active_bg_color, height=43, width=200, command=lambda: launch_script(script_name))
         start_btn.photo = start_image
         start_btn.grid(row=5, column=1, pady=(30, 0))
 
@@ -67,7 +67,7 @@ def show_plg_start_section(main_plg_frame, font_styles, script_name):
     # Start_Equipment
     start_equip_img_label = Label(start_info_frame, image=start_equip_image, background=frame_bg_color)
     start_equip_img_label.photo = start_equip_image
-    start_equip_img_label.grid(row=1, column=2, padx=(25, 0))
+    start_equip_img_label.grid(row=1, column=2, padx=(15, 0))
 
     # Start_Inventory
     start_invent_img_label = Label(start_info_frame, image=start_invent_image, background=frame_bg_color)

@@ -397,25 +397,19 @@ def fill_coal_bag():
         print(f'CACHED_INVENT_COAL_BAG: (NOT exists) setting now: {CACHED_INVENT_COAL_BAG_XY}')
         mouse_long_click(CACHED_INVENT_COAL_BAG_XY)
 
-    # if CACHED_FILL_COAL_BAG_XY:
-    #     print(f'CACHED_FILL Exists: {CACHED_FILL_COAL_BAG_XY}')
-    #     mouse_click(CACHED_FILL_COAL_BAG_XY)
-    # else:
+    # RIGHT CLICKING INVENTORY COAL BAG HERE
     if not does_img_exist(img_name='Fill_Coal_Bag', script_name='Blast_Furnace', threshold=0.9):
         if not does_img_exist(img_name='Empty_Coal_Bag', script_name=SCRIPT_NAME, threshold=0.9):
             print(f'Failed to find Fill_Coal_Bag on first loop to set cache')
             return False
         else:
             # We went to fill but saw empty instead because coal bag is already full
-            return True
+            if not does_img_exist(img_name='Cancel_Take_Bars', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True):
+                return False
     else:
-        # x, y = get_existing_img_xy()
-        # CACHED_FILL_COAL_BAG_XY = x, y
-        # mouse_click(CACHED_FILL_COAL_BAG_XY)
         mouse_click(get_existing_img_xy())
-        # print(f'CACHED Fill option not saved - set to {CACHED_FILL_COAL_BAG_XY}')
 
-    # API.AntiBan.sleep_between(0.3, 0.4)
+    API.AntiBan.sleep_between(0.2, 0.3)
     return True
 
 
@@ -427,11 +421,12 @@ def withdraw_coal():
     if CACHED_BANKED_COAL_XY:
         mouse_click(CACHED_BANKED_COAL_XY)
     else:
-        if not does_img_exist(img_name='Banked_Coal', script_name=SCRIPT_NAME, threshold=0.95):
+        if not does_img_exist(img_name='Banked_Coal', script_name=SCRIPT_NAME, threshold=0.90):
             return False
         else:
             x, y = get_existing_img_xy()
             CACHED_BANKED_COAL_XY = x + 6, y + 6
+            print('CLICKING THE BANKED COAL LIKE WE SHOULD BE')
             mouse_click(CACHED_BANKED_COAL_XY)
 
     API.AntiBan.sleep_between(0.3, 0.4)
@@ -448,7 +443,7 @@ def withdraw_ore():
         mouse_move(CACHED_BANKED_ORE_XY)
         mouse_click(CACHED_BANKED_ORE_XY)
     else:
-        if not does_img_exist(img_name=f'Banked_{ORE_TYPE}', script_name=SCRIPT_NAME, threshold=0.95):
+        if not does_img_exist(img_name=f'Banked_{ORE_TYPE}', script_name=SCRIPT_NAME, threshold=0.90):
             return False
         else:
             x, y = get_existing_img_xy()

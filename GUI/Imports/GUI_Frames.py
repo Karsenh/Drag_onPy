@@ -679,9 +679,9 @@ def show_construction_frame(all_frames, t_active_frame, construction_frame, cons
 def add_script_btn(skill_frame, side_img, start_btn, row_num):
     # teak_tree_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{woodcutting_image_path}\Teak_tree.png'))
 
-    teak_label = Label(skill_frame, image=side_img, height=100, width=100, bg=label_frame_bg_color)
+    teak_label = Label(skill_frame, image=side_img, height=100, width=110, bg=label_frame_bg_color)
     teak_label.image = side_img
 
     teak_label.grid(row=row_num, column=1)
-    start_btn.grid(row=row_num, column=2, columnspan=2, pady=20, padx=30)
+    start_btn.grid(row=row_num, column=2, columnspan=2, pady=15, padx=30)
     return
