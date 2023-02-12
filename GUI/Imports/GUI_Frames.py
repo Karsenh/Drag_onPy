@@ -389,7 +389,7 @@ def show_mining_frame(all_frames, t_active_frame, mining_frame, mining_sub_btns)
 def show_smithing_frame(all_frames, t_active_frame, smithing_frame, smithing_sub_btns):
     _, _, _, _, skill_sub_frames = all_frames
     # _, smithing_frame, _, _, _, _, _, _, _ = skill_sub_frames
-    edge_gold_btn = smithing_sub_btns
+    edge_gold_btn, blast_furance_btn = smithing_sub_btns
 
     is_active = t_active_frame("skill", all_frames)
     print(f'show_smithing_frame - skill_frame - is_active: {is_active}')
@@ -398,8 +398,10 @@ def show_smithing_frame(all_frames, t_active_frame, smithing_frame, smithing_sub
 
     smithing_path = 'Assets\Images\GUI_Images\Stats\Smithing'
     gold_bar_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{smithing_path}\gold_bar.png'))
+    rune_addy_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{smithing_path}\Rune_Addy.png'))
 
     add_script_btn(smithing_frame, gold_bar_img, edge_gold_btn, 1)
+    add_script_btn(smithing_frame, rune_addy_img, blast_furance_btn, 2)
     return
 
 
@@ -535,7 +537,7 @@ def show_firemaking_frame(all_frames, t_active_frame, firemaking_frame, firemaki
 
 def show_hunter_frame(all_frames, t_active_frame, hunter_frame, hunter_sub_btns):
     _, _, _, _, skill_sub_frames = all_frames
-    crimson_swift_btn, cerulean_twitch_btn, orange_lizard_btn, red_lizard_btn = hunter_sub_btns
+    crimson_swift_btn, cerulean_twitch_btn, orange_lizard_btn, red_lizard_btn, black_lizard_btn, red_chin_btn = hunter_sub_btns
 
     is_active = t_active_frame("skill", all_frames)
     print(f'show_firemaking_frame - skill_frame - is_active: {is_active}')
@@ -547,11 +549,15 @@ def show_hunter_frame(all_frames, t_active_frame, hunter_frame, hunter_sub_btns)
     cerulean_twitch_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{hunter_img_path}\Cerulean_Twitch.png'))
     orange_lizard_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{hunter_img_path}\Orange_Lizard.png'))
     red_lizard_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{hunter_img_path}\Red_Lizard.png'))
+    black_lizard_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{hunter_img_path}\Black_Lizard.png'))
+    red_chin_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{hunter_img_path}\Red_Chin.png'))
 
     add_script_btn(hunter_frame, crimson_swift_img, crimson_swift_btn, 1)
     add_script_btn(hunter_frame, cerulean_twitch_img, cerulean_twitch_btn, 2)
     add_script_btn(hunter_frame, orange_lizard_img, orange_lizard_btn, 3)
     add_script_btn(hunter_frame, red_lizard_img, red_lizard_btn, 4)
+    add_script_btn(hunter_frame, black_lizard_img, black_lizard_btn, 5)
+    add_script_btn(hunter_frame, red_chin_img, red_chin_btn, 6)
     return
 
 
@@ -573,7 +579,7 @@ def show_fletching_frame(all_frames, t_active_frame, fletching_frame, fletching_
 
 def show_crafting_frame(all_frames, t_active_frame, crafting_frame, crafting_sub_btns):
     _, _, _, _, skill_sub_frames = all_frames
-    ge_glass_blower_btn = crafting_sub_btns
+    ge_glass_blower_btn, dhide_bodies_btn = crafting_sub_btns
 
     is_active = t_active_frame("skill", all_frames)
     print(f'show_firemaking_frame - skill_frame - is_active: {is_active}')
@@ -582,8 +588,10 @@ def show_crafting_frame(all_frames, t_active_frame, crafting_frame, crafting_sub
 
     crafting_img_path = 'Assets\Images\GUI_Images\Stats\Crafting'
     molten_glass_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{crafting_img_path}\Molten_glass.png'))
+    dhide_body_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{crafting_img_path}\Dhide_Bodies.png'))
 
     add_script_btn(crafting_frame, molten_glass_img, ge_glass_blower_btn, 1)
+    add_script_btn(crafting_frame, dhide_body_img, dhide_bodies_btn, 2)
     return
 
 
@@ -623,7 +631,7 @@ def show_woodcutting_frame(all_frames, t_active_frame, woodcutting_frame, woodcu
 
 def show_farming_frame(all_frames, t_active_frame, farming_frame, woodcutting_sub_btns):
     _, _, _, _, skill_sub_frames = all_frames
-    hosidius_plough_btn, sulpher_fert_btn = woodcutting_sub_btns
+    hosidius_plough_btn, sulpher_fert_btn, tithe_farmer_btn = woodcutting_sub_btns
 
     is_active = t_active_frame("skill", all_frames)
     print(f'show_farming_frame - skill_frame - is_active: {is_active}')
@@ -632,10 +640,12 @@ def show_farming_frame(all_frames, t_active_frame, farming_frame, woodcutting_su
 
     farming_img_path = 'Assets\Images\GUI_Images\Stats\Farming'
     plough_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{farming_img_path}\Plough.png'))
-    sulph_fert = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{farming_img_path}\Sulphurous_Fertilizer.png'))
+    sulph_fert_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{farming_img_path}\Sulphurous_Fertilizer.png'))
+    farming_outfit_btn = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{farming_img_path}\Farmers_Outfit.png'))
 
     add_script_btn(farming_frame, plough_img, hosidius_plough_btn, 1)
-    add_script_btn(farming_frame, sulph_fert, sulpher_fert_btn, 2)
+    add_script_btn(farming_frame, sulph_fert_img, sulpher_fert_btn, 2)
+    add_script_btn(farming_frame, farming_outfit_btn, tithe_farmer_btn, 3)
     return
 
 

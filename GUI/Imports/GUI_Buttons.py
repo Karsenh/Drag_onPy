@@ -1,4 +1,6 @@
-from Database.Script_Access import cow_killer_script, pisc_iron_script, motherlode_mine_script, kourend_crab_killer_script
+from Database.Script_Access import cow_killer_script, pisc_iron_script, motherlode_mine_script, \
+    kourend_crab_killer_script, blast_furance_script, black_lizards_script, red_chin_script, dhide_bodies_script, \
+    tithe_farmer_script
 from GUI.Imports.GUI_Frames import *
 from Scripts.Skilling.Mining.Iron.Pisc_Iron import *
 from GUI.Imports.PreLaunch_Gui.PreLaunch_Gui import show_plg
@@ -125,6 +127,8 @@ def get_all_btns(all_frames, all_images):
     skill_level_input_btn = Button(skill_frame, text="Input Skill Levels", image=skill_input_img, height=SKILL_BTN_HEIGHT, width=SKILL_BTN_WIDTH, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_skill_input_frame(skill_level_input_frame, toggle_active_frame, all_frames))
 
     # ---- SUB SKILL BTNS ----
+    # TODO - ORDER THE FOLLOWING ALPHABETICALLY
+    # TODO - SUB OUT ALL INSTANCES OF 'Buttom()' FOR 'new_script_start_btn()'
     def new_script_start_btn(script_frame, script_name, script_state):
         btn_text = script_name.replace('_', ' ')
         return Button(script_frame, state=script_state, text=btn_text, image=start_btn_img, cursor=BTN_CURSOR, height=SCRIPT_START_BTN_HEIGHT, width=SCRIPT_START_BTN_WIDTH, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_plg(script_name))
@@ -151,7 +155,8 @@ def get_all_btns(all_frames, all_images):
 
     #     Smithing
     edge_gold_btn = Button(smithing_frame, text="Edge Gold", cursor=BTN_CURSOR, image=start_btn_img,  height=SCRIPT_START_BTN_HEIGHT, width=SCRIPT_START_BTN_WIDTH, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_plg("edge_gold"))
-    smithing_sub_btns = edge_gold_btn
+    blast_furance_btn = new_script_start_btn(smithing_frame, "Blast_Furnace", blast_furance_script.btn_state)
+    smithing_sub_btns = edge_gold_btn, blast_furance_btn
 
     #     Herblore
     unf_pots_btn = Button(herblore_frame, text="Unf Pots", cursor=BTN_CURSOR, image=start_btn_img,  height=SCRIPT_START_BTN_HEIGHT, width=SCRIPT_START_BTN_WIDTH, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_plg("unf_pots"))
@@ -184,7 +189,8 @@ def get_all_btns(all_frames, all_images):
 
     #     Crafting
     glass_blower_btn = Button(crafting_frame, text="Glass Blower", cursor=BTN_CURSOR, image=start_btn_img,  height=SCRIPT_START_BTN_HEIGHT, width=SCRIPT_START_BTN_WIDTH, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_plg("ge_glass_blower"))
-    crafting_sub_btns = glass_blower_btn
+    dhide_bodies_btn = new_script_start_btn(crafting_frame, 'Dhide_Bodies', dhide_bodies_script.btn_state)
+    crafting_sub_btns = glass_blower_btn, dhide_bodies_btn
 
     #     Firemaking
     ge_log_burner_btn = Button(firemaking_frame, text="GE Log Burner", cursor=BTN_CURSOR, image=start_btn_img,  height=SCRIPT_START_BTN_HEIGHT, width=SCRIPT_START_BTN_WIDTH, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_plg("ge_log_burner"))
@@ -200,12 +206,15 @@ def get_all_btns(all_frames, all_images):
     cerulean_twitch_btn = Button(hunter_frame, text="Cerulean Twitch (2)", image=start_btn_img,  height=SCRIPT_START_BTN_HEIGHT, width=SCRIPT_START_BTN_WIDTH, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_plg("Double_Trap_Ceruleans"))
     orange_lizards_btn = Button(hunter_frame, text="Orange Lizard (3)", image=start_btn_img,  height=SCRIPT_START_BTN_HEIGHT, width=SCRIPT_START_BTN_WIDTH, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_plg("Desert_Lizards"))
     red_lizards_btn = Button(hunter_frame, text="Red Lizard (3)", image=start_btn_img,  height=SCRIPT_START_BTN_HEIGHT, width=SCRIPT_START_BTN_WIDTH, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_plg("Red_Lizards"))
-    hunter_sub_btns = crimson_swift_btn, cerulean_twitch_btn, orange_lizards_btn, red_lizards_btn
+    black_lizards_btn = new_script_start_btn(hunter_frame, 'Black_Lizards', black_lizards_script.btn_state)
+    red_chins_btn = new_script_start_btn(hunter_frame, 'Red_Chins', red_chin_script.btn_state)
+    hunter_sub_btns = crimson_swift_btn, cerulean_twitch_btn, orange_lizards_btn, red_lizards_btn, black_lizards_btn, red_chins_btn
 
     #     Farming
     hosidius_plough_btn = Button(farming_frame, text="Fishing Trawler", image=start_btn_img,  height=SCRIPT_START_BTN_HEIGHT, width=SCRIPT_START_BTN_WIDTH, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_plg("Hosidius_Plough"))
     sulfer_fert_btn = Button(farming_frame, text="Sulpherous Fertalizer", image=start_btn_img,  height=SCRIPT_START_BTN_HEIGHT, width=SCRIPT_START_BTN_WIDTH, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_plg("GE_Sulphurous_Fertilizer"))
-    farming_sub_btns = hosidius_plough_btn, sulfer_fert_btn
+    tithe_farmer_btn = new_script_start_btn(farming_frame, 'Tithe_Farmer', tithe_farmer_script.btn_state)
+    farming_sub_btns = hosidius_plough_btn, sulfer_fert_btn, tithe_farmer_btn
 
     #     Runecrafting
     cwars_lavas_btn = Button(runecrafting_frame, text="Cwars Lavas", image=start_btn_img,  height=SCRIPT_START_BTN_HEIGHT, width=SCRIPT_START_BTN_WIDTH, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_plg("Cwars_Lavas"))

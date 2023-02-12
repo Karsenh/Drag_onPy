@@ -1,4 +1,3 @@
-import json
 import jwt
 
 
@@ -7,14 +6,16 @@ class ScriptAccess:
         self.btn_state = btn_state
 
 
-kourend_crab_killer_script = ScriptAccess('disabled')
-cow_killer_script = ScriptAccess('disabled')
-pisc_iron_script = ScriptAccess('disabled')
-barb_fisher_script = ScriptAccess('disabled')
-red_chin_script = ScriptAccess('disabled')
-motherlode_mine_script = ScriptAccess('disabled')
+initial_state = 'disabled'
 
-all_scripts = [kourend_crab_killer_script, cow_killer_script, pisc_iron_script, barb_fisher_script, red_chin_script, motherlode_mine_script]
+kourend_crab_killer_script = cow_killer_script = pisc_iron_script = \
+    barb_fisher_script = red_chin_script = motherlode_mine_script = \
+    blast_furance_script = black_lizards_script = dhide_bodies_script = \
+    tithe_farmer_script \
+    = ScriptAccess(initial_state)
+
+all_scripts = [kourend_crab_killer_script, cow_killer_script, pisc_iron_script, barb_fisher_script, red_chin_script,
+               motherlode_mine_script, blast_furance_script, dhide_bodies_script, tithe_farmer_script]
 
 
 def set_script_access(user_licenses):
@@ -48,7 +49,7 @@ def update_script_state(decoded_lic):
         print(f'📦 - Package Access')
     elif decoded_lic['category'] == 'individual':
         print(f'📃 - Individual Script')
-        match(decoded_lic['name']):
+        match (decoded_lic['name']):
             case 'kourend_crab_killer':
                 kourend_crab_killer_script.state = enabled
             case 'cow_killer':
@@ -57,4 +58,12 @@ def update_script_state(decoded_lic):
                 barb_fisher_script.state = enabled
             case 'red_chin_hunter':
                 red_chin_script.state = enabled
+            case 'blast_furnace':
+                blast_furance_script.state = enabled
+            case 'black_lizards':
+                black_lizards_script.state = enabled
+            case 'dhide_bodies':
+                dhide_bodies_script.state = enabled
+            case 'tithe_farmer':
+                tithe_farmer_script.state = enabled
     return

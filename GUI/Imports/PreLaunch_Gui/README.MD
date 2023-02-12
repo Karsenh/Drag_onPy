@@ -1,0 +1,1 @@
+## Scripts require images in Assets -> Images -> GUI Images -> PreLaunch_Gui to start
