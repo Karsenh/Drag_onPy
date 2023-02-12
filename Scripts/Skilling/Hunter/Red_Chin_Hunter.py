@@ -350,6 +350,9 @@ def handle_green_found(curr_check_trap_num, curr_at_trap_num, curr_check_trap_cl
             update_curr_trap_state(curr_check_trap_num)
             API.AntiBan.sleep_between(3.1, 3.2)
             return trap_is_set(curr_check_trap_num)
+        else:
+            print(f'Failed to find exp drop - but we will assume to have reset trap.')
+            return True
 
     return False
 
