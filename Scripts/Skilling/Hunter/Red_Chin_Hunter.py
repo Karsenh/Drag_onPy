@@ -373,7 +373,7 @@ def trap_is_set(curr_check_trap_num):
     found_yellow = False
     search_attempts = 0
 
-    while not found_yellow and search_attempts <= 50:
+    while not found_yellow and search_attempts <= 100:
         print(f'Searching for yellow adjacent to us @ {yellow_check_region} total of {search_attempts} times')
         update_curr_trap_state(curr_check_trap_num)
         found_yellow = does_color_exist_in_sub_image(yellow_check_region, yellow_color, 'Adj_Yellow_Wait', color_tolerance=25)
