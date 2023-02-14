@@ -30,7 +30,6 @@ def get_all_gui_images():
     cballs_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{gold_path}\Cballs.png'))
     unf_pot_img = ImageTk.PhotoImage(Image.open(f"{os.getcwd()}\{gold_path}\Herb_pot.png"))
 
-
     # Skills_Gui images
     # First Row
     stats_path = "Assets\Images\GUI_Images\Stats"
@@ -101,76 +100,12 @@ def get_all_gui_images():
     start_btn_img_path = "Assets\Images\GUI_Images\Show_Info_Btn.png"
     start_btn_img = ImageTk.PhotoImage(Image.open(start_btn_img_path))
 
+    skilling_sub_gui_images = start_btn_img
 
-    # Skill Sub-GUI
-    skill_sub_path = "Assets\Images\GUI_Images\Stats"
-    map_path = "Assets\Images\GUI_Images\Stats\Map_Images"
-    # (Map Button Images)
-
-    # MINING
-    #     Pisc_Iron
-    iron_pisc_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{map_path}\Piscatoris_Map.png'))
-    motherlode_map_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{map_path}\Motherlode_Mine_Map.png'))
-
-    # SMITHING
-    #     Edge_Gold
-    edge_gold_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{skill_sub_path}\Smithing\Edge_Gold.png'))
-
-    # AGILITY
-    #     Gnome Course
-    gnome_course_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{map_path}\Gnome_Stronghold_Map.png'))
-    canifis_map_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{skill_sub_path}\Agility\canifis_map.png'))
-    seers_map_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{map_path}\Seers_Map.png'))
-
-    # FISHING
-    #     Draynor Shrimp
-    barb_trout_map_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{skill_sub_path}\Fishing\Barb_Trout_map.png'))
-    #     Barb Trout
-    draynor_shrimp_map_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{map_path}\Draynor_Map.png'))
-    #     Barbarian_Fishing
-    barbarian_fishing_map_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{skill_sub_path}\Fishing\Barbarian_fishing_map.png'))
-
-    # COOKING
-    #     Rogue_Cooker
-    rogue_den_map_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{skill_sub_path}\Cooking\Rogues_den_map.png'))
-
-    # COMBAT
-    #     Cow_Killer
-    cow_killer_map_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{map_path}\Lummy_Map.png'))
-
-    # FLETCHING / CRAFTING
-    ge_map_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{map_path}\GE_map.png'))
-
-    # HERBLORE
-    # uses GE map from above
-
-    # PRAYER
-    remmy_map_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{map_path}\Remmy_map.png'))
-
-    # THIEVING
-    ardy_map_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{map_path}\Ardy_map.png'))
-    hosidius_map_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{map_path}\Hosidius_map.png'))
-
-    # WOODCUTTING
-    lummy_map_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{map_path}\Lummy_Map.png'))
-    cwars_map_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{map_path}\Cwars_Map.png'))
-
-    # HUNTER
-    corsair_cove_map_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{map_path}\Corsair_Cove_Map.png'))
-    cerulean_map_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{map_path}\Keldagrim_Aisle_Map.png'))
-    ourania_map_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{map_path}\Ourania_Map.png'))
-    uzer_map_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{map_path}\Map_Uzer.png'))
-
-    skilling_sub_gui_images = iron_pisc_img, edge_gold_img, gnome_course_img, \
-                              draynor_shrimp_map_img, barb_trout_map_img, barbarian_fishing_map_img, \
-                              rogue_den_map_img, cow_killer_map_img, ge_map_img, canifis_map_img, \
-                              remmy_map_img, ardy_map_img, hosidius_map_img, lummy_map_img, \
-                              corsair_cove_map_img, cerulean_map_img, seers_map_img, cwars_map_img, \
-                              motherlode_map_img, ourania_map_img, uzer_map_img, start_btn_img
+    # -----------------------------------------------------------------------------------------
 
     return main_gui_images, gold_gui_images, skill_gui_images, minigames_images, skilling_sub_gui_images
 
-    # -----------------------------------------------------------------------------------------
 
 
 

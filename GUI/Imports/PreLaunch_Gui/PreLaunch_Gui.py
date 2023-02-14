@@ -15,7 +15,7 @@ btn_bg_color = '#645747'
 
 def show_plg(script_name):
 
-    auth_top_height = 1035
+    auth_top_height = 1100
     auth_top_width = 650
 
     break_font = font.Font(family='Helvetica', size=11, weight='normal')
