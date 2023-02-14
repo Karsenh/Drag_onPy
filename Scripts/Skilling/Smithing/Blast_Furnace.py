@@ -325,7 +325,7 @@ def open_bank_from_coffer():
 
 
 def open_bank_from_bank():
-    if not does_img_exist(img_name="Bank_From_Bank", script_name=SCRIPT_NAME, threshold=0.80, should_click=True, click_middle=True):
+    if not wait_for_img(img_name="Bank_From_Bank", script_name=SCRIPT_NAME, threshold=0.80, should_click=True, click_middle=True):
         return False
     else:
         return is_bank_open(max_wait_sec=5)
@@ -443,7 +443,7 @@ def withdraw_ore():
         mouse_move(CACHED_BANKED_ORE_XY)
         mouse_click(CACHED_BANKED_ORE_XY)
     else:
-        if not does_img_exist(img_name=f'Banked_{ORE_TYPE}', script_name=SCRIPT_NAME, threshold=0.90):
+        if not does_img_exist(img_name=f'Banked_{ORE_TYPE}', script_name=SCRIPT_NAME, threshold=0.92):
             return False
         else:
             x, y = get_existing_img_xy()
