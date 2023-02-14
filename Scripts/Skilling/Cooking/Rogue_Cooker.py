@@ -7,9 +7,10 @@ from API.Interface.General import setup_interface, get_xy_for_invent_slot
 from API.Interface.Bank import is_bank_tab_open, deposit_all, close_bank, is_withdraw_qty
 from API.Imaging.Image import does_img_exist, wait_for_img
 from API.Debug import write_debug
+from GUI.Imports.PreLaunch_Gui.Plg_Script_Options import Global_Script_Options
 
-
-food_to_cook = "monkfish"
+BANK_TAB = 1
+FOOD_TO_COOK = "monkfish"
 has_cooking_gauntlets = True
 
 
@@ -39,11 +40,12 @@ def start_rogue_cooking(curr_loop):
                 cook_food()
     else:
         # This is the first loop
+        set_food_to_cook()
         setup_interface("south", 5, "up")
         API.AntiBan.sleep_between(0.7, 0.8)
         if not open_rogue_bank():
             return False
-        check_for_gauntlets()
+        # check_for_gauntlets()
         deposit_all()
         withdraw_food_to_cook()
         close_bank()
@@ -51,6 +53,17 @@ def start_rogue_cooking(curr_loop):
         API.AntiBan.sleep_between(1.5, 1.8)
 
     return True
+
+
+def set_food_to_cook():
+    global FOOD_TO_COOK
+
+    for option in Global_Script_Options.options_arr:
+        if option.name == 'Food Type':
+            print(f'Found Food Type option - Setting to: {option.value}')
+            FOOD_TO_COOK = option.value
+
+    return
 
 
 def open_rogue_bank():
@@ -66,15 +79,15 @@ def open_rogue_bank():
         return False
     is_withdraw_qty('all', should_click=True)
     API.AntiBan.sleep_between(0.5, 0.6)
-    if not is_bank_tab_open(tab_num=5, should_open=True, double_check=True):
+    if not is_bank_tab_open(tab_num=BANK_TAB, should_open=True, double_check=True):
         return False
     return True
 
 
 def withdraw_food_to_cook():
     # food_withdraw_slot = 905, 443
-    does_img_exist(img_name=f"banked_raw_{food_to_cook}", script_name="Rogue_Cooker", threshold=0.99, should_click=True)
-    API.AntiBan.sleep_between(0.7, 0.8)
+    does_img_exist(img_name=f"banked_raw_{FOOD_TO_COOK}", script_name="Rogue_Cooker", threshold=0.95, should_click=True, click_middle=True)
+    API.AntiBan.sleep_between(0.6, 0.7 )
 
     return
 
@@ -111,6 +124,8 @@ def check_for_level_dialogue():
 
 
 def check_for_gauntlets():
+    is_bank_tab_open(tab_num=BANK_TAB, should_open=True)
+
     # Withdraw gauntlets if found in bank
     if does_img_exist(img_name="cooking_gauntlets", script_name="Rogue_Cooker", threshold=0.99, should_click=True):
         API.AntiBan.sleep_between(0.6, 0.7)

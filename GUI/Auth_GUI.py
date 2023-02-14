@@ -34,6 +34,7 @@ def show_auth_gui():
     # Labels and Entries
     email_label = Label(form_frame, text="Email", pady=10, background=label_frame_bg_color)
     email_entry = Entry(form_frame, textvariable=email_val)
+    email_entry.focus_set()
 
     pass_label = Label(form_frame, text="Password", pady=10, background=label_frame_bg_color)
     pass_entry = Entry(form_frame, textvariable=pass_val, show="✖")
