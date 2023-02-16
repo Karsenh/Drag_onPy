@@ -416,20 +416,24 @@ def handle_auth_screens():
             if is_on_login_screen():
                 if is_on_welcome_screen():
                     API.AntiBan.sleep_between(1.0, 1.1)
+                    print(f'1 Relogged and returning True from Handle_Auth_Screen()')
                     return True
 
     elif does_img_exist(img_name="login_screen", category="Auth", threshold=0.85):
         if is_on_login_screen():
             if is_on_welcome_screen():
                 API.AntiBan.sleep_between(1.0, 1.1)
+                print(f'2 Relogged and returning True from Handle_Auth_Screen()')
                 return True
 
     elif does_img_exist(img_name="welcome_screen", category="Auth", threshold=0.85):
         if is_on_welcome_screen():
             API.AntiBan.sleep_between(1.0, 1.1)
+            print(f'3 Relogged and returning True from Handle_Auth_Screen()')
             return True
 
     else:
+        print(f'Returning False from Handle_Auth_Screens')
         return False
 
 
