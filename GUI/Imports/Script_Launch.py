@@ -36,7 +36,7 @@ from Scripts.Skilling.Hunter.Red_Chin_Hunter import start_catching_chins
 from Scripts.Skilling.Runecrafting.Cwars_Lavas import start_crafting_lavas
 from Scripts.Skilling.Mining.Motherlode_Miner import start_motherlode_mining
 from Scripts.Skilling.Farming.GE_Sulphurous_Fertilizer import start_making_fertalizer
-from Scripts.Skilling.Farming.Tithe_Farmer import start_tithe_farming
+from Scripts.Skilling.Farming.Tithe_Farmer_v2 import start_tithe_farming
 from Scripts.Skilling.Smithing.Blast_Furnace import start_blasting
 
 import API
