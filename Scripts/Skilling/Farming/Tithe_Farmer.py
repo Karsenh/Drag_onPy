@@ -178,7 +178,7 @@ def deposit_points():
         manual_deposit_xy = 854, 253
         mouse_click(manual_deposit_xy)
     API.AntiBan.sleep_between(2.0, 2.1)
-    return wait_for_img(img_name="Farming", category="Exp_Drops")
+    return wait_for_img(img_name="Farming", category="Exp_Drops", threshold=0.85)
 
 
 def harvest_plants():
@@ -201,7 +201,7 @@ def plant_and_water():
     is_tab_open("inventory", True)
     i = 1
     for spot in plant_and_water_xys:
-        if does_img_exist(img_name=f"Seed_{SEED_TO_USE}", script_name="Tithe_Farmer", threshold=0.85, should_click=True, click_middle=True):
+        if does_img_exist(img_name=f"Seed_{SEED_TO_USE}", script_name="Tithe_Farmer", threshold=0.80, should_click=True, click_middle=True):
             # Plant seed
             mouse_click(spot[0])
 
