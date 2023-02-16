@@ -37,7 +37,7 @@ def __main__():
 
     # show_main_gui()
 
-    # launch_script("Blast_Furnace")
+    launch_script("Tithe_Farmer")
 
 
     # does_img_exist(img_name='Banked_Raw_Shark', script_name='Rogue_Cooker', threshold=0.9, should_click=True, click_middle=True)

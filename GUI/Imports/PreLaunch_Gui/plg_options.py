@@ -90,21 +90,17 @@ def show_plg_options(main_plg_frame, font_styles, script_name):
                 rogue_cooker_var = tkinter.StringVar(None, "Lobster")
                 set_option(script_name, field_name, 'Lobster')
 
-
             elif 62 >= cooking_lvl < 80:
                 # rogue_cooker_var = tkinter.IntVar()
                 print(f'Setting default food type to: monks')
                 rogue_cooker_var = tkinter.StringVar(None, "Monkfish")
                 set_option(script_name, field_name, 'Monkfish')
 
-
             else:
                 # rogue_cooker_var = tkinter.IntVar()
                 print(f'Setting default food type to: sharks')
                 rogue_cooker_var = tkinter.StringVar(None, "Shark")
                 set_option(script_name, field_name, 'Shark')
-
-
 
             option_1 = tkinter.Radiobutton(script_options_frame, text="Shrimp", value='Shrimp', variable=rogue_cooker_var, tristatevalue=0, font=break_font, background=frame_bg_color, command=lambda: set_option(script_name, field_name, rogue_cooker_var.get()))
             option_1.grid(row=1, column=1, columnspan=1)
