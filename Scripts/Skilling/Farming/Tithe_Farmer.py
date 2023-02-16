@@ -1,9 +1,11 @@
+import pyautogui
+
 import API.AntiBan
 from API.Debug import write_debug
 from GUI.Imports.Skill_Level_Input.Skill_Level_Input import get_skill_level
 from API.Imaging.Image import does_img_exist, wait_for_img, get_existing_img_xy
 from API.Interface.General import setup_interface, is_tab_open, get_xy_for_invent_slot
-from API.Mouse import mouse_click
+from API.Mouse import mouse_click, mouse_move
 
 SEED_TO_USE = "54"
 USE_GRICOLLER_CAN = True
@@ -81,6 +83,7 @@ def harvest_both_sections(curr_loop):
     harvest_plants()
     if not move_to_section_2():
         return False
+
     increase_can_slot()
     harvest_plants()
     # move_back_from_section_2()
@@ -184,8 +187,13 @@ def deposit_points():
 def harvest_plants():
     i = 1
     for spot in plant_and_water_xys:
-        mouse_click(spot[0])
-        wait_between_plants(i, min_even_sec=2.5, min_odd_sec=2.9)
+        if i == 1:
+            mouse_click(spot[0])
+        else:
+            mouse_move(spot[0])
+            wait_for_img(img_name='Farming', category='Exp_Drops', max_wait_sec=2)
+            pyautogui.leftClick()
+            API.AntiBan.sleep_between(2.0, 2.1)
         i += 1
     return
 
@@ -273,6 +281,7 @@ def reset_can_slot():
 
 def increase_can_slot():
     global CURR_WATER_CAN_SLOT
+
     CURR_WATER_CAN_SLOT += 1
     if CURR_WATER_CAN_SLOT == 7:
         CURR_WATER_CAN_SLOT = 1
