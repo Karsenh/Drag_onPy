@@ -10,7 +10,7 @@ from API.Debug import write_debug
 from GUI.Imports.PreLaunch_Gui.Plg_Script_Options import Global_Script_Options
 
 BANK_TAB = 1
-FOOD_TO_COOK = "monkfish"
+FOOD_TO_COOK = None
 has_cooking_gauntlets = True
 
 
@@ -86,8 +86,8 @@ def open_rogue_bank():
 
 def withdraw_food_to_cook():
     # food_withdraw_slot = 905, 443
-    does_img_exist(img_name=f"banked_raw_{FOOD_TO_COOK}", script_name="Rogue_Cooker", threshold=0.95, should_click=True, click_middle=True)
-    API.AntiBan.sleep_between(0.6, 0.7 )
+    does_img_exist(img_name=f"banked_raw_{FOOD_TO_COOK}", script_name="Rogue_Cooker", threshold=0.92, should_click=True, click_middle=True)
+    API.AntiBan.sleep_between(0.6, 0.7)
 
     return
 
