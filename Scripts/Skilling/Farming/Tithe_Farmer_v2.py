@@ -244,7 +244,7 @@ def replenish_seeds():
         print(f'Failed to find seed table...')
         return False
     select_seeds_from_table()
-    wait_for_img(img_name=f'Seed_{SEED_NUM}', script_name="Tithe_Farmer", should_click=True, click_middle=True)
+    wait_for_img(img_name=f'Seed_{SEED_NUM}', script_name="Tithe_Farmer")
     does_img_exist(img_name='door_enter', script_name='Tithe_Farmer', threshold=0.9, should_click=True, click_middle=True, min_clicks=3, max_clicks=4)
     API.AntiBan.sleep_between(4.0, 4.1)
     return True
@@ -315,7 +315,7 @@ def sleep_between_actions(curr_tile, sleep_num, is_watering=False):
         return
 
     if curr_tile == 9 and (sleep_num == 2 or is_watering):
-        API.AntiBan.sleep_between(4.5, 4.55)
+        API.AntiBan.sleep_between(4.6, 4.7)
         return
 
     if curr_tile % 2 == 0:
