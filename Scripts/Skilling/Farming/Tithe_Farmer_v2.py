@@ -117,7 +117,7 @@ def start_tithe_farming(curr_loop):
 
     else:
         print(f'First loop')
-        # setup_interface('south', 1, 'up')
+        setup_interface('south', 1, 'up')
         set_seed_to_use()
         if not move_to_plot_start():
             print(f'Failed to find plot start - exiting')
