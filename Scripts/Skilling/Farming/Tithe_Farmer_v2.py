@@ -185,7 +185,7 @@ def click_plants(fast_click=True, should_water=True):
     else:
         mouse_long_click(PLANT_FROM_2_XY)
         select_water_plant_option(PLANT_FROM_2_XY)
-    API.AntiBan.sleep_between(4.7, 4.8)
+    API.AntiBan.sleep_between(4.3, 4.4)
 
     curr_tile_num = 1
 
@@ -220,7 +220,8 @@ def deposit_points():
     if not wait_for_img(img_name='Deposit_Sack', script_name='Tithe_Farmer', threshold=0.85, should_click=True, click_middle=True):
         print(f'Failed to find points sack')
         return False
-    wait_for_img(img_name='Farming', category='Exp_Drops', threshold=0.94, max_wait_sec=8)
+    API.AntiBan.sleep_between(3.0, 3.1)
+    wait_for_img(img_name='Farming', category='Exp_Drops', threshold=0.85, max_wait_sec=8)
     return
 
 
@@ -231,6 +232,7 @@ def replenish_can():
     if not does_img_exist(img_name='Water_Barrel_From_Points', script_name='Tithe_Farmer', should_click=True, click_middle=True):
         print(f'Failed to find water barrel from points')
         return False
+    API.AntiBan.sleep_between(4.0, 4.3)
     return True
 
 
@@ -241,7 +243,10 @@ def replenish_seeds():
     if not wait_for_img(img_name='Seed_Table', script_name='Tithe_Farmer', should_click=True, click_middle=True, min_clicks=2, max_clicks=3):
         print(f'Failed to find seed table...')
         return False
-
+    select_seeds_from_table()
+    wait_for_img(img_name=f'Seed_{SEED_NUM}', script_name="Tithe_Farmer", should_click=True, click_middle=True)
+    does_img_exist(img_name='door_enter', script_name='Tithe_Farmer', threshold=0.9, should_click=True, click_middle=True, min_clicks=3, max_clicks=4)
+    API.AntiBan.sleep_between(4.0, 4.1)
     return True
 
 
@@ -272,10 +277,10 @@ def set_seed_to_use():
 
 def move_to_plot_start():
     if not does_img_exist(img_name="Farm_Start_Flag_Alt", script_name="Tithe_Farmer", threshold=0.92):
-        if not wait_for_img(img_name="Minimap_Farm_Start", script_name="Tithe_Farmer", threshold=0.92, should_click=True, y_offset=15, max_wait_sec=8):
+        if not wait_for_img(img_name="Minimap_Farm_Start", script_name="Tithe_Farmer", threshold=0.92, should_click=True, y_offset=15, max_wait_sec=10):
             print(f'Failed to find Minimap Farm Start')
         else:
-            if not wait_for_img(img_name="Farm_Start_Flag_Alt", script_name="Tithe_Farmer", threshold=0.92):
+            if not wait_for_img(img_name="Farm_Start_Flag_Alt", script_name="Tithe_Farmer", threshold=0.92, max_wait_sec=10):
                 return False
     return True
 
@@ -310,7 +315,7 @@ def sleep_between_actions(curr_tile, sleep_num, is_watering=False):
         return
 
     if curr_tile == 9 and (sleep_num == 2 or is_watering):
-        API.AntiBan.sleep_between(4.55, 4.6)
+        API.AntiBan.sleep_between(4.5, 4.55)
         return
 
     if curr_tile % 2 == 0:
@@ -325,6 +330,11 @@ def sleep_between_actions(curr_tile, sleep_num, is_watering=False):
         if sleep_num == 1:
             API.AntiBan.sleep_between(2.3, 2.4)
         else:
-            API.AntiBan.sleep_between(2.3, 2.4)
+            API.AntiBan.sleep_between(2.2, 2.3)
 
     return
+
+
+def select_seeds_from_table():
+    return wait_for_img(img_name=f'grab_seed_{SEED_NUM}', script_name='Tithe_Farmer', threshold=0.9, should_click=True, click_middle=True)
+
