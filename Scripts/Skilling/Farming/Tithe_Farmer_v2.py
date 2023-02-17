@@ -91,7 +91,8 @@ def start_tithe_farming(curr_loop):
     if curr_loop != 1:
         print(f'Not the first loop')
         # Plant Seed & Water all spots (1-16) then return to start
-        plant_and_water_seeds()
+        if not plant_and_water_seeds():
+            return False
         return_to_plot_1()
 
         # Water all spots (1-16) then return to start x2
@@ -222,7 +223,7 @@ def deposit_points():
         return False
     API.AntiBan.sleep_between(3.0, 3.1)
     wait_for_img(img_name='Farming', category='Exp_Drops', threshold=0.85, max_wait_sec=8)
-    return
+    return True
 
 
 def replenish_can():
@@ -245,7 +246,8 @@ def replenish_seeds():
         return False
     select_seeds_from_table()
     wait_for_img(img_name=f'Seed_{SEED_NUM}', script_name="Tithe_Farmer")
-    does_img_exist(img_name='door_enter', script_name='Tithe_Farmer', threshold=0.9, should_click=True, click_middle=True, min_clicks=3, max_clicks=4)
+    if not does_img_exist(img_name='door_enter', script_name='Tithe_Farmer', threshold=0.9, should_click=True, click_middle=True, min_clicks=3, max_clicks=4):
+        return False
     API.AntiBan.sleep_between(4.0, 4.1)
     return True
 
@@ -276,10 +278,14 @@ def set_seed_to_use():
 
 
 def move_to_plot_start():
+    # If we're not already at the farm start...
     if not does_img_exist(img_name="Farm_Start_Flag_Alt", script_name="Tithe_Farmer", threshold=0.92):
+        # Move to the farm plot start tile with minimap click
         if not wait_for_img(img_name="Minimap_Farm_Start", script_name="Tithe_Farmer", threshold=0.92, should_click=True, y_offset=15, max_wait_sec=10):
             print(f'Failed to find Minimap Farm Start')
+            return False
         else:
+            # After moving to the farm start - check if we're there again after having supposedly moved there
             if not wait_for_img(img_name="Farm_Start_Flag_Alt", script_name="Tithe_Farmer", threshold=0.92, max_wait_sec=10):
                 return False
     return True
