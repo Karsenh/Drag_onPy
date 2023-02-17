@@ -328,7 +328,7 @@ def sleep_between_actions(curr_tile, sleep_num, is_watering=False):
         # Left side
         print(f'Left side - Curr_tile: {curr_tile} - sleep_num: {sleep_num}')
         if sleep_num == 1:
-            API.AntiBan.sleep_between(2.1, 2.2)
+            API.AntiBan.sleep_between(2.2, 2.3)
         else:
             API.AntiBan.sleep_between(2.2, 2.3)
     else:
