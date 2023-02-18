@@ -109,7 +109,7 @@ def start_tithe_farming(curr_loop):
         deposit_points()
 
         # Every 6th loop - refill Gricoller's can and seeds
-        if curr_loop % 6 == 0:
+        if curr_loop % 5 == 0:
             print(f'Replenishing Can & Seeds')
             replenish_can()
             replenish_seeds()
@@ -241,6 +241,7 @@ def replenish_seeds():
     if not does_img_exist(img_name='Door_From_Water_Barrel', script_name='Tithe_Farmer', should_click=True, click_middle=True, min_clicks=2, max_clicks=3):
         print(f'Failed to find Door from Water Barrel')
         return False
+    API.AntiBan.sleep_between(3.0, 3.1)
     if not wait_for_img(img_name='Seed_Table', script_name='Tithe_Farmer', should_click=True, click_middle=True, min_clicks=2, max_clicks=3):
         print(f'Failed to find seed table...')
         return False

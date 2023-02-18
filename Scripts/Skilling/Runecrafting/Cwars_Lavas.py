@@ -194,7 +194,7 @@ def replenish_missing_items(curr_loop):
         if CACHED_BANKED_ROD:
             mouse_click(CACHED_BANKED_ROD)
         else:
-            if not does_img_exist(img_name="Banked_Rod", script_name="Cwars_Lavas", threshold=0.97):
+            if not does_img_exist(img_name="Banked_Rod", script_name="Cwars_Lavas", threshold=0.9):
                 print(f'Failed to find banked Rod')
                 return False
             else:
@@ -219,7 +219,7 @@ def replenish_missing_items(curr_loop):
         if CACHED_BANKED_NECKLACE:
             mouse_click(CACHED_BANKED_NECKLACE)
         else:
-            if not does_img_exist(img_name="Banked_Necklace", script_name="Cwars_Lavas", threshold=0.97):
+            if not does_img_exist(img_name="Banked_Necklace", script_name="Cwars_Lavas", threshold=0.9):
                 print(f'Failed to find banked necklace')
                 return False
             else:
@@ -252,7 +252,7 @@ def replenish_missing_items(curr_loop):
         # deposit_ess()
         is_withdraw_qty("1", True)
         if not does_img_exist(img_name="Banked_Tiara", script_name="Cwars_Lavas", should_click=True, click_middle=True,
-                       threshold=0.95):
+                       threshold=0.90):
             write_debug(f"Failed to find banked Tiara")
             return False
         # API.AntiBan.sleep_between(1, 1.1)
@@ -297,7 +297,7 @@ def replenish_missing_items(curr_loop):
         for has_pouch in HAS_ESS_POUCH_ARR:
             if not has_pouch:
                 need_pouch_size = POUCHES_TO_USE_ARR[pouch_idx]
-                does_img_exist(img_name=f"Banked_{need_pouch_size}_Pouch", script_name="Cwars_Lavas", threshold=0.92, should_click=True, click_middle=True)
+                does_img_exist(img_name=f"Banked_{need_pouch_size}_Pouch", script_name="Cwars_Lavas", threshold=0.9, should_click=True, click_middle=True)
 
             pouch_idx += 1
 
@@ -306,7 +306,7 @@ def replenish_missing_items(curr_loop):
         is_bank_tab_open(MAGIC_BANK_TAB, True)
         # deposit_ess()
         is_withdraw_qty(qty="all", should_click=True)
-        EARTH_RUNES_INVENT = does_img_exist(img_name="Banked_Earth_Runes", script_name="Cwars_Lavas", should_click=True, click_middle=True, threshold=0.96)
+        EARTH_RUNES_INVENT = does_img_exist(img_name="Banked_Earth_Runes", script_name="Cwars_Lavas", should_click=True, click_middle=True, threshold=0.90)
 
     return True
 
@@ -329,7 +329,7 @@ def withdraw_ess():
         mouse_click(CACHED_BANKED_ESS_XY)
         return True
     else:
-        if wait_for_img(img_name="Banked_Ess", script_name="Cwars_Lavas", threshold=0.97, should_click=True, click_middle=True, img_sel="last"):
+        if wait_for_img(img_name="Banked_Ess", script_name="Cwars_Lavas", threshold=0.90, should_click=True, click_middle=True, img_sel="last"):
             x, y = get_existing_img_xy()
             adj_xy = x+22, y+6
             CACHED_BANKED_ESS_XY = adj_xy
@@ -507,7 +507,7 @@ def check_for_degraded_pouches():
 
     for pouch_size in POUCHES_TO_USE_ARR:
         if pouch_size != "Small":
-            if does_img_exist(img_name=f"Inventory_{pouch_size}_Pouch_Degraded", script_name="Cwars_Lavas", threshold=0.90):
+            if does_img_exist(img_name=f"Inventory_{pouch_size}_Pouch_Degraded", script_name="Cwars_Lavas", threshold=0.85):
                 DEGRADED_POUCH_EXISTS = True
                 return True
     return False
@@ -757,7 +757,7 @@ def check_run():
     return
 
 
-def wait_for_invent_item_xy(img_name, threshold=0.9):
+def wait_for_invent_item_xy(img_name, threshold=0.85):
     return wait_for_img(img_name=img_name, script_name="Cwars_Lavas", threshold=threshold, img_sel="inventory", max_wait_sec=4)
 
 

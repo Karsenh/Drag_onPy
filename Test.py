@@ -35,7 +35,7 @@ def __main__():
     capture_bluestacks()
     clear_debug_log()
 
-    launch_script("Tithe_Farmer")
+    launch_script("Cwars_Lavas")
 
     return
 
