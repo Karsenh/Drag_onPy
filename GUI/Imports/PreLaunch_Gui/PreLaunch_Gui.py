@@ -47,10 +47,9 @@ def show_plg(script_name):
 
         # SCRIPT START BUTTON
         start_image = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\Assets\Images\GUI_Images\PreLaunch_Gui\start_btn.png'))
-        start_btn = Button(main_plg_frame, text="Defence", image=start_image, bg="#3e3529", activebackground=btn_active_bg_color, height=43, width=200, command=lambda: launch_script(script_name))
+        start_btn = Button(main_plg_frame, text="Defence", image=start_image, bg="#3e3529", activebackground=btn_active_bg_color, height=43, width=200, command=lambda: handle_script_launched(script_name, plg_gui))
         start_btn.photo = start_image
         start_btn.grid(row=5, column=1, pady=(30, 0))
-
         return
 
 
@@ -95,6 +94,11 @@ def show_plg_notes_section(main_plg_frame, font_styles, script_name):
     notes_label_frame.grid(row=3, column=1, pady=(20, 20))
     return
 
+
+def handle_script_launched(script_name, plg_gui):
+    plg_gui.destroy()
+    launch_script(script_name)
+    return
 
 
 
