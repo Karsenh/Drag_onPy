@@ -9,11 +9,13 @@ from API.Imports.Coords import *
 import pyautogui as pag
 
 
-logs_to_use = "yew"
+LOG_TYPE = "magic"
+BANK_TAB_NUM = 1
 
 
 def burn_logs_at_ge(curr_loop):
     if curr_loop == 1:
+        needs_tinderbox = True
 
         setup_interface("east", 3, "up")
         API.AntiBan.sleep_between(0.3, 1.3)
@@ -24,19 +26,25 @@ def burn_logs_at_ge(curr_loop):
         is_tab_open("inventory", should_be_open=True)
         API.AntiBan.sleep_between(1.0, 1.5)
 
+        if has_tinderbox():
+            needs_tinderbox = False
+        else:
+            needs_tinderbox = True
+
         if not click_to_open_bank():
             print(f'Something went wrong opening the bank')
             return False
         API.AntiBan.sleep_between(1.1, 1.8)
 
         # Check if on tab 3
-        is_bank_tab_open(tab_num=3, should_open=True)
+        is_bank_tab_open(tab_num=BANK_TAB_NUM, should_open=True)
 
         # Check if withdraw qty all
         is_withdraw_qty("all")
 
         # Check if tinderbox withdrawn
-        does_img_exist(img_name="banked_tinderbox", script_name="GE_Log_Burner", category="Scripts", threshold=0.98, should_click=True, y_offset=30, x_offset=20)
+        if needs_tinderbox:
+            does_img_exist(img_name="banked_tinderbox", script_name="GE_Log_Burner", category="Scripts", threshold=0.9, should_click=True, y_offset=30, x_offset=20)
 
     else:
         # Just open bank
@@ -44,7 +52,6 @@ def burn_logs_at_ge(curr_loop):
         if not click_to_open_bank():
             print(f'Something went wrong opening the bank')
             return False
-
 
     # Withdraw logs
     click_to_withdraw_logs()
@@ -92,10 +99,10 @@ def move_to_start(move_xy):
 def burn_logs():
     i = 0
 
-    if not does_img_exist(img_name=f"inventory_{logs_to_use}_log", script_name="GE_Log_Burner", category="Scripts", threshold=0.85, should_click=False):
+    if not does_img_exist(img_name=f"inventory_{LOG_TYPE}_log", script_name="GE_Log_Burner", category="Scripts", threshold=0.85, should_click=False):
         return False
 
-    while does_img_exist(img_name=f"inventory_{logs_to_use}_log", script_name="GE_Log_Burner", category="Scripts", threshold=0.85, should_click=False):
+    while does_img_exist(img_name=f"inventory_{LOG_TYPE}_log", script_name="GE_Log_Burner", category="Scripts", threshold=0.85, should_click=False):
         i += 1
 
         write_debug(f'BURN LOGS - {i}/28')
@@ -104,7 +111,7 @@ def burn_logs():
         API.AntiBan.sleep_between(0.1, 0.2)
 
         if i > 1:
-            does_img_exist(img_name=f"inventory_{logs_to_use}_log", script_name="GE_Log_Burner", category="Scripts", threshold=0.85, should_click=False)
+            does_img_exist(img_name=f"inventory_{LOG_TYPE}_log", script_name="GE_Log_Burner", category="Scripts", threshold=0.85, should_click=False)
             next_log_xy = get_existing_img_xy()
             mouse_move(next_log_xy, max_x_dev=15, max_y_dev=15)
 
@@ -114,7 +121,7 @@ def burn_logs():
                 write_debug(f'Exp drop not seen! Clicking anyways because we saw a log here.')
                 pag.leftClick()
         else:
-            does_img_exist(img_name=f"inventory_{logs_to_use}_log", script_name="GE_Log_Burner", category="Scripts", threshold=0.85, should_click=True, x_offset=15, y_offset=15)
+            does_img_exist(img_name=f"inventory_{LOG_TYPE}_log", script_name="GE_Log_Burner", category="Scripts", threshold=0.85, should_click=True, x_offset=15, y_offset=15)
 
     # wait_for_img(img_name="log_burned", script_name="GE_Log_Burner", category="Scripts", max_wait_sec=6)
     return True
@@ -142,7 +149,11 @@ def click_to_open_bank():
 
 
 def click_to_withdraw_logs():
-    wait_for_img(img_name=f"banked_{logs_to_use}_log", script_name="GE_Log_Burner", threshold=0.95, should_click=True,
-                   x_offset=22, y_offset=15)
+    wait_for_img(img_name=f"banked_{LOG_TYPE}_log", script_name="GE_Log_Burner", threshold=0.95, should_click=True,
+                 x_offset=22, y_offset=15)
     API.AntiBan.sleep_between(0.5, 0.6)
     return
+
+
+def has_tinderbox():
+    return does_img_exist(img_name='inventory_tinderbox', script_name='GE_Log_Burner', threshold=0.9)
