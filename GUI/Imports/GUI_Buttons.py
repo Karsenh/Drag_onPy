@@ -26,7 +26,7 @@ SKILL_BTN_HEIGHT = 60
 BTN_CURSOR = 'circle'
 
 
-def get_all_btns(all_frames, all_images):
+def get_all_btns(all_frames, all_images, root):
     global SCRIPT_BTN_SIZE
     global SKILL_BTN_WIDTH
     global SKILL_BTN_HEIGHT
@@ -127,9 +127,9 @@ def get_all_btns(all_frames, all_images):
 
     # ---- SUB SKILL BTNS ----
     # TODO - SUB OUT ALL INSTANCES OF 'Buttom()' FOR 'new_script_start_btn()'
-    def new_script_start_btn(script_frame, script_name, script_state):
+    def new_script_start_btn(script_frame, script_name, script_state, root=root):
         btn_text = script_name.replace('_', ' ')
-        return Button(script_frame, state=script_state, text=btn_text, image=start_btn_img, cursor=BTN_CURSOR, height=SCRIPT_START_BTN_HEIGHT, width=SCRIPT_START_BTN_WIDTH, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_plg(script_name))
+        return Button(script_frame, state=script_state, text=btn_text, image=start_btn_img, cursor=BTN_CURSOR, height=SCRIPT_START_BTN_HEIGHT, width=SCRIPT_START_BTN_WIDTH, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_plg(script_name, root))
 
     #     Agility
     gnome_course_btn = new_script_start_btn(agility_frame, 'Gnome_Agility', gnome_agility_script.btn_state)

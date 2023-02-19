@@ -8,6 +8,8 @@ from GUI.Imports.GUI_Frames import btn_bg_color, btn_active_bg_color, frame_bg_c
 from Database.Connection import get_user
 from GUI.Main_GUI import show_main_gui
 
+IS_AUTHED = False
+
 
 def show_auth_gui():
     auth_top_height = 500
@@ -20,9 +22,7 @@ def show_auth_gui():
     auth_top.configure(bg='#676157')
     auth_top.geometry(f"{auth_top_width}x{auth_top_height}")
 
-
     # Auth Frame
-
     form_frame = Frame(auth_top, bg=label_frame_bg_color)
 
     # Entry value variables
@@ -59,11 +59,15 @@ def show_auth_gui():
     login_btn.place(anchor="center", relx=0.5, rely=0.85, height=30)
 
     auth_top.mainloop()
-
-    return
+    if IS_AUTHED:
+        return True
+    else:
+        return False
 
 
 def authenticate_user(form_vals, auth_top):
+    global IS_AUTHED
+
     # Get the entries (email / pass)
     email, password = form_vals
 
@@ -102,9 +106,12 @@ def authenticate_user(form_vals, auth_top):
 
     if authed_user:
         auth_top.destroy()
-        show_main_gui()
-
-    return
+        # show_main_gui()
+        IS_AUTHED = True
+        return True
+    else:
+        IS_AUTHED = False
+        return False
 
 
 def validate_input(email, password):

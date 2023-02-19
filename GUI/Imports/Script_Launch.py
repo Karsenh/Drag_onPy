@@ -1,3 +1,5 @@
+import threading
+
 from Scripts.Skilling.Smithing.Edge_Gold import smith_gold_edge
 from Scripts.Skilling.Mining.Iron.Pisc_Iron import mine_iron_pisc
 from Scripts.Skilling.Agility.Gnome_Course import run_gnome_course
@@ -46,17 +48,23 @@ from API.Interface.General import handle_auth_screens
 from API.Break_Timer.Break_Handler import is_break_timer_set
 from API.Break_Timer.Break_Handler import break_handler
 
-CURR_SCRIPT_LOOP = 1
 SHOULD_CONTINUE = True
+CURR_SCRIPT_LOOP = 1
 
 
 # script_name passed into individual buttons in GUI corresponding to individual scripts
 def launch_script(script_name="pisc_iron"):
-    global CURR_SCRIPT_LOOP
     global SHOULD_CONTINUE
+    global CURR_SCRIPT_LOOP
+
+    CURR_SCRIPT_LOOP = 1
+    SHOULD_CONTINUE = True
 
     reopen_invent = True
     always_sleep = True
+
+    for thread in threading.enumerate():
+        print(f'Thread name: {thread.name}')
 
     write_debug(f"Pre-launch checks for: {script_name}")
     # Check that we're not on dc screen (click continue if so)
