@@ -1,3 +1,5 @@
+import tkinter.messagebox
+
 from GUI.Imports.GUI_Buttons import *
 from GUI.Imports.GUI_Images import get_all_gui_images
 from GUI.Imports.GUI_Frames import get_all_frames
@@ -9,12 +11,26 @@ from pynput import keyboard
 import sys
 
 
+TERMINATION_KEY = "Key.end"
+IS_RUNNING = True
+
+
+def should_be_running():
+    return IS_RUNNING
+
+
+def set_should_be_running(value):
+    global IS_RUNNING
+    IS_RUNNING = value
+    print(f'IS_RUNNING: {IS_RUNNING}')
+    return
+
 # Main_Gui images
-def terminate_app(key, root):
-    if str(key) == "Key.end":
-        print(f'⛔ Script Terminated by User.')
-        root.destroy()
-        sys.exit(-99)
+# def terminate_app(key, root):
+#     if str(key) == TERMINATION_KEY:
+#         print(f'⛔ Script Terminated by User - MainGUI')
+#         root.destroy()
+#         sys.exit(-99)
 
 
 def show_main_gui():
@@ -26,9 +42,9 @@ def show_main_gui():
     root_gui_width = 550  #675
     root.configure(bg='#969488', height=root_gui_height, width=root_gui_width)
 
-    listener = keyboard.Listener(
-        on_press=lambda event: terminate_app(event, root))
-    listener.start()
+    # listener = keyboard.Listener(
+    #     on_press=lambda event: terminate_app(event, root))
+    # listener.start()
 
     dragon_py_hwnd = win32gui.FindWindow(None, 'Drag_onPy')
     if not dragon_py_hwnd:
@@ -53,7 +69,7 @@ def show_main_gui():
     # Get all Frames & Images to send down into buttons
     all_frames = get_all_frames(root)
     all_images = get_all_gui_images()
-    all_btns = get_all_btns(all_frames, all_images)
+    all_btns = get_all_btns(all_frames, all_images, root)
 
     # Get the Main_Gui from All_Btns  (Gold, Skill, and Minigames buttons not used)
     main_gui_btns, _, _, _ = all_btns
@@ -69,7 +85,16 @@ def show_main_gui():
     info_btn.grid(row=footer_row, column=2, columnspan=1, pady=(15,10))
     bug_report_btn.grid(row=footer_row, column=3, columnspan=1, pady=(15,10))
 
+    def on_closing():
+
+        if tkinter.messagebox.askokcancel('Quit', 'Are you sure you want to quit?'):
+            set_should_be_running(False)
+            root.destroy()
+
+    root.protocol('WM_DELETE_WINDOW', on_closing)
+
     root.mainloop()
+
     return
 
 
