@@ -161,7 +161,7 @@ def launch_script(script_name="pisc_iron"):
             selected_script = ScriptEnum.ARDY_CAKE.value
             antiban_likelihood = 10
             antiban_downtime_sec = 0.4
-        case "ge_log_burner":
+        case "GE_Log_Burner":
             selected_script = ScriptEnum.GE_LOGS.value
             antiban_likelihood = 15
             antiban_downtime_sec = 3

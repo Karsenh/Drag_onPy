@@ -45,7 +45,6 @@ def burn_logs_at_ge(curr_loop):
             print(f'Something went wrong opening the bank')
             return False
 
-
     # Withdraw logs
     click_to_withdraw_logs()
 

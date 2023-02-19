@@ -3,7 +3,7 @@ from Database.Script_Access import cow_killer_script, pisc_iron_script, motherlo
     tithe_farmer_script, gnome_agility_script, canifis_rooftops, seers_rooftops, rogue_cooker_script, \
     ge_glass_blower_script, poh_larders_script, poh_tables_script, hosidius_plough_script, \
     ge_sulphurous_fertilizer_script, draynor_shrimp_script, barb_trout_script, barb_fishing_script, \
-    ge_dart_fletcher_script
+    ge_dart_fletcher_script, ge_log_burner_script
 from GUI.Imports.GUI_Frames import *
 from Scripts.Skilling.Mining.Iron.Pisc_Iron import *
 from GUI.Imports.PreLaunch_Gui.PreLaunch_Gui import show_plg
@@ -173,7 +173,7 @@ def get_all_btns(all_frames, all_images, root):
     fletching_sub_btns = dart_fletcher_btn
 
     #     Firemaking
-    ge_log_burner_btn = Button(firemaking_frame, text="GE Log Burner", cursor=BTN_CURSOR, image=start_btn_img,  height=SCRIPT_START_BTN_HEIGHT, width=SCRIPT_START_BTN_WIDTH, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_plg("ge_log_burner"))
+    ge_log_burner_btn = new_script_start_btn(firemaking_frame, 'GE_Log_Burner', ge_log_burner_script.btn_state)
     firemaking_sub_btns = ge_log_burner_btn
 
     #     Herblore

@@ -15,6 +15,7 @@ kourend_crab_killer_script = cow_killer_script = pisc_iron_script = \
     = rogue_cooker_script = ge_glass_blower_script = poh_tables_script = poh_larders_script \
     = hosidius_plough_script = ge_sulphurous_fertilizer_script = tithe_farmer_script \
     = draynor_shrimp_script = barb_trout_script = barb_fishing_script = ge_dart_fletcher_script \
+    = ge_log_burner_script \
     = ScriptAccess(initial_state)
 
 all_scripts = [kourend_crab_killer_script, cow_killer_script, pisc_iron_script,
@@ -22,7 +23,8 @@ all_scripts = [kourend_crab_killer_script, cow_killer_script, pisc_iron_script,
                blast_furance_script, dhide_bodies_script, gnome_agility_script,
                canifis_rooftops, seers_rooftops, rogue_cooker_script,
                ge_glass_blower_script, hosidius_plough_script, ge_sulphurous_fertilizer_script,
-               tithe_farmer_script, draynor_shrimp_script, barb_trout_script, barb_fishing_script, ge_dart_fletcher_script]
+               tithe_farmer_script, draynor_shrimp_script, barb_trout_script, barb_fishing_script,
+               ge_dart_fletcher_script, ge_log_burner_script]
 
 
 def set_script_access(user_licenses):
@@ -99,4 +101,6 @@ def update_script_state(decoded_lic):
                 barb_fishing_script.btn_state = enabled
             case 'ge_dart_fletcher':
                 ge_dart_fletcher_script.btn_state = enabled
+            case 'ge_log_burner':
+                ge_log_burner_script.btn_state = enabled
     return
