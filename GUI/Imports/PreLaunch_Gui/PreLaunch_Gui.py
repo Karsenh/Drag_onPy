@@ -66,7 +66,7 @@ def show_plg_start_section(main_plg_frame, font_styles, script_name):
     # Start_Equipment
     start_equip_img_label = Label(start_info_frame, image=start_equip_image, background=frame_bg_color)
     start_equip_img_label.photo = start_equip_image
-    start_equip_img_label.grid(row=1, column=2, padx=(15, 0))
+    start_equip_img_label.grid(row=1, column=2, padx=(15, 15))
 
     # Start_Inventory
     start_invent_img_label = Label(start_info_frame, image=start_invent_image, background=frame_bg_color)
