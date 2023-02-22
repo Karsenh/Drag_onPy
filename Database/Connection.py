@@ -57,3 +57,17 @@ def print_user_data(user):
         i += 1
         print(f'Found user attribute: {i} - {data}')
     return
+
+
+def update_user_licenses(user_email, new_license_arr):
+    print(f'Updating {user_email} document with new_license_arr of length: {len(new_license_arr)}')
+
+    # Update db user data
+    user_query = {'email': user_email}
+    update_license_query = {'$set': {'licenses': new_license_arr}}
+    update_result = USER_COLLECTION.update_one(user_query, update_license_query)
+    # Update local user data
+    AUTHED_USER.licenses = new_license_arr
+
+    print(f'Updated: {update_result.modified_count} document(s) license arrays.')
+    return

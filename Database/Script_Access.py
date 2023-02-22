@@ -1,5 +1,7 @@
 import jwt
 
+from Database.Connection import update_user_licenses, AUTHED_USER
+
 
 class ScriptAccess:
     def __init__(self, btn_state):
@@ -37,21 +39,29 @@ all_scripts = [kourend_crab_killer_script, cow_killer_script, pisc_iron_script,
                edge_gold_script, unf_pots_script, cball_smithing_script]
 
 
-def set_script_access(user_licenses):
+def set_script_access(user_email, user_licenses):
     print(f"set_script_access 🔥'ed - user_licenses: {user_licenses}")
+
+    updated_lic_arr = []
 
     for lic in user_licenses:
         print(f'Decoding License and setting Script Access for license: {lic}')
 
+        jwts = 'cFnLPysgeQ6mLn83qVYz1PkNbJuZJzVyKkfv0kOfAKJ6Ihg6j0BUxIntWgIex5vAGDzb8DmYCLo2eaBa'
+
         try:
-            decoded_lic = jwt.decode(lic, "your-256-bit-secret", algorithms=["HS256"])
+            decoded_lic = jwt.decode(lic, jwts, algorithms=["HS256"])
             print(f'decoded_lic: {decoded_lic}')
             update_script_state(decoded_lic)
+            updated_lic_arr.append(decoded_lic)
         except:
             print(f'decoded token is invalid - likely expired. Remove from user doc.')
-            return False
+            # TODO: Remove invalid license from array or simply don't include in updated_lic_arr
+            # return False
 
+    # TODO: - Update user doc with updated_lic_arr (removed bad licenses)
     # license_obj = json.load(license)
+    update_user_licenses(user_email, updated_lic_arr)
 
     return True
 
