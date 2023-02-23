@@ -35,10 +35,7 @@ def __main__():
     capture_bluestacks()
     clear_debug_log()
 
-    launch_script("Red_Chins")
-
-    SCRIPT_NAME = 'Ardy_Knights'
-
+    launch_script("GE_Dhide_Bodies")
 
     return
 

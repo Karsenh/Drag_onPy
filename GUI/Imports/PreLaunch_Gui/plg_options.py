@@ -22,7 +22,7 @@ def show_plg_options(main_plg_frame, font_styles, script_name):
 
         # TODO - Using script_name, find the corresponding plg_script_options obj and set the option_string
 
-        Global_Script_Options.script_name = script_name
+        Global_Script_Options.SCRIPT_NAME = script_name
         # Add curr_option field and value (type ScriptOption) to the Global_Script_Options options_arr property
 
         for option in Global_Script_Options.options_arr:
@@ -37,7 +37,7 @@ def show_plg_options(main_plg_frame, font_styles, script_name):
         Global_Script_Options.options_arr.append(curr_option_val)
 
         for option in Global_Script_Options.options_arr:
-            print(f'Script = {Global_Script_Options.script_name} Option: {option}')
+            print(f'Script = {Global_Script_Options.SCRIPT_NAME} Option: {option}')
 
         return
 

@@ -43,6 +43,7 @@ def set_script_access(user_email, user_licenses):
     print(f"set_script_access 🔥'ed - user_licenses: {user_licenses}")
 
     updated_lic_arr = []
+    used_licenses_arr = []
 
     for lic in user_licenses:
         print(f'Decoding License and setting Script Access for license: {lic}')
@@ -52,16 +53,15 @@ def set_script_access(user_email, user_licenses):
         try:
             decoded_lic = jwt.decode(lic, jwts, algorithms=["HS256"])
             print(f'decoded_lic: {decoded_lic}')
+            # TODO: Check if license is already in a user session - skip if so, otherwise update_script_state & used_licenses_arr with curr license
             update_script_state(decoded_lic)
             updated_lic_arr.append(decoded_lic)
         except:
             print(f'decoded token is invalid - likely expired. Remove from user doc.')
-            # TODO: Remove invalid license from array or simply don't include in updated_lic_arr
-            # return False
 
-    # TODO: - Update user doc with updated_lic_arr (removed bad licenses)
     # license_obj = json.load(license)
     update_user_licenses(user_email, updated_lic_arr)
+    # TODO: Update user sessions with used_licenses_arr
 
     return True
 
