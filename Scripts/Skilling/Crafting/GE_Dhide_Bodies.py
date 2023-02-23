@@ -28,7 +28,7 @@ def start_crafting_dhide_bodies(curr_loop):
 
             open_ge_bank()
 
-            API.AntiBan.sleep_between(0.3, 1.1, likelihood=50)
+            API.AntiBan.sleep_between(0.3, 1.1, likelihood=10)
 
             deposit_dhide_bodies()
 
@@ -36,11 +36,11 @@ def start_crafting_dhide_bodies(curr_loop):
                 write_debug(f'We must be out of {DHIDE_COLOR} dragon leather. Exiting...')
                 return False
 
-            API.AntiBan.sleep_between(0.4, 0.9)
+            API.AntiBan.sleep_between(0.3, 0.6)
 
             close_bank()
 
-            API.AntiBan.sleep_between(0.3, 1.1, likelihood=50)
+            API.AntiBan.sleep_between(0.3, 1.1, likelihood=8)
 
             return craft_dhide_bodies()
 
@@ -93,11 +93,11 @@ def open_ge_bank():
     bank_xy = get_existing_img_xy()
     mouse_long_click(bank_xy)
 
-    if not does_img_exist(img_name='bank_option', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True):
+    if not does_img_exist(img_name='bank_option', script_name=SCRIPT_NAME, threshold=0.94, should_click=True, click_middle=True):
         if not does_img_exist(img_name='cancel_option', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True):
             return False
         mouse_long_click(bank_xy)
-        if not does_img_exist(img_name='bank_option', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True):
+        if not does_img_exist(img_name='bank_option', script_name=SCRIPT_NAME, threshold=0.92, should_click=True, click_middle=True):
             write_debug('Failed to find bank option twice - exiting...')
             return False
 
@@ -107,7 +107,7 @@ def open_ge_bank():
 
 
 def is_crafting():
-    return wait_for_img(img_name="Crafting", category="Exp_Drops", max_wait_sec=2)
+    return wait_for_img(img_name="Crafting", category="Exp_Drops", max_wait_sec=1)
 
 
 def withdraw_leather():
