@@ -187,8 +187,8 @@ def launch_script(script_name="pisc_iron"):
             antiban_downtime_sec = 4
         case "ge_dart_fletcher":
             selected_script = ScriptEnum.DART_FLETCHER.value
-            antiban_likelihood = 20
-            antiban_downtime_sec = 4
+            antiban_likelihood = 5
+            antiban_downtime_sec = 2
         case "hosidius_plough":
             selected_script = ScriptEnum.HOSIDIUS_PLOUGH.value
             antiban_likelihood = 15
@@ -266,8 +266,8 @@ def launch_script(script_name="pisc_iron"):
             reopen_invent = True
         case "Cwars_Lavas":
             selected_script = ScriptEnum.CWARS_LAVAS.value
-            antiban_likelihood = 12
-            antiban_downtime_sec = 5
+            antiban_likelihood = 9
+            antiban_downtime_sec = 4
             reopen_invent = True
             always_sleep = False
         case "Motherlode_Miner":
