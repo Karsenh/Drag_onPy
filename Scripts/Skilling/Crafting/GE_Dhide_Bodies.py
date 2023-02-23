@@ -4,21 +4,22 @@ from API.Interface.General import setup_interface, get_xy_for_invent_slot, is_ta
 from API.Interface.Bank import is_bank_open, deposit_all, is_withdraw_qty, is_bank_tab_open, close_bank
 from API.Imaging.Image import wait_for_img, does_img_exist, get_existing_img_xy
 from API.Debug import write_debug
-from API.Mouse import mouse_click
+from API.Mouse import mouse_click, mouse_long_click
 import pyautogui as pag
 import API.AntiBan
 
-dragon_leather_color = "green"
-jewelry_tab_num = 2
-script_name = "GE_Dhide_Bodies"
+DHIDE_COLOR = "green"
+BANK_TAB_NUM = 1
+SCRIPT_NAME = "GE_Dhide_Bodies"
 CRAFTING_ATTEMPTS = 0
+
 
 def start_crafting_dhide_bodies(curr_loop):
     if curr_loop != 1:
         print(f'Not the first loop - Main Script Logic Here')
         # If we're crafting (crafting exp drop seen) return True
         if not is_crafting():
-            print(f"No crafting exp drop seen for six sec. Must not be crafting due to level up or no more mats.")
+            print(f"No crafting exp drop seen for 2 sec. Must not be crafting due to level up or no more mats.")
 
             if did_level():
                 handle_level_dialogue()
@@ -32,7 +33,7 @@ def start_crafting_dhide_bodies(curr_loop):
             deposit_dhide_bodies()
 
             if not withdraw_leather():
-                write_debug(f'We must be out of {dragon_leather_color} dragon leather. Exiting...')
+                write_debug(f'We must be out of {DHIDE_COLOR} dragon leather. Exiting...')
                 return False
 
             API.AntiBan.sleep_between(0.4, 0.9)
@@ -49,7 +50,7 @@ def start_crafting_dhide_bodies(curr_loop):
     else:
         # First loop - setup script
         print(f'This is the first loop')
-        setup_interface("north", 4, "up")
+        setup_interface("east", 4, "up")
         # Open bank
         if not open_ge_bank():
             return False
@@ -58,23 +59,23 @@ def start_crafting_dhide_bodies(curr_loop):
         deposit_all()
 
         # Open Jewelry tab
-        is_bank_tab_open(tab_num=jewelry_tab_num, should_open=True)
+        is_bank_tab_open(tab_num=BANK_TAB_NUM, should_open=True)
 
         # Check we're on withdraw qty 1
         is_withdraw_qty(qty="1")
 
         # Withdraw needle
-        does_img_exist(img_name="Banked_needle", script_name=script_name, should_click=True, x_offset=10)
+        does_img_exist(img_name="Banked_needle", script_name=SCRIPT_NAME, should_click=True, x_offset=10)
 
         # Check we're on withdraw qty All
         is_withdraw_qty("all")
 
         # Withdraw Thread
-        does_img_exist(img_name="Banked_thread", script_name=script_name, should_click=True)
+        does_img_exist(img_name="Banked_thread", script_name=SCRIPT_NAME, should_click=True)
 
         # Withdraw Leather Type
         if not withdraw_leather():
-            write_debug(f'We must be out of {dragon_leather_color} dragon leather. Exiting...')
+            write_debug(f'We must be out of {DHIDE_COLOR} dragon leather. Exiting...')
             return False
         API.AntiBan.sleep_between(0.3, 0.5)
 
@@ -85,16 +86,24 @@ def start_crafting_dhide_bodies(curr_loop):
 
 
 def open_ge_bank():
-    # wait_for_img(img_name="Ge_bank", script_name=script_name, threshold=0.87, should_click=True, x_offset=20)
     API.AntiBan.sleep_between(0.3, 0.4)
-
-    ge_bank_xy = 710, 443
-    mouse_click(ge_bank_xy)
-
-    if is_bank_open():
-        return True
-    else:
+    if not wait_for_img(img_name="ge_bank", script_name=SCRIPT_NAME, threshold=0.9):
         return False
+
+    bank_xy = get_existing_img_xy()
+    mouse_long_click(bank_xy)
+
+    if not does_img_exist(img_name='bank_option', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True):
+        if not does_img_exist(img_name='cancel_option', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True):
+            return False
+        mouse_long_click(bank_xy)
+        if not does_img_exist(img_name='bank_option', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True):
+            write_debug('Failed to find bank option twice - exiting...')
+            return False
+
+    # ge_bank_xy = 710, 443
+    # mouse_click(ge_bank_xy)
+    return is_bank_open()
 
 
 def is_crafting():
@@ -102,8 +111,8 @@ def is_crafting():
 
 
 def withdraw_leather():
-    global dragon_leather_color
-    return does_img_exist(img_name=f"Banked_{dragon_leather_color}_leather", script_name=script_name, should_click=True, img_sel="first", x_offset=40)
+    global DHIDE_COLOR
+    return does_img_exist(img_name=f"Banked_{DHIDE_COLOR}_leather", script_name=SCRIPT_NAME, should_click=True, img_sel="first", x_offset=40)
 
 
 def craft_dhide_bodies():
@@ -116,7 +125,7 @@ def craft_dhide_bodies():
     mouse_click(get_random_invent_slot_between(5, 9))
     API.AntiBan.sleep_between(0.3, 0.4)
     API.AntiBan.sleep_between(0.2, 0.9, 35)
-    if not wait_for_img(img_name="Green_body_craft_btn", script_name=script_name):
+    if not wait_for_img(img_name="Green_body_craft_btn", script_name=SCRIPT_NAME):
         craft_dhide_bodies()
         CRAFTING_ATTEMPTS += 1
         if CRAFTING_ATTEMPTS > 2:

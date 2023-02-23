@@ -7,19 +7,13 @@ from API.Setup import get_bluestacks_xy, set_bluestacks_window_size
 
 
 def terminate_script(key):
-    global SHOULD_CONTINUE
-
     if str(key) == TERMINATION_KEY:
         print(f'⛔ Script Terminated by User - Main')
-        SHOULD_CONTINUE = False
+        set_should_cont(False)
         sys.exit(-99)
 
 
 def __main__() -> int:
-    global root
-
-    # while not_exit:
-
     listener = keyboard.Listener(
         on_press=lambda event: terminate_script(event))
     listener.start()

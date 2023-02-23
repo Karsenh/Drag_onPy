@@ -7,8 +7,8 @@ from API.Mouse import mouse_click, mouse_long_click
 script_name = "Ardy_Knights"
 
 selected_food = 'monkfish'
-food_tab_num = 5
-necklace_tab_num = 2
+food_tab_num = 1
+necklace_tab_num = 1
 use_dodgy_necklace = True
 has_food = False
 has_necklace = False

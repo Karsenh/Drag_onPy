@@ -23,7 +23,7 @@ from Scripts.Skilling.Agility.Canifis_Rooftops import start_canifis_rooftops
 from Scripts.Skilling.Agility.Seers_Rooftops import start_seers_rooftops
 from Scripts.Skilling.Hunter.Single_Trap_Crimsons import start_catching_crimsons
 from Scripts.Skilling.Hunter.Double_Trap_Ceruleans import start_trapping_birds
-from Scripts.Skilling.Thieving.Pickpocketing.Ardy_Knights import start_pickpocketing_ardy_knights
+from Scripts.Skilling.Thieving.Pickpocketing.Ardy_Knights_v2 import start_pickpocketing_knight
 from Scripts.Skilling.Combat.Kourend_Crab_Killer import start_killing_kourend_crabs
 from Scripts.Skilling.Crafting.GE_Dhide_Bodies import start_crafting_dhide_bodies
 from Scripts.Skilling.Woodcutting.Cwars_Teaks import start_chopping_teaks
@@ -119,7 +119,7 @@ def launch_script(script_name="pisc_iron"):
                    start_chop_fletching, start_blowing_glass, start_fletching_darts,
                    start_ploughing_for_favour, start_stealing_fruit, start_worshipping_bones,
                    start_unf_pots, start_canifis_rooftops, start_seers_rooftops,
-                   start_catching_crimsons, start_trapping_birds, start_pickpocketing_ardy_knights,
+                   start_catching_crimsons, start_trapping_birds, start_pickpocketing_knight,
                    start_killing_kourend_crabs, start_crafting_dhide_bodies, start_chopping_teaks,
                    start_superheating_gold, start_constructing_larders, start_constructing_tables,
                    start_catching_desert_lizards, start_catching_red_lizards, start_chopping_sw_teaks,
@@ -223,15 +223,15 @@ def launch_script(script_name="pisc_iron"):
             antiban_downtime_sec = 1
         case "Ardy_Knights":
             selected_script = ScriptEnum.ARDY_KNIGHTS.value
-            antiban_likelihood = 50
-            antiban_downtime_sec = .5
+            antiban_likelihood = 8
+            antiban_downtime_sec = 2
         case "Kourend_Crab_Killer":
             selected_script = ScriptEnum.KOUREND_CRABS.value
             antiban_likelihood = 10
             antiban_downtime_sec = 4
         case "GE_Dhide_Bodies":
             selected_script = ScriptEnum.DHIDE_BODIES.value
-            antiban_likelihood = 15
+            antiban_likelihood = 9
             antiban_downtime_sec = 1
         case "Cwars_Teak":
             selected_script = ScriptEnum.CWARS_TEAK.value
@@ -339,4 +339,10 @@ def launch_script(script_name="pisc_iron"):
 def set_curr_iteration(new_val):
     global CURR_SCRIPT_LOOP
     CURR_SCRIPT_LOOP = new_val
+    return
+
+
+def set_should_cont(value):
+    global SHOULD_CONTINUE
+    SHOULD_CONTINUE = value
     return

@@ -102,7 +102,7 @@ def authenticate_user(form_vals, auth_top):
         return -1
     else:
         print(f'✅ Successfully retrieved {len(authed_user.licenses_arr)} licenses for user {email}.')
-        set_script_access(authed_user.licenses_arr)
+        set_script_access(email, authed_user.licenses_arr)
 
     if authed_user:
         auth_top.destroy()
