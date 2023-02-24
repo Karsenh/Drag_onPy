@@ -137,7 +137,8 @@ def craft_dhide_bodies():
     if not wait_for_img(img_name="Green_body_craft_btn", script_name=SCRIPT_NAME):
         craft_dhide_bodies()
         CRAFTING_ATTEMPTS += 1
-        if CRAFTING_ATTEMPTS > 2:
+        if CRAFTING_ATTEMPTS > 3:
+            print(f'Exiting due to Green body craft btn attempts exceeding three.')
             return False
     else:
         CRAFTING_ATTEMPTS = 0
