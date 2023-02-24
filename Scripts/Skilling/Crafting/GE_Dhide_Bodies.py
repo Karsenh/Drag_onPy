@@ -93,11 +93,11 @@ def open_ge_bank():
     bank_xy = get_existing_img_xy()
     mouse_long_click(bank_xy)
 
-    if not does_img_exist(img_name='bank_option', script_name=SCRIPT_NAME, threshold=0.94, should_click=True, click_middle=True):
+    if not does_img_exist(img_name='bank_option', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True):
         if not does_img_exist(img_name='cancel_option', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True):
             return False
         mouse_long_click(bank_xy)
-        if not does_img_exist(img_name='bank_option', script_name=SCRIPT_NAME, threshold=0.92, should_click=True, click_middle=True):
+        if not does_img_exist(img_name='bank_option', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True):
             write_debug('Failed to find bank option twice - exiting...')
             return False
 
