@@ -375,7 +375,7 @@ def fill_pouch(pouch_size):
             if CACHED_INVENT_SMALL_POUCH:
                 mouse_long_click(CACHED_INVENT_SMALL_POUCH)
             else:
-                if not wait_for_invent_item_xy("Inventory_Small_Pouch", threshold=0.96):
+                if not wait_for_invent_item_xy("Inventory_Small_Pouch", threshold=0.92):
                     return
 
                 # does_img_exist(img_name=f"Inventory_Small_Pouch", script_name="Cwars_Lavas", threshold=0.95,
@@ -404,7 +404,7 @@ def fill_pouch(pouch_size):
             if CACHED_INVENT_MEDIUM_POUCH:
                 mouse_long_click(CACHED_INVENT_MEDIUM_POUCH)
             else:
-                if not wait_for_invent_item_xy("Inventory_Medium_Pouch", threshold=0.96):
+                if not wait_for_invent_item_xy("Inventory_Medium_Pouch", threshold=0.92):
                     return
 
                 # does_img_exist(img_name=f"Inventory_Medium_Pouch", script_name="Cwars_Lavas", threshold=0.95,
@@ -433,7 +433,7 @@ def fill_pouch(pouch_size):
             if CACHED_INVENT_LARGE_POUCH:
                 mouse_long_click(CACHED_INVENT_LARGE_POUCH)
             else:
-                if not wait_for_invent_item_xy("Inventory_Large_Pouch", threshold=0.96):
+                if not wait_for_invent_item_xy("Inventory_Large_Pouch", threshold=0.92):
                     return
 
                 # does_img_exist(img_name=f"Inventory_Large_Pouch", script_name="Cwars_Lavas", threshold=0.95,
@@ -462,7 +462,7 @@ def fill_pouch(pouch_size):
             if CACHED_INVENT_GIANT_POUCH:
                 mouse_long_click(CACHED_INVENT_GIANT_POUCH)
             else:
-                if not wait_for_invent_item_xy("Inventory_Giant_Pouch", threshold=0.96):
+                if not wait_for_invent_item_xy("Inventory_Giant_Pouch", threshold=0.92):
                     return
                 # does_img_exist(img_name=f"Inventory_Giant_Pouch", script_name="Cwars_Lavas", threshold=0.96,
                 #                img_sel="first")
