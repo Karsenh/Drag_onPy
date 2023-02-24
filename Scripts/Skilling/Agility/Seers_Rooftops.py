@@ -7,7 +7,7 @@ from API.Imaging.Image import wait_for_img, get_existing_img_xy, does_img_exist
 import pyautogui as pag
 
 CURR_JUMP_NUM = 1
-ALCH_ITEM = "magic_long_note"
+ALCH_ITEM = "green_dhide_body_note"
 SHOULD_ALCH = True
 
 # OPTIONS
