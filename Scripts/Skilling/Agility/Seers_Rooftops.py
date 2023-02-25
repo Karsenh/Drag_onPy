@@ -171,7 +171,7 @@ def handle_next_jump():
     elif CURR_JUMP_NUM == 6:
         print('click move_back image')
         if not wait_for_img(img_name="move_back_alt", script_name="Seers_Rooftops", threshold=0.9, should_click=True, x_offset=25,
-                 y_offset=25, max_wait_sec=45):
+                 y_offset=25, max_wait_sec=10):
             if does_img_exist(img_name='at_course_end_flag', script_name='Seers_Rooftops', threshold=0.9):
                 flower_tile_xy = 1116, 278
                 mouse_long_click(flower_tile_xy)
