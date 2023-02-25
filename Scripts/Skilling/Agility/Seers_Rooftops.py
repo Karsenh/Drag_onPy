@@ -119,7 +119,11 @@ def handle_next_jump():
                 print(f'Found a Mark of Grace and clicked it... Looking for jump_{CURR_JUMP_NUM}_from_mog')
                 API.AntiBan.sleep_between(0.6, 0.7)
 
-                if not wait_for_img(img_name=f"jump_{CURR_JUMP_NUM}_from_mog", script_name="Seers_Rooftops", x_offset=12, should_click=True):
+                y_offset = 0
+                if CURR_JUMP_NUM == 3:
+                    y_offset = 10
+
+                if not wait_for_img(img_name=f"jump_{CURR_JUMP_NUM}_from_mog", script_name="Seers_Rooftops", x_offset=12, y_offset=y_offset, should_click=True):
                     return False
 
             # Check if an alt mog is present...
