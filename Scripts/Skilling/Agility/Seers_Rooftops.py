@@ -1,7 +1,7 @@
 import random
 
 import API.AntiBan
-from API.Mouse import mouse_click, mouse_move
+from API.Mouse import mouse_click, mouse_move, mouse_long_click
 from API.Interface.General import setup_interface, is_tab_open
 from API.Imaging.Image import wait_for_img, get_existing_img_xy, does_img_exist
 import pyautogui as pag
@@ -79,7 +79,7 @@ def alch_on_agility_drop():
             return
 
     if CURR_JUMP_NUM != 7:
-        if wait_for_img(img_name="agility_exp", script_name="Seers_Rooftops", max_wait_sec=15):
+        if wait_for_img(img_name="Agility", category='Exp_Drops', max_wait_sec=15):
             print(f'Saw agility exp - clicking to alch magic long...')
             pag.leftClick()
         else:
@@ -113,7 +113,7 @@ def handle_next_jump():
         if CURR_JUMP_NUM in jumps_with_mog:
             print("This roof has a Mark of Grace spawn that we're checking...")
             if CURR_JUMP_NUM == 3:
-                API.AntiBan.sleep_between(1.7, 1.8)
+                API.AntiBan.sleep_between(.6, .7)
 
             if does_img_exist(img_name=f"mog_on_{CURR_JUMP_NUM}", script_name="Seers_Rooftops", threshold=0.9, should_click=True, x_offset=5, y_offset=5):
                 print(f'Found a Mark of Grace and clicked it... Looking for jump_{CURR_JUMP_NUM}_from_mog')
@@ -134,19 +134,24 @@ def handle_next_jump():
 
             else:
                 if not wait_for_img(img_name=f"jump_{CURR_JUMP_NUM}", script_name="Seers_Rooftops", threshold=0.80, should_click=True, x_offset=10, y_offset=14):
-                    if not wait_for_img(img_name=f"jump_{CURR_JUMP_NUM - 1}", script_name="Seers_Rooftops", threshold=0.80,
-                                        should_click=True, x_offset=10, y_offset=10):
-                        if wait_for_img(img_name=f"fall_on_{CURR_JUMP_NUM}", script_name="Seers_Rooftops"):
-                            print(f'We seem to have fallen looking for jump_num: {CURR_JUMP_NUM} - but we can get up...')
-                            if CURR_JUMP_NUM == 2:
-                                recover_xy = 1176, 586
-                            if CURR_JUMP_NUM == 3:
-                                recover_xy = 1204, 338
-                            # Reset the jump number since we're back to the start
-                            CURR_JUMP_NUM = 0
-                            mouse_click(recover_xy)
-                        else:
+                    if CURR_JUMP_NUM == 1:
+                        if not wait_for_img(img_name=f"jump_{CURR_JUMP_NUM}", script_name="Seers_Rooftops",
+                                            threshold=0.70, should_click=True, x_offset=10, y_offset=14):
                             return False
+                    else:
+                        if not wait_for_img(img_name=f"jump_{CURR_JUMP_NUM - 1}", script_name="Seers_Rooftops", threshold=0.80,
+                                            should_click=True, x_offset=10, y_offset=10):
+                            if wait_for_img(img_name=f"fall_on_{CURR_JUMP_NUM}", script_name="Seers_Rooftops"):
+                                print(f'We seem to have fallen looking for jump_num: {CURR_JUMP_NUM} - but we can get up...')
+                                if CURR_JUMP_NUM == 2:
+                                    recover_xy = 1176, 586
+                                if CURR_JUMP_NUM == 3:
+                                    recover_xy = 1204, 338
+                                # Reset the jump number since we're back to the start
+                                CURR_JUMP_NUM = 0
+                                mouse_click(recover_xy)
+                            else:
+                                return False
         else:
             if not wait_for_img(img_name=f"jump_{CURR_JUMP_NUM}", script_name="Seers_Rooftops", threshold=0.80, should_click=True, x_offset=10, y_offset=14):
                 print(f"Couldn't find curr_jump_num ({CURR_JUMP_NUM} - Looking for previous jump before looking for fall")
@@ -167,7 +172,11 @@ def handle_next_jump():
         print('click move_back image')
         if not wait_for_img(img_name="move_back_alt", script_name="Seers_Rooftops", threshold=0.9, should_click=True, x_offset=25,
                  y_offset=25, max_wait_sec=45):
-            return False
+            if does_img_exist(img_name='at_course_end_flag', script_name='Seers_Rooftops', threshold=0.9):
+                flower_tile_xy = 1116, 278
+                mouse_long_click(flower_tile_xy)
+                return does_img_exist(img_name='walk_here_option', script_name='Seers_Rooftops', threshold=0.85, should_click=True, click_middle=True)
+
     else:
         # else jump_num == 7 | reset it back to 1 (0 + 1) after restarting course
         print('click restart_course image')

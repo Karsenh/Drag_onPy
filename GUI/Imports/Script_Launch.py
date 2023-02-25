@@ -211,7 +211,7 @@ def launch_script(script_name="pisc_iron"):
             antiban_downtime_sec = 8
         case "Seers_Rooftops":
             selected_script = ScriptEnum.SEERS_ROOFTOPS.value
-            antiban_likelihood = 50
+            antiban_likelihood = 0
             antiban_downtime_sec = 0.5
         case "feldip_single_trap_crimsons":
             selected_script = ScriptEnum.BIRD_SNARER.value
