@@ -63,6 +63,10 @@ def set_script_access(user_email, user_licenses):
     update_user_licenses(user_email, updated_lic_arr)
     # TODO: Update user sessions with used_licenses_arr
 
+    if not updated_lic_arr:
+        print(f'⛔ Found licenses but they were expired. No more licenses to check.')
+        return False
+
     return True
 
 

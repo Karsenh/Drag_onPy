@@ -80,14 +80,14 @@ def authenticate_user(form_vals, auth_top):
 
     if not validate_input(email, password):
         write_debug(f'⛔ Failed to validate auth input')
-        return -1
+        return False
 
     # Connect to mongoDb and get user
     authed_user = get_user(email, password)
 
     if not authed_user:
         print(f'⛔ User not authenticated.')
-        return -1
+        return False
     else:
         print(f'✅ User {authed_user.email} successfully authenticated.')
 
@@ -99,10 +99,11 @@ def authenticate_user(form_vals, auth_top):
 
     if not authed_user.licenses_arr:
         print(f'⛔ No licenses found for user {email}.')
-        return -1
+        return False
     else:
         print(f'✅ Successfully retrieved {len(authed_user.licenses_arr)} licenses for user {email}.')
-        set_script_access(email, authed_user.licenses_arr)
+        if not set_script_access(email, authed_user.licenses_arr):
+            return False
 
     if authed_user:
         auth_top.destroy()

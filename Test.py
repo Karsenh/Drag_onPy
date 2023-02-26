@@ -35,7 +35,17 @@ def __main__():
     capture_bluestacks()
     clear_debug_log()
 
-    launch_script("Seers_Rooftops")
+    launch_script("NMZ")
+
+    # does_img_exist(img_name='inventory_ovl_1', script_name='NMZ', threshold=0.94, should_click=True,
+    #                click_middle=True)
+
+    # color_check = 142, 261
+    # get_color_at_coords(color_check)
+
+
+
+    # does_img_exist(img_name='ovl_active_flag', script_name='NMZ', threshold=0.92)
 
     return
 
