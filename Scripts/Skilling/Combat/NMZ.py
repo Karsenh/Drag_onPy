@@ -58,7 +58,7 @@ def click_inventory_abs():
     inventory_abs_4_pot = get_existing_img_xy()
     for i in range(5):
         mouse_click(inventory_abs_4_pot)
-        API.AntiBan.sleep_between(2.6, 2.7)
+        API.AntiBan.sleep_between(1.6, 1.7)
     return True
 
 
