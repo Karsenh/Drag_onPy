@@ -36,7 +36,7 @@ def start_training_nmz(curr_loop):
 
     else:
         print(f'First loop')
-        # setup_interface('north', 3, 'up')
+        setup_interface('north', 3, 'up')
     return True
 
 
@@ -64,13 +64,13 @@ def click_inventory_abs():
 
 def click_inventory_ovl():
     is_tab_open('inventory', True)
-    if not does_img_exist(img_name='inventory_ovl_1', script_name=SCRIPT_NAME, threshold=0.96, should_click=True, click_middle=True):
+    if not does_img_exist(img_name='inventory_ovl_1', script_name=SCRIPT_NAME, threshold=0.98, should_click=True, click_middle=True):
         print(f'No inventory overload 1 dose - checking for 2 dose')
-        if not does_img_exist(img_name='inventory_ovl_2', script_name=SCRIPT_NAME, threshold=0.96, should_click=True, click_middle=True):
+        if not does_img_exist(img_name='inventory_ovl_2', script_name=SCRIPT_NAME, threshold=0.98, should_click=True, click_middle=True):
             print(f'No inventory overload 2 dose - checking for 3 dose')
-            if not does_img_exist(img_name='inventory_ovl_3', script_name=SCRIPT_NAME, threshold=0.96, should_click=True, click_middle=True):
+            if not does_img_exist(img_name='inventory_ovl_3', script_name=SCRIPT_NAME, threshold=0.98, should_click=True, click_middle=True):
                 print(f'No inventory overload 3 dose - checking for 4 dose')
-                if not does_img_exist(img_name='inventory_ovl_4', script_name=SCRIPT_NAME, threshold=0.96, should_click=True, click_middle=True):
+                if not does_img_exist(img_name='inventory_ovl_4', script_name=SCRIPT_NAME, threshold=0.98, should_click=True, click_middle=True):
                     print(f'No inventory overload 2 dose - checking for 3 dose')
                     return False
     API.AntiBan.sleep_between(8.0, 8.1)
