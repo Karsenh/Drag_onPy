@@ -79,25 +79,34 @@ def click_inventory_ovl():
 
 def click_inventory_cake():
     is_tab_open('inventory', True)
+    check_rock_cake_xy_set()
+
     if is_hp_gt(50):
         print(f'Need to overload')
         return False
     elif is_hp_gt(10):
         print(f'Need to guzzle')
-        guzzle_rock_cake()
-    else:
-        print(f'Need to click')
-        check_rock_cake_xy_set()
+        while is_hp_gt(10):
+            guzzle_rock_cake()
 
-        while needs_rock_cake():
-            mouse_click(get_cached_rock_cake_xy())
+    print(f'Move to clicking instead of guzzling...')
+
+    while needs_rock_cake():
+        mouse_click(get_cached_rock_cake_xy())
 
     return True
 
 
 def needs_abs():
+    # If the absorption potion icon isn't found at all - we don't have it active
+    if not does_img_exist(img_name='abs_active_flag', script_name=SCRIPT_NAME, threshold=0.9):
+        print(f'Absorption potion flag not found - Need abs')
+        return True
+
+    # Check if it's active but low
     abs_region_check = 113, 250, 188, 290
     abs_color = (255, 129, 129)
+
     return does_color_exist_in_sub_image(abs_region_check, abs_color, 'is_absorption_active', color_tolerance=30, count_min=50)
 
 
