@@ -73,7 +73,11 @@ def click_inventory_ovl():
                 if not does_img_exist(img_name='inventory_ovl_4', script_name=SCRIPT_NAME, threshold=0.98, should_click=True, click_middle=True):
                     print(f'No inventory overload 2 dose - checking for 3 dose')
                     return False
-    API.AntiBan.sleep_between(8.0, 8.1)
+    if needs_abs():
+        click_inventory_abs()
+        API.AntiBan.sleep_between(2.1, 2.2)
+    else:
+        API.AntiBan.sleep_between(8.0, 8.1)
     return True
 
 

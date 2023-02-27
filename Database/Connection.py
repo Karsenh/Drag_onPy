@@ -59,6 +59,7 @@ def print_user_data(user):
     return
 
 
+# Update the users licenses in the DB and local data
 def update_user_licenses(user_email, new_license_arr):
     print(f'Updating {user_email} document with new_license_arr of length: {len(new_license_arr)}')
 
