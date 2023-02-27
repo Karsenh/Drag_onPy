@@ -1,7 +1,7 @@
 import threading
 
 from Scripts.Skilling.Smithing.Edge_Gold import smith_gold_edge
-from Scripts.Skilling.Mining.Iron.Pisc_Iron import mine_iron_pisc
+from Scripts.Skilling.Mining.Pisc_Iron_Miner import mine_pisc_iron
 from Scripts.Skilling.Agility.Gnome_Course import run_gnome_course
 from Scripts.Skilling.Fishing.Shrimp.Draynor_Shrimp import fish_draynor_shrimp
 from Scripts.Skilling.Fishing.Trout.Barb_Trout import fish_barb_trout
@@ -114,7 +114,7 @@ def launch_script(script_name="pisc_iron"):
         BLAST_FURNACE = 39
         NMZ = 40
 
-    all_scripts = [mine_iron_pisc, smith_gold_edge, run_gnome_course,
+    all_scripts = [mine_pisc_iron, smith_gold_edge, run_gnome_course,
                    fish_draynor_shrimp, fish_barb_trout, barbarian_fishing,
                    pickpocket_draynor_man, steal_ardy_cake, burn_logs_at_ge,
                    start_trawling, start_killing_cows, start_rogue_cooking,
@@ -129,7 +129,7 @@ def launch_script(script_name="pisc_iron"):
                    start_catching_black_lizards, start_catching_chins, start_blasting, start_training_nmz]
 
     match script_name:
-        case "pisc_iron":
+        case "Pisc_Iron_Miner":
             selected_script = ScriptEnum.PISC_IRON.value
             # 1 / x
             antiban_likelihood = 50

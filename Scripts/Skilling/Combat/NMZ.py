@@ -60,6 +60,11 @@ def click_inventory_abs():
 
 def click_inventory_ovl():
     is_tab_open('inventory', True)
+    # Check if we can even click the overload
+    if not is_hp_gt(50):
+        print(f"🔴 Can't use overload right now - health not above 50%")
+        return False
+
     if not does_img_exist(img_name='inventory_ovl_1', script_name=SCRIPT_NAME, threshold=0.98, should_click=True, click_middle=True):
         print(f'No inventory overload 1 dose - checking for 2 dose')
         if not does_img_exist(img_name='inventory_ovl_2', script_name=SCRIPT_NAME, threshold=0.98, should_click=True, click_middle=True):
@@ -120,7 +125,7 @@ def needs_rock_cake():
         return False
     if not does_img_exist(img_name='hp_2', script_name=SCRIPT_NAME):
         if does_img_exist(img_name='hp_3', script_name=SCRIPT_NAME):
-            print(f'Hp = 2 - Use inventory rock cake.')
+            print(f'Hp = 2 or 3 - Use inventory rock cake.')
             return True
         else:
             print(f'Found neither 2 or 3 hp...? - Use cake in case ')

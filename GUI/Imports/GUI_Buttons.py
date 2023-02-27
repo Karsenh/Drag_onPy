@@ -1,18 +1,15 @@
-from Database.Script_Access import cow_killer_script, pisc_iron_script, motherlode_mine_script, \
-    kourend_crab_killer_script, blast_furance_script, black_lizards_script, dhide_bodies_script, \
-    tithe_farmer_script, gnome_agility_script, canifis_rooftops, seers_rooftops, rogue_cooker_script, \
-    ge_glass_blower_script, poh_larders_script, poh_tables_script, hosidius_plough_script, \
-    ge_sulphurous_fertilizer_script, draynor_shrimp_script, barb_trout_script, barb_fishing_script, \
-    ge_dart_fletcher_script, ge_log_burner_script, crimson_swift_script, cerulean_twitches, red_lizards_script, \
-    desert_lizards_script, draynor_man_script, ardy_cake_script, hosidius_fruit_script, ardy_knight_script, \
-    chop_fletcher_script, sw_teaks_script, cwars_lavas_script, gilded_altar_script, edge_gold_script, red_chins_script, \
-    unf_pots_script, cball_smithing_script
+from Database.Script_Access import gnome_agility_script, seers_rooftops, canifis_rooftops, cow_killer_script, \
+    kourend_crab_killer_script, rogue_cooker_script, ge_glass_blower_script, dhide_bodies_script, poh_larders_script, \
+    poh_tables_script, hosidius_plough_script, ge_sulphurous_fertilizer_script, tithe_farmer_script, \
+    draynor_shrimp_script, barb_trout_script, barb_fishing_script, ge_dart_fletcher_script, ge_log_burner_script, \
+    unf_pots_script, crimson_swift_script, cerulean_twitches, desert_lizards_script, red_lizards_script, \
+    black_lizards_script, red_chins_script, pisc_iron_script, motherlode_mine_script, gilded_altar_script, \
+    cwars_lavas_script, edge_gold_script, blast_furance_script, draynor_man_script, ardy_cake_script, \
+    hosidius_fruit_script, ardy_knight_script, chop_fletcher_script, sw_teaks_script, cball_smithing_script
 from GUI.Imports.GUI_Frames import *
-from Scripts.Skilling.Mining.Iron.Pisc_Iron import *
+from Scripts.Skilling.Mining.Pisc_Iron_Miner import *
 from GUI.Imports.PreLaunch_Gui.PreLaunch_Gui import show_plg
 from GUI.Imports.Skill_Level_Input.Skill_Level_Input import show_skill_input_frame
-
-from GUI.Imports.Script_Launch import *
 
 frame_bg_color = '#969488'
 label_frame_bg_color = '#a5a195'
@@ -194,7 +191,7 @@ def get_all_btns(all_frames, all_images, root):
 
     #     Magic
     #     Mining
-    pisc_iron_btn = new_script_start_btn(mining_frame, "Pisc_Iron", pisc_iron_script.btn_state)
+    pisc_iron_btn = new_script_start_btn(mining_frame, "Pisc_Iron_Miner", pisc_iron_script.btn_state)
     motherlode_miner_btn = new_script_start_btn(mining_frame, "Motherlode_Miner", motherlode_mine_script.btn_state)
     mining_sub_btns = pisc_iron_btn, motherlode_miner_btn
 
