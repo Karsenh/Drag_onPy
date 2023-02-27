@@ -10,10 +10,6 @@ SKILL_TO_TRAIN = 'str'
 USE_DHAROKS = True
 CACHED_INVENT_ROCK_CAKE_XY = None
 
-# TODO:
-# 1. Add guzzle on rock cake if above 10 percent
-# 2. Add check for
-
 
 def start_training_nmz(curr_loop):
     if curr_loop != 1:
