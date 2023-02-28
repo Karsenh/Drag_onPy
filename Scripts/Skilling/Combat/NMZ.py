@@ -17,10 +17,12 @@ IS_OUTSIDE = False
 def set_is_outside(new_val):
     global IS_OUTSIDE
     IS_OUTSIDE = new_val
+    print(f'set_is_outside({new_val}) fired')
     return IS_OUTSIDE
 
 
 def get_is_outside():
+    print(f'get_is_outside fired: {IS_OUTSIDE}')
     return IS_OUTSIDE
 
 
@@ -35,14 +37,14 @@ def start_training_nmz(curr_loop):
                 if is_outside_dream():
                     set_is_outside(True)
 
-        if needs_ovl and not get_is_outside():
+        if needs_ovl() and not get_is_outside():
             print(f'💪🏼 NEED TO OVERLOAD')
             if not click_inventory_ovl():
                 print(f'Out of Overloads - Checking if we are outside yet...')
                 if is_outside_dream():
                     set_is_outside(True)
 
-        while needs_rock_cake and not get_is_outside():
+        while needs_rock_cake() and not get_is_outside():
             print(f'🎂 NEED ROCK CAKE - CLICKING INVENTORY CAKE')
             if not click_inventory_cake():
                 print(f'FAILED TO FIND INVENTORY ROCK')
@@ -69,6 +71,7 @@ def start_training_nmz(curr_loop):
 # -------
 def click_inventory_abs():
     set_is_outside(get_is_outside())
+
     if not get_is_outside():
         is_tab_open('inventory', True)
         if not does_img_exist(img_name='inventory_abs_4', script_name=SCRIPT_NAME, threshold=0.94, should_click=True, click_middle=True):
@@ -259,7 +262,7 @@ def withdraw_ovls():
 
 
 def restock_doses_from_chest():
-    if does_img_exist(img_name='rewards_chest', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True):
+    if wait_for_img(img_name='rewards_chest', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True):
         print(f'Found rewards chest...')
 
     else:
@@ -336,7 +339,7 @@ def drop_pots_from_invent(pot_type, dose_num):
 
 def needs_abs():
     # If the absorption potion icon isn't found at all - we don't have it active
-    if not does_img_exist(img_name='abs_active_flag_alt', script_name=SCRIPT_NAME, threshold=0.9):
+    if not does_img_exist(img_name='abs_active_flag_alt', script_name=SCRIPT_NAME, threshold=0.98):
         print(f'Absorption potion flag not found - Need abs')
         return True
 
