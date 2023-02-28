@@ -1,5 +1,7 @@
+import pyautogui
+
 import API.AntiBan
-from API.Interface.General import setup_interface, is_tab_open, is_run_on, is_run_gt, is_hp_gt
+from API.Interface.General import setup_interface, is_tab_open, is_run_on, is_run_gt, is_hp_gt, is_otd_enabled
 from API.Imaging.Image import wait_for_img, does_img_exist, does_color_exist_in_sub_image, get_existing_img_xy
 from API.Mouse import mouse_click, mouse_long_click
 from API.Debug import write_debug
@@ -9,6 +11,17 @@ SCRIPT_NAME = 'NMZ'
 SKILL_TO_TRAIN = 'str'
 USE_DHAROKS = True
 CACHED_INVENT_ROCK_CAKE_XY = None
+IS_OUTSIDE = False
+
+
+def set_is_outside(new_val):
+    global IS_OUTSIDE
+    IS_OUTSIDE = new_val
+    return IS_OUTSIDE
+
+
+def get_is_outside():
+    return IS_OUTSIDE
 
 
 def start_training_nmz(curr_loop):
@@ -18,21 +31,36 @@ def start_training_nmz(curr_loop):
         if needs_abs():
             print(f'🧪 NEED ABSORPTION POTION')
             if not click_inventory_abs():
-                print(f'Exiting script - out of absorptions')
-                return False
+                print(f'Out of Absorptions - Checking if we are outside yet...')
+                if is_outside_dream():
+                    set_is_outside(True)
 
         if needs_ovl():
             print(f'💪🏼 NEED TO OVERLOAD')
-            click_inventory_ovl()
+            if not click_inventory_ovl():
+                print(f'Out of Overloads - Checking if we are outside yet...')
+                if is_outside_dream():
+                    set_is_outside(True)
 
         while needs_rock_cake():
             print(f'🎂 NEED ROCK CAKE - CLICKING INVENTORY CAKE')
             if not click_inventory_cake():
                 print(f'FAILED TO FIND INVENTORY ROCK')
 
+        if get_is_outside():
+            if is_outside_dream():
+                if not restart_dream():
+                    return False
+                else:
+                    set_is_outside(False)
+
     else:
         print(f'First loop')
         # setup_interface('north', 3, 'up')
+        if is_outside_dream():
+            if not restart_dream():
+                return False
+
     return True
 
 
@@ -102,6 +130,199 @@ def click_inventory_cake():
     return True
 
 
+def restart_dream():
+    # TODO - Check if money in coffer with Onion man dialogue (kind of already does if we dont purchase new dream)
+
+    # 1. Drop remaining absorptions and ovls from inventory
+    drop_all_inventory_pots()
+
+    # 2. Purchase another dream from Onion man
+    if not purchase_new_dream():
+        return False
+
+    # 3. Purchase 88 doses of Absorption & 20 doses of Overload from the chest
+    if not restock_doses_from_chest():
+        return False
+
+    # 4. Take 20 doses of Overload from the barrel
+    withdraw_ovls()
+
+    # 5. Take 88 doses of Absorption from the barrel
+    withdraw_abs()
+
+    # 6. Click to enter dream
+    if not enter_dream():
+        return False
+
+    # 7. Confirm we're in dream and return True if so - else return False
+    return is_in_dream()
+
+
+# -------
+# HELPERS
+# -------
+def is_in_dream():
+    return wait_for_img(img_name='inside_dream_flag', script_name=SCRIPT_NAME, threshold=0.9, max_wait_sec=8)
+
+
+def enter_dream():
+    # FROM Absorption potion
+    if not does_img_exist(img_name='dream_vial_from_abs', script_name=SCRIPT_NAME, threshold=0.9):
+        print(f'Failed to find dream_vial_from_abs')
+        dream_vial_xy = 1034, 439
+    else:
+        dream_vial_xy = get_existing_img_xy()
+
+    mouse_long_click(dream_vial_xy)
+    if not does_img_exist(img_name='drink_option', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True):
+        print(f'Failed to find drink option on vial from absorptions...')
+        if not does_img_exist(img_name='cancel_option', script_name=SCRIPT_NAME, threshold=0.9):
+            print(f'Failed to find cancel option on vial long click')
+            return False
+        if not does_img_exist(img_name='drink_option', script_name=SCRIPT_NAME, threshold=0.9, should_click=True,
+                              click_middle=True):
+            print(f'Failed to find drink option for a second time - exiting...')
+            return False
+
+    return True
+
+
+def withdraw_abs():
+    # FROM Rewards Chest
+    abs_qty = '88'
+
+    if not does_img_exist(img_name='absorption_barrel_from_overload_barrel', script_name=SCRIPT_NAME, threshold=0.9):
+        print(f'Failed to find absorption barrel from overload barrel... Hard-coding XY coords')
+        absorption_barrel_xy = 664, 356
+    else:
+        print(f'Found absorption_barrel_from_overload_barrel')
+        absorption_barrel_xy = get_existing_img_xy()
+
+    mouse_long_click(absorption_barrel_xy)
+
+    if not sel_take_option():
+        print(f'Failed to sel_take_option (abs)...')
+        return False
+
+    for num_char in abs_qty:
+        pyautogui.press(num_char)
+
+    pyautogui.press('enter')
+
+    if not wait_for_img(img_name='inventory_abs_4', script_name=SCRIPT_NAME, threshold=0.9, img_sel='inventory'):
+        print(f'Failed to find absorptions in inventory after supposedly withdrawing {abs_qty} doses...')
+        return False
+
+    print(f'✔ Successfully withdrew {abs_qty} doses of absorption potion')
+    return
+
+
+def withdraw_ovls():
+    # FROM Rewards Chest
+    ovl_qty = '20'
+
+    if not does_img_exist(img_name='overload_barrel_from_rewards_chest', script_name=SCRIPT_NAME, threshold=0.9):
+        print(f'Failed to find overload barrel from rewards chest... Hard-coding XY coords')
+        overload_barrel_xy = 93, 590
+    else:
+        print(f'Found overload_barrel_from_rewards_chest')
+        overload_barrel_xy = get_existing_img_xy()
+
+    mouse_long_click(overload_barrel_xy)
+
+    if not sel_take_option():
+        print(f'Failed to sel_take_option...')
+        return False
+
+    for num_char in ovl_qty:
+        pyautogui.press(num_char)
+
+    pyautogui.press('enter')
+
+    if not wait_for_img(img_name='inventory_ovl_4', script_name=SCRIPT_NAME, threshold=0.9, img_sel='inventory'):
+        print(f'Failed to find overloads in inventory after supposedly withdrawing {ovl_qty} doses...')
+        return False
+
+    print(f'✔ Successfully withdrew {ovl_qty} doses of overload potion')
+    return True
+
+
+def restock_doses_from_chest():
+    if does_img_exist(img_name='rewards_chest', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True):
+        print(f'Found rewards chest...')
+
+    else:
+        print(f'Failed to find rewards chest to restock potion doses...')
+        chest_xy = 820, 167
+        mouse_click(chest_xy)
+
+    if not is_reward_chest_open():
+        print(f'Failed to see rewards chest open (benefits btn)')
+        return False
+
+    if not is_on_benefits_page():
+        print(f'Failed to find potions on benefits page')
+        return False
+
+    buy_88_abs()
+
+    buy_20_ovl()
+
+    return True
+
+
+def purchase_new_dream():
+    if does_img_exist(img_name='dom_onion', script_name=SCRIPT_NAME, threshold=0.85):
+        print(f'Found Dom!')
+        dom_xy = get_existing_img_xy()
+        mouse_long_click(dom_xy)
+    else:
+        print(f'Failed to find Dominic Onion... using raw XY coords')
+        dom_xy = 751, 374
+        mouse_long_click(dom_xy)
+
+    if not sel_dream_option():
+        print(f'Failed to find Dream option...')
+
+    if not sel_previous_dream_option():
+        print(f'Failed to find previous dream option in chat dialogue...')
+
+    if not sel_tap_to_cont():
+        print(f'Failed to tap to continue (1)')
+
+    if not sel_yes_option():
+        print(f'Failed to find Yes option in chat dialogue...')
+
+    if not sel_tap_to_cont():
+        print(f'Failed to tap to continue (2)')
+
+    return True
+
+
+def drop_all_inventory_pots():
+    is_tab_open('inventory', True)
+    is_otd_enabled(True)
+
+    dose_arr = [1, 2, 3, 4]
+
+    for dose in dose_arr:
+        # Overload
+        drop_pots_from_invent('ovl', dose)
+        # Absorption
+        drop_pots_from_invent('abs', dose)
+
+    # TODO: Double check there are no pots in inventory here before returning
+
+    is_otd_enabled(False)
+    return
+
+
+def drop_pots_from_invent(pot_type, dose_num):
+    while does_img_exist(img_name=f'inventory_{pot_type}_{dose_num}', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True):
+        print(f'Dropping overload 1 dose')
+    return
+
+
 def needs_abs():
     # If the absorption potion icon isn't found at all - we don't have it active
     if not does_img_exist(img_name='abs_active_flag', script_name=SCRIPT_NAME, threshold=0.9):
@@ -134,9 +355,6 @@ def needs_rock_cake():
     return False
 
 
-# -------
-# HELPERS
-# -------
 def set_cached_rock_cake_xy(new_xy):
     global CACHED_INVENT_ROCK_CAKE_XY
     CACHED_INVENT_ROCK_CAKE_XY = new_xy
@@ -181,3 +399,86 @@ def check_rock_cake_xy_set():
             return False
         set_cached_rock_cake_xy(get_existing_img_xy())
     return
+
+
+def is_outside_dream():
+    return does_img_exist(img_name='outside_flag', script_name=SCRIPT_NAME, threshold=0.85)
+
+
+def sel_dream_option():
+    return does_img_exist(img_name='dream_option', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True)
+
+
+def sel_previous_dream_option():
+    return wait_for_img(img_name='previous_option', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True)
+
+
+def sel_tap_to_cont():
+    return wait_for_img(img_name='tap_to_continue_option', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True)
+
+
+def sel_yes_option():
+    return wait_for_img(img_name='yes_option', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True)
+
+
+def is_reward_chest_open():
+    return wait_for_img(img_name='rewards_benefits_btn', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True)
+
+
+def is_on_benefits_page():
+    return does_img_exist(img_name='absorption_benefit', script_name=SCRIPT_NAME, threshold=0.9)
+
+
+def buy_88_abs():
+    if not does_img_exist(img_name='absorption_benefit', script_name=SCRIPT_NAME, threshold=0.9):
+        print(f'Failed to find absorption which is weird because we made it this far and this is a flag...')
+        return False
+
+    x, y = get_existing_img_xy()
+    abs_benefit_xy = x+10, y+10
+    mouse_long_click(abs_benefit_xy)
+
+    sel_buy_x('88')
+
+
+    return
+
+
+def buy_20_ovl():
+    if not does_img_exist(img_name='overload_benefit', script_name=SCRIPT_NAME, threshold=0.9):
+        print(f'Failed to find overload which is weird because we made it this far and found absorption...')
+        return False
+
+    x, y = get_existing_img_xy()
+    ovl_benefit = x+10, y+10
+    mouse_long_click(ovl_benefit)
+
+    sel_buy_x('20')
+    return
+
+
+def sel_buy_x(qty):
+    does_img_exist(img_name='buy_x_option', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True)
+    if not wait_for_img(img_name='enter_amount_dialogue', script_name=SCRIPT_NAME, threshold=0.9):
+        print(f'Failed to see Enter Amount Dialogue - did we click Buy_X_Option correctly?')
+        return False
+
+    for num_char in qty:
+        pyautogui.press(num_char)
+
+    pyautogui.press('enter')
+
+    return True
+
+
+def sel_take_option():
+    # Select 'take' from potion barrels
+    does_img_exist(img_name='take_option', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True)
+
+    if not wait_for_img(img_name='is_in_take_qty_dialogue', script_name=SCRIPT_NAME, threshold=0.9):
+        print(f'Failed to find TAKE qty dialogue from potion barrels...')
+        if not wait_for_img(img_name='cancel_option', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True):
+            print(f'Failed to find cancel')
+            return False
+
+    return True

@@ -1,3 +1,5 @@
+import pyautogui
+
 import API.AntiBan
 from GUI.Main_GUI import show_main_gui
 from API.Debug import clear_debug_log
@@ -7,6 +9,8 @@ from API.Imports.Paths import BS_SCREEN_PATH
 from GUI.Imports.Script_Launch import launch_script
 from GUI.Imports.Skill_Level_Input.Skill_Level_Input import get_skill_level, update_skill_level
 from API.Interface.Bank import is_bank_tab_open
+from Scripts.Skilling.Combat.NMZ import drop_pots_from_invent, purchase_new_dream, restock_doses_from_chest, \
+    withdraw_ovls, withdraw_abs
 from Scripts.Skilling.Mining.Motherlode_Miner import claim_ore
 
 import sys
@@ -35,7 +39,19 @@ def __main__():
     capture_bluestacks()
     clear_debug_log()
 
-    launch_script("NMZ")
+    # launch_script("NMZ")
+
+    qty = '88'
+
+    # restock_doses_from_chest()
+
+    # withdraw_ovls()
+
+    withdraw_abs()
+
+
+    # purchase_new_dream()
+
 
     # does_img_exist(img_name='inventory_ovl_1', script_name='NMZ', threshold=0.94, should_click=True,
     #                click_middle=True)
