@@ -134,7 +134,7 @@ def click_inventory_cake():
     print(f'Move to clicking instead of guzzling...')
     set_is_outside(is_outside_dream())
 
-    while needs_rock_cake() and not get_is_outside():
+    while needs_rock_cake() and not needs_ovl() and not get_is_outside():
         mouse_click(get_cached_rock_cake_xy())
 
     return True
