@@ -39,7 +39,7 @@ def __main__():
     capture_bluestacks()
     clear_debug_log()
 
-    # launch_script("NMZ")
+    launch_script("NMZ")
 
     qty = '88'
 
@@ -47,7 +47,7 @@ def __main__():
 
     # withdraw_ovls()
 
-    withdraw_abs()
+    # withdraw_abs()
 
 
     # purchase_new_dream()

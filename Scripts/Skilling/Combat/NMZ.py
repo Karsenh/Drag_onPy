@@ -184,6 +184,10 @@ def enter_dream():
             print(f'Failed to find drink option for a second time - exiting...')
             return False
 
+    if not wait_for_img(img_name='click_accept_to_enter', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True):
+        print(f'Failed to find Accept button to enter dream')
+        return False
+
     return True
 
 
@@ -318,7 +322,7 @@ def drop_all_inventory_pots():
 
 
 def drop_pots_from_invent(pot_type, dose_num):
-    while does_img_exist(img_name=f'inventory_{pot_type}_{dose_num}', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True):
+    while does_img_exist(img_name=f'inventory_{pot_type}_{dose_num}', script_name=SCRIPT_NAME, threshold=0.96, should_click=True, click_middle=True):
         print(f'Dropping overload 1 dose')
     return
 
