@@ -39,8 +39,10 @@ def __main__():
     capture_bluestacks()
     clear_debug_log()
 
-    launch_script("NMZ")
+    # launch_script("NMZ")
 
+
+    does_img_exist(img_name='abs_active_flag_alt', script_name='NMZ', threshold=0.98, should_click=True, click_middle=True)
     qty = '88'
 
     # restock_doses_from_chest()

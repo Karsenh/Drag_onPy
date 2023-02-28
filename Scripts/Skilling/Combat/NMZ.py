@@ -35,14 +35,14 @@ def start_training_nmz(curr_loop):
                 if is_outside_dream():
                     set_is_outside(True)
 
-        if needs_ovl():
+        if needs_ovl and not get_is_outside():
             print(f'💪🏼 NEED TO OVERLOAD')
             if not click_inventory_ovl():
                 print(f'Out of Overloads - Checking if we are outside yet...')
                 if is_outside_dream():
                     set_is_outside(True)
 
-        while needs_rock_cake():
+        while needs_rock_cake and not get_is_outside():
             print(f'🎂 NEED ROCK CAKE - CLICKING INVENTORY CAKE')
             if not click_inventory_cake():
                 print(f'FAILED TO FIND INVENTORY ROCK')
@@ -68,21 +68,23 @@ def start_training_nmz(curr_loop):
 # METHODS
 # -------
 def click_inventory_abs():
-    is_tab_open('inventory', True)
-    if not does_img_exist(img_name='inventory_abs_4', script_name=SCRIPT_NAME, threshold=0.94, should_click=True, click_middle=True):
-        print(f'No inventory absorption pots (4) found')
-        if not does_img_exist(img_name='inventory_abs_3', script_name=SCRIPT_NAME, threshold=0.94, should_click=True, click_middle=True):
-            print(f'No inventory absorption pots (3) found')
-            if not does_img_exist(img_name='inventory_abs_2', script_name=SCRIPT_NAME, threshold=0.94, should_click=True, click_middle=True):
-                print(f'No inventory absorption pots (2) found')
-                if not does_img_exist(img_name='inventory_abs_1', script_name=SCRIPT_NAME, threshold=0.94,
-                                      should_click=True, click_middle=True):
-                    print(f'No inventory absorption pots (1) found')
-                    return False
-    inventory_abs_4_pot = get_existing_img_xy()
-    for i in range(5):
-        mouse_click(inventory_abs_4_pot)
-        API.AntiBan.sleep_between(1.6, 1.7)
+    set_is_outside(get_is_outside())
+    if not get_is_outside():
+        is_tab_open('inventory', True)
+        if not does_img_exist(img_name='inventory_abs_4', script_name=SCRIPT_NAME, threshold=0.94, should_click=True, click_middle=True):
+            print(f'No inventory absorption pots (4) found')
+            if not does_img_exist(img_name='inventory_abs_3', script_name=SCRIPT_NAME, threshold=0.94, should_click=True, click_middle=True):
+                print(f'No inventory absorption pots (3) found')
+                if not does_img_exist(img_name='inventory_abs_2', script_name=SCRIPT_NAME, threshold=0.94, should_click=True, click_middle=True):
+                    print(f'No inventory absorption pots (2) found')
+                    if not does_img_exist(img_name='inventory_abs_1', script_name=SCRIPT_NAME, threshold=0.94,
+                                          should_click=True, click_middle=True):
+                        print(f'No inventory absorption pots (1) found')
+                        return False
+        inventory_abs_4_pot = get_existing_img_xy()
+        for i in range(5):
+            mouse_click(inventory_abs_4_pot)
+            API.AntiBan.sleep_between(1.6, 1.7)
     return True
 
 
@@ -93,20 +95,23 @@ def click_inventory_ovl():
         print(f"🔴 Can't use overload right now - health not above 50%")
         return False
 
-    if not does_img_exist(img_name='inventory_ovl_1', script_name=SCRIPT_NAME, threshold=0.98, should_click=True, click_middle=True):
-        print(f'No inventory overload 1 dose - checking for 2 dose')
-        if not does_img_exist(img_name='inventory_ovl_2', script_name=SCRIPT_NAME, threshold=0.98, should_click=True, click_middle=True):
-            print(f'No inventory overload 2 dose - checking for 3 dose')
-            if not does_img_exist(img_name='inventory_ovl_3', script_name=SCRIPT_NAME, threshold=0.98, should_click=True, click_middle=True):
-                print(f'No inventory overload 3 dose - checking for 4 dose')
-                if not does_img_exist(img_name='inventory_ovl_4', script_name=SCRIPT_NAME, threshold=0.98, should_click=True, click_middle=True):
-                    print(f'No inventory overload 2 dose - checking for 3 dose')
-                    return False
-    if needs_abs():
-        click_inventory_abs()
-        API.AntiBan.sleep_between(2.1, 2.2)
-    else:
-        API.AntiBan.sleep_between(8.0, 8.1)
+    set_is_outside(get_is_outside())
+
+    if not get_is_outside():
+        if not does_img_exist(img_name='inventory_ovl_1', script_name=SCRIPT_NAME, threshold=0.98, should_click=True, click_middle=True):
+            print(f'No inventory overload 1 dose - checking for 2 dose')
+            if not does_img_exist(img_name='inventory_ovl_2', script_name=SCRIPT_NAME, threshold=0.98, should_click=True, click_middle=True):
+                print(f'No inventory overload 2 dose - checking for 3 dose')
+                if not does_img_exist(img_name='inventory_ovl_3', script_name=SCRIPT_NAME, threshold=0.98, should_click=True, click_middle=True):
+                    print(f'No inventory overload 3 dose - checking for 4 dose')
+                    if not does_img_exist(img_name='inventory_ovl_4', script_name=SCRIPT_NAME, threshold=0.98, should_click=True, click_middle=True):
+                        print(f'No inventory overload 2 dose - checking for 3 dose')
+                        return False
+        if needs_abs():
+            click_inventory_abs()
+            API.AntiBan.sleep_between(2.1, 2.2)
+        else:
+            API.AntiBan.sleep_between(8.0, 8.1)
     return True
 
 
@@ -117,14 +122,16 @@ def click_inventory_cake():
     if is_hp_gt(50):
         print(f'Need to overload')
         return False
+
     elif is_hp_gt(10):
         print(f'Need to guzzle')
         while is_hp_gt(10):
             guzzle_rock_cake()
 
     print(f'Move to clicking instead of guzzling...')
+    set_is_outside(is_outside_dream())
 
-    while needs_rock_cake():
+    while needs_rock_cake() and not get_is_outside():
         mouse_click(get_cached_rock_cake_xy())
 
     return True
@@ -329,7 +336,7 @@ def drop_pots_from_invent(pot_type, dose_num):
 
 def needs_abs():
     # If the absorption potion icon isn't found at all - we don't have it active
-    if not does_img_exist(img_name='abs_active_flag', script_name=SCRIPT_NAME, threshold=0.9):
+    if not does_img_exist(img_name='abs_active_flag_alt', script_name=SCRIPT_NAME, threshold=0.9):
         print(f'Absorption potion flag not found - Need abs')
         return True
 
