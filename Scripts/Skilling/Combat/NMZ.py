@@ -32,7 +32,7 @@ def start_training_nmz(curr_loop):
 
     else:
         print(f'First loop')
-        setup_interface('north', 3, 'up')
+        # setup_interface('north', 3, 'up')
     return True
 
 
