@@ -128,7 +128,7 @@ def click_inventory_cake():
         print(f'Need to overload')
         return False
 
-    elif is_hp_gt(10):
+    elif is_hp_gt(10) and not needs_ovl():
         print(f'Need to guzzle')
         while is_hp_gt(10):
             guzzle_rock_cake()
