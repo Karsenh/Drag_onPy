@@ -1,3 +1,5 @@
+import random
+
 from API.Imaging.Image import does_img_exist, does_color_exist, get_color_at_coords, wait_for_img, does_color_exist_in_thresh, does_color_exist_in_sub_image
 from API.Mouse import *
 from API.Imports.Coords import *
@@ -9,6 +11,23 @@ import math
 
 compass_xy = 1210, 70
 inventory_x, inventory_y = 1447, 403
+
+
+def relog():
+    is_tab_open('logout', True)
+    r_value = random.randint(1, 2)
+    should_thumb_up = r_value == 2
+
+    if should_thumb_up:
+        does_img_exist(img_name='logout_thumbs_up', category='interface', threshold=0.9, should_click=True, click_middle=True)
+
+    does_img_exist(img_name='tap_to_logout', category='interface', threshold=0.9, should_click=True, click_middle=True)
+
+    if not wait_for_img(img_name='login_screen', category='Auth', threshold=0.9, max_wait_sec=10):
+        return False
+
+    handle_auth_screens()
+    return
 
 
 def setup_interface(cam_dir="north", cam_distance=3, cam_angle="up"):
@@ -117,8 +136,10 @@ def is_tab_open(tab="inventory", should_be_open=True):
             check_tab_xy = EQUIPMENT_tab_xy
         case "combat":
             check_tab_xy = COMBAT_tab_xy
+        case "logout":
+            check_tab_xy = LOGOUT_tab_xy
 
-    print(f'Check_tab_xy = {check_tab_xy} ({tab})')
+    print(f'is_tab_open fired for {tab} = {check_tab_xy}')
 
     is_open = does_color_exist_in_thresh(check_tab_xy, open_tab_color, 15)
 

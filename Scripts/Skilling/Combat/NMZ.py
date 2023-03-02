@@ -1,7 +1,7 @@
 import pyautogui
 
 import API.AntiBan
-from API.Interface.General import setup_interface, is_tab_open, is_run_on, is_run_gt, is_hp_gt, is_otd_enabled
+from API.Interface.General import setup_interface, is_tab_open, is_run_on, is_run_gt, is_hp_gt, is_otd_enabled, relog
 from API.Imaging.Image import wait_for_img, does_img_exist, does_color_exist_in_sub_image, get_existing_img_xy
 from API.Mouse import mouse_click, mouse_long_click
 from API.Debug import write_debug
@@ -51,6 +51,8 @@ def start_training_nmz(curr_loop):
 
         if get_is_outside():
             if is_outside_dream():
+                relog()
+                setup_interface('north', 3, 'up')
                 if not restart_dream():
                     return False
                 else:
@@ -58,7 +60,7 @@ def start_training_nmz(curr_loop):
 
     else:
         print(f'First loop')
-        # setup_interface('north', 3, 'up')
+        setup_interface('north', 3, 'up')
         if is_outside_dream():
             if not restart_dream():
                 return False

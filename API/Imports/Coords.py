@@ -34,6 +34,9 @@ BANK_all_tab_xys = BANK_tab_0, BANK_tab_1, BANK_tab_2, BANK_tab_3, BANK_tab_4, B
 # -----
 # INTERFACE TABS
 # -----
+# LOGOUT
+LOGOUT_tab_xy = 1426, 767
+
 # INVENTORY
 INVENT_tab_xy = 1429, 373
 
