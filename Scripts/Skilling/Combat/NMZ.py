@@ -136,7 +136,7 @@ def click_inventory_cake():
     print(f'Move to clicking instead of guzzling...')
     set_is_outside(is_outside_dream())
 
-    while needs_rock_cake() and not get_is_outside():
+    while needs_rock_cake() and not needs_ovl() and not get_is_outside():
         mouse_click(get_cached_rock_cake_xy())
 
     return True
@@ -167,7 +167,7 @@ def restart_dream():
         return False
 
     # 7. Confirm we're in dream and return True if so - else return False
-    return is_in_dream()
+    return True
 
 
 # -------
@@ -349,7 +349,7 @@ def needs_abs():
     abs_region_check = 113, 250, 188, 290
     abs_color = (255, 129, 129)
 
-    return does_color_exist_in_sub_image(abs_region_check, abs_color, 'is_absorption_active', color_tolerance=30, count_min=50)
+    return does_color_exist_in_sub_image(abs_region_check, abs_color, 'is_absorption_active', color_tolerance=40, count_min=20)
 
 
 def needs_ovl():
