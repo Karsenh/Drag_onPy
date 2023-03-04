@@ -39,7 +39,7 @@ def __main__():
     capture_bluestacks()
     clear_debug_log()
 
-    # launch_script("NMZ")
+    launch_script("NMZ")
 
     # is_tab_open('logout', True)
     # does_img_exist(img_name='logout_thumbs_up', category='interface', threshold=0.9, should_click=True,
@@ -47,7 +47,7 @@ def __main__():
     #
     # does_img_exist(img_name='tap_to_logout', category='interface', threshold=0.9, should_click=True, click_middle=True)
 
-    relog()
+    # relog()
 
     qty = '88'
 

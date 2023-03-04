@@ -13,6 +13,9 @@ USE_DHAROKS = True
 CACHED_INVENT_ROCK_CAKE_XY = None
 IS_OUTSIDE = False
 
+ABS_QTY = '80'
+OVL_QTY = '28'
+
 
 def set_is_outside(new_val):
     global IS_OUTSIDE
@@ -205,7 +208,6 @@ def enter_dream():
 
 def withdraw_abs():
     # FROM Rewards Chest
-    abs_qty = '88'
 
     if not does_img_exist(img_name='absorption_barrel_from_overload_barrel', script_name=SCRIPT_NAME, threshold=0.9):
         print(f'Failed to find absorption barrel from overload barrel... Hard-coding XY coords')
@@ -220,22 +222,21 @@ def withdraw_abs():
         print(f'Failed to sel_take_option (abs)...')
         return False
 
-    for num_char in abs_qty:
+    for num_char in ABS_QTY:
         pyautogui.press(num_char)
 
     pyautogui.press('enter')
 
     if not wait_for_img(img_name='inventory_abs_4', script_name=SCRIPT_NAME, threshold=0.9, img_sel='inventory'):
-        print(f'Failed to find absorptions in inventory after supposedly withdrawing {abs_qty} doses...')
+        print(f'Failed to find absorptions in inventory after supposedly withdrawing {ABS_QTY} doses...')
         return False
 
-    print(f'✔ Successfully withdrew {abs_qty} doses of absorption potion')
+    print(f'✔ Successfully withdrew {ABS_QTY} doses of absorption potion')
     return
 
 
 def withdraw_ovls():
     # FROM Rewards Chest
-    ovl_qty = '20'
 
     if not does_img_exist(img_name='overload_barrel_from_rewards_chest', script_name=SCRIPT_NAME, threshold=0.9):
         print(f'Failed to find overload barrel from rewards chest... Hard-coding XY coords')
@@ -250,16 +251,16 @@ def withdraw_ovls():
         print(f'Failed to sel_take_option...')
         return False
 
-    for num_char in ovl_qty:
+    for num_char in OVL_QTY:
         pyautogui.press(num_char)
 
     pyautogui.press('enter')
 
     if not wait_for_img(img_name='inventory_ovl_4', script_name=SCRIPT_NAME, threshold=0.9, img_sel='inventory'):
-        print(f'Failed to find overloads in inventory after supposedly withdrawing {ovl_qty} doses...')
+        print(f'Failed to find overloads in inventory after supposedly withdrawing {OVL_QTY} doses...')
         return False
 
-    print(f'✔ Successfully withdrew {ovl_qty} doses of overload potion')
+    print(f'✔ Successfully withdrew {OVL_QTY} doses of overload potion')
     return True
 
 
@@ -280,9 +281,9 @@ def restock_doses_from_chest():
         print(f'Failed to find potions on benefits page')
         return False
 
-    buy_88_abs()
+    purchase_abs_doses()
 
-    buy_20_ovl()
+    purchase_ovl_doses()
 
     return True
 
@@ -445,7 +446,7 @@ def is_on_benefits_page():
     return does_img_exist(img_name='absorption_benefit', script_name=SCRIPT_NAME, threshold=0.9)
 
 
-def buy_88_abs():
+def purchase_abs_doses():
     if not does_img_exist(img_name='absorption_benefit', script_name=SCRIPT_NAME, threshold=0.9):
         print(f'Failed to find absorption which is weird because we made it this far and this is a flag...')
         return False
@@ -454,13 +455,11 @@ def buy_88_abs():
     abs_benefit_xy = x+10, y+10
     mouse_long_click(abs_benefit_xy)
 
-    sel_buy_x('88')
-
-
+    sel_buy_x(ABS_QTY)
     return
 
 
-def buy_20_ovl():
+def purchase_ovl_doses():
     if not does_img_exist(img_name='overload_benefit', script_name=SCRIPT_NAME, threshold=0.9):
         print(f'Failed to find overload which is weird because we made it this far and found absorption...')
         return False
@@ -469,7 +468,7 @@ def buy_20_ovl():
     ovl_benefit = x+10, y+10
     mouse_long_click(ovl_benefit)
 
-    sel_buy_x('20')
+    sel_buy_x(OVL_QTY)
     return
 
 
