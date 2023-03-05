@@ -95,7 +95,7 @@ def start_pickpocketing_knight(curr_loop):
         while should_cont_pickpocketing:
             # pickpocket_knight()
             knight_from_1_xy = 701, 457
-            mouse_click(knight_from_1_xy)
+            mouse_click(knight_from_1_xy, min_num_clicks=1, max_num_clicks=3)
             should_cont_pickpocketing = saw_thieving_exp()
 
     else:
