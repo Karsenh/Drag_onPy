@@ -199,7 +199,7 @@ def get_is_necklace_equipped():
 
 
 def sel_bank_option():
-    return wait_for_img(img_name='bank_option', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True)
+    return wait_for_img(img_name='bank_option', script_name=SCRIPT_NAME, threshold=0.94, should_click=True, click_middle=True)
 
 
 def get_is_necklace_in_inventory():
