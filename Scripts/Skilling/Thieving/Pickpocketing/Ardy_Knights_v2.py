@@ -154,7 +154,7 @@ def pickpocket_knight():
 
 def eat_food():
     is_tab_open('inventory', True)
-    return does_img_exist(img_name=f'inventory_{FOOD_TYPE}', script_name=SCRIPT_NAME, threshold=0.8, should_click=True, click_middle=True)
+    return does_img_exist(img_name=f'inventory_{FOOD_TYPE}', script_name=SCRIPT_NAME, threshold=0.84, should_click=True, click_middle=True)
 
 
 def open_coin_pouch():
