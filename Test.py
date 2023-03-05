@@ -39,7 +39,7 @@ def __main__():
     capture_bluestacks()
     clear_debug_log()
 
-    launch_script("Ardy_Knights")
+    launch_script("Ardy_Knight_Splasher")
 
     # is_tab_open('logout', True)
     # does_img_exist(img_name='logout_thumbs_up', category='interface', threshold=0.9, should_click=True,

@@ -41,6 +41,7 @@ from Scripts.Skilling.Farming.GE_Sulphurous_Fertilizer import start_making_ferta
 from Scripts.Skilling.Farming.Tithe_Farmer_v2 import start_tithe_farming
 from Scripts.Skilling.Smithing.Blast_Furnace import start_blasting
 from Scripts.Skilling.Combat.NMZ import start_training_nmz
+from Scripts.Skilling.Magic.Ardy_Knight_Splasher import start_splashing_ardy_knight
 
 import API
 from enum import Enum
@@ -113,6 +114,7 @@ def launch_script(script_name="pisc_iron"):
         RED_CHINS = 38
         BLAST_FURNACE = 39
         NMZ = 40
+        ARDY_KNIGHT_SPLASHER = 41
 
     all_scripts = [mine_pisc_iron, smith_gold_edge, run_gnome_course,
                    fish_draynor_shrimp, fish_barb_trout, barbarian_fishing,
@@ -126,7 +128,7 @@ def launch_script(script_name="pisc_iron"):
                    start_superheating_gold, start_constructing_larders, start_constructing_tables,
                    start_catching_desert_lizards, start_catching_red_lizards, start_chopping_sw_teaks,
                    start_crafting_lavas, start_motherlode_mining, start_making_fertalizer, start_tithe_farming,
-                   start_catching_black_lizards, start_catching_chins, start_blasting, start_training_nmz]
+                   start_catching_black_lizards, start_catching_chins, start_blasting, start_training_nmz, start_splashing_ardy_knight]
 
     match script_name:
         case "Pisc_Iron_Miner":
@@ -225,7 +227,7 @@ def launch_script(script_name="pisc_iron"):
             antiban_downtime_sec = 1
         case "Ardy_Knights":
             selected_script = ScriptEnum.ARDY_KNIGHTS.value
-            antiban_likelihood = 8
+            antiban_likelihood = 4
             antiban_downtime_sec = 2
         case "Kourend_Crab_Killer":
             selected_script = ScriptEnum.KOUREND_CRABS.value
@@ -312,6 +314,12 @@ def launch_script(script_name="pisc_iron"):
             selected_script = ScriptEnum.NMZ.value
             antiban_likelihood = 2
             antiban_downtime_sec = 3
+            reopen_invent = False
+            always_sleep = False
+        case "Ardy_Knight_Splasher":
+            selected_script = ScriptEnum.ARDY_KNIGHT_SPLASHER.value
+            antiban_likelihood = 5
+            antiban_downtime_sec = 5
             reopen_invent = False
             always_sleep = False
 
