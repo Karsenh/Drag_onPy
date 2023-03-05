@@ -83,18 +83,18 @@ def start_pickpocketing_knight(curr_loop):
             close_bank()
 
         # Otherwise, pickpocket ardy knight
-        while not is_hp_gt(10):
-            eat_food()
+        while not is_hp_gt(50):
             eat_food()
 
         r_max_num_pickpockets = random.randint(8, 11)
 
-        for i in range(1, r_max_num_pickpockets):
-            should_cont_pickpocketing = True
-            open_coin_pouch()
-            while should_cont_pickpocketing:
-                pickpocket_knight()
-                should_cont_pickpocketing = saw_thieving_exp()
+        should_cont_pickpocketing = True
+
+        open_coin_pouch()
+
+        while should_cont_pickpocketing:
+            pickpocket_knight()
+            should_cont_pickpocketing = saw_thieving_exp()
 
     else:
         print(f'First loop')
@@ -154,7 +154,7 @@ def pickpocket_knight():
 
 def eat_food():
     is_tab_open('inventory', True)
-    return does_img_exist(img_name=f'inventory_{FOOD_TYPE}', script_name=SCRIPT_NAME, threshold=0.85, should_click=True, click_middle=True)
+    return does_img_exist(img_name=f'inventory_{FOOD_TYPE}', script_name=SCRIPT_NAME, threshold=0.8, should_click=True, click_middle=True)
 
 
 def open_coin_pouch():
