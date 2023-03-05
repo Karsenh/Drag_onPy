@@ -93,7 +93,9 @@ def start_pickpocketing_knight(curr_loop):
         open_coin_pouch()
 
         while should_cont_pickpocketing:
-            pickpocket_knight()
+            # pickpocket_knight()
+            knight_from_1_xy = 701, 457
+            mouse_click(knight_from_1_xy)
             should_cont_pickpocketing = saw_thieving_exp()
 
     else:
