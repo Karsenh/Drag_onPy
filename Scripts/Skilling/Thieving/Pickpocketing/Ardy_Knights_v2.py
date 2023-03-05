@@ -165,12 +165,12 @@ def open_coin_pouch():
 # HELPERS
 def is_on_tile_1():
     write_debug(f'Checking if on tile 1')
-    return wait_for_img(img_name='tile_1_flag', script_name=SCRIPT_NAME, threshold=0.9, max_wait_sec=3)
+    return wait_for_img(img_name='tile_1_flag', script_name=SCRIPT_NAME, threshold=0.85, max_wait_sec=3)
 
 
 def is_on_tile_2():
     write_debug(f'Checking if on tile 2')
-    if wait_for_img(img_name='tile_2_flag', script_name=SCRIPT_NAME, threshold=0.9, max_wait_sec=3) or is_bank_open(3):
+    if wait_for_img(img_name='tile_2_flag', script_name=SCRIPT_NAME, threshold=0.85, max_wait_sec=3) or is_bank_open(3):
         write_debug(f'Bank is open or tile 2 flag found')
         return True
     else:

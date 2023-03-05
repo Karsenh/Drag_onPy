@@ -48,16 +48,16 @@ def set_script_access(user_email, user_licenses):
     for lic in user_licenses:
         print(f'Decoding License and setting Script Access for license: {lic}')
 
-        jwts = 'cFnLPysgeQ6mLn83qVYz1PkNbJuZJzVyKkfv0kOfAKJ6Ihg6j0BUxIntWgIex5vAGDzb8DmYCLo2eaBa'
+        JWT_SEC = 'cFnLPysgeQ6mLn83qVYz1PkNbJuZJzVyKkfv0kOfAKJ6Ihg6j0BUxIntWgIex5vAGDzb8DmYCLo2eaBa'
 
         try:
-            decoded_lic = jwt.decode(lic, jwts, algorithms=["HS256"])
-            print(f'decoded_lic: {decoded_lic}')
+            decoded_lic = jwt.decode(lic, JWT_SEC, algorithms=["HS256"])
+            print(f'Successfully decoded_lic: {decoded_lic}')
             # TODO: Check if license is already in a user session - skip if so, otherwise update_script_state & used_licenses_arr with curr license
             update_script_state(decoded_lic)
-            updated_lic_arr.append(decoded_lic)
-        except:
-            print(f'decoded token is invalid - likely expired. Remove from user doc.')
+            updated_lic_arr.append(lic)
+        except Exception:
+            print(f'decoded token is invalid - likely expired. Remove from user doc with exception: {Exception}')
 
     # license_obj = json.load(license)
     update_user_licenses(user_email, updated_lic_arr)
@@ -71,13 +71,13 @@ def set_script_access(user_email, user_licenses):
 
 
 def update_script_state(decoded_lic):
-    enabled = 'active'
+    enabled = 'normal'
     # disabled = 'disabled'
 
     if decoded_lic['category'] == 'all_access':
         print(f'👑 - All Access Granted')
         for script in all_scripts:
-            script.btn_state = 'active'
+            script.btn_state = 'normal'
 
     elif decoded_lic['category'] == 'package':
         print(f'📦 - Package Access')

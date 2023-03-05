@@ -8,10 +8,10 @@ from PIL import ImageTk, Image
 from API.Debug import *
 
 
-frame_bg_color = '#969488'
-label_frame_bg_color = '#a5a195'
-btn_active_bg_color = '#972b29'
-btn_bg_color = '#645747'
+FRAME_BG_COL = '#969488'
+LABEL_FRAME_BG_COL = '#a5a195'
+BTN_ACTIVE_BG_COL = '#972b29'
+BTN_BG_COL = '#645747'
 
 sub_gui_row = 3
 
@@ -66,48 +66,48 @@ def toggle_active_frame(frame_name, all_frames):
 def get_all_frames(root):
     sub_gui_label_font = tkinter.font.Font(family='Helvetica', size=12, weight='normal')
 
-    main_frame = Frame(root, bg=frame_bg_color)
+    main_frame = Frame(root, bg=FRAME_BG_COL)
     main_frame.pack()
     main_frame.place(anchor='center', relx=0.5, rely=0.5)
 
-    combat_frame = LabelFrame(main_frame, text="Combat", bg=label_frame_bg_color, font=sub_gui_label_font)
+    combat_frame = LabelFrame(main_frame, text="Combat", bg=LABEL_FRAME_BG_COL, font=sub_gui_label_font)
 
-    gold_frame = LabelFrame(main_frame, text="Money making", bg=label_frame_bg_color, font=sub_gui_label_font)
-    skill_frame = LabelFrame(main_frame, text="Skill training", bg=label_frame_bg_color, font=sub_gui_label_font)
-    minigames_frame = LabelFrame(main_frame, text="Minigames", bg=label_frame_bg_color, font=sub_gui_label_font)
+    gold_frame = LabelFrame(main_frame, text="Money making", bg=LABEL_FRAME_BG_COL, font=sub_gui_label_font)
+    skill_frame = LabelFrame(main_frame, text="Skill training", bg=LABEL_FRAME_BG_COL, font=sub_gui_label_font)
+    minigames_frame = LabelFrame(main_frame, text="Minigames", bg=LABEL_FRAME_BG_COL, font=sub_gui_label_font)
 
-    attack_frame = LabelFrame(main_frame, text="Attack", bg=label_frame_bg_color, font=sub_gui_label_font)
-    hp_frame = LabelFrame(main_frame, text="Hitpoints", bg=label_frame_bg_color, font=sub_gui_label_font)
-    mining_frame = LabelFrame(main_frame, text="Mining", bg=label_frame_bg_color, font=sub_gui_label_font)
+    attack_frame = LabelFrame(main_frame, text="Attack", bg=LABEL_FRAME_BG_COL, font=sub_gui_label_font)
+    hp_frame = LabelFrame(main_frame, text="Hitpoints", bg=LABEL_FRAME_BG_COL, font=sub_gui_label_font)
+    mining_frame = LabelFrame(main_frame, text="Mining", bg=LABEL_FRAME_BG_COL, font=sub_gui_label_font)
 
-    strength_frame = LabelFrame(main_frame, text="Strength", bg=label_frame_bg_color, font=sub_gui_label_font)
-    agility_frame = LabelFrame(main_frame, text="Agility", bg=label_frame_bg_color, font=sub_gui_label_font)
-    smithing_frame = LabelFrame(main_frame, text="Smithing", bg=label_frame_bg_color, font=sub_gui_label_font)
+    strength_frame = LabelFrame(main_frame, text="Strength", bg=LABEL_FRAME_BG_COL, font=sub_gui_label_font)
+    agility_frame = LabelFrame(main_frame, text="Agility", bg=LABEL_FRAME_BG_COL, font=sub_gui_label_font)
+    smithing_frame = LabelFrame(main_frame, text="Smithing", bg=LABEL_FRAME_BG_COL, font=sub_gui_label_font)
 
-    defence_frame = LabelFrame(main_frame, text="Defence", bg=label_frame_bg_color, font=sub_gui_label_font)
-    herblore_frame = LabelFrame(main_frame, text="Herblore", bg=label_frame_bg_color, font=sub_gui_label_font)
-    fishing_frame = LabelFrame(main_frame, text="Fishing", bg=label_frame_bg_color, font=sub_gui_label_font)
+    defence_frame = LabelFrame(main_frame, text="Defence", bg=LABEL_FRAME_BG_COL, font=sub_gui_label_font)
+    herblore_frame = LabelFrame(main_frame, text="Herblore", bg=LABEL_FRAME_BG_COL, font=sub_gui_label_font)
+    fishing_frame = LabelFrame(main_frame, text="Fishing", bg=LABEL_FRAME_BG_COL, font=sub_gui_label_font)
 
-    ranged_frame = LabelFrame(main_frame, text="Ranged", bg=label_frame_bg_color, font=sub_gui_label_font)
-    thieving_frame = LabelFrame(main_frame, text="Thieving", bg=label_frame_bg_color, font=sub_gui_label_font)
-    cooking_frame = LabelFrame(main_frame, text="Cooking", bg=label_frame_bg_color, font=sub_gui_label_font)
+    ranged_frame = LabelFrame(main_frame, text="Ranged", bg=LABEL_FRAME_BG_COL, font=sub_gui_label_font)
+    thieving_frame = LabelFrame(main_frame, text="Thieving", bg=LABEL_FRAME_BG_COL, font=sub_gui_label_font)
+    cooking_frame = LabelFrame(main_frame, text="Cooking", bg=LABEL_FRAME_BG_COL, font=sub_gui_label_font)
 
-    prayer_frame = LabelFrame(main_frame, text="Prayer", bg=label_frame_bg_color, font=sub_gui_label_font)
-    crafting_frame = LabelFrame(main_frame, text="Crafting", bg=label_frame_bg_color, font=sub_gui_label_font)
-    firemaking_frame = LabelFrame(main_frame, text="Firemaking", bg=label_frame_bg_color, font=sub_gui_label_font)
+    prayer_frame = LabelFrame(main_frame, text="Prayer", bg=LABEL_FRAME_BG_COL, font=sub_gui_label_font)
+    crafting_frame = LabelFrame(main_frame, text="Crafting", bg=LABEL_FRAME_BG_COL, font=sub_gui_label_font)
+    firemaking_frame = LabelFrame(main_frame, text="Firemaking", bg=LABEL_FRAME_BG_COL, font=sub_gui_label_font)
 
-    magic_frame = LabelFrame(main_frame, text="Magic", bg=label_frame_bg_color, font=sub_gui_label_font)
-    fletching_frame = LabelFrame(main_frame, text="Fletching", bg=label_frame_bg_color, font=sub_gui_label_font)
-    woodcutting_frame = LabelFrame(main_frame, text="Woodcutting", bg=label_frame_bg_color, font=sub_gui_label_font)
+    magic_frame = LabelFrame(main_frame, text="Magic", bg=LABEL_FRAME_BG_COL, font=sub_gui_label_font)
+    fletching_frame = LabelFrame(main_frame, text="Fletching", bg=LABEL_FRAME_BG_COL, font=sub_gui_label_font)
+    woodcutting_frame = LabelFrame(main_frame, text="Woodcutting", bg=LABEL_FRAME_BG_COL, font=sub_gui_label_font)
 
-    runecrafting_frame = LabelFrame(main_frame, text="Runecrafting", bg=label_frame_bg_color, font=sub_gui_label_font)
-    slayer_frame = LabelFrame(main_frame, text="Slayer", bg=label_frame_bg_color, font=sub_gui_label_font)
-    farming_frame = LabelFrame(main_frame, text="Farming", bg=label_frame_bg_color, font=sub_gui_label_font)
+    runecrafting_frame = LabelFrame(main_frame, text="Runecrafting", bg=LABEL_FRAME_BG_COL, font=sub_gui_label_font)
+    slayer_frame = LabelFrame(main_frame, text="Slayer", bg=LABEL_FRAME_BG_COL, font=sub_gui_label_font)
+    farming_frame = LabelFrame(main_frame, text="Farming", bg=LABEL_FRAME_BG_COL, font=sub_gui_label_font)
 
-    construction_frame = LabelFrame(main_frame, text="Construction", bg=label_frame_bg_color, font=sub_gui_label_font)
-    hunter_frame = LabelFrame(main_frame, text="Hunter", bg=label_frame_bg_color, font=sub_gui_label_font)
+    construction_frame = LabelFrame(main_frame, text="Construction", bg=LABEL_FRAME_BG_COL, font=sub_gui_label_font)
+    hunter_frame = LabelFrame(main_frame, text="Hunter", bg=LABEL_FRAME_BG_COL, font=sub_gui_label_font)
 
-    skill_level_input_frame = LabelFrame(main_frame, text="Skill Levels", bg=label_frame_bg_color, font=sub_gui_label_font)
+    skill_level_input_frame = LabelFrame(main_frame, text="Skill Levels", bg=LABEL_FRAME_BG_COL, font=sub_gui_label_font)
 
     skill_sub_frames = mining_frame, smithing_frame, agility_frame, \
                        defence_frame, herblore_frame, fishing_frame, \
@@ -149,23 +149,23 @@ def show_settings_frame():
     # Break for 'c' minutes         (break_minutes)
     # Give or take 'd' minutes      (break_dev_minutes)
 
-    bt_frame_1 = LabelFrame(settings_gui, text="⏱ Break Schedule", bg=frame_bg_color, pady=40, padx=40)
+    bt_frame_1 = LabelFrame(settings_gui, text="⏱ Break Schedule", bg=FRAME_BG_COL, pady=40, padx=40)
 
-    e_min_label_prefix = Label(bt_frame_1, text="Every", background=frame_bg_color, font=break_font)
-    e_min = Entry(bt_frame_1, textvariable=break_m, background=label_frame_bg_color, font=break_btn_font)
-    e_min_label_suffix = Label(bt_frame_1, text="minutes,", background=frame_bg_color, font=break_font)
+    e_min_label_prefix = Label(bt_frame_1, text="Every", background=FRAME_BG_COL, font=break_font)
+    e_min = Entry(bt_frame_1, textvariable=break_m, background=LABEL_FRAME_BG_COL, font=break_btn_font)
+    e_min_label_suffix = Label(bt_frame_1, text="minutes,", background=FRAME_BG_COL, font=break_font)
 
-    e_min_label_prefix2 = Label(bt_frame_1, text="give or take", background=frame_bg_color, font=break_font)
-    e_min2 = Entry(bt_frame_1, textvariable=break_dev_m, background=label_frame_bg_color, font=break_btn_font)
-    e_min_label_suffix2 = Label(bt_frame_1, text="minutes,", background=frame_bg_color, font=break_font)
+    e_min_label_prefix2 = Label(bt_frame_1, text="give or take", background=FRAME_BG_COL, font=break_font)
+    e_min2 = Entry(bt_frame_1, textvariable=break_dev_m, background=LABEL_FRAME_BG_COL, font=break_btn_font)
+    e_min_label_suffix2 = Label(bt_frame_1, text="minutes,", background=FRAME_BG_COL, font=break_font)
 
-    e_min_label_prefix3 = Label(bt_frame_1, text="Break for", background=frame_bg_color, font=break_font)
-    e_min3 = Entry(bt_frame_1, textvariable=interval_m, background=label_frame_bg_color, font=break_btn_font)
-    e_min_label_suffix3 = Label(bt_frame_1, text="minutes,", background=frame_bg_color, font=break_font)
+    e_min_label_prefix3 = Label(bt_frame_1, text="Break for", background=FRAME_BG_COL, font=break_font)
+    e_min3 = Entry(bt_frame_1, textvariable=interval_m, background=LABEL_FRAME_BG_COL, font=break_btn_font)
+    e_min_label_suffix3 = Label(bt_frame_1, text="minutes,", background=FRAME_BG_COL, font=break_font)
 
-    e_min_label_prefix4 = Label(bt_frame_1, text="give or take", background=frame_bg_color, font=break_font)
-    e_min4 = Entry(bt_frame_1, textvariable=interval_dev_m, background=label_frame_bg_color, font=break_btn_font)
-    e_min_label_suffix4 = Label(bt_frame_1, text="minutes,", background=frame_bg_color, font=break_font)
+    e_min_label_prefix4 = Label(bt_frame_1, text="give or take", background=FRAME_BG_COL, font=break_font)
+    e_min4 = Entry(bt_frame_1, textvariable=interval_dev_m, background=LABEL_FRAME_BG_COL, font=break_btn_font)
+    e_min_label_suffix4 = Label(bt_frame_1, text="minutes,", background=FRAME_BG_COL, font=break_font)
 
     e_min_label_prefix.grid(row=1, column=1)
     e_min.grid(row=1, column=2, columnspan=1, padx=20, pady=10)
@@ -183,7 +183,7 @@ def show_settings_frame():
     e_min4.grid(row=4, column=2, columnspan=1, padx=20, pady=10)
     e_min_label_suffix4.grid(row=4, column=3, padx=10, pady=15)
 
-    test_btn = Button(bt_frame_1, fg='white', padx=10, pady=5, text="Set Schedule", font=break_btn_font, bg=btn_bg_color, activebackground=btn_active_bg_color, command=lambda: set_break_timer(time_vars, settings_gui))
+    test_btn = Button(bt_frame_1, fg='white', padx=10, pady=5, text="Set Schedule", font=break_btn_font, bg=BTN_BG_COL, activebackground=BTN_ACTIVE_BG_COL, command=lambda: set_break_timer(time_vars, settings_gui))
     test_btn.grid(row=5, column=1, pady=20, padx=20, columnspan=3)
 
     # Break Timer Frame
@@ -193,12 +193,12 @@ def show_settings_frame():
     # sep = tkinter.ttk.Separator(settings_gui, orient="horizontal")
     # sep.grid(row=6, column=1, columnspan=4)
 
-    db_frame_2 = LabelFrame(settings_gui, text="🐛 Debugging", bg=frame_bg_color, pady=40, padx=40)
+    db_frame_2 = LabelFrame(settings_gui, text="🐛 Debugging", bg=FRAME_BG_COL, pady=40, padx=40)
 
     # Debug checkbox variable
     is_debug = tkinter.IntVar()
 
-    is_debug_cb = tkinter.Checkbutton(db_frame_2, text='Enable DEBUG', bg=frame_bg_color, variable=is_debug, offvalue=False, onvalue=True, command=lambda: set_is_debug(is_debug))
+    is_debug_cb = tkinter.Checkbutton(db_frame_2, text='Enable DEBUG', bg=FRAME_BG_COL, variable=is_debug, offvalue=False, onvalue=True, command=lambda: set_is_debug(is_debug))
     is_debug_cb.grid(row=1, column=1)
 
     # Debug Frame
@@ -211,9 +211,9 @@ def show_gold_frame(all_frames, gold_gui_btns, t_active_frame, gui_btns):
     gold_btn, skill_btn, minigames_btn = gui_btns
     is_active = t_active_frame("gold", all_frames)
     # print(f'Entering 💰 Gold Frame with is_active: {not is_active} which is now: {is_active}')
-    gold_btn.configure(bg=btn_active_bg_color)
-    skill_btn.configure(bg=btn_bg_color)
-    minigames_btn.configure(bg=btn_bg_color)
+    gold_btn.configure(bg=BTN_ACTIVE_BG_COL)
+    skill_btn.configure(bg=BTN_BG_COL)
+    minigames_btn.configure(bg=BTN_BG_COL)
 
     cball_btn, unf_pots_btn = gold_gui_btns
     main_frame, gold_frame, skill_frame, minigames_frame, skill_sub_frame = all_frames
@@ -230,7 +230,7 @@ def show_gold_frame(all_frames, gold_gui_btns, t_active_frame, gui_btns):
     # If is_active is false here, it was true when we clicked, therefore exit
     if not is_active:
         gold_frame.grid_remove()
-        gold_btn.configure(bg=btn_bg_color)
+        gold_btn.configure(bg=BTN_BG_COL)
 
     return
 
@@ -242,9 +242,9 @@ def show_skill_frame(all_frames, skill_gui_btns, t_active_frame, gui_btns):
 
     is_active = t_active_frame("skill", all_frames)
     # print(f'📊 Skill Frame with is_active: {not is_active} which is now: {is_active}')
-    gold_btn.configure(bg=btn_bg_color)
-    skill_btn.configure(bg=btn_active_bg_color)
-    minigames_btn.configure(bg=btn_bg_color)
+    gold_btn.configure(bg=BTN_BG_COL)
+    skill_btn.configure(bg=BTN_ACTIVE_BG_COL)
+    minigames_btn.configure(bg=BTN_BG_COL)
 
     attack_btn, hp_btn, mining_btn, \
     strength_btn, agility_btn, smithing_btn, \
@@ -299,7 +299,7 @@ def show_skill_frame(all_frames, skill_gui_btns, t_active_frame, gui_btns):
     # If is_active is false here, it was true when we clicked, therefore exit
     if not is_active:
         skill_frame.grid_remove()
-        skill_btn.configure(bg=btn_bg_color)
+        skill_btn.configure(bg=BTN_BG_COL)
 
     return
 
@@ -309,11 +309,11 @@ def show_minigames_frame(all_frames, minigames_sub_btns, t_active_frame, gui_btn
 
     is_active = t_active_frame("minigames", all_frames)
 
-    gold_btn.configure(bg=btn_bg_color)
-    skill_btn.configure(bg=btn_bg_color)
-    minigames_btn.configure(bg=btn_active_bg_color)
+    gold_btn.configure(bg=BTN_BG_COL)
+    skill_btn.configure(bg=BTN_BG_COL)
+    minigames_btn.configure(bg=BTN_ACTIVE_BG_COL)
 
-    trawler_btn = minigames_sub_btns
+    trawler_btn, nmz_btn = minigames_sub_btns
     main_frame, gold_frame, skill_frame, minigames_frame, skill_sub_frame = all_frames
 
     gold_frame.grid_remove()
@@ -321,12 +321,13 @@ def show_minigames_frame(all_frames, minigames_sub_btns, t_active_frame, gui_btn
 
     minigames_frame.grid(row=sub_gui_row, column=1, columnspan=5, pady=50)
 
-    trawler_btn.grid(row=1, column=1, pady=35, padx=50)
+    trawler_btn.grid(row=1, column=1, pady=20, padx=20)
+    nmz_btn.grid(row=1, column=2, pady=20, padx=20)
 
     # If is_active is false here, it was true when we clicked, therefore exit
     if not is_active:
         minigames_frame.grid_remove()
-        minigames_btn.configure(bg=btn_bg_color)
+        minigames_btn.configure(bg=BTN_BG_COL)
     return
 
 
@@ -687,11 +688,18 @@ def show_construction_frame(all_frames, t_active_frame, construction_frame, cons
 # HELPER
 # ------
 def add_script_btn(skill_frame, side_img, start_btn, row_num):
-    # teak_tree_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{woodcutting_image_path}\Teak_tree.png'))
+    btn_label = Label(skill_frame, image=side_img, height=75, width=75, bg=LABEL_FRAME_BG_COL)
+    btn_label.image = side_img
 
-    teak_label = Label(skill_frame, image=side_img, height=100, width=110, bg=label_frame_bg_color)
-    teak_label.image = side_img
+    btn_label.grid(row=row_num, column=1)
+    start_btn.grid(row=row_num, column=2, columnspan=2, pady=10, padx=10)
 
-    teak_label.grid(row=row_num, column=1)
-    start_btn.grid(row=row_num, column=2, columnspan=2, pady=15, padx=30)
+    # if row_num > 3:
+    #     row_num = row_num - 3
+    #     btn_label.grid(row=row_num, column=5)
+    #     start_btn.grid(row=row_num, column=6, columnspan=2, pady=5, padx=10)
+    #
+    # else:
+    btn_label.grid(row=row_num, column=1)
+    start_btn.grid(row=row_num, column=2, columnspan=2, pady=5, padx=10)
     return
