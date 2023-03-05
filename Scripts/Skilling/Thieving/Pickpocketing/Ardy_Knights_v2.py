@@ -60,6 +60,7 @@ def start_pickpocketing_knight(curr_loop):
 
         # Bank based on food / necklace values
         should_bank = False
+
         if needs_food:
             should_bank = True
 
@@ -93,6 +94,7 @@ def start_pickpocketing_knight(curr_loop):
         open_coin_pouch()
 
         while should_cont_pickpocketing:
+            print(f'⏬ TILE: {CURR_TILE}')
             # pickpocket_knight()
             knight_from_1_xy = 701, 457
             mouse_click(knight_from_1_xy, min_num_clicks=1, max_num_clicks=3)
@@ -199,7 +201,7 @@ def get_is_necklace_equipped():
 
 
 def sel_bank_option():
-    return wait_for_img(img_name='bank_option', script_name=SCRIPT_NAME, threshold=0.94, should_click=True, click_middle=True)
+    return wait_for_img(img_name='bank_option', script_name=SCRIPT_NAME, threshold=0.96, should_click=True, click_middle=True)
 
 
 def get_is_necklace_in_inventory():
