@@ -4,7 +4,7 @@ import re
 
 from API.Debug import write_debug
 from Database.Script_Access import set_script_access
-from GUI.Imports.GUI_Frames import btn_bg_color, btn_active_bg_color, frame_bg_color, label_frame_bg_color
+from GUI.Imports.GUI_Frames import BTN_BG_COL, BTN_ACTIVE_BG_COL, FRAME_BG_COL, LABEL_FRAME_BG_COL
 from Database.Connection import get_user
 from GUI.Main_GUI import show_main_gui
 
@@ -23,7 +23,7 @@ def show_auth_gui():
     auth_top.geometry(f"{auth_top_width}x{auth_top_height}")
 
     # Auth Frame
-    form_frame = Frame(auth_top, bg=label_frame_bg_color)
+    form_frame = Frame(auth_top, bg=LABEL_FRAME_BG_COL)
 
     # Entry value variables
     email_val = StringVar(form_frame)
@@ -32,11 +32,11 @@ def show_auth_gui():
     form_vals = email_val, pass_val
 
     # Labels and Entries
-    email_label = Label(form_frame, text="Email", pady=10, background=label_frame_bg_color)
+    email_label = Label(form_frame, text="Email", pady=10, background=LABEL_FRAME_BG_COL)
     email_entry = Entry(form_frame, textvariable=email_val)
     email_entry.focus_set()
 
-    pass_label = Label(form_frame, text="Password", pady=10, background=label_frame_bg_color)
+    pass_label = Label(form_frame, text="Password", pady=10, background=LABEL_FRAME_BG_COL)
     pass_entry = Entry(form_frame, textvariable=pass_val, show="✖")
 
     # Positioning
@@ -54,7 +54,7 @@ def show_auth_gui():
     pass_entry.grid(row=5, column=1, columnspan=1, pady=5, padx=30)
     pass_entry.place(anchor='w', relx=0.1, rely=0.60, width=195, height=30)
 
-    login_btn = Button(form_frame, text="Login", fg='white', width=15, bg=btn_bg_color, activebackground=btn_active_bg_color, command=lambda: authenticate_user(form_vals, auth_top))
+    login_btn = Button(form_frame, text="Login", fg='white', width=15, bg=BTN_BG_COL, activebackground=BTN_ACTIVE_BG_COL, command=lambda: authenticate_user(form_vals, auth_top))
     login_btn.grid(row=6, column=1, columnspan=3, pady=20)
     login_btn.place(anchor="center", relx=0.5, rely=0.85, height=30)
 

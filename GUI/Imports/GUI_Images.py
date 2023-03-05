@@ -75,7 +75,8 @@ def get_all_gui_images():
 
     # Minigames images
     minigames_path = "Assets\Images\GUI_Images\Minigames"
-    trawler_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{minigames_path}\Fishing_Trawler\Fishing_Trawler.png'))
+    trawler_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{minigames_path}\Fishing_Trawler.png'))
+    nmz_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{minigames_path}\ANMZ.png'))
 
     main_gui_images = gold_img, skills_img, skull_img, settings_img, question_mark_img, bug_report_img
 
@@ -90,7 +91,7 @@ def get_all_gui_images():
                        runecrafting_img, slayer_img, farming_img, \
                        construction_img, hunter_img, skill_input_img
 
-    minigames_images = trawler_img
+    minigames_images = trawler_img, nmz_img
 
     # -----------------------------------------------------------------------------------------
     # ---

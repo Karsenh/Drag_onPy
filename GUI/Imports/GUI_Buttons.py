@@ -20,8 +20,8 @@ plg_gui_active = 1
 SCRIPT_START_BTN_HEIGHT = 30
 SCRIPT_START_BTN_WIDTH = 140
 
-SKILL_BTN_WIDTH = 100
-SKILL_BTN_HEIGHT = 60
+SKILL_BTN_HEIGHT = 30
+SKILL_BTN_WIDTH = 60
 
 BTN_CURSOR = 'circle'
 
@@ -65,7 +65,7 @@ def get_all_btns(all_frames, all_images, root):
     construction_img, hunter_img, skill_input_img \
         = skill_gui_images
 
-    trawler_img = minigames_images
+    trawler_img, nmz_img = minigames_images
 
     # Skilling SUB Images
     # (Mining/Smithing/Fishing)
@@ -75,61 +75,60 @@ def get_all_btns(all_frames, all_images, root):
     main_img_path = "Assets\Images\GUI_Images"
     main_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{main_img_path}\Main_image.png'))
 
-    main_img_label = Label(main_frame, image=main_img, bg=frame_bg_color)
+    main_img_label = Label(main_frame, image=main_img, bg=FRAME_BG_COL)
     main_img_label.image = main_img
     main_img_label.grid(row=1, column=1, columnspan=3, pady=(8, 15))
 
-    gold_btn = Button(main_frame, text="Gold", bg=btn_bg_color, activebackground=btn_active_bg_color, image=gold_img, command=lambda: show_gold_frame(all_frames, gold_gui_btns, toggle_active_frame, gui_btns))
-    skill_btn = Button(main_frame, text="Leveling", bg=btn_bg_color, activebackground=btn_active_bg_color, image=skills_img, command=lambda: show_skill_frame(all_frames, skill_gui_btns, toggle_active_frame, gui_btns))
-    minigames_btn = Button(main_frame, text="Minigames", bg=btn_bg_color, activebackground=btn_active_bg_color, image=skull_img, command=lambda: show_minigames_frame(all_frames, minigames_sub_btns, toggle_active_frame, gui_btns))
+    gold_btn = Button(main_frame, text="Gold", bg=BTN_BG_COL, activebackground=BTN_ACTIVE_BG_COL, image=gold_img, command=lambda: show_gold_frame(all_frames, gold_gui_btns, toggle_active_frame, gui_btns), height=50, width=50)
+    skill_btn = Button(main_frame, text="Leveling", bg=BTN_BG_COL, activebackground=BTN_ACTIVE_BG_COL, image=skills_img, command=lambda: show_skill_frame(all_frames, skill_gui_btns, toggle_active_frame, gui_btns), height=50, width=50)
+    minigames_btn = Button(main_frame, text="Minigames", bg=BTN_BG_COL, activebackground=BTN_ACTIVE_BG_COL, image=skull_img, command=lambda: show_minigames_frame(all_frames, minigames_sub_btns, toggle_active_frame, gui_btns), height=50, width=50)
 
-    settings_btn = Button(main_frame, text="Settings", bg=btn_bg_color, activebackground='#f7881c', image=settings_img, command=lambda: show_settings_frame(), height=50, width=50)
-    info_btn = Button(main_frame, text="Info", bg=btn_bg_color, activebackground='#febf56', image=question_mark_img, command=lambda: print('Info test'), height=50, width=50)
-    bug_report_btn = Button(main_frame, text="Bug Report", bg=btn_bg_color, activebackground='#81d5fa', image=bug_report_img, command=lambda: print('Bug test'), height=50, width=50)
+    settings_btn = Button(main_frame, text="Settings", bg=BTN_BG_COL, activebackground='#f7881c', image=settings_img, command=lambda: show_settings_frame(), height=25, width=25)
+    info_btn = Button(main_frame, text="Info", bg=BTN_BG_COL, activebackground='#febf56', image=question_mark_img, command=lambda: print('Info test'), height=25, width=25)
+    bug_report_btn = Button(main_frame, text="Bug Report", bg=BTN_BG_COL, activebackground='#81d5fa', image=bug_report_img, command=lambda: print('Bug test'), height=25, width=25)
 
     # Package up Gui_Btns to access values within each button
     gui_btns = gold_btn, skill_btn, minigames_btn
 
 
     # (Main) Skill_gui_btns
-    attack_btn = Button(skill_frame, text="Attack", image=attack_img, height=SKILL_BTN_HEIGHT, width=SKILL_BTN_WIDTH, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_combat_frame(all_frames, toggle_active_frame, combat_frame, combat_sub_btns))
-    hp_btn = Button(skill_frame, text="HP", image=hp_img, height=SKILL_BTN_HEIGHT, width=SKILL_BTN_WIDTH, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_combat_frame(all_frames, toggle_active_frame, combat_frame, combat_sub_btns))
-    minining_btn = Button(skill_frame, text="Mining", image=mining_img, height=SKILL_BTN_HEIGHT, width=SKILL_BTN_WIDTH, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_mining_frame(all_frames, toggle_active_frame, mining_frame, mining_sub_btns))
+    attack_btn = Button(skill_frame, text="Attack", image=attack_img, height=SKILL_BTN_HEIGHT, width=SKILL_BTN_WIDTH, bg='#545550', activebackground=BTN_ACTIVE_BG_COL, command=lambda: show_combat_frame(all_frames, toggle_active_frame, combat_frame, combat_sub_btns))
+    hp_btn = Button(skill_frame, text="HP", image=hp_img, height=SKILL_BTN_HEIGHT, width=SKILL_BTN_WIDTH, bg='#545550', activebackground=BTN_ACTIVE_BG_COL, command=lambda: show_combat_frame(all_frames, toggle_active_frame, combat_frame, combat_sub_btns))
+    minining_btn = Button(skill_frame, text="Mining", image=mining_img, height=SKILL_BTN_HEIGHT, width=SKILL_BTN_WIDTH, bg='#545550', activebackground=BTN_ACTIVE_BG_COL, command=lambda: show_mining_frame(all_frames, toggle_active_frame, mining_frame, mining_sub_btns))
 
-    strength_btn = Button(skill_frame, text="Strength", image=strength_img, height=SKILL_BTN_HEIGHT, width=SKILL_BTN_WIDTH, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_combat_frame(all_frames, toggle_active_frame, combat_frame, combat_sub_btns))
-    agility_btn = Button(skill_frame, text="Agility", image=agility_img, height=SKILL_BTN_HEIGHT, width=SKILL_BTN_WIDTH, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_agility_frame(all_frames, toggle_active_frame, agility_frame, agility_sub_btns))
-    smithing_btn = Button(skill_frame, text="Smithing", image=smithing_img, height=SKILL_BTN_HEIGHT, width=SKILL_BTN_WIDTH, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_smithing_frame(all_frames, toggle_active_frame, smithing_frame, smithing_sub_btns))
+    strength_btn = Button(skill_frame, text="Strength", image=strength_img, height=SKILL_BTN_HEIGHT, width=SKILL_BTN_WIDTH, bg='#545550', activebackground=BTN_ACTIVE_BG_COL, command=lambda: show_combat_frame(all_frames, toggle_active_frame, combat_frame, combat_sub_btns))
+    agility_btn = Button(skill_frame, text="Agility", image=agility_img, height=SKILL_BTN_HEIGHT, width=SKILL_BTN_WIDTH, bg='#545550', activebackground=BTN_ACTIVE_BG_COL, command=lambda: show_agility_frame(all_frames, toggle_active_frame, agility_frame, agility_sub_btns))
+    smithing_btn = Button(skill_frame, text="Smithing", image=smithing_img, height=SKILL_BTN_HEIGHT, width=SKILL_BTN_WIDTH, bg='#545550', activebackground=BTN_ACTIVE_BG_COL, command=lambda: show_smithing_frame(all_frames, toggle_active_frame, smithing_frame, smithing_sub_btns))
 
-    defence_btn = Button(skill_frame, text="Defence", image=defence_img, height=SKILL_BTN_HEIGHT, width=SKILL_BTN_WIDTH, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_combat_frame(all_frames, toggle_active_frame, combat_frame, combat_sub_btns))
-    herblore_btn = Button(skill_frame, text="Herblore", image=herblore_img, height=SKILL_BTN_HEIGHT, width=SKILL_BTN_WIDTH, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_herblore_frame(all_frames, toggle_active_frame, herblore_frame, herblore_sub_btns))
-    fishing_btn = Button(skill_frame, text="Fishing", image=fishing_img, height=SKILL_BTN_HEIGHT, width=SKILL_BTN_WIDTH, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_fishing_frame(all_frames, toggle_active_frame, fishing_frame, fishing_sub_btns))
+    defence_btn = Button(skill_frame, text="Defence", image=defence_img, height=SKILL_BTN_HEIGHT, width=SKILL_BTN_WIDTH, bg='#545550', activebackground=BTN_ACTIVE_BG_COL, command=lambda: show_combat_frame(all_frames, toggle_active_frame, combat_frame, combat_sub_btns))
+    herblore_btn = Button(skill_frame, text="Herblore", image=herblore_img, height=SKILL_BTN_HEIGHT, width=SKILL_BTN_WIDTH, bg='#545550', activebackground=BTN_ACTIVE_BG_COL, command=lambda: show_herblore_frame(all_frames, toggle_active_frame, herblore_frame, herblore_sub_btns))
+    fishing_btn = Button(skill_frame, text="Fishing", image=fishing_img, height=SKILL_BTN_HEIGHT, width=SKILL_BTN_WIDTH, bg='#545550', activebackground=BTN_ACTIVE_BG_COL, command=lambda: show_fishing_frame(all_frames, toggle_active_frame, fishing_frame, fishing_sub_btns))
 
-    ranged_btn = Button(skill_frame, text="Ranged", image=ranged_img, height=SKILL_BTN_HEIGHT, width=SKILL_BTN_WIDTH, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_combat_frame(all_frames, toggle_active_frame, combat_frame, combat_sub_btns))
-    thieving_btn = Button(skill_frame, text="Thieving", image=thieving_img, height=SKILL_BTN_HEIGHT, width=SKILL_BTN_WIDTH, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_thieving_frame(all_frames, toggle_active_frame, thieving_frame, thieving_sub_btns))
-    cooking_btn = Button(skill_frame, text="Cooking", image=cooking_img, height=SKILL_BTN_HEIGHT, width=SKILL_BTN_WIDTH, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_cooking_frame(all_frames, toggle_active_frame, cooking_frame, cooking_sub_btns))
+    ranged_btn = Button(skill_frame, text="Ranged", image=ranged_img, height=SKILL_BTN_HEIGHT, width=SKILL_BTN_WIDTH, bg='#545550', activebackground=BTN_ACTIVE_BG_COL, command=lambda: show_combat_frame(all_frames, toggle_active_frame, combat_frame, combat_sub_btns))
+    thieving_btn = Button(skill_frame, text="Thieving", image=thieving_img, height=SKILL_BTN_HEIGHT, width=SKILL_BTN_WIDTH, bg='#545550', activebackground=BTN_ACTIVE_BG_COL, command=lambda: show_thieving_frame(all_frames, toggle_active_frame, thieving_frame, thieving_sub_btns))
+    cooking_btn = Button(skill_frame, text="Cooking", image=cooking_img, height=SKILL_BTN_HEIGHT, width=SKILL_BTN_WIDTH, bg='#545550', activebackground=BTN_ACTIVE_BG_COL, command=lambda: show_cooking_frame(all_frames, toggle_active_frame, cooking_frame, cooking_sub_btns))
 
-    prayer_btn = Button(skill_frame, text="Prayer", image=prayer_img, height=SKILL_BTN_HEIGHT, width=SKILL_BTN_WIDTH, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_prayer_frame(all_frames, toggle_active_frame, prayer_frame, prayer_sub_btns))
-    crafting_btn = Button(skill_frame, text="Crafting", image=crafting_img, height=SKILL_BTN_HEIGHT, width=SKILL_BTN_WIDTH, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_crafting_frame(all_frames, toggle_active_frame, crafting_frame, crafting_sub_btns))
-    firemaking_btn = Button(skill_frame, text="Firemaking", image=firemaking_img, height=SKILL_BTN_HEIGHT, width=SKILL_BTN_WIDTH, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_firemaking_frame(all_frames, toggle_active_frame, firemaking_frame, firemaking_sub_btns))
+    prayer_btn = Button(skill_frame, text="Prayer", image=prayer_img, height=SKILL_BTN_HEIGHT, width=SKILL_BTN_WIDTH, bg='#545550', activebackground=BTN_ACTIVE_BG_COL, command=lambda: show_prayer_frame(all_frames, toggle_active_frame, prayer_frame, prayer_sub_btns))
+    crafting_btn = Button(skill_frame, text="Crafting", image=crafting_img, height=SKILL_BTN_HEIGHT, width=SKILL_BTN_WIDTH, bg='#545550', activebackground=BTN_ACTIVE_BG_COL, command=lambda: show_crafting_frame(all_frames, toggle_active_frame, crafting_frame, crafting_sub_btns))
+    firemaking_btn = Button(skill_frame, text="Firemaking", image=firemaking_img, height=SKILL_BTN_HEIGHT, width=SKILL_BTN_WIDTH, bg='#545550', activebackground=BTN_ACTIVE_BG_COL, command=lambda: show_firemaking_frame(all_frames, toggle_active_frame, firemaking_frame, firemaking_sub_btns))
 
-    magic_btn = Button(skill_frame, text="Magic", image=magic_img, height=SKILL_BTN_HEIGHT, width=SKILL_BTN_WIDTH, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_combat_frame(all_frames, toggle_active_frame, combat_frame, combat_sub_btns))
-    fletching_btn = Button(skill_frame, text="Fletching", image=fletching_img, height=SKILL_BTN_HEIGHT, width=SKILL_BTN_WIDTH, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_fletching_frame(all_frames, toggle_active_frame, fletching_frame, fletching_sub_btns))
-    woodcutting_btn = Button(skill_frame, text="Woodcutting", image=woodcutting_img, height=SKILL_BTN_HEIGHT, width=SKILL_BTN_WIDTH, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_woodcutting_frame(all_frames, toggle_active_frame, woodcutting_frame, woodcutting_sub_btns))
+    magic_btn = Button(skill_frame, text="Magic", image=magic_img, height=SKILL_BTN_HEIGHT, width=SKILL_BTN_WIDTH, bg='#545550', activebackground=BTN_ACTIVE_BG_COL, command=lambda: show_combat_frame(all_frames, toggle_active_frame, combat_frame, combat_sub_btns))
+    fletching_btn = Button(skill_frame, text="Fletching", image=fletching_img, height=SKILL_BTN_HEIGHT, width=SKILL_BTN_WIDTH, bg='#545550', activebackground=BTN_ACTIVE_BG_COL, command=lambda: show_fletching_frame(all_frames, toggle_active_frame, fletching_frame, fletching_sub_btns))
+    woodcutting_btn = Button(skill_frame, text="Woodcutting", image=woodcutting_img, height=SKILL_BTN_HEIGHT, width=SKILL_BTN_WIDTH, bg='#545550', activebackground=BTN_ACTIVE_BG_COL, command=lambda: show_woodcutting_frame(all_frames, toggle_active_frame, woodcutting_frame, woodcutting_sub_btns))
 
-    runecrafting_btn = Button(skill_frame, text="RuneCrafting", image=runecrafting_img, height=SKILL_BTN_HEIGHT, width=SKILL_BTN_WIDTH, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_runecrafting_frame(all_frames, toggle_active_frame, runecrafting_frame, runecrafting_sub_btns))
-    slayer_btn = Button(skill_frame, state="disabled", text="Slayer", image=slayer_img, height=SKILL_BTN_HEIGHT, width=SKILL_BTN_WIDTH, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_thieving_frame(all_frames, toggle_active_frame, thieving_frame, thieving_sub_btns))
-    farming_btn = Button(skill_frame, text="Farming", image=farming_img, height=SKILL_BTN_HEIGHT, width=SKILL_BTN_WIDTH, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_farming_frame(all_frames, toggle_active_frame, farming_frame, farming_sub_btns))
+    runecrafting_btn = Button(skill_frame, text="RuneCrafting", image=runecrafting_img, height=SKILL_BTN_HEIGHT, width=SKILL_BTN_WIDTH, bg='#545550', activebackground=BTN_ACTIVE_BG_COL, command=lambda: show_runecrafting_frame(all_frames, toggle_active_frame, runecrafting_frame, runecrafting_sub_btns))
+    slayer_btn = Button(skill_frame, state="disabled", text="Slayer", image=slayer_img, height=SKILL_BTN_HEIGHT, width=SKILL_BTN_WIDTH, bg='#545550', activebackground=BTN_ACTIVE_BG_COL, command=lambda: show_thieving_frame(all_frames, toggle_active_frame, thieving_frame, thieving_sub_btns))
+    farming_btn = Button(skill_frame, text="Farming", image=farming_img, height=SKILL_BTN_HEIGHT, width=SKILL_BTN_WIDTH, bg='#545550', activebackground=BTN_ACTIVE_BG_COL, command=lambda: show_farming_frame(all_frames, toggle_active_frame, farming_frame, farming_sub_btns))
 
-    construction_btn = Button(skill_frame, text="Construction", image=construction_img, height=SKILL_BTN_HEIGHT, width=SKILL_BTN_WIDTH, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_construction_frame(all_frames, toggle_active_frame, construction_frame, construction_sub_btns))
-    hunter_btn = Button(skill_frame, text="Hunter", image=hunter_img, height=SKILL_BTN_HEIGHT, width=SKILL_BTN_WIDTH, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_hunter_frame(all_frames, toggle_active_frame, hunter_frame, hunter_sub_btns))
+    construction_btn = Button(skill_frame, text="Construction", image=construction_img, height=SKILL_BTN_HEIGHT, width=SKILL_BTN_WIDTH, bg='#545550', activebackground=BTN_ACTIVE_BG_COL, command=lambda: show_construction_frame(all_frames, toggle_active_frame, construction_frame, construction_sub_btns))
+    hunter_btn = Button(skill_frame, text="Hunter", image=hunter_img, height=SKILL_BTN_HEIGHT, width=SKILL_BTN_WIDTH, bg='#545550', activebackground=BTN_ACTIVE_BG_COL, command=lambda: show_hunter_frame(all_frames, toggle_active_frame, hunter_frame, hunter_sub_btns))
 
-    skill_level_input_btn = Button(skill_frame, text="Input Skill Levels", image=skill_input_img, height=SKILL_BTN_HEIGHT, width=SKILL_BTN_WIDTH, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_skill_input_frame(skill_level_input_frame, toggle_active_frame, all_frames))
+    skill_level_input_btn = Button(skill_frame, text="Input Skill Levels", image=skill_input_img, height=SKILL_BTN_HEIGHT, width=SKILL_BTN_WIDTH, bg='#545550', activebackground=BTN_ACTIVE_BG_COL, command=lambda: show_skill_input_frame(skill_level_input_frame, toggle_active_frame, all_frames))
 
     # ---- SUB SKILL BTNS ----
-    # TODO - SUB OUT ALL INSTANCES OF 'Buttom()' FOR 'new_script_start_btn()'
     def new_script_start_btn(script_frame, script_name, script_state, root=root):
         btn_text = script_name.replace('_', ' ')
-        return Button(script_frame, state=script_state, text=btn_text, image=start_btn_img, cursor=BTN_CURSOR, height=SCRIPT_START_BTN_HEIGHT, width=SCRIPT_START_BTN_WIDTH, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_plg(script_name, root))
+        return Button(script_frame, state=script_state, text=btn_text, image=start_btn_img, cursor=BTN_CURSOR, height=SCRIPT_START_BTN_HEIGHT, width=SCRIPT_START_BTN_WIDTH, bg='#545550', activebackground=BTN_ACTIVE_BG_COL, command=lambda: show_plg(script_name, root), relief='raised')
 
     #     Agility
     gnome_course_btn = new_script_start_btn(agility_frame, 'Gnome_Agility', gnome_agility_script.btn_state)
@@ -196,7 +195,7 @@ def get_all_btns(all_frames, all_images, root):
     mining_sub_btns = pisc_iron_btn, motherlode_miner_btn
 
     #     Prayer
-    gilded_altar_btn = new_script_start_btn(prayer_frame, 'Cwars_Lavas', gilded_altar_script.btn_state)
+    gilded_altar_btn = new_script_start_btn(prayer_frame, 'Gilded_Altar', gilded_altar_script.btn_state)
     prayer_sub_btns = gilded_altar_btn
 
     #     Runecrafting
@@ -210,9 +209,9 @@ def get_all_btns(all_frames, all_images, root):
 
     #     Thieving
     draynor_man_btn = new_script_start_btn(thieving_frame, 'Draynor_Man', draynor_man_script.btn_state)
-    ardy_cake_btn = new_script_start_btn(thieving_frame, 'Draynor_Man', ardy_cake_script.btn_state)
-    hosidius_fruit_btn = new_script_start_btn(thieving_frame, 'Draynor_Man', hosidius_fruit_script.btn_state)
-    ardy_knights_btn = new_script_start_btn(thieving_frame, 'Draynor_Man', ardy_knight_script.btn_state)
+    ardy_cake_btn = new_script_start_btn(thieving_frame, 'Ardy_Cake', ardy_cake_script.btn_state)
+    hosidius_fruit_btn = new_script_start_btn(thieving_frame, 'Hosidius_Fruit', hosidius_fruit_script.btn_state)
+    ardy_knights_btn = new_script_start_btn(thieving_frame, 'Ardy_Knights', ardy_knight_script.btn_state)
     thieving_sub_btns = draynor_man_btn, ardy_cake_btn, hosidius_fruit_btn, ardy_knights_btn
 
     #     Woodcutting
@@ -221,8 +220,9 @@ def get_all_btns(all_frames, all_images, root):
     woodcutting_sub_btns = chop_fletcher_btn, sw_teaks_btn
 
     #     Minigames Buttons
-    fishing_trawler_btn = Button(minigames_frame, text="Fishing Trawler", image=trawler_img, bg='#545550', activebackground=btn_active_bg_color, command=lambda: show_plg("Fishing_Trawler"))
-    minigames_sub_btns = fishing_trawler_btn
+    fishing_trawler_btn = Button(minigames_frame, text="Fishing Trawler", image=trawler_img, bg='#545550', activebackground=BTN_ACTIVE_BG_COL, command=lambda: show_plg("Fishing_Trawler"))
+    nmz_btn = Button(minigames_frame, text="NMZ", image=nmz_img, bg='#545550', activebackground=BTN_ACTIVE_BG_COL, command=lambda: show_plg("Fishing_Trawler"))
+    minigames_sub_btns = fishing_trawler_btn, nmz_btn
 
     main_gui_btns = gold_btn, skill_btn, minigames_btn, settings_btn, info_btn, bug_report_btn
 

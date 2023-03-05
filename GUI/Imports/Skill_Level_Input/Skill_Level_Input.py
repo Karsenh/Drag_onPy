@@ -1,7 +1,7 @@
 import tkinter
 import os
 from tkinter import Toplevel, LabelFrame, Label, Entry, Button
-from GUI.Imports.GUI_Frames import frame_bg_color, label_frame_bg_color, btn_bg_color, btn_active_bg_color
+from GUI.Imports.GUI_Frames import FRAME_BG_COL, LABEL_FRAME_BG_COL, BTN_BG_COL, BTN_ACTIVE_BG_COL
 from osrs_api import Hiscores
 from API.Debug import write_debug
 
@@ -18,7 +18,7 @@ def show_skill_input_frame(skill_level_input_frame, t_active_frame, all_frames, 
 
     skill_level_input_frame.grid(row=3, column=1, columnspan=4, pady=20)
 
-    user_search_sub_frame = LabelFrame(skill_level_input_frame, text="Load Levels by User", bg=label_frame_bg_color, font=break_font)
+    user_search_sub_frame = LabelFrame(skill_level_input_frame, text="Load Levels by User", bg=LABEL_FRAME_BG_COL, font=break_font)
     user_search_sub_frame.grid(row=1, pady=(20, 5))
 
     print(f'Show_Skill_Input_Frame Fired')
@@ -41,7 +41,7 @@ def show_skill_input_frame(skill_level_input_frame, t_active_frame, all_frames, 
         username_var.set(username_arg)
 
     # username_label = Label(user_search_sub_frame, text="Search Username", background=frame_bg_color, font=break_font)
-    username_input = Entry(user_search_sub_frame, textvariable=username_var, background=label_frame_bg_color, font=break_btn_font)
+    username_input = Entry(user_search_sub_frame, textvariable=username_var, background=LABEL_FRAME_BG_COL, font=break_btn_font)
 
     if username_from_file and initial_get:
         print(f'Found username ({username_from_file}) in {assets_path}\Levels.txt')
@@ -57,12 +57,12 @@ def show_skill_input_frame(skill_level_input_frame, t_active_frame, all_frames, 
     # username_label.grid(row=1, column=1)
     username_input.grid(row=1, column=1, padx=20, pady=10)
 
-    username_lookup_btn = Button(user_search_sub_frame, fg="white", font=break_btn_font, text="Search User", bg=btn_bg_color, activebackground=btn_active_bg_color, command=lambda: show_skill_input_frame(skill_level_input_frame, t_active_frame, all_frames, username_arg=username_input.get()))
+    username_lookup_btn = Button(user_search_sub_frame, fg="white", font=break_btn_font, text="Search User", bg=BTN_BG_COL, activebackground=BTN_ACTIVE_BG_COL, command=lambda: show_skill_input_frame(skill_level_input_frame, t_active_frame, all_frames, username_arg=username_input.get()))
 
     username_lookup_btn.grid(row=2, column=1, columnspan=3, pady=10)
 
     # SKILL LEVEL INPUTS
-    skill_level_input_sub_frame = LabelFrame(skill_level_input_frame, text="Input Levels", bg=label_frame_bg_color, font=break_font)
+    skill_level_input_sub_frame = LabelFrame(skill_level_input_frame, text="Input Levels", bg=LABEL_FRAME_BG_COL, font=break_font)
     skill_level_input_sub_frame.grid(row=2, padx=(10, 10), pady=20)
 
     add_new_skill_input("attack", skill_level_input_sub_frame, user_hiscores, row=3, start_col=1)
@@ -96,7 +96,7 @@ def show_skill_input_frame(skill_level_input_frame, t_active_frame, all_frames, 
     add_new_skill_input("construction", skill_level_input_sub_frame, user_hiscores, row=10, start_col=1)
     add_new_skill_input("hunter", skill_level_input_sub_frame, user_hiscores, row=10, start_col=3)
 
-    save_levels_btn = Button(skill_level_input_sub_frame, state='disabled', font=break_btn_font, text="Update Levels", bg=btn_bg_color, activebackground=btn_active_bg_color, command=lambda: save_hs_to_file(username_var.get(), user_hiscores))
+    save_levels_btn = Button(skill_level_input_sub_frame, state='disabled', font=break_btn_font, text="Update Levels", bg=BTN_BG_COL, activebackground=BTN_ACTIVE_BG_COL, command=lambda: save_hs_to_file(username_var.get(), user_hiscores))
     save_levels_btn.grid(row=11, column=1, columnspan=6, pady="20")
 
     return
@@ -108,8 +108,8 @@ def add_new_skill_input(skill_name, skill_level_input_sub_frame, user_hiscores, 
 
     mining_level_var = tkinter.StringVar(skill_level_input_sub_frame)
     mining_level_var.set(user_hiscores.skills[f'{skill_name}'].level)
-    mining_label = Label(skill_level_input_sub_frame, text=f"{skill_name.capitalize()}:", background=frame_bg_color, font=break_font)
-    mining_input = Entry(skill_level_input_sub_frame, textvariable=mining_level_var, background=label_frame_bg_color, font=break_btn_font, width=3)
+    mining_label = Label(skill_level_input_sub_frame, text=f"{skill_name.capitalize()}:", background=FRAME_BG_COL, font=break_font)
+    mining_input = Entry(skill_level_input_sub_frame, textvariable=mining_level_var, background=LABEL_FRAME_BG_COL, font=break_btn_font, width=3)
     mining_label.grid(row=row, column=start_col, pady=(15, 0), sticky='W')
     mining_input.grid(row=row, column=start_col+1, padx=(5, 15), pady=(15, 0))
     return
