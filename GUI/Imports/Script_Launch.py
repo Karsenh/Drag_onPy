@@ -227,8 +227,8 @@ def launch_script(script_name="pisc_iron"):
             antiban_downtime_sec = 1
         case "Ardy_Knights":
             selected_script = ScriptEnum.ARDY_KNIGHTS.value
-            antiban_likelihood = 4
-            antiban_downtime_sec = 2
+            antiban_likelihood = 2
+            antiban_downtime_sec = 1
         case "Kourend_Crab_Killer":
             selected_script = ScriptEnum.KOUREND_CRABS.value
             antiban_likelihood = 10
