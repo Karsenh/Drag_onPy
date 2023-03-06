@@ -84,6 +84,7 @@ def start_pickpocketing_knight(curr_loop):
                 withdraw_food()
 
             close_bank()
+            move_to_tile_1()
 
         # Otherwise, pickpocket ardy knight
         while not is_hp_gt(50):
@@ -96,7 +97,7 @@ def start_pickpocketing_knight(curr_loop):
 
         open_coin_pouch()
 
-        pickpocket_knight()
+        # pickpocket_knight()
         while should_cont_pickpocketing:
             print(f'⏬ TILE: {CURR_TILE}')
             knight_from_1_xy = 701, 457
@@ -151,12 +152,12 @@ def equip_necklace_from_invent():
 
 def move_to_tile_1():
     long_click_knight_from_curr_tile()
-    return does_img_exist(img_name='pickpocket_knight_option', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True)
+    return does_img_exist(img_name='pickpocket_knight_option', script_name=SCRIPT_NAME, threshold=0.85, should_click=True, click_middle=True)
 
 
 def pickpocket_knight():
     long_click_knight_from_curr_tile()
-    return does_img_exist(img_name='pickpocket_knight_option', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True)
+    return does_img_exist(img_name='pickpocket_knight_option', script_name=SCRIPT_NAME, threshold=0.85, should_click=True, click_middle=True)
 
 
 def eat_food():
