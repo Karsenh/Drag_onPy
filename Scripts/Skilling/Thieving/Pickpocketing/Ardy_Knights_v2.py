@@ -194,7 +194,7 @@ def set_tile_val(new_tile_val):
 def has_inventory_food():
     write_debug(f'Checking for inventory food: {FOOD_TYPE}')
     is_tab_open('inventory', True)
-    return does_img_exist(img_name=f'inventory_{FOOD_TYPE}', script_name=SCRIPT_NAME, threshold=0.85)
+    return does_img_exist(img_name=f'inventory_{FOOD_TYPE}', script_name=SCRIPT_NAME, threshold=0.94)
 
 
 def get_is_necklace_equipped():
