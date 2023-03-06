@@ -88,7 +88,7 @@ def start_pickpocketing_knight(curr_loop):
         # Otherwise, pickpocket ardy knight
         while not is_hp_gt(50):
             if not eat_food():
-                return
+                return True
 
         r_max_num_pickpockets = random.randint(8, 11)
 
