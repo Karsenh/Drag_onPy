@@ -209,7 +209,7 @@ def sel_bank_option():
 
 def get_is_necklace_in_inventory():
     is_tab_open('inventory', True)
-    return does_img_exist(img_name='inventory_dodgy_necklace', script_name=SCRIPT_NAME)
+    return does_img_exist(img_name='inventory_dodgy_necklace', script_name=SCRIPT_NAME, threshold=0.9, img_sel='inventory')
 
 
 def long_click_bank_from_curr_tile():
