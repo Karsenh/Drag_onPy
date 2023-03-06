@@ -166,7 +166,7 @@ def eat_food():
 
 def open_coin_pouch():
     is_tab_open('inventory', True)
-    return does_img_exist(img_name='inventory_coin_pouch', script_name=SCRIPT_NAME, should_click=True, click_middle=True)
+    return does_img_exist(img_name='inventory_coin_pouch', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True)
 
 
 # HELPERS
