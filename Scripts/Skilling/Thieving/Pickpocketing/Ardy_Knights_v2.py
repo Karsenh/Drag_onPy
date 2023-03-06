@@ -45,7 +45,6 @@ def start_pickpocketing_knight(curr_loop):
 
         # Check the dodgy necklace
         needs_necklace = False
-
         should_check_necklace = curr_loop == 2 or curr_loop % 9 == 0
 
         if USE_NECKLACE and should_check_necklace:
@@ -201,7 +200,7 @@ def has_inventory_food():
 def get_is_necklace_equipped():
     write_debug(f'Checking for equipped Dodgy Necklace')
     is_tab_open('equipment', True)
-    return does_img_exist(img_name=f'equipped_dodgy_necklace', script_name=SCRIPT_NAME, threshold=0.85)
+    return does_img_exist(img_name=f'equipped_dodgy_necklace', script_name=SCRIPT_NAME, threshold=0.8)
 
 
 def sel_bank_option():
