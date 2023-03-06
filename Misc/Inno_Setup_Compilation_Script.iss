@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "DragonPy"
-#define MyAppVersion "1.0"
+#define MyAppVersion "1.1"
 #define MyAppPublisher "Auto Mate"
 #define MyAppURL "https://dragonpy.herokuapp.com/"
 #define MyAppExeName "Main.exe"

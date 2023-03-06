@@ -35,7 +35,7 @@ TILE_2 = CoordinatesFromTile(knight_from_2, bank_from_2)
 
 def start_pickpocketing_knight(curr_loop):
     if curr_loop != 1:
-        print(f'Not first loop')
+        print(f'➰➰ CURR LOOP: {curr_loop}')
         if not update_curr_tile():
             return False
 
@@ -44,20 +44,24 @@ def start_pickpocketing_knight(curr_loop):
         write_debug(f'needs_food: {needs_food}')
 
         # Check the dodgy necklace
+
         needs_necklace = False
-        should_check_necklace = curr_loop == 2 or curr_loop % 9 == 0
 
-        if USE_NECKLACE and should_check_necklace:
-            has_equipped_necklace = get_is_necklace_equipped()
-            has_inventory_necklace = get_is_necklace_in_inventory()
+        if USE_NECKLACE:
+            should_check_necklace = curr_loop == 2 or curr_loop % 5 == 0 or not is_necklace_in_inventory()
+            print(f'❓ Should We Check Necklace: {should_check_necklace}')
 
-            if not has_equipped_necklace and not has_inventory_necklace:
-                needs_necklace = True
+            if should_check_necklace:
+                has_equipped_necklace = is_necklace_equipped()
+                has_inventory_necklace = is_necklace_in_inventory()
 
-            elif not has_equipped_necklace:
-                equip_necklace_from_invent()
+                if not has_equipped_necklace and not has_inventory_necklace:
+                    needs_necklace = True
 
-        write_debug(f'needs_necklace: {needs_necklace}')
+                elif not has_equipped_necklace:
+                    equip_necklace_from_invent()
+
+        write_debug(f'❓ Needs_necklace: {needs_necklace}')
 
         # Bank based on food / necklace values
         should_bank = False
@@ -197,7 +201,7 @@ def has_inventory_food():
     return does_img_exist(img_name=f'inventory_{FOOD_TYPE}', script_name=SCRIPT_NAME, threshold=0.94)
 
 
-def get_is_necklace_equipped():
+def is_necklace_equipped():
     write_debug(f'Checking for equipped Dodgy Necklace')
     is_tab_open('equipment', True)
     return does_img_exist(img_name=f'equipped_dodgy_necklace', script_name=SCRIPT_NAME, threshold=0.8)
@@ -207,7 +211,7 @@ def sel_bank_option():
     return wait_for_img(img_name='bank_option', script_name=SCRIPT_NAME, threshold=0.98, should_click=True, click_middle=True)
 
 
-def get_is_necklace_in_inventory():
+def is_necklace_in_inventory():
     is_tab_open('inventory', True)
     return does_img_exist(img_name='inventory_dodgy_necklace', script_name=SCRIPT_NAME, threshold=0.9, img_sel='inventory')
 
