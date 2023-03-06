@@ -5,7 +5,8 @@ from Database.Script_Access import gnome_agility_script, seers_rooftops, canifis
     unf_pots_script, crimson_swift_script, cerulean_twitches, desert_lizards_script, red_lizards_script, \
     black_lizards_script, red_chins_script, pisc_iron_script, motherlode_mine_script, gilded_altar_script, \
     cwars_lavas_script, edge_gold_script, blast_furance_script, draynor_man_script, ardy_cake_script, \
-    hosidius_fruit_script, ardy_knight_script, chop_fletcher_script, sw_teaks_script, cball_smithing_script
+    hosidius_fruit_script, ardy_knight_script, chop_fletcher_script, sw_teaks_script, cball_smithing_script, \
+    ardy_knight_splasher_script
 from GUI.Imports.GUI_Frames import *
 from Scripts.Skilling.Mining.Pisc_Iron_Miner import *
 from GUI.Imports.PreLaunch_Gui.PreLaunch_Gui import show_plg
@@ -112,7 +113,7 @@ def get_all_btns(all_frames, all_images, root):
     crafting_btn = Button(skill_frame, text="Crafting", image=crafting_img, height=SKILL_BTN_HEIGHT, width=SKILL_BTN_WIDTH, bg='#545550', activebackground=BTN_ACTIVE_BG_COL, command=lambda: show_crafting_frame(all_frames, toggle_active_frame, crafting_frame, crafting_sub_btns))
     firemaking_btn = Button(skill_frame, text="Firemaking", image=firemaking_img, height=SKILL_BTN_HEIGHT, width=SKILL_BTN_WIDTH, bg='#545550', activebackground=BTN_ACTIVE_BG_COL, command=lambda: show_firemaking_frame(all_frames, toggle_active_frame, firemaking_frame, firemaking_sub_btns))
 
-    magic_btn = Button(skill_frame, text="Magic", image=magic_img, height=SKILL_BTN_HEIGHT, width=SKILL_BTN_WIDTH, bg='#545550', activebackground=BTN_ACTIVE_BG_COL, command=lambda: show_combat_frame(all_frames, toggle_active_frame, combat_frame, combat_sub_btns))
+    magic_btn = Button(skill_frame, text="Magic", image=magic_img, height=SKILL_BTN_HEIGHT, width=SKILL_BTN_WIDTH, bg='#545550', activebackground=BTN_ACTIVE_BG_COL, command=lambda: show_magic_frame(all_frames, toggle_active_frame, magic_frame, magic_sub_btns))
     fletching_btn = Button(skill_frame, text="Fletching", image=fletching_img, height=SKILL_BTN_HEIGHT, width=SKILL_BTN_WIDTH, bg='#545550', activebackground=BTN_ACTIVE_BG_COL, command=lambda: show_fletching_frame(all_frames, toggle_active_frame, fletching_frame, fletching_sub_btns))
     woodcutting_btn = Button(skill_frame, text="Woodcutting", image=woodcutting_img, height=SKILL_BTN_HEIGHT, width=SKILL_BTN_WIDTH, bg='#545550', activebackground=BTN_ACTIVE_BG_COL, command=lambda: show_woodcutting_frame(all_frames, toggle_active_frame, woodcutting_frame, woodcutting_sub_btns))
 
@@ -131,7 +132,7 @@ def get_all_btns(all_frames, all_images, root):
         return Button(script_frame, state=script_state, text=btn_text, image=start_btn_img, cursor=BTN_CURSOR, height=SCRIPT_START_BTN_HEIGHT, width=SCRIPT_START_BTN_WIDTH, bg='#545550', activebackground=BTN_ACTIVE_BG_COL, command=lambda: show_plg(script_name, root), relief='raised')
 
     #     Agility
-    gnome_course_btn = new_script_start_btn(agility_frame, 'Gnome_Agility', gnome_agility_script.btn_state)
+    gnome_course_btn = new_script_start_btn(agility_frame, 'Gnome_Course', gnome_agility_script.btn_state)
     canifis_rooftops_btn = new_script_start_btn(agility_frame, 'Canifis_Rooftops', canifis_rooftops.btn_state)
     seers_rooftops_btn = new_script_start_btn(agility_frame, 'Seers_Rooftops', seers_rooftops.btn_state)
     agility_sub_btns = gnome_course_btn, canifis_rooftops_btn, seers_rooftops_btn
@@ -147,12 +148,12 @@ def get_all_btns(all_frames, all_images, root):
 
     #     Crafting
     glass_blower_btn = new_script_start_btn(crafting_frame, 'GE_Glass_Blower', ge_glass_blower_script.btn_state)
-    dhide_bodies_btn = new_script_start_btn(crafting_frame, 'Dhide_Bodies', dhide_bodies_script.btn_state)
+    dhide_bodies_btn = new_script_start_btn(crafting_frame, 'GE_Dhide_Bodies', dhide_bodies_script.btn_state)
     crafting_sub_btns = glass_blower_btn, dhide_bodies_btn
 
     #     Construction
     larder_btn = new_script_start_btn(construction_frame, 'Poh_Larders', poh_larders_script.btn_state)
-    table_btn = new_script_start_btn(construction_frame, 'Poh_Tables', poh_tables_script.btn_state)
+    table_btn = new_script_start_btn(construction_frame, 'Poh_Mahogany_Tables', poh_tables_script.btn_state)
     construction_sub_btns = larder_btn, table_btn
 
     #     Farming
@@ -189,6 +190,9 @@ def get_all_btns(all_frames, all_images, root):
     hunter_sub_btns = crimson_swift_btn, cerulean_twitch_btn, orange_lizards_btn, red_lizards_btn, black_lizards_btn, red_chins_btn
 
     #     Magic
+    ardy_knight_splasher_btn = new_script_start_btn(magic_frame, "Ardy_Knight_Splasher", ardy_knight_splasher_script.btn_state)
+    magic_sub_btns = ardy_knight_splasher_btn
+
     #     Mining
     pisc_iron_btn = new_script_start_btn(mining_frame, "Pisc_Iron_Miner", pisc_iron_script.btn_state)
     motherlode_miner_btn = new_script_start_btn(mining_frame, "Motherlode_Miner", motherlode_mine_script.btn_state)
@@ -220,8 +224,8 @@ def get_all_btns(all_frames, all_images, root):
     woodcutting_sub_btns = chop_fletcher_btn, sw_teaks_btn
 
     #     Minigames Buttons
-    fishing_trawler_btn = Button(minigames_frame, text="Fishing Trawler", image=trawler_img, bg='#545550', activebackground=BTN_ACTIVE_BG_COL, command=lambda: show_plg("Fishing_Trawler"))
-    nmz_btn = Button(minigames_frame, text="NMZ", image=nmz_img, bg='#545550', activebackground=BTN_ACTIVE_BG_COL, command=lambda: show_plg("Fishing_Trawler"))
+    fishing_trawler_btn = Button(minigames_frame, text="Fishing Trawler", image=trawler_img, bg='#545550', activebackground=BTN_ACTIVE_BG_COL, command=lambda: show_plg("Fishing_Trawler", root))
+    nmz_btn = Button(minigames_frame, text="NMZ", image=nmz_img, bg='#545550', activebackground=BTN_ACTIVE_BG_COL, command=lambda: show_plg("NMZ", root))
     minigames_sub_btns = fishing_trawler_btn, nmz_btn
 
     main_gui_btns = gold_btn, skill_btn, minigames_btn, settings_btn, info_btn, bug_report_btn

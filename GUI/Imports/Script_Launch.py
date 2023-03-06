@@ -1,5 +1,4 @@
 import threading
-
 from Scripts.Skilling.Smithing.Edge_Gold import smith_gold_edge
 from Scripts.Skilling.Mining.Pisc_Iron_Miner import mine_pisc_iron
 from Scripts.Skilling.Agility.Gnome_Course import run_gnome_course
@@ -137,31 +136,31 @@ def launch_script(script_name="pisc_iron"):
             antiban_likelihood = 50
             # Interval between scrip loops
             antiban_downtime_sec = 1
-        case "edge_gold":
+        case "Edge_Gold":
             selected_script = ScriptEnum.EDGE_GOLD.value
             antiban_likelihood = 10
             antiban_downtime_sec = 6
-        case "gnome_course":
+        case "Gnome_Course":
             selected_script = ScriptEnum.GNOME_COURSE.value
             antiban_likelihood = 10
             antiban_downtime_sec = 6
-        case "draynor_shrimp":
+        case "Draynor_Shrimp":
             selected_script = ScriptEnum.DRAYNOR_SHRIMP.value
             antiban_likelihood = 10
             antiban_downtime_sec = 6
-        case "barb_trout":
+        case "Barb_Trout":
             selected_script = ScriptEnum.BARB_TROUT.value
             antiban_likelihood = 10
             antiban_downtime_sec = 6
-        case "barbarian_fishing":
+        case "Barbarian_Fishing":
             selected_script = ScriptEnum.BARBARIAN_FISHING.value
             antiban_likelihood = 10
             antiban_downtime_sec = 6
-        case "draynor_man":
+        case "Draynor_Man":
             selected_script = ScriptEnum.DRAYNOR_MAN.value
             antiban_likelihood = 50
             antiban_downtime_sec = 0.2
-        case "ardy_cake":
+        case "Ardy_Cake":
             selected_script = ScriptEnum.ARDY_CAKE.value
             antiban_likelihood = 10
             antiban_downtime_sec = 0.4
@@ -181,23 +180,23 @@ def launch_script(script_name="pisc_iron"):
             selected_script = ScriptEnum.ROGUE_COOKER.value
             antiban_likelihood = 10
             antiban_downtime_sec = 6
-        case "lummy_chop_fletcher":
+        case "Lummy_Chop_And_Fletcher":
             selected_script = ScriptEnum.CHOP_FLETCH.value
             antiban_likelihood = 20
             antiban_downtime_sec = 3
-        case "ge_glass_blower":
+        case "GE_Glass_Blower":
             selected_script = ScriptEnum.BLOW_GLASS.value
             antiban_likelihood = 10
             antiban_downtime_sec = 4
-        case "ge_dart_fletcher":
+        case "GE_Dart_Fletcher":
             selected_script = ScriptEnum.DART_FLETCHER.value
             antiban_likelihood = 5
             antiban_downtime_sec = 2
-        case "hosidius_plough":
+        case "Hosidius_Plough":
             selected_script = ScriptEnum.HOSIDIUS_PLOUGH.value
             antiban_likelihood = 15
             antiban_downtime_sec = 4
-        case "hosidius_fruit":
+        case "Hosidius_Fruit":
             selected_script = ScriptEnum.HOSIDIUS_FRUIT.value
             antiban_likelihood = 10
             antiban_downtime_sec = 10
@@ -205,11 +204,11 @@ def launch_script(script_name="pisc_iron"):
             selected_script = ScriptEnum.GILDED_ALTAR.value
             antiban_likelihood = 20
             antiban_downtime_sec = 5
-        case "unf_pots":
+        case "Unf_Pots":
             selected_script = ScriptEnum.UNF_POTS.value
             antiban_likelihood = 25
             antiban_downtime_sec = 8
-        case "canifis_rooftops":
+        case "Canifis_Rooftops":
             selected_script = ScriptEnum.CANIFIS_ROOFTOPS.value
             antiban_likelihood = 25
             antiban_downtime_sec = 8
@@ -217,11 +216,11 @@ def launch_script(script_name="pisc_iron"):
             selected_script = ScriptEnum.SEERS_ROOFTOPS.value
             antiban_likelihood = 0
             antiban_downtime_sec = 0.5
-        case "feldip_single_trap_crimsons":
+        case "Feldip_1t_Crimson":
             selected_script = ScriptEnum.BIRD_SNARER.value
             antiban_likelihood = 30
             antiban_downtime_sec = 1
-        case "troll_double_trap_ceruleans":
+        case "Troll_2t_Cerulean":
             selected_script = ScriptEnum.DOUBLE_TRAP_CERULEANS.value
             antiban_likelihood = 100
             antiban_downtime_sec = 1

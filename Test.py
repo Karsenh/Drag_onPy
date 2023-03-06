@@ -39,7 +39,7 @@ def __main__():
     capture_bluestacks()
     clear_debug_log()
 
-    launch_script("Ardy_Knights")
+    launch_script("Ardy_Knight_Splasher")
 
 
     # does_img_exist(img_name='tile_1_flag', script_name='Ardy_Knights', threshold=0.9)

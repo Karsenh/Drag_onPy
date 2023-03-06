@@ -22,7 +22,7 @@ kourend_crab_killer_script = cow_killer_script = pisc_iron_script = \
     = ardy_cake_script = hosidius_fruit_script = ardy_knight_script \
     = chop_fletcher_script = sw_teaks_script = cwars_lavas_script \
     = gilded_altar_script = edge_gold_script = unf_pots_script \
-    = cball_smithing_script \
+    = cball_smithing_script = ardy_knight_splasher_script \
     = ScriptAccess(initial_state)
 
 all_scripts = [kourend_crab_killer_script, cow_killer_script, pisc_iron_script,
@@ -36,7 +36,7 @@ all_scripts = [kourend_crab_killer_script, cow_killer_script, pisc_iron_script,
                red_lizards_script, draynor_man_script, ardy_cake_script,
                hosidius_fruit_script, ardy_knight_script, chop_fletcher_script,
                sw_teaks_script, cwars_lavas_script, gilded_altar_script,
-               edge_gold_script, unf_pots_script, cball_smithing_script]
+               edge_gold_script, unf_pots_script, cball_smithing_script, ardy_knight_splasher_script]
 
 
 def set_script_access(user_email, user_licenses):
@@ -160,5 +160,7 @@ def update_script_state(decoded_lic):
                 unf_pots_script.btn_state = enabled
             case 'cball_smither':
                 cball_smithing_script.btn_state = enabled
+            case 'ardy_knight_splasher':
+                ardy_knight_splasher_script.btn_state = enabled
 
     return

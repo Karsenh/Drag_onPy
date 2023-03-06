@@ -368,6 +368,23 @@ def show_attack_frame(all_frames, t_active_frame, attack_frame, attack_sub_btns)
     return
 
 
+def show_magic_frame(all_frames, t_active_frame, magic_frame, magic_sub_btns):
+    _, _, _, _, skill_sub_frames = all_frames
+    ardy_knight_splasher_btn = magic_sub_btns
+
+    is_active = t_active_frame("skill", all_frames)
+    print(f'show_attack_frame - skill_frame - is_active: {is_active}')
+
+    magic_frame.grid(row=sub_gui_row, column=1, columnspan=5, pady=50)
+
+    magic_img_path = 'Assets\Images\GUI_Images\Stats\Magic'
+
+    splash_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{magic_img_path}\Splash_img.png'))
+
+    add_script_btn(magic_frame, splash_img, ardy_knight_splasher_btn, 2)
+    return
+
+
 def show_mining_frame(all_frames, t_active_frame, mining_frame, mining_sub_btns):
     # Close skill_frame
     _, _, _, _, skill_sub_frames = all_frames
