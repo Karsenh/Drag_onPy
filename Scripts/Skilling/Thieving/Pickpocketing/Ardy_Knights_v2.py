@@ -88,6 +88,9 @@ def start_pickpocketing_knight(curr_loop):
 
             close_bank()
             move_to_tile_1()
+            API.AntiBan.sleep_between(0.4, 0.6)
+            update_curr_tile()
+            print(f'Should have moved back to Tile 1: curr_tile = {CURR_TILE}')
 
         # Otherwise, pickpocket ardy knight
         while not is_hp_gt(50):
