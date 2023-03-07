@@ -208,8 +208,8 @@ def is_necklace_equipped():
 
 
 def sel_bank_option():
-    if not wait_for_img(img_name='bank_option', script_name=SCRIPT_NAME, threshold=0.96, should_click=True, click_middle=True):
-        if not wait_for_img(img_name='bank_option_2', script_name=SCRIPT_NAME, threshold=0.96, should_click=True,
+    if not wait_for_img(img_name='bank_option', script_name=SCRIPT_NAME, threshold=0.94, should_click=True, click_middle=True):
+        if not wait_for_img(img_name='bank_option_2', script_name=SCRIPT_NAME, threshold=0.94, should_click=True,
                             click_middle=True):
             return False
     return True
@@ -243,4 +243,4 @@ def long_click_knight_from_curr_tile():
 
 
 def saw_thieving_exp():
-    return wait_for_img(img_name='Thieving', category='Exp_Drops', max_wait_sec=2)
+    return wait_for_img(img_name='Thieving', category='Exp_Drops', max_wait_sec=1)
