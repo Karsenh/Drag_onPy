@@ -46,6 +46,7 @@ def start_pickpocketing_knight(curr_loop):
         # Check the dodgy necklace
 
         needs_necklace = False
+        has_inventory_necklace = False
 
         if USE_NECKLACE:
             should_check_necklace = curr_loop == 2 or curr_loop % 5 == 0 or not is_necklace_in_inventory()
