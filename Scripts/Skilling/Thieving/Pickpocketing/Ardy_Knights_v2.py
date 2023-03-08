@@ -55,11 +55,17 @@ def start_pickpocketing_knight(curr_loop):
                 has_equipped_necklace = is_necklace_equipped()
                 has_inventory_necklace = is_necklace_in_inventory()
 
-                if not has_equipped_necklace and not has_inventory_necklace:
-                    needs_necklace = True
+                # if not has_equipped_necklace and not has_inventory_necklace:
+                #     needs_necklace = True
+                if not has_equipped_necklace:
+                    if not equip_necklace_from_invent():
+                        needs_necklace = True
 
-                elif not has_equipped_necklace:
-                    equip_necklace_from_invent()
+                # if not has_inventory_necklace:
+                #     needs_necklace = True
+                #
+                # elif not has_equipped_necklace:
+                #     equip_necklace_from_invent()
 
         write_debug(f'❓ Needs_necklace: {needs_necklace}')
 
@@ -68,6 +74,8 @@ def start_pickpocketing_knight(curr_loop):
 
         if needs_food:
             should_bank = True
+            if not has_inventory_necklace:
+                needs_necklace = True
 
         if USE_NECKLACE and needs_necklace:
             should_bank = True
