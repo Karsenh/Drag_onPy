@@ -103,12 +103,16 @@ def start_pickpocketing_knight(curr_loop):
 
         open_coin_pouch()
 
+        num_pickpockets = 1
         # pickpocket_knight()
         while should_cont_pickpocketing:
             print(f'⏬ TILE: {CURR_TILE}')
             knight_from_1_xy = 701, 457
             mouse_click(knight_from_1_xy, min_num_clicks=3, max_num_clicks=4)
             should_cont_pickpocketing = saw_thieving_exp()
+            num_pickpockets += 1
+            if num_pickpockets == 28:
+                open_coin_pouch()
 
     else:
         print(f'First loop')

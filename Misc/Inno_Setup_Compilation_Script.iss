@@ -2,8 +2,8 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "DragonPy"
-#define MyAppVersion "1.1"
-#define MyAppPublisher "Auto Mate"
+#define MyAppVersion "1.2.2"
+#define MyAppPublisher "AutoMate"
 #define MyAppURL "https://dragonpy.herokuapp.com/"
 #define MyAppExeName "Main.exe"
 
@@ -24,7 +24,7 @@ LicenseFile=C:\Users\Karsen\Desktop\Drag_onPy\output\License.txt
 ; Uncomment the following line to run in non administrative install mode (install for current user only.)
 ;PrivilegesRequired=lowest
 OutputDir=C:\Users\Karsen\Desktop\Drag_onPy Output
-OutputBaseFilename=DragonPy_WIN_1.0_Setup
+OutputBaseFilename=DragonPy_WIN_1.2.2_Setup
 SetupIconFile=C:\Users\Karsen\Downloads\setupIcon.ico
 Compression=lzma
 SolidCompression=yes

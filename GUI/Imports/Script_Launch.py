@@ -317,7 +317,7 @@ def launch_script(script_name="pisc_iron"):
             always_sleep = False
         case "Ardy_Knight_Splasher":
             selected_script = ScriptEnum.ARDY_KNIGHT_SPLASHER.value
-            antiban_likelihood = 5
+            antiban_likelihood = 15
             antiban_downtime_sec = 1
             reopen_invent = False
             always_sleep = False

@@ -7,7 +7,7 @@ def start_splashing_ardy_knight(curr_loop):
         print(f'Not first loop')
         handle_level_dialogue()
 
-        if not wait_for_img(img_name='Magic', category='Exp_Drops', threshold=0.7):
+        if not wait_for_img(img_name='Magic', category='Exp_Drops', threshold=0.7, max_wait_sec=15):
             print(f'⛔ Failed to find Magic Exp')
             return False
 
