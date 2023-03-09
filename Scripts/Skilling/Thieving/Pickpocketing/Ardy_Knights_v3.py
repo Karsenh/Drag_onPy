@@ -75,8 +75,6 @@ def pickpocket_knight():
         # We're clicking the knigth from the bank first
         click_knight_from_bank()
 
-    set_curr_tile()
-
     if get_curr_tile() != 1 and get_curr_tile() != 2:
         print(f'⛔ Unexpected curr_tile: {get_curr_tile()}')
         return False
@@ -132,6 +130,7 @@ def click_knight_from_bank():
     else:
         API.AntiBan.sleep_between(0.6, 0.7)
 
+    set_curr_tile()
     return
 
 
