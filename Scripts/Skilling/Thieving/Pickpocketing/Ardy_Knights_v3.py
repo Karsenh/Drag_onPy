@@ -148,9 +148,9 @@ def open_bank():
     print(f'OPENING BANK FROM CURR_TILE: {CURR_TILE}')
 
     if get_curr_tile() == 1:
-        bank_xy = 620, 700
+        bank_xy = 375, 475
     elif get_curr_tile() == 2:
-        bank_xy = 630, 600
+        bank_xy = 405, 370
     elif get_curr_tile() == 3:
         bank_xy = 610, 355
 
