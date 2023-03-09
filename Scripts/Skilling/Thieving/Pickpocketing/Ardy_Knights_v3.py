@@ -83,7 +83,7 @@ def pickpocket_knight():
 def needs_to_eat():
     if not is_hp_gt(50):
         print(f'🦈 HP LESS THAN 50 - EATING')
-        while not is_hp_gt(90):
+        while not is_hp_gt(90) and has_inventory_food():
             eat_food()
             API.AntiBan.sleep_between(0.3, 0.4)
 
