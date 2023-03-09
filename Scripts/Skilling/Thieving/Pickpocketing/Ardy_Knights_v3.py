@@ -43,9 +43,11 @@ def start_pickpocketing_knight(curr_loop):
             if get_needs_food():
                 print(f'🎒🦈WITHDRAWING FOOD')
                 withdraw_food()
+                set_needs_food(False)
             if get_needs_necklaces():
                 print(f'🎒📿WITHDRAWING FOOD')
                 withdraw_necklaces()
+                set_needs_necklaces(False)
 
             close_bank()
 
