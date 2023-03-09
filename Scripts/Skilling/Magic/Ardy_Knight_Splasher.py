@@ -13,8 +13,10 @@ def start_splashing_ardy_knight(curr_loop):
         if not wait_for_img(img_name='Magic', category='Exp_Drops', threshold=0.7, max_wait_sec=15):
             print(f'⛔ Failed to find Magic Exp: {get_num_times_failed()}/3')
             inc_num_times_failed()
-            if get_num_times_failed() > 3:
+            if get_num_times_failed() > 4:
                 return False
+        else:
+            reset_num_times_failed()
 
     else:
         print(f'First loop')
@@ -27,6 +29,11 @@ def inc_num_times_failed():
     NUM_TIMES_FAILED += 1
     return
 
+
+def reset_num_times_failed():
+    global NUM_TIMES_FAILED
+    NUM_TIMES_FAILED = 0
+    return
 
 def get_num_times_failed():
     return NUM_TIMES_FAILED
