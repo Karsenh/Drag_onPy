@@ -49,7 +49,6 @@ def start_pickpocketing_knight(curr_loop):
                 if not equip_new_necklace():
                     print(f'NO NECKLACE EQUIPPED OR IN INVENTORY')
                     set_needs_necklaces(True)
-                    return False
 
         pickpocket_knight()
 
