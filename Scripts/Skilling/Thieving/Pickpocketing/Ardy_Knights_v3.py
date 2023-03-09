@@ -79,10 +79,10 @@ def pickpocket_knight():
 
     num_pickpockets = 0
     open_coin_pouch()
-    while (num_pickpockets < 5 and not needs_to_eat()) or saw_thieving_exp():
+    while (num_pickpockets < 5 and not needs_to_eat()) or (saw_thieving_exp() and not needs_to_eat()):
         print(f'num_pickpockets = {num_pickpockets}')
         knight_xy_from_1_and_2 = 785, 530
-        mouse_click(knight_xy_from_1_and_2, min_num_clicks=3, max_num_clicks=5)
+        mouse_click(knight_xy_from_1_and_2, min_num_clicks=4, max_num_clicks=6)
         num_pickpockets += 1
         if num_pickpockets % 15 == 0:
             open_coin_pouch()
