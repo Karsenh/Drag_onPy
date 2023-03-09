@@ -24,22 +24,32 @@ def start_pickpocketing_knight(curr_loop):
         needs_necklace = False
 
         if not has_inventory_food():
+            print(f'🦈❌NEED FOOD')
             needs_food = True
+        else:
+            print(f'🦈✔ HAVE FOOD')
 
         if IS_USING_NECKLACE and not has_inventory_necklace():
+            print(f'📿❌NEED NECKLACE')
             needs_necklace = True
+        else:
+            print(f'📿✔ HAVE NECKLACE')
 
         if needs_food or needs_necklace:
+            print(f'💰🏧 OPENING BANK\nneeds_food: {needs_food}\nneeds_necklace: {needs_necklace}')
             open_bank()
 
             if needs_food:
+                print(f'🎒🦈WITHDRAWING FOOD')
                 withdraw_food()
             if needs_necklace:
+                print(f'🎒📿WITHDRAWING FOOD')
                 withdraw_necklaces()
 
             close_bank()
 
-        if curr_loop % 6 == 0:
+        if curr_loop == 2 or curr_loop % 6 == 0:
+            print(f'📿 CHECKING FOR EQUIPPED NECKLACE')
             if not has_equipped_necklace():
                 if not equip_new_necklace():
                     print(f'We should have necklaces but failed to find one in inventory for some reason...')
@@ -137,7 +147,7 @@ def has_inventory_necklace():
 
 
 def has_equipped_necklace():
-    print(f'CHECKING FOR EQUIPPED NECKLACE')
+    print(f'CHECKING FOR EQUIPPED NECKLACE 👨🏼📿')
     is_tab_open('equipment', True)
     return does_img_exist(img_name='equipped_dodgy_necklace', script_name=SCRIPT_NAME, threshold=0.9)
 
