@@ -97,7 +97,7 @@ def needs_to_eat():
             eat_food()
             API.AntiBan.sleep_between(0.3, 0.4)
 
-    return not is_hp_gt(50)
+    return False
 
 
 def eat_food():
