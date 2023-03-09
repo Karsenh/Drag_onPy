@@ -84,7 +84,7 @@ def pickpocket_knight():
     num_pickpockets = 0
     open_coin_pouch()
 
-    while (num_pickpockets < 5 and not needs_to_eat()) or (saw_thieving_exp() and not needs_to_eat()):
+    while (num_pickpockets < 5 and not needs_more_food()) or (saw_thieving_exp() and not needs_more_food()):
         print(f'num_pickpockets = {num_pickpockets}')
         knight_xy_from_1_and_2 = 785, 530
         mouse_click(knight_xy_from_1_and_2, min_num_clicks=4, max_num_clicks=6)
@@ -95,7 +95,7 @@ def pickpocket_knight():
     return
 
 
-def needs_to_eat():
+def needs_more_food():
     if not is_hp_gt(50):
         print(f'💔 HP LESS THAN 50 - ATTEMPING TO EAT 🦈')
         while not is_hp_gt(90) and has_inventory_food():
