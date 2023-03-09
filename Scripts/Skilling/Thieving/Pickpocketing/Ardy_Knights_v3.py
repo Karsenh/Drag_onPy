@@ -23,7 +23,7 @@ def start_pickpocketing_knight(curr_loop):
     if curr_loop != 1:
         print(f'Not first loop')
 
-        if get_needs_food() or get_needs_necklaces() or curr_loop == 2:
+        if get_needs_food() or get_needs_necklaces():
             # if not has_inventory_food():
             #     print(f'🦈❌NEED FOOD')
             #     needs_food = True
