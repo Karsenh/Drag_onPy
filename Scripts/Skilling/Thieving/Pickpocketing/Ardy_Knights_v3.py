@@ -15,36 +15,39 @@ FOOD_TYPE = 'monkfish'
 IS_USING_NECKLACE = True
 CURR_TILE = None
 BANK_TAB_NUM = 1
+NEEDS_FOODS = False
+NEEDS_NECKLACES = False
 
 
 def start_pickpocketing_knight(curr_loop):
     if curr_loop != 1:
         print(f'Not first loop')
-        needs_food = False
-        needs_necklace = False
 
-        if not has_inventory_food():
-            print(f'🦈❌NEED FOOD')
-            needs_food = True
-        else:
-            print(f'🦈✔ HAVE FOOD')
-
-        if IS_USING_NECKLACE and not has_inventory_necklace():
-            print(f'📿❌NEED NECKLACE')
-            needs_necklace = True
-        else:
-            print(f'📿✔ HAVE NECKLACE')
-
-        if needs_food or needs_necklace:
-            print(f'💰🏧 OPENING BANK\nneeds_food: {needs_food}\nneeds_necklace: {needs_necklace}')
+        if get_needs_food() or get_needs_necklaces() or curr_loop == 2:
+            # if not has_inventory_food():
+            #     print(f'🦈❌NEED FOOD')
+            #     needs_food = True
+            # else:
+            #     print(f'🦈✔ HAVE FOOD')
+            #
+            # if IS_USING_NECKLACE and not has_inventory_necklace():
+            #     print(f'📿❌NEED NECKLACE')
+            #     needs_necklace = True
+            # else:
+            #     print(f'📿✔ HAVE NECKLACE')
+            #
+            # if needs_food or needs_necklace:
+            #     print(f'💰🏧 OPENING BANK\nneeds_food: {needs_food}\nneeds_necklace: {needs_necklace}')
             open_bank()
 
-            if needs_food:
+            if get_needs_food():
                 print(f'🎒🦈WITHDRAWING FOOD')
                 withdraw_food()
-            if needs_necklace:
+                set_needs_food(False)
+            if get_needs_necklaces():
                 print(f'🎒📿WITHDRAWING FOOD')
                 withdraw_necklaces()
+                set_needs_necklaces(False)
 
             close_bank()
 
@@ -52,7 +55,8 @@ def start_pickpocketing_knight(curr_loop):
             print(f'📿 CHECKING FOR EQUIPPED NECKLACE')
             if not has_equipped_necklace():
                 if not equip_new_necklace():
-                    print(f'We should have necklaces but failed to find one in inventory for some reason...')
+                    print(f'NO NECKLACE EQUIPPED OR IN INVENTORY')
+                    set_needs_necklaces(True)
                     return False
 
         pickpocket_knight()
@@ -79,7 +83,8 @@ def pickpocket_knight():
 
     num_pickpockets = 0
     open_coin_pouch()
-    while (num_pickpockets < 5 and not needs_to_eat()) or (saw_thieving_exp() and not needs_to_eat()):
+
+    while (num_pickpockets < 5 and not needs_more_food()) or (saw_thieving_exp() and not needs_more_food()):
         print(f'num_pickpockets = {num_pickpockets}')
         knight_xy_from_1_and_2 = 785, 530
         mouse_click(knight_xy_from_1_and_2, min_num_clicks=4, max_num_clicks=6)
@@ -90,12 +95,17 @@ def pickpocket_knight():
     return
 
 
-def needs_to_eat():
+def needs_more_food():
     if not is_hp_gt(50):
-        print(f'🦈 HP LESS THAN 50 - EATING')
+        print(f'💔 HP LESS THAN 50 - ATTEMPING TO EAT 🦈')
         while not is_hp_gt(90) and has_inventory_food():
             eat_food()
             API.AntiBan.sleep_between(0.3, 0.4)
+
+        if not has_inventory_food():
+            print(f'⛔ 🦈 NO INVENTORY FOOD FOUND - SETTING NEEDS FOOD TRUE')
+            set_needs_food(True)
+            return True
 
     return False
 
@@ -205,6 +215,25 @@ def withdraw_necklaces():
     is_withdraw_qty('10', True)
     return does_img_exist(img_name=f'banked_dodgy_necklace', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True)
 
+
+def set_needs_food(new_val):
+    global NEEDS_FOODS
+    NEEDS_FOODS = new_val
+    return
+
+
+def get_needs_food():
+    return NEEDS_FOODS
+
+
+def set_needs_necklaces(new_val):
+    global NEEDS_NECKLACES
+    NEEDS_NECKLACES = new_val
+    return
+
+
+def get_needs_necklaces():
+    return NEEDS_NECKLACES
 # PSEUDO CODE:
 # 1. Check if we have inventory necklaces
 # 2. Check if we have inventory food
