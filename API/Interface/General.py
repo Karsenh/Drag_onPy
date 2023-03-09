@@ -236,6 +236,7 @@ def is_run_gt(percent=10):
 
 
 def is_hp_gt(percent=50):
+    ninety_percent_xy = 1190, 125
     half_hp_xy = 1175, 140
     ten_percent_xy = 1184, 154
 
@@ -243,10 +244,13 @@ def is_hp_gt(percent=50):
     health_red_color = 161, 6, 3
 
     match percent:
+        case 90:
+            check_xy = ninety_percent_xy
         case 50:
             check_xy = half_hp_xy
         case 10:
             check_xy = ten_percent_xy
+
     print(f'is_hp_gt(percent={percent}) : {get_color_at_coords(check_xy) > health_black_color}')
     return get_color_at_coords(check_xy) > health_black_color
 

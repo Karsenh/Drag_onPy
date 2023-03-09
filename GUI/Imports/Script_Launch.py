@@ -22,7 +22,7 @@ from Scripts.Skilling.Agility.Canifis_Rooftops import start_canifis_rooftops
 from Scripts.Skilling.Agility.Seers_Rooftops import start_seers_rooftops
 from Scripts.Skilling.Hunter.Single_Trap_Crimsons import start_catching_crimsons
 from Scripts.Skilling.Hunter.Double_Trap_Ceruleans import start_trapping_birds
-from Scripts.Skilling.Thieving.Pickpocketing.Ardy_Knights_v2 import start_pickpocketing_knight
+from Scripts.Skilling.Thieving.Pickpocketing.Ardy_Knights_v3 import start_pickpocketing_knight
 from Scripts.Skilling.Combat.Kourend_Crab_Killer import start_killing_kourend_crabs
 from Scripts.Skilling.Crafting.GE_Dhide_Bodies import start_crafting_dhide_bodies
 from Scripts.Skilling.Woodcutting.Cwars_Teaks import start_chopping_teaks
@@ -317,7 +317,7 @@ def launch_script(script_name="pisc_iron"):
             always_sleep = False
         case "Ardy_Knight_Splasher":
             selected_script = ScriptEnum.ARDY_KNIGHT_SPLASHER.value
-            antiban_likelihood = 15
+            antiban_likelihood = 20
             antiban_downtime_sec = 1
             reopen_invent = False
             always_sleep = False
