@@ -23,29 +23,21 @@ def start_pickpocketing_knight(curr_loop):
     if curr_loop != 1:
         print(f'Not first loop')
 
-        if get_needs_food() or get_needs_necklaces() or curr_loop == 2:
-            # if not has_inventory_food():
-            #     print(f'🦈❌NEED FOOD')
-            #     needs_food = True
-            # else:
-            #     print(f'🦈✔ HAVE FOOD')
-            #
-            # if IS_USING_NECKLACE and not has_inventory_necklace():
-            #     print(f'📿❌NEED NECKLACE')
-            #     needs_necklace = True
-            # else:
-            #     print(f'📿✔ HAVE NECKLACE')
-            #
-            # if needs_food or needs_necklace:
-            #     print(f'💰🏧 OPENING BANK\nneeds_food: {needs_food}\nneeds_necklace: {needs_necklace}')
+        if get_needs_food() or get_needs_necklaces():
+            if not has_inventory_food():
+                set_needs_food(True)
+            if not has_inventory_necklaces():
+                set_needs_necklaces(True)
+
             open_bank()
 
             if get_needs_food():
                 print(f'🎒🦈WITHDRAWING FOOD')
                 withdraw_food()
                 set_needs_food(False)
+
             if get_needs_necklaces():
-                print(f'🎒📿WITHDRAWING FOOD')
+                print(f'🎒📿WITHDRAWING NECKLACES')
                 withdraw_necklaces()
                 set_needs_necklaces(False)
 
@@ -146,13 +138,13 @@ def equip_new_necklace():
 def has_inventory_food():
     print(f'CHECKING FOR INVENTORY FOOD 🦈')
     is_tab_open('inventory', True)
-    return does_img_exist(img_name=f'inventory_{FOOD_TYPE}', script_name=SCRIPT_NAME, threshold=0.9)
+    return does_img_exist(img_name=f'inventory_{FOOD_TYPE}', script_name=SCRIPT_NAME, threshold=0.9, img_sel='inventory')
 
 
-def has_inventory_necklace():
+def has_inventory_necklaces():
     print(f'CHECKING FOR INVENTORY NECKLACES 📿')
     is_tab_open('inventory', True)
-    return does_img_exist(img_name=f'inventory_dodgy_necklace', script_name=SCRIPT_NAME, threshold=0.9)
+    return does_img_exist(img_name=f'inventory_dodgy_necklace', script_name=SCRIPT_NAME, threshold=0.9, img_sel='inventory')
 
 
 def has_equipped_necklace():
