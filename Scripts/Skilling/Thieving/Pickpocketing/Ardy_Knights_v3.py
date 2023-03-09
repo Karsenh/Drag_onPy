@@ -24,22 +24,32 @@ def start_pickpocketing_knight(curr_loop):
         needs_necklace = False
 
         if not has_inventory_food():
+            print(f'🦈❌NEED FOOD')
             needs_food = True
+        else:
+            print(f'🦈✔ HAVE FOOD')
 
         if IS_USING_NECKLACE and not has_inventory_necklace():
+            print(f'📿❌NEED NECKLACE')
             needs_necklace = True
+        else:
+            print(f'📿✔ HAVE NECKLACE')
 
         if needs_food or needs_necklace:
+            print(f'💰🏧 OPENING BANK\nneeds_food: {needs_food}\nneeds_necklace: {needs_necklace}')
             open_bank()
 
             if needs_food:
+                print(f'🎒🦈WITHDRAWING FOOD')
                 withdraw_food()
             if needs_necklace:
+                print(f'🎒📿WITHDRAWING FOOD')
                 withdraw_necklaces()
 
             close_bank()
 
-        if curr_loop % 6 == 0:
+        if curr_loop == 2 or curr_loop % 6 == 0:
+            print(f'📿 CHECKING FOR EQUIPPED NECKLACE')
             if not has_equipped_necklace():
                 if not equip_new_necklace():
                     print(f'We should have necklaces but failed to find one in inventory for some reason...')
@@ -69,10 +79,10 @@ def pickpocket_knight():
 
     num_pickpockets = 0
     open_coin_pouch()
-    while (num_pickpockets < 5 and not needs_to_eat()) or saw_thieving_exp():
+    while (num_pickpockets < 5 and not needs_to_eat()) or (saw_thieving_exp() and not needs_to_eat()):
         print(f'num_pickpockets = {num_pickpockets}')
         knight_xy_from_1_and_2 = 785, 530
-        mouse_click(knight_xy_from_1_and_2, min_num_clicks=3, max_num_clicks=5)
+        mouse_click(knight_xy_from_1_and_2, min_num_clicks=4, max_num_clicks=6)
         num_pickpockets += 1
         if num_pickpockets % 15 == 0:
             open_coin_pouch()
@@ -87,7 +97,7 @@ def needs_to_eat():
             eat_food()
             API.AntiBan.sleep_between(0.3, 0.4)
 
-    return not is_hp_gt(50)
+    return False
 
 
 def eat_food():
@@ -137,7 +147,7 @@ def has_inventory_necklace():
 
 
 def has_equipped_necklace():
-    print(f'CHECKING FOR EQUIPPED NECKLACE')
+    print(f'CHECKING FOR EQUIPPED NECKLACE 👨🏼📿')
     is_tab_open('equipment', True)
     return does_img_exist(img_name='equipped_dodgy_necklace', script_name=SCRIPT_NAME, threshold=0.9)
 
