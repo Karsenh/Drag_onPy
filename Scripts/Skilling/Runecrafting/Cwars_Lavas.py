@@ -700,7 +700,7 @@ def teleport_to_cwars():
 
     is_tab_open("equipment", True)
 
-    if not does_img_exist(img_name="Equipped_Necklace", script_name="Cwars_Lavas", threshold=0.88):
+    if not does_img_exist(img_name="Equipped_Necklace", script_name="Cwars_Lavas", threshold=0.85):
         NECK_EQUIPPED = False
 
     if CACHED_EQUIPPED_ROD_XY:
