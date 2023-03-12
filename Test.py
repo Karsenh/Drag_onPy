@@ -39,14 +39,7 @@ def __main__():
     capture_bluestacks()
     clear_debug_log()
 
-    launch_script("Pest_Control")
-    # wait_for_img(img_name="bank_is_open", category="Banking", max_wait_sec=15)
-    # setup_interface('west', 4, 'down')
-
-    SCRIPT_NAME = 'Ardy_Knights'
-    # does_img_exist(img_name='tile_1', script_name=SCRIPT_NAME, threshold=0.9)
-    # does_img_exist(img_name='tile_2', script_name=SCRIPT_NAME, threshold=0.9)
-    # does_img_exist(img_name='bank_tile', script_name=SCRIPT_NAME, threshold=0.9)
+    launch_script("Cwars_Lavas")
 
 
     # does_img_exist(img_name='tile_1_flag', script_name='Ardy_Knights', threshold=0.9)
