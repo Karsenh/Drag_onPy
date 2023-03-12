@@ -39,7 +39,7 @@ def __main__():
     capture_bluestacks()
     clear_debug_log()
 
-    launch_script("Ardy_Knights")
+    launch_script("Pest_Control")
     # wait_for_img(img_name="bank_is_open", category="Banking", max_wait_sec=15)
     # setup_interface('west', 4, 'down')
 

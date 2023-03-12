@@ -41,6 +41,7 @@ from Scripts.Skilling.Farming.Tithe_Farmer_v2 import start_tithe_farming
 from Scripts.Skilling.Smithing.Blast_Furnace import start_blasting
 from Scripts.Skilling.Combat.NMZ import start_training_nmz
 from Scripts.Skilling.Magic.Ardy_Knight_Splasher import start_splashing_ardy_knight
+from Scripts.MiniGames.Pest_Control import start_pest_control
 
 import API
 from enum import Enum
@@ -114,6 +115,7 @@ def launch_script(script_name="pisc_iron"):
         BLAST_FURNACE = 39
         NMZ = 40
         ARDY_KNIGHT_SPLASHER = 41
+        PEST_CONTROL = 42
 
     all_scripts = [mine_pisc_iron, smith_gold_edge, run_gnome_course,
                    fish_draynor_shrimp, fish_barb_trout, barbarian_fishing,
@@ -127,7 +129,8 @@ def launch_script(script_name="pisc_iron"):
                    start_superheating_gold, start_constructing_larders, start_constructing_tables,
                    start_catching_desert_lizards, start_catching_red_lizards, start_chopping_sw_teaks,
                    start_crafting_lavas, start_motherlode_mining, start_making_fertalizer, start_tithe_farming,
-                   start_catching_black_lizards, start_catching_chins, start_blasting, start_training_nmz, start_splashing_ardy_knight]
+                   start_catching_black_lizards, start_catching_chins, start_blasting, start_training_nmz,
+                   start_splashing_ardy_knight, start_pest_control]
 
     match script_name:
         case "Pisc_Iron_Miner":
@@ -317,6 +320,12 @@ def launch_script(script_name="pisc_iron"):
             always_sleep = False
         case "Ardy_Knight_Splasher":
             selected_script = ScriptEnum.ARDY_KNIGHT_SPLASHER.value
+            antiban_likelihood = 20
+            antiban_downtime_sec = 1
+            reopen_invent = False
+            always_sleep = False
+        case "Pest_Control":
+            selected_script = ScriptEnum.PEST_CONTROL.value
             antiban_likelihood = 20
             antiban_downtime_sec = 1
             reopen_invent = False
