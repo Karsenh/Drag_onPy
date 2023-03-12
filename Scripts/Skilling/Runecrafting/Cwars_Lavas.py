@@ -663,7 +663,7 @@ def move_to_ruins():
         print(f'Couldnt find Enter Ruins image - manually entering')
         manual_enter_ruins_xy = 810, 314
         mouse_click(manual_enter_ruins_xy)
-    return wait_for_img(img_name="Entered_Ruins_Flag", script_name="Cwars_Lavas", threshold=0.9)
+    return wait_for_img(img_name="Entered_Ruins_Flag", script_name="Cwars_Lavas", threshold=0.9, max_wait_sec=12)
 
 
 def move_to_altar():
