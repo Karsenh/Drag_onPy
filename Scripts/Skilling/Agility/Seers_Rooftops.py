@@ -2,7 +2,7 @@ import random
 
 import API.AntiBan
 from API.Mouse import mouse_click, mouse_move, mouse_long_click
-from API.Interface.General import setup_interface, is_tab_open
+from API.Interface.General import setup_interface, is_tab_open, relog
 from API.Imaging.Image import wait_for_img, get_existing_img_xy, does_img_exist
 import pyautogui as pag
 
@@ -23,7 +23,7 @@ def start_seers_rooftops(curr_loop):
         alch_on_agility_drop()
 
     for i in range(1, 8):
-        if not handle_next_jump():
+        if not handle_next_jump(curr_loop):
             print(f'Something went wrong in handle_next_jump()')
             return False
         CURR_JUMP_NUM += 1
@@ -92,7 +92,7 @@ def alch_on_agility_drop():
 
 
 # HELPERS
-def handle_next_jump():
+def handle_next_jump(curr_loop):
     global CURR_JUMP_NUM
 
     jumps_with_mog = [1, 2, 3, 5]
@@ -173,11 +173,15 @@ def handle_next_jump():
                         return False
 
     elif CURR_JUMP_NUM == 6:
+        if curr_loop % 300 == 0:
+            relog()
+            setup_interface("north", 1, "up")
+
         print('click move_back image')
         if not wait_for_img(img_name="move_back_alt", script_name="Seers_Rooftops", threshold=0.9, should_click=True, x_offset=25,
                  y_offset=25, max_wait_sec=10):
             if does_img_exist(img_name='at_course_end_flag', script_name='Seers_Rooftops', threshold=0.9):
-                flower_tile_xy = 1116, 278
+                flower_tile_xy = 1100, 265
                 mouse_long_click(flower_tile_xy)
                 return does_img_exist(img_name='walk_here_option', script_name='Seers_Rooftops', threshold=0.85, should_click=True, click_middle=True)
 
@@ -186,7 +190,7 @@ def handle_next_jump():
         print('click restart_course image')
         pag.leftClick()
         API.AntiBan.sleep_between(2.0, 2.1)
-        if not wait_for_img(img_name="restart_course", script_name="Seers_Rooftops", threshold=0.86, should_click=True, max_wait_sec=15, max_clicks=2, y_offset=8):
+        if not wait_for_img(img_name="restart_course", script_name="Seers_Rooftops", threshold=0.86, should_click=True, max_wait_sec=15, max_clicks=2, click_middle=True):
             return False
         print(f'Setting curr_jump_num ({CURR_JUMP_NUM}) = 0 ')
         CURR_JUMP_NUM = 0
