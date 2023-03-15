@@ -49,10 +49,10 @@ def start_killing_cows(curr_loop):
                     print(f'⛔ Cow click off window frame - skipping!')
 
                 break
-            if does_img_exist(img_name=f"c{i}", script_name="Cow_Killer", threshold=0.80, should_click=True):
-                print(f'Found Cow image')
-                API.AntiBan.sleep_between(3.1, 3.5)
-                break
+            # if does_img_exist(img_name=f"c{i}", script_name="Cow_Killer", threshold=0.80, should_click=True):
+            #     print(f'Found Cow image')
+            #     API.AntiBan.sleep_between(3.1, 3.5)
+            #     break
 
             i += 1
             if i == TOTAL_NUM_COW_IMGS + 1:
