@@ -18,6 +18,7 @@ from Scripts.MiniGames.Hosidius_Plough import start_ploughing_for_favour
 from Scripts.Skilling.Thieving.Stalls.Hosidius_Fruit import start_stealing_fruit
 from Scripts.Skilling.Prayer.Gilded_Altar_v2 import start_worshipping_bones
 from Scripts.Skilling.Herblore.Unf_Pots import start_unf_pots
+from Scripts.Skilling.Herblore.GE_Finished_Pots import start_making_finished_potions
 from Scripts.Skilling.Agility.Canifis_Rooftops import start_canifis_rooftops
 from Scripts.Skilling.Agility.Seers_Rooftops import start_seers_rooftops
 from Scripts.Skilling.Hunter.Single_Trap_Crimsons import start_catching_crimsons
@@ -116,6 +117,7 @@ def launch_script(script_name="pisc_iron"):
         NMZ = 40
         ARDY_KNIGHT_SPLASHER = 41
         PEST_CONTROL = 42
+        GE_FINISHED_POTS = 43
 
     all_scripts = [mine_pisc_iron, smith_gold_edge, run_gnome_course,
                    fish_draynor_shrimp, fish_barb_trout, barbarian_fishing,
@@ -130,7 +132,7 @@ def launch_script(script_name="pisc_iron"):
                    start_catching_desert_lizards, start_catching_red_lizards, start_chopping_sw_teaks,
                    start_crafting_lavas, start_motherlode_mining, start_making_fertalizer, start_tithe_farming,
                    start_catching_black_lizards, start_catching_chins, start_blasting, start_training_nmz,
-                   start_splashing_ardy_knight, start_pest_control]
+                   start_splashing_ardy_knight, start_pest_control, start_making_finished_potions]
 
     match script_name:
         case "Pisc_Iron_Miner":
@@ -329,6 +331,12 @@ def launch_script(script_name="pisc_iron"):
             antiban_likelihood = 20
             antiban_downtime_sec = 1
             reopen_invent = False
+            always_sleep = False
+        case "GE_Finished_Pots":
+            selected_script = ScriptEnum.GE_FINISHED_POTS.value
+            antiban_likelihood = 6
+            antiban_downtime_sec = 2
+            reopen_invent = True
             always_sleep = False
 
     is_timer_set = is_break_timer_set()

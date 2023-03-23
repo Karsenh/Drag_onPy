@@ -2,15 +2,14 @@
 
 ---
 ## Undetected Mobile Botting Software
+(requies Bluestacks 5 Emulator)
 
 1. Must have Permanent XP drops enabled in settings
-2. Must have BlueStacks 5 Android emulator
-3. Must be on mobile sub-tab within Settings Tab
-4. DO NOT adjust Mini-map zoom (turn minimap zoom off)
+2. DO NOT adjust Mini-map zoom (turn minimap zoom off)
 
 
 
-### [ 2 ] Total Scripts
+### [ 42 ] Total Scripts
 1. Piscatoris Iron **Miner**
 2. Edgeville Gold **Smither**
 
@@ -35,16 +34,9 @@
 7. Import JSON config settings and convert to exe
 8. (or) Manually configure based on following:
 9. ** NOTE (not shown in image) Must include in "Hidden imports" - "pyautogui" & "pywintypes"
-
-<img src='C:\Users\Karsen\Desktop\Drag_onPy\Assets\Images\Instructions\Generating Exe\Auto-Py-To-Exe Configuration.png' />
-
+10. After .exe is built - move from output (click open output dir in py-to-exe) into output dir within this project
+11. Once .exe from auto-py-to-exe is in the output dir of this project, start Inno
+12. Use the Inno script in the 'Misc' dir within this project to create Inno setup Exe
 
 ---
 
-## Hosidius Plough:
-
-Start:
-
-Inventory:
-
-Notes:

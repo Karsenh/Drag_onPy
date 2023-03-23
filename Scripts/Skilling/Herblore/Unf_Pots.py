@@ -9,8 +9,10 @@ from API.Mouse import mouse_click, mouse_long_click
 from API.Interface.General import get_xy_for_invent_slot
 import pyautogui as pag
 
-herb_type = "snapdragon"
+HERB_TYPE = "snapdragon"
 herb_start_time = None
+
+MAKE_FINISHED = True
 
 
 def start_unf_pots(curr_loop):
@@ -46,7 +48,7 @@ def open_bank():
 
 
 def withdraw_herbs_and_vials(curr_loop):
-    global herb_type
+    global HERB_TYPE
 
     deposit_all()
     API.AntiBan.sleep_between(0.5, 0.6)
@@ -54,10 +56,10 @@ def withdraw_herbs_and_vials(curr_loop):
     if curr_loop != 1:
         print('not first loop')
     #     Withdrawing normally
-        if does_img_exist(img_name=herb_type, script_name="Unf_Pots", should_click=True, x_offset=10, y_offset=7):
+        if does_img_exist(img_name=HERB_TYPE, script_name="Unf_Pots", should_click=True, x_offset=10, y_offset=7):
             API.AntiBan.sleep_between(0.6, 0.7)
         else:
-            return shutdown(script_name="Unf_Pots", reason=f"Couldn't find anymore {herb_type} to withdraw from bank.")
+            return shutdown(script_name="Unf_Pots", reason=f"Couldn't find anymore {HERB_TYPE} to withdraw from bank.")
 
         if does_img_exist(img_name="water_vial", script_name="Unf_Pots", should_click=True, x_offset=15, y_offset=8, threshold=0.99):
             API.AntiBan.sleep_between(0.8, 0.9)
@@ -70,7 +72,7 @@ def withdraw_herbs_and_vials(curr_loop):
         is_bank_tab_open(tab_num=6, should_open=True)
         API.AntiBan.sleep_between(0.6, 0.9)
 
-        withdraw_14(item=herb_type)
+        withdraw_14(item=HERB_TYPE)
 
         if does_img_exist(img_name="water_vial", script_name="Unf_Pots", should_click=True, x_offset=15, y_offset=8, threshold=0.99):
             API.AntiBan.sleep_between(0.8, 0.9)

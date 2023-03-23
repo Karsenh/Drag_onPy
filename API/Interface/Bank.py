@@ -1,18 +1,85 @@
 import random
-
+import pyautogui as pag
 import API.Imaging.Image
 from API.Imaging.Image import does_color_exist
 from API.Imports.Coords import *
-from API.Mouse import mouse_click
+from API.Mouse import mouse_click, mouse_move, mouse_long_click
 from API.Imaging.Image import does_img_exist
 from API.AntiBan import print_to_log, sleep_between
 from API.Debug import write_debug
 import keyboard
 
+HAS_WITHDRAWN_14 = False
+
+
+def withdraw_item_from_tab_num(item, qty, tab_num, threshold=0.8):
+    global HAS_WITHDRAWN_14
+    write_debug(f'Withdrawing {item} from tab_num: {tab_num}')
+    scroll_xy = 622, 580
+
+    if not is_bank_open():
+        write_debug(f'Bank is not open - returning')
+        return False
+
+    is_bank_tab_open(tab_num)
+
+    is_withdraw_qty(qty)
+
+    if qty != 'x' or HAS_WITHDRAWN_14:
+        if not does_img_exist(img_name=item, category='Banking\Bank_Items', threshold=threshold, should_click=True, click_middle=True):
+            # Scroll and try again before returning false
+            write_debug(f'Failed to find bank item: {item} in tab_num: {tab_num}- Scrolling and trying again')
+            mouse_move(scroll_xy)
+            pag.hscroll(150)
+            if not does_img_exist(img_name=item, category='Banking\Bank_Items', threshold=threshold, should_click=True, click_middle=True):
+                write_debug(f'Failed to find item: {item} in tab_num: {tab_num} for a second time after scrolling - returning...')
+                return False
+    else:
+        if not does_img_exist(img_name=item, category='Banking\Bank_Items', threshold=threshold):
+            write_debug(f'Failed to find bank item: {item} in tab_num: {tab_num}- Scrolling and trying again')
+            mouse_move(scroll_xy)
+            pag.hscroll(150)
+            if not does_img_exist(img_name=item, category='Banking\Bank_Items', threshold=threshold):
+                write_debug(f'Failed to find item: {item} in tab_num: {tab_num} for a second time after scrolling - returning...')
+                return False
+
+        bank_item_xy = API.Imaging.Image.get_existing_img_xy()
+        mouse_long_click(bank_item_xy)
+        does_img_exist(img_name="withdraw_x", category="Banking", should_click=True, threshold=0.9, click_middle=True)
+        API.AntiBan.sleep_between(1.0, 1.1)
+
+        pag.press('1')
+        API.AntiBan.sleep_between(0.4, 0.7)
+        pag.press('4')
+        API.AntiBan.sleep_between(0.8, 1.1)
+
+        pag.press('enter')
+
+        API.AntiBan.sleep_between(1.7, 1.8)
+
+        HAS_WITHDRAWN_14 = True
+
+    return True
+
 
 def open_ge_bank():
     # Opens GE bank from diagonal tile (SE) while facing EAST zoomed all the way in
-    does_img_exist(img_name="GE_SE_6_Zoom_Bank", category="Banking", threshold=0.90, should_click=True, click_middle=True)
+    # if not does_img_exist(img_name="GE_SE_6_Zoom_Bank", category="Banking", threshold=0.98):
+    #     write_debug(f'Failed to find GE bank (facing East with 5x zoom?)')
+    #     return False
+    ge_bank_xy = 810, 630
+    # ge_bank_xy = API.Imaging.Image.get_existing_img_xy()
+    API.Mouse.mouse_long_click(ge_bank_xy)
+    if not does_img_exist(img_name='bank_grand', category='Banking', threshold=0.8, should_click=True, click_middle=True):
+        write_debug('❌ Failed to find bank grand exchange long-click option after long clicking')
+        if not does_img_exist(img_name='cancel', category='General', threshold=0.8, should_click=True, click_middle=True):
+            write_debug('⛔ Failed to find cancel option as well - exiting...')
+            return False
+        if not does_img_exist(img_name='bank_grand', category='Banking', threshold=0.8, should_click=True, click_middle=True):
+            write_debug('⛔ Failed to find the bank grand exchange long-click option for a second time - exiting...')
+            return False
+
+    write_debug('✔ Clicked Bank Grand Exchange long-click option - checking if bank is open...')
     bank_open = is_bank_open()
     if not bank_open:
         write_debug(f'Something went wrong while opening the GE bank')

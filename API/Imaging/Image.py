@@ -33,7 +33,6 @@ def capture_bluestacks():
     x1, y1, x2, y2 = get_bluestacks_region()
 
     # write_debug(f'🐛 x1: {x1}, y1: {y1}\n🐛 x2: {x2}, y2: {y2}')
-
     # w, h = get_bluestacks_window_size()
     pag.screenshot(imageFilename=fr'{BS_SCREEN_PATH}', region=(x1, y1, x2-x1, y2-y1))
     # write_debug(f'📸 Captured & Saved Live (BlueStacks) Img: {BS_SCREEN_PATH}')
@@ -150,7 +149,10 @@ def does_img_exist(img_name, script_name=None, category='Scripts', threshold=0.8
         return False
     else:
         write_debug(f'✔ {img_name}.png found:\nloc[1] (x)= {loc[1]}\n loc[0] (y)= {loc[0]}')
-        if img_sel == "first":
+        if img_sel == "last":
+            LATEST_IMG_XY = loc[1][len(loc[1]) - 1], loc[0][len(loc[0]) - 1]
+            write_debug(f'EXISTING_IMG_XY = {LATEST_IMG_XY}')
+        elif img_sel == "first":
             # Save the first img find xy coords
             LATEST_IMG_XY = loc[1][0], loc[0][0]
         elif img_sel == "random":
@@ -183,8 +185,7 @@ def does_img_exist(img_name, script_name=None, category='Scripts', threshold=0.8
                 return False
         else:
             # Save the 'deepest' find of img's xy coords
-            LATEST_IMG_XY = loc[1][len(loc[1]) - 1], loc[0][len(loc[0]) - 1]
-            write_debug(f'EXISTING_IMG_XY = {LATEST_IMG_XY}')
+            print(f'Failed to find img_sel {img_sel} for located image...')
 
         if should_click:
             if click_middle:
