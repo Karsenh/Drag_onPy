@@ -54,6 +54,7 @@ def start_training_nmz(curr_loop):
 
         if get_is_outside():
             if is_outside_dream():
+                check_armor_condition()
                 relog()
                 setup_interface('north', 3, 'up')
                 if not restart_dream():
@@ -74,6 +75,18 @@ def start_training_nmz(curr_loop):
 # -------
 # METHODS
 # -------
+def check_armor_condition():
+    dh_pieces = ['helm', 'chest', 'axe', 'legs']
+
+    is_tab_open('equipment')
+
+    for piece in dh_pieces:
+        if does_img_exist(img_name=f'broken_dh_{piece}', script_name=SCRIPT_NAME, threshold=0.85):
+            return False
+
+    return True
+
+
 def click_inventory_abs():
     set_is_outside(get_is_outside())
 

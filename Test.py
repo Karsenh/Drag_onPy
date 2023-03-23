@@ -8,7 +8,7 @@ from API.Imaging.OCR.Run_Energy import *
 from API.Imports.Paths import BS_SCREEN_PATH
 from GUI.Imports.Script_Launch import launch_script
 from GUI.Imports.Skill_Level_Input.Skill_Level_Input import get_skill_level, update_skill_level
-from API.Interface.Bank import is_bank_tab_open
+from API.Interface.Bank import is_bank_tab_open, open_ge_bank, withdraw_item_from_tab_num
 from Scripts.Skilling.Combat.NMZ import drop_pots_from_invent, purchase_new_dream, restock_doses_from_chest, \
     withdraw_ovls, withdraw_abs
 from Scripts.Skilling.Mining.Motherlode_Miner import claim_ore
@@ -39,10 +39,12 @@ def __main__():
     capture_bluestacks()
     clear_debug_log()
 
-    launch_script("Cow_Killer")
+    launch_script("GE_Finished_Pots")
 
 
-    does_img_exist(img_name='tile_1_flag', script_name='Ardy_Knights', threshold=0.9)
+
+
+    # does_img_exist(img_name='tile_1_flag', script_name='Ardy_Knights', threshold=0.9)
     # is_tab_open('logout', True)
     # does_img_exist(img_name='logout_thumbs_up', category='interface', threshold=0.9, should_click=True,
     #                click_middle=True)
