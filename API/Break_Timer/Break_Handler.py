@@ -10,7 +10,7 @@ script_start_time = None
 
 
 def check_break_timer(callback_fn=None):
-    if is_break_timer_set():
+    if get_is_break_timer_set():
         if should_break():
             go_on_break()
             handle_auth_screens()
@@ -22,7 +22,7 @@ def check_break_timer(callback_fn=None):
 
 
 # Boolean check if a break-schedule has been set in GUI
-def is_break_timer_set():
+def get_is_break_timer_set():
     break_vals = get_break_times()
     break_time, _, _, _ = break_vals
     if break_time is None:

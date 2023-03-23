@@ -23,11 +23,13 @@ def start_making_finished_potions(curr_loop):
         print(f'Not first loop')
         open_ge_bank()
         deposit_all()
-        withdraw_item_from_tab_num(item=PRIMARY_INGREDIENT, qty='x', tab_num=BANK_TAB_NUM)
-        withdraw_item_from_tab_num(item=SECONDARY_INGREDIENT, qty='x', tab_num=BANK_TAB_NUM)
+        if not withdraw_item_from_tab_num(item=PRIMARY_INGREDIENT, qty='x', tab_num=BANK_TAB_NUM):
+            return False
+        if not withdraw_item_from_tab_num(item=SECONDARY_INGREDIENT, qty='x', tab_num=BANK_TAB_NUM):
+            return False
         close_bank()
         make_inventory()
-        API.AntiBan.sleep_between(15, 16)
+        API.AntiBan.sleep_between(15, 17)
     else:
         print(f'First loop')
         setup_interface('east', 5, 'up')

@@ -48,7 +48,7 @@ import API
 from enum import Enum
 from API.Debug import write_debug
 from API.Interface.General import handle_auth_screens
-from API.Break_Timer.Break_Handler import is_break_timer_set
+from API.Break_Timer.Break_Handler import get_is_break_timer_set
 from API.Break_Timer.Break_Handler import break_handler
 
 SHOULD_CONTINUE = True
@@ -339,9 +339,10 @@ def launch_script(script_name="pisc_iron"):
             reopen_invent = True
             always_sleep = False
 
-    is_timer_set = is_break_timer_set()
+    is_bt_set = get_is_break_timer_set()
+    API.Time.start_script_timer()
 
-    if is_timer_set:
+    if is_bt_set:
         write_debug(f'🚩 Break Timer Set - Entering loop with break_handler()')
         while SHOULD_CONTINUE:
             if not all_scripts[selected_script](CURR_SCRIPT_LOOP):
@@ -352,6 +353,7 @@ def launch_script(script_name="pisc_iron"):
 
             CURR_SCRIPT_LOOP += 1
             print(f'🔄 MAIN LOOP COUNT: {CURR_SCRIPT_LOOP}')
+            print(f'⏳ {API.Time.get_curr_runtime()}')
 
     else:
         write_debug(f'🏳 NO Break Timer Set - Entering loop WITHOUT break_handler()')
@@ -365,6 +367,7 @@ def launch_script(script_name="pisc_iron"):
 
             CURR_SCRIPT_LOOP += 1
             print(f'🔄 MAIN LOOP COUNT: {CURR_SCRIPT_LOOP}')
+            print(f'⏳ {API.Time.get_curr_runtime()}')
 
     return
 
