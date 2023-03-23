@@ -54,7 +54,9 @@ def start_training_nmz(curr_loop):
 
         if get_is_outside():
             if is_outside_dream():
-                check_armor_condition()
+                if not is_armor_usable():
+                    print(f'Armor is fucked. Exiting...')
+                    return False
                 relog()
                 setup_interface('north', 3, 'up')
                 if not restart_dream():
@@ -75,7 +77,7 @@ def start_training_nmz(curr_loop):
 # -------
 # METHODS
 # -------
-def check_armor_condition():
+def is_armor_usable():
     dh_pieces = ['helm', 'chest', 'axe', 'legs']
 
     is_tab_open('equipment')
