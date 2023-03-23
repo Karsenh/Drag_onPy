@@ -23,7 +23,7 @@ def relog():
 
     does_img_exist(img_name='tap_to_logout', category='interface', threshold=0.9, should_click=True, click_middle=True)
 
-    if not wait_for_img(img_name='login_screen', category='Auth', threshold=0.9, max_wait_sec=10):
+    if not wait_for_img(img_name='login_screen', category='Auth', threshold=0.9, max_wait_sec=15):
         return False
 
     handle_auth_screens()
@@ -409,7 +409,7 @@ def check_skill_tab(max_sec=2.0, skill_to_check='random', should_reopen_inventor
 
 
 def is_on_dc_screen(should_cont=True):
-    if wait_for_img(img_name="disconnected_screen", category="Auth", threshold=0.85) and should_cont:
+    if wait_for_img(img_name="disconnected_screen", category="Auth", threshold=0.85, max_wait_sec=15) and should_cont:
         xy = 755, 555
         mouse_click(xy)
         return True
@@ -418,7 +418,7 @@ def is_on_dc_screen(should_cont=True):
 
 
 def is_on_login_screen(should_cont=True):
-    if wait_for_img(img_name="login_screen", category="Auth", threshold=0.85) and should_cont:
+    if wait_for_img(img_name="login_screen", category="Auth", threshold=0.85, max_wait_sec=15) and should_cont:
         xy = 753, 471
         mouse_click(xy, 67, 23)
         return True
@@ -427,7 +427,7 @@ def is_on_login_screen(should_cont=True):
 
 
 def is_on_welcome_screen(should_cont=True):
-    if wait_for_img(img_name="welcome_screen", category="Auth", threshold=0.85, max_wait_sec=8) and should_cont:
+    if wait_for_img(img_name="welcome_screen", category="Auth", threshold=0.85, max_wait_sec=15, ) and should_cont:
         xy = 755, 593
         mouse_click(xy, 54, 34)
         return True
