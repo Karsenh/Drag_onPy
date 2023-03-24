@@ -237,7 +237,7 @@ def is_run_gt(percent=10):
 
 def is_hp_gt(percent=50):
     ninety_percent_xy = 1190, 125
-    half_hp_xy = 1175, 140
+    half_hp_xy = 1175, 138
     ten_percent_xy = 1184, 154
 
     health_black_color = 19, 19, 19
