@@ -373,7 +373,7 @@ def needs_ovl():
 
 
 def needs_rock_cake():
-    if is_hp_gt(50):
+    if is_hp_gt(50) and needs_ovl():
         print(f'We actually need to overload - not rock cake.')
         return False
     if not does_img_exist(img_name='hp_2', script_name=SCRIPT_NAME):
