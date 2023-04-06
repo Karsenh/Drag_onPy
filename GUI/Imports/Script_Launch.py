@@ -20,7 +20,7 @@ from Scripts.Skilling.Prayer.Gilded_Altar_v2 import start_worshipping_bones
 from Scripts.Skilling.Herblore.Unf_Pots import start_unf_pots
 from Scripts.Skilling.Herblore.GE_Finished_Pots import start_making_finished_potions
 from Scripts.Skilling.Agility.Canifis_Rooftops import start_canifis_rooftops
-from Scripts.Skilling.Agility.Seers_Rooftops import start_seers_rooftops
+from Scripts.Skilling.Agility.Seers_Rooftops_v2 import start_seers_rooftops
 from Scripts.Skilling.Hunter.Single_Trap_Crimsons import start_catching_crimsons
 from Scripts.Skilling.Hunter.Double_Trap_Ceruleans import start_trapping_birds
 from Scripts.Skilling.Thieving.Pickpocketing.Ardy_Knights_v3 import start_pickpocketing_knight
