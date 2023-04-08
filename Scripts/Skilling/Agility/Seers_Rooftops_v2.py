@@ -235,6 +235,7 @@ def wait_for_agility_exp():
         mouse_long_click(jump_coords[CURR_JUMP_NUM])
         if not does_img_exist(img_name='jump_option', script_name=SCRIPT_NAME, should_click=True, click_middle=True):
             inc_num_times_no_exp_seen()
+            inc_curr_jump_num()
             return False
     else:
         reset_num_times_no_exp_seen()
