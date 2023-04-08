@@ -23,7 +23,7 @@ def log_to_debug(text):
     now = datetime.now()
     current_time = now.strftime("%H:%M:%S")
     print(
-        f'\n🐛 DEBUG @ [{current_time}]: - {text}'
+        f'\n🧪 DEBUG @ [{current_time}]: - {text}'
         f'Logging to Debug_Log.txt')
 
     with open(f'{DEBUG_PATH}', 'a') as f:
