@@ -93,7 +93,7 @@ def handle_curr_jump(curr_jump_num):
         print(f'Waiting a second longer...')
         API.AntiBan.sleep_between(0.6, 0.7)
 
-    # If current jump has a mog spawn
+    # IF THIS JUMP HAS MOG SPAWN
     if curr_jump_num in mog_jumps:
 
         if found_and_retrieved_mog(curr_jump_num):
@@ -105,11 +105,10 @@ def handle_curr_jump(curr_jump_num):
                     case 1:
                         jump_from_mog_xy = 777, 567
                         mouse_click(jump_from_mog_xy)
-                        return True
+
                     case _:
                         print(f'Failed to find recovery xy')
-
-                return False
+                        return False
 
         # Current jump has mog spawn but didn't have primary mog
         else:
@@ -124,8 +123,8 @@ def handle_curr_jump(curr_jump_num):
                     if not click_curr_jump(f'jump_{curr_jump_num}_from_mog_alt', from_mog=True):
                         print(f'Failed to find jump_{curr_jump_num}_from_mog')
                         return False
+                # Else Didn't find alt mog
                 else:
-                    # Didn't find alt mog
                     if USE_COORDS:
                         print(f'Using coords: (curr jump {curr_jump_num}) - {jump_coords[curr_jump_num]}')
                         mouse_click(jump_coords[curr_jump_num])
@@ -157,6 +156,7 @@ def handle_curr_jump(curr_jump_num):
 
     API.AntiBan.sleep_between(0.3, 0.4)
 
+    # ALCH AFTER JUMP
     if SHOULD_ALCH:
         if not wait_then_alch(curr_jump_num):
             print(f'❌ Failed to wait_then_alch()')
