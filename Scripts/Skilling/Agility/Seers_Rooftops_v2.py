@@ -8,7 +8,7 @@ from API.Mouse import mouse_move, mouse_click, mouse_long_click
 SCRIPT_NAME = 'Seers_Rooftops'
 
 SHOULD_TELE = False
-SHOULD_ALCH = True
+SHOULD_ALCH = False
 USE_COORDS = True
 ITEMS_TO_ALCH = ['green_dhide_body_note', 'magic_long_note']
 ALCH_ITEM = ITEMS_TO_ALCH[0]
@@ -184,7 +184,7 @@ def move_back_to_start(curr_loop):
                         x_offset=25,
                         y_offset=25, max_wait_sec=10):
         if does_img_exist(img_name='at_course_end_flag', script_name='Seers_Rooftops', threshold=0.9):
-            flower_tile_xy = 1100, 265
+            flower_tile_xy = 1135, 285
             mouse_long_click(flower_tile_xy)
             return does_img_exist(img_name='walk_here_option', script_name='Seers_Rooftops', threshold=0.85,
                                   should_click=True, click_middle=True)
@@ -215,7 +215,7 @@ def prepare_alch():
 
 def cast_alch():
     pyautogui.leftClick()
-    API.AntiBan.sleep_between(0.1, 0.6)
+    API.AntiBan.sleep_between(0.8, 1.3)
     return
 
 
