@@ -52,7 +52,7 @@ def start_seers_rooftops(curr_loop):
 ##########
 def click_to_start_course():
     if not does_img_exist(img_name='v2_start_course', script_name='Seers_Rooftops', threshold=0.8, should_click=True, click_middle=True):
-        if not wait_for_img(img_name='v2_restart_course_from_flowers', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True, max_wait_sec=15):
+        if not wait_for_img(img_name='v2_restart_course_from_flowers', script_name=SCRIPT_NAME, threshold=0.85, should_click=True, click_middle=True, max_wait_sec=15):
             print(f'⛔ Failed to find either course start images (2)')
             return False
     return True
@@ -90,6 +90,10 @@ def handle_curr_jump(curr_jump_num):
 
     jump_coords = [jump_0, jump_1, jump_2, jump_3, jump_4]
 
+    if CURR_JUMP_NUM == 2 or CURR_JUMP_NUM == 3:
+        print(f'Waiting a second longer...')
+        API.AntiBan.sleep_between(0.6, 0.7)
+
     # If current jump has a mog spawn
     if curr_jump_num in mog_jumps:
 
@@ -97,6 +101,13 @@ def handle_curr_jump(curr_jump_num):
             API.AntiBan.sleep_between(5, 6)
             if not click_curr_jump(f'jump_{curr_jump_num}_from_mog', from_mog=True):
                 print(f'Failed to find jump_{curr_jump_num}_from_mog')
+
+                match CURR_JUMP_NUM:
+                    case 1:
+                        jump_from_mog_xy = 777, 567
+                        mouse_click(jump_from_mog_xy)
+                    case _:
+                        print(f'Failed to find recovery xy')
                 return False
 
         # Current jump has mog spawn but didn't have primary mog
@@ -133,6 +144,7 @@ def handle_curr_jump(curr_jump_num):
                         return False
 
     # current jump does NOT have mog spawn
+    # CLICK JUMP
     else:
         if USE_COORDS:
             print(f'Using coords: (curr jump {curr_jump_num}) - {jump_coords[curr_jump_num]}')
@@ -221,8 +233,6 @@ def cast_alch():
 
 def wait_for_agility_exp():
     # check is too quick on these jumps - pause before checking
-    if CURR_JUMP_NUM is 2 or 3:
-        API.AntiBan.sleep_between(1.0, 1.1)
     if not wait_for_img(img_name='Agility', category='Exp_Drops', max_wait_sec=15):
         inc_num_times_no_exp_seen()
         return False
