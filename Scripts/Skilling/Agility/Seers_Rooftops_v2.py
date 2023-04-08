@@ -17,6 +17,13 @@ CURR_JUMP_NUM = 0
 
 CONSEC_TIMES_NO_EXP_SEEN = 0
 
+jump_0 = 513, 410
+jump_1 = 660, 592
+jump_2 = 756, 570
+jump_3 = 495, 536
+jump_4 = 780, 505
+jump_coords = [jump_0, jump_1, jump_2, jump_3, jump_4]
+
 
 def start_seers_rooftops(curr_loop):
     if curr_loop != 1:
@@ -78,17 +85,9 @@ def handle_curr_jump(curr_jump_num):
     mog_jumps = [0, 1, 2, 4]
     alt_mog_jumps = [1]
 
-    jump_0 = 513, 410
-    jump_1 = 660, 592
-    jump_2 = 756, 570
-    jump_3 = 495, 536
-    jump_4 = 780, 505
-
     print(f'CONSEC_TIME_NO_EXP_SEEN: {CONSEC_TIMES_NO_EXP_SEEN} (> 4?)')
     if CONSEC_TIMES_NO_EXP_SEEN > 4:
         return False
-
-    jump_coords = [jump_0, jump_1, jump_2, jump_3, jump_4]
 
     if CURR_JUMP_NUM == 2 or CURR_JUMP_NUM == 3:
         print(f'Waiting a second longer...')
@@ -232,13 +231,14 @@ def cast_alch():
 
 
 def wait_for_agility_exp():
-    # check is too quick on these jumps - pause before checking
     if not wait_for_img(img_name='Agility', category='Exp_Drops', max_wait_sec=15):
-        inc_num_times_no_exp_seen()
-        return False
+        mouse_long_click(jump_coords[CURR_JUMP_NUM])
+        if not does_img_exist(img_name='jump_option', script_name=SCRIPT_NAME, should_click=True, click_middle=True):
+            inc_num_times_no_exp_seen()
+            return False
     else:
         reset_num_times_no_exp_seen()
-        return True
+    return True
 
 
 def found_and_retrieved_mog(curr_jump_num, is_alt_mog=False):
