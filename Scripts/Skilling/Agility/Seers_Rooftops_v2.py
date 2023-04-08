@@ -233,9 +233,9 @@ def wait_for_agility_exp():
 
 def found_and_retrieved_mog(curr_jump_num, is_alt_mog=False):
     if not is_alt_mog:
-        return does_img_exist(img_name=f'mog_on_{curr_jump_num}', script_name=SCRIPT_NAME, threshold=0.82, should_click=True, click_middle=True)
+        return does_img_exist(img_name=f'mog_on_{curr_jump_num}', script_name=SCRIPT_NAME, threshold=0.80, should_click=True, click_middle=True)
     else:
-        return does_img_exist(img_name=f'mog_on_{curr_jump_num}_alt', script_name=SCRIPT_NAME, threshold=0.82, should_click=True, click_middle=True)
+        return does_img_exist(img_name=f'mog_on_{curr_jump_num}_alt', script_name=SCRIPT_NAME, threshold=0.80, should_click=True, click_middle=True)
 
 
 def click_curr_jump(curr_jump_name, from_mog=False):
