@@ -105,8 +105,10 @@ def handle_curr_jump(curr_jump_num):
                     case 1:
                         jump_from_mog_xy = 777, 567
                         mouse_click(jump_from_mog_xy)
+                        return True
                     case _:
                         print(f'Failed to find recovery xy')
+
                 return False
 
         # Current jump has mog spawn but didn't have primary mog
