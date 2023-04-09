@@ -216,7 +216,9 @@ def prepare_alch():
     if not wait_for_img(img_name='high_alch', script_name=SCRIPT_NAME, threshold=0.9, max_wait_sec=5, should_click=True, click_middle=True):
         print(f'❌ Failed to find high alchemy spell for some reason - out of runes or not in magic tab?')
         is_tab_open(tab='magic', should_be_open=True)
-        return False
+        if not wait_for_img(img_name='high_alch', script_name=SCRIPT_NAME, threshold=0.9, max_wait_sec=5,
+                            should_click=True, click_middle=True):
+            return False
 
     if not wait_for_img(img_name=ALCH_ITEM, script_name=SCRIPT_NAME, threshold=0.88):
         print(f'❌ Failed to find ALCH_ITEM: {ALCH_ITEM}')
