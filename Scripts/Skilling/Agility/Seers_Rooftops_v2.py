@@ -188,6 +188,7 @@ def move_back_to_start(curr_loop):
     global CURR_JUMP_NUM
     CURR_JUMP_NUM = 0
 
+    print(f'curr_loop: {curr_loop} % 300 == 0 ? {curr_loop % 300 == 0}')
     if curr_loop % 300 == 0:
         relog()
         setup_interface("north", 1, "up")
