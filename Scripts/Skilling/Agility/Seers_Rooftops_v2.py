@@ -8,7 +8,7 @@ from API.Mouse import mouse_move, mouse_click, mouse_long_click
 SCRIPT_NAME = 'Seers_Rooftops'
 
 SHOULD_TELE = False
-SHOULD_ALCH = False
+SHOULD_ALCH = True
 USE_COORDS = True
 ITEMS_TO_ALCH = ['green_dhide_body_note', 'magic_long_note']
 ALCH_ITEM = ITEMS_TO_ALCH[0]
@@ -49,7 +49,7 @@ def start_seers_rooftops(curr_loop):
 
     else:
         print(f'First loop')
-        # setup_interface("north", 1, "up")
+        setup_interface("north", 1, "up")
 
     return True
 
