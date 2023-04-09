@@ -8,7 +8,7 @@ import pyautogui as pag
 
 CURR_JUMP_NUM = 1
 ALCH_ITEM = "green_dhide_body_note"
-SHOULD_ALCH = True
+SHOULD_ALCH = False
 
 # OPTIONS
 # Teleport to Seers
@@ -181,7 +181,7 @@ def handle_next_jump(curr_loop):
         if not wait_for_img(img_name="move_back_alt", script_name="Seers_Rooftops", threshold=0.9, should_click=True, x_offset=25,
                  y_offset=25, max_wait_sec=10):
             if does_img_exist(img_name='at_course_end_flag', script_name='Seers_Rooftops', threshold=0.9):
-                flower_tile_xy = 1100, 265
+                flower_tile_xy = 1116, 278
                 mouse_long_click(flower_tile_xy)
                 return does_img_exist(img_name='walk_here_option', script_name='Seers_Rooftops', threshold=0.85, should_click=True, click_middle=True)
 

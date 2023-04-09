@@ -67,15 +67,15 @@ def open_ge_bank():
     # if not does_img_exist(img_name="GE_SE_6_Zoom_Bank", category="Banking", threshold=0.98):
     #     write_debug(f'Failed to find GE bank (facing East with 5x zoom?)')
     #     return False
-    ge_bank_xy = 810, 630
+    ge_bank_xy = 798, 583
     # ge_bank_xy = API.Imaging.Image.get_existing_img_xy()
     API.Mouse.mouse_long_click(ge_bank_xy)
-    if not does_img_exist(img_name='bank_grand', category='Banking', threshold=0.8, should_click=True, click_middle=True):
+    if not does_img_exist(img_name='bank_grand', category='Banking', threshold=0.9, should_click=True, click_middle=True):
         write_debug('❌ Failed to find bank grand exchange long-click option after long clicking')
-        if not does_img_exist(img_name='cancel', category='General', threshold=0.8, should_click=True, click_middle=True):
+        if not does_img_exist(img_name='cancel', category='General', threshold=0.9, should_click=True, click_middle=True):
             write_debug('⛔ Failed to find cancel option as well - exiting...')
             return False
-        if not does_img_exist(img_name='bank_grand', category='Banking', threshold=0.8, should_click=True, click_middle=True):
+        if not does_img_exist(img_name='bank_grand', category='Banking', threshold=0.85, should_click=True, click_middle=True):
             write_debug('⛔ Failed to find the bank grand exchange long-click option for a second time - exiting...')
             return False
 
