@@ -238,6 +238,9 @@ def cast_alch():
 
 def wait_for_agility_exp():
     if not wait_for_img(img_name='Agility', category='Exp_Drops', max_wait_sec=15):
+        if SHOULD_ALCH:
+            # Clear click, if alching before long clicking to avoid using alch on jump resulting in no options
+            pyautogui.leftClick()
         mouse_long_click(jump_coords[CURR_JUMP_NUM])
         if not does_img_exist(img_name='jump_option', script_name=SCRIPT_NAME, should_click=True, click_middle=True):
             print(f'f Manually Left Clicking (PAG)')
