@@ -243,11 +243,13 @@ def wait_for_agility_exp():
             pyautogui.leftClick()
         mouse_long_click(jump_coords[CURR_JUMP_NUM])
         if not does_img_exist(img_name='jump_option', script_name=SCRIPT_NAME, should_click=True, click_middle=True):
-            print(f'f Manually Left Clicking (PAG)')
-            pyautogui.leftClick()
+            print(f'Manually Left Clicking (PAG)')
+            curr_jump_xy = jump_coords[CURR_JUMP_NUM]
+            pyautogui.leftClick(curr_jump_xy)
+            if not wait_for_img(img_name='Agility', category='Exp_Drops', max_wait_sec=15):
+                return False
             inc_num_times_no_exp_seen()
             inc_curr_jump_num()
-            return False
     else:
         reset_num_times_no_exp_seen()
     return True
