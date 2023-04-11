@@ -8,7 +8,7 @@ from API.Mouse import mouse_move, mouse_click, mouse_long_click
 SCRIPT_NAME = 'Seers_Rooftops'
 
 SHOULD_TELE = False
-SHOULD_ALCH = True
+SHOULD_ALCH = False
 USE_COORDS = True
 ITEMS_TO_ALCH = ['green_dhide_body_note', 'magic_long_note']
 ALCH_ITEM = ITEMS_TO_ALCH[0]
