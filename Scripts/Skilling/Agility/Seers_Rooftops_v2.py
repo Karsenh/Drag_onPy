@@ -65,21 +65,6 @@ def click_to_start_course():
     return True
 
 
-def wait_then_alch(curr_jump_num):
-    if not prepare_alch():
-        print(f'❌ Prepare_alch failed in wait_then_alch either opening tab or finding high-alch spell img')
-        return False
-
-    if not wait_for_agility_exp():
-        cast_alch()
-        print(f'❌ Failed to find exp drop - assuming after 15 seconds we got it and continuing')
-        handle_fall(curr_jump_num)
-    else:
-        cast_alch()
-
-    return True
-
-
 def handle_curr_jump(curr_jump_num):
     # Jumps with mark of grace spawn
     mog_jumps = [0, 1, 2, 4]
@@ -202,6 +187,21 @@ def move_back_to_start(curr_loop):
             mouse_long_click(flower_tile_xy)
             return does_img_exist(img_name='walk_here_option', script_name='Seers_Rooftops', threshold=0.85,
                                   should_click=True, click_middle=True)
+    return True
+
+
+def wait_then_alch(curr_jump_num):
+    if not prepare_alch():
+        print(f'❌ Prepare_alch failed in wait_then_alch either opening tab or finding high-alch spell img')
+        return False
+
+    if not wait_for_agility_exp():
+        cast_alch()
+        print(f'❌ Failed to find exp drop - assuming after 15 seconds we got it and continuing')
+        handle_fall(curr_jump_num)
+    else:
+        cast_alch()
+
     return True
 
 

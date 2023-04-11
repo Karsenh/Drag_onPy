@@ -72,11 +72,11 @@ def does_color_exist_in_thresh(color_xy, check_color, threshold=15):
     curr_color = get_color_at_coords(color_xy)
     curr_color_idx = 0
     for val in curr_color:
-        print(f'Color at {color_xy} val {curr_color_idx}: {val}')
+        # print(f'Color at {color_xy} val {curr_color_idx}: {val}')
         curr_color_diff = check_color[curr_color_idx] - val
         if curr_color_diff < -1:
             curr_color_diff = curr_color_diff * -1
-        print(f'Curr_color_diff: {curr_color_diff} > Specific Thresh: {threshold} ? {curr_color_diff > threshold}')
+        # print(f'Curr_color_diff: {curr_color_diff} > Specific Thresh: {threshold} ? {curr_color_diff > threshold}')
         if curr_color_diff > threshold:
             print(f'✖ Check Color ({check_color}) not found within threshold ({threshold}) @ coords: {color_xy}')
             return False
@@ -111,7 +111,7 @@ def get_color_at_coords(xy):
     capture_bluestacks()
     image = Image.open(f'{BS_SCREEN_PATH}')
     picture = image.load()
-    write_debug(f'RGB Color @ {x}, {y} = {picture[x, y]}')
+    # write_debug(f'RGB Color @ {x}, {y} = {picture[x, y]}')
     return picture[x, y]
 
 
@@ -125,11 +125,11 @@ def does_img_exist(img_name, script_name=None, category='Scripts', threshold=0.8
 
     # Read the template (disconnected)
     if script_name is not None:  # If it's a script name
-        write_debug(f'Checking for {img_name}.png in {SCRIPTS_SCREEN_PATH}\{script_name}\{img_name}.png ... ')
+        # write_debug(f'Checking for {img_name}.png in {SCRIPTS_SCREEN_PATH}\{script_name}\{img_name}.png ... ')
         template_img_path = f'{SCRIPTS_SCREEN_PATH}\{script_name}\{img_name}.png'
 
     else:  # If no script name - get Category
-        write_debug(f'Checking for {img_name}.png in Comparators\{category}...')
+        # write_debug(f'Checking for {img_name}.png in Comparators\{category}...')
         template_img_path = f'{ROOT_COMPARATORS_PATH}\{category}\{img_name}.png'
 
     template = cv2.imread(template_img_path, 0)
@@ -145,13 +145,13 @@ def does_img_exist(img_name, script_name=None, category='Scripts', threshold=0.8
     loc = np.where(res >= threshold)
 
     if len(loc[0]) == 0 and len(loc[1]) == 0:
-        write_debug(f'✖ {img_name}.png NOT found within game window.\n {loc[0]} {loc[1]}')
+        # write_debug(f'✖ {img_name}.png NOT found within game window.\n {loc[0]} {loc[1]}')
         return False
     else:
         write_debug(f'✔ {img_name}.png found:\nloc[1] (x)= {loc[1]}\n loc[0] (y)= {loc[0]}')
         if img_sel == "last":
             LATEST_IMG_XY = loc[1][len(loc[1]) - 1], loc[0][len(loc[0]) - 1]
-            write_debug(f'EXISTING_IMG_XY = {LATEST_IMG_XY}')
+            write_debug(f'{img_name} EXISTING_IMG_XY = {LATEST_IMG_XY}')
         elif img_sel == "first":
             # Save the first img find xy coords
             LATEST_IMG_XY = loc[1][0], loc[0][0]
@@ -215,7 +215,7 @@ def wait_for_img(img_name, script_name=None, category="Scripts",
                  min_clicks=1, max_clicks=1,
                  img_sel="last", click_middle=False):
     start_time = datetime.now()
-    write_debug(f'⏲ Wait_For_Img Start Time: {start_time}')
+    write_debug(f'⏲ Wait_For_Img: {img_name} | Start Time: {start_time}')
 
     while not is_time_up(start_time, max_wait_sec):
         img_found = does_img_exist(img_name, script_name=script_name, category=category,
@@ -224,12 +224,15 @@ def wait_for_img(img_name, script_name=None, category="Scripts",
                                    min_clicks=min_clicks, max_clicks=max_clicks,
                                    img_sel=img_sel, click_middle=click_middle)
         if img_found:
+            print(f'✔ Wait_for_img Found {img_name}')
             # does_img_exist(img_name, script_name=script_name, category=category, threshold=threshold, should_click=should_click, x_offset=x_offset, y_offset=y_offset)
             return True
         # else:
             # write_debug(f'Still checking for image...')
             # if max_wait_sec > 60:
             #     API.AntiBan.random_human_actions(max_downtime_seconds=6, likelihood=5, reopen_inventory=False)
+    print(f'❌ Wait_for_img Failed to find {img_name}')
+
     return False
 
 
@@ -242,5 +245,5 @@ def find_color_xy(img_path, search_color):
     im = np.array(pim)
 
     y, x = np.where(np.all(im == search_color, axis=2))
-    write_debug(f'Found X: {x} & Y: {y}')
+    write_debug(f'find_color_xy Found X: {x} & Y: {y}')
     return x, y
