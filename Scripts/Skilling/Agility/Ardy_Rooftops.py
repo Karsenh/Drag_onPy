@@ -12,6 +12,7 @@ SHOULD_ALCH = True
 USE_COORDS = False
 ITEMS_TO_ALCH = ['green_dhide_body_note', 'magic_long_note']
 ALCH_ITEM = ITEMS_TO_ALCH[0]
+NO_ALCH_SLEEP_TIMES = [1, 1, 1, 1, 1, 1, 1]
 
 CURR_JUMP_NUM = 0
 
@@ -108,6 +109,9 @@ def handle_wait_and_alch():
 
 
 def handle_wait():
+    sleep_time_sec = NO_ALCH_SLEEP_TIMES[CURR_JUMP_NUM]
+    API.AntiBan.sleep_between(sleep_time_sec, sleep_time_sec+0.1)
+
     if not wait_for_agility_exp():
         print(f'❌ handle_wait - failed to find agility exp')
         if not handle_exp_not_seen():
