@@ -49,7 +49,7 @@ def start_seers_rooftops(curr_loop):
 
     else:
         print(f'First loop')
-        # setup_interface("north", 1, "up")
+        setup_interface("north", 1, "up")
 
     return True
 

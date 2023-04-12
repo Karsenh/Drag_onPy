@@ -15,6 +15,7 @@ ALCH_ITEM = ITEMS_TO_ALCH[0]
 NO_ALCH_SLEEP_TIMES = [1, 1, 1, 1, 1, 1, 1]
 
 CURR_JUMP_NUM = 0
+NUM_TOTAL_LAPS = 0
 
 CONSEC_TIMES_NO_EXP_SEEN = 0
 
@@ -36,7 +37,7 @@ def start_ardy_rooftops(curr_loop):
 
     else:
         print(f'First loop')
-        # setup_interface('north', 1, 'up')
+        setup_interface('north', 1, 'up')
 
     return True
 
@@ -85,6 +86,10 @@ def handle_next_jump():
 
     if CURR_JUMP_NUM == len(jump_coords):
         reset_curr_jump()
+        inc_num_total_laps()
+        print(f'TOTAL NUM LAPS: {NUM_TOTAL_LAPS}')
+        if NUM_TOTAL_LAPS % 300 == 0:
+            relog()
 
     return True
 
@@ -139,7 +144,7 @@ def handle_fall():
 
     for coords in recovery_xys:
         mouse_click(coords)
-        API.AntiBan.sleep_between(5.0, 5.1)
+        API.AntiBan.sleep_between(6.0, 6.1)
 
     reset_curr_jump()
     return
@@ -182,10 +187,10 @@ def is_on_jump(jump_name='curr'):
     mouse_long_click(jump_coords[jump_coord_idx])
 
     if not does_img_exist(img_name='jump_option', script_name='Seers_Rooftops', should_click=True, click_middle=True):
-        pyautogui.leftClick()
-        return False
-    else:
-        return True
+        if not does_img_exist(img_name='walk_on_option', script_name=SCRIPT_NAME, threshold=0.92, should_click=True, click_middle=True):
+            pyautogui.leftClick()
+            return False
+    return True
 
 
 def prepare_alch():
@@ -250,4 +255,10 @@ def reset_num_times_no_exp_seen():
     global CONSEC_TIMES_NO_EXP_SEEN
 
     CONSEC_TIMES_NO_EXP_SEEN = 0
+    return
+
+
+def inc_num_total_laps():
+    global NUM_TOTAL_LAPS
+    NUM_TOTAL_LAPS += 1
     return
