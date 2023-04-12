@@ -207,6 +207,7 @@ def prepare_alch():
 
     if not wait_for_img(img_name=ALCH_ITEM, script_name='Seers_Rooftops', threshold=0.88):
         print(f'❌ Failed to find ALCH_ITEM: {ALCH_ITEM}')
+        pyautogui.leftClick()
         SHOULD_ALCH = False
     else:
         alch_item_coords = get_existing_img_xy()
