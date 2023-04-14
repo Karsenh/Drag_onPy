@@ -13,12 +13,15 @@ USE_COORDS = False
 ITEMS_TO_ALCH = ['green_dhide_body_note', 'magic_long_note']
 ALCH_ITEM = ITEMS_TO_ALCH[0]
 NO_ALCH_SLEEP_TIMES = [1, 1, 1, 1, 1, 1, 1]
+MOG_JUMPS = [3]
+JUMPS_TO_LONG_CLICK = [0]
 
 CURR_JUMP_NUM = 0
 NUM_TOTAL_LAPS = 0
 
 CONSEC_TIMES_NO_EXP_SEEN = 0
 
+# JUMP COORDINATES
 jump_0 = 885, 426
 jump_1 = 735, 224
 jump_2 = 645, 456
@@ -26,7 +29,6 @@ jump_3 = 666, 456
 jump_4 = 745, 608
 jump_5 = 844, 734
 jump_6 = 766, 470
-
 jump_coords = [jump_0, jump_1, jump_2, jump_3, jump_4, jump_5, jump_6]
 
 
@@ -46,14 +48,13 @@ def start_ardy_rooftops(curr_loop):
 # METHODS
 #########
 def handle_next_jump():
-    mog_jumps = [ 3 ]
 
     print(f'CONSEC_TIME_NO_EXP_SEEN: {CONSEC_TIMES_NO_EXP_SEEN} (> 4?)')
     if CONSEC_TIMES_NO_EXP_SEEN > 4:
         return False
 
     # Check for Mog
-    if CURR_JUMP_NUM in mog_jumps:
+    if CURR_JUMP_NUM in MOG_JUMPS:
         print(f'Checking for MoG on: {CURR_JUMP_NUM}')
         if does_img_exist(img_name=f'mog_on_{CURR_JUMP_NUM}', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True):
             API.AntiBan.sleep_between(3.0, 3.5)
@@ -71,7 +72,13 @@ def handle_next_jump():
     else:
         # Click curr jump
         print(f'Clicking jump {CURR_JUMP_NUM} @ {jump_coords[CURR_JUMP_NUM]}')
-        mouse_click(jump_coords[CURR_JUMP_NUM])
+        if CURR_JUMP_NUM in JUMPS_TO_LONG_CLICK:
+            mouse_long_click(jump_coords[CURR_JUMP_NUM])
+            if not does_img_exist(img_name='climb_up_option', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True):
+                print(f'⛔ Failed to find climb_up_option on jump_num: {CURR_JUMP_NUM}')
+                return False
+        else:
+            mouse_click(jump_coords[CURR_JUMP_NUM])
 
     if SHOULD_ALCH:
         if not handle_wait_and_alch():
@@ -188,8 +195,9 @@ def is_on_jump(jump_name='curr'):
 
     if not does_img_exist(img_name='jump_option', script_name='Seers_Rooftops', should_click=True, click_middle=True):
         if not does_img_exist(img_name='walk_on_option', script_name=SCRIPT_NAME, threshold=0.92, should_click=True, click_middle=True):
-            pyautogui.leftClick()
-            return False
+            if not does_img_exist(img_name='balance_across_option', script_name=SCRIPT_NAME, threshold=0.92, should_click=True, click_middle=True):
+                pyautogui.leftClick()
+                return False
     return True
 
 
