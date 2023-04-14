@@ -195,7 +195,8 @@ def is_on_jump(jump_name='curr'):
 
     if not does_img_exist(img_name='jump_option', script_name='Seers_Rooftops', should_click=True, click_middle=True):
         if not does_img_exist(img_name='walk_on_option', script_name=SCRIPT_NAME, threshold=0.92, should_click=True, click_middle=True):
-            if not does_img_exist(img_name='balance_across_option', script_name=SCRIPT_NAME, threshold=0.92, should_click=True, click_middle=True):
+            if not does_img_exist(img_name='balance_across_option', script_name=SCRIPT_NAME, threshold=0.85, should_click=True, click_middle=True):
+                print(f'Failed to find Jump, Walk, and Balance options on {jump_name} jump')
                 pyautogui.leftClick()
                 return False
     return True
