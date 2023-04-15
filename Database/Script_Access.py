@@ -74,7 +74,7 @@ def update_script_state(decoded_lic):
     enabled = 'normal'
     # disabled = 'disabled'
 
-    if decoded_lic['category'] == 'all_access':
+    if decoded_lic['category'] == 'all-access':
         print(f'👑 - All Access Granted')
         for script in all_scripts:
             script.btn_state = 'normal'
