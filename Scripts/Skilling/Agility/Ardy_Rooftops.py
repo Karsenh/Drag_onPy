@@ -95,7 +95,7 @@ def handle_next_jump():
         reset_curr_jump()
         inc_num_total_laps()
         print(f'TOTAL NUM LAPS: {NUM_TOTAL_LAPS}')
-        if NUM_TOTAL_LAPS % 300 == 0:
+        if NUM_TOTAL_LAPS % 240 == 0:
             relog()
 
     return True
