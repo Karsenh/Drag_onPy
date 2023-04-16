@@ -342,7 +342,7 @@ def launch_script(script_name="pisc_iron"):
             always_sleep = False
         case "Ardy_Rooftops":
             selected_script = ScriptEnum.ARDY_ROOFTOPS.value
-            antiban_likelihood = 6
+            antiban_likelihood = 2
             antiban_downtime_sec = 2
             reopen_invent = True
             always_sleep = False

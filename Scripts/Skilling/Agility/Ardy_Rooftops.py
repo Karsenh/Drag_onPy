@@ -22,7 +22,7 @@ NUM_TOTAL_LAPS = 0
 CONSEC_TIMES_NO_EXP_SEEN = 0
 
 # JUMP COORDINATES
-jump_0 = 893, 427
+jump_0 = 895, 428
 jump_1 = 735, 224
 jump_2 = 645, 456
 jump_3 = 666, 456
