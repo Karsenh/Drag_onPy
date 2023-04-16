@@ -1,5 +1,4 @@
 import random
-
 from API.Imaging.Image import does_img_exist, does_color_exist, get_color_at_coords, wait_for_img, does_color_exist_in_thresh, does_color_exist_in_sub_image
 from API.Mouse import *
 from API.Imports.Coords import *
