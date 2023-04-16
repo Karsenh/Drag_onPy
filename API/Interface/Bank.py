@@ -71,14 +71,18 @@ def open_ge_bank():
     if not does_img_exist(img_name='bank_grand', category='Banking', threshold=0.9, should_click=True, click_middle=True):
         write_debug('❌ Failed to find bank grand exchange long-click option after long clicking')
 
-        if not does_img_exist(img_name='cancel', category='General', threshold=0.9, should_click=True, click_middle=True):
-            write_debug('⛔ Failed to find cancel option as well - exiting...')
-            return False
-        else:
-            API.Mouse.mouse_long_click(ge_bank_xy)
-            if not does_img_exist(img_name='bank_grand', category='Banking', threshold=0.85, should_click=True, click_middle=True):
-                write_debug('⛔ Failed to find the bank grand exchange long-click option for a second time - exiting...')
+        if not does_img_exist(img_name='bank_grand_alt', category='Banking', threshold=0.88, should_click=True,
+                              click_middle=True):
+
+            if not does_img_exist(img_name='cancel', category='General', threshold=0.9, should_click=True, click_middle=True):
+                write_debug('⛔ Failed to find cancel option as well - exiting...')
                 return False
+
+            else:
+                API.Mouse.mouse_long_click(ge_bank_xy)
+                if not does_img_exist(img_name='bank_grand', category='Banking', threshold=0.85, should_click=True, click_middle=True):
+                    write_debug('⛔ Failed to find the bank grand exchange long-click option for a second time - exiting...')
+                    return False
 
     write_debug('✔ Clicked Bank Grand Exchange long-click option - checking if bank is open...')
     bank_open = is_bank_open()
