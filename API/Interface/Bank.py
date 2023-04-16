@@ -26,20 +26,20 @@ def withdraw_item_from_tab_num(item, qty, tab_num, threshold=0.8):
     is_withdraw_qty(qty)
 
     if qty != 'x' or HAS_WITHDRAWN_14:
-        if not does_img_exist(img_name=item, category='Banking\Bank_Items', threshold=threshold, should_click=True, click_middle=True):
+        if not does_img_exist(img_name=item, category='Banking\Bank_Items', threshold=threshold, should_click=True, click_middle=True, img_sel='banked'):
             # Scroll and try again before returning false
             write_debug(f'Failed to find bank item: {item} in tab_num: {tab_num}- Scrolling and trying again')
             mouse_move(scroll_xy)
             pag.hscroll(150)
-            if not does_img_exist(img_name=item, category='Banking\Bank_Items', threshold=threshold, should_click=True, click_middle=True):
+            if not does_img_exist(img_name=item, category='Banking\Bank_Items', threshold=threshold, should_click=True, click_middle=True, img_sel='banked'):
                 write_debug(f'Failed to find item: {item} in tab_num: {tab_num} for a second time after scrolling - returning...')
                 return False
     else:
-        if not does_img_exist(img_name=item, category='Banking\Bank_Items', threshold=threshold):
+        if not does_img_exist(img_name=item, category='Banking\Bank_Items', threshold=threshold, img_sel='banked'):
             write_debug(f'Failed to find bank item: {item} in tab_num: {tab_num}- Scrolling and trying again')
             mouse_move(scroll_xy)
             pag.hscroll(150)
-            if not does_img_exist(img_name=item, category='Banking\Bank_Items', threshold=threshold):
+            if not does_img_exist(img_name=item, category='Banking\Bank_Items', threshold=threshold, img_sel='banked'):
                 write_debug(f'Failed to find item: {item} in tab_num: {tab_num} for a second time after scrolling - returning...')
                 return False
 
@@ -64,25 +64,26 @@ def withdraw_item_from_tab_num(item, qty, tab_num, threshold=0.8):
 
 def open_ge_bank():
     # Opens GE bank from diagonal tile (SE) while facing EAST zoomed all the way in
-    # if not does_img_exist(img_name="GE_SE_6_Zoom_Bank", category="Banking", threshold=0.98):
-    #     write_debug(f'Failed to find GE bank (facing East with 5x zoom?)')
-    #     return False
+
     ge_bank_xy = 798, 583
-    # ge_bank_xy = API.Imaging.Image.get_existing_img_xy()
     API.Mouse.mouse_long_click(ge_bank_xy)
+
     if not does_img_exist(img_name='bank_grand', category='Banking', threshold=0.9, should_click=True, click_middle=True):
         write_debug('❌ Failed to find bank grand exchange long-click option after long clicking')
+
         if not does_img_exist(img_name='cancel', category='General', threshold=0.9, should_click=True, click_middle=True):
             write_debug('⛔ Failed to find cancel option as well - exiting...')
             return False
-        if not does_img_exist(img_name='bank_grand', category='Banking', threshold=0.85, should_click=True, click_middle=True):
-            write_debug('⛔ Failed to find the bank grand exchange long-click option for a second time - exiting...')
-            return False
+        else:
+            API.Mouse.mouse_long_click(ge_bank_xy)
+            if not does_img_exist(img_name='bank_grand', category='Banking', threshold=0.85, should_click=True, click_middle=True):
+                write_debug('⛔ Failed to find the bank grand exchange long-click option for a second time - exiting...')
+                return False
 
     write_debug('✔ Clicked Bank Grand Exchange long-click option - checking if bank is open...')
     bank_open = is_bank_open()
     if not bank_open:
-        write_debug(f'Something went wrong while opening the GE bank')
+        write_debug(f'⛔ Something went wrong in open_ge_bank()...')
     return bank_open
 
 

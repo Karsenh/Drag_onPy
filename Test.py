@@ -39,7 +39,8 @@ def __main__():
     capture_bluestacks()
     clear_debug_log()
 
-    launch_script("Ardy_Rooftops")
+    # launch_script("Ardy_Rooftops")
+    launch_script("GE_Dhide_Bodies")
 
 
 
