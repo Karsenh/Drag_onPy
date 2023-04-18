@@ -1,9 +1,16 @@
+# from GUI.Imports.Script_Launch import set_should_cont
 from GUI.Main_GUI import *
 from sys import exit
 from GUI.Auth_GUI import *
 from API.Imaging.Image import *
 from API.Setup import get_bluestacks_xy, set_bluestacks_window_size
 # not_exit = True
+
+
+def set_should_cont(value):
+    global SHOULD_CONTINUE
+    SHOULD_CONTINUE = value
+    return
 
 
 def terminate_script(key):
@@ -14,21 +21,25 @@ def terminate_script(key):
 
 
 def __main__() -> int:
-    listener = keyboard.Listener(
-        on_press=lambda event: terminate_script(event))
-    listener.start()
 
-    get_bluestacks_xy()
-    set_bluestacks_window_size()
-    capture_bluestacks()
+    try:
+        listener = keyboard.Listener(
+            on_press=lambda event: terminate_script(event))
+        listener.start()
 
-    # show_main_gui()
-    if show_auth_gui():
-        while should_be_running():
-            show_main_gui()
+        get_bluestacks_xy()
+        set_bluestacks_window_size()
+        capture_bluestacks()
 
-    else:
-        print(f'Failed to authenticate.')
+        # show_main_gui()
+        if show_auth_gui():
+            while should_be_running():
+                show_main_gui()
+
+        else:
+            print(f'Failed to authenticate.')
+    except:
+        print(f'Exception thrown in Main')
 
     return 0
 

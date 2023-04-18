@@ -9,8 +9,6 @@ dist/
 main.spec
 output/
 
-Assets/Levels.txt
-
 API/Imaging/Screenshots/
 Assets/Screenshots/Comparators/Custom/*
 Assets/Screenshots/BlueStacks_ScreenShot.png
