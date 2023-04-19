@@ -1,43 +1,50 @@
 import random
 import keyboard
 import pyautogui as pag
+from datetime import datetime
 import API.AntiBan
 from API.Mouse import mouse_click, mouse_drag, mouse_long_click
-from API.Interface.General import setup_interface, get_xy_for_invent_slot
+from API.Interface.General import setup_interface, get_xy_for_invent_slot, relog
 from API.Interface.Bank import is_bank_tab_open, deposit_all, close_bank, is_withdraw_qty
 from API.Imaging.Image import does_img_exist, wait_for_img
 from API.Debug import write_debug
+from API.Time import get_curr_runtime
 from GUI.Imports.PreLaunch_Gui.Plg_Script_Options import Global_Script_Options
 
 BANK_TAB = 1
 FOOD_TO_COOK = None
 has_cooking_gauntlets = True
+START_COOK_TIME = None
 
 
 def start_rogue_cooking(curr_loop):
     if curr_loop != 1:
         write_debug(f'Checking if cooking...')
 
-        if not is_cooking():
-            write_debug(f'Not cooking. Checking for level dialogue...')
+        # if not is_cooking():
+        #     write_debug(f'Not cooking. Checking for level dialogue...')
+        #
+        #     if check_for_level_dialogue():
+        #         write_debug(f'Level dialogue found. Continuing to cook...')
+        #         cook_food()
+        #
+        #     else:
+        #         write_debug(f'No level dialogue found. Opening bank to get food...')
+        curr_rt = get_curr_runtime()
+        if curr_rt > '5:10:00.000000':
+            relog()
+            setup_interface("south", 5, "up")
 
-            if check_for_level_dialogue():
-                write_debug(f'Level dialogue found. Continuing to cook...')
-                cook_food()
+        if not open_rogue_bank():
+            return False
 
-            else:
-                write_debug(f'No level dialogue found. Opening bank to get food...')
+        deposit_all()
 
-                if not open_rogue_bank():
-                    return False
+        withdraw_food_to_cook()
 
-                deposit_all()
+        close_bank()
 
-                withdraw_food_to_cook()
-
-                close_bank()
-
-                cook_food()
+        cook_food()
     else:
         # This is the first loop
         set_food_to_cook()
@@ -50,7 +57,7 @@ def start_rogue_cooking(curr_loop):
         withdraw_food_to_cook()
         close_bank()
         cook_food()
-        API.AntiBan.sleep_between(1.5, 1.8)
+        # API.AntiBan.sleep_between(1.5, 1.8)
 
     return True
 
@@ -93,6 +100,7 @@ def withdraw_food_to_cook():
 
 
 def cook_food():
+    global START_COOK_TIME
     fire_xy = 775, 667
 
     mouse_click(fire_xy, max_x_dev=15, max_y_dev=13)
@@ -108,6 +116,19 @@ def cook_food():
     pag.press("space")
 
     API.AntiBan.sleep_between(1.1, 1.6)
+
+    if START_COOK_TIME is None:
+        START_COOK_TIME = datetime.now()
+
+    curr_time = datetime.now()
+    time_diff = curr_time - START_COOK_TIME
+    time_diff_seconds = time_diff.total_seconds()
+    print(f'Time difference: {time_diff_seconds}')
+    max_wait_seconds = random.randint(63, 65)
+    wait_sec = max_wait_seconds - time_diff_seconds
+    if wait_sec > 1:
+        if wait_for_img(img_name='level_up', category='General', max_wait_sec=wait_sec):
+            cook_food()
 
     return True
 
