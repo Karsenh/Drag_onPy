@@ -18,18 +18,11 @@ START_COOK_TIME = None
 
 
 def start_rogue_cooking(curr_loop):
+    global START_COOK_TIME
+
     if curr_loop != 1:
         write_debug(f'Checking if cooking...')
 
-        # if not is_cooking():
-        #     write_debug(f'Not cooking. Checking for level dialogue...')
-        #
-        #     if check_for_level_dialogue():
-        #         write_debug(f'Level dialogue found. Continuing to cook...')
-        #         cook_food()
-        #
-        #     else:
-        #         write_debug(f'No level dialogue found. Opening bank to get food...')
         curr_rt = get_curr_runtime()
 
         if curr_rt.total_seconds() > 19800:
@@ -131,6 +124,7 @@ def cook_food():
         if wait_for_img(img_name='level_up', category='General', max_wait_sec=wait_sec):
             cook_food()
 
+    START_COOK_TIME = None
     return True
 
 
