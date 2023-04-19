@@ -40,7 +40,8 @@ def __main__():
     clear_debug_log()
 
     # launch_script("Ardy_Rooftops")
-    launch_script("GE_Dhide_Bodies")
+    # launch_script("GE_Dhide_Bodies")
+    launch_script("Rogue_Cooker")
 
 
 
