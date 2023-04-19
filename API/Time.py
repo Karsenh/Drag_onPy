@@ -29,4 +29,4 @@ def get_curr_runtime():
 
     curr_runtime = curr_time - START_TIME
     write_debug(f'CURRENT RUN-TIME: {curr_runtime}')
-    return
+    return curr_runtime

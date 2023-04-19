@@ -31,7 +31,8 @@ def start_rogue_cooking(curr_loop):
         #     else:
         #         write_debug(f'No level dialogue found. Opening bank to get food...')
         curr_rt = get_curr_runtime()
-        if curr_rt > '5:10:00.000000':
+
+        if curr_rt.total_seconds() > 19800:
             relog()
             setup_interface("south", 5, "up")
 
