@@ -119,7 +119,7 @@ def cook_food():
     time_diff = curr_time - START_COOK_TIME
     time_diff_seconds = time_diff.total_seconds()
     print(f'Time difference: {time_diff_seconds}')
-    max_wait_seconds = random.randint(63, 65)
+    max_wait_seconds = random.randint(60, 65)
     wait_sec = max_wait_seconds - time_diff_seconds
     if wait_sec > 1:
         if wait_for_img(img_name='level_up', category='General', max_wait_sec=wait_sec):
