@@ -43,6 +43,7 @@ from Scripts.Skilling.Farming.Tithe_Farmer_v2 import start_tithe_farming
 from Scripts.Skilling.Smithing.Blast_Furnace import start_blasting
 from Scripts.Skilling.Combat.NMZ import start_training_nmz
 from Scripts.Skilling.Magic.Ardy_Knight_Splasher import start_splashing_ardy_knight
+from Scripts.Skilling.Fletching.GE_Bow_Stringer import start_stringing_bows
 from Scripts.MiniGames.Pest_Control import start_pest_control
 
 import API
@@ -120,6 +121,7 @@ def launch_script(script_name="pisc_iron"):
         PEST_CONTROL = 42
         GE_FINISHED_POTS = 43
         ARDY_ROOFTOPS = 44
+        GE_BOW_STRINGER = 45
 
     all_scripts = [mine_pisc_iron, smith_gold_edge, run_gnome_course,
                    fish_draynor_shrimp, fish_barb_trout, barbarian_fishing,
@@ -134,7 +136,8 @@ def launch_script(script_name="pisc_iron"):
                    start_catching_desert_lizards, start_catching_red_lizards, start_chopping_sw_teaks,
                    start_crafting_lavas, start_motherlode_mining, start_making_fertalizer, start_tithe_farming,
                    start_catching_black_lizards, start_catching_chins, start_blasting, start_training_nmz,
-                   start_splashing_ardy_knight, start_pest_control, start_making_finished_potions, start_ardy_rooftops]
+                   start_splashing_ardy_knight, start_pest_control, start_making_finished_potions, start_ardy_rooftops,
+                   start_stringing_bows]
 
     match script_name:
         case "Pisc_Iron_Miner":
@@ -342,6 +345,12 @@ def launch_script(script_name="pisc_iron"):
             always_sleep = False
         case "Ardy_Rooftops":
             selected_script = ScriptEnum.ARDY_ROOFTOPS.value
+            antiban_likelihood = 2
+            antiban_downtime_sec = 2
+            reopen_invent = True
+            always_sleep = False
+        case "GE_Bow_Stringer":
+            selected_script = ScriptEnum.GE_BOW_STRINGER.value
             antiban_likelihood = 2
             antiban_downtime_sec = 2
             reopen_invent = True

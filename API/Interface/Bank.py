@@ -30,7 +30,8 @@ def withdraw_item_from_tab_num(item, qty, tab_num, threshold=0.8):
             # Scroll and try again before returning false
             write_debug(f'Failed to find bank item: {item} in tab_num: {tab_num}- Scrolling and trying again')
             mouse_move(scroll_xy)
-            pag.hscroll(150)
+            API.AntiBan.sleep_between(0.6, 0.9)
+            pag.hscroll(-150)
             if not does_img_exist(img_name=item, category='Banking\Bank_Items', threshold=threshold, should_click=True, click_middle=True, img_sel='banked'):
                 write_debug(f'Failed to find item: {item} in tab_num: {tab_num} for a second time after scrolling - returning...')
                 return False
@@ -38,12 +39,14 @@ def withdraw_item_from_tab_num(item, qty, tab_num, threshold=0.8):
         if not does_img_exist(img_name=item, category='Banking\Bank_Items', threshold=threshold, img_sel='banked'):
             write_debug(f'Failed to find bank item: {item} in tab_num: {tab_num}- Scrolling and trying again')
             mouse_move(scroll_xy)
-            pag.hscroll(150)
+            API.AntiBan.sleep_between(0.6, 0.9)
+            pag.hscroll(-150)
             if not does_img_exist(img_name=item, category='Banking\Bank_Items', threshold=threshold, img_sel='banked'):
                 write_debug(f'Failed to find item: {item} in tab_num: {tab_num} for a second time after scrolling - returning...')
                 return False
 
-        bank_item_xy = API.Imaging.Image.get_existing_img_xy()
+        x, y = API.Imaging.Image.get_existing_img_xy()
+        bank_item_xy = x + 20, y + 20
         mouse_long_click(bank_item_xy)
         does_img_exist(img_name="withdraw_x", category="Banking", should_click=True, threshold=0.9, click_middle=True)
         API.AntiBan.sleep_between(1.0, 1.1)
