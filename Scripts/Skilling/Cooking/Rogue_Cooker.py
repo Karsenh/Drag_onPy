@@ -8,7 +8,7 @@ from API.Interface.General import setup_interface, get_xy_for_invent_slot, relog
 from API.Interface.Bank import is_bank_tab_open, deposit_all, close_bank, is_withdraw_qty
 from API.Imaging.Image import does_img_exist, wait_for_img
 from API.Debug import write_debug
-from API.Time import get_curr_runtime
+from API.Time import get_curr_runtime, reset_curr_runtime
 from GUI.Imports.PreLaunch_Gui.Plg_Script_Options import Global_Script_Options
 
 BANK_TAB = 1
@@ -28,6 +28,7 @@ def start_rogue_cooking(curr_loop):
         if curr_rt.total_seconds() > 19800:
             relog()
             setup_interface("south", 5, "up")
+            reset_curr_runtime()
 
         if not open_rogue_bank():
             return False

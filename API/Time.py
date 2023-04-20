@@ -30,3 +30,9 @@ def get_curr_runtime():
     curr_runtime = curr_time - START_TIME
     write_debug(f'CURRENT RUN-TIME: {curr_runtime}')
     return curr_runtime
+
+
+def reset_curr_runtime():
+    global START_TIME
+    START_TIME = datetime.now()
+    return
