@@ -45,10 +45,10 @@ def set_script_access(user_email, user_licenses):
     updated_lic_arr = []
     used_licenses_arr = []
 
+    JWT_SEC = 'cFnLPysgeQ6mLn83qVYz1PkNbJuZJzVyKkfv0kOfAKJ6Ihg6j0BUxIntWgIex5vAGDzb8DmYCLo2eaBa'
+
     for lic in user_licenses:
         print(f'Decoding License and setting Script Access for license: {lic}')
-
-        JWT_SEC = 'cFnLPysgeQ6mLn83qVYz1PkNbJuZJzVyKkfv0kOfAKJ6Ihg6j0BUxIntWgIex5vAGDzb8DmYCLo2eaBa'
 
         try:
             decoded_lic = jwt.decode(lic, JWT_SEC, algorithms=["HS256"])
@@ -57,7 +57,7 @@ def set_script_access(user_email, user_licenses):
             update_script_state(decoded_lic)
             updated_lic_arr.append(lic)
         except Exception:
-            print(f'decoded token is invalid - likely expired. Remove from user doc with exception: {Exception}')
+            print(f'decoded token is invalid - likely expired. Removed from user doc with exception: {Exception}')
 
     # license_obj = json.load(license)
     update_user_licenses(user_email, updated_lic_arr)

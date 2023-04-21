@@ -3,12 +3,13 @@ import datetime
 import API.AntiBan
 import pyautogui as pag
 from API.AntiBan import shutdown
-from API.Interface.General import setup_interface, is_tab_open
+from API.Interface.General import setup_interface, is_tab_open, relog
 from API.Interface.Bank import is_withdraw_qty, close_bank, is_bank_tab_open, deposit_all, open_ge_bank, \
     withdraw_item_from_tab_num
 from API.Imaging.Image import does_img_exist, get_existing_img_xy, wait_for_img
 from API.Mouse import mouse_click, mouse_long_click
 from API.Interface.General import get_xy_for_invent_slot
+from API.Time import get_curr_runtime, reset_curr_runtime
 
 SCRIPT_NAME = 'GE_Bow_Stringer'
 
@@ -30,6 +31,13 @@ def start_stringing_bows(curr_loop):
         close_bank()
         make_inventory()
         API.AntiBan.sleep_between(15, 17)
+
+        curr_rt = get_curr_runtime()
+
+        if curr_rt.total_seconds() > 19800:
+            relog()
+            setup_interface("east", 5, "up")
+            reset_curr_runtime()
     else:
         print(f'First loop')
         setup_interface('east', 5, 'up')

@@ -1,5 +1,5 @@
-import pyautogui
-
+import sys
+import tty
 import API.AntiBan
 from GUI.Main_GUI import show_main_gui
 from API.Debug import clear_debug_log
@@ -12,8 +12,6 @@ from API.Interface.Bank import is_bank_tab_open, open_ge_bank, withdraw_item_fro
 from Scripts.Skilling.Combat.NMZ import drop_pots_from_invent, purchase_new_dream, restock_doses_from_chest, \
     withdraw_ovls, withdraw_abs
 from Scripts.Skilling.Mining.Motherlode_Miner import claim_ore
-
-import sys
 from pynput import keyboard
 
 
