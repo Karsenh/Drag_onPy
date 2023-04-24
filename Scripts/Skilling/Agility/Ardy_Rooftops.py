@@ -3,7 +3,7 @@ import API.AntiBan
 from API.Imaging.Image import does_img_exist, wait_for_img, get_existing_img_xy
 from API.Interface.General import setup_interface, is_tab_open, relog
 from API.Mouse import mouse_move, mouse_click, mouse_long_click
-
+from API.Time import reset_curr_runtime
 
 SCRIPT_NAME = 'Ardy_Rooftops'
 
@@ -11,7 +11,7 @@ SHOULD_TELE = False
 SHOULD_ALCH = True
 USE_COORDS = False
 ITEMS_TO_ALCH = ['green_dhide_body_note', 'magic_long_note']
-ALCH_ITEM = ITEMS_TO_ALCH[0]
+ALCH_ITEM = ITEMS_TO_ALCH[1]
 NO_ALCH_SLEEP_TIMES = [1, 1, 1, 1, 1, 1, 1]
 MOG_JUMPS = [3]
 JUMPS_TO_LONG_CLICK = [0]
@@ -74,7 +74,7 @@ def handle_next_jump():
         print(f'Clicking jump {CURR_JUMP_NUM} @ {jump_coords[CURR_JUMP_NUM]}')
         if CURR_JUMP_NUM in JUMPS_TO_LONG_CLICK:
             mouse_long_click(jump_coords[CURR_JUMP_NUM])
-            if not does_img_exist(img_name='climb_up_option', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True):
+            if not does_img_exist(img_name='climb_up_option', script_name=SCRIPT_NAME, threshold=0.8, should_click=True, click_middle=True):
                 print(f'⛔ Failed to find climb_up_option on jump_num: {CURR_JUMP_NUM}')
                 return False
         else:
@@ -97,6 +97,7 @@ def handle_next_jump():
         print(f'TOTAL NUM LAPS: {NUM_TOTAL_LAPS}')
         if NUM_TOTAL_LAPS % 240 == 0:
             relog()
+            reset_curr_runtime()
 
     return True
 
