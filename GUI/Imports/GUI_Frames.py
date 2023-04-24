@@ -316,7 +316,7 @@ def show_minigames_frame(all_frames, minigames_sub_btns, t_active_frame, gui_btn
     skill_btn.configure(bg=BTN_BG_COL)
     minigames_btn.configure(bg=BTN_ACTIVE_BG_COL)
 
-    trawler_btn, nmz_btn = minigames_sub_btns
+    trawler_btn, nmz_btn, tithe_farmer_btn = minigames_sub_btns
     main_frame, gold_frame, skill_frame, minigames_frame, skill_sub_frame = all_frames
 
     gold_frame.grid_remove()
@@ -326,6 +326,7 @@ def show_minigames_frame(all_frames, minigames_sub_btns, t_active_frame, gui_btn
 
     trawler_btn.grid(row=1, column=1, pady=20, padx=20)
     nmz_btn.grid(row=1, column=2, pady=20, padx=20)
+    tithe_farmer_btn.grid(row=2, column=1, pady=20, padx=20)
 
     # If is_active is false here, it was true when we clicked, therefore exit
     if not is_active:
@@ -373,7 +374,7 @@ def show_attack_frame(all_frames, t_active_frame, attack_frame, attack_sub_btns)
 
 def show_magic_frame(all_frames, t_active_frame, magic_frame, magic_sub_btns):
     _, _, _, _, skill_sub_frames = all_frames
-    ardy_knight_splasher_btn = magic_sub_btns
+    ardy_knight_splasher_btn, ge_superheat_gold_btn = magic_sub_btns
 
     is_active = t_active_frame("skill", all_frames)
     print(f'show_attack_frame - skill_frame - is_active: {is_active}')
@@ -382,8 +383,10 @@ def show_magic_frame(all_frames, t_active_frame, magic_frame, magic_sub_btns):
 
     magic_img_path = 'Assets\Images\GUI_Images\Stats\Magic'
     splash_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{magic_img_path}\Splash_img.png'))
+    superheat_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{magic_img_path}\Superheat.png'))
 
-    add_script_btn(magic_frame, splash_img, ardy_knight_splasher_btn, 2)
+    add_script_btn(magic_frame, splash_img, ardy_knight_splasher_btn, 1)
+    add_script_btn(magic_frame, superheat_img, ge_superheat_gold_btn, 2)
     return
 
 
@@ -409,7 +412,7 @@ def show_mining_frame(all_frames, t_active_frame, mining_frame, mining_sub_btns)
 def show_smithing_frame(all_frames, t_active_frame, smithing_frame, smithing_sub_btns):
     _, _, _, _, skill_sub_frames = all_frames
     # _, smithing_frame, _, _, _, _, _, _, _ = skill_sub_frames
-    edge_gold_btn, blast_furance_btn = smithing_sub_btns
+    edge_gold_btn, blast_furance_btn, ge_superheat_gold_btn = smithing_sub_btns
 
     is_active = t_active_frame("skill", all_frames)
     print(f'show_smithing_frame - skill_frame - is_active: {is_active}')
@@ -419,15 +422,17 @@ def show_smithing_frame(all_frames, t_active_frame, smithing_frame, smithing_sub
     smithing_path = 'Assets\Images\GUI_Images\Stats\Smithing'
     gold_bar_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{smithing_path}\gold_bar.png'))
     rune_addy_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{smithing_path}\Rune_Addy.png'))
+    superheat_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{smithing_path}\Superheat.png'))
 
     add_script_btn(smithing_frame, gold_bar_img, edge_gold_btn, 1)
     add_script_btn(smithing_frame, rune_addy_img, blast_furance_btn, 2)
+    add_script_btn(smithing_frame, superheat_img, ge_superheat_gold_btn, 3)
     return
 
 
 def show_agility_frame(all_frames, t_active_frame, agility_frame, agility_sub_btns):
     _, _, _, _, skill_sub_frames = all_frames
-    gnome_course_btn, canifis_rooftops_btn, seers_rooftop_btn = agility_sub_btns
+    gnome_course_btn, canifis_rooftops_btn, seers_rooftop_btn, ardy_rooftops_btn = agility_sub_btns
 
     is_active = t_active_frame("skill", all_frames)
     print(f'show_agility_frame - skill_frame - is_active: {is_active}')
@@ -438,10 +443,12 @@ def show_agility_frame(all_frames, t_active_frame, agility_frame, agility_sub_bt
     gnome_course_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{agility_path}\Gnome_Course.png'))
     mog_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{agility_path}\Mog.png'))
     high_alch_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{agility_path}\High_Alch.png'))
+    ardy_rooftops_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{agility_path}\Ardy_Course.png'))
 
     add_script_btn(agility_frame, gnome_course_img, gnome_course_btn, 1)
     add_script_btn(agility_frame, mog_img, canifis_rooftops_btn, 2)
     add_script_btn(agility_frame, high_alch_img, seers_rooftop_btn, 3)
+    add_script_btn(agility_frame, ardy_rooftops_img, ardy_rooftops_btn, 4)
     return
 
 
@@ -456,7 +463,7 @@ def show_defence_frame(all_frames, t_active_frame, defence_frame, defence_sub_bt
 
 def show_herblore_frame(all_frames, t_active_frame, herblore_frame, herblore_sub_btns):
     _, _, _, _, skill_sub_frames = all_frames
-    unf_pot_btn = herblore_sub_btns
+    unf_pot_btn, ge_finished_pots_btn = herblore_sub_btns
 
     is_active = t_active_frame("skill", all_frames)
     print(f'show_herblore_frame - skill_frame - is_active: {is_active}')
@@ -465,8 +472,10 @@ def show_herblore_frame(all_frames, t_active_frame, herblore_frame, herblore_sub
 
     herblore_img_path = 'Assets\Images\GUI_Images\Stats\Herblore'
     unf_pot_img = ImageTk.PhotoImage(Image.open(f"{os.getcwd()}\{herblore_img_path}\Herb_pot.png"))
+    finished_pot_img = ImageTk.PhotoImage(Image.open(f"{os.getcwd()}\{herblore_img_path}\Restore_pot.png"))
 
     add_script_btn(herblore_frame, unf_pot_img, unf_pot_btn, 1)
+    add_script_btn(herblore_frame, finished_pot_img, ge_finished_pots_btn, 2)
     return
 
 
@@ -583,7 +592,7 @@ def show_hunter_frame(all_frames, t_active_frame, hunter_frame, hunter_sub_btns)
 
 def show_fletching_frame(all_frames, t_active_frame, fletching_frame, fletching_sub_btns):
     _, _, _, _, skill_sub_frames = all_frames
-    ge_dart_fletcher_btn = fletching_sub_btns
+    ge_dart_fletcher_btn, ge_bow_stringer_btn = fletching_sub_btns
 
     is_active = t_active_frame("skill", all_frames)
     print(f'show_firemaking_frame - skill_frame - is_active: {is_active}')
@@ -592,8 +601,10 @@ def show_fletching_frame(all_frames, t_active_frame, fletching_frame, fletching_
 
     fletching_img_path = 'Assets\Images\GUI_Images\Stats\Fletching'
     dart_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{fletching_img_path}\Dart.png'))
+    magic_long_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{fletching_img_path}\Magic_Long.png'))
 
     add_script_btn(fletching_frame, dart_img, ge_dart_fletcher_btn, 1)
+    add_script_btn(fletching_frame, magic_long_img, ge_bow_stringer_btn, 2)
     return
 
 

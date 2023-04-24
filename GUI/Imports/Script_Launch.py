@@ -1,6 +1,9 @@
 import threading
 import os
 import keyboard
+
+from Database.Connection import AUTHED_USER, check_client_version, get_authed_user
+from Database.Script_Access import set_script_access
 from Scripts.Skilling.Smithing.Edge_Gold import smith_gold_edge
 from Scripts.Skilling.Mining.Pisc_Iron_Miner import mine_pisc_iron
 from Scripts.Skilling.Agility.Gnome_Course_v3 import start_gnome_course
@@ -74,6 +77,10 @@ def launch_script(script_name="pisc_iron"):
 
     # for thread in threading.enumerate():
     #     print(f'Thread name: {thread.name}')
+
+    authed_user = get_authed_user()
+
+    set_script_access(authed_user.email, authed_user.licenses)
 
     write_debug(f"Pre-launch checks for: {script_name}")
     # Check that we're not on dc screen (click continue if so)

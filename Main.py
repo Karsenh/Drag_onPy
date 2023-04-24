@@ -3,6 +3,9 @@ import msvcrt
 import sys
 import os
 import signal
+
+from Database.Connection import check_client_version
+from GUI.Imports.GUI_Update_Client import show_update_client_gui
 from GUI.Main_GUI import *
 from sys import exit
 from GUI.Auth_GUI import *
@@ -29,6 +32,11 @@ def __main__() -> int:
         get_bluestacks_xy()
         set_bluestacks_window_size()
         capture_bluestacks()
+
+        if not check_client_version():
+            print(f'Exiting Script_Launch...')
+            show_update_client_gui()
+            return False
 
         # show_main_gui()
         if show_auth_gui():

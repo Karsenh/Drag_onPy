@@ -45,7 +45,7 @@ def show_plg_options(main_plg_frame, font_styles, script_name):
 
     # Determines what option buttons to show at the bottom of the Pre-Launch GUI based on the script
     match script_name:
-        case "Gnome_Course":
+        case "Gnome_Course", "Canafis_Rooftops", "Seers_Rooftops", "Ardy_Rooftops", :
             script_name = 'Gnome_Course'
             field_name = 'High Alch'
 
@@ -70,32 +70,28 @@ def show_plg_options(main_plg_frame, font_styles, script_name):
             option_1 = tkinter.Checkbutton(script_options_frame, text="Bank Fruit", font=break_font, background=frame_bg_color)
             option_1.grid(row=1, column=1)
 
-        case "Canifis_Rooftops":
-            option_1 = tkinter.Checkbutton(script_options_frame, text="High Alch", font=break_font, background=frame_bg_color)
-            option_1.grid(row=1, column=1)
-
-        case "Seers_Rooftops":
-            option_1 = tkinter.Checkbutton(script_options_frame, text="High Alch", font=break_font, background=frame_bg_color)
-            option_1.grid(row=1, column=1)
-
-        case "Ardy_Rooftops":
-            option_1 = tkinter.Checkbutton(script_options_frame, text="High Alch", font=break_font, background=frame_bg_color)
-            option_1.grid(row=1, column=1)
-
         case "GE_Bow_Stringer":
             option_1 = tkinter.Checkbutton(script_options_frame, text="Bow Type", font=break_font, background=frame_bg_color)
             option_1.grid(row=1, column=1)
 
         case "GE_Dhide_Bodies":
-            option_1 = tkinter.Checkbutton(script_options_frame, text="Leather Type", font=break_font, background=frame_bg_color)
+            option_1 = tkinter.Radiobutton(script_options_frame, text="Leather Type", font=break_font, background=frame_bg_color)
             option_1.grid(row=1, column=1)
 
         case "Tithe_Farmer":
-            option_1 = tkinter.Checkbutton(script_options_frame, text="Watering Can Type", font=break_font, background=frame_bg_color)
+            option_1 = tkinter.Radiobutton(script_options_frame, text="Regular Cans (8)", font=break_font, background=frame_bg_color)
+            option_1.grid(row=1, column=1)
+            option_1 = tkinter.Radiobutton(script_options_frame, text="Gricollers Can", font=break_font, background=frame_bg_color)
+            option_1.grid(row=1, column=1)
+            option_1 = tkinter.Checkbutton(script_options_frame, text="Use Humidfy", font=break_font, background=frame_bg_color)
             option_1.grid(row=1, column=1)
 
         case "Blast_Furnace":
-            option_1 = tkinter.Checkbutton(script_options_frame, text="Leather Type", font=break_font, background=frame_bg_color)
+            option_1 = tkinter.Checkbutton(script_options_frame, text="Gold Bars", font=break_font, background=frame_bg_color)
+            option_1.grid(row=1, column=1)
+            option_1 = tkinter.Checkbutton(script_options_frame, text="Addy Bars", font=break_font, background=frame_bg_color)
+            option_1.grid(row=1, column=1)
+            option_1 = tkinter.Checkbutton(script_options_frame, text="Runite Bars", font=break_font, background=frame_bg_color)
             option_1.grid(row=1, column=1)
 
         case "Cwars_Lavas":
@@ -160,22 +156,6 @@ def show_plg_options(main_plg_frame, font_styles, script_name):
             option_1.grid(row=1, column=3, columnspan=1)
             option_1 = tkinter.Radiobutton(script_options_frame, text="Shark", value='Shark', variable=rogue_cooker_var, tristatevalue=1, font=break_font, background=frame_bg_color, command=lambda: set_option(script_name, field_name, rogue_cooker_var.get()))
             option_1.grid(row=1, column=4, columnspan=1)
-        case "Kourend_Crab_Killer":
-            option_1 = tkinter.Radiobutton(script_options_frame, text="Attack", font=break_font, background=frame_bg_color)
-            option_1.grid(row=1, column=1)
-            option_1 = tkinter.Radiobutton(script_options_frame, text="Strength", font=break_font, background=frame_bg_color)
-            option_1.grid(row=1, column=2)
-            option_1 = tkinter.Radiobutton(script_options_frame, text="Defense", font=break_font, background=frame_bg_color)
-            option_1.grid(row=1, column=3)
-            option_1 = tkinter.Radiobutton(script_options_frame, text="Range", font=break_font, background=frame_bg_color)
-            option_1.grid(row=1, column=4)
-
-            option_1 = tkinter.Checkbutton(script_options_frame, text="Super Attack", font=break_font, background=frame_bg_color)
-            option_1.grid(row=2, column=1, pady=10, padx=10, columnspan=2)
-            option_1 = tkinter.Checkbutton(script_options_frame, text="Super Strength", font=break_font, background=frame_bg_color)
-            option_1.grid(row=2, column=3, pady=10, padx=10, columnspan=2)
-            option_1 = tkinter.Checkbutton(script_options_frame, text="Range Potion", font=break_font, background=frame_bg_color)
-            option_1.grid(row=2, column=5, pady=10, padx=10, columnspan=2)
 
     script_options_frame.grid(row=4, column=1)
 
