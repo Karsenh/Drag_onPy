@@ -472,8 +472,8 @@ def click_belt_from_bank():
 
 def click_belt_from_belt():
     print(f'Clicking ')
-    furance_xy = 778, 455
-    mouse_click(furance_xy, min_num_clicks=2, max_num_clicks=3)
+    furnace_xy = 778, 455
+    mouse_click(furnace_xy, min_num_clicks=2, max_num_clicks=3)
     API.AntiBan.sleep_between(0.1, 0.2)
     return
 

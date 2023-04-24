@@ -12,7 +12,7 @@ initial_state = 'disabled'
 
 kourend_crab_killer_script = cow_killer_script = pisc_iron_script = \
     barb_fisher_script = red_chins_script = motherlode_mine_script = \
-    blast_furance_script = black_lizards_script = dhide_bodies_script = \
+    blast_furnace_script = black_lizards_script = dhide_bodies_script = \
     tithe_farmer_script = gnome_agility_script = canifis_rooftops \
     = seers_rooftops = poh_larders_script = tithe_farmer_script \
     = rogue_cooker_script = ge_glass_blower_script = poh_tables_script \
@@ -22,14 +22,15 @@ kourend_crab_killer_script = cow_killer_script = pisc_iron_script = \
     = desert_lizards_script = red_lizards_script = draynor_man_script \
     = ardy_cake_script = hosidius_fruit_script = ardy_knight_script \
     = chop_fletcher_script = sw_teaks_script = cwars_lavas_script \
-    = gilded_altar_script = edge_gold_script = unf_pots_script \
+    = gilded_altar_script = edge_gold_script = ge_unf_pots_script \
     = cball_smithing_script = ardy_knight_splasher_script = ge_dart_fletcher_script \
-    = ge_bow_stringer_script = ardy_rooftops_script = ge_finished_pots_script = ge_superheat_gold_script\
+    = ge_bow_stringer_script = ardy_rooftops_script = ge_finished_pots_script \
+    = ge_superheat_gold_script = fishing_trawler_script = nmz_script\
     = ScriptAccess(initial_state)
 
 all_scripts = [kourend_crab_killer_script, cow_killer_script, pisc_iron_script,
                barb_fisher_script, red_chins_script, motherlode_mine_script,
-               blast_furance_script, dhide_bodies_script, gnome_agility_script,
+               blast_furnace_script, dhide_bodies_script, gnome_agility_script,
                canifis_rooftops, seers_rooftops, rogue_cooker_script,
                ge_glass_blower_script, hosidius_plough_script, ge_sulphurous_fertilizer_script,
                tithe_farmer_script, draynor_shrimp_script, barb_trout_script,
@@ -38,9 +39,10 @@ all_scripts = [kourend_crab_killer_script, cow_killer_script, pisc_iron_script,
                red_lizards_script, draynor_man_script, ardy_cake_script,
                hosidius_fruit_script, ardy_knight_script, chop_fletcher_script,
                sw_teaks_script, cwars_lavas_script, gilded_altar_script,
-               edge_gold_script, unf_pots_script, cball_smithing_script,
+               edge_gold_script, ge_unf_pots_script, cball_smithing_script,
                ardy_knight_splasher_script, ge_finished_pots_script,
-               ge_bow_stringer_script, ardy_rooftops_script, ge_superheat_gold_script]
+               ge_bow_stringer_script, ardy_rooftops_script, ge_superheat_gold_script,
+               fishing_trawler_script, nmz_script]
 
 
 def set_script_access(user_email, user_licenses):
@@ -97,7 +99,7 @@ def update_script_state(decoded_lic):
             case 'barb_fisher':
                 barb_fisher_script.btn_state = enabled
             case 'blast_furnace':
-                blast_furance_script.btn_state = enabled
+                blast_furnace_script.btn_state = enabled
             case 'dhide_bodies':
                 dhide_bodies_script.btn_state = enabled
             case 'gnome_course':
@@ -161,7 +163,7 @@ def update_script_state(decoded_lic):
             case 'edge_gold':
                 edge_gold_script.btn_state = enabled
             case 'unf_pots':
-                unf_pots_script.btn_state = enabled
+                ge_unf_pots_script.btn_state = enabled
             case 'cball_smither':
                 cball_smithing_script.btn_state = enabled
             case 'ardy_knight_splasher':
@@ -174,5 +176,9 @@ def update_script_state(decoded_lic):
                 ardy_rooftops_script.btn_state = enabled
             case 'ge_superheat_gold':
                 ge_superheat_gold_script.btn_state = enabled
+            case 'fishing_trawler':
+                fishing_trawler_script.btn_state = enabled
+            case 'nmz':
+                nmz_script.btn_state = enabled
 
     return

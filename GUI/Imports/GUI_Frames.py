@@ -217,7 +217,7 @@ def show_gold_frame(all_frames, gold_gui_btns, t_active_frame, gui_btns):
 
     # print(f'Entering 💰 Gold Frame with is_active: {not is_active} which is now: {is_active}')
 
-    cball_btn, unf_pots_btn, blast_furance_btn2, red_chins_btn2 = gold_gui_btns
+    ge_unf_pots_btn, blast_furnace_btn2, red_chins_btn2 = gold_gui_btns
     main_frame, gold_frame, skill_frame, minigames_frame, skill_sub_frame = all_frames
 
     skill_frame.grid_remove()
@@ -225,10 +225,22 @@ def show_gold_frame(all_frames, gold_gui_btns, t_active_frame, gui_btns):
 
     gold_frame.grid(row=sub_gui_row, column=1, columnspan=5, pady=50)
 
-    cball_btn.grid(row=1, column=1, padx=15, pady=20)
-    unf_pots_btn.grid(row=2, column=1, padx=15, pady=20)
-    blast_furance_btn2.grid(row=1, column=2, padx=15, pady=20)
-    red_chins_btn2.grid(row=2, column=2, padx=15, pady=20)
+    # cball_btn.grid(row=1, column=1, padx=15, pady=20)
+    # unf_pots_btn.grid(row=2, column=1, padx=15, pady=20)
+    # blast_furance_btn2.grid(row=1, column=2, padx=15, pady=20)
+    # red_chins_btn2.grid(row=2, column=2, padx=15, pady=20)
+
+    herblore_img_path = 'Assets\Images\GUI_Images\Stats\Herblore'
+    smithing_img_path = 'Assets\Images\GUI_Images\Stats\Smithing'
+    hunter_img_path = 'Assets\Images\GUI_Images\Stats\Hunter'
+
+    ge_unf_pot_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{herblore_img_path}\Herb_pot.png'))
+    blast_furnace_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{smithing_img_path}\Rune_Addy.png'))
+    red_chin_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{hunter_img_path}\Red_Chin.png'))
+
+    add_script_btn(gold_frame, ge_unf_pot_img, ge_unf_pots_btn, 1)
+    add_script_btn(gold_frame, blast_furnace_img, blast_furnace_btn2, 2)
+    add_script_btn(gold_frame, red_chin_img, red_chins_btn2, 3)
 
     # If is_active is false here, it was true when we clicked, therefore exit
     if not is_active:
@@ -324,9 +336,16 @@ def show_minigames_frame(all_frames, minigames_sub_btns, t_active_frame, gui_btn
 
     minigames_frame.grid(row=sub_gui_row, column=1, columnspan=5, pady=50)
 
-    trawler_btn.grid(row=1, column=1, pady=20, padx=20)
-    nmz_btn.grid(row=1, column=2, pady=20, padx=20)
-    tithe_farmer_btn.grid(row=2, column=1, pady=20, padx=20)
+    minigames_img_path = 'Assets\Images\GUI_Images\Minigames'
+    trawler_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{minigames_img_path}\Fishing_Trawler.png'))
+    nmz_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{minigames_img_path}\ANMZ.png'))
+
+    farming_path = 'Assets\Images\GUI_Images\Stats\Farming'
+    tithe_farmer_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{farming_path}\Farmers_Outfit.png'))
+
+    add_script_btn(minigames_frame, trawler_img, trawler_btn, 1)
+    add_script_btn(minigames_frame, nmz_img, nmz_btn, 2)
+    add_script_btn(minigames_frame, tithe_farmer_img, tithe_farmer_btn, 3)
 
     # If is_active is false here, it was true when we clicked, therefore exit
     if not is_active:
@@ -412,7 +431,7 @@ def show_mining_frame(all_frames, t_active_frame, mining_frame, mining_sub_btns)
 def show_smithing_frame(all_frames, t_active_frame, smithing_frame, smithing_sub_btns):
     _, _, _, _, skill_sub_frames = all_frames
     # _, smithing_frame, _, _, _, _, _, _, _ = skill_sub_frames
-    edge_gold_btn, blast_furance_btn, ge_superheat_gold_btn = smithing_sub_btns
+    edge_gold_btn, blast_furnace_btn, ge_superheat_gold_btn = smithing_sub_btns
 
     is_active = t_active_frame("skill", all_frames)
     print(f'show_smithing_frame - skill_frame - is_active: {is_active}')
@@ -425,7 +444,7 @@ def show_smithing_frame(all_frames, t_active_frame, smithing_frame, smithing_sub
     superheat_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{smithing_path}\Superheat.png'))
 
     add_script_btn(smithing_frame, gold_bar_img, edge_gold_btn, 1)
-    add_script_btn(smithing_frame, rune_addy_img, blast_furance_btn, 2)
+    add_script_btn(smithing_frame, rune_addy_img, blast_furnace_btn, 2)
     add_script_btn(smithing_frame, superheat_img, ge_superheat_gold_btn, 3)
     return
 
