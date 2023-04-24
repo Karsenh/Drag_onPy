@@ -210,12 +210,14 @@ def show_settings_frame():
 def show_gold_frame(all_frames, gold_gui_btns, t_active_frame, gui_btns):
     gold_btn, skill_btn, minigames_btn = gui_btns
     is_active = t_active_frame("gold", all_frames)
-    # print(f'Entering 💰 Gold Frame with is_active: {not is_active} which is now: {is_active}')
+
     gold_btn.configure(bg=BTN_ACTIVE_BG_COL)
     skill_btn.configure(bg=BTN_BG_COL)
     minigames_btn.configure(bg=BTN_BG_COL)
 
-    cball_btn, unf_pots_btn = gold_gui_btns
+    # print(f'Entering 💰 Gold Frame with is_active: {not is_active} which is now: {is_active}')
+
+    cball_btn, unf_pots_btn, blast_furance_btn2, red_chins_btn2 = gold_gui_btns
     main_frame, gold_frame, skill_frame, minigames_frame, skill_sub_frame = all_frames
 
     skill_frame.grid_remove()
@@ -223,9 +225,10 @@ def show_gold_frame(all_frames, gold_gui_btns, t_active_frame, gui_btns):
 
     gold_frame.grid(row=sub_gui_row, column=1, columnspan=5, pady=50)
 
-    cball_btn.grid(row=1, column=1, padx=50, pady=35)
-
-    unf_pots_btn.grid(row=2, column=1, padx=50, pady=35)
+    cball_btn.grid(row=1, column=1, padx=15, pady=20)
+    unf_pots_btn.grid(row=2, column=1, padx=15, pady=20)
+    blast_furance_btn2.grid(row=1, column=2, padx=15, pady=20)
+    red_chins_btn2.grid(row=2, column=2, padx=15, pady=20)
 
     # If is_active is false here, it was true when we clicked, therefore exit
     if not is_active:
@@ -378,7 +381,6 @@ def show_magic_frame(all_frames, t_active_frame, magic_frame, magic_sub_btns):
     magic_frame.grid(row=sub_gui_row, column=1, columnspan=5, pady=50)
 
     magic_img_path = 'Assets\Images\GUI_Images\Stats\Magic'
-
     splash_img = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\{magic_img_path}\Splash_img.png'))
 
     add_script_btn(magic_frame, splash_img, ardy_knight_splasher_btn, 2)

@@ -231,10 +231,13 @@ def get_all_btns(all_frames, all_images, root):
     main_gui_btns = gold_btn, skill_btn, minigames_btn, settings_btn, info_btn, bug_report_btn
 
     # (Main) Gold_gui_btns
-    cball_btn = new_script_start_btn(money_making_frame, 'Cball_Smither', cball_smithing_script.btn_state)
-    unf_pots_btn = new_script_start_btn(money_making_frame, 'Unf_Pots', unf_pots_script.btn_state)
-
-    gold_gui_btns = cball_btn, unf_pots_btn
+    cball_btn = Button(money_making_frame, text="Cballs", image=trawler_img, bg='#545550', activebackground=BTN_ACTIVE_BG_COL, command=lambda: show_plg("Fishing_Trawler", root))
+    unf_pots_btn = Button(money_making_frame, text="Unf Pots", image=nmz_img, bg='#545550', activebackground=BTN_ACTIVE_BG_COL, command=lambda: show_plg("Unf_Pots", root))
+    blast_furance_btn2 = Button(money_making_frame, text="Blast Furnace", image=nmz_img, bg='#545550', activebackground=BTN_ACTIVE_BG_COL, command=lambda: show_plg("Blast_Furnace", root))
+    red_chins_btn2 = Button(money_making_frame, text="Blast Furnace", image=nmz_img, bg='#545550', activebackground=BTN_ACTIVE_BG_COL, command=lambda: show_plg("Blast_Furnace", root))
+    # cball_btn = new_script_start_btn(money_making_frame, 'Cball_Smither', cball_smithing_script.btn_state)
+    # unf_pots_btn = new_script_start_btn(money_making_frame, 'Unf_Pots', unf_pots_script.btn_state)
+    gold_gui_btns = cball_btn, unf_pots_btn, blast_furance_btn2, red_chins_btn2
 
     skill_gui_btns = attack_btn, hp_btn, minining_btn, \
                      strength_btn, agility_btn, smithing_btn, \

@@ -1,5 +1,4 @@
 import sys
-import tty
 import API.AntiBan
 from GUI.Main_GUI import show_main_gui
 from API.Debug import clear_debug_log
@@ -39,7 +38,7 @@ def __main__():
 
     # launch_script("Ardy_Rooftops")
     # launch_script("GE_Dhide_Bodies")
-    launch_script("GE_Bow_Stringer")
+    launch_script("Gnome_Course")
 
     # does_img_exist(img_name='jump_4', script_name='Ardy_Rooftops', threshold=0.9, should_click=True, click_middle=True)
 

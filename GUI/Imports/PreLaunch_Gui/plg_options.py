@@ -45,33 +45,83 @@ def show_plg_options(main_plg_frame, font_styles, script_name):
 
     # Determines what option buttons to show at the bottom of the Pre-Launch GUI based on the script
     match script_name:
+        case "Gnome_Course":
+            script_name = 'Gnome_Course'
+            field_name = 'High Alch'
+
+            alch_item = tkinter.StringVar(None, "none")
+
+            option_1 = tkinter.Radiobutton(script_options_frame, variable=alch_item, tristatevalue=1, value="none", text="No Alch", font=break_font, background=frame_bg_color, command=lambda: set_option(script_name, field_name, alch_item.get()))
+            option_1.grid(row=1, column=1)
+            option_1 = tkinter.Radiobutton(script_options_frame, variable=alch_item, tristatevalue=0, value="magic_long_noted", text="Magic Longbow (noted)", font=break_font, background=frame_bg_color, command=lambda: set_option(script_name, field_name, alch_item.get()))
+            option_1.grid(row=1, column=2)
+            option_1 = tkinter.Radiobutton(script_options_frame, variable=alch_item, tristatevalue=0, value="green_dhide_bodies_noted", text="Green Dhide Body (noted)", font=break_font, background=frame_bg_color, command=lambda: set_option(script_name, field_name, alch_item.get()))
+            option_1.grid(row=1, column=3)
+
         case "Ardy_Knights":
             option_1 = tkinter.Checkbutton(script_options_frame, text="Dodgy Necklace (Jewelry tab)", font=break_font, background=frame_bg_color)
             option_1.grid(row=1, column=1)
-        case "Cwars_Teak":
-            option_1 = tkinter.Checkbutton(script_options_frame, text="Bank Logs", font=break_font, background=frame_bg_color)
+
+        case "Draynor_Shrimp":
+            option_1 = tkinter.Checkbutton(script_options_frame, text="Bank Shrimp", font=break_font, background=frame_bg_color)
             option_1.grid(row=1, column=1)
-            option_1 = tkinter.Checkbutton(script_options_frame, text="Use Ring of Dueling", font=break_font, background=frame_bg_color)
-            option_1.grid(row=1, column=2)
+
+        case "Hosidius_Fruit":
+            option_1 = tkinter.Checkbutton(script_options_frame, text="Bank Fruit", font=break_font, background=frame_bg_color)
+            option_1.grid(row=1, column=1)
+
+        case "Canifis_Rooftops":
+            option_1 = tkinter.Checkbutton(script_options_frame, text="High Alch", font=break_font, background=frame_bg_color)
+            option_1.grid(row=1, column=1)
+
+        case "Seers_Rooftops":
+            option_1 = tkinter.Checkbutton(script_options_frame, text="High Alch", font=break_font, background=frame_bg_color)
+            option_1.grid(row=1, column=1)
+
+        case "Ardy_Rooftops":
+            option_1 = tkinter.Checkbutton(script_options_frame, text="High Alch", font=break_font, background=frame_bg_color)
+            option_1.grid(row=1, column=1)
+
+        case "GE_Bow_Stringer":
+            option_1 = tkinter.Checkbutton(script_options_frame, text="Bow Type", font=break_font, background=frame_bg_color)
+            option_1.grid(row=1, column=1)
+
+        case "GE_Dhide_Bodies":
+            option_1 = tkinter.Checkbutton(script_options_frame, text="Leather Type", font=break_font, background=frame_bg_color)
+            option_1.grid(row=1, column=1)
+
+        case "Tithe_Farmer":
+            option_1 = tkinter.Checkbutton(script_options_frame, text="Watering Can Type", font=break_font, background=frame_bg_color)
+            option_1.grid(row=1, column=1)
+
+        case "Blast_Furnace":
+            option_1 = tkinter.Checkbutton(script_options_frame, text="Leather Type", font=break_font, background=frame_bg_color)
+            option_1.grid(row=1, column=1)
+
         case "Cwars_Lavas":
-            option_1 = tkinter.Radiobutton(script_options_frame, text="Small Pouch", font=break_font, background=frame_bg_color)
+            script_name = 'Cwars_Lavas'
+            field_name = 'Pouches'
+
+            pouch_small = tkinter.BooleanVar(None, True, "Small Pouch")
+            pouch_medium = tkinter.BooleanVar(None, True, "Medium Pouch")
+            pouch_large = tkinter.BooleanVar(None, True, "Large Pouch")
+            pouch_giant = tkinter.BooleanVar(None, False, "Giant Pouch")
+
+            option_1 = tkinter.Checkbutton(script_options_frame, variable=pouch_small, text="Small Pouch", font=break_font, background=frame_bg_color, command=lambda: set_option(script_name, field_name, pouch_small.get()))
             option_1.grid(row=1, column=1)
-            option_1 = tkinter.Radiobutton(script_options_frame, text="Medium Pouch", font=break_font, background=frame_bg_color)
+            option_1 = tkinter.Checkbutton(script_options_frame, variable=pouch_medium, text="Medium Pouch", font=break_font, background=frame_bg_color, command=lambda: set_option(script_name, field_name, pouch_medium.get()))
             option_1.grid(row=1, column=2)
-            option_1 = tkinter.Radiobutton(script_options_frame, text="Large Pouch", font=break_font, background=frame_bg_color)
+            option_1 = tkinter.Checkbutton(script_options_frame, variable=pouch_large, text="Large Pouch", font=break_font, background=frame_bg_color, command=lambda: set_option(script_name, field_name, pouch_large.get()))
             option_1.grid(row=1, column=3)
-            option_1 = tkinter.Radiobutton(script_options_frame, text="Giant Pouch", font=break_font, background=frame_bg_color)
+            option_1 = tkinter.Checkbutton(script_options_frame, variable=pouch_giant, text="Giant Pouch", font=break_font, background=frame_bg_color, command=lambda: set_option(script_name, field_name, pouch_giant.get()))
             option_1.grid(row=1, column=4)
+
         case "Poh_Larder":
             option_1 = tkinter.Checkbutton(script_options_frame, text="Wood", font=break_font, background=frame_bg_color)
             option_1.grid(row=1, column=1)
             option_1 = tkinter.Checkbutton(script_options_frame, text="Oak", font=break_font, background=frame_bg_color)
             option_1.grid(row=1, column=2)
-            option_1 = tkinter.Checkbutton(script_options_frame, text="Level-based", font=break_font, background=frame_bg_color)
-            option_1.grid(row=1, column=3)
-        case "Poh_Table":
-            option_1 = tkinter.Checkbutton(script_options_frame, text="Wood", font=break_font, background=frame_bg_color)
-            option_1.grid(row=1, column=1)
+
         case "Rogue_Cooker":
             script_name = 'Rogue_Cooker'
             field_name = 'Food Type'

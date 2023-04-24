@@ -1,7 +1,9 @@
 import threading
+import os
+import keyboard
 from Scripts.Skilling.Smithing.Edge_Gold import smith_gold_edge
 from Scripts.Skilling.Mining.Pisc_Iron_Miner import mine_pisc_iron
-from Scripts.Skilling.Agility.Gnome_Course import run_gnome_course
+from Scripts.Skilling.Agility.Gnome_Course_v3 import start_gnome_course
 from Scripts.Skilling.Fishing.Shrimp.Draynor_Shrimp import fish_draynor_shrimp
 from Scripts.Skilling.Fishing.Trout.Barb_Trout import fish_barb_trout
 from Scripts.Skilling.Fishing.Barbarian.Barbarian_Fishing import barbarian_fishing
@@ -62,14 +64,16 @@ def launch_script(script_name="pisc_iron"):
     global SHOULD_CONTINUE
     global CURR_SCRIPT_LOOP
 
+    keyboard.add_hotkey("~", lambda: os.kill(os.getpid(), 9))
+
     CURR_SCRIPT_LOOP = 1
     SHOULD_CONTINUE = True
 
     reopen_invent = True
     always_sleep = True
 
-    for thread in threading.enumerate():
-        print(f'Thread name: {thread.name}')
+    # for thread in threading.enumerate():
+    #     print(f'Thread name: {thread.name}')
 
     write_debug(f"Pre-launch checks for: {script_name}")
     # Check that we're not on dc screen (click continue if so)
@@ -123,7 +127,7 @@ def launch_script(script_name="pisc_iron"):
         ARDY_ROOFTOPS = 44
         GE_BOW_STRINGER = 45
 
-    all_scripts = [mine_pisc_iron, smith_gold_edge, run_gnome_course,
+    all_scripts = [mine_pisc_iron, smith_gold_edge, start_gnome_course,
                    fish_draynor_shrimp, fish_barb_trout, barbarian_fishing,
                    pickpocket_draynor_man, steal_ardy_cake, burn_logs_at_ge,
                    start_trawling, start_killing_cows, start_rogue_cooking,
@@ -152,8 +156,8 @@ def launch_script(script_name="pisc_iron"):
             antiban_downtime_sec = 6
         case "Gnome_Course":
             selected_script = ScriptEnum.GNOME_COURSE.value
-            antiban_likelihood = 10
-            antiban_downtime_sec = 6
+            antiban_likelihood = 5
+            antiban_downtime_sec = 2
         case "Draynor_Shrimp":
             selected_script = ScriptEnum.DRAYNOR_SHRIMP.value
             antiban_likelihood = 10
