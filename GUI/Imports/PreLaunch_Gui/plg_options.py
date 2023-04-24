@@ -89,12 +89,10 @@ def show_plg_options(main_plg_frame, font_styles, script_name):
             option_1.grid(row=1, column=1)
 
         case "Blast_Furnace":
-            option_1 = tkinter.Checkbutton(script_options_frame, text="Gold Bars", font=break_font, background=frame_bg_color)
+            option_1 = tkinter.Radiobutton(script_options_frame, text="Gold Bars", font=break_font, background=frame_bg_color)
             option_1.grid(row=1, column=1)
-            option_1 = tkinter.Checkbutton(script_options_frame, text="Addy Bars", font=break_font, background=frame_bg_color)
-            option_1.grid(row=1, column=1)
-            option_1 = tkinter.Checkbutton(script_options_frame, text="Runite Bars", font=break_font, background=frame_bg_color)
-            option_1.grid(row=1, column=1)
+            option_1 = tkinter.Radiobutton(script_options_frame, text="Runite Bars", font=break_font, background=frame_bg_color)
+            option_1.grid(row=1, column=2)
 
         case "Cwars_Lavas":
             script_name = 'Cwars_Lavas'

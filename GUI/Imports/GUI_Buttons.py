@@ -2,12 +2,12 @@ from Database.Script_Access import gnome_agility_script, seers_rooftops, canifis
     kourend_crab_killer_script, rogue_cooker_script, ge_glass_blower_script, dhide_bodies_script, poh_larders_script, \
     poh_tables_script, hosidius_plough_script, ge_sulphurous_fertilizer_script, tithe_farmer_script, \
     draynor_shrimp_script, barb_trout_script, barb_fishing_script, ge_dart_fletcher_script, ge_log_burner_script, \
-    unf_pots_script, crimson_swift_script, cerulean_twitches, desert_lizards_script, red_lizards_script, \
+    ge_unf_pots_script, crimson_swift_script, cerulean_twitches, desert_lizards_script, red_lizards_script, \
     black_lizards_script, red_chins_script, pisc_iron_script, motherlode_mine_script, gilded_altar_script, \
-    cwars_lavas_script, edge_gold_script, blast_furance_script, draynor_man_script, ardy_cake_script, \
+    cwars_lavas_script, edge_gold_script, blast_furnace_script, draynor_man_script, ardy_cake_script, \
     hosidius_fruit_script, ardy_knight_script, chop_fletcher_script, sw_teaks_script, cball_smithing_script, \
     ardy_knight_splasher_script, ge_finished_pots_script, ge_bow_stringer_script, ardy_rooftops_script, \
-    ge_superheat_gold_script
+    ge_superheat_gold_script, fishing_trawler_script, nmz_script
 from GUI.Imports.GUI_Frames import *
 from Scripts.Skilling.Mining.Pisc_Iron_Miner import *
 from GUI.Imports.PreLaunch_Gui.PreLaunch_Gui import show_plg
@@ -180,7 +180,7 @@ def get_all_btns(all_frames, all_images, root):
     firemaking_sub_btns = ge_log_burner_btn
 
     #     Herblore
-    unf_pots_btn = new_script_start_btn(herblore_frame, 'GE_Unf_Pots', unf_pots_script.btn_state)
+    unf_pots_btn = new_script_start_btn(herblore_frame, 'GE_Unf_Pots', ge_unf_pots_script.btn_state)
     finished_pots_btn = new_script_start_btn(herblore_frame, 'GE_Finished_Pots', ge_finished_pots_script.btn_state)
     herblore_sub_btns = unf_pots_btn, finished_pots_btn
 
@@ -213,9 +213,9 @@ def get_all_btns(all_frames, all_images, root):
 
     #     Smithing
     edge_gold_btn = new_script_start_btn(smithing_frame, "Edge_Gold", edge_gold_script.btn_state)
-    blast_furance_btn = new_script_start_btn(smithing_frame, "Blast_Furnace", blast_furance_script.btn_state)
+    blast_furnace_btn2 = new_script_start_btn(smithing_frame, "Blast_Furnace", blast_furnace_script.btn_state)
     ge_superheat_gold_btn2 = new_script_start_btn(smithing_frame, "GE_Superheat_Gold", ge_superheat_gold_script.btn_state)
-    smithing_sub_btns = edge_gold_btn, blast_furance_btn, ge_superheat_gold_btn2
+    smithing_sub_btns = edge_gold_btn, blast_furnace_btn2, ge_superheat_gold_btn2
 
     #     Thieving
     draynor_man_btn = new_script_start_btn(thieving_frame, 'Draynor_Man', draynor_man_script.btn_state)
@@ -230,21 +230,19 @@ def get_all_btns(all_frames, all_images, root):
     woodcutting_sub_btns = chop_fletcher_btn, sw_teaks_btn
 
     #     Minigames Buttons
-    fishing_trawler_btn = Button(minigames_frame, text="Fishing Trawler", image=trawler_img, bg='#545550', activebackground=BTN_ACTIVE_BG_COL, command=lambda: show_plg("Fishing_Trawler", root))
-    nmz_btn = Button(minigames_frame, text="NMZ", image=nmz_img, bg='#545550', activebackground=BTN_ACTIVE_BG_COL, command=lambda: show_plg("NMZ", root))
-    tithe_farmer_btn2 = Button(minigames_frame, text="Tithe_farmer", image=farming_img, bg='#545550', activebackground=BTN_ACTIVE_BG_COL, command=lambda: show_plg("Tithe_Farmer", root))
-    minigames_sub_btns = fishing_trawler_btn, nmz_btn, tithe_farmer_btn2
+    fishing_trawler_btn2 = new_script_start_btn(minigames_frame, "Fishing_Trawler", fishing_trawler_script.btn_state)
+    nmz_btn2 = new_script_start_btn(minigames_frame, "NMZ", nmz_script.btn_state)
+    tithe_farmer_btn2 = new_script_start_btn(minigames_frame, "Tithe_Farmer", tithe_farmer_script.btn_state)
+    minigames_sub_btns = fishing_trawler_btn2, nmz_btn2, tithe_farmer_btn2
+
 
     main_gui_btns = gold_btn, skill_btn, minigames_btn, settings_btn, info_btn, bug_report_btn
 
     # (Main) Gold_gui_btns
-    cball_btn = Button(money_making_frame, text="Cballs", image=trawler_img, bg='#545550', activebackground=BTN_ACTIVE_BG_COL, command=lambda: show_plg("Fishing_Trawler", root))
-    unf_pots_btn = Button(money_making_frame, text="Unf Pots", image=unf_pot_img, bg='#545550', activebackground=BTN_ACTIVE_BG_COL, command=lambda: show_plg("Unf_Pots", root))
-    blast_furance_btn2 = Button(money_making_frame, text="Blast Furnace", image=nmz_img, bg='#545550', activebackground=BTN_ACTIVE_BG_COL, command=lambda: show_plg("Blast_Furnace", root))
-    red_chins_btn2 = Button(money_making_frame, text="Blast Furnace", image=nmz_img, bg='#545550', activebackground=BTN_ACTIVE_BG_COL, command=lambda: show_plg("Blast_Furnace", root))
-    # cball_btn = new_script_start_btn(money_making_frame, 'Cball_Smither', cball_smithing_script.btn_state)
-    # unf_pots_btn = new_script_start_btn(money_making_frame, 'Unf_Pots', unf_pots_script.btn_state)
-    gold_gui_btns = cball_btn, unf_pots_btn, blast_furance_btn2, red_chins_btn2
+    ge_unf_pots_btn = new_script_start_btn(money_making_frame, "GE_Unf_Pots", ge_unf_pots_script.btn_state)
+    blast_furnace_btn2 = new_script_start_btn(money_making_frame, "Blast_Furnace", blast_furnace_script.btn_state)
+    red_chins_btn2 = new_script_start_btn(money_making_frame, "Red_Chins", blast_furnace_script.btn_state)
+    gold_gui_btns = ge_unf_pots_btn, blast_furnace_btn2, red_chins_btn2
 
     skill_gui_btns = attack_btn, hp_btn, minining_btn, \
                      strength_btn, agility_btn, smithing_btn, \
