@@ -491,6 +491,6 @@ def close_chatbox():
 def handle_level_dialogue():
     if does_img_exist(img_name="level_up", category="General"):
         pag.press('space')
-        API.AntiBan.sleep_between(1.1, 2.3)
+        API.AntiBan.sleep_between(1.4, 1.6)
         pag.press('space')
     return

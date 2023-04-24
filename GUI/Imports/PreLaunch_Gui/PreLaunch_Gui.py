@@ -1,5 +1,9 @@
 import os
+import time
+import tkinter
 from tkinter import Toplevel, LabelFrame, font, Entry, Label, StringVar, Tk, Button
+
+from GUI.Imports.GUI_Frames import BTN_BG_COL, BTN_ACTIVE_BG_COL
 from GUI.Imports.PreLaunch_Gui.plg_images import get_plg_gui_images
 from PIL import ImageTk, Image
 from GUI.Imports.Script_Launch import launch_script
@@ -102,5 +106,29 @@ def handle_script_launched(script_name, plg_gui, root):
     print(f'Should now display script results GUI')
     return
 
+
+def show_exit_gui():
+    pwd = os.getcwd()
+    exit_gui = Toplevel(pady=50, padx=50)
+    exit_gui.title('Exit')
+    exit_gui.iconbitmap(f'{pwd}\Icon.ico')
+    exit_gui.configure(bg='#969488')
+
+    break_btn_font = tkinter.font.Font(family='Helvetica', size=11, weight='bold')
+
+    exit_frame = LabelFrame(exit_gui, text="⛔", bg='#969488', pady=40, padx=40)
+
+    test_btn = Button(exit_frame, fg='white', padx=10, pady=5, text="Set Schedule", font=break_btn_font, bg=BTN_BG_COL,
+                      activebackground=BTN_ACTIVE_BG_COL, command=lambda: exit_script())
+
+    test_btn.grid(row=2, column=1, pady=20, padx=20, columnspan=4)
+
+
+    return
+
+
+def exit_script():
+    print(f'test')
+    return
 
 

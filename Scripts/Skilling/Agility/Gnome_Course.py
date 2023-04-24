@@ -13,7 +13,7 @@ second_loop_start_spot_xy = 724, 735
 i = 0
 
 
-def run_gnome_course(_):
+def run_gnome_course(curr_loop):
     global first_loop
     global i
 
@@ -22,11 +22,8 @@ def run_gnome_course(_):
     # Turn - North
     # Camera - Up
 
-    if first_loop:
-        zoom_camera(notches=2)
-        turn_compass(direction="north")
-        pitch_camera(direction="up")
-        first_loop = False
+    if curr_loop == 1:
+        setup_interface("north", 2, "up")
         if is_pipe_start():
             i = 1
             print(f'🚽 PIPE START i = {i}')
