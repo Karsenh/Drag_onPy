@@ -44,8 +44,10 @@ def show_plg_options(main_plg_frame, font_styles, script_name):
     script_options_frame = LabelFrame(main_plg_frame, text=f"Additional Options - ({script_name})", bg=frame_bg_color, pady=40, padx=40, width=250)
 
     # Determines what option buttons to show at the bottom of the Pre-Launch GUI based on the script
+    agility_scripts = ["Gnome_Course", "Canafis_Rooftops", "Seers_Rooftops", "Ardy_Rooftops"]
+
     match script_name:
-        case "Gnome_Course", "Canafis_Rooftops", "Seers_Rooftops", "Ardy_Rooftops", :
+        case script_name if script_name in agility_scripts:
             script_name = 'Gnome_Course'
             field_name = 'High Alch'
 
