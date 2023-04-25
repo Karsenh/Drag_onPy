@@ -172,7 +172,7 @@ def get_all_btns(all_frames, all_images, root):
 
     #     Fletching
     ge_dart_fletcher_btn = new_script_start_btn(fletching_frame, 'GE_Dart_Fletcher', ge_dart_fletcher_script.btn_state)
-    ge_bow_stringer_btn = new_script_start_btn(fletching_frame, 'GE_Bow_Fletcher', ge_bow_stringer_script.btn_state)
+    ge_bow_stringer_btn = new_script_start_btn(fletching_frame, 'GE_Bow_Stringer', ge_bow_stringer_script.btn_state)
     fletching_sub_btns = ge_dart_fletcher_btn, ge_bow_stringer_btn
 
     #     Firemaking
