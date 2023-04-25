@@ -88,7 +88,7 @@ def blow_glass():
     # Check get crafting level to determine which number to enter
     crafting_lvl = get_skill_level("crafting")
 
-    if 1 < crafting_lvl <= 3:
+    if 1 <= crafting_lvl <= 3:
         pag.press('1')
     if 3 < crafting_lvl <= 11:
         pag.press('2')
