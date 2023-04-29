@@ -225,7 +225,7 @@ def get_all_btns(all_frames, all_images, root):
     thieving_sub_btns = draynor_man_btn, ardy_cake_btn, hosidius_fruit_btn, ardy_knights_btn
 
     #     Woodcutting
-    chop_fletcher_btn = new_script_start_btn(woodcutting_frame, 'Chop_Fletcher', chop_fletcher_script.btn_state)
+    chop_fletcher_btn = new_script_start_btn(woodcutting_frame, 'Lummy_Chop_And_Fletcher', chop_fletcher_script.btn_state)
     sw_teaks_btn = new_script_start_btn(woodcutting_frame, 'SW_Teaks', sw_teaks_script.btn_state)
     woodcutting_sub_btns = chop_fletcher_btn, sw_teaks_btn
 

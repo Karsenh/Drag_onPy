@@ -3,6 +3,7 @@ import time
 import tkinter
 from tkinter import Toplevel, LabelFrame, font, Entry, Label, StringVar, Tk, Button
 
+from API.Setup import get_bluestacks_region
 from GUI.Imports.GUI_Frames import BTN_BG_COL, BTN_ACTIVE_BG_COL
 from GUI.Imports.PreLaunch_Gui.plg_images import get_plg_gui_images
 from PIL import ImageTk, Image
@@ -19,8 +20,8 @@ btn_bg_color = '#645747'
 
 def show_plg(script_name, root):
 
-    auth_top_height = 1100
-    auth_top_width = 650
+    plg_top_height = 1100
+    plg_top_width = 650
 
     break_font = font.Font(family='Helvetica', size=11, weight='normal')
     break_btn_font = font.Font(family='Helvetica', size=11, weight='bold', underline=True)
@@ -39,7 +40,14 @@ def show_plg(script_name, root):
         plg_gui.iconbitmap(f'{pwd}\Icon.ico')
         plg_gui.configure(bg='#969488')
         plg_gui.protocol("WM_DELETE_WINDOW", plg_gui.destroy)
-        plg_gui.geometry(f"{auth_top_width}x{auth_top_height}")
+        # plg_gui.geometry(f"{auth_top_width}x{auth_top_height}")
+
+        x1, y1, x2, y2 = get_bluestacks_region()
+
+        app_x = x1 - plg_top_width
+        app_y = y1
+
+        plg_gui.geometry(f"{plg_top_width}x{plg_top_height}+{app_x}+{app_y}")
 
         main_plg_frame = LabelFrame(plg_gui, text="Settings & Info", bg=frame_bg_color, pady=20, padx=20)
         main_plg_frame.place(anchor='center', relx=0.5, rely=.5)

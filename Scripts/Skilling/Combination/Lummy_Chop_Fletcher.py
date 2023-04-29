@@ -5,36 +5,55 @@ from API.Imaging.OCR.Skill_Levels import ocr_skill_levels
 from API.Imaging.Image import does_img_exist, wait_for_img
 from API.Interface.General import setup_interface, is_otd_enabled, get_xy_for_invent_slot, drop_inventory, is_tab_open
 from API.Mouse import mouse_click
+from GUI.Imports.PreLaunch_Gui.Plg_Script_Options import Global_Script_Options
+from GUI.Imports.PreLaunch_Gui.plg_options import get_script_options
 from GUI.Imports.Skill_Level_Input.Skill_Level_Input import get_skill_level
 
-curr_tree_num = 1
+CURR_TREE_NUM = 1
+FLETCH_ITEMS = ['arrow_shafts', 'javeline_shafts', 'shortbow', 'longbow', 'cbow_stock']
+ITEM_TO_FLETCH = None
+
+
+def set_fletch_item():
+    global ITEM_TO_FLETCH
+
+    ITEM_TO_FLETCH = get_script_options('Fletch Item')
+    return
 
 
 def start_chop_fletching(curr_loop):
-    global curr_tree_num
+    global CURR_TREE_NUM
     print(f'Curr_loop: {curr_loop}')
 
     if curr_loop == 1:
-        ocr_skill_levels()
+        # ocr_skill_levels()
+        set_fletch_item()
+        reset_globals()
         setup_interface("west", 2, "up")
         is_otd_enabled(should_enable=False)
         API.AntiBan.sleep_between(1.1, 2.3)
 
     chop_and_wait_for_exp()
 
-    curr_tree_num += 1
+    CURR_TREE_NUM += 1
 
-    if curr_tree_num > 11:
+    if CURR_TREE_NUM > 11:
         handle_level_dialogue()
         fletch_logs()
-        curr_tree_num = 1
+        CURR_TREE_NUM = 1
 
     return True
 
 
+def reset_globals():
+    global CURR_TREE_NUM
+    CURR_TREE_NUM = 1
+    return
+
+
 def chop_and_wait_for_exp():
-    if wait_for_img(img_name=f"t{curr_tree_num}", script_name="Lummy_Chop_Fletch", threshold=0.9, max_wait_sec=4):
-        does_img_exist(img_name=f"t{curr_tree_num}", script_name="Lummy_Chop_Fletch", should_click=True, x_offset=23, y_offset=20, threshold=0.9)
+    if wait_for_img(img_name=f"t{CURR_TREE_NUM}", script_name="Lummy_Chop_Fletch", threshold=0.9, max_wait_sec=4):
+        does_img_exist(img_name=f"t{CURR_TREE_NUM}", script_name="Lummy_Chop_Fletch", should_click=True, x_offset=23, y_offset=20, threshold=0.9)
 
     if not wait_for_img(img_name="wc_exp", script_name="Lummy_Chop_Fletch", max_wait_sec=6, threshold=0.88):
         print(f"Havent't chopped the logs yet?")
@@ -63,21 +82,17 @@ def fletch_logs(should_drop_recursive=True):
 
     API.AntiBan.sleep_between(1.2, 1.6)
 
-    lvl_val = get_skill_level("fletching")
-    if lvl_val == "n/a":
-        lvl_val = 1
-    else:
-        lvl_val = int(lvl_val)
-
-    curr_fletch_lvl = lvl_val
-
-    if curr_fletch_lvl <= 4:
+    if ITEM_TO_FLETCH == FLETCH_ITEMS[0]:
         pag.press("1")
         should_drop_fletched_items = False
-    if 4 < curr_fletch_lvl <= 9:
+    if ITEM_TO_FLETCH == FLETCH_ITEMS[1]:
+        pag.press("2")
+    if ITEM_TO_FLETCH == FLETCH_ITEMS[2]:
         pag.press("3")
-    elif curr_fletch_lvl > 9:
+    if ITEM_TO_FLETCH == FLETCH_ITEMS[3]:
         pag.press("4")
+    else:
+        pag.press("5")
 
     while wait_for_img(img_name="fletching_exp", script_name="Lummy_Chop_Fletch", max_wait_sec=3, threshold=0.8):
         print(f'Still fletching...')

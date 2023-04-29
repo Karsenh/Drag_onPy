@@ -19,14 +19,7 @@ import signal
 import threading
 
 
-def set_should_cont(value):
-    global SHOULD_CONTINUE
-    SHOULD_CONTINUE = value
-    return
-
-
 def __main__() -> int:
-
 
     try:
         get_bluestacks_xy()

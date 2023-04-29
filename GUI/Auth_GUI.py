@@ -3,6 +3,7 @@ import os
 import re
 
 from API.Debug import write_debug
+from API.Setup import get_bluestacks_region
 from Database.Script_Access import set_script_access
 from GUI.Imports.GUI_Frames import BTN_BG_COL, BTN_ACTIVE_BG_COL, FRAME_BG_COL, LABEL_FRAME_BG_COL
 from Database.Connection import get_user
@@ -20,7 +21,14 @@ def show_auth_gui():
     auth_top.title('Drag_onPy - Login')
     auth_top.iconbitmap(f'{pwd}\Icon.ico')
     auth_top.configure(bg='#676157')
-    auth_top.geometry(f"{auth_top_width}x{auth_top_height}")
+    # auth_top.geometry(f"{auth_top_width}x{auth_top_height}")
+
+    x1, y1, x2, y2 = get_bluestacks_region()
+
+    app_x = x1 - auth_top_width
+    app_y = y1
+
+    auth_top.geometry(f"{auth_top_width}x{auth_top_height}+{app_x}+{app_y}")
 
     # Auth Frame
     form_frame = Frame(auth_top, bg=LABEL_FRAME_BG_COL)

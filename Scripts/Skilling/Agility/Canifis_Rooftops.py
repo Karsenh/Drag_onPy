@@ -4,6 +4,8 @@ from API.Interface.General import setup_interface, is_tab_open
 from API.Mouse import mouse_click
 import pyautogui as pag
 
+from GUI.Imports.PreLaunch_Gui.Plg_Script_Options import Global_Script_Options
+
 
 def start_canifis_rooftops(curr_loop):
     if curr_loop != 1:
@@ -119,5 +121,32 @@ def handle_level_dialogue():
         API.AntiBan.sleep_between(1.1, 2.3)
         pag.press('space')
         API.AntiBan.sleep_between(0.8, 1.7)
+
+    return
+
+
+def set_script_options():
+    global SHOULD_ALCH
+    global ALCH_ITEM
+
+    for option in Global_Script_Options.options_arr:
+        if option.name == 'High Alch':
+            print(f'Found Food Type option - Setting to: {option.value}')
+            SHOULD_ALCH = True
+            match option.value:
+                case "none":
+                    print(f'Not Alching')
+                    ALCH_ITEM = None
+                    SHOULD_ALCH = False
+                case "magic_long_noted":
+                    print(f'Alching Magic Long notes')
+                    ALCH_ITEM = ITEMS_TO_ALCH[1]
+                case "green_dhide_bodies":
+                    print(f'Alching Green Dhide Bodies notes')
+                    ALCH_ITEM = ITEMS_TO_ALCH[0]
+                case _:
+                    print(f'Default case hit')
+
+            SHOULD_ALCH = option.value
 
     return

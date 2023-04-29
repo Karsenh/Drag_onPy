@@ -22,12 +22,13 @@ def show_plg_options(main_plg_frame, font_styles, script_name):
 
         # TODO - Using script_name, find the corresponding plg_script_options obj and set the option_string
 
-        Global_Script_Options.SCRIPT_NAME = script_name
+        Global_Script_Options.script_name = script_name
         # Add curr_option field and value (type ScriptOption) to the Global_Script_Options options_arr property
 
         for option in Global_Script_Options.options_arr:
             if option.name == option_field:
                 print(f'Found this option field ({option.name}) - updating value ({new_option_value}) instead of appending this field')
+                option.value = new_option_value
                 return
             else:
                 print(f'Failed to find option.name: {option.name}')
@@ -37,7 +38,7 @@ def show_plg_options(main_plg_frame, font_styles, script_name):
         Global_Script_Options.options_arr.append(curr_option_val)
 
         for option in Global_Script_Options.options_arr:
-            print(f'Script = {Global_Script_Options.SCRIPT_NAME} Option: {option}')
+            print(f'Script = {Global_Script_Options.script_name} Option: {option}')
 
         return
 
@@ -94,29 +95,35 @@ def show_plg_options(main_plg_frame, font_styles, script_name):
             option_1 = tkinter.Radiobutton(script_options_frame, text="Runite Bars", font=break_font, background=frame_bg_color)
             option_1.grid(row=1, column=2)
 
-        case "Cwars_Lavas":
-            script_name = 'Cwars_Lavas'
-            field_name = 'Pouches'
+        case "Poh_Larders":
+            script_name = 'Poh_Larders'
+            field_name = 'Plank Type'
 
-            pouch_small = tkinter.BooleanVar(None, True, "Small Pouch")
-            pouch_medium = tkinter.BooleanVar(None, True, "Medium Pouch")
-            pouch_large = tkinter.BooleanVar(None, True, "Large Pouch")
-            pouch_giant = tkinter.BooleanVar(None, False, "Giant Pouch")
+            plank_type_var = tkinter.StringVar(None, "Wood")
+            set_option(script_name, field_name, 'Wood')
 
-            option_1 = tkinter.Checkbutton(script_options_frame, variable=pouch_small, text="Small Pouch", font=break_font, background=frame_bg_color, command=lambda: set_option(script_name, field_name, pouch_small.get()))
+            option_1 = tkinter.Radiobutton(script_options_frame, tristatevalue=1, value='Wood', variable=plank_type_var, text="Wood", font=break_font, background=frame_bg_color, command=lambda: set_option(script_name, field_name, plank_type_var.get()))
             option_1.grid(row=1, column=1)
-            option_1 = tkinter.Checkbutton(script_options_frame, variable=pouch_medium, text="Medium Pouch", font=break_font, background=frame_bg_color, command=lambda: set_option(script_name, field_name, pouch_medium.get()))
+            option_1 = tkinter.Radiobutton(script_options_frame, tristatevalue=0, value='Oak', variable=plank_type_var, text="Oak", font=break_font, background=frame_bg_color, command=lambda: set_option(script_name, field_name, plank_type_var.get()))
             option_1.grid(row=1, column=2)
-            option_1 = tkinter.Checkbutton(script_options_frame, variable=pouch_large, text="Large Pouch", font=break_font, background=frame_bg_color, command=lambda: set_option(script_name, field_name, pouch_large.get()))
+
+        case "Lummy_Chop_And_Fletcher":
+            script_name = 'Lummy_Chop_And_Fletcher'
+            field_name = 'Fletch Item'
+
+            fletch_item_var = tkinter.StringVar(None, "Arrows")
+            set_option(script_name, field_name, 'Arrows')
+
+            option_1 = tkinter.Radiobutton(script_options_frame, text="Arrows Shafts", value='Arrows', variable=fletch_item_var, tristatevalue=1, font=break_font, background=frame_bg_color, command=lambda: set_option(script_name, field_name, fletch_item_var.get()))
+            option_1.grid(row=1, column=1)
+            option_1 = tkinter.Radiobutton(script_options_frame, text="Javeline Shafts", value='Javelines', variable=fletch_item_var, tristatevalue=0, font=break_font, background=frame_bg_color, command=lambda: set_option(script_name, field_name, fletch_item_var.get()))
+            option_1.grid(row=1, column=2)
+            option_1 = tkinter.Radiobutton(script_options_frame, text="Shortbows", value='Shortbows', variable=fletch_item_var, tristatevalue=0, font=break_font, background=frame_bg_color, command=lambda: set_option(script_name, field_name, fletch_item_var.get()))
             option_1.grid(row=1, column=3)
-            option_1 = tkinter.Checkbutton(script_options_frame, variable=pouch_giant, text="Giant Pouch", font=break_font, background=frame_bg_color, command=lambda: set_option(script_name, field_name, pouch_giant.get()))
+            option_1 = tkinter.Radiobutton(script_options_frame, text="Longbows", value='Longbows', variable=fletch_item_var, tristatevalue=0, font=break_font, background=frame_bg_color, command=lambda: set_option(script_name, field_name, fletch_item_var.get()))
             option_1.grid(row=1, column=4)
-
-        case "Poh_Larder":
-            option_1 = tkinter.Checkbutton(script_options_frame, text="Wood", font=break_font, background=frame_bg_color)
-            option_1.grid(row=1, column=1)
-            option_1 = tkinter.Checkbutton(script_options_frame, text="Oak", font=break_font, background=frame_bg_color)
-            option_1.grid(row=1, column=2)
+            option_1 = tkinter.Radiobutton(script_options_frame, text="C'bow Stock", value='Cbow', variable=fletch_item_var, tristatevalue=0, font=break_font, background=frame_bg_color, command=lambda: set_option(script_name, field_name, fletch_item_var.get()))
+            option_1.grid(row=2, column=2)
 
         case "Ardy_Knights":
             option_1 = tkinter.Checkbutton(script_options_frame, text="Wine", font=break_font, background=frame_bg_color)
@@ -170,3 +177,13 @@ def show_plg_options(main_plg_frame, font_styles, script_name):
     script_options_frame.grid(row=4, column=1)
 
     return
+
+
+def get_script_options(field_name):
+    for option in Global_Script_Options.options_arr:
+        print(f'get_script_options: (field_name: {field_name}) option_name: {option.name} & value: {option.value}')
+        if option.name == field_name:
+            print(f'Found Item option for field_name {field_name} | option_value: {option.value}')
+            return option.value
+
+    return False
