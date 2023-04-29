@@ -23,6 +23,7 @@ def start_worshipping_bones(curr_loop):
             return False
 
         if not worship_bones():
+            print(f'worship_bones is false for some reason - exiting script.')
             return False
 
         if not move_back_to_phials():
@@ -220,12 +221,14 @@ def is_worshipping():
         # Check if we gained a level
         if does_img_exist(img_name="level_up", category="General"):
             if not does_img_exist(img_name='inventory_dbone', script_name=SCRIPT_NAME, threshold=0.85):
+                print(f'Found Level up but looks like we are out of bones')
                 return False
             dbone_xy = get_existing_img_xy()
             mouse_long_click(dbone_xy)
             wait_for_img(img_name='use_dbone', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True)
             return wait_for_img(img_name='gilded_altar_from_altar', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True)
         else:
+            print(f'Looks like we are done worshipping... ')
             return False
     else:
         return True
