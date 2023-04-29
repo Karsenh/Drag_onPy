@@ -226,8 +226,7 @@ def is_worshipping():
             wait_for_img(img_name='use_dbone', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True)
             return wait_for_img(img_name='gilded_altar_from_altar', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True)
 
-        return False
-    return True
+    return False
 
 
 def click_portal_to_leave():
