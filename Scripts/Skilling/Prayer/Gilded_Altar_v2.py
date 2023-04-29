@@ -99,7 +99,11 @@ def worship_bones():
 
     API.AntiBan.sleep_between(3.0, 3.1)
 
-    while is_worshipping():
+    still_worshipping = True
+    while still_worshipping:
+        if not is_worshipping():
+            still_worshipping = False
+
         print('Saw Prayer Exp - Still Worshipping')
 
     return True
