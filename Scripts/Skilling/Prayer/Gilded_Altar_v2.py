@@ -244,7 +244,10 @@ def is_worshipping():
 
 
 def click_portal_to_leave():
-    return does_img_exist(img_name='portal_out', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True)
+    portal_xy = 770, 800
+    mouse_click(portal_xy)
+    return True
+    # return does_img_exist(img_name='portal_out', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True)
 
 
 def click_back_to_phials():
