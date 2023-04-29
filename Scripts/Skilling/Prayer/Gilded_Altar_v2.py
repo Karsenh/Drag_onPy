@@ -104,7 +104,7 @@ def worship_bones():
     while still_worshipping:
         if not is_worshipping():
             print(f'popped out of is_worshipping loop bc no longer worshipping bones')
-            return True
+            break
         print('Saw Prayer Exp - Still Worshipping')
 
     return True
@@ -112,9 +112,11 @@ def worship_bones():
 
 def move_back_to_phials():
     if not click_portal_to_leave():
+        print(f'Failed to click_portal_to_leave()')
         return False
 
     if not is_outside_portal():
+        print(f'Failed to find is_outside_portal()')
         return False
 
     click_back_to_phials()
@@ -225,6 +227,7 @@ def is_worshipping():
     if not wait_for_img(img_name='Prayer', category='Exp_Drops', threshold=0.9, max_wait_sec=4):
         # Check if we gained a level
         print(f'Should have a level up check next...')
+
         if does_img_exist(img_name="level_up", category="General"):
             if not does_img_exist(img_name='inventory_dbone', script_name=SCRIPT_NAME, threshold=0.85):
                 print(f'Found Level up but looks like we are out of bones')

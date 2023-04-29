@@ -402,6 +402,7 @@ def launch_script(script_name="pisc_iron"):
         write_debug(f'🏳 NO Break Timer Set - Entering loop WITHOUT break_handler()')
         while SHOULD_CONTINUE:
             if not all_scripts[selected_script](CURR_SCRIPT_LOOP):
+                write_debug(f'❌ Script returned false - checking if we logged out...')
                 if not handle_auth_screens():
                     SHOULD_CONTINUE = False
 
