@@ -18,7 +18,7 @@ STAFF_EQUIPPED = False
 RUNE_POUCH_INVENT = False
 EARTH_RUNES_INVENT = False
 
-POUCHES_TO_USE_ARR = ['Giant', 'Small', 'Medium', 'Large']
+POUCHES_TO_USE_ARR = ['Small', 'Medium', 'Large', 'Giant']
 HAS_ESS_POUCH_ARR = []
 DEGRADED_POUCH_EXISTS = False
 
