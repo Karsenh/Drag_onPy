@@ -1,9 +1,10 @@
 import API.AntiBan
-from API.Interface.General import setup_interface, is_tab_open, is_run_gt, is_run_on
+from API.Interface.General import setup_interface, is_tab_open, is_run_gt, is_run_on, relog
 from API.Interface.Bank import is_bank_open, is_bank_tab_open, is_withdraw_qty, close_bank, deposit_all
 from API.Imaging.Image import wait_for_img, does_img_exist, get_existing_img_xy
 from API.Mouse import mouse_click, mouse_long_click
 from API.Debug import write_debug
+from API.Time import get_curr_runtime, reset_curr_runtime
 from GUI.Imports.PreLaunch_Gui.plg_options import get_script_options
 
 
@@ -76,6 +77,14 @@ def start_crafting_lavas(curr_loop):
         withdraw_ess()
         fill_pouches()
         close_bank()
+
+        curr_rt = get_curr_runtime()
+
+        if curr_rt.total_seconds() > 19800:
+            relog()
+            setup_interface("north", 1, "up")
+            reset_curr_runtime()
+
         teleport_to_duel_arena()
         if not move_to_ruins():
             return False
