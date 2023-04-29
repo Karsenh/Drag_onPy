@@ -62,12 +62,27 @@ SHOULD_CONTINUE = True
 CURR_SCRIPT_LOOP = 1
 
 
+def stop_script():
+    global SHOULD_CONTINUE
+    SHOULD_CONTINUE = False
+    write_debug(f'⛔ set_should_continue - new_val: {False}')
+    set_curr_iteration(1)
+    return
+
+
+def set_curr_iteration(new_val):
+    global CURR_SCRIPT_LOOP
+    CURR_SCRIPT_LOOP = new_val
+    return
+
+
 # script_name passed into individual buttons in GUI corresponding to individual scripts
 def launch_script(script_name="pisc_iron"):
     global SHOULD_CONTINUE
     global CURR_SCRIPT_LOOP
 
-    keyboard.add_hotkey("~", lambda: os.kill(os.getpid(), 9))
+    keyboard.add_hotkey("End", lambda: os.kill(os.getpid(), 9))
+    keyboard.add_hotkey("~", lambda: stop_script())
 
     CURR_SCRIPT_LOOP = 1
     SHOULD_CONTINUE = True
@@ -400,13 +415,4 @@ def launch_script(script_name="pisc_iron"):
     return
 
 
-def set_curr_iteration(new_val):
-    global CURR_SCRIPT_LOOP
-    CURR_SCRIPT_LOOP = new_val
-    return
 
-
-def set_should_cont(value):
-    global SHOULD_CONTINUE
-    SHOULD_CONTINUE = value
-    return

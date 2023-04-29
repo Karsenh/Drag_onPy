@@ -10,6 +10,7 @@ from API.Imaging.Image import does_img_exist, wait_for_img
 from API.Debug import write_debug
 from API.Time import get_curr_runtime, reset_curr_runtime
 from GUI.Imports.PreLaunch_Gui.Plg_Script_Options import Global_Script_Options
+from GUI.Imports.PreLaunch_Gui.plg_options import get_script_options
 
 BANK_TAB = 1
 FOOD_TO_COOK = None
@@ -60,10 +61,12 @@ def start_rogue_cooking(curr_loop):
 def set_food_to_cook():
     global FOOD_TO_COOK
 
-    for option in Global_Script_Options.options_arr:
-        if option.name == 'Food Type':
-            print(f'Found Food Type option - Setting to: {option.value}')
-            FOOD_TO_COOK = option.value
+    FOOD_TO_COOK = get_script_options('Food Type')
+
+    # for option in Global_Script_Options.options_arr:
+    #     if option.name == 'Food Type':
+    #         print(f'Found Food Type option - Setting to: {option.value}')
+    #         FOOD_TO_COOK = option.value
 
     return
 

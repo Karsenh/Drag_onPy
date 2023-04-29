@@ -3,6 +3,7 @@ from API.Imaging.Image import does_img_exist, wait_for_img, get_existing_img_xy
 from API.Interface.General import setup_interface, is_tab_open
 from API.Mouse import mouse_long_click, mouse_click, mouse_move
 from GUI.Imports.Skill_Level_Input.Skill_Level_Input import get_skill_level
+from GUI.Imports.PreLaunch_Gui.plg_options import get_script_options
 
 
 SCRIPT_NAME = "Con_Larders"
@@ -33,7 +34,8 @@ def start_constructing_larders(curr_loop):
     else:
         print(f'This is the first loop')
         setup_interface("north", 4, "up")
-        set_plank_type()
+        # set_plank_type()
+
         if not unnote_planks():
             print(f"⛔ We must be out of planks")
             return False
@@ -55,22 +57,22 @@ def set_plank_type():
 
     plank_options = ["Regular", "Oak"]
 
-    if AUTO_DETECT_PLANKS:
-        if does_img_exist(img_name="Noted_Inventory_Oak_Planks", script_name="Con_Larders", threshold=0.95, should_click=True):
-            PLANK_TYPE = "Oak"
+    PLANK_TYPE = get_script_options('Plank Type')
 
-    else:
-        con_level = get_skill_level("construction")
-        print(f'Construction level: {con_level}')
-        if con_level > 32:
-            PLANK_TYPE = "Oak"
+    # if AUTO_DETECT_PLANKS:
+    #     if does_img_exist(img_name="Noted_Inventory_Oak_Planks", script_name="Con_Larders", threshold=0.95, should_click=True):
+    #         PLANK_TYPE = "Oak"
+    #
+    # else:
+    #     con_level = get_skill_level("construction")
+    #     print(f'Construction level: {con_level}')
+    #     if con_level > 32:
+    #         PLANK_TYPE = "Oak"
 
     print(f'PLANK TYPE SET = {PLANK_TYPE}')
     return True
 
-
-
-    get_skill_level()
+    # get_skill_level()
     return
 
 

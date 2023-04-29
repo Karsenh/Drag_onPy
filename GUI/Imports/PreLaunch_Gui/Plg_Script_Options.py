@@ -3,7 +3,7 @@
 class PlgScriptOptions:
     def __init__ (self, script_name, options_arr):
         self.script_name = script_name
-        self.options_arr = options_arr
+        self.options_arr = options_arr  # array of ScripOptions
 
 
 class ScriptOption:

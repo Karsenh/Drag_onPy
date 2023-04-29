@@ -4,6 +4,8 @@ from API.Interface.Bank import is_bank_open, is_bank_tab_open, is_withdraw_qty, 
 from API.Imaging.Image import wait_for_img, does_img_exist, get_existing_img_xy
 from API.Mouse import mouse_click, mouse_long_click
 from API.Debug import write_debug
+from GUI.Imports.PreLaunch_Gui.plg_options import get_script_options
+
 
 USE_STAMS = True
 NEEDS_STAM = False
@@ -16,7 +18,7 @@ STAFF_EQUIPPED = False
 RUNE_POUCH_INVENT = False
 EARTH_RUNES_INVENT = False
 
-POUCHES_TO_USE_ARR = ["Small", "Medium", "Large", "Giant"]
+POUCHES_TO_USE_ARR = ['Giant', 'Small', 'Medium', 'Large']
 HAS_ESS_POUCH_ARR = []
 DEGRADED_POUCH_EXISTS = False
 
@@ -90,11 +92,25 @@ def start_crafting_lavas(curr_loop):
         # API.AntiBan.sleep_between(0.5, 0.6)
     else:
         print(f'This is the first loop - setting up interface etc.')
+        # set_pouches_to_use()
         setup_interface("north", 1, "up")
         set_inventory_items(curr_loop)
         set_equipped_items(curr_loop)
 
     return True
+
+
+# def set_pouches_to_use():
+#     global POUCHES_TO_USE_ARR
+#     potential_pouches = ['small pouch', 'medium pouch', 'large pouch', 'giant pouch']
+#
+#     for pouch in potential_pouches:
+#         if get_script_options(pouch):
+#             POUCHES_TO_USE_ARR.append(pouch.split('_')[0])
+#
+#     print(f'POUCHES_TO_USE_ARR: {POUCHES_TO_USE_ARR}')
+#
+#     return
 
 
 def optimal_bank_open():

@@ -194,15 +194,18 @@ def show_settings_frame():
     # sep.grid(row=6, column=1, columnspan=4)
 
     db_frame_2 = LabelFrame(settings_gui, text="🐛 Debugging", bg=FRAME_BG_COL, pady=40, padx=40)
-
     # Debug checkbox variable
     is_debug = tkinter.IntVar()
-
     is_debug_cb = tkinter.Checkbutton(db_frame_2, text='Enable DEBUG', bg=FRAME_BG_COL, variable=is_debug, offvalue=False, onvalue=True, command=lambda: set_is_debug(is_debug))
     is_debug_cb.grid(row=1, column=1)
-
     # Debug Frame
     db_frame_2.grid(row=2, column=1)
+
+    global_var_frame = LabelFrame(settings_gui, text="🌏 Variables", bg=FRAME_BG_COL, pady=40, padx=40)
+    bank_tab_num_var = tkinter.IntVar()
+    bank_tab_num = tkinter.Entry(global_var_frame, text='Enable DEBUG', bg=FRAME_BG_COL, variable=bank_tab_num_var, command=lambda: set_bank_tab_num(bank_tab_num_var))
+    bank_tab_num.grid(row=1, column=1)
+    global_var_frame.grid(row=3, column=1)
 
     return
 
@@ -751,4 +754,9 @@ def add_script_btn(skill_frame, side_img, start_btn, row_num):
     # else:
     btn_label.grid(row=row_num, column=1)
     start_btn.grid(row=row_num, column=2, columnspan=2, pady=5, padx=10)
+    return
+
+
+def set_bank_tab_num(tab_num):
+    print(f'Setting 🌏 Bank Tab Num: {tab_num}')
     return

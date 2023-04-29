@@ -20,7 +20,6 @@ def smith_gold_edge(curr_loop):
 
     exit_prog = False
     check_for_gauntlets = True
-    keyboard.add_hotkey('esc', lambda: quit_script())
 
     # normalize interface
     # Start in front of NW bank booth in Edge bank
