@@ -52,7 +52,7 @@ def unnote_bones():
     # if not wait_for_img(img_name='exchange_success', script_name=SCRIPT_NAME, threshold=0.8):
     #     print(f'Failed to find exchange successful - are we full already?')
 
-    does_img_exist(img_name='tap_to_cont', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True)
+    wait_for_img(img_name='tap_to_cont', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True, max_wait_sec=3)
 
     return True
 
