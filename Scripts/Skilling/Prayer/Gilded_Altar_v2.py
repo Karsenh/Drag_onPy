@@ -100,10 +100,11 @@ def worship_bones():
     API.AntiBan.sleep_between(3.0, 3.1)
 
     still_worshipping = True
+
     while still_worshipping:
         if not is_worshipping():
-            still_worshipping = False
-
+            print(f'popped out of is_worshipping loop bc no longer worshipping bones')
+            return True
         print('Saw Prayer Exp - Still Worshipping')
 
     return True
@@ -223,6 +224,7 @@ def use_bones_with_altar():
 def is_worshipping():
     if not wait_for_img(img_name='Prayer', category='Exp_Drops', threshold=0.9, max_wait_sec=4):
         # Check if we gained a level
+        print(f'Should have a level up check next...')
         if does_img_exist(img_name="level_up", category="General"):
             if not does_img_exist(img_name='inventory_dbone', script_name=SCRIPT_NAME, threshold=0.85):
                 print(f'Found Level up but looks like we are out of bones')
