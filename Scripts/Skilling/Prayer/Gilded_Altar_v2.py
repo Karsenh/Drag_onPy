@@ -163,8 +163,8 @@ def long_click_house_box():
     max_attempts = 10
 
     while attempts <= max_attempts:
-        for i in range(1, 3):
-            if does_img_exist(img_name=f'house_box_{i}', script_name=SCRIPT_NAME, threshold=0.7):
+        for i in range(1, 6):
+            if does_img_exist(img_name=f'house_box_{i}', script_name=SCRIPT_NAME, threshold=0.8):
                 x, y = get_existing_img_xy()
                 loc_xy = x + 6, y + 6
                 mouse_long_click(loc_xy)
@@ -215,7 +215,7 @@ def use_bones_with_altar():
         mouse_click(CACHED_ALTAR_XY)
     else:
         print(f'CACHED_ALTAR_XY DOES NOT Exist - Setting to ')
-        if not wait_for_img(img_name='gilded_altar', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True, max_wait_sec=10):
+        if not wait_for_img(img_name='gilded_altar', script_name=SCRIPT_NAME, threshold=0.94, should_click=True, click_middle=True, max_wait_sec=10):
             print(f'Failed to find Gilded Altar image')
             return False
 
