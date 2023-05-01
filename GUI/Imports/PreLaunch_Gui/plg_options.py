@@ -61,22 +61,22 @@ def show_plg_options(main_plg_frame, font_styles, script_name):
             option_1 = tkinter.Radiobutton(script_options_frame, variable=alch_item, tristatevalue=0, value="green_dhide_bodies_noted", text="Green Dhide Body (noted)", font=break_font, background=frame_bg_color, command=lambda: set_option(script_name, field_name, alch_item.get()))
             option_1.grid(row=1, column=3)
 
-        case "Ardy_Knights":
-            option_1 = tkinter.Checkbutton(script_options_frame, text="Dodgy Necklace (Jewelry tab)", font=break_font, background=frame_bg_color)
-            option_1.grid(row=1, column=1)
-
+        # TODO
         case "Draynor_Shrimp":
-            option_1 = tkinter.Checkbutton(script_options_frame, text="Bank Shrimp", font=break_font, background=frame_bg_color)
+            option_1 = tkinter.Checkbutton(script_options_frame, state='disabled',  text="Bank Shrimp", font=break_font, background=frame_bg_color)
             option_1.grid(row=1, column=1)
 
+        # TODO
         case "Hosidius_Fruit":
-            option_1 = tkinter.Checkbutton(script_options_frame, text="Bank Fruit", font=break_font, background=frame_bg_color)
+            option_1 = tkinter.Checkbutton(script_options_frame, state='disabled', text="Bank Fruit", font=break_font, background=frame_bg_color)
             option_1.grid(row=1, column=1)
 
+        # TODO
         case "GE_Bow_Stringer":
             option_1 = tkinter.Radiobutton(script_options_frame, text="Magic Long", font=break_font, background=frame_bg_color)
             option_1.grid(row=1, column=1)
 
+        # TODO
         case "GE_Dhide_Bodies":
             option_1 = tkinter.Radiobutton(script_options_frame, text="Green Leather", font=break_font, background=frame_bg_color)
             option_1.grid(row=1, column=1)
@@ -90,10 +90,18 @@ def show_plg_options(main_plg_frame, font_styles, script_name):
             option_1.grid(row=1, column=3)
 
         case "Blast_Furnace":
-            option_1 = tkinter.Radiobutton(script_options_frame, text="Gold Bars", font=break_font, background=frame_bg_color)
+            script_name = 'Blast_Furnace'
+            field_name = 'Bar Type'
+
+            bar_type_var = tkinter.StringVar(None, "Addy")
+            set_option(script_name, field_name, 'Addy')
+
+            option_1 = tkinter.Radiobutton(script_options_frame, state='disabled', tristatevalue=0, value='Gold', variable=bar_type_var, text="Gold", font=break_font, background=frame_bg_color, command=lambda: set_option(script_name, field_name, bar_type_var.get()))
             option_1.grid(row=1, column=1)
-            option_1 = tkinter.Radiobutton(script_options_frame, text="Runite Bars", font=break_font, background=frame_bg_color)
+            option_1 = tkinter.Radiobutton(script_options_frame, tristatevalue=1, value='Addy', variable=bar_type_var, text="Addy", font=break_font, background=frame_bg_color, command=lambda: set_option(script_name, field_name, bar_type_var.get()))
             option_1.grid(row=1, column=2)
+            option_1 = tkinter.Radiobutton(script_options_frame, tristatevalue=0, value='Rune', variable=bar_type_var, text="Rune", font=break_font, background=frame_bg_color, command=lambda: set_option(script_name, field_name, bar_type_var.get()))
+            option_1.grid(row=1, column=3)
 
         case "Poh_Larders":
             script_name = 'Poh_Larders'
@@ -125,15 +133,43 @@ def show_plg_options(main_plg_frame, font_styles, script_name):
             option_1 = tkinter.Radiobutton(script_options_frame, text="C'bow Stock", value='Cbow', variable=fletch_item_var, tristatevalue=0, font=break_font, background=frame_bg_color, command=lambda: set_option(script_name, field_name, fletch_item_var.get()))
             option_1.grid(row=2, column=2)
 
-        case "Ardy_Knights":
-            option_1 = tkinter.Checkbutton(script_options_frame, text="Wine", font=break_font, background=frame_bg_color)
+        case "GE_Log_Burner":
+            script_name = 'GE_Log_Burner'
+            field_name = 'Log Type'
+
+            log_type_var = tkinter.StringVar(None, "Log")
+            set_option(script_name, field_name, 'Log')
+
+            option_1 = tkinter.Radiobutton(script_options_frame, text="Log", value='Log', variable=log_type_var, tristatevalue=1, font=break_font, background=frame_bg_color, command=lambda: set_option(script_name, field_name, log_type_var.get()))
             option_1.grid(row=1, column=1)
-            option_1 = tkinter.Checkbutton(script_options_frame, text="Lobster", font=break_font, background=frame_bg_color)
+            option_1 = tkinter.Radiobutton(script_options_frame, text="Oak", value='Oak', variable=log_type_var, tristatevalue=0, font=break_font, background=frame_bg_color, command=lambda: set_option(script_name, field_name, log_type_var.get()))
             option_1.grid(row=1, column=2)
-            option_1 = tkinter.Checkbutton(script_options_frame, text="Monkfish", font=break_font, background=frame_bg_color)
+            option_1 = tkinter.Radiobutton(script_options_frame, text="Willow", value='Willow', variable=log_type_var, tristatevalue=0, font=break_font, background=frame_bg_color, command=lambda: set_option(script_name, field_name, log_type_var.get()))
             option_1.grid(row=1, column=3)
-            option_1 = tkinter.Checkbutton(script_options_frame, text="Shark", font=break_font, background=frame_bg_color)
+            option_1 = tkinter.Radiobutton(script_options_frame, text="Maple", value='Maple', variable=log_type_var, tristatevalue=0, font=break_font, background=frame_bg_color, command=lambda: set_option(script_name, field_name, log_type_var.get()))
             option_1.grid(row=1, column=4)
+            option_1 = tkinter.Radiobutton(script_options_frame, text="Yew", value='Yew', variable=log_type_var, tristatevalue=0, font=break_font, background=frame_bg_color, command=lambda: set_option(script_name, field_name, log_type_var.get()))
+            option_1.grid(row=2, column=1)
+            option_1 = tkinter.Radiobutton(script_options_frame, text="Magic", value='Magic', variable=log_type_var, tristatevalue=0, font=break_font, background=frame_bg_color, command=lambda: set_option(script_name, field_name, log_type_var.get()))
+            option_1.grid(row=2, column=2)
+            option_1 = tkinter.Radiobutton(script_options_frame, text="Redwood", value='Redwood', variable=log_type_var, tristatevalue=0, font=break_font, background=frame_bg_color, command=lambda: set_option(script_name, field_name, log_type_var.get()))
+            option_1.grid(row=2, column=3)
+
+        case "Ardy_Knights":
+            script_name = 'Rogue_Cooker'
+            field_name = 'Food Type'
+
+            food_type_var = tkinter.StringVar(None, "Monkfish")
+            set_option(script_name, field_name, 'Monkfish')
+
+            option_1 = tkinter.Radiobutton(script_options_frame, state='disabled', text="Wine", value='Wine', variable=food_type_var, tristatevalue=0, font=break_font, background=frame_bg_color, command=lambda: set_option(script_name, field_name, food_type_var.get()))
+            option_1.grid(row=1, column=1, columnspan=1)
+            option_1 = tkinter.Radiobutton(script_options_frame, state='disabled', text="Lobster", value='Lobster', variable=food_type_var, tristatevalue=0, font=break_font, background=frame_bg_color, command=lambda: set_option(script_name, field_name, food_type_var.get()))
+            option_1.grid(row=1, column=2, columnspan=1)
+            option_1 = tkinter.Radiobutton(script_options_frame, text="Monkfish", value='Monkfish', variable=food_type_var, tristatevalue=0, font=break_font, background=frame_bg_color, command=lambda: set_option(script_name, field_name, food_type_var.get()))
+            option_1.grid(row=1, column=3, columnspan=1)
+            option_1 = tkinter.Radiobutton(script_options_frame, state='disabled', text="Shark", value='Shark', variable=food_type_var, tristatevalue=1, font=break_font, background=frame_bg_color, command=lambda: set_option(script_name, field_name, food_type_var.get()))
+            option_1.grid(row=1, column=4, columnspan=1)
 
         case "Rogue_Cooker":
             script_name = 'Rogue_Cooker'

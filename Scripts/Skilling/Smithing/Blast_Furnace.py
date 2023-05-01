@@ -5,11 +5,12 @@ from API.Mouse import mouse_click, mouse_move, mouse_long_click
 from API.Interface.General import setup_interface, is_otd_enabled, is_tab_open, get_xy_for_invent_slot, is_run_on, is_run_gt
 from API.Interface.Bank import close_bank, is_bank_open, is_bank_tab_open, is_withdraw_qty
 from API.Imaging.Image import does_img_exist, wait_for_img, does_color_exist_in_thresh, does_color_exist_in_sub_image, get_existing_img_xy
+from GUI.Imports.PreLaunch_Gui.plg_options import get_script_options
 import pyautogui as pag
 
 SCRIPT_NAME = "Blast_Furnace"
 BANK_TAB = 1
-ORE_TYPE = 'Rune'  # Mith, Addy, Rune, Gold
+ORE_TYPE = None  # Mith, Addy, Rune, Gold
 
 # Cached coordinates
 CACHED_BANKED_COAL_XY = None
@@ -93,6 +94,7 @@ def start_blasting(curr_loop):
 
     else:
         print(f'First loop!')
+        set_ore_from_options()
         setup_interface('north', 1, 'up')
         open_bank_from_bank()
         handle_run()
@@ -123,6 +125,13 @@ def start_blasting(curr_loop):
         click_belt_from_belt()
         # wait_for_belt_deposit('coal')
         return claim_bars()
+
+
+def set_ore_from_options():
+    global ORE_TYPE
+    ORE_TYPE = get_script_options('Bar Type')
+    print(f'Setting ore type from options: {ORE_TYPE}')
+    return
 
 
 def deposit_money_into_coffer():

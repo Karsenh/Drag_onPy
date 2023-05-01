@@ -1,4 +1,6 @@
 import tkinter.font
+
+from API.Global_Vars import set_global_bank_tab_num
 from GUI.Main_GUI import *
 from API.Break_Timer.Timer import *
 import os
@@ -189,23 +191,37 @@ def show_settings_frame():
     # Break Timer Frame
     bt_frame_1.grid(row=1, column=1)
 
+    # GLOBAL VARIABLES
+    gv_frame_2 = LabelFrame(settings_gui, text="🌏 Variables", bg=FRAME_BG_COL, pady=40, padx=40)
+
+    bank_tab_num_var = tkinter.IntVar(settings_gui)
+
+    global_vars = bank_tab_num_var
+
+    bank_tab_label = Label(gv_frame_2, text="Bank tab # of supplies:", background=FRAME_BG_COL, font=break_font)
+    bank_tab_num_entry = tkinter.Entry(gv_frame_2, textvariable=bank_tab_num_var, bg=LABEL_FRAME_BG_COL)
+
+    set_global_var_btn = Button(gv_frame_2, fg='white', padx=10, pady=5, text="Set Values", font=break_btn_font, bg=BTN_BG_COL, activebackground=BTN_ACTIVE_BG_COL, command=lambda: set_global_bank_tab_num(global_vars))
+
+    gv_frame_2.grid(row=2, column=1)
+    bank_tab_label.grid(row=1, column=1)
+    bank_tab_num_entry.grid(row=2, column=1)
+    set_global_var_btn.grid(row=5, column=1, pady=20, padx=20, columnspan=3)
+
+
     # DEBUG MODE
     # sep = tkinter.ttk.Separator(settings_gui, orient="horizontal")
     # sep.grid(row=6, column=1, columnspan=4)
 
-    db_frame_2 = LabelFrame(settings_gui, text="🐛 Debugging", bg=FRAME_BG_COL, pady=40, padx=40)
+    db_frame_3 = LabelFrame(settings_gui, text="🐛 Debugging", bg=FRAME_BG_COL, pady=40, padx=40)
     # Debug checkbox variable
     is_debug = tkinter.IntVar()
-    is_debug_cb = tkinter.Checkbutton(db_frame_2, text='Enable DEBUG', bg=FRAME_BG_COL, variable=is_debug, offvalue=False, onvalue=True, command=lambda: set_is_debug(is_debug))
+    is_debug_cb = tkinter.Checkbutton(db_frame_3, text='Enable DEBUG', bg=FRAME_BG_COL, variable=is_debug, offvalue=False, onvalue=True, command=lambda: set_is_debug(is_debug))
     is_debug_cb.grid(row=1, column=1)
     # Debug Frame
-    db_frame_2.grid(row=2, column=1)
+    db_frame_3.grid(row=3, column=1)
 
-    global_var_frame = LabelFrame(settings_gui, text="🌏 Variables", bg=FRAME_BG_COL, pady=40, padx=40)
-    bank_tab_num_var = tkinter.IntVar()
-    bank_tab_num = tkinter.Entry(global_var_frame, text='Enable DEBUG', bg=FRAME_BG_COL, variable=bank_tab_num_var, command=lambda: set_bank_tab_num(bank_tab_num_var))
-    bank_tab_num.grid(row=1, column=1)
-    global_var_frame.grid(row=3, column=1)
+
 
     return
 
@@ -756,7 +772,3 @@ def add_script_btn(skill_frame, side_img, start_btn, row_num):
     start_btn.grid(row=row_num, column=2, columnspan=2, pady=5, padx=10)
     return
 
-
-def set_bank_tab_num(tab_num):
-    print(f'Setting 🌏 Bank Tab Num: {tab_num}')
-    return
