@@ -37,11 +37,11 @@ def __main__():
     capture_bluestacks()
     clear_debug_log()
 
-    # launch_script("Ardy_Rooftops")
+    launch_script("Gilded_Altar")
     # launch_script("GE_Dhide_Bodies")
     # launch_script("Gnome_Course")
 
-    check_client_version()
+    # check_client_version()
     # does_img_exist(img_name='jump_4', script_name='Ardy_Rooftops', threshold=0.9, should_click=True, click_middle=True)
 
 

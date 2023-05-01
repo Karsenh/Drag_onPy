@@ -93,9 +93,9 @@ def launch_script(script_name="pisc_iron"):
     # for thread in threading.enumerate():
     #     print(f'Thread name: {thread.name}')
 
-    authed_user = get_authed_user()
-
-    set_script_access(authed_user.email, authed_user.licenses)
+    # authed_user = get_authed_user()
+    #
+    # set_script_access(authed_user.email, authed_user.licenses)
 
     write_debug(f"Pre-launch checks for: {script_name}")
     # Check that we're not on dc screen (click continue if so)
