@@ -4,6 +4,7 @@ from API.AntiBan import write_debug
 from API.Mouse import mouse_click, mouse_move, mouse_long_click
 from API.Interface.Bank import is_bank_tab_open, is_withdraw_qty
 from API.Imaging.Image import does_img_exist, wait_for_img, does_color_exist, get_existing_img_xy
+from GUI.Imports.PreLaunch_Gui.plg_options import get_script_options
 from API.Imports.Coords import BANK_qty_all
 from API.Imports.Coords import *
 import pyautogui as pag
@@ -15,6 +16,7 @@ BANK_TAB_NUM = 1
 
 def burn_logs_at_ge(curr_loop):
     if curr_loop == 1:
+        set_log_type()
         needs_tinderbox = True
 
         setup_interface("east", 3, "up")
@@ -81,6 +83,13 @@ def burn_logs_at_ge(curr_loop):
     if not burn_logs():
         return False
     return True
+
+
+def set_log_type():
+    global LOG_TYPE
+    LOG_TYPE = get_script_options('Log Type')
+    print(f'Setting log type: {LOG_TYPE}')
+    return
 
 
 def move_away_from_bank(move_xy):

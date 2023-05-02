@@ -5,6 +5,7 @@ from API.Interface.General import setup_interface, is_tab_open, relog, handle_le
 from API.Mouse import mouse_move, mouse_click, mouse_long_click
 from GUI.Imports.PreLaunch_Gui.Plg_Script_Options import Global_Script_Options
 
+
 SCRIPT_NAME = 'Gnome_Course'
 
 SHOULD_TELE = False

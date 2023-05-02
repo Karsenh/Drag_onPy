@@ -4,6 +4,7 @@ import API.AntiBan
 from API.Imaging.Image import does_img_exist, wait_for_img, get_existing_img_xy
 from API.Interface.General import setup_interface, is_tab_open, relog
 from API.Mouse import mouse_move, mouse_click, mouse_long_click
+from GUI.Imports.PreLaunch_Gui.Plg_Script_Options import Global_Script_Options
 
 SCRIPT_NAME = 'Seers_Rooftops'
 
@@ -49,6 +50,7 @@ def start_seers_rooftops(curr_loop):
 
     else:
         print(f'First loop')
+        set_script_options()
         setup_interface("north", 1, "up")
 
     return True
@@ -307,3 +309,30 @@ def handle_fall_on(curr_jump_num):
 
     mouse_click(recover_xy)
     return True
+
+
+def set_script_options():
+    global SHOULD_ALCH
+    global ALCH_ITEM
+
+    for option in Global_Script_Options.options_arr:
+        if option.name == 'High Alch':
+            print(f'Found Food Type option - Setting to: {option.value}')
+            SHOULD_ALCH = True
+            match option.value:
+                case "none":
+                    print(f'Not Alching')
+                    ALCH_ITEM = None
+                    SHOULD_ALCH = False
+                case "magic_long_noted":
+                    print(f'Alching Magic Long notes')
+                    ALCH_ITEM = ITEMS_TO_ALCH[1]
+                case "green_dhide_bodies":
+                    print(f'Alching Green Dhide Bodies notes')
+                    ALCH_ITEM = ITEMS_TO_ALCH[0]
+                case _:
+                    print(f'Default case hit')
+
+            SHOULD_ALCH = option.value
+
+    return
