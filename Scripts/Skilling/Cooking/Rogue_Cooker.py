@@ -3,6 +3,7 @@ import keyboard
 import pyautogui as pag
 from datetime import datetime
 import API.AntiBan
+from API.Global_Vars import get_global_bank_tab_num
 from API.Mouse import mouse_click, mouse_drag, mouse_long_click
 from API.Interface.General import setup_interface, get_xy_for_invent_slot, relog
 from API.Interface.Bank import is_bank_tab_open, deposit_all, close_bank, is_withdraw_qty
@@ -19,7 +20,7 @@ START_COOK_TIME = None
 
 
 def start_rogue_cooking(curr_loop):
-    global START_COOK_TIME
+    global START_COOK_TIME, BANK_TAB
 
     if curr_loop != 1:
         write_debug(f'Checking if cooking...')
@@ -43,6 +44,7 @@ def start_rogue_cooking(curr_loop):
         cook_food()
     else:
         # This is the first loop
+        BANK_TAB = get_global_bank_tab_num()
         set_food_to_cook()
         setup_interface("south", 5, "up")
         API.AntiBan.sleep_between(0.7, 0.8)

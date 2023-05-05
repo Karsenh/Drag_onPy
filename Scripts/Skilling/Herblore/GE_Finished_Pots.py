@@ -3,6 +3,7 @@ import datetime
 import API.AntiBan
 import pyautogui as pag
 from API.AntiBan import shutdown
+from API.Global_Vars import get_global_bank_tab_num
 from API.Interface.General import setup_interface, is_tab_open
 from API.Interface.Bank import is_withdraw_qty, close_bank, is_bank_tab_open, deposit_all, open_ge_bank, \
     withdraw_item_from_tab_num
@@ -14,16 +15,18 @@ SCRIPT_NAME = 'GE_Finished_Pots'
 
 BANK_TAB_NUM = 1
 
-PRIMARY_INGREDIENT = 'snapdragon_potion_unf_3'
+PRIMARY_INGREDIENT = 'snapdragon'
 SECONDARY_INGREDIENT = 'red_spider_eggs'
 
 
 def start_making_finished_potions(curr_loop):
+    global BANK_TAB_NUM
+
     if curr_loop != 1:
         print(f'Not first loop')
         open_ge_bank()
         deposit_all()
-        if not withdraw_item_from_tab_num(item=PRIMARY_INGREDIENT, qty='x', tab_num=BANK_TAB_NUM):
+        if not withdraw_item_from_tab_num(item=f'${PRIMARY_INGREDIENT}_potion_unf_3', qty='x', tab_num=BANK_TAB_NUM):
             return False
         if not withdraw_item_from_tab_num(item=SECONDARY_INGREDIENT, qty='x', tab_num=BANK_TAB_NUM):
             return False
@@ -32,6 +35,7 @@ def start_making_finished_potions(curr_loop):
         API.AntiBan.sleep_between(15, 17)
     else:
         print(f'First loop')
+        BANK_TAB_NUM = get_global_bank_tab_num()
         setup_interface('east', 5, 'up')
 
     return True

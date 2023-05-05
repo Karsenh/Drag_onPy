@@ -322,7 +322,7 @@ def sleep_between_actions(curr_tile, sleep_num, is_watering=False):
         return
 
     if curr_tile == 9 and (sleep_num == 2 or is_watering):
-        API.AntiBan.sleep_between(4.6, 4.7)
+        API.AntiBan.sleep_between(4.0, 4.1)
         return
 
     if curr_tile % 2 == 0:

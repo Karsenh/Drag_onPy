@@ -7,11 +7,14 @@ from GUI.Imports.PreLaunch_Gui.plg_options import get_script_options
 
 
 SCRIPT_NAME = "Con_Larders"
+
 UNNOTE_ATTEMPTS = 0
 REMOVE_ATTEMPTS = 0
 BUILD_ATTEMPTS = 0
+
 PLANK_TYPE = "Regular"
-AUTO_DETECT_PLANKS = False
+
+AUTO_DETECT_PLANKS = True
 
 # NOTES
 # Start in front of phials with noted planks, money to unnote, hammer, saw, and nails
@@ -55,25 +58,17 @@ def set_plank_type():
     global PLANK_TYPE
     global AUTO_DETECT_PLANKS
 
-    plank_options = ["Regular", "Oak"]
+    if AUTO_DETECT_PLANKS:
+        if does_img_exist(img_name="Noted_Inventory_Oak_Planks", script_name="Con_Larders", threshold=0.95, should_click=True):
+            PLANK_TYPE = "Oak"
+        else:
+            PLANK_TYPE = "Regular"
 
-    PLANK_TYPE = get_script_options('Plank Type')
-
-    # if AUTO_DETECT_PLANKS:
-    #     if does_img_exist(img_name="Noted_Inventory_Oak_Planks", script_name="Con_Larders", threshold=0.95, should_click=True):
-    #         PLANK_TYPE = "Oak"
-    #
-    # else:
-    #     con_level = get_skill_level("construction")
-    #     print(f'Construction level: {con_level}')
-    #     if con_level > 32:
-    #         PLANK_TYPE = "Oak"
+    else:
+        PLANK_TYPE = get_script_options('Plank Type')
 
     print(f'PLANK TYPE SET = {PLANK_TYPE}')
     return True
-
-    # get_skill_level()
-    return
 
 
 def unnote_planks():

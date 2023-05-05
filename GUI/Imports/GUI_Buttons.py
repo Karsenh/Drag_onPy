@@ -1,3 +1,5 @@
+import webbrowser
+
 from Database.Script_Access import gnome_agility_script, seers_rooftops, canifis_rooftops, cow_killer_script, \
     kourend_crab_killer_script, rogue_cooker_script, ge_glass_blower_script, dhide_bodies_script, poh_larders_script, \
     poh_tables_script, hosidius_plough_script, ge_sulphurous_fertilizer_script, tithe_farmer_script, \
@@ -86,8 +88,18 @@ def get_all_btns(all_frames, all_images, root):
     minigames_btn = Button(main_frame, text="Minigames", bg=BTN_BG_COL, activebackground=BTN_ACTIVE_BG_COL, image=skull_img, command=lambda: show_minigames_frame(all_frames, minigames_sub_btns, toggle_active_frame, gui_btns), height=50, width=50)
 
     settings_btn = Button(main_frame, text="Settings", bg=BTN_BG_COL, activebackground='#f7881c', image=settings_img, command=lambda: show_settings_frame(), height=25, width=25)
-    info_btn = Button(main_frame, text="Info", bg=BTN_BG_COL, activebackground='#febf56', image=question_mark_img, command=lambda: print('Info test'), height=25, width=25)
-    bug_report_btn = Button(main_frame, text="Bug Report", bg=BTN_BG_COL, activebackground='#81d5fa', image=bug_report_img, command=lambda: print('Bug test'), height=25, width=25)
+    info_btn = Button(main_frame, text="Info", bg=BTN_BG_COL, activebackground='#febf56', image=question_mark_img, command=lambda: open_help_link(), height=25, width=25)
+    bug_report_btn = Button(main_frame, text="Bug Report", bg=BTN_BG_COL, activebackground='#81d5fa', image=bug_report_img, command=lambda: open_discord_invite(), height=25, width=25)
+
+    def open_discord_invite():
+        discord_link = 'https://discord.gg/uqyyHSBvqt'
+        webbrowser.open(discord_link, new=1)
+        return
+
+    def open_help_link():
+        help_link = 'https://www.dragonpybot.com/install'
+        webbrowser.open(help_link, new=1)
+        return
 
     # Package up Gui_Btns to access values within each button
     gui_btns = gold_btn, skill_btn, minigames_btn

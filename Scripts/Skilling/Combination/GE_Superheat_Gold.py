@@ -3,6 +3,7 @@ import random
 import numpy.random
 
 import API.AntiBan
+from API.Global_Vars import get_global_bank_tab_num
 from API.Mouse import mouse_click, mouse_long_click
 from API.Interface.Bank import is_bank_open, is_bank_tab_open, close_bank, deposit_all, is_withdraw_qty
 from API.Interface.General import setup_interface, is_tab_open, get_xy_for_invent_slot
@@ -26,6 +27,7 @@ USE_GAUNTLETS = True
 
 
 def start_superheating_gold(curr_loop):
+    global MAGIC_TAB_NUM, SMITHING_TAB_NUM
 
     if curr_loop != 1:
         print(f'doing main loop shit')
@@ -44,6 +46,7 @@ def start_superheating_gold(curr_loop):
 
     else:
         print(f'This is the first loop')
+        MAGIC_TAB_NUM, SMITHING_TAB_NUM = get_global_bank_tab_num()
         setup_interface("east", 4, "up")
 
         check_equipment()

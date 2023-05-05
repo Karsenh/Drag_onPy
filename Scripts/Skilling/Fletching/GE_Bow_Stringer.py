@@ -3,6 +3,7 @@ import datetime
 import API.AntiBan
 import pyautogui as pag
 from API.AntiBan import shutdown
+from API.Global_Vars import get_global_bank_tab_num
 from API.Interface.General import setup_interface, is_tab_open, relog
 from API.Interface.Bank import is_withdraw_qty, close_bank, is_bank_tab_open, deposit_all, open_ge_bank, \
     withdraw_item_from_tab_num
@@ -20,6 +21,8 @@ SECONDARY_INGREDIENT = 'magic_long_u'
 
 
 def start_stringing_bows(curr_loop):
+    global BANK_TAB_NUM
+
     if curr_loop != 1:
         print(f'Not first loop')
         open_ge_bank()
@@ -40,6 +43,7 @@ def start_stringing_bows(curr_loop):
             reset_curr_runtime()
     else:
         print(f'First loop')
+        BANK_TAB_NUM = get_global_bank_tab_num()
         setup_interface('east', 5, 'up')
 
     return True

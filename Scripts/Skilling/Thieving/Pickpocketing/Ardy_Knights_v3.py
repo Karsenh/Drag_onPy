@@ -3,6 +3,7 @@ import random
 import pyautogui
 
 import API.AntiBan
+from API.Global_Vars import get_global_bank_tab_num
 from API.Interface.General import setup_interface, is_hp_gt, is_tab_open
 from API.Interface.Bank import is_bank_open, is_bank_tab_open, close_bank, is_withdraw_qty
 from API.Imaging.Image import does_img_exist, wait_for_img
@@ -20,9 +21,10 @@ NEEDS_NECKLACES = False
 
 
 def start_pickpocketing_knight(curr_loop):
+    global BANK_TAB_NUM
+
     if curr_loop != 1:
         print(f'Not first loop')
-
         if get_needs_food() or get_needs_necklaces():
             if not has_inventory_food():
                 set_needs_food(True)
@@ -54,6 +56,7 @@ def start_pickpocketing_knight(curr_loop):
 
     else:
         print(f'First loop')
+        BANK_TAB_NUM = get_global_bank_tab_num()
         setup_interface('west', 4, 'down')
 
     return True

@@ -1,4 +1,5 @@
 import API.AntiBan
+from API.Global_Vars import get_global_bank_tab_num
 from API.Interface.General import setup_interface, is_tab_open, is_otd_enabled
 from API.AntiBan import write_debug
 from API.Mouse import mouse_click, mouse_move, mouse_long_click
@@ -15,7 +16,10 @@ BANK_TAB_NUM = 1
 
 
 def burn_logs_at_ge(curr_loop):
+    global BANK_TAB_NUM
+
     if curr_loop == 1:
+        BANK_TAB_NUM = get_global_bank_tab_num()
         set_log_type()
         needs_tinderbox = True
 

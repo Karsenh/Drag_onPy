@@ -1,5 +1,7 @@
 from datetime import datetime
 import random
+
+from API.Global_Vars import get_global_bank_tab_num
 from API.Interface.General import setup_interface, get_xy_for_invent_slot, is_tab_open
 from API.Interface.Bank import is_withdraw_qty, close_bank, is_bank_tab_open, deposit_all, open_ge_bank, \
     withdraw_item_from_tab_num
@@ -18,6 +20,8 @@ START_TIME = None
 
 
 def start_crafting_dhide_bodies(curr_loop):
+    global BANK_TAB_NUM
+
     if curr_loop != 1:
         print(f'Not the first loop')
         if not craft_dhide_bodies():
@@ -27,6 +31,7 @@ def start_crafting_dhide_bodies(curr_loop):
             return False
     else:
         print(f'First loop')
+        BANK_TAB_NUM = get_global_bank_tab_num()
         setup_interface("east", 5, "up")
         if not open_ge_bank():
             return False

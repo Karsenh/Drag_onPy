@@ -2,6 +2,7 @@ import datetime
 import random
 from API.AntiBan import shutdown
 import API.AntiBan
+from API.Global_Vars import get_global_bank_tab_num
 from API.Interface.General import setup_interface, is_tab_open
 from API.Interface.Bank import is_withdraw_qty, close_bank, is_bank_tab_open, deposit_all
 from API.Imaging.Image import does_img_exist, get_existing_img_xy, wait_for_img
@@ -9,6 +10,7 @@ from API.Mouse import mouse_click, mouse_long_click
 from API.Interface.General import get_xy_for_invent_slot
 import pyautogui as pag
 
+BANK_TAB_NUM = 1
 HERB_TYPE = "snapdragon"
 herb_start_time = None
 
@@ -16,7 +18,10 @@ MAKE_FINISHED = True
 
 
 def start_unf_pots(curr_loop):
+    global BANK_TAB_NUM
+
     if curr_loop == 1:
+        BANK_TAB_NUM = get_global_bank_tab_num()
         setup_interface("west", 5, "down")
         is_tab_open("inventory", should_be_open=True)
 
@@ -69,7 +74,7 @@ def withdraw_herbs_and_vials(curr_loop):
     else:
         print('first loop - checking for correct tab')
     #     Check we're on tab 6
-        is_bank_tab_open(tab_num=6, should_open=True)
+        is_bank_tab_open(tab_num=BANK_TAB_NUM, should_open=True)
         API.AntiBan.sleep_between(0.6, 0.9)
 
         withdraw_14(item=HERB_TYPE)

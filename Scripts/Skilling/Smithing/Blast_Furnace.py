@@ -1,6 +1,7 @@
 import random
 
 import API.AntiBan
+from API.Global_Vars import get_global_bank_tab_num
 from API.Mouse import mouse_click, mouse_move, mouse_long_click
 from API.Interface.General import setup_interface, is_otd_enabled, is_tab_open, get_xy_for_invent_slot, is_run_on, is_run_gt
 from API.Interface.Bank import close_bank, is_bank_open, is_bank_tab_open, is_withdraw_qty
@@ -25,6 +26,8 @@ CACHED_TAKE_BARS_XY = None
 
 
 def start_blasting(curr_loop):
+    global BANK_TAB
+
     if curr_loop != 1:
         print(f'♾ CURR LOOP: {curr_loop}')
         # Curr_loop == 2 (+27 coal)
@@ -94,6 +97,7 @@ def start_blasting(curr_loop):
 
     else:
         print(f'First loop!')
+        BANK_TAB = get_global_bank_tab_num()
         set_ore_from_options()
         setup_interface('north', 1, 'up')
         open_bank_from_bank()

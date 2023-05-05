@@ -1,4 +1,5 @@
 import API.AntiBan
+from API.Global_Vars import get_global_bank_tab_num
 from API.Interface.General import setup_interface, is_tab_open, get_xy_for_invent_slot
 from API.Interface.Bank import open_ge_bank, is_bank_tab_open, is_withdraw_qty, close_bank, deposit_all
 from API.Imaging.Image import does_img_exist, wait_for_img, get_existing_img_xy
@@ -8,10 +9,12 @@ import pyautogui as pag
 import numpy as np
 
 SCRIPT_NAME = "GE_Sulphurous_Fertilizer"
-HERB_BANK_TAB_NUM = 1
+BANK_TAB_NUM = 1
 
 
 def start_making_fertalizer(curr_loop):
+    global BANK_TAB_NUM
+
     if curr_loop != 1:
         print(f'Not first loop')
         bank_for_mats(curr_loop)
@@ -19,6 +22,7 @@ def start_making_fertalizer(curr_loop):
     else:
         print(f'First loop')
         setup_interface('east', 5, 'up')
+        BANK_TAB_NUM = get_global_bank_tab_num()
     return True
 
 
@@ -46,7 +50,7 @@ def bank_for_mats(curr_loop):
         if not open_ge_bank():
             return False
 
-    is_bank_tab_open(tab_num=HERB_BANK_TAB_NUM, should_open=True)
+    is_bank_tab_open(tab_num=BANK_TAB_NUM, should_open=True)
 
     deposit_all()
 

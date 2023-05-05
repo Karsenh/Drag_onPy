@@ -1,4 +1,5 @@
 import API.AntiBan
+from API.Global_Vars import get_global_bank_tab_num
 from API.Interface.General import setup_interface, is_tab_open, is_run_gt, is_run_on, relog
 from API.Interface.Bank import is_bank_open, is_bank_tab_open, is_withdraw_qty, close_bank, deposit_all
 from API.Imaging.Image import wait_for_img, does_img_exist, get_existing_img_xy
@@ -25,7 +26,6 @@ DEGRADED_POUCH_EXISTS = False
 
 MAGIC_BANK_TAB = 1
 JEWELRY_BANK_TAB = 1
-HERBLORE_BANK_TAK = 1
 
 CACHED_SMALL_FILL_XY = None
 CACHED_SMALL_EMPTY_XY = None
@@ -57,8 +57,12 @@ CACHED_INVENT_GIANT_POUCH = None
 
 
 def start_crafting_lavas(curr_loop):
+    global MAGIC_BANK_TAB
+    global JEWELRY_BANK_TAB
+
     if curr_loop != 1:
         print(f'Not the first loop')
+
 
         # Add check for run energy gt however much needed for full run - if not wd stam and use
         check_run()
@@ -102,6 +106,7 @@ def start_crafting_lavas(curr_loop):
     else:
         print(f'This is the first loop - setting up interface etc.')
         # set_pouches_to_use()
+        MAGIC_BANK_TAB, JEWELRY_BANK_TAB = get_global_bank_tab_num()
         setup_interface("north", 1, "up")
         set_inventory_items(curr_loop)
         set_equipped_items(curr_loop)
