@@ -109,7 +109,7 @@ def start_tithe_farming(curr_loop):
         deposit_points()
 
         # Every 6th loop - refill Gricoller's can and seeds
-        if curr_loop % 5 == 0:
+        if curr_loop % 6 == 0:
             print(f'Replenishing Can & Seeds')
             replenish_can()
             replenish_seeds()
