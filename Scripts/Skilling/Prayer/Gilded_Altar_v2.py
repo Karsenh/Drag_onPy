@@ -78,9 +78,6 @@ def move_to_house(curr_loop):
 
     if not wait_for_img(img_name='gilded_altar', script_name=SCRIPT_NAME, threshold=0.9, max_wait_sec=10):
         return False
-
-    x, y = get_existing_img_xy()
-    CACHED_ALTAR_XY = x, y+18
     # Inside house here
     return True
 
@@ -219,7 +216,8 @@ def use_bones_with_altar():
             print(f'Failed to find Gilded Altar image')
             return False
 
-        CACHED_ALTAR_XY = get_existing_img_xy()
+        x, y = get_existing_img_xy()
+        CACHED_ALTAR_XY = x+10, y
     return True
 
 

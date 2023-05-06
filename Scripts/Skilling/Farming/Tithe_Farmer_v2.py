@@ -114,7 +114,9 @@ def start_tithe_farming(curr_loop):
             replenish_can()
             replenish_seeds()
 
-        move_to_plot_start()
+        if not move_to_plot_start():
+            print(f'Failed to find plot start or someone is using it - exiting')
+            return False
 
     else:
         print(f'First loop')
@@ -289,7 +291,8 @@ def move_to_plot_start():
             # After moving to the farm start - check if we're there again after having supposedly moved there
             if not wait_for_img(img_name="Farm_Start_Flag_Alt", script_name="Tithe_Farmer", threshold=0.92, max_wait_sec=10):
                 return False
-    return True
+
+    return does_img_exist(img_name='available_patch', script_name="Tithe_Farmer", threshold=0.80)
 
 
 def select_water_plant_option(retry_xy):

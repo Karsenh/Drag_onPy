@@ -37,8 +37,9 @@ def __main__():
     capture_bluestacks()
     clear_debug_log()
 
-    launch_script("Gilded_Altar")
+    # launch_script("Gilded_Altar")
     # launch_script("GE_Dhide_Bodies")
+    # does_img_exist(img_name='available_patch', script_name='Tithe_Farmer', threshold=0.85)
     # launch_script("Gnome_Course")
 
     # check_client_version()
