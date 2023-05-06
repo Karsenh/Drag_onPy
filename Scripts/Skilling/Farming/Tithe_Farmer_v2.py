@@ -321,10 +321,12 @@ def select_inventory_seed():
 
 def sleep_between_actions(curr_tile, sleep_num, is_watering=False):
     if curr_tile == 1:
+        print(f'⭐')
         API.AntiBan.sleep_between(2.0, 2.1)
         return
 
     if curr_tile == 9 and (sleep_num == 2 or is_watering):
+        print(f'✨')
         API.AntiBan.sleep_between(3.9, 4.0)
         return
 
@@ -332,15 +334,23 @@ def sleep_between_actions(curr_tile, sleep_num, is_watering=False):
         # Left side
         print(f'Left side - Curr_tile: {curr_tile} - sleep_num: {sleep_num}')
         if sleep_num == 1:
-            API.AntiBan.sleep_between(2.2, 2.3)
+            print(f'🟠')
+            API.AntiBan.sleep_between(2.2, 2.2)
         else:
-            API.AntiBan.sleep_between(2.4, 2.5)
+            print(f'🟢')
+            API.AntiBan.sleep_between(2.2, 2.2)
     else:
         print(f'Right side - Curr_tile: {curr_tile} - sleep_num: {sleep_num}')
         if sleep_num == 1:
-            API.AntiBan.sleep_between(2.3, 2.4)
+            print(f'🔴')
+            API.AntiBan.sleep_between(2.1, 2.1)
         else:
-            API.AntiBan.sleep_between(2.4, 2.5)
+            print(f'🟡')
+            API.AntiBan.sleep_between(2.2, 2.2)
+
+    if curr_tile == 14 or curr_tile == 15:
+        print(f'🔚')
+        API.AntiBan.sleep_between(1.0, 1.1)
 
     return
 
