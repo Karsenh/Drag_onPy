@@ -220,7 +220,7 @@ def harvest_plants():
 
 
 def deposit_points():
-    if not wait_for_img(img_name='Deposit_Sack', script_name='Tithe_Farmer', threshold=0.85, should_click=True, click_middle=True):
+    if not wait_for_img(img_name='Deposit_Sack', script_name='Tithe_Farmer', threshold=0.85, should_click=True, click_middle=True, max_wait_sec=10):
         print(f'Failed to find points sack')
         return False
     API.AntiBan.sleep_between(3.0, 3.1)
@@ -240,7 +240,7 @@ def replenish_can():
 
 
 def replenish_seeds():
-    if not does_img_exist(img_name='Door_From_Water_Barrel', script_name='Tithe_Farmer', should_click=True, click_middle=True, min_clicks=2, max_clicks=3):
+    if not does_img_exist(img_name='Door_From_Water_Barrel', script_name='Tithe_Farmer', should_click=True, click_middle=True, min_clicks=2, max_clicks=2):
         print(f'Failed to find Door from Water Barrel')
         return False
     API.AntiBan.sleep_between(3.0, 3.1)
