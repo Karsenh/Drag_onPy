@@ -269,6 +269,7 @@ def handle_eat_food():
 
 def empty_pouches():
     global POUCHES_TO_USE_ARR
+    is_tab_open('inventory')
 
     for pouch_size in POUCHES_TO_USE_ARR:
         if pouch_size == "Giant":
