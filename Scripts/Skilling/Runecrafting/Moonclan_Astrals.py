@@ -67,7 +67,7 @@ def start_crafting_astrals(curr_loop):
         else:
             API.AntiBan.sleep_between(8.0, 8.1)
 
-        craft_astrals()
+        click_astral_altar_initally()
         empty_pouches()
         craft_astrals()
 
@@ -142,19 +142,25 @@ def move_4():
     return True
 
 
-def craft_astrals():
-    if not does_img_exist(img_name='astral_altar_1', script_name='Moonclan_Astrals', threshold=0.8):
-        print(f'⛔ Failed to find astral altar 1')
-        if not does_img_exist(img_name='astral_altar_2', script_name='Moonclan_Astrals', threshold=0.8,
-                              should_click=True, click_middle=True):
-            print(f'⛔ Failed to find astral altar 2')
+def click_astral_altar_initally():
+    if not wait_for_img(img_name='astral_altar_1', script_name=SCRIPT_NAME, threshold=0.75):
+        print(f'⛔ Failed to find astral_altar_1')
+        if not does_img_exist(img_name='astral_altar_2', script_name=SCRIPT_NAME, threshold=0.8):
+            print(f'⛔ Failed to find astral_altar_2 as well - exiting...')
             return False
-    else:
-        altar_x, altar_y = get_existing_img_xy()
-        adj_altar_xy = altar_x+50, altar_y+50
-        mouse_click(adj_altar_xy)
 
-    return
+    altar_x, altar_y = get_existing_img_xy()
+    adj_altar_xy = altar_x + 45, altar_y + 45
+    mouse_click(adj_altar_xy)
+
+    return True
+
+
+def craft_astrals():
+    if not does_img_exist(img_name='astral_altar_2', script_name='Moonclan_Astrals', threshold=0.8, should_click=True, click_middle=True):
+        print(f'⛔ Failed to find astral altar 2')
+        return False
+    return True
 
 
 def open_bank():
