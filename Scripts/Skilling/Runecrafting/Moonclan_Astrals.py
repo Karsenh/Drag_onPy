@@ -241,9 +241,10 @@ def handle_stamina_pot():
 
     NEEDS_STAM = False
 
+    is_run_on(True)
+
     open_bank()
 
-    is_run_on(True)
     return True
 
 
