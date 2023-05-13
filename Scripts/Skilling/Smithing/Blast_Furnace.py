@@ -479,7 +479,7 @@ def click_belt_from_bank():
     furnace_xy = 633, 226
     mouse_click(furnace_xy)
     is_run_on(True)
-    API.AntiBan.sleep_between(1.5, 1.6)
+    API.AntiBan.sleep_between(2.5, 2.6)
     return
 
 
