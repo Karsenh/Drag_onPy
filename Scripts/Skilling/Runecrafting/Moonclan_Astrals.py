@@ -241,6 +241,8 @@ def handle_stamina_pot():
 
     NEEDS_STAM = False
 
+    open_bank()
+
     is_run_on(True)
     return True
 
@@ -279,6 +281,9 @@ def handle_eat_food():
         attempts += 1
 
     NEEDS_FOOD = False
+
+    open_bank()
+
     return True
 
 
