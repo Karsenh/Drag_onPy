@@ -12,6 +12,7 @@ from Scripts.Skilling.Runecrafting.Cwars_Lavas import wait_for_invent_item_xy
 SCRIPT_NAME = 'Moonclan_Astrals'
 
 NEEDS_STAM = False
+NEEDS_FOOD = False
 
 USE_CRAFTING_CAPE = True
 FOOD_TYPE = 'monkfish'
@@ -164,6 +165,8 @@ def craft_astrals():
 
 
 def open_bank():
+    global NEEDS_FOOD
+    global NEEDS_STAM
 
     if USE_CRAFTING_CAPE:
         if not does_img_exist(img_name='crafting_guild_bank', script_name=SCRIPT_NAME, threshold=0.9, should_click=True, click_middle=True):
@@ -175,30 +178,36 @@ def open_bank():
         print(f'⛔ Failed to find bank open')
         return False
 
+    # TODO: put check for food and stam pot here while running to bank (set flag)
+    if not is_hp_sufficient():
+        NEEDS_FOOD = True
+    if not is_run_sufficient():
+        NEEDS_STAM = True
+
     return is_bank_tab_open(BANK_TAB_NUM)
 
 
 def resupply():
+    global NEEDS_FOOD
+    global NEEDS_STAM
     print(f'Resupplying...')
 
     # Check health
-    if not is_hp_sufficient():
+    if NEEDS_FOOD:
         print(f'HP not sufficient - 🦈 handling eat food...')
         if not handle_eat_food():
             print(f'⛔ Failed to eat food for some reason - exiting...')
             return False
 
     # Check run
-    if not is_run_sufficient():
+    if NEEDS_STAM:
         print(f'Run is not sufficient - 🏃🏼‍🧪️ handling stamina pot...')
         if not handle_stamina_pot():
             print(f'⛔ Failed to handle stamina pot for some reason - exiting...')
             return False
 
     withdraw_ess()
-
     fill_pouches()
-
     close_bank()
     return True
 
@@ -228,6 +237,8 @@ def handle_stamina_pot():
         adj_vial_xy = x+2, y+16
         mouse_long_click(adj_vial_xy)
         does_img_exist(img_name="Drop", category="General", threshold=0.9, should_click=True, click_middle=True)
+
+    NEEDS_STAM = False
     return True
 
 
@@ -236,6 +247,7 @@ def is_hp_sufficient():
 
 
 def handle_eat_food():
+    global NEEDS_FOOD
     is_bank_open(BANK_TAB_NUM)
 
     is_withdraw_qty('1')
@@ -263,6 +275,7 @@ def handle_eat_food():
                 return False
         attempts += 1
 
+    NEEDS_FOOD = False
     return True
 
 

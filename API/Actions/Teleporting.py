@@ -5,6 +5,7 @@ from API.Mouse import mouse_long_click, mouse_click
 
 CACHED_INVENT_CRAFTING_CAPE_XY = None
 
+
 def teleport_with_crafting_cape(is_equipped=False):
     global CACHED_INVENT_CRAFTING_CAPE_XY
     print(f'Teleporting with Crafting Cape...')
