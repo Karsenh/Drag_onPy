@@ -81,7 +81,7 @@ def start_crafting_astrals(curr_loop):
 
     else:
         print(f'First loop')
-        # setup_interface('east', 1, 'up')
+        setup_interface('east', 1, 'up')
 
         if not open_bank():
             print(f'⛔ Failed to open bank')
@@ -89,6 +89,13 @@ def start_crafting_astrals(curr_loop):
 
         if not resupply():
             return False
+
+        curr_rt = get_curr_runtime()
+
+        if curr_rt.total_seconds() > 19800:
+            relog()
+            setup_interface("east", 1, "up")
+            reset_curr_runtime()
 
     return True
 
