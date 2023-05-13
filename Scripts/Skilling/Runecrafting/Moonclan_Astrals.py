@@ -174,15 +174,14 @@ def open_bank():
     else:
         print(f'Bank at moonclan island')
 
-    if not is_bank_open(max_wait_sec=15):
-        print(f'⛔ Failed to find bank open')
-        return False
-
-    # TODO: put check for food and stam pot here while running to bank (set flag)
     if not is_hp_sufficient():
         NEEDS_FOOD = True
     if not is_run_sufficient():
         NEEDS_STAM = True
+
+    if not is_bank_open(max_wait_sec=15):
+        print(f'⛔ Failed to find bank open')
+        return False
 
     return is_bank_tab_open(BANK_TAB_NUM)
 
@@ -226,6 +225,7 @@ def handle_stamina_pot():
     if not does_img_exist(img_name="Banked_Stam_4", script_name="Cwars_Lavas", threshold=0.92, should_click=True,
                    click_middle=True):
         print(f'Failed to find Banked_Stam_4 pot')
+        return False
     close_bank()
     does_img_exist(img_name="Inventory_Stam", script_name="Cwars_Lavas", threshold=0.9)
     x, y, = get_existing_img_xy()
@@ -240,6 +240,8 @@ def handle_stamina_pot():
         does_img_exist(img_name="Drop", category="General", threshold=0.9, should_click=True, click_middle=True)
 
     NEEDS_STAM = False
+
+    is_run_on(True)
     return True
 
 
