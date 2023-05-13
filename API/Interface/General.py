@@ -204,6 +204,7 @@ def is_run_gt(percent=10):
     elif percent >= 10 and percent < 19:
         message = '10-19 % hp'
     elif percent >= 20 and percent < 29:
+        xy = 1220, 263
         message = '20 - 29 % hp'
     elif percent >= 30 and percent < 39:
         message = '30 - 39 %'
