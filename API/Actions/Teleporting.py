@@ -20,15 +20,13 @@ def teleport_with_crafting_cape(is_equipped=False):
             print(f'Failed to open equipment tab in teleport_crafting_cape method in API > Actions > Teleporting')
             return False
 
-    # Get the cape coordinates
-    if not does_img_exist(img_name='crafting_cape', category='Teleports', img_sel='inventory'):
-        print(f'⛔ Failed to find Crafting Cape in inventory in API > Actions > Teleporting')
-        return False
-
-    # Adjust the cape coords for clicking
     if CACHED_INVENT_CRAFTING_CAPE_XY:
         mouse_long_click(CACHED_INVENT_CRAFTING_CAPE_XY)
+    # Get the cape coordinates
     else:
+        if not does_img_exist(img_name='crafting_cape', category='Teleports', img_sel='inventory'):
+            print(f'⛔ Failed to find Crafting Cape in inventory in API > Actions > Teleporting')
+            return False
         cape_x, cape_y = get_existing_img_xy()
         adj_xy = cape_x + 10, cape_y + 10
 
