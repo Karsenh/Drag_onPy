@@ -223,13 +223,14 @@ def handle_stamina_pot():
     is_bank_tab_open(BANK_TAB_NUM, True)
     # deposit_ess()
     is_withdraw_qty("1", True)
-    does_img_exist(img_name="Banked_Stam_4", script_name="Cwars_Lavas", threshold=0.97, should_click=True,
-                   click_middle=True)
+    if not does_img_exist(img_name="Banked_Stam_4", script_name="Cwars_Lavas", threshold=0.92, should_click=True,
+                   click_middle=True):
+        print(f'Failed to find Banked_Stam_4 pot')
     close_bank()
-    does_img_exist(img_name="Inventory_Stam", script_name="Cwars_Lavas", threshold=0.95, should_click=True, click_middle=True)
+    does_img_exist(img_name="Inventory_Stam", script_name="Cwars_Lavas", threshold=0.9)
     x, y, = get_existing_img_xy()
     adj_stam_xy = x+2, y+12
-    for i in range(3):
+    for i in range(4):
         API.AntiBan.sleep_between(3.0, 3.1)
         mouse_click(adj_stam_xy)
     if wait_for_img(img_name="Inventory_Vial", script_name="Cwars_Lavas", threshold=0.97, max_wait_sec=3):
