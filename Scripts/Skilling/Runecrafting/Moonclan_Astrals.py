@@ -278,6 +278,8 @@ def handle_eat_food():
             if not does_img_exist(img_name='cancel_option', category='Interface', threshold=0.8, should_click=True, click_middle=True):
                 print(f'⛔ Failed to find cancel option on food eat')
                 return False
+        else:
+            attempts = 3
         attempts += 1
 
     NEEDS_FOOD = False
