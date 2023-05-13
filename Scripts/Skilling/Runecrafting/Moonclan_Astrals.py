@@ -116,7 +116,7 @@ def move_1():
 
 
 def move_2():
-    return wait_for_img(img_name='move_2', script_name=SCRIPT_NAME, should_click=True, click_middle=True, max_wait_sec=15, threshold=0.85)
+    return wait_for_img(img_name='move_2', script_name=SCRIPT_NAME, should_click=True, click_middle=True, max_wait_sec=15, threshold=0.90)
 
 
 def move_3():
