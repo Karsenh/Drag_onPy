@@ -211,26 +211,24 @@ def is_run_sufficient():
 def handle_stamina_pot():
     global NEEDS_STAM
 
-    if NEEDS_STAM:
-        is_bank_tab_open(BANK_TAB_NUM, True)
-        # deposit_ess()
-        is_withdraw_qty("1", True)
-        does_img_exist(img_name="Banked_Stam_4", script_name="Cwars_Lavas", threshold=0.97, should_click=True,
-                       click_middle=True)
-        close_bank()
-        does_img_exist(img_name="Inventory_Stam", script_name="Cwars_Lavas", threshold=0.95, should_click=True, click_middle=True)
-        x, y, = get_existing_img_xy()
-        adj_stam_xy = x+2, y+12
-        for i in range(3):
-            API.AntiBan.sleep_between(3.0, 3.1)
-            mouse_click(adj_stam_xy)
-        if wait_for_img(img_name="Inventory_Vial", script_name="Cwars_Lavas", threshold=0.97, max_wait_sec=3):
-            x, y = get_existing_img_xy()
-            adj_vial_xy = x+2, y+16
-            mouse_long_click(adj_vial_xy)
-            does_img_exist(img_name="Drop", category="General", threshold=0.9, should_click=True, click_middle=True)
-        NEEDS_STAM = False
-    return
+    is_bank_tab_open(BANK_TAB_NUM, True)
+    # deposit_ess()
+    is_withdraw_qty("1", True)
+    does_img_exist(img_name="Banked_Stam_4", script_name="Cwars_Lavas", threshold=0.97, should_click=True,
+                   click_middle=True)
+    close_bank()
+    does_img_exist(img_name="Inventory_Stam", script_name="Cwars_Lavas", threshold=0.95, should_click=True, click_middle=True)
+    x, y, = get_existing_img_xy()
+    adj_stam_xy = x+2, y+12
+    for i in range(3):
+        API.AntiBan.sleep_between(3.0, 3.1)
+        mouse_click(adj_stam_xy)
+    if wait_for_img(img_name="Inventory_Vial", script_name="Cwars_Lavas", threshold=0.97, max_wait_sec=3):
+        x, y = get_existing_img_xy()
+        adj_vial_xy = x+2, y+16
+        mouse_long_click(adj_vial_xy)
+        does_img_exist(img_name="Drop", category="General", threshold=0.9, should_click=True, click_middle=True)
+    return True
 
 
 def is_hp_sufficient():
