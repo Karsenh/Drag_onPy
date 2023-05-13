@@ -246,6 +246,7 @@ def handle_eat_food():
 
     if not does_img_exist(img_name=f'inventory_{FOOD_TYPE}', category='Banking', threshold=0.9, img_sel='inventory'):
         print(f'⛔ Failed to find inventory food')
+        return False
 
     invent_x, invent_y = get_existing_img_xy()
 
