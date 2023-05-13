@@ -269,10 +269,10 @@ def handle_eat_food():
 
     adj_xy = invent_x + 10, invent_y + 10
 
-    mouse_long_click(adj_xy)
-
     attempts = 0
     while attempts < 2:
+        mouse_long_click(adj_xy)
+
         if not does_img_exist(img_name='eat_option', category='Interface', threshold=0.85, should_click=True, click_middle=True):
             print(f'⛔ Failed to find eat option for food...')
             if not does_img_exist(img_name='cancel_option', category='Interface', threshold=0.8, should_click=True, click_middle=True):
