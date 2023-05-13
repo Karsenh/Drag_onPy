@@ -55,9 +55,16 @@ def start_crafting_astrals(curr_loop):
         teleport_with_spellbook('moonclan')
 
         move_1()
-        move_2()
-        move_3()
-        if move_4():
+        if not move_2():
+            print(f'⛔ Failed to find move_2')
+            return False
+        if not move_3():
+            print(f'⛔ Failed to find move_3')
+            return False
+        if not move_4():
+            print(f'⛔ Failed to find move_4')
+            return False
+        else:
             API.AntiBan.sleep_between(8.0, 8.1)
 
         craft_astrals()
@@ -68,7 +75,7 @@ def start_crafting_astrals(curr_loop):
             fix_pouches()
 
         if USE_CRAFTING_CAPE:
-            teleport_with_crafting_cape(is_equipped=True)
+            teleport_with_crafting_cape(is_equipped=False)
         else:
             teleport_with_spellbook('moonclan')
 
@@ -109,7 +116,7 @@ def move_1():
 
 
 def move_2():
-    return wait_for_img(img_name='move_2', script_name=SCRIPT_NAME, should_click=True, click_middle=True, max_wait_sec=15, threshold=0.95)
+    return wait_for_img(img_name='move_2', script_name=SCRIPT_NAME, should_click=True, click_middle=True, max_wait_sec=15, threshold=0.92)
 
 
 def move_3():
@@ -136,8 +143,6 @@ def move_4():
 
 
 def craft_astrals():
-    is_tab_open('inventory')
-
     if not does_img_exist(img_name='astral_altar_1', script_name='Moonclan_Astrals', threshold=0.8):
         print(f'⛔ Failed to find astral altar 1')
         if not does_img_exist(img_name='astral_altar_2', script_name='Moonclan_Astrals', threshold=0.8,
