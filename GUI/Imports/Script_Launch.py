@@ -42,6 +42,7 @@ from Scripts.Skilling.Hunter.Red_Lizards_v2 import start_catching_red_lizards
 from Scripts.Skilling.Hunter.Black_Lizards_v2 import start_catching_black_lizards
 from Scripts.Skilling.Hunter.Red_Chin_Hunter import start_catching_chins
 from Scripts.Skilling.Runecrafting.Cwars_Lavas import start_crafting_lavas
+from Scripts.Skilling.Runecrafting.Moonclan_Astrals import start_crafting_astrals
 from Scripts.Skilling.Mining.Motherlode_Miner import start_motherlode_mining
 from Scripts.Skilling.Farming.GE_Sulphurous_Fertilizer import start_making_fertalizer
 from Scripts.Skilling.Farming.Tithe_Farmer_v2 import start_tithe_farming
@@ -148,6 +149,7 @@ def launch_script(script_name="pisc_iron"):
         GE_FINISHED_POTS = 43
         ARDY_ROOFTOPS = 44
         GE_BOW_STRINGER = 45
+        MOONCLAN_ASTRALS = 46
 
     all_scripts = [mine_pisc_iron, smith_gold_edge, start_gnome_course,
                    fish_draynor_shrimp, fish_barb_trout, barbarian_fishing,
@@ -163,7 +165,7 @@ def launch_script(script_name="pisc_iron"):
                    start_crafting_lavas, start_motherlode_mining, start_making_fertalizer, start_tithe_farming,
                    start_catching_black_lizards, start_catching_chins, start_blasting, start_training_nmz,
                    start_splashing_ardy_knight, start_pest_control, start_making_finished_potions, start_ardy_rooftops,
-                   start_stringing_bows]
+                   start_stringing_bows, start_crafting_astrals]
 
     match script_name:
         case "Pisc_Iron_Miner":
@@ -379,6 +381,12 @@ def launch_script(script_name="pisc_iron"):
             selected_script = ScriptEnum.GE_BOW_STRINGER.value
             antiban_likelihood = 2
             antiban_downtime_sec = 2
+            reopen_invent = True
+            always_sleep = False
+        case "Moonclan_Astrals":
+            selected_script = ScriptEnum.MOONCLAN_ASTRALS.value
+            antiban_likelihood = 2
+            antiban_downtime_sec = 4
             reopen_invent = True
             always_sleep = False
 

@@ -1,5 +1,6 @@
 import sys
 import API.AntiBan
+from API.Actions.Teleporting import teleport_with_crafting_cape, teleport_with_spellbook
 from Database.Connection import check_client_version
 from GUI.Main_GUI import show_main_gui
 from API.Debug import clear_debug_log
@@ -37,8 +38,10 @@ def __main__():
     capture_bluestacks()
     clear_debug_log()
 
-    # launch_script("Gilded_Altar")
+    launch_script("Moonclan_Astrals")
     # launch_script("GE_Dhide_Bodies")
+
+
     # does_img_exist(img_name='available_patch', script_name='Tithe_Farmer', threshold=0.85)
     # launch_script("Gnome_Course")
 

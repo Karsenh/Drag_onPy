@@ -197,7 +197,7 @@ def replenish_missing_items(curr_loop):
           f'\nHAS_ESS_POUCH_ARR = {HAS_ESS_POUCH_ARR}')
 
     if NEEDS_STAM:
-        is_bank_tab_open("6", True)
+        is_bank_tab_open(MAGIC_BANK_TAB, True)
         # deposit_ess()
         is_withdraw_qty("1", True)
         does_img_exist(img_name="Banked_Stam_4", script_name="Cwars_Lavas", threshold=0.97, should_click=True,
@@ -393,11 +393,6 @@ def fill_pouch(pouch_size):
     global CACHED_INVENT_LARGE_POUCH
     global CACHED_INVENT_GIANT_POUCH
 
-    # if not wait_for_invent_item_xy(f"Inventory_{pouch_size}_Pouch"):
-    #     return False
-    # does_img_exist(img_name=f"Inventory_{pouch_size}_Pouch", script_name="Cwars_Lavas", threshold=0.95, img_sel="first")
-    # mouse_long_click(get_existing_img_xy())
-
     print(f'small pouch fill vals: {CACHED_SMALL_FILL_XY}\nmedium: {CACHED_MEDIUM_FILL_XY}\nlarge: {CACHED_LARGE_FILL_XY}')
 
     match pouch_size:
@@ -555,16 +550,6 @@ def empty_pouch(pouch_size):
     global CACHED_INVENT_MEDIUM_POUCH
     global CACHED_INVENT_LARGE_POUCH
     global CACHED_INVENT_GIANT_POUCH
-
-    # if not does_img_exist(img_name=f"Inventory_{pouch_size}_Pouch", script_name="Cwars_Lavas", threshold=0.95, img_sel="first"):
-    #     if does_img_exist(img_name=f"Inventory_{pouch_size}_Pouch_Degraded", script_name="Cwars_Lavas", threshold=0.90):
-    #         print(f'Found Degraded {pouch_size} pouch - setting Degraded Exists to True')
-    #         DEGRADED_POUCH_EXISTS = True
-    #     else:
-    #         print(f'Found neither {pouch_size} pouch or degraded {pouch_size} pouch.')
-    #         return
-    #
-    # mouse_long_click(get_existing_img_xy())
 
     match pouch_size:
         case "Small":
