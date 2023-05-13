@@ -337,13 +337,13 @@ def launch_script(script_name="pisc_iron"):
             always_sleep = False
         case "Red_Chins":
             selected_script = ScriptEnum.RED_CHINS.value
-            antiban_likelihood = 15
+            antiban_likelihood = 5
             antiban_downtime_sec = 2
             reopen_invent = False
             always_sleep = False
         case "Blast_Furnace":
             selected_script = ScriptEnum.BLAST_FURNACE.value
-            antiban_likelihood = 15
+            antiban_likelihood = 5
             antiban_downtime_sec = 2
             reopen_invent = False
             always_sleep = False
