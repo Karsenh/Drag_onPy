@@ -87,6 +87,13 @@ def start_crafting_astrals(curr_loop):
         if not resupply():
             return False
 
+        curr_rt = get_curr_runtime()
+
+        if curr_rt.total_seconds() > 19800:
+            relog()
+            setup_interface("east", 1, "up")
+            reset_curr_runtime()
+
     else:
         print(f'First loop')
         setup_interface('east', 1, 'up')
@@ -98,17 +105,12 @@ def start_crafting_astrals(curr_loop):
         if not resupply():
             return False
 
-        curr_rt = get_curr_runtime()
-
-        if curr_rt.total_seconds() > 19800:
-            relog()
-            setup_interface("east", 1, "up")
-            reset_curr_runtime()
 
     return True
 
 
 def move_1():
+    is_tab_open('inventory')
     API.AntiBan.sleep_between(2.1, 2.2)
     wait_for_img(img_name='moonclan_island_flag', script_name=SCRIPT_NAME, threshold=0.9, max_wait_sec=5)
     mini_map_coords = 1458, 175
@@ -117,7 +119,7 @@ def move_1():
 
 
 def move_2():
-    return wait_for_img(img_name='move_2', script_name=SCRIPT_NAME, should_click=True, click_middle=True, max_wait_sec=15, threshold=0.90)
+    return wait_for_img(img_name='move_2', script_name=SCRIPT_NAME, should_click=True, click_middle=True, max_wait_sec=15, threshold=0.86)
 
 
 def move_3():
@@ -132,7 +134,7 @@ def move_3():
 
 
 def move_4():
-    if not wait_for_img(img_name='move_4', script_name=SCRIPT_NAME, max_wait_sec=15, threshold=0.98):
+    if not wait_for_img(img_name='move_4', script_name=SCRIPT_NAME, max_wait_sec=15, threshold=0.96):
         return False
 
     x, y = get_existing_img_xy()

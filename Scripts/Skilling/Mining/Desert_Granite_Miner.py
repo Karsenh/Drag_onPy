@@ -37,7 +37,7 @@ def start_mining_granite(curr_loop):
 
     else:
         print(f'First loop')
-        # setup_interface('south', 5, 'up')
+        setup_interface('south', 5, 'up')
     return True
 
 
