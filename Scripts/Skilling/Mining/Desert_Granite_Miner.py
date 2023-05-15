@@ -46,12 +46,13 @@ def mine_next_rock(curr_iteration):
     global NUM_TIMES_EXP_NOT_SEEN
     global SHOULD_CONTINUE_MINING
 
-    if is_last_drop():
-        print(f'is_last_drop: TRUE')
-        if not humidify_waterskins():
+    if CURR_TILE == 5:
+        if is_last_drop():
+            print(f'is_last_drop: TRUE')
             if not humidify_waterskins():
-                print(f'Failed to humidify twice')
-                return False
+                if not humidify_waterskins():
+                    print(f'Failed to humidify twice')
+                    return False
 
     # Coordinates of next rock from current tile
     rock_xy = ROCK_COORDS[CURR_TILE-1]
@@ -64,10 +65,9 @@ def mine_next_rock(curr_iteration):
     if curr_iteration != 1:
         API.AntiBan.sleep_between(SLEEP_TIMES[CURR_TILE-1], SLEEP_TIMES[CURR_TILE-1])
 
-    if CURR_TILE == 4:
-        SHOULD_CONTINUE_MINING = not does_img_exist(img_name='too_full', script_name=SCRIPT_NAME)
-        if not SHOULD_CONTINUE_MINING:
-            return True
+    SHOULD_CONTINUE_MINING = not does_img_exist(img_name='too_full', script_name=SCRIPT_NAME)
+    if not SHOULD_CONTINUE_MINING:
+        return True
 
     if not use_harralander_with_tar():
         return False
