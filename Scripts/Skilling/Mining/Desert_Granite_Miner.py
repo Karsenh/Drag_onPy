@@ -12,7 +12,7 @@ rock_3_xy = 933, 677
 rock_4_xy = 627, 720
 
 ROCK_COORDS = [rock_1_xy, rock_2_xy, rock_3_xy, rock_4_xy]
-SLEEP_TIMES = [.5, .6, .5, .5]
+SLEEP_TIMES = [.2, .3, .2, .2]
 CACHED_HARR_XY = None
 CACHED_TAR_XY = None
 
