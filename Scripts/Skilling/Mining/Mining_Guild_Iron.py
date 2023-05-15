@@ -21,6 +21,8 @@ rock_colors = [r1_col, r2_col, r3_col]
 
 CURR_ROCK = 0
 
+ROCK_CLICK_INTERVAL = 0.85
+
 
 def start_mining_guild_iron(curr_loop):
     if curr_loop != 1:
@@ -53,7 +55,7 @@ def mine_iron():
         print(f'Found iron color @ curr_rock: {CURR_ROCK}')
         mouse_click(rock_xy[CURR_ROCK], min_num_clicks=1, max_num_clicks=2)
         # wait_for_img(img_name='Mining', category='Exp_Drops', threshold=0.75, max_wait_sec=2)
-        API.AntiBan.sleep_between(1.0, 1.1)
+        API.AntiBan.sleep_between(ROCK_CLICK_INTERVAL, ROCK_CLICK_INTERVAL)
         CURR_ROCK += 1
 
     if CURR_ROCK == 3:
