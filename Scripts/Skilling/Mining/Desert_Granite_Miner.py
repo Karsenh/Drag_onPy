@@ -64,9 +64,10 @@ def mine_next_rock(curr_iteration):
     if curr_iteration != 1:
         API.AntiBan.sleep_between(SLEEP_TIMES[CURR_TILE-1], SLEEP_TIMES[CURR_TILE-1])
 
-    SHOULD_CONTINUE_MINING = not does_img_exist(img_name='too_full', script_name=SCRIPT_NAME)
-    if not SHOULD_CONTINUE_MINING:
-        return True
+    if CURR_TILE == 4:
+        SHOULD_CONTINUE_MINING = not does_img_exist(img_name='too_full', script_name=SCRIPT_NAME)
+        if not SHOULD_CONTINUE_MINING:
+            return True
 
     if not use_harralander_with_tar():
         return False
