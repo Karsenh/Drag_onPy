@@ -1,5 +1,6 @@
 import API.AntiBan
-from API.Imaging.Image import wait_for_img, does_img_exist, get_existing_img_xy
+from API.Imaging.Image import wait_for_img, does_img_exist, get_existing_img_xy, does_color_exist
+from API.Imports.Paths import BS_SCREEN_PATH
 from API.Interface.General import setup_interface, is_tab_open, is_otd_enabled, drop_inventory
 from API.Mouse import mouse_click
 
@@ -34,10 +35,14 @@ def start_mining_granite(curr_loop):
             i += 1
 
         drop_granite()
+        if is_dpick_spec_ready():
+            use_spec()
 
     else:
         print(f'First loop')
-        setup_interface('south', 5, 'up')
+        # setup_interface('south', 5, 'up')
+        if is_dpick_spec_ready():
+            use_spec()
     return True
 
 
@@ -159,3 +164,15 @@ def use_harralander_with_tar():
         adj_xy = x+6, y+6
         CACHED_TAR_XY = adj_xy
     return True
+
+
+def is_dpick_spec_ready():
+    col_xy = 1244, 273
+    spec_col = 29, 143, 171
+    return does_color_exist(spec_col, col_xy, BS_SCREEN_PATH)
+
+
+def use_spec():
+    spec_xy = 1244, 290
+    mouse_click(spec_xy)
+    return
