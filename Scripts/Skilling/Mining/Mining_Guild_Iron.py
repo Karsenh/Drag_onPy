@@ -95,9 +95,7 @@ def move_back_to_ore():
         print(f'❌ Failed to find walk_here_dark option - clicking manually...')
         mouse_click(ore_spot_xy)
 
-
-
-    API.AntiBan.sleep_between(3.0, 3.1)
+    API.AntiBan.sleep_between(4.5, 4.6)
 
     return True
 
