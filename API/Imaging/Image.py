@@ -189,20 +189,20 @@ def does_img_exist(img_name, script_name=None, category='Scripts', threshold=0.8
 
         if should_click:
             if click_middle:
-                print(f'Clicking calculated middle of template image.')
+                # print(f'Clicking calculated middle of template image.')
                 img_x, img_y = LATEST_IMG_XY
                 adj_x = img_x + temp_middle_width
                 adj_y = img_y + temp_middle_height
                 adj_xy = adj_x, adj_y
                 mouse_click(adj_xy, min_num_clicks=min_clicks, max_num_clicks=max_clicks)
             else:
-                print(f'Clicking with xy offset')
+                # print(f'Clicking with xy offset')
                 img_x, img_y = LATEST_IMG_XY
                 adj_x = img_x + x_offset
                 adj_y = img_y + y_offset
                 adj_xy = adj_x, adj_y
                 mouse_click(adj_xy, min_num_clicks=min_clicks, max_num_clicks=max_clicks)
-        write_debug(f'{LATEST_IMG_XY} saved to img_check_xy global')
+        write_debug(f'{LATEST_IMG_XY} saved to img_check_xy for: {img_name}')
         return True
 
 

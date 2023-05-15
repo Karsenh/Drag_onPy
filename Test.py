@@ -38,8 +38,7 @@ def __main__():
     capture_bluestacks()
     clear_debug_log()
 
-    launch_script("Moonclan_Astrals")
-    # launch_script("GE_Dhide_Bodies")
+    launch_script("Desert_Granite_Miner")
 
 
     # does_img_exist(img_name='available_patch', script_name='Tithe_Farmer', threshold=0.85)
