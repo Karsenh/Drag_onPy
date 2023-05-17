@@ -31,6 +31,13 @@ def start_mining_guild_iron(curr_loop):
         while not inventory_full():
             mine_iron()
 
+        curr_rt = get_curr_runtime()
+
+        if curr_rt.total_seconds() > 19800:
+            relog()
+            setup_interface("south", 5, "up")
+            reset_curr_runtime()
+
         if not deposit_inventory():
             print(f'⛔ Deposite inventory failed for some reason - likely found iron in inventory after attempting to deposit - Exiting...')
             return False
@@ -47,6 +54,8 @@ def start_mining_guild_iron(curr_loop):
 
         if is_dpick_spec_ready():
             use_spec()
+
+
 
     else:
         print(f'First loop')
@@ -87,10 +96,11 @@ def deposit_inventory():
         return False
 
     keyboard.send('esc')
+    return True
 
-    API.AntiBan.sleep_between(1.0, 1.1)
-
-    return not does_img_exist(img_name='inventory_iron_ore', script_name=SCRIPT_NAME, img_sel='inventory')
+    # API.AntiBan.sleep_between(1.0, 1.1)
+    #
+    # return not does_img_exist(img_name='inventory_iron_ore', script_name=SCRIPT_NAME, img_sel='inventory')
 
 
 def move_back_to_ore():
