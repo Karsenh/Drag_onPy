@@ -1,8 +1,10 @@
+import pyautogui
+
 import API.AntiBan
 from API.Imaging.Image import wait_for_img, does_img_exist, get_existing_img_xy, does_color_exist
 from API.Imports.Paths import BS_SCREEN_PATH
 from API.Interface.General import setup_interface, is_tab_open, is_otd_enabled, drop_inventory
-from API.Mouse import mouse_click
+from API.Mouse import mouse_click, mouse_move
 
 SCRIPT_NAME = 'Desert_Granite_Miner'
 CURR_TILE = 1
@@ -12,7 +14,7 @@ rock_2_xy = 930, 650
 rock_3_xy = 933, 677
 rock_4_xy = 627, 720
 
-ROCK_COORDS = [rock_1_xy, rock_2_xy, rock_3_xy, rock_4_xy]
+ORE_COORDS = [rock_1_xy, rock_2_xy, rock_3_xy, rock_4_xy]
 SLEEP_TIMES = [.2, .3, .2, .2]
 CACHED_HARR_XY = None
 CACHED_TAR_XY = None
@@ -27,6 +29,7 @@ USE_SPEC = True
 def start_mining_granite(curr_loop):
     if curr_loop != 1:
         print(f'Not first loop')
+        start_mining(curr_loop)
         i = 1
         while SHOULD_CONTINUE_MINING:
             print(f'Mine Next Rock Loop iteration: {i}')
@@ -35,6 +38,14 @@ def start_mining_granite(curr_loop):
             i += 1
 
         drop_granite()
+
+        if need_water_refill():
+            print(f'is_last_drop: TRUE')
+            if not humidify_waterskins():
+                if not humidify_waterskins():
+                    print(f'Failed to humidify twice')
+                    return False
+
         if is_dpick_spec_ready():
             use_spec()
 
@@ -46,39 +57,67 @@ def start_mining_granite(curr_loop):
     return True
 
 
+def start_mining(curr_loop):
+    # Click herb
+    sel_invent_harralander()
+
+    # Click tar
+    use_harralander_with_tar()
+
+    # Click ore nearby
+    if curr_loop != 2:
+        next_ore_xy = ORE_COORDS[CURR_TILE-1]
+        increment_curr_tile()
+    else:
+        next_ore_xy = 775, 726
+
+    mouse_click(next_ore_xy)
+
+    return True
+
+
 def mine_next_rock(curr_iteration):
     global CURR_TILE
     global NUM_TIMES_EXP_NOT_SEEN
     global SHOULD_CONTINUE_MINING
 
-    if CURR_TILE == 5:
-        if is_last_drop():
-            print(f'is_last_drop: TRUE')
-            if not humidify_waterskins():
-                if not humidify_waterskins():
-                    print(f'Failed to humidify twice')
-                    return False
-
-    # Coordinates of next rock from current tile
-    rock_xy = ROCK_COORDS[CURR_TILE-1]
-
-    print(f'Clicking coordinates - {rock_xy}')
-
+    # Click herb
     if not sel_invent_harralander():
         return False
 
-    if curr_iteration != 1:
-        API.AntiBan.sleep_between(SLEEP_TIMES[CURR_TILE-1], SLEEP_TIMES[CURR_TILE-1])
+    # Hover over tar
+    hover_tar_with_harralander_sel()
 
-    SHOULD_CONTINUE_MINING = not does_img_exist(img_name='too_full', script_name=SCRIPT_NAME)
-    if not SHOULD_CONTINUE_MINING:
-        return True
+    # Wait for mining xp drop
+    if not saw_mining_exp():
+        print(f'❌ Failed to see mining exp - clicking tar then next ore...')
+        SHOULD_CONTINUE_MINING = not does_img_exist(img_name='too_full', script_name=SCRIPT_NAME)
+        if not SHOULD_CONTINUE_MINING:
+            return True
+    else:
+        print(f'✔ Saw next mining exp')
 
-    if not use_harralander_with_tar():
-        return False
+    # Click tar (hovered)
+    pyautogui.leftClick()
 
-    print(f'Clicking rock: {rock_xy}')
-    mouse_click(rock_xy)
+    # Click next ore
+    ore_xy = ORE_COORDS[CURR_TILE - 1]
+    print(f'Clicking coordinates - {ore_xy}')
+    mouse_click(ore_xy)
+
+    increment_curr_tile()
+
+    # Do checks
+    # (humidify)
+
+    API.AntiBan.sleep_between(0.8, 0.8)
+
+    return True
+
+
+# HELPERS
+def increment_curr_tile():
+    global CURR_TILE
 
     CURR_TILE += 1
     print(f'Inc curr_tile (now): {CURR_TILE}')
@@ -86,26 +125,11 @@ def mine_next_rock(curr_iteration):
     if CURR_TILE == 5:
         print(f'Resetting curr tile to 1')
         CURR_TILE = 1
-
-    # mined_rock = saw_mining_exp()
-    #
-    # if mined_rock:
-    #     print(f'✅ Saw Mining Exp - Rock successfully mined')
-    #     NUM_TIMES_EXP_NOT_SEEN = 0
-    # else:
-    #     NUM_TIMES_EXP_NOT_SEEN += 1
-    #     print(f'❌ Failed to find Mining exp - Num times now: {NUM_TIMES_EXP_NOT_SEEN}')
-    #
-    # if NUM_TIMES_EXP_NOT_SEEN > 5:
-    #     print(f'⛔ Failed to find Mining Exp for {NUM_TIMES_EXP_NOT_SEEN} times which is greater than 5 - Exiting...')
-    #     return False
-
-    return True
+    return
 
 
-# HELPERS
-def is_last_drop():
-    return does_img_exist(img_name='last_drop_of_water', script_name=SCRIPT_NAME, threshold=0.92)
+def need_water_refill():
+    return does_img_exist(img_name='last_drop_of_water', script_name=SCRIPT_NAME, threshold=0.9)
 
 
 def humidify_waterskins():
@@ -123,7 +147,7 @@ def drop_granite():
 
 
 def saw_mining_exp():
-    return wait_for_img(img_name='Mining', category='Exp_Drops', max_wait_sec=5)
+    return wait_for_img(img_name='Mining', category='Exp_Drops', max_wait_sec=4)
 
 
 def is_time_to_humidify():
@@ -175,4 +199,27 @@ def is_dpick_spec_ready():
 def use_spec():
     spec_xy = 1244, 290
     mouse_click(spec_xy)
+    return
+
+
+def hover_tar_with_harralander_sel():
+    global CACHED_TAR_XY
+
+    is_tab_open('inventory')
+
+    if CACHED_TAR_XY:
+        # mouse_click(CACHED_TAR_XY)
+        mouse_move(CACHED_TAR_XY)
+    else:
+        if not does_img_exist(img_name='tar', script_name=SCRIPT_NAME):
+            print(f'⛔ Failed to find Tar in inventory to use Harralander with')
+            return False
+        x, y, = get_existing_img_xy()
+        adj_xy = x+6, y+6
+        CACHED_TAR_XY = adj_xy
+        mouse_move(CACHED_TAR_XY)
+    return True
+
+
+def click_next_ore():
     return

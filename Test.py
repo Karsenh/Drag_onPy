@@ -40,6 +40,8 @@ def __main__():
 
     launch_script("Desert_Granite_Miner")
 
+    # does_img_exist(img_name='last_drop_of_water', script_name='Desert_Granite_Miner', threshold=0.8)
+
     # r1_xy = 764, 511
     # r2_xy = 832, 479
     # r3_xy = 756, 388
