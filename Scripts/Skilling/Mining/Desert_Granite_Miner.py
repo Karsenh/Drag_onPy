@@ -40,7 +40,7 @@ def start_mining_granite(curr_loop):
 
     else:
         print(f'First loop')
-        # setup_interface('south', 5, 'up')
+        setup_interface('south', 5, 'up')
         if is_dpick_spec_ready():
             use_spec()
     return True

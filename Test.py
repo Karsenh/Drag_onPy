@@ -38,15 +38,15 @@ def __main__():
     capture_bluestacks()
     clear_debug_log()
 
-    launch_script("Mining_Guild_Iron")
+    launch_script("Desert_Granite_Miner")
 
-    r1_xy = 764, 511
-    r2_xy = 832, 479
-    r3_xy = 756, 388
-    r1_col = [66, 41, 31]
-    r2_col = [60, 38, 30]
-    r2_col = [66, 41, 31]
-    print(f'color: ${get_color_at_coords(r1_xy)}')
+    # r1_xy = 764, 511
+    # r2_xy = 832, 479
+    # r3_xy = 756, 388
+    # r1_col = [66, 41, 31]
+    # r2_col = [60, 38, 30]
+    # r2_col = [66, 41, 31]
+    # print(f'color: ${get_color_at_coords(r1_xy)}')
 
 
     # does_img_exist(img_name='available_patch', script_name='Tithe_Farmer', threshold=0.85)
