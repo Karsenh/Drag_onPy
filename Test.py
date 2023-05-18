@@ -38,7 +38,7 @@ def __main__():
     capture_bluestacks()
     clear_debug_log()
 
-    launch_script("Desert_Granite_Miner")
+    launch_script("Mining_Guild_Iron")
 
     # does_img_exist(img_name='last_drop_of_water', script_name='Desert_Granite_Miner', threshold=0.8)
 
