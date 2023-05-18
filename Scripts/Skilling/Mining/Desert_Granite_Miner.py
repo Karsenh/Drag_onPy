@@ -129,7 +129,7 @@ def increment_curr_tile():
 
 
 def need_water_refill():
-    return does_img_exist(img_name='last_drop_of_water', script_name=SCRIPT_NAME, threshold=0.9)
+    return does_img_exist(img_name='last_drop_of_water', script_name=SCRIPT_NAME, threshold=0.85)
 
 
 def humidify_waterskins():
@@ -141,13 +141,13 @@ def humidify_waterskins():
 def drop_granite():
     global SHOULD_CONTINUE_MINING
     is_otd_enabled(True)
-    drop_inventory(from_spot_num=3, to_spot_num=16, should_disable_otd_after=True)
+    drop_inventory(from_spot_num=3, to_spot_num=18, should_disable_otd_after=True)
     SHOULD_CONTINUE_MINING = True
     return
 
 
 def saw_mining_exp():
-    return wait_for_img(img_name='Mining', category='Exp_Drops', max_wait_sec=4)
+    return wait_for_img(img_name='Mining', category='Exp_Drops', max_wait_sec=1)
 
 
 def is_time_to_humidify():
