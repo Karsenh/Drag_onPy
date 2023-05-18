@@ -35,7 +35,7 @@ def start_mining_guild_iron(curr_loop):
 
         if curr_rt.total_seconds() > 19800:
             relog()
-            setup_interface("south", 5, "up")
+            setup_interface("south", 3, "up")
             reset_curr_runtime()
 
         if not deposit_inventory():
