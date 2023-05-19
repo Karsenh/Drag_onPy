@@ -20,7 +20,7 @@ btn_bg_color = '#645747'
 
 def show_plg(script_name, root):
 
-    plg_top_height = 1100
+    plg_top_height = 940
     plg_top_width = 650
 
     break_font = font.Font(family='Helvetica', size=11, weight='normal')
@@ -61,14 +61,14 @@ def show_plg(script_name, root):
         start_image = ImageTk.PhotoImage(Image.open(f'{os.getcwd()}\Assets\Images\GUI_Images\PreLaunch_Gui\start_btn.png'))
         start_btn = Button(main_plg_frame, text="Defence", image=start_image, bg="#3e3529", activebackground=btn_active_bg_color, height=43, width=200, command=lambda: handle_script_launched(script_name, plg_gui, root))
         start_btn.photo = start_image
-        start_btn.grid(row=5, column=1, pady=(30, 0))
+        start_btn.grid(row=5, column=1, pady=(20, 0))
         return
 
 
 def show_plg_start_section(main_plg_frame, font_styles, script_name):
     start_tile_image, start_equip_image, start_invent_image, _ = get_plg_gui_images(script_name)
 
-    start_info_frame = LabelFrame(main_plg_frame, text="Start Tile | Equipment | Inventory", bg=frame_bg_color, pady=20, padx=20)
+    start_info_frame = LabelFrame(main_plg_frame, text="Start Tile | Equipment | Inventory", bg=frame_bg_color, pady=10, padx=20)
 
     # Start_Tile
     start_tile_img_label = Label(start_info_frame, image=start_tile_image, background=frame_bg_color)
@@ -93,7 +93,7 @@ def show_plg_start_section(main_plg_frame, font_styles, script_name):
 def show_plg_notes_section(main_plg_frame, font_styles, script_name):
     break_font, break_btn_font = font_styles
 
-    notes_label_frame = LabelFrame(main_plg_frame, text="Notes", bg=frame_bg_color, pady=20, padx=20, width=250)
+    notes_label_frame = LabelFrame(main_plg_frame, text="Notes", bg=frame_bg_color, pady=0, padx=20, width=250)
     break_font, break_btn_font = font_styles
 
     _, _, _, notes_image = get_plg_gui_images(script_name)
@@ -103,7 +103,7 @@ def show_plg_notes_section(main_plg_frame, font_styles, script_name):
     start_tile_img_label.photo = notes_image
     start_tile_img_label.grid(row=1, column=1)
 
-    notes_label_frame.grid(row=3, column=1, pady=(20, 20))
+    notes_label_frame.grid(row=3, column=1, pady=(10, 10))
     return
 
 
