@@ -30,69 +30,101 @@ def start_blasting(curr_loop):
 
     if curr_loop != 1:
         print(f'♾ CURR LOOP: {curr_loop}')
-        # Curr_loop == 2 (+27 coal)
-        # Curr_loop == 3 (+54 coal)
-        # Curr_loop == 4 (+81 coal)
+        if curr_loop != 2:
+            if not open_bank_from_bars():
+                return False
+            deposit_bars()
+        else:
+            open_bank_from_bank()
+        handle_run()
 
-        # Open the bank from bar claim - wait for it to open and if not return false
+        if not fill_coal_bag():             # +27 Coal (27):
+            return False
+        if not withdraw_coal():             # +27 Coal (54)
+            return False
+
+        click_belt_from_bank()
+
+        if not empty_coal_bag('coal'):
+            return False
+
+        click_belt_from_belt()
+
+        if not open_bank_from_belt():
+            return False
+        if not handle_run():
+            return False
+
+        if not fill_coal_bag():             # +27 Coal (27):
+            return False
+        if not withdraw_coal():             # +27 Coal (54)
+            return False
+
+        click_belt_from_bank()
+
+        if not empty_coal_bag('coal'):
+            return False
+
+        click_belt_from_belt()
+
+        if not open_bank_from_belt():
+            return False
+        if not handle_run():
+            return False
+
+        if not fill_coal_bag():
+            return False
+        if not withdraw_ore():
+            return False
+
+        click_belt_from_bank()
+
+        if not empty_coal_bag('rune'):
+            return False
+
+        click_belt_from_belt()
+
+        if not claim_bars():
+            return False
+
         if not open_bank_from_bars():
             return False
 
-        # Deposit bars in inventory
         deposit_bars()
-        # Drink stam if necessary
-        handle_run()
 
-        if ORE_TYPE == 'Rune' and curr_loop % 4 == 0:
-            print(f'Need to get coal bag and rune invent here')
-            fill_coal_bag()
-            withdraw_ore()
-            click_belt_from_bank()
-            empty_coal_bag(ORE_TYPE)
-            click_belt_from_belt()
-            return claim_bars()
-
-        # Fill Coal Pouch
-        fill_coal_bag()
-        # Fill Inventory with coal
-        withdraw_coal()
-        # Click Belt
-        click_belt_from_bank()
-        # Wait for coal deposit
-        # wait_for_belt_deposit('coal')
-        # Empty coal bag
-        empty_coal_bag('coal')
-        # Deposit Coal
-        click_belt_from_belt()
-        # Wait for coal deposit
-        # wait_for_belt_deposit('coal')
-        # Click bank from belt - wait for bank open (10 seconds) - return false if not
-        if not open_bank_from_belt():
+        if not handle_run():
             return False
 
-        handle_run()
-        # Fill Coal Pouch
-        fill_coal_bag()
+        if not fill_coal_bag():
+            return False
+        if not withdraw_coal():
+            return False
 
-        if ORE_TYPE == 'Rune':
-            withdraw_coal()
-            click_belt_from_bank()
-            empty_coal_bag('coal')
-            click_belt_from_belt()
-            if not open_bank_from_belt():
-                return False
-            handle_run()
-            fill_coal_bag()
-
-        # Fill Inventory with ore
-        withdraw_ore()
-        # Deposit ore on belt
         click_belt_from_bank()
-        # wait_for_belt_deposit('addy')
-        empty_coal_bag(ORE_TYPE)
+
+        if not empty_coal_bag('coal'):
+            return False
+
         click_belt_from_belt()
-        # API.AntiBan.sleep_between(0.4, 0.5)
-        # wait_for_belt_deposit('coal')
+
+        if not open_bank_from_belt():
+            return False
+        if not handle_run():
+            return False
+
+        if not fill_coal_bag():
+            return False
+        if not withdraw_ore():
+            return False
+
+        click_belt_from_bank()
+
+        if not empty_coal_bag('rune'):
+            print(f'⛔⛔ Failed to empty coal bag for some reason')
+            return False
+
+        click_belt_from_belt()
+
         return claim_bars()
 
     else:
@@ -100,35 +132,7 @@ def start_blasting(curr_loop):
         BANK_TAB = get_global_bank_tab_num()
         set_ore_from_options()
         setup_interface('north', 1, 'up')
-        open_bank_from_bank()
-        handle_run()
-        # deposit_money_into_coffer()
-        withdraw_coal_bag()
-        fill_coal_bag()
-        withdraw_coal()
-        click_belt_from_bank()
-        empty_coal_bag('coal')
-        click_belt_from_belt()
-        open_bank_from_belt()
-        handle_run()
-        fill_coal_bag()
-
-        if ORE_TYPE == 'Rune':
-            withdraw_coal()
-            click_belt_from_bank()
-            empty_coal_bag('coal')
-            click_belt_from_belt()
-            if not open_bank_from_belt():
-                return False
-            handle_run()
-            fill_coal_bag()
-
-        withdraw_ore()
-        click_belt_from_bank()
-        empty_coal_bag(ORE_TYPE)
-        click_belt_from_belt()
-        # wait_for_belt_deposit('coal')
-        return claim_bars()
+        return True
 
 
 def set_ore_from_options():

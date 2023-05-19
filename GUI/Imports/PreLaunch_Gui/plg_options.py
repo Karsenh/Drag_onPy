@@ -42,7 +42,7 @@ def show_plg_options(main_plg_frame, font_styles, script_name):
 
         return
 
-    script_options_frame = LabelFrame(main_plg_frame, text=f"Additional Options - ({script_name})", bg=frame_bg_color, pady=40, padx=40, width=250)
+    script_options_frame = LabelFrame(main_plg_frame, text=f"Additional Options - ({script_name})", bg=frame_bg_color, pady=15, padx=25, width=250)
 
     # Determines what option buttons to show at the bottom of the Pre-Launch GUI based on the script
     agility_scripts = ["Gnome_Course", "Canifis_Rooftops", "Seers_Rooftops", "Ardy_Rooftops"]
