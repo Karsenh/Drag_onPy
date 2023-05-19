@@ -1,11 +1,13 @@
 import keyboard
+import pyautogui
 
 import API.AntiBan
 from API.Imaging.Image import wait_for_img, does_img_exist, get_existing_img_xy, does_color_exist, \
     does_color_exist_in_thresh
 from API.Imports.Paths import BS_SCREEN_PATH
-from API.Interface.General import setup_interface, is_tab_open, is_otd_enabled, drop_inventory, relog
-from API.Mouse import mouse_click, mouse_long_click
+from API.Interface.General import setup_interface, is_tab_open, is_otd_enabled, drop_inventory, relog, \
+    get_xy_for_invent_slot
+from API.Mouse import mouse_click, mouse_long_click, mouse_move
 from API.Time import get_curr_runtime, reset_curr_runtime
 
 SCRIPT_NAME = 'Mining_Guild_Iron'
@@ -22,46 +24,96 @@ rock_colors = [r1_col, r2_col, r3_col]
 
 CURR_ROCK = 0
 
-ROCK_CLICK_INTERVAL = 0.85
+ROCK_CLICK_INTERVAL = 0.75
+
+POWER_MINE = True
+
+PM_ITERATION = 0
 
 
 def start_mining_guild_iron(curr_loop):
     if curr_loop != 1:
         print(f'Not first loop')
-        while not inventory_full():
-            mine_iron()
 
-        curr_rt = get_curr_runtime()
+        if not POWER_MINE:
+            while not inventory_full():
+                mine_iron()
 
-        if curr_rt.total_seconds() > 19800:
-            relog()
-            setup_interface("south", 3, "up")
-            reset_curr_runtime()
+            curr_rt = get_curr_runtime()
 
-        if not deposit_inventory():
-            print(f'⛔ Deposite inventory failed for some reason - likely found iron in inventory after attempting to deposit - Exiting...')
-            return False
+            if curr_rt.total_seconds() > 19800:
+                relog()
+                setup_interface("south", 3, "up")
+                reset_curr_runtime()
 
-        if not move_back_to_ore():
-            return False
+            if not deposit_inventory():
+                print(f'⛔ Deposite inventory failed for some reason - likely found iron in inventory after attempting to deposit - Exiting...')
+                return False
 
-        curr_rt = get_curr_runtime()
+            if not move_back_to_ore():
+                return False
 
-        if curr_rt.total_seconds() > 19800:
-            relog()
-            setup_interface("east", 1, "up")
-            reset_curr_runtime()
-
-        if is_dpick_spec_ready():
-            use_spec()
-
-
-
+            if is_dpick_spec_ready():
+                use_spec()
+        else:
+            print('Power mining...')
+            power_mine()
     else:
         print(f'First loop')
         setup_interface('south', 3, 'up')
         if is_dpick_spec_ready():
             use_spec()
+    return True
+
+
+def power_mine():
+    global CURR_ROCK
+    global PM_ITERATION
+
+    safe_mode = False
+
+    # turn on otd
+    is_otd_enabled(True)
+
+    # open inventory
+    is_tab_open('inventory')
+    if CURR_ROCK == 3:
+        CURR_ROCK = 0
+    print(f'CURR ROCK: {CURR_ROCK}')
+
+    mouse_click(rock_xy[CURR_ROCK])
+    CURR_ROCK += 1
+    API.AntiBan.sleep_between(1.9, 1.9)
+
+    # click rock
+    while get_curr_runtime().total_seconds() < 19800 and not inventory_full():
+
+        mouse_click(rock_xy[CURR_ROCK])
+        if PM_ITERATION % 2 == 0:
+            drop_slot_num = 1
+        else:
+            drop_slot_num = 2
+
+        mouse_move(get_xy_for_invent_slot(drop_slot_num))
+
+        if CURR_ROCK == 1 or CURR_ROCK == 2:
+            API.AntiBan.sleep_between(1.4, 1.4)
+        else:
+            API.AntiBan.sleep_between(1.4, 1.4)
+        if safe_mode:
+            wait_for_img(img_name='Mining', category='Exp_Drops', max_wait_sec=2)
+
+        pyautogui.leftClick()
+
+        if is_dpick_spec_ready():
+            use_spec()
+
+        PM_ITERATION += 1
+        CURR_ROCK += 1
+
+    if inventory_full():
+        drop_inventory(from_spot_num=1, to_spot_num=27)
+
     return True
 
 
