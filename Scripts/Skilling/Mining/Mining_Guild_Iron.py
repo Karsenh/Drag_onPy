@@ -71,6 +71,7 @@ def power_mine():
     global PM_ITERATION
 
     safe_mode = False
+    is_invent_full = False
 
     # turn on otd
     is_otd_enabled(True)
@@ -82,18 +83,20 @@ def power_mine():
     API.AntiBan.sleep_between(1.9, 1.9)
 
     # click rock
-    while get_curr_runtime().total_seconds() < 19800 and not inventory_full():
+    while get_curr_runtime().total_seconds() < 19800 and not is_invent_full:
         print(f'CURR ROCK: {CURR_ROCK}')
         mouse_click(rock_xy[CURR_ROCK])
+
         if PM_ITERATION % 2 == 0:
             drop_slot_num = 1
         else:
             drop_slot_num = 2
 
+        is_invent_full = inventory_full()
         mouse_move(get_xy_for_invent_slot(drop_slot_num))
 
         if CURR_ROCK == 1 or CURR_ROCK == 2:
-            API.AntiBan.sleep_between(1.2, 1.2)
+            API.AntiBan.sleep_between(1.4, 1.4)
         else:
             API.AntiBan.sleep_between(1.4, 1.4)
         if safe_mode:
@@ -106,7 +109,7 @@ def power_mine():
         if CURR_ROCK == 3:
             CURR_ROCK = 0
 
-    if inventory_full():
+    if is_invent_full:
         drop_inventory(from_spot_num=1, to_spot_num=27)
 
     return True
