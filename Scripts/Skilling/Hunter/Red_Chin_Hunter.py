@@ -267,8 +267,10 @@ def check_traps_from(curr_at_trap_num):
                         if not wait_for_img(img_name="Lay_Trap", script_name="Red_Chins", threshold=0.8, should_click=True, click_middle=True):
                             if not wait_for_img(img_name="Reset_Trap", script_name="Red_Chins", threshold=0.8,
                                                 should_click=True, click_middle=True):
-                                print(f'Failed to find ')
-                                return False
+                                print(f'Failed to find Reset_Trap')
+                                if not does_img_exist(img_name='Lay_Trap', script_name='Red_Chins', threshold=0.75, should_click=True, click_middle=True):
+                                    print(f'Failed a lot of steps')
+                                    return False
 
                 API.AntiBan.sleep_between(5.2, 5.3)
                 if not trap_is_set(curr_check_trap_num):
