@@ -265,7 +265,7 @@ def check_traps_from(curr_at_trap_num):
                     else:
                         mouse_long_click(curr_check_trap_claim_coords[curr_check_trap_num])
                         if not wait_for_img(img_name="Lay_Trap", script_name="Red_Chins", threshold=0.8, should_click=True, click_middle=True):
-                            if not wait_for_img(img_name="Reset_Trap", script_name="Red_Chins", threshold=0.9,
+                            if not wait_for_img(img_name="Reset_Trap", script_name="Red_Chins", threshold=0.8,
                                                 should_click=True, click_middle=True):
                                 print(f'Failed to find ')
                                 return False
@@ -312,7 +312,7 @@ def get_curr_at_trap():
 
 def set_box_trap():
     is_tab_open('inventory', True)
-    did_trap_set = does_img_exist(img_name="Inventory_Box_Trap", script_name="Red_Chins", threshold=0.9, should_click=True, click_middle=True)
+    did_trap_set = does_img_exist(img_name="Inventory_Box_Trap", script_name="Red_Chins", threshold=0.85, should_click=True, click_middle=True)
     is_tab_open('inventory', False)
     API.AntiBan.sleep_between(5.0, 5.1)
     return did_trap_set
