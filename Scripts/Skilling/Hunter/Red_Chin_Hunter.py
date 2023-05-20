@@ -36,7 +36,7 @@ class SpotCoords:
 
 
 t1f1_ss_region_xy = 830, 425, 880, 520
-t2f1_ss_region_xy = 622, 425, 668, 510
+t2f1_ss_region_xy = 590, 422, 668, 510
 t3f1_ss_region_xy = 840, 663, 885, 745
 t4f1_ss_region_xy = 580, 657, 635, 730
 t5f1_ss_region_xy = 712, 541, 760, 625
@@ -324,7 +324,7 @@ def set_box_trap():
 def color_exists(region, color, img_name):
     print(f'Checking color: {color} @ region: {region}')
     # 25 color tolerance working but not with very little timer remaining - trying 35
-    return does_color_exist_in_sub_image(region, color, img_name, color_tolerance=36, count_min=5)
+    return does_color_exist_in_sub_image(region, color, img_name, color_tolerance=45, count_min=5)
 
 
 # HANDLE COLORS
