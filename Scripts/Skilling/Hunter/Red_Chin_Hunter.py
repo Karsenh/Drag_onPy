@@ -324,7 +324,7 @@ def set_box_trap():
 def color_exists(region, color, img_name):
     print(f'Checking color: {color} @ region: {region}')
     # 25 color tolerance working but not with very little timer remaining - trying 35
-    return does_color_exist_in_sub_image(region, color, img_name, color_tolerance=36, count_min=5)
+    return does_color_exist_in_sub_image(region, color, img_name, color_tolerance=45, count_min=5)
 
 
 # HANDLE COLORS
