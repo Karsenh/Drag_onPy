@@ -1,9 +1,10 @@
 import pyautogui
 import API.AntiBan
 from API.Debug import write_debug
+from API.Time import get_curr_runtime, reset_curr_runtime
 from GUI.Imports.Skill_Level_Input.Skill_Level_Input import get_skill_level
 from API.Imaging.Image import does_img_exist, wait_for_img, get_existing_img_xy
-from API.Interface.General import setup_interface, is_tab_open, get_xy_for_invent_slot
+from API.Interface.General import setup_interface, is_tab_open, get_xy_for_invent_slot, relog
 from API.Mouse import mouse_click, mouse_move, mouse_long_click
 
 SEED_NUM = None
@@ -107,6 +108,13 @@ def start_tithe_farming(curr_loop):
         # harvest_plants()
         click_plants(should_water=False)
         deposit_points()
+
+        curr_rt = get_curr_runtime()
+
+        if curr_rt.total_seconds() > 19800:
+            relog()
+            setup_interface('south', 1, 'up')
+            reset_curr_runtime()
 
         # Every 6th loop - refill Gricoller's can and seeds
         if curr_loop % 17 == 0:
