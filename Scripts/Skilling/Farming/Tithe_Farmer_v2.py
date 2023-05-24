@@ -274,7 +274,7 @@ def replenish_seeds():
     pyautogui.press('0')
     API.AntiBan.sleep_between(0.4, 0.9)
     pyautogui.press('enter')
-    API.AntiBan.sleep_between(1.5, 1.6)
+    API.AntiBan.sleep_between(4.5, 4.6)
     if not does_img_exist(img_name='door_enter', script_name='Tithe_Farmer', threshold=0.9, should_click=True, click_middle=True, min_clicks=3, max_clicks=4):
         return False
     API.AntiBan.sleep_between(4.0, 4.1)
