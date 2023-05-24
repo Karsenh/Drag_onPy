@@ -109,7 +109,10 @@ def start_tithe_farming(curr_loop):
         deposit_points()
 
         # Every 6th loop - refill Gricoller's can and seeds
-        if curr_loop % 6 == 0:
+        if curr_loop % 17 == 0:
+            replenish_can()
+
+        if curr_loop % 600 == 0:
             print(f'Replenishing Can & Seeds')
             replenish_can()
             replenish_seeds()
@@ -249,6 +252,21 @@ def replenish_seeds():
         return False
     select_seeds_from_table()
     wait_for_img(img_name=f'Seed_{SEED_NUM}', script_name="Tithe_Farmer")
+    if not wait_for_img(img_name='how_many_seeds_chat_input', script_name='Tithe_Farmer'):
+        print(f'Failed to find how_many_seeds_chat_input')
+        return False
+    pyautogui.press('1')
+    API.AntiBan.sleep_between(0.4, 0.7)
+    pyautogui.press('0')
+    API.AntiBan.sleep_between(0.5, 0.9)
+    pyautogui.press('0')
+    API.AntiBan.sleep_between(0.4, 0.9)
+    pyautogui.press('0')
+    API.AntiBan.sleep_between(0.4, 0.9)
+    pyautogui.press('0')
+    API.AntiBan.sleep_between(0.4, 0.9)
+    pyautogui.press('enter')
+    API.AntiBan.sleep_between(1.5, 1.6)
     if not does_img_exist(img_name='door_enter', script_name='Tithe_Farmer', threshold=0.9, should_click=True, click_middle=True, min_clicks=3, max_clicks=4):
         return False
     API.AntiBan.sleep_between(4.0, 4.1)
@@ -257,7 +275,7 @@ def replenish_seeds():
 
 def return_to_plot_1():
     print(f'🔁 Returning to first plot section...')
-    mouse_click(BACK_TO_FIRST_PLOT_XY)
+    mouse_click(BACK_TO_FIRST_PLOT_XY, min_num_clicks=2, max_num_clicks=2)
     API.AntiBan.sleep_between(7.0, 7.1)
     return
 
@@ -316,7 +334,7 @@ def select_water_plant_option(retry_xy):
 
 # HELPERS
 def select_inventory_seed():
-    return does_img_exist(img_name=f'Seed_{SEED_NUM}', script_name="Tithe_Farmer", should_click=True, click_middle=True)
+    return does_img_exist(img_name=f'Seed_{SEED_NUM}', script_name="Tithe_Farmer", should_click=True, click_middle=True, threshold=0.7)
 
 
 def sleep_between_actions(curr_tile, sleep_num, is_watering=False):

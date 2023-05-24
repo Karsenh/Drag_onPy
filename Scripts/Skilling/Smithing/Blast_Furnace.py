@@ -46,6 +46,7 @@ def start_blasting(curr_loop):
         click_belt_from_bank()
 
         if not empty_coal_bag('coal'):
+            print(f'⛔⛔ Failed to empty coal bag for some reason')
             return False
 
         click_belt_from_belt()
@@ -63,6 +64,7 @@ def start_blasting(curr_loop):
         click_belt_from_bank()
 
         if not empty_coal_bag('coal'):
+            print(f'⛔⛔ Failed to empty coal bag for some reason')
             return False
 
         click_belt_from_belt()
@@ -80,6 +82,7 @@ def start_blasting(curr_loop):
         click_belt_from_bank()
 
         if not empty_coal_bag('rune'):
+            print(f'⛔⛔ Failed to empty coal bag for some reason (rune)')
             return False
 
         click_belt_from_belt()
@@ -103,6 +106,7 @@ def start_blasting(curr_loop):
         click_belt_from_bank()
 
         if not empty_coal_bag('coal'):
+            print(f'⛔⛔ Failed to empty coal bag for some reason')
             return False
 
         click_belt_from_belt()
@@ -120,7 +124,7 @@ def start_blasting(curr_loop):
         click_belt_from_bank()
 
         if not empty_coal_bag('rune'):
-            print(f'⛔⛔ Failed to empty coal bag for some reason')
+            print(f'⛔⛔ Failed to empty coal bag for some reason (rune)')
             return False
 
         click_belt_from_belt()
@@ -300,13 +304,15 @@ def wait_for_belt_deposit(ore):
     is_tab_open('inventory', True)
 
     while ore_present and attempts < 100:
-        ore_present = does_img_exist(img_name=f'Inventory_{ore}', script_name=SCRIPT_NAME, threshold=0.9)
+        ore_present = does_img_exist(img_name=f'Inventory_{ore}', script_name=SCRIPT_NAME, threshold=0.8)
+        print(f'ore_present: {ore_present}')
         attempts += 1
 
     if attempts == 100:
         print(f'Attempts to find inventory_{ore} = {attempts}')
         return False
 
+    print(f'wait_for_belt_deposit saw ore deposited')
     return True
 
 
