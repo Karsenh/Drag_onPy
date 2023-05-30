@@ -116,7 +116,7 @@ def move_1():
 
 
 def move_2():
-    return wait_for_img(img_name='move_2', script_name=SCRIPT_NAME, should_click=True, click_middle=True, max_wait_sec=15, threshold=0.95)
+    return wait_for_img(img_name='move_2', script_name=SCRIPT_NAME, should_click=True, click_middle=True, max_wait_sec=15, threshold=0.96)
 
 
 def move_3():
@@ -261,7 +261,7 @@ def handle_eat_food():
         print(f'⛔ Failed to find food ({FOOD_TYPE})')
         return False
 
-    if not wait_for_img(img_name=f'inventory_{FOOD_TYPE}', category='Banking', threshold=0.8, img_sel='inventory'):
+    if not wait_for_img(img_name=f'inventory_{FOOD_TYPE}', category='Banking', threshold=0.92, img_sel='inventory'):
         print(f'⛔ Failed to find inventory food')
         return False
 

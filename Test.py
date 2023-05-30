@@ -40,6 +40,7 @@ def __main__():
 
     launch_script("Moonclan_Astrals")
 
+    # does_img_exist(img_name='move_2', script_name='Moonclan_Astrals', threshold=0.96, should_click=True, click_middle=True)
     # does_img_exist(img_name='last_drop_of_water', script_name='Desert_Granite_Miner', threshold=0.85)
 
     # r1_xy = 764, 511
