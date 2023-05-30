@@ -93,7 +93,6 @@ def start_crafting_astrals(curr_loop):
             relog()
             setup_interface("east", 1, "up")
             reset_curr_runtime()
-
     else:
         print(f'First loop')
         setup_interface('east', 1, 'up')
@@ -104,8 +103,6 @@ def start_crafting_astrals(curr_loop):
 
         if not resupply():
             return False
-
-
     return True
 
 
