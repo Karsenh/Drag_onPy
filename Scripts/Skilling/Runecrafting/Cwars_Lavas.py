@@ -106,7 +106,8 @@ def start_crafting_lavas(curr_loop):
     else:
         print(f'This is the first loop - setting up interface etc.')
         # set_pouches_to_use()
-        MAGIC_BANK_TAB, JEWELRY_BANK_TAB = get_global_bank_tab_num()
+        MAGIC_BANK_TAB = get_global_bank_tab_num()
+        JEWELRY_BANK_TAB = get_global_bank_tab_num()
         setup_interface("north", 1, "up")
         set_inventory_items(curr_loop)
         set_equipped_items(curr_loop)

@@ -87,12 +87,12 @@ def start_crafting_astrals(curr_loop):
         if not resupply():
             return False
 
-        curr_rt = get_curr_runtime()
-
-        if curr_rt.total_seconds() > 19800:
-            relog()
-            setup_interface("east", 1, "up")
-            reset_curr_runtime()
+        # curr_rt = get_curr_runtime()
+        #
+        # if curr_rt.total_seconds() > 19800:
+        #     relog()
+        #     setup_interface("east", 1, "up")
+        #     reset_curr_runtime()
     else:
         print(f'First loop')
         setup_interface('east', 1, 'up')
