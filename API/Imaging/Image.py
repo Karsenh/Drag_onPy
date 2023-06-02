@@ -1,6 +1,8 @@
 import os
 import random
 
+from memory_profiler import profile
+
 import API.AntiBan
 from API.Time import is_time_up
 from PIL import Image, ImageGrab
@@ -16,7 +18,7 @@ import pyautogui as pag
 
 LATEST_IMG_XY = 0, 0
 
-
+@profile
 def capture_img_region(window_x, window_y, window_x2, window_y2, image_name):
     x1, y1, _, _ = get_bluestacks_region()
 
@@ -152,17 +154,20 @@ def does_img_exist(img_name, script_name=None, category='Scripts', threshold=0.8
         if img_sel == "last":
             LATEST_IMG_XY = loc[1][len(loc[1]) - 1], loc[0][len(loc[0]) - 1]
             write_debug(f'{img_name} EXISTING_IMG_XY = {LATEST_IMG_XY}')
+
         elif img_sel == "first":
             # Save the first img find xy coords
             LATEST_IMG_XY = loc[1][0], loc[0][0]
+
         elif img_sel == "random":
             r_x = random.randint(0, len(loc[1])-1)
             r_y = random.randint(0, len(loc[0])-1)
             print(f'Random img returning')
             LATEST_IMG_XY = loc[1][r_x], loc[0][r_y]
+
         elif img_sel == "inventory":
-            invent_x = max(loc[1])
-            invent_y_idx = np.where(loc[1] == invent_x)[0][0]  # [0] indicates the first item found within array of found x values
+            invent_x = max(loc[0])
+            invent_y_idx = np.where(loc[0] == invent_x)[0][0]  # [0] indicates the first item found within array of found x values
             invent_y = loc[0][invent_y_idx]
             print(f'Inventory x: {invent_x} @ idx {invent_y_idx}\nIvenntory y: {invent_y}')
             if invent_x > 1070 and invent_y > 370:

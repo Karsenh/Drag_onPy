@@ -63,7 +63,6 @@ def start_crafting_lavas(curr_loop):
     if curr_loop != 1:
         print(f'Not the first loop')
 
-
         # Add check for run energy gt however much needed for full run - if not wd stam and use
         check_run()
 
@@ -78,16 +77,17 @@ def start_crafting_lavas(curr_loop):
         if not replenish_missing_items(curr_loop):
             write_debug(f"Something went wrong while replenishing items... Exiting.")
             return False
+
         withdraw_ess()
         fill_pouches()
         close_bank()
 
-        curr_rt = get_curr_runtime()
-
-        if curr_rt.total_seconds() > 19800:
-            relog()
-            setup_interface("north", 1, "up")
-            reset_curr_runtime()
+        # curr_rt = get_curr_runtime()
+        #
+        # if curr_rt.total_seconds() > 19800:
+        #     relog()
+        #     setup_interface("north", 1, "up")
+        #     reset_curr_runtime()
 
         teleport_to_duel_arena()
         if not move_to_ruins():

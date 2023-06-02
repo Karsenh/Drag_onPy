@@ -1,9 +1,11 @@
+import sys
 from datetime import datetime
 from API.Imports.Paths import DEBUG_PATH
 import inspect
 
 
 DEBUG_MODE = True
+MEM_USAGE_OBJS = []
 
 
 def get_is_debug():
@@ -44,4 +46,30 @@ def write_debug(text, to_file=False):
         if to_file:
             print(f'📝 to Debug_Log')
             log_to_debug(text)
+    return
+
+
+def add_mem_obj(obj_name, obj_val):
+    global MEM_USAGE_OBJS
+    new_obj = {
+        'name': obj_name,
+        'value': obj_val
+    }
+    MEM_USAGE_OBJS.append(new_obj)
+    print(f'Successfully appended new obj to MEM_USAGE_OBJS: {new_obj}')
+    return
+
+
+def clear_mem_objs():
+    global MEM_USAGE_OBJS
+    MEM_USAGE_OBJS = []
+    print(f'✅ Successfully cleared MEM_USAGE_OBJS: (curr val) {MEM_USAGE_OBJS}')
+    return
+
+
+def print_mem_objs():
+    print(f'#### 🧠 MEMORY PROFILE 🧠 ####')
+    for obj in MEM_USAGE_OBJS:
+        print(f'{obj.name} : {sys.getsizeof(obj.value)}')
+    print(f'###############################')
     return

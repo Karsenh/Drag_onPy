@@ -1,3 +1,7 @@
+import sys
+
+from memory_profiler import profile
+
 import API.AntiBan
 from API.Actions.Teleporting import teleport_with_spellbook, teleport_with_crafting_cape
 from API.Global_Vars import get_global_bank_tab_num
@@ -5,7 +9,7 @@ from API.Interface.General import setup_interface, is_tab_open, is_run_gt, is_ru
 from API.Interface.Bank import is_bank_open, is_bank_tab_open, is_withdraw_qty, close_bank, deposit_all
 from API.Imaging.Image import wait_for_img, does_img_exist, get_existing_img_xy
 from API.Mouse import mouse_click, mouse_long_click
-from API.Debug import write_debug
+from API.Debug import write_debug, add_mem_obj, print_mem_objs
 from API.Time import get_curr_runtime, reset_curr_runtime
 from Scripts.Skilling.Runecrafting.Cwars_Lavas import wait_for_invent_item_xy
 
@@ -38,9 +42,6 @@ CACHED_GIANT_EMPTY_XY = None
 CACHED_EARTHS_XY = None
 CACHED_BANKED_ESS_XY = None
 
-CACHED_CWARS_TELE_XY = None
-CACHED_DA_TELE_XY = None
-
 CACHED_INVENT_SMALL_POUCH = None
 CACHED_INVENT_MEDIUM_POUCH = None
 CACHED_INVENT_LARGE_POUCH = None
@@ -49,6 +50,7 @@ CACHED_INVENT_GIANT_POUCH = None
 CRAFTING_GUILD_BANK_XY = 896, 330
 
 
+@profile
 def start_crafting_astrals(curr_loop):
     if curr_loop != 1:
         print(f'Not first loop')
@@ -87,15 +89,59 @@ def start_crafting_astrals(curr_loop):
         if not resupply():
             return False
 
-        # curr_rt = get_curr_runtime()
+        # print(f'{sys.getsizeof(CACHED_SMALL_FILL_XY)}')
+        # print(f'{sys.getsizeof(CACHED_SMALL_EMPTY_XY)}')
         #
-        # if curr_rt.total_seconds() > 19800:
-        #     relog()
-        #     setup_interface("east", 1, "up")
-        #     reset_curr_runtime()
+        # print(f'{sys.getsizeof(CACHED_MEDIUM_FILL_XY)}')
+        # print(f'{sys.getsizeof(CACHED_MEDIUM_EMPTY_XY)}')
+        #
+        # print(f'{sys.getsizeof(CACHED_LARGE_FILL_XY)}')
+        # print(f'{sys.getsizeof(CACHED_LARGE_EMPTY_XY)}')
+        #
+        # print(f'{sys.getsizeof(CACHED_GIANT_FILL_XY)}')
+        # print(f'{sys.getsizeof(CACHED_GIANT_EMPTY_XY)}')
+        #
+        # print(f'{sys.getsizeof(CACHED_EARTHS_XY)}')
+        # print(f'{sys.getsizeof(CACHED_BANKED_ESS_XY)}')
+        #
+        # print(f'{sys.getsizeof(CACHED_INVENT_SMALL_POUCH)}')
+        # print(f'{sys.getsizeof(CACHED_INVENT_MEDIUM_POUCH)}')
+        # print(f'{sys.getsizeof(CACHED_INVENT_LARGE_POUCH)}')
+        # print(f'{sys.getsizeof(CACHED_INVENT_GIANT_POUCH)}')
+        #
+        # API.AntiBan.sleep_between(5.0, 11.0)
+
+        curr_rt = get_curr_runtime()
+
+        if curr_rt.total_seconds() > 19800:
+            relog()
+            setup_interface("east", 1, "up")
+            reset_curr_runtime()
     else:
         print(f'First loop')
         setup_interface('east', 1, 'up')
+        #
+        # print(f'{sys.getsizeof(CACHED_SMALL_FILL_XY)}')
+        # print(f'{sys.getsizeof(CACHED_SMALL_EMPTY_XY)}')
+        #
+        # print(f'{sys.getsizeof(CACHED_MEDIUM_FILL_XY)}')
+        # print(f'{sys.getsizeof(CACHED_MEDIUM_EMPTY_XY)}')
+        #
+        # print(f'{sys.getsizeof(CACHED_LARGE_FILL_XY)}')
+        # print(f'{sys.getsizeof(CACHED_LARGE_EMPTY_XY)}')
+        #
+        # print(f'{sys.getsizeof(CACHED_GIANT_FILL_XY)}')
+        # print(f'{sys.getsizeof(CACHED_GIANT_EMPTY_XY)}')
+        #
+        # print(f'{sys.getsizeof(CACHED_EARTHS_XY)}')
+        # print(f'{sys.getsizeof(CACHED_BANKED_ESS_XY)}')
+        #
+        # print(f'{sys.getsizeof(CACHED_INVENT_SMALL_POUCH)}')
+        # print(f'{sys.getsizeof(CACHED_INVENT_MEDIUM_POUCH)}')
+        # print(f'{sys.getsizeof(CACHED_INVENT_LARGE_POUCH)}')
+        # print(f'{sys.getsizeof(CACHED_INVENT_GIANT_POUCH)}')
+        #
+        # API.AntiBan.sleep_between(10.0, 11.0)
 
         if not open_bank():
             print(f'⛔ Failed to open bank')
