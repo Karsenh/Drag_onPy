@@ -15,6 +15,10 @@ from Scripts.Skilling.Combat.NMZ import drop_pots_from_invent, purchase_new_drea
 from Scripts.Skilling.Mining.Motherlode_Miner import claim_ore
 from pynput import keyboard
 
+from Scripts.Skilling.Runecrafting.Cwars_Lavas_v2 import empty_small_pouch, empty_medium_pouch, empty_large_pouch, \
+    empty_giant_pouch
+from Scripts.Skilling.Runecrafting.Moonclan_Astrals import start_crafting_astrals
+
 
 def terminate_app(key):
     try:
@@ -38,7 +42,14 @@ def __main__():
     capture_bluestacks()
     clear_debug_log()
 
-    launch_script("Moonclan_Astrals")
+    launch_script("Cwars_Lavas")
+
+
+
+    # empty_small_pouch()
+    # empty_medium_pouch()
+    # empty_large_pouch()
+    # empty_giant_pouch()
 
     # does_img_exist(img_name='move_2', script_name='Moonclan_Astrals', threshold=0.96, should_click=True, click_middle=True)
     # does_img_exist(img_name='last_drop_of_water', script_name='Desert_Granite_Miner', threshold=0.85)
