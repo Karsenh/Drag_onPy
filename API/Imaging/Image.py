@@ -1,8 +1,6 @@
 import os
 import random
 
-from memory_profiler import profile
-
 import API.AntiBan
 from API.Time import is_time_up
 from PIL import Image, ImageGrab
@@ -18,7 +16,6 @@ import pyautogui as pag
 
 LATEST_IMG_XY = 0, 0
 
-@profile
 def capture_img_region(window_x, window_y, window_x2, window_y2, image_name):
     x1, y1, _, _ = get_bluestacks_region()
 
