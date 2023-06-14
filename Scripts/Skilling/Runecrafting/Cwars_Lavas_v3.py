@@ -63,7 +63,7 @@ def start_crafting_lavas(curr_loop):
         craft_lavas()
 
         # teleport_to_cwars()
-        if not teleport_with_crafting_cape(is_equipped=False):
+        if not teleport_with_crafting_cape(is_equipped=False, should_confirm=False):
             print(f'Failed to teleport with crafting cape')
             return False
 
