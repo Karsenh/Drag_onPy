@@ -163,10 +163,10 @@ def does_img_exist(img_name, script_name=None, category='Scripts', threshold=0.8
             LATEST_IMG_XY = loc[1][r_x], loc[0][r_y]
 
         elif img_sel == "inventory":
-            invent_y = max(loc[0])
-            invent_x_idx = np.where(loc[0] == invent_y)[0][0]  # [0] indicates the first item found within array of found x values
-            invent_x = loc[1][invent_x_idx]
-            print(f'Inventory x: {invent_x} @ idx {invent_x_idx}\nInventory y: {invent_y}')
+            invent_x = max(loc[1])
+            invent_y_idx = np.where(loc[1] == invent_x)[0][0]  # [0] indicates the first item found within array of found x values
+            invent_y = loc[0][invent_y_idx]
+            print(f'Inventory x: {invent_x} @ idx {invent_y_idx}\nInventory y: {invent_y}')
             if invent_x > 1070 and invent_y > 370:
                 print(f'✔ X: {invent_x} Y: {invent_y} within Inventory XY Bounds - Setting LATEST_IMG_XY')
                 LATEST_IMG_XY = invent_x, invent_y

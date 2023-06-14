@@ -42,7 +42,7 @@ def __main__():
     capture_bluestacks()
     clear_debug_log()
 
-    launch_script("Blast_Furnace")
+    launch_script("Cwars_Lavas")
 
     # SCRIPT_NAME = 'Moonclan_Astrals'
     # wait_for_img(img_name='move_2', script_name=SCRIPT_NAME, should_click=True, click_middle=True, max_wait_sec=15,

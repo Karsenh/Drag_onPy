@@ -33,12 +33,7 @@ NEEDS_RING = False
 def start_crafting_lavas(curr_loop):
     if curr_loop != 1:
         print(f'Not first loop')
-        # if check_for_degraded_pouches():
-        #     fix_pouches()
 
-        # if not optimal_bank_open():
-        #     move_to_bank_chest()
-        #     open_bank_from_bank()
         if not open_bank_from_teleport():
             if not open_bank_from_bank():
                 print('failed to find both bank images')
@@ -75,6 +70,7 @@ def start_crafting_lavas(curr_loop):
         if check_for_degraded_pouches():
             print(f'🎒 Degraded pouch found')
             fix_pouches()
+
         check_equipment()
 
     else:
@@ -142,7 +138,9 @@ def resupply():
         mouse_click(RING_XY)
         API.AntiBan.sleep_between(1.1, 1.1)
 
-        long_click_xy = 1208, 477
+        wait_for_img(img_name='inventory_rod', script_name=SCRIPT_NAME, img_sel='inventory')
+        x, y = get_existing_img_xy()
+        long_click_xy = x+10,y+10
         mouse_long_click(long_click_xy)
 
         if not wait_for_img(img_name='Wear', category='General', should_click=True, click_middle=True):
@@ -156,7 +154,9 @@ def resupply():
         mouse_click(NECKLACE_XY)
         API.AntiBan.sleep_between(1.1, 1.1)
 
-        long_click_xy = 1208, 477
+        wait_for_img(img_name='inventory_necklace', script_name=SCRIPT_NAME, img_sel='inventory', threshold=0.9)
+        x, y = get_existing_img_xy()
+        long_click_xy = x+10,y+10
         mouse_long_click(long_click_xy)
 
         if not wait_for_img(img_name='Wear', category='General', should_click=True, click_middle=True):
