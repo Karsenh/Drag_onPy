@@ -41,7 +41,7 @@ from Scripts.Skilling.Hunter.Desert_Lizards import start_catching_desert_lizards
 from Scripts.Skilling.Hunter.Red_Lizards_v2 import start_catching_red_lizards
 from Scripts.Skilling.Hunter.Black_Lizards_v2 import start_catching_black_lizards
 from Scripts.Skilling.Hunter.Red_Chin_Hunter import start_catching_chins
-from Scripts.Skilling.Runecrafting.Cwars_Lavas_v2 import start_crafting_lavas
+from Scripts.Skilling.Runecrafting.Cwars_Lavas_v3 import start_crafting_lavas
 from Scripts.Skilling.Runecrafting.Moonclan_Astrals import start_crafting_astrals
 from Scripts.Skilling.Mining.Motherlode_Miner import start_motherlode_mining
 from Scripts.Skilling.Mining.Desert_Granite_Miner import start_mining_granite
