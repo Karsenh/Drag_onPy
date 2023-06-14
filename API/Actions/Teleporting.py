@@ -6,7 +6,7 @@ from API.Mouse import mouse_long_click, mouse_click
 CACHED_INVENT_CRAFTING_CAPE_XY = None
 
 
-def teleport_with_crafting_cape(is_equipped=False):
+def teleport_with_crafting_cape(is_equipped=False, should_confirm=True):
     global CACHED_INVENT_CRAFTING_CAPE_XY
     print(f'Teleporting with Crafting Cape...')
 
@@ -40,7 +40,10 @@ def teleport_with_crafting_cape(is_equipped=False):
         print(f'⛔ Failed to find Crafting Cape Teleport option in API > Actions > Teleporting')
         return False
 
-    return wait_for_img(img_name='crafting_guild_flag', category='Teleports')
+    if should_confirm:
+        return wait_for_img(img_name='crafting_guild_flag', category='Teleports')
+    else:
+        return True
 
 
 def teleport_with_spellbook(location):
