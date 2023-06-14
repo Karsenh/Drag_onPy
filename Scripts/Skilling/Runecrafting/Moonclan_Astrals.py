@@ -1,6 +1,5 @@
 import sys
 
-from memory_profiler import profile
 
 import API.AntiBan
 from API.Actions.Teleporting import teleport_with_spellbook, teleport_with_crafting_cape
@@ -50,7 +49,6 @@ CACHED_INVENT_GIANT_POUCH = None
 CRAFTING_GUILD_BANK_XY = 896, 330
 
 
-@profile
 def start_crafting_astrals(curr_loop):
     if curr_loop != 1:
         print(f'Not first loop')
@@ -162,7 +160,7 @@ def move_1():
 
 
 def move_2():
-    return wait_for_img(img_name='move_2', script_name=SCRIPT_NAME, should_click=True, click_middle=True, max_wait_sec=15, threshold=0.96)
+    return wait_for_img(img_name='move_2', script_name=SCRIPT_NAME, should_click=True, click_middle=True, max_wait_sec=15, threshold=0.95)
 
 
 def move_3():

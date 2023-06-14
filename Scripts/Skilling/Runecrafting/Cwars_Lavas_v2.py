@@ -5,7 +5,7 @@ from API.Interface.Bank import is_bank_open, is_bank_tab_open, is_withdraw_qty, 
 from API.Imaging.Image import wait_for_img, does_img_exist, get_existing_img_xy
 from API.Mouse import mouse_click, mouse_long_click
 from API.Debug import write_debug
-
+from API.Time import get_curr_runtime, reset_curr_runtime
 
 SCRIPT_NAME = 'Cwars_Lavas'
 
@@ -42,6 +42,13 @@ def start_crafting_lavas(curr_loop):
         if not resupply():
             print(f'📛 Failed to resupply - exiting...')
             return False
+
+        curr_rt = get_curr_runtime()
+
+        if curr_rt.total_seconds() > 18000:
+            relog()
+            setup_interface("north", 1, "up")
+            reset_curr_runtime()
 
         teleport_to_da()
 
@@ -272,6 +279,7 @@ def fill_pouches():
 
     is_withdraw_qty('all')
     mouse_click(PURE_ESS_XY)
+    API.AntiBan.sleep_between(0.2, 0.2)
 
     mouse_long_click(SMALL_POUCH_XY)
     API.AntiBan.sleep_between(0.1, 0.2)
@@ -286,6 +294,7 @@ def fill_pouches():
     mouse_click(large_fill_xy)
 
     mouse_click(PURE_ESS_XY)
+    API.AntiBan.sleep_between(0.2, 0.2)
 
     mouse_long_click(GIANT_POUCH_XY)
     API.AntiBan.sleep_between(0.1, 0.2)

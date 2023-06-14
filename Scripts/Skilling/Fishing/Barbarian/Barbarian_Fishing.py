@@ -1,10 +1,10 @@
-from API.Interface.General import setup_interface, is_otd_enabled, is_inventory_full, is_tab_open
+from API.Interface.General import setup_interface, is_otd_enabled, is_inventory_full, is_tab_open, relog
 from API.Imaging.Image import does_img_exist
 from API.Imaging.OCR.Total_Exp import wait_for_exp_change
 import API.AntiBan
 import pyautogui as pag
 from API.Debug import write_debug
-
+from API.Time import get_curr_runtime, reset_curr_runtime
 
 click_fish_attempts = 0
 
@@ -28,6 +28,13 @@ def barbarian_fishing(curr_loop):
 
     # If level up dialogue - clear and re-click fish
     if not is_barbarian_fishing():
+        curr_rt = get_curr_runtime()
+
+        if curr_rt.total_seconds() > 19800:
+            relog()
+            setup_interface("east", 2, "up")
+            reset_curr_runtime()
+
         if not any(click_barbarian_fish()):
             click_fish_attempts += 1
             if click_fish_attempts > 10:

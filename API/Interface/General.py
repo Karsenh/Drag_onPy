@@ -99,12 +99,12 @@ def drop_inventory(from_spot_num=1, to_spot_num=27, should_random_skip=False, sh
     is_tab_open("inventory", should_be_open=True)
     is_otd_enabled(should_enable=True)
 
-    API.AntiBan.sleep_between(1.4, 1.9)
+    API.AntiBan.sleep_between(0.5, 0.9)
 
     for i in range(from_spot_num, to_spot_num+1):
         mouse_click(get_xy_for_invent_slot(i))
         if i % 4 == 0:
-            API.AntiBan.sleep_between(0.25, 0.55)
+            API.AntiBan.sleep_between(0.22, 0.56)
 
     if should_disable_otd_after:
         is_otd_enabled(should_enable=False)
