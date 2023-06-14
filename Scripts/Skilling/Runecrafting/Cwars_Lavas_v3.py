@@ -154,7 +154,7 @@ def resupply():
         mouse_click(NECKLACE_XY)
         API.AntiBan.sleep_between(1.1, 1.1)
 
-        wait_for_img(img_name='inventory_necklace', script_name=SCRIPT_NAME, img_sel='inventory', threshold=0.9)
+        wait_for_img(img_name='inventory_necklace', script_name=SCRIPT_NAME, img_sel='inventory', threshold=0.92)
         x, y = get_existing_img_xy()
         long_click_xy = x+10,y+10
         mouse_long_click(long_click_xy)
